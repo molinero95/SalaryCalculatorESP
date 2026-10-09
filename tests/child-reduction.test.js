@@ -15,7 +15,7 @@ for (const children of [0, 1, 2, 4, 7]) {
         { upTo: 70000, rate: Math.max(0, 15 - 4 * children) },
         { upTo: null, rate: Math.max(0, 25 - 4 * children) },
       ];
-      const base = result.incomeTax.withholdingBase;
+      const base = result.incomeTax.annualBase;
       const minimum = result.incomeTax.allowance.total;
       const expected = Math.max(
         0,
@@ -42,7 +42,7 @@ for (const region of ['madrid', 'catalonia', 'andalusia']) {
         2;
     const expected = Math.max(
       0,
-      applyScale(REGIONAL_SCALES[region].brackets, result.incomeTax.withholdingBase) -
+      applyScale(REGIONAL_SCALES[region].brackets, result.incomeTax.annualBase) -
         applyScale(REGIONAL_SCALES[region].brackets, minimum),
     );
     assert.ok(expected > 0);

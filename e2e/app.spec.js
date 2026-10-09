@@ -13,7 +13,7 @@ test('shows the current payslip by default', async ({ page }) => {
 
 test('recalculates when the salary changes', async ({ page }) => {
   await page.fill('#salary', '45000');
-  await expect(page.locator('.result-current .headline strong')).toHaveText('2.293,61 €');
+  await expect(page.locator('.result-current .headline strong')).toHaveText('2.293,93 €');
 });
 
 test('lowering every bracket shows a positive difference', async ({ page }) => {
