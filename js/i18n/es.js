@@ -156,15 +156,18 @@ export default {
   how2: 'En «Propuesta a simular», cambia tramos, mínimos o cotizaciones para reflejar la medida que quieras evaluar.',
   how3: 'Compara al instante tu nómina actual con la simulada, y guarda o comparte la propuesta con un enlace.',
   simTitle: 'Propuesta a simular',
-  simDesc: 'Define aquí el cambio que quieres evaluar. Parte de la normativa vigente; los valores que modifiques se resaltan.',
+  simDesc:
+    'Define aquí el cambio que quieres evaluar. Parte de la normativa vigente; los valores que modifiques se resaltan.',
   currentTitle: 'Normativa vigente',
-  currentDesc: 'Parámetros oficiales de 2026 con los que se calcula la columna «Actual». No hace falta tocarlos salvo que cambie la ley o quieras usar otra referencia.',
+  currentDesc:
+    'Parámetros oficiales de 2026 con los que se calcula la columna «Actual». No hace falta tocarlos salvo que cambie la ley o quieras usar otra referencia.',
   familySituation: 'Situación familiar',
   situation1: 'Monoparental (con hijos a cargo)',
   situation2: 'Cónyuge sin rentas (< 1.500 €)',
   situation3: 'Otras situaciones',
   flexTitle: 'Retribución flexible',
-  flexHelp: 'Parte del bruto que cobras en especie. Está exenta de IRPF hasta ciertos límites, pero sigue cotizando a la Seguridad Social.',
+  flexHelp:
+    'Parte del bruto que cobras en especie. Está exenta de IRPF hasta ciertos límites, pero sigue cotizando a la Seguridad Social.',
   flexMeal: 'Tarjeta restaurante',
   workingDays: 'Días laborables al año',
   flexTransport: 'Transporte público',
@@ -201,7 +204,8 @@ export default {
   monthly: 'Mensual',
   amountsIn: 'Importes',
   pensionTitle: 'Plan de pensiones',
-  pensionHelp: 'Las aportaciones reducen la base del IRPF hasta ciertos límites. El ahorro se obtiene en la declaración de la renta.',
+  pensionHelp:
+    'Las aportaciones reducen la base del IRPF hasta ciertos límites. El ahorro se obtiene en la declaración de la renta.',
   pensionIndividual: 'Plan individual',
   pensionEmployee: 'Tu aportación al plan de empresa',
   pensionEmployer: 'Aportación de la empresa',
@@ -220,12 +224,16 @@ export default {
   partTime: 'Jornada',
   helpPayments: 'Con 14 pagas cobras dos pagas extra (normalmente en junio y diciembre). El total anual es el mismo.',
   helpPartTime: 'Porcentaje de jornada respecto a tiempo completo. Reduce la base mínima de cotización.',
-  helpFamilySituation: 'Determina a partir de qué salario hay retención. «Cónyuge sin rentas»: casado/a con cónyuge que gana menos de 1.500 € al año.',
-  helpChildrenFullyCounted: 'Márcalo si los hijos solo cuentan para ti (por ejemplo, familia monoparental). Si no, el mínimo se reparte entre los dos progenitores.',
+  helpFamilySituation:
+    'Determina a partir de qué salario hay retención. «Cónyuge sin rentas»: casado/a con cónyuge que gana menos de 1.500 € al año.',
+  helpChildrenFullyCounted:
+    'Márcalo si los hijos solo cuentan para ti (por ejemplo, familia monoparental). Si no, el mínimo se reparte entre los dos progenitores.',
   helpContributionBase: 'Salario mensual sobre el que se cotiza, con un mínimo y un máximo legal.',
-  helpMei: 'Mecanismo de Equidad Intergeneracional: cotización adicional que nutre el fondo de reserva de las pensiones.',
+  helpMei:
+    'Mecanismo de Equidad Intergeneracional: cotización adicional que nutre el fondo de reserva de las pensiones.',
   helpSolidarity: 'Cotización extra sobre la parte del sueldo que supera la base máxima.',
-  helpEmploymentReduction: 'Reducción para rentas del trabajo bajas: disminuye la base sobre la que se calcula el IRPF.',
+  helpEmploymentReduction:
+    'Reducción para rentas del trabajo bajas: disminuye la base sobre la que se calcula el IRPF.',
   helpPersonalAllowance: 'Parte de la renta que no tributa por tus circunstancias personales y familiares.',
   helpWithholdingRate: 'Porcentaje del bruto que la empresa retiene cada mes a cuenta del IRPF.',
   helpTaxWedge: 'Parte del coste total para la empresa que se va en impuestos y cotizaciones.',

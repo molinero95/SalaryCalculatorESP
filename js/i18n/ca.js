@@ -156,15 +156,18 @@ export default {
   how2: 'A «Proposta a simular», canvia trams, mínims o cotitzacions per reflectir la mesura que vulguis avaluar.',
   how3: "Compara a l'instant la teva nòmina actual amb la simulada, i desa o comparteix la proposta amb un enllaç.",
   simTitle: 'Proposta a simular',
-  simDesc: 'Defineix aquí el canvi que vols avaluar. Parteix de la normativa vigent; els valors que modifiquis es ressalten.',
+  simDesc:
+    'Defineix aquí el canvi que vols avaluar. Parteix de la normativa vigent; els valors que modifiquis es ressalten.',
   currentTitle: 'Normativa vigent',
-  currentDesc: 'Paràmetres oficials del 2026 amb què es calcula la columna «Actual». No cal tocar-los tret que canviï la llei o vulguis fer servir una altra referència.',
+  currentDesc:
+    'Paràmetres oficials del 2026 amb què es calcula la columna «Actual». No cal tocar-los tret que canviï la llei o vulguis fer servir una altra referència.',
   familySituation: 'Situació familiar',
   situation1: 'Monoparental (amb fills a càrrec)',
   situation2: 'Cònjuge sense rendes (< 1.500 €)',
   situation3: 'Altres situacions',
   flexTitle: 'Retribució flexible',
-  flexHelp: "Part del brut que cobres en espècie. Està exempta d'IRPF fins a certs límits, però continua cotitzant a la Seguretat Social.",
+  flexHelp:
+    "Part del brut que cobres en espècie. Està exempta d'IRPF fins a certs límits, però continua cotitzant a la Seguretat Social.",
   flexMeal: 'Targeta restaurant',
   workingDays: "Dies laborables a l'any",
   flexTransport: 'Transport públic',
@@ -201,7 +204,8 @@ export default {
   monthly: 'Mensual',
   amountsIn: 'Imports',
   pensionTitle: 'Pla de pensions',
-  pensionHelp: "Les aportacions redueixen la base de l'IRPF fins a certs límits. L'estalvi s'obté a la declaració de la renda.",
+  pensionHelp:
+    "Les aportacions redueixen la base de l'IRPF fins a certs límits. L'estalvi s'obté a la declaració de la renda.",
   pensionIndividual: 'Pla individual',
   pensionEmployee: "La teva aportació al pla d'empresa",
   pensionEmployer: "Aportació de l'empresa",
@@ -218,14 +222,19 @@ export default {
   f_netIncomeShareLimit: 'Màxim sobre rendiments nets',
   f_highIncomeThreshold: "Renda a partir de la qual la teva aportació no pot superar la de l'empresa",
   partTime: 'Jornada',
-  helpPayments: 'Amb 14 pagues cobres dues pagues extres (normalment al juny i al desembre). El total anual és el mateix.',
+  helpPayments:
+    'Amb 14 pagues cobres dues pagues extres (normalment al juny i al desembre). El total anual és el mateix.',
   helpPartTime: 'Percentatge de jornada respecte a temps complet. Redueix la base mínima de cotització.',
-  helpFamilySituation: 'Determina a partir de quin salari hi ha retenció. «Cònjuge sense rendes»: casat/da amb cònjuge que guanya menys de 1.500 € l’any.',
-  helpChildrenFullyCounted: 'Marca-ho si els fills només compten per a tu (per exemple, família monoparental). Si no, el mínim es reparteix entre els dos progenitors.',
+  helpFamilySituation:
+    'Determina a partir de quin salari hi ha retenció. «Cònjuge sense rendes»: casat/da amb cònjuge que guanya menys de 1.500 € l’any.',
+  helpChildrenFullyCounted:
+    'Marca-ho si els fills només compten per a tu (per exemple, família monoparental). Si no, el mínim es reparteix entre els dos progenitors.',
   helpContributionBase: 'Salari mensual sobre el qual es cotitza, amb un mínim i un màxim legal.',
-  helpMei: "Mecanisme d'Equitat Intergeneracional: cotització addicional que nodreix el fons de reserva de les pensions.",
+  helpMei:
+    "Mecanisme d'Equitat Intergeneracional: cotització addicional que nodreix el fons de reserva de les pensions.",
   helpSolidarity: 'Cotització extra sobre la part del sou que supera la base màxima.',
-  helpEmploymentReduction: "Reducció per a rendes del treball baixes: disminueix la base sobre la qual es calcula l'IRPF.",
+  helpEmploymentReduction:
+    "Reducció per a rendes del treball baixes: disminueix la base sobre la qual es calcula l'IRPF.",
   helpPersonalAllowance: 'Part de la renda que no tributa per les teves circumstàncies personals i familiars.',
   helpWithholdingRate: "Percentatge del brut que l'empresa reté cada mes a compte de l'IRPF.",
   helpTaxWedge: "Part del cost total per a l'empresa que se'n va en impostos i cotitzacions.",

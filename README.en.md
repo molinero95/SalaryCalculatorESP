@@ -33,17 +33,17 @@ Spanish payroll calculator and tax policy simulator. Work out your take-home pay
 
 ### Default values (2026)
 
-| Parameter | Value |
-| --- | --- |
-| Withholding scale | 19 % · 24 % · 30 % · 37 % · 45 % · 47 % |
-| Employee contributions | 4.70 % CC + 1.55 % unemployment + 0.10 % training + 0.15 % MEI |
-| Maximum / minimum base | €5,101.20 / €1,424.50 per month |
-| Personal allowance | €5,550 |
-| Maximum employment income reduction | €7,302 |
-| Low-earner credit (annual return) | €590.89 up to €17,094, zero at €20,048.45 |
-| Withholding-free minimum | €15,876 – €19,262 depending on family situation |
-| Pension plans (tax base reduction) | €1,500 individual + €8,500 employment, max 30 % of net income |
-| Tax-exempt flexible pay | Meals €11/day · transport €1,500/year · health insurance €500/person |
+| Parameter                           | Value                                                                |
+| ----------------------------------- | -------------------------------------------------------------------- |
+| Withholding scale                   | 19 % · 24 % · 30 % · 37 % · 45 % · 47 %                              |
+| Employee contributions              | 4.70 % CC + 1.55 % unemployment + 0.10 % training + 0.15 % MEI       |
+| Maximum / minimum base              | €5,101.20 / €1,424.50 per month                                      |
+| Personal allowance                  | €5,550                                                               |
+| Maximum employment income reduction | €7,302                                                               |
+| Low-earner credit (annual return)   | €590.89 up to €17,094, zero at €20,048.45                            |
+| Withholding-free minimum            | €15,876 – €19,262 depending on family situation                      |
+| Pension plans (tax base reduction)  | €1,500 individual + €8,500 employment, max 30 % of net income        |
+| Tax-exempt flexible pay             | Meals €11/day · transport €1,500/year · health insurance €500/person |
 
 > [!IMPORTANT]
 > This tool gives estimates only. Some parameters (minimum wage credit, withholding-free minimum, regional scales) may change during the year; all of them can be adjusted in the interface or in [`js/defaults.js`](js/defaults.js). It does not cover the foral territories (Basque Country and Navarre).

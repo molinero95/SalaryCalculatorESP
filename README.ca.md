@@ -33,17 +33,17 @@ Calculadora de nòmina per a Espanya i simulador de propostes fiscals. Calcula e
 
 ### Valors per defecte (2026)
 
-| Paràmetre | Valor |
-| --- | --- |
-| Escala de retenció | 19 % · 24 % · 30 % · 37 % · 45 % · 47 % |
-| Cotització treballador | 4,70 % CC + 1,55 % atur + 0,10 % FP + 0,15 % MEI |
-| Base màxima / mínima | 5.101,20 € / 1.424,50 € al mes |
-| Mínim personal | 5.550 € |
-| Reducció màxima per rendiments del treball | 7.302 € |
-| Deducció SMI (a la renda) | 590,89 € fins a 17.094 €, s'anul·la a 20.048,45 € |
-| Mínim exempt de retenció | 15.876 € – 19.262 € segons la situació familiar |
-| Pla de pensions (reducció) | 1.500 € individual + 8.500 € d'ocupació, màx. 30 % dels rendiments nets |
-| Retribució flexible exempta | Restaurant 11 €/dia · transport 1.500 €/any · assegurança mèdica 500 €/persona |
+| Paràmetre                                  | Valor                                                                          |
+| ------------------------------------------ | ------------------------------------------------------------------------------ |
+| Escala de retenció                         | 19 % · 24 % · 30 % · 37 % · 45 % · 47 %                                        |
+| Cotització treballador                     | 4,70 % CC + 1,55 % atur + 0,10 % FP + 0,15 % MEI                               |
+| Base màxima / mínima                       | 5.101,20 € / 1.424,50 € al mes                                                 |
+| Mínim personal                             | 5.550 €                                                                        |
+| Reducció màxima per rendiments del treball | 7.302 €                                                                        |
+| Deducció SMI (a la renda)                  | 590,89 € fins a 17.094 €, s'anul·la a 20.048,45 €                              |
+| Mínim exempt de retenció                   | 15.876 € – 19.262 € segons la situació familiar                                |
+| Pla de pensions (reducció)                 | 1.500 € individual + 8.500 € d'ocupació, màx. 30 % dels rendiments nets        |
+| Retribució flexible exempta                | Restaurant 11 €/dia · transport 1.500 €/any · assegurança mèdica 500 €/persona |
 
 > [!IMPORTANT]
 > És una eina orientativa. Alguns paràmetres (deducció SMI, mínim exempt de retenció, escales autonòmiques) poden canviar durant l'any; tots es poden ajustar des de la interfície o a [`js/defaults.js`](js/defaults.js). No s'aplica als territoris forals (País Basc i Navarra).

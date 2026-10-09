@@ -33,17 +33,17 @@ Espainiako nomina-kalkulagailua eta proposamen fiskalen simulagailua. Kalkulatu 
 
 ### Balio lehenetsiak (2026)
 
-| Parametroa | Balioa |
-| --- | --- |
-| Atxikipen-eskala | % 19 · % 24 · % 30 · % 37 · % 45 · % 47 |
-| Langilearen kotizazioa | % 4,70 CA + % 1,55 langabezia + % 0,10 LH + % 0,15 MEI |
-| Gehieneko / gutxieneko oinarria | 5.101,20 € / 1.424,50 € hilean |
-| Gutxieneko pertsonala | 5.550 € |
-| Lan-etekinengatiko gehieneko murrizketa | 7.302 € |
-| LGS kenkaria (errentan) | 590,89 € 17.094 €-raino; 20.048,45 €-an desagertzen da |
-| Atxikipenetik salbuetsitako gutxienekoa | 15.876 € – 19.262 €, familia-egoeraren arabera |
-| Pentsio-plana (murrizketa) | 1.500 € banakakoa + 8.500 € enplegukoa, gehienez etekin garbien % 30 |
-| Ordainsari malgu salbuetsia | Jatetxea 11 €/egun · garraioa 1.500 €/urte · osasun-asegurua 500 €/pertsona |
+| Parametroa                              | Balioa                                                                      |
+| --------------------------------------- | --------------------------------------------------------------------------- |
+| Atxikipen-eskala                        | % 19 · % 24 · % 30 · % 37 · % 45 · % 47                                     |
+| Langilearen kotizazioa                  | % 4,70 CA + % 1,55 langabezia + % 0,10 LH + % 0,15 MEI                      |
+| Gehieneko / gutxieneko oinarria         | 5.101,20 € / 1.424,50 € hilean                                              |
+| Gutxieneko pertsonala                   | 5.550 €                                                                     |
+| Lan-etekinengatiko gehieneko murrizketa | 7.302 €                                                                     |
+| LGS kenkaria (errentan)                 | 590,89 € 17.094 €-raino; 20.048,45 €-an desagertzen da                      |
+| Atxikipenetik salbuetsitako gutxienekoa | 15.876 € – 19.262 €, familia-egoeraren arabera                              |
+| Pentsio-plana (murrizketa)              | 1.500 € banakakoa + 8.500 € enplegukoa, gehienez etekin garbien % 30        |
+| Ordainsari malgu salbuetsia             | Jatetxea 11 €/egun · garraioa 1.500 €/urte · osasun-asegurua 500 €/pertsona |
 
 > [!IMPORTANT]
 > Tresna orientagarria da. Parametro batzuk (LGS kenkaria, atxikipenetik salbuetsitako gutxienekoa, autonomia-erkidegoetako eskalak) urtean zehar alda daitezke; denak interfazetik edo [`js/defaults.js`](js/defaults.js) fitxategian doi daitezke. Ez da lurralde foraletan aplikatzen (Euskadi eta Nafarroa).

@@ -67,7 +67,8 @@ export default {
   chartTitle: 'Alderaketa soldata-mailaren arabera',
   chartDiff: 'Diferentzia garbia',
   chartRate: 'Tasa efektiboa',
-  chartDiffDesc: 'Simulazioarekin urtean zenbat gehiago (edo gutxiago) kobratuko zenukeen, urteko soldata gordinaren arabera.',
+  chartDiffDesc:
+    'Simulazioarekin urtean zenbat gehiago (edo gutxiago) kobratuko zenukeen, urteko soldata gordinaren arabera.',
   chartRateDesc: 'Soldata gordinaren zer ehuneko doan PFEZera eta Gizarte Segurantzara.',
   yourSalary: 'Zure soldata',
   grossAnnual: 'Urteko gordina',
@@ -156,15 +157,18 @@ export default {
   how2: '«Proposamena simulatu» atalean, aldatu tarteak, gutxienekoak edo kotizazioak ebaluatu nahi duzun neurria islatzeko.',
   how3: 'Alderatu berehala zure egungo nomina simulatuarekin, eta gorde edo partekatu proposamena esteka batekin.',
   simTitle: 'Proposamena simulatu',
-  simDesc: 'Zehaztu hemen ebaluatu nahi duzun aldaketa. Indarreko araudia du abiapuntu; aldatzen dituzun balioak nabarmendu egiten dira.',
+  simDesc:
+    'Zehaztu hemen ebaluatu nahi duzun aldaketa. Indarreko araudia du abiapuntu; aldatzen dituzun balioak nabarmendu egiten dira.',
   currentTitle: 'Indarreko araudia',
-  currentDesc: '«Egungoa» zutabea kalkulatzeko 2026ko parametro ofizialak. Ez dago zertan ukitu, legea aldatzen ez bada edo beste erreferentzia bat erabili nahi ez baduzu.',
+  currentDesc:
+    '«Egungoa» zutabea kalkulatzeko 2026ko parametro ofizialak. Ez dago zertan ukitu, legea aldatzen ez bada edo beste erreferentzia bat erabili nahi ez baduzu.',
   familySituation: 'Familia-egoera',
   situation1: 'Guraso bakarrekoa (seme-alabak ardurapean)',
   situation2: 'Errentarik gabeko ezkontidea (< 1.500 €)',
   situation3: 'Beste egoera batzuk',
   flexTitle: 'Ordainsari malgua',
-  flexHelp: 'Gordinaren zati bat, gauzaz kobratzen duzuna. PFEZetik salbuetsita dago muga batzuetaraino, baina Gizarte Segurantzan kotizatzen jarraitzen du.',
+  flexHelp:
+    'Gordinaren zati bat, gauzaz kobratzen duzuna. PFEZetik salbuetsita dago muga batzuetaraino, baina Gizarte Segurantzan kotizatzen jarraitzen du.',
   flexMeal: 'Jatetxe-txartela',
   workingDays: 'Lanegunak urtean',
   flexTransport: 'Garraio publikoa',
@@ -201,7 +205,8 @@ export default {
   monthly: 'Hilekoa',
   amountsIn: 'Zenbatekoak',
   pensionTitle: 'Pentsio-plana',
-  pensionHelp: 'Ekarpenek PFEZaren oinarria murrizten dute muga batzuetaraino. Aurrezkia errenta-aitorpenean lortzen da.',
+  pensionHelp:
+    'Ekarpenek PFEZaren oinarria murrizten dute muga batzuetaraino. Aurrezkia errenta-aitorpenean lortzen da.',
   pensionIndividual: 'Banakako plana',
   pensionEmployee: 'Zure ekarpena enpresako planera',
   pensionEmployer: 'Enpresaren ekarpena',
@@ -218,10 +223,13 @@ export default {
   f_netIncomeShareLimit: 'Etekin garbien gaineko gehienekoa',
   f_highIncomeThreshold: 'Zure ekarpenak enpresarena gainditu ezin duen errenta',
   partTime: 'Lanaldia',
-  helpPayments: '14 ordainsarirekin bi aparteko ordainsari kobratzen dituzu (normalean ekainean eta abenduan). Urteko guztizkoa berdina da.',
+  helpPayments:
+    '14 ordainsarirekin bi aparteko ordainsari kobratzen dituzu (normalean ekainean eta abenduan). Urteko guztizkoa berdina da.',
   helpPartTime: 'Lanaldiaren ehunekoa lanaldi osoarekiko. Gutxieneko kotizazio-oinarria murrizten du.',
-  helpFamilySituation: 'Zein soldatatik aurrera dagoen atxikipena zehazten du. «Errentarik gabeko ezkontidea»: urtean 1.500 € baino gutxiago irabazten duen ezkontidea.',
-  helpChildrenFullyCounted: 'Markatu seme-alabak zuretzat bakarrik zenbatzen badira (adibidez, guraso bakarreko familia). Bestela, gutxienekoa bi gurasoen artean banatzen da.',
+  helpFamilySituation:
+    'Zein soldatatik aurrera dagoen atxikipena zehazten du. «Errentarik gabeko ezkontidea»: urtean 1.500 € baino gutxiago irabazten duen ezkontidea.',
+  helpChildrenFullyCounted:
+    'Markatu seme-alabak zuretzat bakarrik zenbatzen badira (adibidez, guraso bakarreko familia). Bestela, gutxienekoa bi gurasoen artean banatzen da.',
   helpContributionBase: 'Kotizatzen den hileko soldata, legezko gutxieneko eta gehieneko batekin.',
   helpMei: 'Belaunaldien arteko Ekitate Mekanismoa: pentsioen erreserba-funtsa elikatzen duen kotizazio gehigarria.',
   helpSolidarity: 'Gehieneko oinarria gainditzen duen soldataren zatiaren gaineko kotizazio gehigarria.',
@@ -230,7 +238,8 @@ export default {
   helpWithholdingRate: 'Enpresak hilero PFEZaren konturako atxikitzen duen gordinaren ehunekoa.',
   helpTaxWedge: 'Enpresarentzako kostu osoaren zer zati doan zergetara eta kotizazioetara.',
   warnChildrenUnder3: '3 urtetik beherako seme-alaba gehiago daude seme-alaba guztiak baino.',
-  warnSingleParent: 'Guraso bakarreko egoerak gutxienez seme-alaba bat behar du; «beste egoera batzuk» gisa kalkulatzen da.',
+  warnSingleParent:
+    'Guraso bakarreko egoerak gutxienez seme-alaba bat behar du; «beste egoera batzuk» gisa kalkulatzen da.',
   print: 'Inprimatu edo PDF gisa gorde',
   help: 'Laguntza',
 };

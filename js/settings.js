@@ -133,7 +133,9 @@ export function renderSettings(container, { scenario, reference, onChange, idPre
 
   container.innerHTML =
     groupHtml('groupBrackets', openGroups, '<div class="brackets" data-brackets></div>') +
-    GROUPS.map((group) => groupHtml(group.title, openGroups, fieldsHtml(group.fields, scenario, reference, idPrefix))).join('');
+    GROUPS.map((group) =>
+      groupHtml(group.title, openGroups, fieldsHtml(group.fields, scenario, reference, idPrefix)),
+    ).join('');
 
   const bracketsContainer = container.querySelector('[data-brackets]');
   const renderBracketEditor = () =>

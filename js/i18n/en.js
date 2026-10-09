@@ -156,15 +156,18 @@ export default {
   how2: 'In “Proposal to simulate”, change brackets, allowances or contributions to reflect the measure you want to test.',
   how3: 'Instantly compare your current payslip with the simulated one, and save or share the proposal with a link.',
   simTitle: 'Proposal to simulate',
-  simDesc: 'Define the change you want to test here. It starts from the current rules; any value you modify is highlighted.',
+  simDesc:
+    'Define the change you want to test here. It starts from the current rules; any value you modify is highlighted.',
   currentTitle: 'Current rules',
-  currentDesc: 'Official 2026 parameters used for the “Current” column. You don’t need to touch them unless the law changes or you want a different baseline.',
+  currentDesc:
+    'Official 2026 parameters used for the “Current” column. You don’t need to touch them unless the law changes or you want a different baseline.',
   familySituation: 'Family situation',
   situation1: 'Single parent (with dependent children)',
   situation2: 'Spouse with no income (< €1,500)',
   situation3: 'Other situations',
   flexTitle: 'Flexible compensation',
-  flexHelp: 'Part of your gross salary paid in kind. It is exempt from income tax up to certain limits but still pays social security.',
+  flexHelp:
+    'Part of your gross salary paid in kind. It is exempt from income tax up to certain limits but still pays social security.',
   flexMeal: 'Meal card',
   workingDays: 'Working days per year',
   flexTransport: 'Public transport',
@@ -201,7 +204,8 @@ export default {
   monthly: 'Monthly',
   amountsIn: 'Amounts',
   pensionTitle: 'Pension plan',
-  pensionHelp: 'Contributions reduce the income tax base up to certain limits. The saving comes through the annual tax return.',
+  pensionHelp:
+    'Contributions reduce the income tax base up to certain limits. The saving comes through the annual tax return.',
   pensionIndividual: 'Individual plan',
   pensionEmployee: 'Your contribution to the company plan',
   pensionEmployer: 'Employer contribution',
@@ -218,10 +222,13 @@ export default {
   f_netIncomeShareLimit: 'Maximum over net income',
   f_highIncomeThreshold: 'Income above which your contribution can’t exceed the employer’s',
   partTime: 'Working hours',
-  helpPayments: 'With 14 payments you get two extra payments (usually in June and December). The annual total is the same.',
+  helpPayments:
+    'With 14 payments you get two extra payments (usually in June and December). The annual total is the same.',
   helpPartTime: 'Share of a full-time week. It lowers the minimum contribution base.',
-  helpFamilySituation: 'Sets the salary from which tax is withheld. “Spouse with no income”: married to someone earning under €1,500 a year.',
-  helpChildrenFullyCounted: 'Tick it if the children only count for you (e.g. single-parent family). Otherwise the allowance is split between both parents.',
+  helpFamilySituation:
+    'Sets the salary from which tax is withheld. “Spouse with no income”: married to someone earning under €1,500 a year.',
+  helpChildrenFullyCounted:
+    'Tick it if the children only count for you (e.g. single-parent family). Otherwise the allowance is split between both parents.',
   helpContributionBase: 'Monthly salary on which contributions are paid, within a legal minimum and maximum.',
   helpMei: 'Intergenerational Equity Mechanism: an extra contribution that feeds the pension reserve fund.',
   helpSolidarity: 'Extra contribution on the part of the salary above the maximum base.',

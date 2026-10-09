@@ -33,17 +33,17 @@ Calculadora de nómina para España y simulador de propuestas fiscales. Calcula 
 
 ### Valores por defecto (2026)
 
-| Parámetro | Valor |
-| --- | --- |
-| Escala de retención | 19 % · 24 % · 30 % · 37 % · 45 % · 47 % |
-| Cotización trabajador | 4,70 % CC + 1,55 % desempleo + 0,10 % FP + 0,15 % MEI |
-| Base máxima / mínima | 5.101,20 € / 1.424,50 € al mes |
-| Mínimo personal | 5.550 € |
-| Reducción máxima rendimientos del trabajo | 7.302 € |
-| Deducción SMI (en la renta) | 590,89 € hasta 17.094 €, se anula en 20.048,45 € |
-| Mínimo exento de retención | 15.876 € – 19.262 € según situación familiar |
-| Plan de pensiones (reducción) | 1.500 € individual + 8.500 € de empleo, máx. 30 % de rendimientos netos |
-| Retribución flexible exenta | Restaurante 11 €/día · transporte 1.500 €/año · seguro médico 500 €/persona |
+| Parámetro                                 | Valor                                                                       |
+| ----------------------------------------- | --------------------------------------------------------------------------- |
+| Escala de retención                       | 19 % · 24 % · 30 % · 37 % · 45 % · 47 %                                     |
+| Cotización trabajador                     | 4,70 % CC + 1,55 % desempleo + 0,10 % FP + 0,15 % MEI                       |
+| Base máxima / mínima                      | 5.101,20 € / 1.424,50 € al mes                                              |
+| Mínimo personal                           | 5.550 €                                                                     |
+| Reducción máxima rendimientos del trabajo | 7.302 €                                                                     |
+| Deducción SMI (en la renta)               | 590,89 € hasta 17.094 €, se anula en 20.048,45 €                            |
+| Mínimo exento de retención                | 15.876 € – 19.262 € según situación familiar                                |
+| Plan de pensiones (reducción)             | 1.500 € individual + 8.500 € de empleo, máx. 30 % de rendimientos netos     |
+| Retribución flexible exenta               | Restaurante 11 €/día · transporte 1.500 €/año · seguro médico 500 €/persona |
 
 > [!IMPORTANT]
 > Es una herramienta orientativa. Algunos parámetros (deducción SMI, mínimo exento de retención, escalas autonómicas) pueden cambiar durante el año; todos se pueden ajustar desde la interfaz o en [`js/defaults.js`](js/defaults.js). No aplica a los territorios forales (País Vasco y Navarra).

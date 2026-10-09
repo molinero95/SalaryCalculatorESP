@@ -68,8 +68,14 @@ test('lowering every rate raises take-home pay', () => {
 
 test('combineScales adds rates over the union of limits', () => {
   const combined = combineScales(
-    [{ upTo: 10, rate: 1 }, { upTo: null, rate: 2 }],
-    [{ upTo: 20, rate: 10 }, { upTo: null, rate: 20 }],
+    [
+      { upTo: 10, rate: 1 },
+      { upTo: null, rate: 2 },
+    ],
+    [
+      { upTo: 20, rate: 10 },
+      { upTo: null, rate: 20 },
+    ],
   );
   assert.deepEqual(combined, [
     { upTo: 10, rate: 11 },

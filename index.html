@@ -76,7 +76,9 @@
           </div>
 
           <div class="field">
-            <label for="familySituation"><span data-i18n="familySituation"></span><span data-help="helpFamilySituation"></span></label>
+            <label for="familySituation"
+              ><span data-i18n="familySituation"></span><span data-help="helpFamilySituation"></span
+            ></label>
             <select id="familySituation" name="familySituation">
               <option value="3" data-i18n="situation3"></option>
               <option value="2" data-i18n="situation2"></option>
@@ -197,29 +199,54 @@
             <div class="field amounts-period">
               <span class="label" data-i18n="amountsIn"></span>
               <div class="segmented" role="radiogroup">
-                <label><input type="radio" name="pensionPeriod" value="annual" /><span data-i18n="annual"></span></label>
-                <label><input type="radio" name="pensionPeriod" value="monthly" /><span data-i18n="monthly"></span></label>
+                <label
+                  ><input type="radio" name="pensionPeriod" value="annual" /><span data-i18n="annual"></span
+                ></label>
+                <label
+                  ><input type="radio" name="pensionPeriod" value="monthly" /><span data-i18n="monthly"></span
+                ></label>
               </div>
             </div>
             <div class="fields">
               <div class="field">
                 <label for="pensionIndividual" data-i18n="pensionIndividual"></label>
                 <div class="input-unit">
-                  <input id="pensionIndividual" name="pensionIndividual" type="number" min="0" step="10" inputmode="decimal" />
+                  <input
+                    id="pensionIndividual"
+                    name="pensionIndividual"
+                    type="number"
+                    min="0"
+                    step="10"
+                    inputmode="decimal"
+                  />
                   <span class="unit">€</span>
                 </div>
               </div>
               <div class="field">
                 <label for="pensionEmployee" data-i18n="pensionEmployee"></label>
                 <div class="input-unit">
-                  <input id="pensionEmployee" name="pensionEmployee" type="number" min="0" step="10" inputmode="decimal" />
+                  <input
+                    id="pensionEmployee"
+                    name="pensionEmployee"
+                    type="number"
+                    min="0"
+                    step="10"
+                    inputmode="decimal"
+                  />
                   <span class="unit">€</span>
                 </div>
               </div>
               <div class="field">
                 <label for="pensionEmployer" data-i18n="pensionEmployer"></label>
                 <div class="input-unit">
-                  <input id="pensionEmployer" name="pensionEmployer" type="number" min="0" step="10" inputmode="decimal" />
+                  <input
+                    id="pensionEmployer"
+                    name="pensionEmployer"
+                    type="number"
+                    min="0"
+                    step="10"
+                    inputmode="decimal"
+                  />
                   <span class="unit">€</span>
                 </div>
               </div>
@@ -230,7 +257,9 @@
 
       <details class="card card-simulation collapsible" open>
         <summary>
-          <h2 id="simulation-title" class="section-title"><span class="chip chip-simulation" data-i18n="simulation"></span><span data-i18n="simTitle"></span></h2>
+          <h2 id="simulation-title" class="section-title">
+            <span class="chip chip-simulation" data-i18n="simulation"></span><span data-i18n="simTitle"></span>
+          </h2>
         </summary>
         <p class="help" data-i18n="simDesc"></p>
 
@@ -292,7 +321,9 @@
 
       <details class="card card-current collapsible">
         <summary>
-          <h2 id="current-title" class="section-title"><span class="chip chip-current" data-i18n="current"></span><span data-i18n="currentTitle"></span></h2>
+          <h2 id="current-title" class="section-title">
+            <span class="chip chip-current" data-i18n="current"></span><span data-i18n="currentTitle"></span>
+          </h2>
         </summary>
         <p class="help" data-i18n="currentDesc"></p>
         <div class="toolbar">

@@ -158,13 +158,15 @@ export default {
   simTitle: 'Proposta que simular',
   simDesc: 'Define aquí o cambio que queres avaliar. Parte da normativa vixente; os valores que modifiques resáltanse.',
   currentTitle: 'Normativa vixente',
-  currentDesc: 'Parámetros oficiais de 2026 cos que se calcula a columna «Actual». Non fai falla tocalos salvo que cambie a lei ou queiras usar outra referencia.',
+  currentDesc:
+    'Parámetros oficiais de 2026 cos que se calcula a columna «Actual». Non fai falla tocalos salvo que cambie a lei ou queiras usar outra referencia.',
   familySituation: 'Situación familiar',
   situation1: 'Monoparental (con fillos a cargo)',
   situation2: 'Cónxuxe sen rendas (< 1.500 €)',
   situation3: 'Outras situacións',
   flexTitle: 'Retribución flexible',
-  flexHelp: 'Parte do bruto que cobras en especie. Está exenta de IRPF ata certos límites, pero segue cotizando á Seguridade Social.',
+  flexHelp:
+    'Parte do bruto que cobras en especie. Está exenta de IRPF ata certos límites, pero segue cotizando á Seguridade Social.',
   flexMeal: 'Tarxeta restaurante',
   workingDays: 'Días laborables ao ano',
   flexTransport: 'Transporte público',
@@ -220,8 +222,10 @@ export default {
   partTime: 'Xornada',
   helpPayments: 'Con 14 pagas cobras dúas pagas extra (normalmente en xuño e decembro). O total anual é o mesmo.',
   helpPartTime: 'Porcentaxe de xornada respecto a tempo completo. Reduce a base mínima de cotización.',
-  helpFamilySituation: 'Determina a partir de que salario hai retención. «Cónxuxe sen rendas»: casado/a con cónxuxe que gaña menos de 1.500 € ao ano.',
-  helpChildrenFullyCounted: 'Márcao se os fillos só contan para ti (por exemplo, familia monoparental). Se non, o mínimo repártese entre os dous proxenitores.',
+  helpFamilySituation:
+    'Determina a partir de que salario hai retención. «Cónxuxe sen rendas»: casado/a con cónxuxe que gaña menos de 1.500 € ao ano.',
+  helpChildrenFullyCounted:
+    'Márcao se os fillos só contan para ti (por exemplo, familia monoparental). Se non, o mínimo repártese entre os dous proxenitores.',
   helpContributionBase: 'Salario mensual sobre o que se cotiza, cun mínimo e un máximo legal.',
   helpMei: 'Mecanismo de Equidade Interxeracional: cotización adicional que nutre o fondo de reserva das pensións.',
   helpSolidarity: 'Cotización extra sobre a parte do soldo que supera a base máxima.',

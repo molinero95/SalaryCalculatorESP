@@ -45,7 +45,10 @@ function niceTicks(min, max, target = 5) {
  * @param {number} [options.marker]             X value to highlight (the user's salary).
  * @param {boolean} [options.includeZero]       Force the Y domain to include zero.
  */
-export function renderChart(container, { xs, series, formatValue, formatAxis = formatValue, marker, includeZero = true }) {
+export function renderChart(
+  container,
+  { xs, series, formatValue, formatAxis = formatValue, marker, includeZero = true },
+) {
   container.replaceChildren();
 
   const width = Math.max(MIN_WIDTH, container.clientWidth);
@@ -63,7 +66,13 @@ export function renderChart(container, { xs, series, formatValue, formatAxis = f
   const scaleX = (x) => MARGIN.left + ((x - xMin) / (xMax - xMin)) * plotWidth;
   const scaleY = (y) => MARGIN.top + (1 - (y - yMin) / (yMax - yMin || 1)) * plotHeight;
 
-  const root = svg('svg', { viewBox: `0 0 ${width} ${HEIGHT}`, width, height: HEIGHT, role: 'img', class: 'chart-svg' });
+  const root = svg('svg', {
+    viewBox: `0 0 ${width} ${HEIGHT}`,
+    width,
+    height: HEIGHT,
+    role: 'img',
+    class: 'chart-svg',
+  });
   svg('title', {}, root).textContent = series.map((s) => s.name).join(' · ');
 
   // Grid and Y axis
@@ -100,8 +109,11 @@ export function renderChart(container, { xs, series, formatValue, formatAxis = f
     const ends = series.map((s) => ({ s, y: scaleY(s.values.at(-1)) })).sort((a, b) => a.y - b.y);
     ends.forEach((end, i) => {
       if (i > 0 && end.y - ends[i - 1].y < LABEL_GAP) end.y = ends[i - 1].y + LABEL_GAP;
-      svg('text', { x: width - MARGIN.right - 4, y: end.y - 8, 'text-anchor': 'end', class: 'direct-label' }, root)
-        .textContent = end.s.name;
+      svg(
+        'text',
+        { x: width - MARGIN.right - 4, y: end.y - 8, 'text-anchor': 'end', class: 'direct-label' },
+        root,
+      ).textContent = end.s.name;
     });
   }
 
@@ -109,9 +121,17 @@ export function renderChart(container, { xs, series, formatValue, formatAxis = f
 }
 
 function addHoverLayer({ container, root, xs, series, width, plotWidth, plotHeight, scaleX, scaleY, formatValue }) {
-  const crosshair = svg('line', { y1: MARGIN.top, y2: MARGIN.top + plotHeight, class: 'crosshair', visibility: 'hidden' }, root);
+  const crosshair = svg(
+    'line',
+    { y1: MARGIN.top, y2: MARGIN.top + plotHeight, class: 'crosshair', visibility: 'hidden' },
+    root,
+  );
   const dots = series.map((s) => svg('circle', { r: 5, class: `dot ${s.className}`, visibility: 'hidden' }, root));
-  const hitArea = svg('rect', { x: MARGIN.left, y: MARGIN.top, width: plotWidth, height: plotHeight, class: 'hit-area' }, root);
+  const hitArea = svg(
+    'rect',
+    { x: MARGIN.left, y: MARGIN.top, width: plotWidth, height: plotHeight, class: 'hit-area' },
+    root,
+  );
 
   const tooltip = document.createElement('div');
   tooltip.className = 'tooltip';

@@ -103,7 +103,10 @@ function employmentReduction(netEarnings, p) {
   return 0;
 }
 
-function minWageCredit(grossEarnings, { minWageCredit: amount, minWageCreditFullUpTo: full, minWageCreditEndsAt: end }) {
+function minWageCredit(
+  grossEarnings,
+  { minWageCredit: amount, minWageCreditFullUpTo: full, minWageCreditEndsAt: end },
+) {
   if (amount <= 0 || grossEarnings >= end) return 0;
   if (grossEarnings <= full) return amount;
   return amount * ((end - grossEarnings) / (end - full));
@@ -192,7 +195,8 @@ export function computePayroll(input, scenario, grossAnnual = grossAnnualOf(inpu
   const flexible = flexibleCompensation(input, scenario.flexible, gross);
   const taxableGross = gross - flexible.exempt;
   const incomeTax = withholding(input, scenario.incomeTax, taxableGross, employee.total);
-  const taxWithoutFlexible = flexible.exempt > 0 ? withholding(input, scenario.incomeTax, gross, employee.total).withheld : incomeTax.withheld;
+  const taxWithoutFlexible =
+    flexible.exempt > 0 ? withholding(input, scenario.incomeTax, gross, employee.total).withheld : incomeTax.withheld;
 
   // Pension contributions and the low-earner credit only apply in the annual
   // return, so they show up as an estimated refund (capped at what was withheld).
@@ -204,7 +208,10 @@ export function computePayroll(input, scenario, grossAnnual = grossAnnualOf(inpu
     0,
     incomeTax.withholdingBase - (pension.deductible - employerDeducted) + (input.pensionEmployer - employerDeducted),
   );
-  const taxAfterPension = Math.max(0, applyScale(scenario.incomeTax.brackets, baseAfterPension) - incomeTax.taxOnAllowance);
+  const taxAfterPension = Math.max(
+    0,
+    applyScale(scenario.incomeTax.brackets, baseAfterPension) - incomeTax.taxOnAllowance,
+  );
   const pensionTaxSaved = Math.max(0, incomeTax.taxOnBase - incomeTax.taxOnAllowance) - taxAfterPension;
 
   const credit = minWageCredit(taxableGross, scenario.incomeTax);
@@ -234,10 +241,13 @@ export function computePayroll(input, scenario, grossAnnual = grossAnnualOf(inpu
     netAnnualAfterReturn,
     netMonthlyAverage: netAnnual / 12,
     payments: input.payments,
-    netRegularPayment: grossPerPayment - (employee.total + flexible.total + pension.employee) / 12 - taxPerRegularPayment,
+    netRegularPayment:
+      grossPerPayment - (employee.total + flexible.total + pension.employee) / 12 - taxPerRegularPayment,
     netExtraPayment: hasExtraPayments ? grossPerPayment - taxPerExtraPayment : 0,
     effectiveRate: gross > 0 ? ((employee.total + incomeTax.withheld - refund) / gross) * 100 : 0,
     taxWedge:
-      gross > 0 ? ((employer.total + employee.total + incomeTax.withheld - refund) / (gross + employer.total)) * 100 : 0,
+      gross > 0
+        ? ((employer.total + employee.total + incomeTax.withheld - refund) / (gross + employer.total)) * 100
+        : 0,
   };
 }

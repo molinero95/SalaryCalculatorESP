@@ -91,7 +91,8 @@ function initialState() {
   state.input.familySituation = oneOf(state.input.familySituation, [3, 2, 1]);
   state.input.disability = oneOf(state.input.disability, [0, 33, 65]);
   state.input.partTime = Math.min(100, Math.max(1, state.input.partTime));
-  for (const period of Object.keys(AMOUNT_FIELDS)) state.input[period] = oneOf(state.input[period], ['annual', 'monthly']);
+  for (const period of Object.keys(AMOUNT_FIELDS))
+    state.input[period] = oneOf(state.input[period], ['annual', 'monthly']);
   return state;
 }
 
@@ -171,7 +172,13 @@ function renderComparisonChart() {
   const isDiff = state.chartMode === 'diff';
 
   const series = isDiff
-    ? [{ name: t('chartDiff'), className: 'series-1', values: pairs.map(([a, b]) => b.netAnnualAfterReturn - a.netAnnualAfterReturn) }]
+    ? [
+        {
+          name: t('chartDiff'),
+          className: 'series-1',
+          values: pairs.map(([a, b]) => b.netAnnualAfterReturn - a.netAnnualAfterReturn),
+        },
+      ]
     : [
         { name: names.current, className: 'series-1', values: pairs.map(([a]) => a.effectiveRate) },
         { name: names.simulation, className: 'series-2', values: pairs.map(([, b]) => b.effectiveRate) },
@@ -190,7 +197,9 @@ function renderComparisonChart() {
   $('#chart-legend').innerHTML =
     series.length > 1
       ? series
-          .map((s) => `<span class="legend-item"><span class="swatch ${s.className}"></span>${escapeHtml(s.name)}</span>`)
+          .map(
+            (s) => `<span class="legend-item"><span class="swatch ${s.className}"></span>${escapeHtml(s.name)}</span>`,
+          )
           .join('')
       : '';
 
@@ -306,8 +315,14 @@ $('#print').addEventListener('click', () => {
 $('#export').addEventListener('click', () => {
   const { input, current, simulation } = state;
   const blob = new Blob([JSON.stringify({ input, current, simulation }, null, 2)], { type: 'application/json' });
-  const slug = scenarioName('simulation').normalize('NFD').replace(/[^\w]+/g, '-').toLowerCase();
-  const link = Object.assign(document.createElement('a'), { href: URL.createObjectURL(blob), download: `${slug}.json` });
+  const slug = scenarioName('simulation')
+    .normalize('NFD')
+    .replace(/[^\w]+/g, '-')
+    .toLowerCase();
+  const link = Object.assign(document.createElement('a'), {
+    href: URL.createObjectURL(blob),
+    download: `${slug}.json`,
+  });
   link.click();
   URL.revokeObjectURL(link.href);
   trackEvent('export-json');
