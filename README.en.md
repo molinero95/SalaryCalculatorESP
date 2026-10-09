@@ -102,3 +102,7 @@ Corrections to the tax rules and reviews of the translations (especially Basque 
 Up to five simulations appear automatically in all comparison charts and the summary table. Tabs select the simulation to edit. Political proposals are editable starting templates. The state rate reduction per child is configurable; Vox uses 4 percentage points with a zero state-rate floor, preserving regional tax. Payroll withholding remains an estimate. After a full online visit, the app works offline.
 
 Withholding includes an additional €600 reduction for more than two descendants. Annual assessment separates state and regional quotas and minima. See the [fiscal validation matrix and official sources](docs/fiscal-validation.md) for test coverage and supported assumptions.
+
+## AI / agent documentation
+
+[AGENTS.md](AGENTS.md) · [Project context](docs/AI_CONTEXT.md) · [Development](CONTRIBUTING.md) · [Decisions and roadmap](docs/ROADMAP.md)
