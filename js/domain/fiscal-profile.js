@@ -1,3 +1,4 @@
+import { unsupportedForalFamily } from './foral-family.js';
 import { FORAL_TERRITORIES } from '../data/foral.js';
 
 export const isForal = (region) => Object.hasOwn(FORAL_TERRITORIES, region);
@@ -8,11 +9,9 @@ export function unsupportedFiscalProfile(input) {
   return (
     input.contract !== 'permanent' ||
     input.age >= 65 ||
-    input.children > 0 ||
-    input.childrenUnder3 > 0 ||
+    unsupportedForalFamily(input) ||
     input.dependents65 > 0 ||
     input.dependents75 > 0 ||
-    input.disability > 0 ||
     input.familySituation !== 3 ||
     [
       'flexMeal',

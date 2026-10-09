@@ -103,7 +103,7 @@ Puedes crear hasta cinco simulaciones. Todas aparecen automáticamente en la tab
 
 La rebaja estatal por hijo se configura en puntos porcentuales. La plantilla Vox aplica 4 puntos por hijo, con un mínimo estatal del 0 %, sin reducir la parte autonómica. La retención de esta propuesta se estima con el procedimiento actual; no reproduce su tabla específica de retenciones ni incluye cheques por nacimiento.
 
-La declaración estimada usa la residencia seleccionada. Hay plantillas de ciudades, incluido Bilbao, tramos anuales y ejemplos de salario. País Vasco y Navarra cuentan con un modelo limitado para perfiles salariales básicos; los perfiles forales no validados ocultan los resultados. Tras la primera visita completa con conexión, la aplicación puede funcionar sin conexión. El navegador permite instalarla cuando sea compatible. Los datos personales permanecen en el navegador.
+La declaración estimada usa la residencia seleccionada. Un único selector de residencia fiscal agrupa las ciudades, incluido Bilbao, por comunidad/territorio y muestra sus tramos anuales y fuentes oficiales. País Vasco y Navarra cuentan con un modelo limitado para perfiles salariales con hijos elegibles confirmados y discapacidad propia; los perfiles forales no validados ocultan los resultados. Tras la primera visita completa con conexión, la aplicación puede funcionar sin conexión. El navegador permite instalarla cuando sea compatible. Los datos personales permanecen en el navegador.
 
 Pruebas: `npm test`, `npm run lint`, `npm run test:e2e`. Las referencias visuales originales son de macOS; revisa las capturas antes de actualizar las referencias de otro sistema.
 

@@ -24,6 +24,7 @@ export function bindPayrollForm(form, state, onChange) {
     if (name === 'residence') {
       const residence = resolveResidence(value);
       if (!residence) return;
+      if (residence.region !== state.input.region) state.input.foralChildrenConfirmed = false;
       Object.assign(state.input, residence);
       render();
       onChange();
@@ -32,6 +33,7 @@ export function bindPayrollForm(form, state, onChange) {
     if (!(name in state.input)) return;
 
     const previousGross = grossAnnualOf(state.input);
+    if (name === 'children') state.input.foralChildrenConfirmed = false;
 
     if (type === 'checkbox') state.input[name] = checked;
     else if (NUMERIC_INPUTS.has(name)) state.input[name] = Math.max(0, parseFloat(value) || 0);
@@ -39,7 +41,7 @@ export function bindPayrollForm(form, state, onChange) {
 
     // Amounts are always stored per year
     if (name in PERIOD_OF_AMOUNT) state.input[name] *= amountDivisor(name);
-    if (name in AMOUNT_FIELDS) render();
+    if (name in AMOUNT_FIELDS || name === 'children') render();
 
     // Switching period or number of payments keeps the same gross annual salary
     if (name === 'period' || name === 'payments') {

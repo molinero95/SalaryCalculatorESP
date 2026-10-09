@@ -108,3 +108,5 @@ Atxikipen-oinarriak 600 €-ko murrizketa gehigarria du bi ondorengo baino gehia
 [AGENTS.md](AGENTS.md) · [Proiektuaren testuingurua](docs/AI_CONTEXT.md) · [Garapena](CONTRIBUTING.md) · [Erabakiak eta hurrengo urratsak](docs/ROADMAP.md)
 
 [Scope of reviewed policy templates](docs/proposal-scope.md): annual assessment and payroll withholding are distinct; reload a saved proposal to adopt its reviewed template.
+
+Egoitza-hautatzaile bakarrak hiriak erkidego/lurraldearen arabera taldekatzen ditu. Foru-ereduak baieztatutako seme-alaba hautagarriak eta norberaren desgaitasuna barne hartzen ditu; ikusi [arauak eta mugak](docs/foral-family.md).

@@ -1,6 +1,22 @@
 // Basque translations. `f_*` keys label the settings fields.
 
 export default {
+  childrenUnder6: 'Horietatik, 6 urtetik beherakoak (3 urtetik beherakoak barne)',
+  children6to15: 'Horietatik, 6–15 urtekoak',
+  childrenBasque: 'Kenkarirako eskubidea duten seme-alabak (30 urte barne)',
+  childrenNavarra: 'Kenkarirako eskubidea duten seme-alabak (30 urtetik beherakoak)',
+  foralChildrenConfirmed: 'Sartutako seme-alaba guztiek foru-baldintzak betetzen dituztela baieztatzen dut',
+  foralReducedMobility: 'Egiaztatutako mugikortasun murriztua: BLAM ≥ %25 (%33–64 desgaitasuna)',
+  foralAlavaRural: 'Araba: 4.000 biztanle baino gutxiagoko udalerria eta familiaren interes nagusiak bertan',
+  foralChildrenBasqueHelp:
+    'Desgaitasunik, adopziorik edo urteko familia-aldaketarik gabeko seme-alabak: zurekin bizi dira, salbuetsi gabeko errentak ez du SMI gainditzen, ez daude SMI gainditzen duen beste familia-unitate batean, eta ez dute PFEZ aurkezten edo aurkeztu beharrik. Urte amaierako adinak. Zenbaketa osoa: eskubidea duen guraso bakarra; bestela bien artean banatzen da.',
+  foralChildrenNavarraHelp:
+    'Desgaitasunik, adopziorik edo urteko familia-aldaketarik gabeko seme-alaba ezkongabeak: zurekin bizi dira eta salbuetsi gabeko errentak ez du IPREM gainditzen. Urte amaierako adinak. Zenbaketa osoa: eskubidea duen guraso bakarra; bestela bien artean banatzen da.',
+  foralUnsupported:
+    'Foru-profil hau balioztatu gabe dago edo familia-baldintzak falta dira. Emaitzak ezkutatzen dira. Egiaztatu adinak eta seme-alaben baldintzak. Kontratu mugagabea, 65 urtetik behera, 3. familia-egoera eta aurrekorik, ordainsari malgurik edo pentsio-ekarpenik gabe behar dira.',
+  foralScope:
+    'Foru-eredu mugatua: kontratu mugagabea, 65 urtetik behera, 3. familia-egoera; seme-alaba hautagarriak eta norberaren desgaitasun egiaztatua barne. Aurrekoak, mendekotasuna, senideen desgaitasuna, adopzioak, urteko familia-aldaketak, ordainsari malgua eta pentsio-ekarpenak kanpo. Lana eta egoitza lurralde berean. Erregimen erkideko proposamenek ez dituzte foru-arauak aldatzen.',
+
   residence: 'Zerga-egoitza',
   residenceOtherCity: 'Beste hiria / lurraldea soilik',
   residenceForal: 'Foru-erregimena',
@@ -12,12 +28,6 @@ export default {
   rowForalQuota: 'Foru-kuota kenkarien aurretik',
 
   rowForalCredits: 'Foru-murrizketak eta kenkariak',
-
-  foralUnsupported:
-    'Foru-profil hau ez dago oraindik balioztatuta. Emaitzak ezkutatzen dira. Oinarrizko ereduak kontratu mugagabea, 65 urtetik beherako adina, 3. familia-egoera eta seme-alabarik, aurrekorik, desgaitasunik, ordainsari malgurik edo pentsiorik eza eskatzen ditu.',
-
-  foralScope:
-    'Foru-eredu mugatua: kontratu mugagabea, 65 urtetik beherakoa, seniderik, desgaitasunik, ordainsari malgurik edo pentsiorik gabe. Lana eta egoitza lurralde berean daudela suposatzen da. Lurralde erkideko proposamenek eta PFEZ editoreek ez dituzte foru-arau hauek aldatzen; kotizazioak simulatu daitezke.',
 
   locationRate: 'Tasa marjinala',
 

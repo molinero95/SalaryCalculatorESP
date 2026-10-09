@@ -1,5 +1,5 @@
 // App shell only: external analytics and shared personal data are never cached.
-const CACHE = 'salary-calculator-v12';
+const CACHE = 'salary-calculator-v13';
 const ASSETS = [
   './manifest.webmanifest',
   './assets/app-icon.svg',
@@ -31,6 +31,8 @@ const ASSETS = [
   './js/data/foral.js',
   './js/data/cities.js',
   './js/foral-tax.js',
+  './js/data/foral-family.js',
+  './js/domain/foral-family.js',
   './js/domain/fiscal-profile.js',
   './js/data/salaries.js',
   './js/i18n/ca.js',

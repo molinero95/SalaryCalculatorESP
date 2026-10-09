@@ -42,4 +42,4 @@ Update this file when a decision or item materially changes. Record why, not a r
 
 ## Foral follow-up
 
-Residence presets now cover all communities and a reviewed basic salary profile in each foral territory. Extend [locations.md](locations.md) by validating family and disability deductions, short temporary contracts, flexible compensation, pension/EPSV rules and independent workplace/withholding jurisdiction. Keep unsupported profiles guarded until their rules and tests are reviewed.
+Residence presets now cover all communities and reviewed individual employment profiles with eligible children and taxpayer disability in each foral territory. Extend [locations.md](locations.md) by validating ascendant/dependency and disabled-relative deductions, family situations 1/2, short temporary contracts, flexible compensation, pension/EPSV rules and independent workplace/withholding jurisdiction. Keep unsupported profiles guarded until their rules and tests are reviewed.
