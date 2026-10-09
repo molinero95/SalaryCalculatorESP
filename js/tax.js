@@ -122,8 +122,9 @@ export function withholding(input, p, taxableGross, socialSecurity) {
   const largeFamilyReduction = input.children > 2 ? 600 : 0;
   const base = Math.max(0, netEarnings - otherExpenses - reduction - largeFamilyReduction);
   const allowance = personalAllowance(input, p);
-  const taxOnBase = applyScale(p.brackets, base);
-  const taxOnAllowance = applyScale(p.brackets, allowance.total);
+  const scale = p.useSeparateWithholding ? p.withholdingBrackets : p.brackets;
+  const taxOnBase = applyScale(scale, base);
+  const taxOnAllowance = applyScale(scale, allowance.total);
   const freeMinimum = withholdingFreeMinimum(input, p);
 
   let amount = Math.max(0, taxOnBase - taxOnAllowance);

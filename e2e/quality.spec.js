@@ -143,3 +143,21 @@ test('breakdown exposes separate annual state and regional quotas', async ({ pag
   const row = page.locator('#breakdown tr').filter({ hasText: 'Reducción por más de dos descendientes' });
   await expect(row).toContainText('600');
 });
+
+test('Vox separates payroll withholding and annual regional tax across reloads', async ({ page }) => {
+  await page.selectOption('#proposal-select', 'vox2024');
+  await expect(page.locator('.result-simulation')).toContainText('Neto anual de nómina');
+  await expect(page.locator('.result-simulation')).toContainText('Neto anual tras la renta');
+  await expect(page.locator('.result-tax-scope').first()).toContainText('comunidad autónoma');
+  await expect(page.locator('#proposal-info')).toContainText('Simulación parcial');
+  await expect(page.locator('#settings-simulation [data-withholding-brackets] [data-rate="0"]')).toHaveValue('15');
+  const payroll = await page.locator('.result-simulation .headline strong').textContent();
+  await page.selectOption('#region', 'madrid');
+  await expect(page.locator('.result-simulation .headline strong')).toHaveText(payroll);
+  await page.reload();
+  await expect(page.locator('#settings-simulation [data-withholding-brackets] [data-rate="0"]')).toHaveValue('15');
+  await expect(page.locator('.result-simulation .headline strong')).toHaveText(payroll);
+  await page.locator('#settings-simulation [data-group="groupWithholdingBrackets"] summary').click();
+  await page.locator('#settings-simulation [data-withholding-brackets] [data-rate="0"]').fill('20');
+  await expect(page.locator('.result-simulation .headline strong')).not.toHaveText(payroll);
+});

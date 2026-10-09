@@ -31,6 +31,7 @@ function resultCard(kind, name, r, reference, { showRefund, showInKind, showPens
       </p>
       <dl class="metrics">
         ${metric(t('netAnnual'), formatEuros(r.netAnnual), deltaBadge(r.netAnnual, reference?.netAnnual))}
+        ${metric(t('rowNetAfterReturn'), formatEuros(r.netAnnualAfterReturn), deltaBadge(r.netAnnualAfterReturn, reference?.netAnnualAfterReturn))}
         ${r.payments === 14 ? metric(t('extraPayment'), formatEuros(r.netExtraPayment), deltaBadge(r.netExtraPayment, reference?.netExtraPayment)) : ''}
         ${showRefund ? metric(t('refund'), formatSignedEuros(r.incomeTax.refund), deltaBadge(r.incomeTax.refund, reference?.incomeTax.refund)) : ''}
         ${showInKind ? metric(t('inKind'), formatEuros(r.flexible.total)) : ''}
@@ -39,6 +40,7 @@ function resultCard(kind, name, r, reference, { showRefund, showInKind, showPens
         ${metric(t('effectiveRate'), formatPercent(r.effectiveRate), rateDelta(r.effectiveRate, reference?.effectiveRate))}
         ${metric(t('employerCost'), formatEuros(r.employerCost))}
       </dl>
+      <p class="muted result-tax-scope">${t('payrollAnnualScope')}</p>
     </article>`;
 }
 

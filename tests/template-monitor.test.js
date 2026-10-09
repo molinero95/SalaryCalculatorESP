@@ -19,6 +19,9 @@ for (const [label, mutate] of [
   ['unordered brackets', (c) => (c.proposals[0].changes.incomeTax.brackets[1].upTo = 1)],
   ['closed final bracket', (c) => (c.proposals[0].changes.incomeTax.brackets.at(-1).upTo = 999999)],
   ['missing partial limitations', (c) => (c.proposals[1].limitations = [])],
+  ['invalid withholding mode', (c) => (c.proposals[0].changes.incomeTax.useSeparateWithholding = 'yes')],
+  ['missing separate withholding scale', (c) => delete c.proposals[0].changes.incomeTax.withholdingBrackets],
+  ['invalid separate withholding rate', (c) => (c.proposals[0].changes.incomeTax.withholdingBrackets[0].rate = 101)],
 ]) {
   test(`rejects ${label}`, () => {
     const copy = structuredClone(catalogue);

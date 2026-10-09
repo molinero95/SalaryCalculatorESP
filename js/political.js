@@ -43,6 +43,11 @@ export function indexedScenario(base, percent, name) {
     upTo: upTo === null ? null : round2(upTo * factor),
     rate,
   }));
+  if (scenario.incomeTax.useSeparateWithholding)
+    scenario.incomeTax.withholdingBrackets = scenario.incomeTax.withholdingBrackets.map(({ upTo, rate }) => ({
+      upTo: upTo === null ? null : round2(upTo * factor),
+      rate,
+    }));
   for (const key of ALLOWANCE_KEYS) scenario.incomeTax[key] = round2(scenario.incomeTax[key] * factor);
   return { ...scenario, name, proposal: '' };
 }

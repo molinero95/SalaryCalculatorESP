@@ -28,7 +28,7 @@ export default {
   disability65: '≥ % 65',
   current: 'Egungoa',
   simulation: 'Simulazioa',
-  netAnnual: 'Urteko garbia',
+  netAnnual: 'Nominaren urteko garbia',
   netPerPayment: 'Ordainsari bakoitzeko garbia',
   netMonthly: 'Hileko garbia',
   extraPayment: 'Aparteko ordainsaria (×2)',
@@ -260,12 +260,17 @@ export default {
     'Zure erkidegoaren eskalarekin aitorpenean ordainduko zenukeena. Atxikitakoarekiko aldea itzuli (+) edo ordaindu (−) egin beharko da.',
   loadProposal: 'Alderdi baten proposamena kargatu',
   proposalSource: 'Iturria',
+  payrollAnnualScope:
+    'Nominak atxikipenak kentzen ditu. Errentaren ondorengo garbiak itzulketaren edo ordainketaren zenbatespena eta hautatutako autonomia-erkidegoa hartzen ditu kontuan.',
+  groupWithholdingBrackets: 'Atxikipen-eskala bereizia',
+  separateWithholdingHelp:
+    'Tarte hauek nominaren atxikipena soilik aldatzen dute. Eskala nagusiak urteko kalkulua aldatzen du.',
   proposalVerified: 'Egiaztatze-data',
   proposalPartial: 'Simulazio partziala',
   proposalVoxNote:
-    'Estatuko zatia bakarrik aldatzen da: % 15 70.000 € arte eta % 25 hortik gora, 22.000 €-ko gutxieneko pertsonalarekin. Seme-alaba bakoitzak estatuko tasak 4 puntu murrizten ditu, % 0 arte. Autonomia-erkidegoko zatia mantentzen da. Atxikipena estimazioa da; jaiotzagatiko ordainketak ez dira sartzen.',
+    '2024ko proposamena: urteko estatuko tasa % 15 da 70.000 € arte eta % 25 hortik gora; autonomia-erkidegoko eskala mantentzen da. 101. artikuluak % 15/% 25eko atxikipen bereizia proposatzen du. Gutxieneko pertsonala 22.000 € da; seme-alabako 4 puntuko murrizketa urteko estatuko kuotan soilik aplikatzen da. Erkidegoek berariaz ezarritako gutxienekoak mantentzen dira; besteek proposatutako gutxienekoa erabiltzen dute. Simulazio partziala: egungo atxikipen-arauak mantentzen ditu eta jaiotza-txekeak kanpoan uzten ditu.',
   proposalSumarNote:
-    'Gehieneko tasa marjinala % 52ra igotzen du 300.000 €-tik gora. Programak ez ditu 120.000 eta 300.000 € arteko tasak zehazten, eta bere horretan uzten dira.',
+    'Gehieneko tasa marjinala % 52ra igotzen du 300.000 €-tik gora. Programak ez ditu 120.000 eta 300.000 € arteko tasak zehazten, eta bere horretan uzten dira. Nominaren atxikipena mantentzen da: programak ez du ordezko eskalarik zehazten.',
   proposalPsoeNote: 'Ondorengoengatiko eta mendekoengatiko gutxienekoa igotzea proposatzen du, zifra zehatzik gabe.',
   proposalPpNote:
     'Gazte jakin batzuen lehen lau lan-urteetan % 100, % 75, % 50 eta % 25eko hobariak proposatzen ditu. Ez dira simulatzen: baldintzak egiaztatzeko datuak falta dira.',

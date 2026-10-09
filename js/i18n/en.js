@@ -28,7 +28,7 @@ export default {
   disability65: '≥ 65 %',
   current: 'Current',
   simulation: 'Simulation',
-  netAnnual: 'Net per year',
+  netAnnual: 'Annual payroll net',
   netPerPayment: 'Net per payment',
   netMonthly: 'Net per month',
   extraPayment: 'Extra payment (×2)',
@@ -258,12 +258,16 @@ export default {
     'What you would pay in the annual return with your region’s scale. The difference with what was withheld is refunded (+) or owed (−).',
   loadProposal: 'Load a party proposal',
   proposalSource: 'Source',
+  payrollAnnualScope:
+    'Payroll deducts withholding. Net after the tax return includes the estimated refund or payment and your selected region.',
+  groupWithholdingBrackets: 'Separate withholding scale',
+  separateWithholdingHelp: 'These brackets only change payroll withholding. The main scale changes annual assessment.',
   proposalVerified: 'Verified on',
   proposalPartial: 'Partial simulation',
   proposalVoxNote:
-    'Only the state share changes: 15 % up to €70,000 and 25 % above, with a €22,000 personal allowance. Each child reduces state rates by 4 percentage points, down to 0 %. Regional tax remains unchanged. Payroll withholding is estimated; birth payments are excluded.',
+    '2024 proposal: annual state rates of 15 % up to €70,000 and 25 % above, retaining regional rates. Article 101 proposes separate 15 %/25 % withholding. Personal minimum €22,000; four-point child relief applies only to annual state tax. Explicit regional minima are retained; other regions inherit the proposed minimum. Partial simulation: existing regulatory withholding rules retained; birth cheques excluded.',
   proposalSumarNote:
-    'Raises the top marginal rate to 52 % above €300,000. The programme gives no rates between €120,000 and €300,000, which are kept.',
+    'Raises the top marginal rate to 52 % above €300,000. The programme gives no rates between €120,000 and €300,000, which are kept. Payroll withholding is retained: the programme does not specify a replacement scale.',
   proposalPsoeNote: 'Proposes raising the child and dependant allowances, without specific figures.',
   proposalPpNote:
     'Proposes 100 %, 75 %, 50 % and 25 % relief in the first four working years for eligible young people. Not simulated: eligibility inputs are missing.',

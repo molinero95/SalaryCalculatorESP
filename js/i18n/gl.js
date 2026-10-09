@@ -28,7 +28,7 @@ export default {
   disability65: '≥ 65 %',
   current: 'Actual',
   simulation: 'Simulación',
-  netAnnual: 'Neto anual',
+  netAnnual: 'Neto anual de nómina',
   netPerPayment: 'Neto por paga',
   netMonthly: 'Neto mensual',
   extraPayment: 'Paga extra (×2)',
@@ -255,12 +255,16 @@ export default {
     'O que pagarías na declaración coa escala da túa comunidade. A diferenza co retido sae a devolver (+) ou a pagar (−).',
   loadProposal: 'Cargar proposta de partido',
   proposalSource: 'Fonte',
+  payrollAnnualScope:
+    'A nómina desconta retencións. O neto tras a renda incorpora a devolución ou o pagamento estimado e a comunidade autónoma seleccionada.',
+  groupWithholdingBrackets: 'Escala de retención independente',
+  separateWithholdingHelp: 'Estes tramos só cambian a retención de nómina. A escala principal cambia o cálculo anual.',
   proposalVerified: 'Verificado o',
   proposalPartial: 'Simulación parcial',
   proposalVoxNote:
-    'Só cambia a parte estatal: 15 % ata 70.000 € e 25 % por riba, cun mínimo persoal de 22.000 €. Cada fillo reduce os tipos estatais en 4 puntos, ata o 0 %. A parte autonómica mantense. A retención é estimada; non inclúe os cheques por nacemento.',
+    'Proposta de 2024: escala estatal anual do 15 % ata 70.000 € e 25 % sobre o exceso; mantén a escala autonómica. O artigo 101 propón unha retención independente do 15 %/25 %. Mínimo persoal de 22.000 € e rebaixa de 4 puntos por fillo só na cota estatal anual. Mantéñense os mínimos autonómicos expresos; outras comunidades herdan o mínimo proposto. Simulación parcial: conserva as regras regulamentarias e exclúe os cheques por nacemento.',
   proposalSumarNote:
-    'Sobe o tipo marxinal máximo ao 52 % por riba de 300.000 €. O programa non detalla os tipos entre 120.000 e 300.000 €, que se manteñen.',
+    'Sobe o tipo marxinal máximo ao 52 % por riba de 300.000 €. O programa non detalla os tipos entre 120.000 e 300.000 €, que se manteñen. A retención de nómina mantense: o programa non define unha escala nova para ela.',
   proposalPsoeNote: 'Propón aumentar o mínimo por descendentes e persoas dependentes, sen cifras concretas.',
   proposalPpNote:
     'Propón bonificacións do 100 %, 75 %, 50 % e 25 % nos primeiros catro anos de vida laboral de determinados mozos. Non simuladas: faltan datos de elixibilidade.',
