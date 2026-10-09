@@ -102,3 +102,7 @@ S'agraeixen correccions de la normativa i revisions de les traduccions (sobretot
 Fins a cinc simulacions apareixen automàticament als gràfics i a la taula. Les pestanyes trien quina edites. Les propostes són plantilles editables. La rebaixa estatal per fill és configurable: Vox aplica 4 punts, amb mínim 0 %, sense reduir la part autonòmica. La retenció és estimada. Després de visitar-la amb connexió, funciona sense connexió.
 
 La base de retenció inclou una reducció addicional de 600 € per més de dos descendents. El càlcul anual separa les quotes estatal i autonòmica i els seus mínims. Consulta la [matriu de validació fiscal i les fonts oficials](docs/fiscal-validation.md) per conèixer les proves i els supòsits coberts.
+
+## Documentació per a agents d’IA
+
+[AGENTS.md](AGENTS.md) · [Context del projecte](docs/AI_CONTEXT.md) · [Desenvolupament](CONTRIBUTING.md) · [Decisions i pròxims passos](docs/ROADMAP.md)

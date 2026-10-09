@@ -102,3 +102,7 @@ Agradécense correccións da normativa e revisións das traducións (sobre todo 
 Ata cinco simulacións aparecen automaticamente nos gráficos e na táboa. As lapelas escollen cal editar. As propostas son modelos editables. A rebaixa estatal por fillo é configurable: Vox aplica 4 puntos, cun mínimo do 0 %, mantendo a parte autonómica. A retención é estimada. Tras unha visita con conexión, funciona sen conexión.
 
 A base de retención inclúe unha redución adicional de 600 € por máis de dous descendentes. O cálculo anual separa as cotas estatal e autonómica e os seus mínimos. Consulta a [matriz de validación fiscal e as fontes oficiais](docs/fiscal-validation.md) para coñecer as probas e os supostos cubertos.
+
+## Documentación para axentes de IA
+
+[AGENTS.md](AGENTS.md) · [Contexto do proxecto](docs/AI_CONTEXT.md) · [Desenvolvemento](CONTRIBUTING.md) · [Decisións e próximos pasos](docs/ROADMAP.md)

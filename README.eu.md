@@ -102,3 +102,7 @@ Eskertzen dira araudiaren zuzenketak eta itzulpenen berrikuspenak (batez ere eus
 Bost simulazio arte automatikoki agertzen dira grafikoetan eta taulan. Fitxek editatu beharreko simulazioa hautatzen dute. Proposamenak txantiloi editagarriak dira. Seme-alaba bakoitzeko estatuko tasaren murrizketa konfiguragarria da: Voxek 4 puntu aplikatzen ditu, gutxienez % 0, autonomia-erkidegoko zatia mantenduz. Atxikipena estimazioa da. Lineako bisita baten ondoren, aplikazioak konexiorik gabe funtzionatzen du.
 
 Atxikipen-oinarriak 600 €-ko murrizketa gehigarria du bi ondorengo baino gehiago daudenean. Urteko kalkuluak estatuko eta autonomia-erkidegoko kuotak eta gutxienekoak bereizten ditu. Ikusi [zerga-balioztapenaren matrizea eta iturri ofizialak](docs/fiscal-validation.md) proben estaldura eta hipotesiak ezagutzeko.
+
+## IA agenteentzako dokumentazioa
+
+[AGENTS.md](AGENTS.md) · [Proiektuaren testuingurua](docs/AI_CONTEXT.md) · [Garapena](CONTRIBUTING.md) · [Erabakiak eta hurrengo urratsak](docs/ROADMAP.md)

@@ -108,3 +108,7 @@ La declaración estimada usa la comunidad seleccionada; País Vasco y Navarra qu
 Pruebas: `npm test`, `npm run lint`, `npm run test:e2e`. Las referencias visuales originales son de macOS; revisa las capturas antes de actualizar las referencias de otro sistema.
 
 La base de retención incluye una reducción adicional de 600 € por más de dos descendientes. El cálculo anual separa las cuotas estatal y autonómica y sus mínimos. Consulta la [matriz de validación fiscal y sus fuentes oficiales](docs/fiscal-validation.md) para conocer las pruebas y los supuestos cubiertos.
+
+## Documentación para agentes de IA
+
+[AGENTS.md](AGENTS.md) · [Contexto del proyecto](docs/AI_CONTEXT.md) · [Desarrollo](CONTRIBUTING.md) · [Decisiones y próximos pasos](docs/ROADMAP.md)
