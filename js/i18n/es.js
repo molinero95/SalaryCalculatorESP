@@ -157,7 +157,7 @@ export default {
   how3: 'Compara al instante tu nómina actual con la simulada, y guarda o comparte la propuesta con un enlace.',
   simTitle: 'Propuesta a simular',
   simDesc: 'Define aquí el cambio que quieres evaluar. Parte de la normativa vigente; los valores que modifiques se resaltan.',
-  currentTitle: 'Normativa vigente (referencia)',
+  currentTitle: 'Normativa vigente',
   currentDesc: 'Parámetros oficiales de 2026 con los que se calcula la columna «Actual». No hace falta tocarlos salvo que cambie la ley o quieras usar otra referencia.',
   familySituation: 'Situación familiar',
   situation1: 'Monoparental (con hijos a cargo)',

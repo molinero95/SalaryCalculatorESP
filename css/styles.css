@@ -772,9 +772,11 @@ main > *,
    Settings
    ========================================================================== */
 
-.card h2 .chip {
-  vertical-align: middle;
-  margin-right: 0.35rem;
+/* Title with a scenario chip: the text wraps in its own column next to the chip */
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
 }
 
 .card-simulation {
@@ -800,7 +802,8 @@ main > *,
 
 .card-current > summary h2::after {
   content: '▸';
-  margin-left: 0.5rem;
+  margin-left: auto;
+  padding-left: 0.5rem;
   color: var(--text-muted);
   display: inline-block;
   transition: transform 0.15s;
@@ -1140,6 +1143,16 @@ main > *,
 
   .card-header .segmented {
     width: 100%;
+  }
+
+  .section-title {
+    gap: 0.45rem;
+    font-size: 1rem;
+  }
+
+  .section-title .chip {
+    padding: 0.1rem 0.45rem;
+    font-size: 0.65rem;
   }
 
   .toolbar .button {

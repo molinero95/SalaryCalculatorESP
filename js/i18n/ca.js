@@ -157,7 +157,7 @@ export default {
   how3: "Compara a l'instant la teva nòmina actual amb la simulada, i desa o comparteix la proposta amb un enllaç.",
   simTitle: 'Proposta a simular',
   simDesc: 'Defineix aquí el canvi que vols avaluar. Parteix de la normativa vigent; els valors que modifiquis es ressalten.',
-  currentTitle: 'Normativa vigent (referència)',
+  currentTitle: 'Normativa vigent',
   currentDesc: 'Paràmetres oficials del 2026 amb què es calcula la columna «Actual». No cal tocar-los tret que canviï la llei o vulguis fer servir una altra referència.',
   familySituation: 'Situació familiar',
   situation1: 'Monoparental (amb fills a càrrec)',

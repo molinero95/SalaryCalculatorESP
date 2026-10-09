@@ -157,7 +157,7 @@ export default {
   how3: 'Instantly compare your current payslip with the simulated one, and save or share the proposal with a link.',
   simTitle: 'Proposal to simulate',
   simDesc: 'Define the change you want to test here. It starts from the current rules; any value you modify is highlighted.',
-  currentTitle: 'Current rules (reference)',
+  currentTitle: 'Current rules',
   currentDesc: 'Official 2026 parameters used for the “Current” column. You don’t need to touch them unless the law changes or you want a different baseline.',
   familySituation: 'Family situation',
   situation1: 'Single parent (with dependent children)',
