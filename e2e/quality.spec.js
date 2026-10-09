@@ -390,7 +390,7 @@ test('unreviewed foral profiles hide every fiscal output and recover when correc
   await expect(page.locator('#fiscal-scope')).toBeHidden();
 });
 
-test('single residence control remains readable in every language on narrow screens', async ({ page }, testInfo) => {
+test('cascading residence controls remain readable in every language on narrow screens', async ({ page }, testInfo) => {
   await page.setViewportSize({ width: 320, height: 740 });
   for (const language of ['es', 'ca', 'eu', 'gl', 'en']) {
     await page.selectOption('#language', language);
@@ -482,4 +482,29 @@ test('community and territory filter cities and restore saved selections', async
   await expect(page.locator('#residence-city option[value="bilbao"]')).toHaveCount(0);
   await page.selectOption('#residence', 'region:general');
   await expect(page.locator('#residence-city')).toBeDisabled();
+});
+
+test('residence help remains inside narrow viewports in every language', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 740 });
+  for (const language of ['es', 'ca', 'eu', 'gl', 'en']) {
+    await page.selectOption('#language', language);
+    const tip = page.locator('label[for="residence"] .help-tip');
+    await tip.click();
+    await expect.poll(() => tip.evaluate((el) => Number(getComputedStyle(el, '::after').opacity))).toBe(1);
+    const bounds = await tip.evaluate((el) => {
+      const field = el.closest('label').getBoundingClientRect();
+      const popup = getComputedStyle(el, '::after');
+      const left = field.left + parseFloat(popup.left);
+      return {
+        left,
+        right: left + parseFloat(popup.width),
+        viewport: innerWidth,
+        overflow: document.documentElement.scrollWidth - innerWidth,
+      };
+    });
+    expect(bounds.left).toBeGreaterThanOrEqual(0);
+    expect(bounds.right).toBeLessThanOrEqual(bounds.viewport);
+    expect(bounds.overflow).toBeLessThanOrEqual(0);
+    await tip.click();
+  }
 });

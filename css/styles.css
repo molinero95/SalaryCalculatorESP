@@ -1682,3 +1682,18 @@ main > *,
 [hidden] {
   display: none !important;
 }
+
+/* Anchor residence help to the field so long translated labels cannot push it off-screen. */
+@media (max-width: 600px) {
+  label[for='residence'] {
+    position: relative;
+  }
+  label[for='residence'] .help-tip {
+    position: static;
+  }
+  label[for='residence'] .help-tip::after {
+    left: 0;
+    max-width: min(260px, 100%);
+    transform: none;
+  }
+}
