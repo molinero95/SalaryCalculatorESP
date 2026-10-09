@@ -196,27 +196,21 @@ test('floating annual difference stays inside narrow viewports with large amount
   });
   await page.locator('#sticky-summary').scrollIntoViewIfNeeded();
   await expect(page.locator('#sticky-summary')).toBeVisible();
-  console.log(
-    'Narrow layout diagnostics',
-    await page.evaluate(() => ({
-      viewport: innerWidth,
-      scroll: document.documentElement.scrollWidth,
-      summary: document.querySelector('#sticky-summary').getBoundingClientRect().toJSON(),
-      overflow: [...document.querySelectorAll('body *')]
-        .filter((e) => e.getBoundingClientRect().right > innerWidth)
-        .slice(0, 80)
-        .map((e) => ({ tag: e.tagName, id: e.id, cls: e.className, right: e.getBoundingClientRect().right })),
-    })),
-  );
 
   await expect
     .poll(() =>
       page.evaluate(() => {
         const rect = document.querySelector('#sticky-summary').getBoundingClientRect();
-        return rect.left >= 0 && rect.right <= innerWidth && document.documentElement.scrollWidth <= innerWidth;
+        return (
+          rect.left >= 0 &&
+          rect.right <= document.documentElement.clientWidth &&
+          document.documentElement.scrollWidth <= document.documentElement.clientWidth
+        );
       }),
     )
     .toBe(true);
   await page.selectOption('#language', 'eu');
-  await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await expect
+    .poll(() => page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth))
+    .toBe(true);
 });
