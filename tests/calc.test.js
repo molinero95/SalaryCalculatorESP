@@ -159,3 +159,24 @@ test('part-time workers contribute on their actual salary, not the full-time min
   close(halfTime.employee.monthlyBase, 1000);
   close(halfTime.employee.total, 12000 * 0.065);
 });
+
+test('the annual return matches withholding for the general scale', () => {
+  const r = computePayroll(DEFAULT_INPUT, CURRENT_SCENARIO);
+  close(r.incomeTax.annualTax, r.incomeTax.withheld, 1);
+  close(r.incomeTax.refund, 0, 1);
+});
+
+test('regions with lower scales get money back in the annual return', () => {
+  const madrid = computePayroll({ ...DEFAULT_INPUT, region: 'madrid' }, CURRENT_SCENARIO);
+  const asturias = computePayroll({ ...DEFAULT_INPUT, salary: 80000, region: 'asturias' }, CURRENT_SCENARIO);
+  const general = computePayroll({ ...DEFAULT_INPUT, salary: 80000 }, CURRENT_SCENARIO);
+
+  assert.ok(madrid.incomeTax.refund > 0);
+  close(madrid.incomeTax.withheld, computePayroll(DEFAULT_INPUT, CURRENT_SCENARIO).incomeTax.withheld);
+  assert.ok(asturias.incomeTax.annualTax > general.incomeTax.annualTax);
+});
+
+test('employees under the filing threshold never owe money in the return', () => {
+  const r = computePayroll({ ...DEFAULT_INPUT, salary: 21000, region: 'rioja' }, CURRENT_SCENARIO);
+  assert.ok(r.incomeTax.refund >= 0);
+});

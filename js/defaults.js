@@ -64,6 +64,8 @@ export const CURRENT_SCENARIO = {
 
     // Other withholding rules (IRPF Regulation, arts. 85-86)
     withholdingCap: 43,
+    // Single-payer employees below this income don't have to file a return (art. 96 LIRPF)
+    filingThreshold: 22000,
     temporaryMinRate: 2,
   },
   // Tax-exempt limits for flexible compensation (art. 42 LIRPF, art. 45-46 RIRPF)
@@ -119,6 +121,7 @@ export const DEFAULT_INPUT = {
   payments: 14, // 12 | 14
   contract: 'permanent', // 'permanent' | 'temporary'
   partTime: 100, // % of a full-time working week
+  region: 'general', // key of REGIONAL_SCALES, or 'general'
   familySituation: 3, // 1 | 2 | 3, see withholdingFreeMin*
   age: 35,
   children: 0,
@@ -143,58 +146,16 @@ export const DEFAULT_INPUT = {
   pensionEmployer: 0,
 };
 
-// State half of the income tax scale (art. 63 LIRPF)
-const STATE_SCALE = [
+// General regional scale that the withholding scale assumes for the regional
+// half (art. 74 LIRPF supplementary scale). A region's real scale is applied
+// as a difference from this one.
+export const GENERAL_REGIONAL_SCALE = [
   { upTo: 12450, rate: 9.5 },
   { upTo: 20200, rate: 12 },
   { upTo: 35200, rate: 15 },
   { upTo: 60000, rate: 18.5 },
-  { upTo: 300000, rate: 22.5 },
-  { upTo: null, rate: 24.5 },
+  { upTo: null, rate: 22.5 },
 ];
-
-// Regional scales (approx. 2025 tax year). Payroll withholding always uses the
-// general scale; regional ones approximate the final tax in the annual return.
-const REGIONAL_SCALES = {
-  madrid: [
-    { upTo: 13362.22, rate: 8.5 },
-    { upTo: 19004.63, rate: 10.7 },
-    { upTo: 35425.68, rate: 12.8 },
-    { upTo: 57320.4, rate: 17.4 },
-    { upTo: null, rate: 20.5 },
-  ],
-  catalonia: [
-    { upTo: 12450, rate: 10.5 },
-    { upTo: 17707.2, rate: 12 },
-    { upTo: 21000, rate: 14 },
-    { upTo: 33007.2, rate: 15 },
-    { upTo: 53407.2, rate: 18.8 },
-    { upTo: 90000, rate: 21.5 },
-    { upTo: 120000, rate: 23.5 },
-    { upTo: 175000, rate: 24.5 },
-    { upTo: null, rate: 25.5 },
-  ],
-  andalusia: [
-    { upTo: 13000, rate: 9.5 },
-    { upTo: 21100, rate: 12 },
-    { upTo: 35200, rate: 15 },
-    { upTo: 60000, rate: 18.5 },
-    { upTo: null, rate: 22.5 },
-  ],
-  valencia: [
-    { upTo: 12000, rate: 9 },
-    { upTo: 22000, rate: 12 },
-    { upTo: 32000, rate: 15 },
-    { upTo: 42000, rate: 17.5 },
-    { upTo: 52000, rate: 20 },
-    { upTo: 62000, rate: 22.5 },
-    { upTo: 72000, rate: 25 },
-    { upTo: 100000, rate: 26.5 },
-    { upTo: 150000, rate: 27.5 },
-    { upTo: 200000, rate: 28.5 },
-    { upTo: null, rate: 29.5 },
-  ],
-};
 
 /** Adds two bracket scales into a single equivalent scale. */
 export function combineScales(a, b) {
@@ -211,12 +172,8 @@ export function combineScales(a, b) {
 }
 
 export const BRACKET_PRESETS = {
-  general: { name: 'General (retención en nómina)', brackets: CURRENT_SCENARIO.incomeTax.brackets },
-  madrid: { name: 'Estatal + Madrid', brackets: combineScales(STATE_SCALE, REGIONAL_SCALES.madrid) },
-  catalonia: { name: 'Estatal + Catalunya', brackets: combineScales(STATE_SCALE, REGIONAL_SCALES.catalonia) },
-  andalusia: { name: 'Estatal + Andalucía', brackets: combineScales(STATE_SCALE, REGIONAL_SCALES.andalusia) },
-  valencia: { name: 'Estatal + C. Valenciana', brackets: combineScales(STATE_SCALE, REGIONAL_SCALES.valencia) },
-  flat20: { name: 'Flat tax 20 %', brackets: [{ upTo: null, rate: 20 }] },
+  general: { name: 'Escala vigente 2026', brackets: CURRENT_SCENARIO.incomeTax.brackets },
+  flat20: { name: 'Tipo único 20 %', brackets: [{ upTo: null, rate: 20 }] },
 };
 
 export const clone = (value) => structuredClone(value);

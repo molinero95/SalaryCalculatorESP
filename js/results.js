@@ -32,7 +32,7 @@ function resultCard(kind, name, r, reference, { showRefund, showInKind, showPens
       <dl class="metrics">
         ${metric(t('netAnnual'), formatEuros(r.netAnnual), deltaBadge(r.netAnnual, reference?.netAnnual))}
         ${r.payments === 14 ? metric(t('extraPayment'), formatEuros(r.netExtraPayment), deltaBadge(r.netExtraPayment, reference?.netExtraPayment)) : ''}
-        ${showRefund ? metric(t('refund'), formatEuros(r.incomeTax.refund), deltaBadge(r.incomeTax.refund, reference?.incomeTax.refund)) : ''}
+        ${showRefund ? metric(t('refund'), formatSignedEuros(r.incomeTax.refund), deltaBadge(r.incomeTax.refund, reference?.incomeTax.refund)) : ''}
         ${showInKind ? metric(t('inKind'), formatEuros(r.flexible.total)) : ''}
         ${showPension ? metric(t('pensions'), formatEuros(r.pension.total)) : ''}
         ${metric(t('withholding'), formatPercent(r.incomeTax.rate), rateDelta(r.incomeTax.rate, reference?.incomeTax.rate))}
@@ -61,7 +61,7 @@ function summaryStrip(names, current, simulation) {
 
 export function renderResults({ cards, summary, sticky }, { names, current, simulation }) {
   const options = {
-    showRefund: current.incomeTax.refund > 0 || simulation.incomeTax.refund > 0,
+    showRefund: Math.abs(current.incomeTax.refund) >= 0.5 || Math.abs(simulation.incomeTax.refund) >= 0.5,
     showInKind: simulation.flexible.total > 0,
     showPension: simulation.pension.total > 0,
   };
@@ -144,6 +144,7 @@ const BREAKDOWN = [
       },
       { label: 'rowIncomeTax', value: (r) => r.incomeTax.withheld, total: true },
       { label: 'rowMinWageCredit', value: (r) => r.incomeTax.minWageCredit, optional: true },
+      { label: 'rowAnnualTax', help: 'helpAnnualTax', value: (r) => r.incomeTax.annualTax, total: true },
     ],
   },
   {
@@ -155,7 +156,13 @@ const BREAKDOWN = [
       { label: 'rowFlexTotal', value: (r) => -r.flexible.total, optional: true },
       { label: 'rowPensionEmployee', value: (r) => -r.pension.employee, optional: true },
       { label: 'rowNetCash', value: (r) => r.netAnnual, total: true, highlight: true },
-      { label: 'refund', value: (r) => r.incomeTax.refund, optional: true },
+      {
+        label: 'refund',
+        value: (r) => r.incomeTax.refund,
+        formatDiff: formatSignedEuros,
+        format: formatSignedEuros,
+        optional: true,
+      },
       { label: 'rowPensionIndividual', value: (r) => -r.pension.individual, optional: true },
       {
         label: 'rowNetAfterReturn',

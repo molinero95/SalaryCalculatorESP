@@ -28,8 +28,8 @@ test('lowering every bracket shows a positive difference', async ({ page }) => {
 
 test('selecting a bracket template keeps it selected', async ({ page }) => {
   const preset = page.locator('#settings-simulation [data-preset]');
-  await preset.selectOption('madrid');
-  await expect(preset).toHaveValue('madrid');
+  await preset.selectOption('flat20');
+  await expect(preset).toHaveValue('flat20');
 });
 
 test('restores a scenario from a shared link', async ({ page }) => {
@@ -110,4 +110,10 @@ test('share links only carry the changed proposal, not personal details', async 
 
   expect(payload).toEqual({ simulation: { name: 'Mi propuesta' } });
   expect(url.length).toBeLessThan(120);
+});
+
+test('choosing a region shows the estimated tax return result', async ({ page }) => {
+  await page.selectOption('#region', 'madrid');
+  await expect(page.locator('.result-current .metrics')).toContainText('Resultado estimado de la renta');
+  await expect(page.locator('.result-current .metrics')).toContainText('+');
 });

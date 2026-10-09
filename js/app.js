@@ -6,6 +6,7 @@ import { renderSettings } from './settings.js';
 import { renderChart, renderDataTable } from './chart.js';
 import { renderResults, renderBreakdown } from './results.js';
 import * as storage from './storage.js';
+import { REGIONAL_SCALES } from './data/regions.js';
 
 const $ = (selector) => document.querySelector(selector);
 
@@ -103,6 +104,7 @@ function initialState() {
   state.input.familySituation = oneOf(state.input.familySituation, [3, 2, 1]);
   state.input.disability = oneOf(state.input.disability, [0, 33, 65]);
   state.input.partTime = Math.min(100, Math.max(1, state.input.partTime));
+  state.input.region = oneOf(state.input.region, ['general', ...Object.keys(REGIONAL_SCALES)]);
   for (const period of Object.keys(AMOUNT_FIELDS))
     state.input[period] = oneOf(state.input[period], ['annual', 'monthly']);
   return state;
@@ -446,8 +448,17 @@ languageSelect.addEventListener('change', ({ target }) => {
   applyLanguage();
 });
 
+function renderRegionOptions() {
+  const regions = Object.entries(REGIONAL_SCALES).sort(([, a], [, b]) => a.name.localeCompare(b.name));
+  $('#region').innerHTML =
+    `<option value="general">${t('regionGeneral')}</option>` +
+    regions.map(([key, { name }]) => `<option value="${key}">${name}</option>`).join('');
+  $('#region').value = state.input.region;
+}
+
 function applyLanguage() {
   setLanguage(state.language);
+  renderRegionOptions();
   languageSelect.value = state.language;
   translateDocument();
   renderSavedScenarios();

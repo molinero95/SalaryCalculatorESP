@@ -100,7 +100,7 @@ export default {
   changed: 'Distinto do escenario de referencia',
   groupBrackets: 'IRPF · Escala de tramos',
   groupBracketsHelp:
-    'A nómina retén sempre coa escala xeral. Os modelos autonómicos aproximan a cota final da declaración da renda.',
+    'Escala conxunta (estatal + autonómica xeral) coa que se retén na nómina. A túa comunidade autónoma aplícase ao estimar a renda.',
   groupAllowances: 'IRPF · Mínimo persoal e familiar',
   groupEmployment: 'IRPF · Rendementos do traballo',
   groupWithholding: 'IRPF · Regras de retención',
@@ -176,7 +176,7 @@ export default {
   flexTraining: 'Formación',
   flexOverCap: 'A retribución en especie supera o {cap} % do salario que permite o Estatuto dos Traballadores.',
   inKind: 'En especie (retribución flexible)',
-  refund: 'Devolución estimada na renda',
+  refund: 'Resultado estimado da renda',
   rowTaxableGross: 'Bruto suxeito a IRPF',
   sectionFlexible: 'Retribución flexible',
   rowFlexTotal: 'Retribución en especie',
@@ -241,4 +241,11 @@ export default {
   shareTextNone: 'Simula como cambiaría o teu soldo con «{name}»:',
   shareNative: 'Compartir…',
   shareNote: 'A ligazón inclúe a proposta, non os teus datos persoais: cada persoa verá coa súa propia nómina.',
+  region: 'Comunidade autónoma',
+  regionGeneral: 'Escala xeral (sen especificar)',
+  helpRegion:
+    'A retención na nómina non depende da túa comunidade, pero a cota final da renda si. O País Vasco e Navarra non están incluídos.',
+  rowAnnualTax: 'Cota anual estimada (renda)',
+  helpAnnualTax:
+    'O que pagarías na declaración coa escala da túa comunidade. A diferenza co retido sae a devolver (+) ou a pagar (−).',
 };

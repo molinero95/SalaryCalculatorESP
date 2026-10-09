@@ -100,7 +100,7 @@ export default {
   changed: 'Differs from the reference scenario',
   groupBrackets: 'Income tax · Brackets',
   groupBracketsHelp:
-    'Payroll withholding always uses the general scale. The regional templates approximate the final tax due in the annual return.',
+    'Combined scale (state + general regional) used for payroll withholding. Your region is applied when estimating the annual return.',
   groupAllowances: 'Income tax · Personal and family allowance',
   groupEmployment: 'Income tax · Employment income',
   groupWithholding: 'Income tax · Withholding rules',
@@ -177,7 +177,7 @@ export default {
   flexTraining: 'Training',
   flexOverCap: 'In-kind compensation exceeds the {cap} % of salary allowed by the Workers’ Statute.',
   inKind: 'In kind (flexible pay)',
-  refund: 'Estimated tax return refund',
+  refund: 'Estimated tax return result',
   rowTaxableGross: 'Gross subject to income tax',
   sectionFlexible: 'Flexible compensation',
   rowFlexTotal: 'In-kind compensation',
@@ -244,4 +244,11 @@ export default {
   shareTextNone: 'See how your salary would change with “{name}”:',
   shareNative: 'Share…',
   shareNote: 'The link contains the proposal, not your personal details: everyone sees it with their own salary.',
+  region: 'Region',
+  regionGeneral: 'General scale (not specified)',
+  helpRegion:
+    'Payroll withholding does not depend on your region, but the final tax in the annual return does. The Basque Country and Navarre are not covered.',
+  rowAnnualTax: 'Estimated annual tax (return)',
+  helpAnnualTax:
+    'What you would pay in the annual return with your region’s scale. The difference with what was withheld is refunded (+) or owed (−).',
 };

@@ -1,5 +1,8 @@
 // Payroll engine. Pure functions with no DOM dependencies.
 
+import { GENERAL_REGIONAL_SCALE } from './defaults.js';
+import { REGIONAL_SCALES, REGIONAL_ALLOWANCES } from './data/regions.js';
+
 const round2 = (x) => Math.round(x * 100) / 100;
 const sum = (values) => values.reduce((a, b) => a + b, 0);
 
@@ -134,6 +137,27 @@ function personalAllowance(input, p) {
   return { personal, children, dependents, disability, total: personal + children + dependents + disability };
 }
 
+/**
+ * Estimated tax due in the annual return. The scenario's brackets are the
+ * combined state + general regional scale; the user's region is applied as the
+ * difference between its own scale and allowances and the general ones.
+ */
+function annualTax(input, p, base, allowance, grossEarnings) {
+  const region = REGIONAL_SCALES[input.region];
+  let tax = applyScale(p.brackets, base) - applyScale(p.brackets, allowance.total);
+
+  if (region) {
+    const regionalAllowance = personalAllowance(input, { ...p, ...REGIONAL_ALLOWANCES[input.region] }).total;
+    tax +=
+      applyScale(region.brackets, base) -
+      applyScale(GENERAL_REGIONAL_SCALE, base) -
+      (applyScale(region.brackets, regionalAllowance) - applyScale(GENERAL_REGIONAL_SCALE, allowance.total));
+  }
+
+  const credit = minWageCredit(grossEarnings, p);
+  return { credit, tax: Math.max(0, Math.max(0, tax) - credit) };
+}
+
 /** Income below which no tax is withheld (art. 81 RIRPF). */
 function withholdingFreeMinimum(input, p) {
   const children = Math.min(input.children, 2);
@@ -198,24 +222,22 @@ export function computePayroll(input, scenario, grossAnnual = grossAnnualOf(inpu
   const taxWithoutFlexible =
     flexible.exempt > 0 ? withholding(input, scenario.incomeTax, gross, employee.total).withheld : incomeTax.withheld;
 
-  // Pension contributions and the low-earner credit only apply in the annual
-  // return, so they show up as an estimated refund (capped at what was withheld).
-  // Employer contributions are imputed as income and reduced again, so only the
-  // deductible amount beyond them lowers the base.
+  // --- Annual return ---
+  // Employer pension contributions are imputed as income and reduced again, so
+  // only the deductible amount beyond them lowers the base.
   const pension = pensionPlan(input, scenario.pension, taxableGross, incomeTax.netEarnings);
   const employerDeducted = Math.min(input.pensionEmployer, pension.deductible);
-  const baseAfterPension = Math.max(
+  const annualBase = Math.max(
     0,
     incomeTax.withholdingBase - (pension.deductible - employerDeducted) + (input.pensionEmployer - employerDeducted),
   );
-  const taxAfterPension = Math.max(
-    0,
-    applyScale(scenario.incomeTax.brackets, baseAfterPension) - incomeTax.taxOnAllowance,
-  );
-  const pensionTaxSaved = Math.max(0, incomeTax.taxOnBase - incomeTax.taxOnAllowance) - taxAfterPension;
+  const annual = annualTax(input, scenario.incomeTax, annualBase, incomeTax.allowance, taxableGross);
+  const pensionTaxSaved =
+    annualTax(input, scenario.incomeTax, incomeTax.withholdingBase, incomeTax.allowance, taxableGross).tax - annual.tax;
 
-  const credit = minWageCredit(taxableGross, scenario.incomeTax);
-  const refund = Math.min(credit + pensionTaxSaved, incomeTax.withheld);
+  // Positive: refund. Negative: to pay, unless the employee doesn't have to file.
+  let refund = incomeTax.withheld - annual.tax;
+  if (refund < 0 && taxableGross <= scenario.incomeTax.filingThreshold) refund = 0;
 
   const netAnnual = gross - flexible.total - employee.total - incomeTax.withheld - pension.employee;
   const netAnnualAfterReturn = netAnnual + refund - pension.individual;
@@ -236,7 +258,7 @@ export function computePayroll(input, scenario, grossAnnual = grossAnnualOf(inpu
     employerCost: gross + employer.total + pension.employer,
     flexible: { ...flexible, taxSaved: taxWithoutFlexible - incomeTax.withheld },
     pension: { ...pension, taxSaved: pensionTaxSaved },
-    incomeTax: { ...incomeTax, minWageCredit: credit, refund },
+    incomeTax: { ...incomeTax, minWageCredit: annual.credit, annualTax: annual.tax, refund },
     netAnnual,
     netAnnualAfterReturn,
     netMonthlyAverage: netAnnual / 12,

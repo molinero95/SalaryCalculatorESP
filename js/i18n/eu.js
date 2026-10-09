@@ -101,7 +101,7 @@ export default {
   changed: 'Erreferentziako agertokiaren desberdina',
   groupBrackets: 'PFEZ · Tarte-eskala',
   groupBracketsHelp:
-    'Nominak beti eskala orokorrarekin atxikitzen du. Autonomia-erkidegoetako txantiloiek errenta-aitorpenaren azken kuota hurbiltzen dute.',
+    'Nominan atxikitzeko erabiltzen den eskala bateratua (estatukoa + autonomikoa orokorra). Zure autonomia-erkidegoa errenta zenbatestean aplikatzen da.',
   groupAllowances: 'PFEZ · Gutxieneko pertsonal eta familiarra',
   groupEmployment: 'PFEZ · Lan-etekinak',
   groupWithholding: 'PFEZ · Atxikipen-arauak',
@@ -178,7 +178,7 @@ export default {
   flexTraining: 'Prestakuntza',
   flexOverCap: 'Gauzazko ordainsariak Langileen Estatutuak baimentzen duen soldataren % {cap} gainditzen du.',
   inKind: 'Gauzaz (ordainsari malgua)',
-  refund: 'Errentan itzuliko dena (zenbatespena)',
+  refund: 'Errentaren emaitza (zenbatespena)',
   rowTaxableGross: 'PFEZaren mendeko gordina',
   sectionFlexible: 'Ordainsari malgua',
   rowFlexTotal: 'Gauzazko ordainsaria',
@@ -246,4 +246,11 @@ export default {
   shareTextNone: 'Simulatu nola aldatuko litzatekeen zure soldata «{name}» proposamenarekin:',
   shareNative: 'Partekatu…',
   shareNote: 'Estekak proposamena dakar, ez zure datu pertsonalak: bakoitzak bere soldatarekin ikusiko du.',
+  region: 'Autonomia-erkidegoa',
+  regionGeneral: 'Eskala orokorra (zehaztu gabe)',
+  helpRegion:
+    'Nominako atxikipena ez dago zure erkidegoaren menpe, baina errentaren azken kuota bai. Euskadi eta Nafarroa ez daude barne.',
+  rowAnnualTax: 'Urteko kuota (errenta, zenbatespena)',
+  helpAnnualTax:
+    'Zure erkidegoaren eskalarekin aitorpenean ordainduko zenukeena. Atxikitakoarekiko aldea itzuli (+) edo ordaindu (−) egin beharko da.',
 };

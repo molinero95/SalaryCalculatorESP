@@ -100,7 +100,7 @@ export default {
   changed: "Diferent de l'escenari de referència",
   groupBrackets: 'IRPF · Escala de trams',
   groupBracketsHelp:
-    "La nòmina reté sempre amb l'escala general. Les plantilles autonòmiques aproximen la quota final de la declaració de la renda.",
+    "Escala conjunta (estatal + autonòmica general) amb què es reté a la nòmina. La teva comunitat autònoma s'aplica en estimar la renda.",
   groupAllowances: 'IRPF · Mínim personal i familiar',
   groupEmployment: 'IRPF · Rendiments del treball',
   groupWithholding: 'IRPF · Regles de retenció',
@@ -177,7 +177,7 @@ export default {
   flexTraining: 'Formació',
   flexOverCap: "La retribució en espècie supera el {cap} % del salari que permet l'Estatut dels Treballadors.",
   inKind: 'En espècie (retribució flexible)',
-  refund: 'Devolució estimada a la renda',
+  refund: 'Resultat estimat de la renda',
   rowTaxableGross: 'Brut subjecte a IRPF',
   sectionFlexible: 'Retribució flexible',
   rowFlexTotal: 'Retribució en espècie',
@@ -246,4 +246,11 @@ export default {
   shareTextNone: 'Simula com canviaria el teu sou amb «{name}»:',
   shareNative: 'Compartir…',
   shareNote: "L'enllaç inclou la proposta, no les teves dades personals: cadascú la veurà amb el seu propi sou.",
+  region: 'Comunitat autònoma',
+  regionGeneral: 'Escala general (sense especificar)',
+  helpRegion:
+    'La retenció en nòmina no depèn de la teva comunitat, però la quota final de la renda sí. El País Basc i Navarra no hi són.',
+  rowAnnualTax: 'Quota anual estimada (renda)',
+  helpAnnualTax:
+    "El que pagaries a la declaració amb l'escala de la teva comunitat. La diferència amb el que s'ha retingut surt a tornar (+) o a pagar (−).",
 };

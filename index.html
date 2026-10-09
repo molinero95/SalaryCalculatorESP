@@ -104,6 +104,11 @@
           </div>
 
           <div class="field">
+            <label for="region"><span data-i18n="region"></span><span data-help="helpRegion"></span></label>
+            <select id="region" name="region"></select>
+          </div>
+
+          <div class="field">
             <label for="disability" data-i18n="disability"></label>
             <select id="disability" name="disability">
               <option value="0" data-i18n="disabilityNone"></option>
@@ -311,6 +316,19 @@
         <div id="settings-simulation" class="settings"></div>
       </details>
 
+      <details class="card card-current collapsible">
+        <summary>
+          <h2 id="current-title" class="section-title">
+            <span class="chip chip-current" data-i18n="current"></span><span data-i18n="currentTitle"></span>
+          </h2>
+        </summary>
+        <p class="help" data-i18n="currentDesc"></p>
+        <div class="toolbar">
+          <button type="button" class="button secondary" id="reset-current" data-i18n="reset"></button>
+        </div>
+        <div id="settings-current" class="settings"></div>
+      </details>
+
       <section aria-live="polite">
         <div class="results" id="results"></div>
         <p class="difference" id="difference"></p>
@@ -340,19 +358,6 @@
         </div>
         <div class="table-scroll" id="breakdown"></div>
       </section>
-
-      <details class="card card-current collapsible">
-        <summary>
-          <h2 id="current-title" class="section-title">
-            <span class="chip chip-current" data-i18n="current"></span><span data-i18n="currentTitle"></span>
-          </h2>
-        </summary>
-        <p class="help" data-i18n="currentDesc"></p>
-        <div class="toolbar">
-          <button type="button" class="button secondary" id="reset-current" data-i18n="reset"></button>
-        </div>
-        <div id="settings-current" class="settings"></div>
-      </details>
     </main>
 
     <footer class="site-footer">
