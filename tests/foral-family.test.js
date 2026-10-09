@@ -280,3 +280,18 @@ for (const region of ['bizkaia', 'gipuzkoa', 'alava', 'navarra']) {
     }
   });
 }
+
+for (const [region, tax, rate] of [
+  ['bizkaia', 3957, 14],
+  ['gipuzkoa', 3957, 14],
+  ['alava', 3915.3, 14],
+  ['navarra', 3730.83, 13.3],
+]) {
+  test(`${region}: independently worked €30k payroll with one shared child under three`, () => {
+    const i = input(region, { children: 1, childrenUnder3: 1, childrenUnder6: 1, foralChildrenConfirmed: true });
+    const r = computePayroll(i, CURRENT_SCENARIO);
+    close(r.incomeTax.annualTax, tax);
+    close(r.incomeTax.rate, rate);
+    close(r.netAnnualAfterReturn, 28050 - tax);
+  });
+}
