@@ -1484,6 +1484,12 @@ main > *,
     border-bottom: 0;
   }
 
+  .breakdown-table td {
+    min-width: 0;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
   .breakdown-table thead th:first-child {
     display: none;
   }
