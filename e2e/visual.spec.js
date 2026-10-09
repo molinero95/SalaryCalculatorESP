@@ -47,7 +47,7 @@ test.describe('@visual layout', () => {
 test.describe('@visual hover states', () => {
   test('help tip shows its message on hover', async ({ page, isMobile }) => {
     await openApp(page);
-    const tip = page.locator('label[for="region"] .help-tip');
+    const tip = page.locator('label[for="residence"] .help-tip');
     if (isMobile) await tip.tap();
     else await tip.hover();
 

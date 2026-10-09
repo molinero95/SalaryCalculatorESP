@@ -1,6 +1,14 @@
 // Catalan translations. `f_*` keys label the settings fields.
 
 export default {
+  residence: 'Residència fiscal',
+  residenceOtherCity: 'Una altra ciutat / només territori',
+  residenceForal: 'Règim foral',
+  residenceCommon: 'Règim comú',
+  residenceSources: 'Fonts oficials',
+  residenceScope:
+    'Els trams depenen del territori fiscal, no de la ciutat. No es calculen totes les deduccions autonòmiques ni els perfils forals sense validar. Es pressuposa residència estable tot l’any i la mateixa administració per a retencions i residència.',
+
   rowForalQuota: 'Quota foral abans de deduccions',
 
   rowForalCredits: 'Minoracions i deduccions forals',
@@ -20,14 +28,8 @@ export default {
 
   locationBrackets: 'Trams anuals de la residència · 2026',
 
-  salaryExamples: 'Salaris d’exemple',
-
   cityPresetHelp:
-    'La ciutat selecciona la residència fiscal. Els imports següents són exemples de salari brut anual, no mitjanes locals.',
-
-  cityNone: 'Sense plantilla',
-
-  cityPreset: 'Plantilla de ciutat',
+    'Tria la ciutat o directament la comunitat o territori. Les dues opcions estableixen la mateixa residència fiscal; el salari es conserva.',
 
   f_childRateReduction: 'Rebaixa estatal per fill (punts percentuals)',
   appTitle: 'Simulador de salari net',

@@ -12,16 +12,14 @@ import {
 import { createSessionPersistence } from './infrastructure/session-persistence.js';
 import { bindPayrollForm } from './presentation/payroll-form.js';
 import { computePayroll, grossAnnualOf } from './calc.js';
-import { CURRENT_SCENARIO, GENERAL_REGIONAL_SCALE, combineScales, clone } from './defaults.js';
+import { CURRENT_SCENARIO, clone } from './defaults.js';
 import { LANGUAGES, DEFAULT_LANGUAGE, setLanguage, t, translateDocument } from './i18n/index.js';
 import { formatEuros, formatSignedEuros, formatPercent, formatCompactEuros, escapeHtml } from './format.js';
 import { renderSettings } from './settings.js';
 import { renderChart, renderDataTable } from './chart.js';
 import { renderResults, renderBreakdown } from './results.js';
 import * as storage from './storage.js';
-import { REGIONAL_SCALES } from './data/regions.js';
-import { FORAL_TERRITORIES } from './data/foral.js';
-import { CITIES, SALARY_EXAMPLES } from './data/cities.js';
+import { renderResidenceOptions, renderResidenceBrackets } from './presentation/residence.js';
 import { isForal, unsupportedFiscalProfile } from './domain/fiscal-profile.js';
 import { PROPOSALS, UNMODELLED_PROPOSALS } from './data/proposals.js';
 import { salaryPercentile } from './data/salaries.js';
@@ -57,15 +55,6 @@ window.addEventListener('pagehide', () => persistence.flush());
 // ---------------------------------------------------------------------------
 
 const renderInput = bindPayrollForm($('#details-form'), state, update);
-$('#salary-examples').addEventListener('click', ({ target }) => {
-  const button = target.closest('button[data-salary]');
-  if (!button) return;
-  const gross = Number(button.dataset.salary);
-  state.input.salary =
-    state.input.period === 'perPayment' ? Math.round((gross / state.input.payments) * 100) / 100 : gross;
-  renderInput();
-  update();
-});
 
 // ---------------------------------------------------------------------------
 // Chart
@@ -512,47 +501,11 @@ languageSelect.addEventListener('change', ({ target }) => {
 });
 
 function renderRegionOptions() {
-  const regions = Object.entries({ ...REGIONAL_SCALES, ...FORAL_TERRITORIES }).sort(([, a], [, b]) =>
-    a.name.localeCompare(b.name),
-  );
-  $('#region').innerHTML =
-    `<option value="general">${t('regionGeneral')}</option>` +
-    regions.map(([key, { name }]) => `<option value="${key}">${name}</option>`).join('');
-  $('#region').value = state.input.region;
-  $('#city').innerHTML =
-    `<option value="">${t('cityNone')}</option>` +
-    [...CITIES]
-      .sort((a, b) => a.name.localeCompare(b.name))
-      .map(
-        (city) =>
-          `<option value="${city.id}">${escapeHtml(city.name)} · ${escapeHtml(REGIONAL_SCALES[city.region]?.name ?? FORAL_TERRITORIES[city.region].name)}</option>`,
-      )
-      .join('');
-  $('#city').value = state.input.city;
-  $('#salary-examples').innerHTML = SALARY_EXAMPLES.map(
-    (salary) =>
-      `<button type="button" class="button secondary" data-salary="${salary}">${formatEuros(salary)} / ${t('annual').toLowerCase()}</button>`,
-  ).join('');
+  renderResidenceOptions($('#residence'), state.input);
 }
 
 function renderLocationBrackets() {
-  const foral = FORAL_TERRITORIES[state.input.region];
-  const stateScale = combineScales(
-    CURRENT_SCENARIO.incomeTax.brackets,
-    GENERAL_REGIONAL_SCALE.map((bracket) => ({ ...bracket, rate: -bracket.rate })),
-  );
-  const brackets =
-    foral?.brackets ??
-    combineScales(stateScale, REGIONAL_SCALES[state.input.region]?.brackets ?? GENERAL_REGIONAL_SCALE);
-  let from = 0;
-  $('#location-brackets').innerHTML =
-    `<p class="help">${t('locationBracketsHelp')}</p><table><thead><tr><th>${t('locationBase')}</th><th>${t('locationRate')}</th></tr></thead><tbody>${brackets
-      .map(({ upTo, rate }) => {
-        const label = upTo === null ? `${formatEuros(from)} +` : `${formatEuros(from)} – ${formatEuros(upTo)}`;
-        from = upTo;
-        return `<tr><td>${label}</td><td>${formatPercent(rate)}</td></tr>`;
-      })
-      .join('')}</tbody></table>`;
+  renderResidenceBrackets($('#location-brackets'), state.input);
 }
 
 function applyLanguage() {
