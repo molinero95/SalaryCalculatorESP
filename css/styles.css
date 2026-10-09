@@ -1572,3 +1572,36 @@ main > *,
     transition: none !important;
   }
 }
+
+.chart-svg .line.series-4 {
+  stroke: #9164c5;
+  stroke-dasharray: 8 3;
+}
+.chart-svg .dot.series-4 {
+  fill: #9164c5;
+}
+.swatch.series-4 {
+  background: #9164c5;
+}
+
+.chart-svg .line.series-5 {
+  stroke: #b88b15;
+  stroke-dasharray: 3 3;
+}
+.chart-svg .dot.series-5 {
+  fill: #b88b15;
+}
+.swatch.series-5 {
+  background: #b88b15;
+}
+
+.chart-svg .line.series-6 {
+  stroke: #bd5486;
+  stroke-dasharray: 10 3 2 3;
+}
+.chart-svg .dot.series-6 {
+  fill: #bd5486;
+}
+.swatch.series-6 {
+  background: #bd5486;
+}

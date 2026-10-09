@@ -1,6 +1,7 @@
 // Basque translations. `f_*` keys label the settings fields.
 
 export default {
+  f_childRateReduction: 'Estatuko tasaren murrizketa seme-alaba bakoitzeko (ehuneko puntuak)',
   appTitle: 'Soldata garbiaren simulagailua',
   appSubtitle: 'Kalkulatu zure nomina Espainian eta alderatu edozein proposamen fiskalekin',
   language: 'Hizkuntza',
@@ -256,7 +257,7 @@ export default {
   loadProposal: 'Alderdi baten proposamena kargatu',
   proposalSource: 'Iturria',
   proposalVoxNote:
-    'Estatuko erdia bakarrik aldatzen du: % 15 70.000 €-raino eta % 25 hortik gora; autonomikoa bere horretan geratzen da. Horregatik eskala bateratua igo egiten da lehen tarteetan (% 15 + % 9,5 = % 24,5), 22.000 €-ko gutxieneko pertsonalarekin konpentsatuta. Ez ditu barne hartzen seme-alaba bakoitzeko 4 puntuko jaitsiera ezta jaiotza-txekeak ere.',
+    'Estatuko zatia bakarrik aldatzen da: % 15 70.000 € arte eta % 25 hortik gora, 22.000 €-ko gutxieneko pertsonalarekin. Seme-alaba bakoitzak estatuko tasak 4 puntu murrizten ditu, % 0 arte. Autonomia-erkidegoko zatia mantentzen da. Atxikipena estimazioa da; jaiotzagatiko ordainketak ez dira sartzen.',
   proposalSumarNote:
     'Gehieneko tasa marjinala % 52ra igotzen du 300.000 €-tik gora. Programak ez ditu 120.000 eta 300.000 € arteko tasak zehazten, eta bere horretan uzten dira.',
   proposalPsoeNote: 'Ondorengoengatiko eta mendekoengatiko gutxienekoa igotzea proposatzen du, zifra zehatzik gabe.',
@@ -275,8 +276,8 @@ export default {
     '{year}tik prezioak % {inflation} igo dira eta PFEZaren tarteak ez dira eguneratu. Tarteak eta gutxienekoak inflazioarekin igoko balira, urtean {amount} gehiago kobratuko zenuke.',
   creepSimulate: 'KPIarekin eguneratutako tarteak simulatu',
   creepScenarioName: 'KPIarekin eguneratutako tarteak (+% {inflation})',
-  compareTitle: 'Proposamenak alderatu',
-  compareDesc: 'Aukeratu gehienez 3 agertoki indarreko araudiarekin alderatzeko, zure datuekin.',
+  compareTitle: 'Simulazioak alderatu',
+  compareDesc: 'Simulazio guztiak automatikoki alderatzen dira indarreko araudiarekin.',
   compareEmpty: 'Aukeratu gutxienez agertoki bat.',
   compareChartDesc: 'Urteko diferentzia garbia indarreko araudiarekiko, soldata gordinaren arabera.',
   newSimulation: '+ Simulazio berria',

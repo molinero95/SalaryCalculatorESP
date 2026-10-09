@@ -17,6 +17,7 @@ export const CURRENT_SCENARIO = {
     ],
 
     // Personal and family allowance (arts. 57-61 LIRPF)
+    childRateReduction: 0, // percentage points per child, state share only
     personalAllowance: 5550,
     ageOver65Allowance: 1150,
     ageOver75Allowance: 1400,

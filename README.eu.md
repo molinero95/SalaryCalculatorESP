@@ -1,5 +1,8 @@
 # Soldata garbiaren simulagailua
 
+> [!WARNING]
+> Proiektu hau adimen artifizialaren laguntzaz sortu eta garatu da. Kodeak, zerga-datuek, itzulpenek eta emaitzek akatsak izan ditzakete edo guztiz eguneratuta ez egon. Test automatizatuek portaera jakin batzuk egiaztatzen dituzte, baina ez dute zerga-zehaztasuna bermatzen. Erabili emaitzak estimazio gisa eta egiaztatu iturri ofizialekin edo aholkularitza profesionalarekin erabakiak hartu aurretik.
+
 Espainiako nomina-kalkulagailua eta proposamen fiskalen simulagailua. Kalkulatu zure soldata garbia indarreko araudiarekin eta alderatu PFEZaren tarteetan, gutxienekoetan edo Gizarte Segurantzako kotizazioetan egindako edozein aldaketarekin.
 
 **[Ireki simulagailua →](https://molinero95.github.io/SalaryCalculatorESP/)**
@@ -93,3 +96,7 @@ Eskertzen dira araudiaren zuzenketak eta itzulpenen berrikuspenak (batez ere eus
 ## Lizentzia
 
 [MIT](LICENSE) © 2026 Jaime Molinero Lacave
+
+## Simulazioak eta konexiorik gabeko erabilera
+
+Bost simulazio arte automatikoki agertzen dira grafikoetan eta taulan. Fitxek editatu beharreko simulazioa hautatzen dute. Proposamenak txantiloi editagarriak dira. Seme-alaba bakoitzeko estatuko tasaren murrizketa konfiguragarria da: Voxek 4 puntu aplikatzen ditu, gutxienez % 0, autonomia-erkidegoko zatia mantenduz. Atxikipena estimazioa da. Lineako bisita baten ondoren, aplikazioak konexiorik gabe funtzionatzen du.

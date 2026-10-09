@@ -1,5 +1,8 @@
 # Net salary simulator
 
+> [!WARNING]
+> This project was generated and developed with the help of artificial intelligence. The code, tax data, translations and results may contain errors or may not be fully up to date. Automated tests check selected behaviours but do not guarantee tax accuracy. Treat results as estimates and verify them against official sources or professional advice before making decisions.
+
 Spanish payroll calculator and tax policy simulator. Work out your take-home pay under the current rules and compare it with any change to income tax (IRPF) brackets, allowances or social security contributions.
 
 **[Open the simulator →](https://molinero95.github.io/SalaryCalculatorESP/)**
@@ -93,3 +96,7 @@ Corrections to the tax rules and reviews of the translations (especially Basque 
 ## License
 
 [MIT](LICENSE) © 2026 Jaime Molinero Lacave
+
+## Simulations and offline use
+
+Up to five simulations appear automatically in all comparison charts and the summary table. Tabs select the simulation to edit. Political proposals are editable starting templates. The state rate reduction per child is configurable; Vox uses 4 percentage points with a zero state-rate floor, preserving regional tax. Payroll withholding remains an estimate. After a full online visit, the app works offline.

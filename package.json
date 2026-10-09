@@ -8,7 +8,7 @@
   "type": "module",
   "scripts": {
     "start": "python3 -m http.server 8000",
-    "test": "node --test tests/",
+    "test": "node --test tests/*.test.js",
     "test:e2e": "playwright test --grep-invert @visual",
     "lint": "eslint . && prettier --check .",
     "format": "prettier --write .",

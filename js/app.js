@@ -16,7 +16,6 @@ const $ = (selector) => document.querySelector(selector);
 
 const CHART_RANGE = { from: 12000, to: 150000, step: 1000 };
 const CHART_TABLE_EVERY = 5;
-const MAX_COMPARED = 3;
 const MAX_SIMULATIONS = 5;
 const INFLATION_SINCE_BRACKETS = Math.round(cumulativeInflation(BRACKETS_LAST_UPDATED - 1));
 const SAVE_DELAY_MS = 300;
@@ -119,7 +118,6 @@ function initialState() {
   const defaults = {
     language: DEFAULT_LANGUAGE,
     chartMode: 'diff',
-    compare: ['vox2024', 'indexed', 'sumar2023'],
     input: clone(DEFAULT_INPUT),
     current: clone(CURRENT_SCENARIO),
     active: 0,
@@ -230,24 +228,25 @@ function renderComparisonChart() {
   const xs = [];
   for (let x = CHART_RANGE.from; x <= CHART_RANGE.to; x += CHART_RANGE.step) xs.push(x);
 
-  const pairs = xs.map((gross) => [
-    computePayroll(state.input, state.current, gross),
-    computePayroll(state.input, state.simulation, gross),
-  ]);
-  const names = scenarioNames();
+  const baseline = xs.map((gross) => computePayroll(state.input, state.current, gross));
   const isDiff = state.chartMode === 'diff';
-
+  const simulations = state.simulations.map((scenario, i) => ({
+    name: simulationName(i),
+    className: `series-${i + 2}`,
+    values: xs.map((gross, j) => {
+      const result = computePayroll(state.input, scenario, gross);
+      return isDiff ? result.netAnnualAfterReturn - baseline[j].netAnnualAfterReturn : result.effectiveRate;
+    }),
+  }));
   const series = isDiff
-    ? [
-        {
-          name: t('chartDiff'),
-          className: 'series-1',
-          values: pairs.map(([a, b]) => b.netAnnualAfterReturn - a.netAnnualAfterReturn),
-        },
-      ]
+    ? simulations
     : [
-        { name: names.current, className: 'series-1', values: pairs.map(([a]) => a.effectiveRate) },
-        { name: names.simulation, className: 'series-2', values: pairs.map(([, b]) => b.effectiveRate) },
+        {
+          name: scenarioName('current'),
+          className: 'series-1',
+          values: baseline.map((result) => result.effectiveRate),
+        },
+        ...simulations,
       ];
 
   const options = {
@@ -261,7 +260,7 @@ function renderComparisonChart() {
 
   $('#chart-description').textContent = t(isDiff ? 'chartDiffDesc' : 'chartRateDesc');
   $('#chart-legend').innerHTML =
-    series.length > 1
+    series.length > 0
       ? series
           .map(
             (s) => `<span class="legend-item"><span class="swatch ${s.className}"></span>${escapeHtml(s.name)}</span>`,
@@ -581,44 +580,13 @@ $('#creep-simulate').addEventListener('click', () => {
 // Comparison of several scenarios
 // ---------------------------------------------------------------------------
 
-/** Every scenario that can be compared, keyed by a stable id. */
-function comparableScenarios() {
-  const saved = Object.entries(storage.listScenarios()).map(([name, scenario]) => [
-    `saved:${name}`,
-    { name, scenario: merge(clone(CURRENT_SCENARIO), scenario) },
-  ]);
-  return Object.fromEntries([
-    ...state.simulations.map((scenario, i) => [`sim:${i}`, { name: simulationName(i), scenario }]),
-    ...Object.keys(PROPOSALS).map((id) => [
-      id,
-      { name: proposalName(id), scenario: proposalScenario(id, proposalName(id)) },
-    ]),
-    ['indexed', { name: indexedName(), scenario: indexedScenario(state.current, INFLATION_SINCE_BRACKETS, '') }],
-    ...saved,
-  ]);
-}
-
 function renderComparison() {
-  const options = comparableScenarios();
-  state.compare = state.compare.filter((id) => id in options);
-  const full = state.compare.length >= MAX_COMPARED;
-
-  $('#compare-options').innerHTML = Object.entries(options)
-    .map(([id, { name }]) => {
-      const checked = state.compare.includes(id);
-      return `<label class="checkbox"><input type="checkbox" value="${escapeHtml(id)}" ${checked ? 'checked' : ''} ${full && !checked ? 'disabled' : ''} /><span>${escapeHtml(name)}</span></label>`;
-    })
-    .join('');
-
-  const selected = state.compare.map((id, i) => ({ ...options[id], className: `series-${i + 1}` }));
+  const selected = state.simulations.map((scenario, i) => ({
+    name: simulationName(i),
+    scenario,
+    className: `series-${i + 2}`,
+  }));
   const current = computePayroll(state.input, state.current);
-
-  if (!selected.length) {
-    $('#compare-table').innerHTML = `<p class="muted">${t('compareEmpty')}</p>`;
-    $('#compare-chart').replaceChildren();
-    $('#compare-legend').innerHTML = '';
-    return;
-  }
 
   const rows = [
     { name: scenarioName('current'), result: current },
@@ -656,14 +624,6 @@ function renderComparison() {
     marker: grossAnnualOf(state.input),
   });
 }
-
-$('#compare-options').addEventListener('change', ({ target }) => {
-  state.compare = target.checked
-    ? [...state.compare, target.value].slice(0, MAX_COMPARED)
-    : state.compare.filter((id) => id !== target.value);
-  persist();
-  renderComparison();
-});
 
 // ---------------------------------------------------------------------------
 // Help tips
@@ -760,3 +720,7 @@ function update() {
 document.querySelector(`input[name="chartMode"][value="${state.chartMode}"]`).checked = true;
 renderInput();
 applyLanguage();
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
+}

@@ -1,5 +1,8 @@
 # Simulador de salari net
 
+> [!WARNING]
+> Aquest projecte s’ha generat i desenvolupat amb ajuda d’intel·ligència artificial. El codi, les dades fiscals, les traduccions i els resultats poden contenir errors o no estar completament actualitzats. Els tests comproven determinats comportaments, però no garanteixen l’exactitud fiscal. Utilitza els resultats com a estimacions i contrasta’ls amb fonts oficials o assessorament professional abans de prendre decisions.
+
 Calculadora de nòmina per a Espanya i simulador de propostes fiscals. Calcula el teu salari net amb la normativa vigent i compara'l amb qualsevol canvi en els trams de l'IRPF, els mínims o les cotitzacions a la Seguretat Social.
 
 **[Obrir el simulador →](https://molinero95.github.io/SalaryCalculatorESP/)**
@@ -93,3 +96,7 @@ S'agraeixen correccions de la normativa i revisions de les traduccions (sobretot
 ## Llicència
 
 [MIT](LICENSE) © 2026 Jaime Molinero Lacave
+
+## Simulacions i ús sense connexió
+
+Fins a cinc simulacions apareixen automàticament als gràfics i a la taula. Les pestanyes trien quina edites. Les propostes són plantilles editables. La rebaixa estatal per fill és configurable: Vox aplica 4 punts, amb mínim 0 %, sense reduir la part autonòmica. La retenció és estimada. Després de visitar-la amb connexió, funciona sense connexió.

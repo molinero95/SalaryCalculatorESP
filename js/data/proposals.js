@@ -22,6 +22,7 @@ export const PROPOSALS = {
           GENERAL_REGIONAL_SCALE,
         ),
         personalAllowance: 22000,
+        childRateReduction: 4,
       },
     },
   },

@@ -1,6 +1,7 @@
 // Spanish (Castilian) translations. `f_*` keys label the settings fields.
 
 export default {
+  f_childRateReduction: 'Rebaja estatal por hijo (puntos porcentuales)',
   appTitle: 'Simulador de salario neto',
   appSubtitle: 'Calcula tu nómina en España y compárala con cualquier propuesta fiscal',
   language: 'Idioma',
@@ -255,7 +256,7 @@ export default {
   loadProposal: 'Cargar propuesta de partido',
   proposalSource: 'Fuente',
   proposalVoxNote:
-    'Solo cambia la mitad estatal: 15 % hasta 70.000 € y 25 % por encima; la autonómica se mantiene. Por eso la escala conjunta sube en los primeros tramos (15 % + 9,5 % = 24,5 %), compensado por un mínimo personal de 22.000 €. No incluye la rebaja de 4 puntos por hijo ni los cheques por nacimiento.',
+    'Solo cambia la mitad estatal: 15 % hasta 70.000 € y 25 % por encima; la autonómica se mantiene. Por eso la escala conjunta sube en los primeros tramos (15 % + 9,5 % = 24,5 %), compensado por un mínimo personal de 22.000 €. Incluye la rebaja estatal de 4 puntos por hijo, con un mínimo del 0 %. La retención es una estimación; no incluye los cheques por nacimiento.',
   proposalSumarNote:
     'Sube el tipo marginal máximo al 52 % por encima de 300.000 €. El programa no detalla los tipos entre 120.000 y 300.000 €, que se mantienen.',
   proposalPsoeNote: 'Propone aumentar el mínimo por descendientes y personas dependientes, sin cifras concretas.',
@@ -271,8 +272,8 @@ export default {
     'Desde {year} los precios han subido un {inflation} % y los tramos del IRPF no se han actualizado. Si tramos y mínimos subieran con la inflación, cobrarías {amount} más al año.',
   creepSimulate: 'Simular tramos actualizados con el IPC',
   creepScenarioName: 'Tramos actualizados con el IPC (+{inflation} %)',
-  compareTitle: 'Comparar propuestas',
-  compareDesc: 'Elige hasta 3 escenarios para compararlos con la normativa vigente usando tus datos.',
+  compareTitle: 'Comparar simulaciones',
+  compareDesc: 'Todas tus simulaciones se comparan automáticamente con la normativa vigente.',
   compareEmpty: 'Selecciona al menos un escenario.',
   compareChartDesc: 'Diferencia neta anual frente a la normativa vigente, según el salario bruto.',
   newSimulation: '+ Nueva simulación',

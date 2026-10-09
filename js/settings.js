@@ -13,6 +13,7 @@ const GROUPS = [
   {
     title: 'groupAllowances',
     fields: [
+      ['incomeTax', 'childRateReduction', 'pp'],
       ['incomeTax', 'personalAllowance', EUR],
       ['incomeTax', 'ageOver65Allowance', EUR],
       ['incomeTax', 'ageOver75Allowance', EUR],

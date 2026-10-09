@@ -1,5 +1,8 @@
 # Simulador de salario neto
 
+> [!WARNING]
+> Este proyecto se ha generado y desarrollado con ayuda de inteligencia artificial. El código, los datos fiscales, las traducciones y los resultados pueden contener errores o no estar completamente actualizados. Los tests verifican determinados comportamientos, pero no garantizan la exactitud fiscal. Usa los resultados como estimaciones y contrástalos con fuentes oficiales o asesoramiento profesional antes de tomar decisiones.
+
 Calculadora de nómina para España y simulador de propuestas fiscales. Calcula tu salario neto con la normativa vigente y compáralo con cualquier cambio en los tramos del IRPF, los mínimos o las cotizaciones a la Seguridad Social.
 
 **[Abrir el simulador →](https://molinero95.github.io/SalaryCalculatorESP/)**
@@ -9,8 +12,8 @@ Calculadora de nómina para España y simulador de propuestas fiscales. Calcula 
 ## Características
 
 - **Nómina completa**: cotizaciones del trabajador (contingencias comunes, desempleo, formación, MEI y cotización de solidaridad), retención de IRPF según el procedimiento general del Reglamento y coste para la empresa.
-- **Comparación lado a lado** entre el escenario actual y una simulación, con desglose línea a línea y diferencias.
-- **Tramos editables**: añade, quita o modifica tramos; aplica plantillas autonómicas o deflacta todos los límites de una vez.
+- **Comparación lado a lado** entre el escenario actual y hasta cinco simulaciones, con desglose línea a línea y diferencias.
+- **Tramos editables**: añade, quita o modifica tramos; carga propuestas editables o deflacta todos los límites de una vez.
 - **Todos los parámetros personalizables**: mínimos personales y familiares, reducción por rendimientos del trabajo, deducción SMI, bases de cotización, tipos de la empresa…
 - **Retribución flexible**: tarjeta restaurante, transporte, seguro médico, guardería y formación, con sus límites exentos.
 - **Plan de pensiones**: plan individual y de empresa, con el ahorro estimado en la renta.
@@ -93,3 +96,13 @@ Se agradecen correcciones de la normativa y revisiones de las traducciones (sobr
 ## Licencia
 
 [MIT](LICENSE) © 2026 Jaime Molinero Lacave
+
+## Simulaciones y uso sin conexión
+
+Puedes crear hasta cinco simulaciones. Todas aparecen automáticamente en la tabla comparativa y en los gráficos; las pestañas solo eligen cuál estás editando. Las propuestas políticas son plantillas editables para una simulación.
+
+La rebaja estatal por hijo se configura en puntos porcentuales. La plantilla Vox aplica 4 puntos por hijo, con un mínimo estatal del 0 %, sin reducir la parte autonómica. La retención de esta propuesta se estima con el procedimiento actual; no reproduce su tabla específica de retenciones ni incluye cheques por nacimiento.
+
+La declaración estimada usa la comunidad seleccionada; País Vasco y Navarra quedan fuera. Tras la primera visita completa con conexión, la aplicación puede funcionar sin conexión. El navegador permite instalarla cuando sea compatible. Los datos personales permanecen en el navegador.
+
+Pruebas: `npm test`, `npm run lint`, `npm run test:e2e`. Las referencias visuales originales son de macOS; revisa las capturas antes de actualizar las referencias de otro sistema.
