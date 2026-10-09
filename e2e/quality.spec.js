@@ -214,6 +214,10 @@ test('floating annual difference stays inside narrow viewports with large amount
     )
     .toBe(true);
   await page.selectOption('#language', 'eu');
+  await testInfo.attach('floating-summary-narrow-basque', {
+    body: await page.screenshot({ fullPage: true }),
+    contentType: 'image/png',
+  });
   await expect
     .poll(() => page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth))
     .toBe(true);
