@@ -49,7 +49,7 @@ Calculadora de nòmina per a Espanya i simulador de propostes fiscals. Calcula e
 | Retribució flexible exempta                | Restaurant 11 €/dia · transport 1.500 €/any · assegurança mèdica 500 €/persona |
 
 > [!IMPORTANT]
-> És una eina orientativa. Alguns paràmetres (deducció SMI, mínim exempt de retenció, escales autonòmiques) poden canviar durant l'any; tots es poden ajustar des de la interfície o a [`js/defaults.js`](js/defaults.js). No s'aplica als territoris forals (País Basc i Navarra).
+> És una eina orientativa. Alguns paràmetres (deducció SMI, mínim exempt de retenció, escales autonòmiques) poden canviar durant l'any; tots es poden ajustar des de la interfície o a [`js/defaults.js`](js/defaults.js). Inclou un model foral limitat per al País Basc i Navarra; consulta [l’abast per residència](docs/locations.md).
 
 ### Fonts
 

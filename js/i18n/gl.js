@@ -1,6 +1,34 @@
 // Galician translations. `f_*` keys label the settings fields.
 
 export default {
+  rowForalQuota: 'Cota foral antes de deducións',
+
+  rowForalCredits: 'Minoracións e deducións forais',
+
+  foralUnsupported:
+    'Este perfil foral aínda non está validado. Ocúltanse os resultados. O modelo básico require contrato indefinido, menor de 65 anos, situación familiar 3, sen fillos, ascendentes, discapacidade, retribución flexible nin pensións.',
+
+  foralScope:
+    'Modelo foral limitado: contrato indefinido, menor de 65 anos, sen familiares, discapacidade, retribución flexible nin pensións. Suponse traballo e residencia no mesmo territorio. As propostas e editores de IRPF común non modifican estas regras forais; as cotizacións si se poden simular.',
+
+  locationRate: 'Tipo marxinal',
+
+  locationBase: 'Base liquidable',
+
+  locationBracketsHelp:
+    'Escala marxinal anual vixente: estatal + autonómica no territorio común; escala completa no territorio foral. Non é a porcentaxe de retención nin a escala da simulación.',
+
+  locationBrackets: 'Tramos anuais da residencia · 2026',
+
+  salaryExamples: 'Salarios de exemplo',
+
+  cityPresetHelp:
+    'A cidade selecciona a residencia fiscal. Os importes seguintes son exemplos de salario bruto anual, non medias locais.',
+
+  cityNone: 'Sen modelo',
+
+  cityPreset: 'Modelo de cidade',
+
   f_childRateReduction: 'Rebaixa estatal por fillo (puntos porcentuais)',
   appTitle: 'Simulador de salario neto',
   appSubtitle: 'Calcula a túa nómina en España e compárala con calquera proposta fiscal',
@@ -108,7 +136,7 @@ export default {
   groupEmployee: 'Seguridade Social · Traballador',
   groupEmployer: 'Seguridade Social · Empresa',
   disclaimer:
-    'Ferramenta orientativa. Calcula a retención co procedemento xeral do Regulamento do IRPF (territorio común; non se aplica ao País Vasco nin a Navarra). Non substitúe a túa nómina nin a declaración da renda.',
+    'Ferramenta orientativa desenvolvida con IA; datos e resultados poden ser imprecisos. Inclúe territorio común e un modelo foral limitado. Non substitúe a nómina nin a declaración.',
   sourceCode: 'Código fonte',
   f_personalAllowance: 'Mínimo persoal',
   f_ageOver65Allowance: 'Incremento por idade > 65',
@@ -245,7 +273,7 @@ export default {
   region: 'Comunidade autónoma',
   regionGeneral: 'Non indicada',
   helpRegion:
-    'A retención na nómina non depende da túa comunidade, pero a cota final da renda si. O País Vasco e Navarra non están incluídos.',
+    'A residencia determina a tributación anual. O País Vasco ten tres territorios forais e Navarra o seu propio réxime. As retencións tamén dependen do lugar de traballo; o modelo foral supón traballo e residencia no mesmo territorio.',
   rowLargeFamilyReduction: 'Redución por máis de dous descendentes (retención)',
   rowAnnualBase: 'Base liquidable anual estimada',
   rowStateTax: 'Cota íntegra estatal',

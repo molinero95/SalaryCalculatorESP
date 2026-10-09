@@ -1,5 +1,7 @@
 // Payroll input units and supported ranges, independent of the browser.
 import { REGIONAL_SCALES } from '../data/regions.js';
+import { FORAL_TERRITORIES } from '../data/foral.js';
+import { CITIES } from '../data/cities.js';
 
 export const MONTHS = 12;
 
@@ -50,7 +52,8 @@ export function normalizeInput(input) {
   input.familySituation = oneOf(input.familySituation, [3, 2, 1]);
   input.disability = oneOf(input.disability, [0, 33, 65]);
   input.partTime = Math.min(100, Math.max(1, input.partTime));
-  input.region = oneOf(input.region, ['general', ...Object.keys(REGIONAL_SCALES)]);
+  input.region = oneOf(input.region, ['general', ...Object.keys(REGIONAL_SCALES), ...Object.keys(FORAL_TERRITORIES)]);
+  input.city = CITIES.some((city) => city.id === input.city && city.region === input.region) ? input.city : '';
   for (const period of Object.keys(AMOUNT_FIELDS)) input[period] = oneOf(input[period], ['annual', 'monthly']);
   for (const [field, { min = 0, max = 1e9, integer = false }] of Object.entries(INPUT_LIMITS)) {
     const value = Math.min(max, Math.max(min, input[field]));

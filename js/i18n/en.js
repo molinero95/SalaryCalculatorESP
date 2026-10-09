@@ -1,6 +1,34 @@
 // English translations. `f_*` keys label the settings fields.
 
 export default {
+  rowForalQuota: 'Foral quota before credits',
+
+  rowForalCredits: 'Foral tax credits',
+
+  foralUnsupported:
+    'This foral profile has not been validated. Results are hidden. The basic model requires permanent employment, age under 65, family situation 3, no children, ascendants, disability, flexible pay or pensions.',
+
+  foralScope:
+    'Limited foral model: permanent employment, under 65, no relatives, disability, flexible pay or pensions. Workplace and residence are assumed to be in the same territory. Common-regime proposals and income-tax editors do not change these foral rules; contributions can still be simulated.',
+
+  locationRate: 'Marginal rate',
+
+  locationBase: 'Taxable base',
+
+  locationBracketsHelp:
+    'Current annual marginal scale: state + regional in the common regime; full scale in foral territories. This is neither the withholding percentage nor the simulation scale.',
+
+  locationBrackets: 'Annual residence brackets · 2026',
+
+  salaryExamples: 'Example salaries',
+
+  cityPresetHelp:
+    'The city selects your tax residence. The amounts below are illustrative annual gross salaries, not local averages.',
+
+  cityNone: 'No preset',
+
+  cityPreset: 'City preset',
+
   f_childRateReduction: 'State rate reduction per child (percentage points)',
   appTitle: 'Net salary simulator',
   appSubtitle: 'Work out your Spanish payslip and compare it with any tax proposal',
@@ -108,7 +136,7 @@ export default {
   groupEmployee: 'Social security · Employee',
   groupEmployer: 'Social security · Employer',
   disclaimer:
-    'Estimate only. Withholding follows the general procedure in the IRPF Regulation (common territory; not the Basque Country or Navarre). It is not a substitute for your payslip or your tax return.',
+    'AI-assisted estimate; data and results may be inaccurate. Includes the common regime and a limited foral model. Does not replace your payslip or tax return.',
   sourceCode: 'Source code',
   f_personalAllowance: 'Personal allowance',
   f_ageOver65Allowance: 'Extra for age > 65',
@@ -248,7 +276,7 @@ export default {
   region: 'Region',
   regionGeneral: 'Not specified',
   helpRegion:
-    'Payroll withholding does not depend on your region, but the final tax in the annual return does. The Basque Country and Navarre are not covered.',
+    'Residence determines annual taxation. The Basque Country has three foral territories; Navarre has its own regime. Withholding jurisdiction also depends on the workplace; the foral model assumes work and residence in the same territory.',
   rowLargeFamilyReduction: 'More than two descendants reduction (withholding)',
   rowAnnualBase: 'Estimated annual taxable base',
   rowStateTax: 'State gross tax quota',

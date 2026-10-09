@@ -39,3 +39,7 @@ Confirm current details in code and CI; this list is not an exhaustive feature s
 A live check during the source-monitor implementation found that the official PSOE PDF returned HTML in that execution environment. Treat this as a dated observation, not a permanent source outage; future reports must determine its current availability. Source-monitor errors should not be mistaken for failed payroll calculations.
 
 Update this file when a decision or item materially changes. Record why, not a running transcript of every implementation step.
+
+## Foral follow-up
+
+Residence presets now cover all communities and a reviewed basic salary profile in each foral territory. Extend [locations.md](locations.md) by validating family and disability deductions, short temporary contracts, flexible compensation, pension/EPSV rules and independent workplace/withholding jurisdiction. Keep unsupported profiles guarded until their rules and tests are reviewed.

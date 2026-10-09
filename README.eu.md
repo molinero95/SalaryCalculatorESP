@@ -49,7 +49,7 @@ Espainiako nomina-kalkulagailua eta proposamen fiskalen simulagailua. Kalkulatu 
 | Ordainsari malgu salbuetsia             | Jatetxea 11 €/egun · garraioa 1.500 €/urte · osasun-asegurua 500 €/pertsona |
 
 > [!IMPORTANT]
-> Tresna orientagarria da. Parametro batzuk (LGS kenkaria, atxikipenetik salbuetsitako gutxienekoa, autonomia-erkidegoetako eskalak) urtean zehar alda daitezke; denak interfazetik edo [`js/defaults.js`](js/defaults.js) fitxategian doi daitezke. Ez da lurralde foraletan aplikatzen (Euskadi eta Nafarroa).
+> Tresna orientagarria da. Parametro batzuk (LGS kenkaria, atxikipenetik salbuetsitako gutxienekoa, autonomia-erkidegoetako eskalak) urtean zehar alda daitezke; denak interfazetik edo [`js/defaults.js`](js/defaults.js) fitxategian doi daitezke. Euskadi eta Nafarroarako foru-eredu mugatua barne; ikusi [egoitzaren araberako irismena](docs/locations.md).
 
 ### Iturriak
 

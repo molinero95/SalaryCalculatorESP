@@ -1,6 +1,34 @@
 // Catalan translations. `f_*` keys label the settings fields.
 
 export default {
+  rowForalQuota: 'Quota foral abans de deduccions',
+
+  rowForalCredits: 'Minoracions i deduccions forals',
+
+  foralUnsupported:
+    'Aquest perfil foral encara no està validat. S’oculten els resultats. El model bàsic exigeix contracte indefinit, menor de 65 anys, situació familiar 3, sense fills, ascendents, discapacitat, retribució flexible ni pensions.',
+
+  foralScope:
+    'Model foral limitat: contracte indefinit, menor de 65 anys, sense familiars, discapacitat, retribució flexible ni pensions. S’assumeix treball i residència al mateix territori. Les propostes i els editors d’IRPF comú no modifiquen aquestes regles forals; les cotitzacions sí es poden simular.',
+
+  locationRate: 'Tipus marginal',
+
+  locationBase: 'Base liquidable',
+
+  locationBracketsHelp:
+    'Escala marginal anual vigent: estatal + autonòmica en territori comú; escala completa en territori foral. No és el percentatge de retenció ni l’escala de la simulació.',
+
+  locationBrackets: 'Trams anuals de la residència · 2026',
+
+  salaryExamples: 'Salaris d’exemple',
+
+  cityPresetHelp:
+    'La ciutat selecciona la residència fiscal. Els imports següents són exemples de salari brut anual, no mitjanes locals.',
+
+  cityNone: 'Sense plantilla',
+
+  cityPreset: 'Plantilla de ciutat',
+
   f_childRateReduction: 'Rebaixa estatal per fill (punts percentuals)',
   appTitle: 'Simulador de salari net',
   appSubtitle: 'Calcula la teva nòmina a Espanya i compara-la amb qualsevol proposta fiscal',
@@ -250,7 +278,7 @@ export default {
   region: 'Comunitat autònoma',
   regionGeneral: 'No indicada',
   helpRegion:
-    'La retenció en nòmina no depèn de la teva comunitat, però la quota final de la renda sí. El País Basc i Navarra no hi són.',
+    'La residència determina la tributació anual. El País Basc té tres territoris forals i Navarra el seu règim propi. Les retencions també depenen del lloc de treball; el model foral assumeix treball i residència al mateix territori.',
   rowLargeFamilyReduction: 'Reducció per més de dos descendents (retenció)',
   rowAnnualBase: 'Base liquidable anual estimada',
   rowStateTax: 'Quota íntegra estatal',

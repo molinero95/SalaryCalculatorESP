@@ -1668,3 +1668,15 @@ main > *,
   outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
+
+.field-full {
+  grid-column: 1 / -1;
+}
+#city {
+  width: 100%;
+  min-width: 0;
+}
+
+[hidden] {
+  display: none !important;
+}
