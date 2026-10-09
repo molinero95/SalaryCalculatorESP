@@ -1,5 +1,6 @@
 // Visual checks. Screenshot baselines are platform-specific, so this file only
-// runs locally (`npm run test:visual`); CI skips the @visual tag.
+// runs locally (`npm run test:visual`). macOS CI checks the residence views
+// and field visibility; Linux CI skips the @visual tag.
 import { test, expect } from '@playwright/test';
 
 const LANGUAGES = ['es', 'ca', 'eu', 'gl', 'en'];

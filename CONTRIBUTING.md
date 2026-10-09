@@ -28,7 +28,7 @@ npx playwright install --with-deps chromium
 npm run test:e2e
 ```
 
-Playwright starts its own Python server on port 4173 and runs desktop Chrome and Pixel 7 profiles. Nonvisual browser checks run in CI. `@visual` tests use macOS screenshot baselines and are excluded from CI. Do not mistake their exclusion for visual validation.
+Playwright starts its own Python server on port 4173 and runs desktop Chrome and Pixel 7 profiles. Nonvisual browser checks run on Linux CI. A separate macOS job compares the residence form, residence help and dark-mode page against reviewed snapshots, and checks field visibility in all five languages. The remaining `@visual` snapshots run locally on macOS; Linux excludes them. Do not mistake their exclusion for visual validation.
 
 `npm run test:coverage` reports executed lines, functions and branches. Coverage reveals unexecuted paths; it does not prove the legal model is complete. `npm run format` formats the entire repository; for focused changes prefer formatting the edited files.
 
