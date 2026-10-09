@@ -18,7 +18,7 @@ Spanish payroll calculator and tax policy simulator. Work out your take-home pay
 - **Flexible compensation**: meal card, transport, health insurance, childcare and training, with their exempt limits.
 - **Pension plans**: individual and company plans, with the estimated saving in the tax return.
 - **Chart by salary level** to see who gains or loses under a proposal.
-- **Saved scenarios**, share links and JSON import/export.
+- **Proposal sharing links** and automatic restoration of open simulations in the browser.
 - **Five languages**: Spanish, Catalan, Basque, Galician and English.
 - No dependencies, no backend, no cookies: everything is computed in the browser.
   Visits are counted anonymously with [GoatCounter](https://www.goatcounter.com/).
@@ -107,7 +107,7 @@ Withholding includes an additional €600 reduction for more than two descendant
 
 [AGENTS.md](AGENTS.md) · [Project context](docs/AI_CONTEXT.md) · [Development](CONTRIBUTING.md) · [Decisions and roadmap](docs/ROADMAP.md)
 
-[Scope of reviewed policy templates](docs/proposal-scope.md): annual assessment and payroll withholding are distinct; reload a saved proposal to adopt its reviewed template.
+[Scope of reviewed policy templates](docs/proposal-scope.md): annual assessment and payroll withholding are distinct; reapply a proposal template to adopt its reviewed rules.
 
 Tax residence uses cascading community, historical-territory (Basque Country only) and optional city selectors. Cities are filtered to the selected territory. The foral model includes confirmed eligible children and taxpayer disability; see [rules and limits](docs/foral-family.md).
 

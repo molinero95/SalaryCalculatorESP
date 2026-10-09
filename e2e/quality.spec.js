@@ -6,23 +6,22 @@ test.beforeEach(async ({ page }) => {
   await page.goto('/');
 });
 
-async function importJson(page, value) {
-  await page.locator('#import').setInputFiles({
-    name: 'scenario.json',
-    mimeType: 'application/json',
-    buffer: Buffer.from(typeof value === 'string' ? value : JSON.stringify(value)),
-  });
+async function restoreState(page, value) {
+  await page.addInitScript(
+    (value) => localStorage.setItem('net-salary:state', typeof value === 'string' ? value : JSON.stringify(value)),
+    value,
+  );
+  await page.reload();
 }
 
-test('malformed imports show an error without changing the payslip', async ({ page }) => {
+test('malformed stored state restores a valid default payslip', async ({ page }) => {
   const before = await page.locator('.result-current .headline strong').textContent();
-  await importJson(page, '{broken');
-  await expect(page.locator('#toast')).toBeVisible();
+  await restoreState(page, '{broken');
   await expect(page.locator('.result-current .headline strong')).toHaveText(before, { useInnerText: true });
 });
 
-test('import normalizes personal ranges and rejects invalid bracket order', async ({ page }) => {
-  await importJson(page, {
+test('restoring browser state normalizes personal ranges and rejects invalid bracket order', async ({ page }) => {
+  await restoreState(page, {
     input: { salary: -500, children: 10000000, partTime: 0, region: 'unknown', payments: 99 },
     simulation: {
       incomeTax: {
@@ -43,9 +42,9 @@ test('import normalizes personal ranges and rejects invalid bracket order', asyn
   expect(brackets).toBe(6);
 });
 
-test('imported HTML names remain literal text and never execute', async ({ page }) => {
+test('restored HTML names remain literal text and never execute', async ({ page }) => {
   const name = '<img src=x onerror="window.injected=true">';
-  await importJson(page, { simulation: { name } });
+  await restoreState(page, { simulation: { name } });
   await expect(page.locator('#compare-table')).toContainText(name);
   await expect(page.locator('#compare-table img')).toHaveCount(0);
   expect(await page.evaluate(() => window.injected)).toBeUndefined();
@@ -163,19 +162,18 @@ test('Vox separates payroll withholding and annual regional tax across reloads',
   await expect(page.locator('.result-simulation .headline strong')).not.toHaveText(payroll);
 });
 
-test('saving retains a named simulation independently of open tabs', async ({ page }) => {
-  await page.fill('#scenario-name', 'Guardada');
+test('manual scenario storage is absent while open simulations restore automatically', async ({ page }) => {
+  const legacy = { Unused: { name: 'Unused' } };
+  await page.evaluate((value) => localStorage.setItem('net-salary:scenarios', JSON.stringify(value)), legacy);
   await page.selectOption('#proposal-select', 'vox2024');
-  await page.fill('#scenario-name', 'Guardada');
+  await page.fill('#scenario-name', 'Propuesta abierta');
   const net = await page.locator('.result-simulation .headline strong').textContent();
-  await page.locator('#save-scenario').click();
-  await expect(page.locator('#saved-scenarios')).toHaveValue('Guardada');
-  await page.selectOption('#proposal-select', '');
   await page.reload();
-  await page.selectOption('#saved-scenarios', 'Guardada');
-  await page.locator('#load-scenario').click();
+  for (const id of ['save-scenario', 'load-scenario', 'delete-scenario', 'saved-scenarios', 'export', 'import'])
+    await expect(page.locator('#' + id)).toHaveCount(0);
   await expect(page.locator('.result-simulation .headline strong')).toHaveText(net);
-  await expect(page.locator('#scenario-name')).toHaveValue('Guardada');
+  await expect(page.locator('#scenario-name')).toHaveValue('Propuesta abierta');
+  expect(await page.evaluate(() => JSON.parse(localStorage.getItem('net-salary:scenarios')))).toEqual(legacy);
 });
 
 test('separate withholding editor compares with the active reference scale', async ({ page }) => {
@@ -300,11 +298,11 @@ test('anonymous events survive a delayed GoatCounter script load', async ({ page
   await page.reload({ waitUntil: 'domcontentloaded' });
   await page.fill('#salary', '73000');
   await page.fill('#scenario-name', 'Private proposal');
-  await page.locator('#save-scenario').click();
+  await page.locator('#add-simulation').click();
   release();
   await expect
     .poll(() => page.evaluate(() => window.analyticsEvents))
-    .toEqual([{ path: 'save-scenario', title: 'save-scenario', event: true }]);
+    .toEqual([{ path: 'add-simulation', title: 'add-simulation', event: true }]);
   await page.locator('#add-simulation').click();
   await expect.poll(() => page.evaluate(() => window.analyticsEvents?.length)).toBe(2);
 });

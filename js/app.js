@@ -1,8 +1,6 @@
 import { createEventTracker } from './infrastructure/analytics.js';
-import { toScenario } from './domain/scenario.js';
 import {
   createSession,
-  importSession,
   sharePayload,
   MAX_SIMULATIONS,
   selectSimulation,
@@ -122,7 +120,7 @@ window.addEventListener('resize', () => {
 });
 
 // ---------------------------------------------------------------------------
-// Settings and saved scenarios
+// Simulation settings
 // ---------------------------------------------------------------------------
 
 function renderSimulationTabs() {
@@ -213,13 +211,6 @@ function renderSimulationHighlights() {
   });
 }
 
-function renderSavedScenarios() {
-  const names = Object.keys(storage.listScenarios()).sort((a, b) => a.localeCompare(b));
-  $('#saved-scenarios').innerHTML =
-    `<option value="">${t('none')}</option>` +
-    names.map((name) => `<option value="${escapeHtml(name)}">${escapeHtml(name)}</option>`).join('');
-}
-
 let toastTimer;
 function toast(message) {
   const element = $('#toast');
@@ -303,60 +294,6 @@ nativeShare.addEventListener('click', async () => {
 $('#print').addEventListener('click', () => {
   trackEvent('print');
   window.print();
-});
-
-$('#export').addEventListener('click', () => {
-  const { input, current, simulations } = state;
-  const blob = new Blob([JSON.stringify({ input, current, simulations }, null, 2)], { type: 'application/json' });
-  const slug = scenarioName('simulation')
-    .normalize('NFD')
-    .replace(/[^\w]+/g, '-')
-    .toLowerCase();
-  const link = Object.assign(document.createElement('a'), {
-    href: URL.createObjectURL(blob),
-    download: `${slug}.json`,
-  });
-  link.click();
-  URL.revokeObjectURL(link.href);
-  trackEvent('export-json');
-});
-
-$('#import').addEventListener('change', async ({ target }) => {
-  const [file] = target.files;
-  target.value = '';
-  if (!file) return;
-  try {
-    const imported = JSON.parse(await file.text());
-    importSession(state, imported);
-    renderInput();
-    refreshScenarios();
-  } catch {
-    toast(t('importError'));
-  }
-});
-
-$('#save-scenario').addEventListener('click', () => {
-  state.simulation.name = scenarioName('simulation');
-  storage.saveScenario(clone(state.simulation));
-  renderSavedScenarios();
-  $('#saved-scenarios').value = state.simulation.name;
-  refreshScenarios();
-  toast(t('saved'));
-  trackEvent('save-scenario');
-});
-
-$('#load-scenario').addEventListener('click', () => {
-  const saved = storage.listScenarios()[$('#saved-scenarios').value];
-  if (!saved) return;
-  state.simulation = toScenario(saved);
-  refreshScenarios();
-});
-
-$('#delete-scenario').addEventListener('click', () => {
-  const name = $('#saved-scenarios').value;
-  if (!name) return;
-  storage.deleteScenario(name);
-  renderSavedScenarios();
 });
 
 // ---------------------------------------------------------------------------
@@ -514,7 +451,6 @@ function applyLanguage() {
   renderProposalControls();
   languageSelect.value = state.language;
   translateDocument();
-  renderSavedScenarios();
   refreshScenarios();
 }
 

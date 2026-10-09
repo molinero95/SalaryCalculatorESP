@@ -61,3 +61,27 @@ jobs:
           path: |
             playwright-report/
             test-results/
+
+  scenario-layout-capture:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install chromium
+      - name: Capture intentionally simplified scenario views for review
+        run: |
+          env -u CI npx playwright test e2e/visual.spec.js --grep 'section: simulation|dark mode' --update-snapshots
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: scenario-layout-review
+          path: |
+            e2e/visual.spec.js-snapshots/simulation-*-darwin.png
+            e2e/visual.spec.js-snapshots/dark-mode-*-darwin.png

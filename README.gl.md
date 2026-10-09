@@ -18,7 +18,7 @@ Calculadora de nómina para España e simulador de propostas fiscais. Calcula o 
 - **Retribución flexible**: tarxeta restaurante, transporte, seguro médico, escola infantil e formación, cos seus límites exentos.
 - **Plan de pensións**: plan individual e de empresa, co aforro estimado na renda.
 - **Gráfico por nivel de salario** para ver a quen beneficia ou prexudica unha proposta.
-- **Escenarios gardados**, ligazóns para compartir e importación/exportación en JSON.
+- **Ligazóns para compartir propostas** e restauración automática das simulacións abertas no navegador.
 - **Cinco idiomas**: castellano, català, euskara, galego e English.
 - Sen dependencias, sen backend, sen cookies: todo se calcula no navegador.
   As visitas cóntanse de forma anónima con [GoatCounter](https://www.goatcounter.com/).
@@ -107,7 +107,7 @@ A base de retención inclúe unha redución adicional de 600 € por máis de do
 
 [AGENTS.md](AGENTS.md) · [Contexto do proxecto](docs/AI_CONTEXT.md) · [Desenvolvemento](CONTRIBUTING.md) · [Decisións e próximos pasos](docs/ROADMAP.md)
 
-[Scope of reviewed policy templates](docs/proposal-scope.md): annual assessment and payroll withholding are distinct; reload a saved proposal to adopt its reviewed template.
+[Scope of reviewed policy templates](docs/proposal-scope.md): annual assessment and payroll withholding are distinct; reapply a proposal template to adopt its reviewed rules.
 
 A residencia escóllese por comunidade autónoma, territorio histórico no País Vasco e cidade opcional filtrada polo territorio. O modelo foral inclúe fillos elixibles confirmados e discapacidade propia; consulta [regras e límites](docs/foral-family.md).
 
