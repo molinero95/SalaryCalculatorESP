@@ -222,3 +222,32 @@ test('floating annual difference stays inside narrow viewports with large amount
     .poll(() => page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth))
     .toBe(true);
 });
+
+test('extracted form preserves annual gross across period changes and reload', async ({ page }) => {
+  await page.fill('#salary', '42000');
+  await page.locator('label:has(input[name="period"][value="perPayment"])').click();
+  await expect(page.locator('#salary')).toHaveValue('3000');
+  await page.locator('label:has(input[name="payments"][value="12"])').click();
+  await expect(page.locator('#salary')).toHaveValue('3500');
+  await page.reload();
+  await expect(page.locator('#salary')).toHaveValue('3500');
+  await expect(page.locator('input[name="period"][value="perPayment"]')).toBeChecked();
+  await page.locator('label:has(input[name="period"][value="annual"])').click();
+  await expect(page.locator('#salary')).toHaveValue('42000');
+});
+
+test('extracted pension form retains annual units and checkbox state across reload', async ({ page }) => {
+  await page.locator('label:has(input[name="childrenFullyCounted"])').click();
+  await page.locator('#pensionIndividual').locator('xpath=ancestor::details').locator('summary').click();
+  await page.locator('label:has(input[name="pensionPeriod"][value="monthly"])').click();
+  await page.fill('#pensionIndividual', '120');
+  await page.fill('#pensionEmployer', '200');
+  await page.locator('label:has(input[name="pensionPeriod"][value="annual"])').click();
+  await expect(page.locator('#pensionIndividual')).toHaveValue('1440');
+  await expect(page.locator('#pensionEmployer')).toHaveValue('2400');
+  await page.reload();
+  await expect(page.locator('input[name="childrenFullyCounted"]')).toBeChecked();
+  await page.locator('#pensionIndividual').locator('xpath=ancestor::details').locator('summary').click();
+  await expect(page.locator('#pensionIndividual')).toHaveValue('1440');
+  await expect(page.locator('#pensionEmployer')).toHaveValue('2400');
+});
