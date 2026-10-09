@@ -1,4 +1,5 @@
 // Payroll input units and supported ranges, independent of the browser.
+import { FORAL_ANNUAL_AMOUNTS } from './foral-assessment.js';
 import { REGIONAL_SCALES } from '../data/regions.js';
 import { FORAL_TERRITORIES } from '../data/foral.js';
 import { CITIES } from '../data/cities.js';
@@ -15,6 +16,7 @@ export const PERIOD_OF_AMOUNT = Object.fromEntries(
 );
 
 export const NUMERIC_INPUTS = new Set([
+  ...FORAL_ANNUAL_AMOUNTS,
   'salary',
   'payments',
   'partTime',
@@ -24,6 +26,8 @@ export const NUMERIC_INPUTS = new Set([
   'childrenUnder3',
   'childrenUnder6',
   'children6to15',
+  'foralAscendantsUnder65',
+  'foralAscendantClaimants',
   'dependents65',
   'dependents75',
   'disability',
@@ -34,6 +38,7 @@ export const NUMERIC_INPUTS = new Set([
 
 /** Shared input bounds; the form must expose the same limits. Amounts remain annual. */
 export const INPUT_LIMITS = {
+  ...Object.fromEntries(FORAL_ANNUAL_AMOUNTS.map((field) => [field, {}])),
   salary: {},
   age: { min: 16, max: 100, integer: true },
   partTime: { min: 1, max: 100, integer: true },
@@ -41,6 +46,8 @@ export const INPUT_LIMITS = {
   childrenUnder3: { max: 20, integer: true },
   childrenUnder6: { max: 20, integer: true },
   children6to15: { max: 20, integer: true },
+  foralAscendantsUnder65: { max: 10, integer: true },
+  foralAscendantClaimants: { min: 1, max: 10, integer: true },
   dependents65: { max: 10, integer: true },
   dependents75: { max: 10, integer: true },
   workingDays: { max: 366, integer: true },

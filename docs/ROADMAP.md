@@ -12,7 +12,7 @@
 | Canonical JSON proposals with generated JS     | Reviewable data/history while retaining synchronous offline browser imports                      |
 | Source monitoring flags changes for review     | Document bytes cannot determine whether a fiscal rule changed or became law                      |
 | Independent official fixtures                  | Tests should challenge implementation rather than reproduce its constants                        |
-| Local macOS visual baselines                   | Platform fonts differ; CI runs behavioural/accessibility checks, not screenshot validation       |
+| Local macOS visual baselines                   | Reviewed residence/help/dark-mode snapshots run on macOS CI; remaining snapshots stay local      |
 
 ## Implemented foundation
 
@@ -42,4 +42,4 @@ Update this file when a decision or item materially changes. Record why, not a r
 
 ## Foral follow-up
 
-Residence presets now cover all communities and reviewed individual employment profiles with eligible children and taxpayer disability in each foral territory. Extend [locations.md](locations.md) by validating ascendant/dependency and disabled-relative deductions, family situations 1/2, short temporary contracts, flexible compensation, pension/EPSV rules and independent workplace/withholding jurisdiction. Keep unsupported profiles guarded until their rules and tests are reviewed.
+Residence presets cover all communities. [Expanded foral payroll](foral-payroll.md) includes age, family situations, short temporary contracts, ascendants, flexible compensation, ordinary pensions and selected positive annual incomes/habitual-rent credits. Remaining work is joint assessment, dependency/disabled relatives, adoption, special rental profiles, losses/carry-forwards, additional credits, preferred EPSV data and independent workplace/withholding jurisdiction. Keep applicability explicit; the current model must not be labelled complete IRPF.

@@ -188,11 +188,7 @@ for (const region of ['bizkaia', 'gipuzkoa', 'alava', 'navarra']) {
       { childrenUnder3: 2 },
       ...(region === 'navarra' ? [] : [{ childrenUnder6: 2 }]),
       ...(region === 'navarra' ? [] : [{ children6to15: 2 }]),
-      { age: 65 },
-      { contract: 'temporary' },
       { dependents65: 1 },
-      { flexHealth: 1 },
-      { pensionIndividual: 1 },
     ]) {
       assert.throws(
         () => computePayroll(input(region, { children: 1, foralChildrenConfirmed: true, ...extra }), CURRENT_SCENARIO),

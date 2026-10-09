@@ -61,7 +61,7 @@ const renderInput = bindPayrollForm($('#details-form'), state, update);
 // ---------------------------------------------------------------------------
 
 function renderComparisonChart() {
-  if (unsupportedFiscalProfile(state.input)) return;
+  if (unsupportedFiscalProfile(state.input) || $('#chart-title').closest('section').hidden) return;
   const xs = [];
   for (let x = CHART_RANGE.from; x <= CHART_RANGE.to; x += CHART_RANGE.step) xs.push(x);
 
@@ -446,7 +446,7 @@ function renderComparison() {
         .map(({ name, className, result }) => {
           const diff = result.netAnnualAfterReturn - current.netAnnualAfterReturn;
           const swatch = className ? `<span class="swatch ${className}"></span> ` : '';
-          return `<tr><th scope="row">${swatch}${escapeHtml(name)}</th><td>${formatEuros(result.netAnnualAfterReturn)}</td><td>${className ? formatSignedEuros(diff) : '—'}</td><td>${formatPercent(result.effectiveRate)}</td></tr>`;
+          return `<tr><th scope="row">${swatch}${escapeHtml(name)}</th><td>${formatEuros(result.netAnnualAfterReturn)}</td><td>${className ? formatSignedEuros(diff) : '—'}</td><td>${result.effectiveRate === null ? '—' : formatPercent(result.effectiveRate)}</td></tr>`;
         })
         .join('')}</tbody>
     </table>`;
@@ -542,11 +542,29 @@ function update() {
   renderLocationBrackets();
   const foral = isForal(state.input.region);
   const basque = foral && state.input.region !== 'navarra';
+  $('#foral-benefits-help').hidden = !foral;
+  $('#foral-benefits-help').textContent = t(basque ? 'foralBenefitsBasqueHelp' : 'foralBenefitsNavarraHelp');
+  $('#foral-annual-fields').hidden = !foral;
+  $('#foralExemptIncome-field').hidden = state.input.region !== 'navarra';
+  $('#foralRentalInsurance-field').hidden = !basque;
+  $('label[for="foralRentalExpenses"]').textContent = t(basque ? 'foralRentalExpensesBasque' : 'foralRentalExpenses');
+  $('#foral-ascendants-under65-field').hidden = !basque;
+  const hasAscendants =
+    state.input.dependents65 + state.input.dependents75 + (basque ? state.input.foralAscendantsUnder65 : 0) > 0;
+  $('#foral-ascendant-claimants-field').hidden = !foral || !hasAscendants;
+  $('#foral-ascendants-field').hidden = !foral || !hasAscendants;
+  $('#foral-ascendants-help').textContent = t(basque ? 'foralAscendantsBasqueHelp' : 'foralAscendantsNavarraHelp');
+  $('label[for="dependents65"]').textContent = t(
+    state.input.region === 'navarra' ? 'dependents65Navarra' : 'dependents65',
+  );
+  $('label[for="dependents75"]').textContent = t(
+    state.input.region === 'navarra' ? 'dependents75Navarra' : 'dependents75',
+  );
   $('#foral-under6-field').hidden = !basque;
   $('#foral-age6to15-field').hidden = state.input.region !== 'alava';
   $('#foral-children-field').hidden = !foral || state.input.children === 0;
   $('#foral-mobility-field').hidden = !basque || state.input.disability !== 33;
-  $('#foral-rural-field').hidden = state.input.region !== 'alava' || state.input.children === 0;
+  $('#foral-rural-field').hidden = state.input.region !== 'alava' || (state.input.children === 0 && !hasAscendants);
   $('label[for="children"]').textContent = t(
     foral ? (state.input.region === 'navarra' ? 'childrenNavarra' : 'childrenBasque') : 'children',
   );
@@ -557,6 +575,16 @@ function update() {
   scope.textContent = t(unsupported ? 'foralUnsupported' : 'foralScope');
   const outputSections = ['#results', '#context-title', '#chart-title', '#compare-title', '#breakdown-title'];
   for (const selector of outputSections) $(selector).closest('section').hidden = unsupported;
+  $('#chart-title').closest('section').hidden =
+    unsupported ||
+    (foral &&
+      [
+        'foralRentalGross',
+        'foralActivityIncome',
+        'foralSavingsIncome',
+        'foralExemptIncome',
+        'foralOtherWithholding',
+      ].some((key) => state.input[key] > 0));
   $('#sticky-summary').hidden = unsupported;
   for (const id of ['share-whatsapp', 'share-x', 'share-native']) $(`#${id}`).disabled = unsupported;
   renderInputWarnings();

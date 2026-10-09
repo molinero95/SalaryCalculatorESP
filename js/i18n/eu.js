@@ -1,6 +1,37 @@
 // Basque translations. `f_*` keys label the settings fields.
 
 export default {
+  foralBenefitsBasqueHelp:
+    'Euskadi: osasun aseguru arruntak zergak ordaintzen ditu. Pentsio/BGAE arruntak: 5.000 € banakakoak, 8.000 € enplegukoak eta 10.000 € guztira; langile aktiboa, erreskaterik edo lehentasunezko BGAE kenkaririk gabe. Otordu, garraio, haur eskola eta prestakuntzak lege baldintzak bete behar dituzte.',
+  foralBenefitsNavarraHelp:
+    'Nafarroa: osasun asegurua 500 € pertsonako edo 1.500 € desgaitasuna duen langilearentzat. Pentsio arruntak: %30eko errenta muga, %50 50 urtetik gorakoentzat, eta diru eta enpresaren ekarpen mugak. Otordu, garraio, haur eskola eta prestakuntzak lege baldintzak bete behar dituzte.',
+  foralExemptIncome: 'Beste lanekoak ez diren errenta salbuetsiak (Nafarroa, € / urte)',
+  foralAnnualTitle: 'Beste errentak eta alokairua · urteko aitorpena',
+  foralAnnualHelp:
+    'Norberaren urteko zenbatekoak. Urteko eredu positiboa, galerarik edo aurreko saldorik gabe: etxebizitza iraunkor baten alokairua, aurrez kalkulatutako jardueraren zerga etekin garbia eta salbuetsi gabeko aurrezki garbia. Nafarroan zerga gastu kengarriak; Euskadin finantzaketa eta ez-ordaintze asegurua soilik, %30eko hobariarekin. Programa publiko hautagarria: %70 eta Nafarroan erregistratutako kontratua. Beste eremu bereziak kanpoan. Ordaindutako alokairua: ohiko etxebizitzaren zure zatia, laguntza salbuetsiak kenduta. Kenkari handitua: euskal 86. artikulua edo Nafarroako 62.2 artikuluko guraso bakarreko familia, bizikidetzarik edo zaintza partekaturik gabe. Errenta hauek aitorpenari eragiten diote baina ez dira nominaren eskudirura gehitzen.',
+  foralRentalGross: 'Etxebizitza baten alokairu kobratua (€ / urte)',
+  foralRentalExpenses: 'Higiezinaren gastu kengarriak (€ / urte)',
+  foralRentalExpensesBasque: 'Higiezinaren finantzaketa kengarria (€ / urte)',
+  foralRentalInsurance: 'Ez-ordaintze asegurua (€ / urte)',
+  foralActivityIncome: 'Jardueraren zerga etekin garbia (€ / urte)',
+  foralSavingsIncome: 'Aurrezki garbi ez salbuetsia eta eskualdatze irabaziak (€ / urte)',
+  foralOtherWithholding: 'Beste atxikipenak eta konturako ordainketak (€ / urte)',
+  foralRentPaid: 'Ohiko alokairu ordaindua, laguntzak kenduta (€ / urte)',
+  foralRentalPublic: 'Programa publiko hautagarri bidez kobratutako alokairua',
+  foralRentEnhanced: 'Alokairu kenkari handituaren baldintza bereziak betetzen ditut',
+  foralAnnualConfirmed: 'Errenta eta kenkari hauen irismena eta baldintzak baieztatzen ditut',
+  rowSavingsBase: 'Aurrezkiaren oinarri likidagarria',
+  rowSavingsTax: 'Aurrezki kuota kenkariak baino lehen',
+  rowHousingCredit: 'Ohiko alokairuaren kenkaria',
+  foralAscendantsNavarraHelp:
+    'Bizikidetza edo egoitzako mendekotasun ekonomikoa; salbuetsi gabeko errenta IPREM baino handiagoa ez, familia unitateak IPREM bikoitza gainditu gabe. Banaketa bera arbaso guztientzat.',
+  foralAscendantsBasqueHelp:
+    'Urte osoko bizikidetza edo fakturaz ordaindutako egoitza; salbuetsi gabeko errenta SMI baino handiagoa ez, hori gainditzen duen familia unitaterik ez, eta PFEZ aitorpenik ez aurkeztu ezta aurkezteko betebeharrik ere. Banaketa bera arbaso guztientzat.',
+  dependents75Navarra: '75 urte edo gehiagoko arbasoak ardurapean',
+  dependents65Navarra: '65–74 urteko arbasoak ardurapean',
+  foralAscendantsConfirmed: 'Arbaso guztien foru baldintzak betetzen direla baieztatzen dut',
+  foralAscendantClaimants: 'Arbaso bakoitzaren kenkaria partekatzen duten pertsonak',
+  foralAscendantsUnder65: '65 urtetik beherako arbaso hautagarriak',
   childrenUnder6: 'Horietatik, 6 urtetik beherakoak (3 urtetik beherakoak barne)',
   children6to15: 'Horietatik, 6–15 urtekoak',
   childrenBasque: 'Kenkarirako eskubidea duten seme-alabak (30 urte barne)',
@@ -13,9 +44,9 @@ export default {
   foralChildrenNavarraHelp:
     'Desgaitasunik, adopziorik edo urteko familia-aldaketarik gabeko seme-alaba ezkongabeak: zurekin bizi dira eta salbuetsi gabeko errentak ez du IPREM gainditzen. Urte amaierako adinak. Zenbaketa osoa: eskubidea duen guraso bakarra; bestela bien artean banatzen da.',
   foralUnsupported:
-    'Foru-profil hau balioztatu gabe dago edo familia-baldintzak falta dira. Emaitzak ezkutatzen dira. Egiaztatu adinak eta seme-alaben baldintzak. Kontratu mugagabea, 65 urtetik behera, 3. familia-egoera eta aurrekorik, ordainsari malgurik edo pentsio-ekarpenik gabe behar dira.',
+    'Foru profila ez dago balioztatuta edo familia baldintzak falta dira. Emaitzak ezkutatzen dira. Egiaztatu adinak eta baieztatu seme-alaben eta arbasoen baldintzak.',
   foralScope:
-    'Foru-eredu mugatua: kontratu mugagabea, 65 urtetik behera, 3. familia-egoera; seme-alaba hautagarriak eta norberaren desgaitasun egiaztatua barne. Aurrekoak, mendekotasuna, senideen desgaitasuna, adopzioak, urteko familia-aldaketak, ordainsari malgua eta pentsio-ekarpenak kanpo. Lana eta egoitza lurralde berean. Erregimen erkideko proposamenek ez dituzte foru-arauak aldatzen.',
+    'Langile aktibo bakarraren foru nomina eta banakako aitorpen eredua: adina, urtebetetik beherako aldi baterako kontratuak, seme-alaba eta arbaso hautagarriak, norberaren desgaitasuna, ordainsari malgua, pentsio arruntak eta urteko ataleko errenta positiboak. Ez da aitorpen osoa: baterako aitorpena, galerak eta aurreko saldoak, mendekotasuna, senideen desgaitasuna, adopzioak, lehentasunezko BGAE eta beste kenkariak kanpoan. Lana eta bizilekua lurralde berean. Erregimen komuneko PFEZ proposamenek ez dituzte arauak aldatzen.',
 
   residence: 'Zerga-egoitza',
   residenceOtherCity: 'Beste hiria / zehaztu gabe',

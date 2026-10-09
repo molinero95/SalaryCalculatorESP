@@ -1,6 +1,6 @@
 # Foral descendants and taxpayer disability · 2026
 
-Reviewed 9 October 2026. This extends the individual, full-year single-employment-payer model; it is not a complete foral return. The model still excludes age 65+, family situations 1/2, temporary contracts, ascendants, dependency grades, relatives’ disability, adoptions, changes in family circumstances during the year, flexible remuneration and pension/EPSV contributions. Workplace and residence are assumed to have the same withholding administration.
+Reviewed 9 October 2026. This documents descendants and taxpayer disability within the individual, full-year single-employment-payer model. Age, family situations, temporary employment, ascendants, flexible remuneration, ordinary pensions and selected positive additional incomes are now described in [foral-payroll.md](foral-payroll.md). Neither module implements a complete foral return. Workplace and residence are assumed to have the same withholding administration.
 
 ## Official sources
 

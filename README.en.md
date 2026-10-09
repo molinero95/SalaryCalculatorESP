@@ -110,3 +110,5 @@ Withholding includes an additional €600 reduction for more than two descendant
 [Scope of reviewed policy templates](docs/proposal-scope.md): annual assessment and payroll withholding are distinct; reload a saved proposal to adopt its reviewed template.
 
 Tax residence uses cascading community, historical-territory (Basque Country only) and optional city selectors. Cities are filtered to the selected territory. The foral model includes confirmed eligible children and taxpayer disability; see [rules and limits](docs/foral-family.md).
+
+The expanded model includes age, short temporary contracts, eligible ascendants, flexible pay, ordinary pensions and selected annual income/rent categories; see [rules and exclusions](docs/foral-payroll.md).

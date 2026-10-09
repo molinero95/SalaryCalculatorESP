@@ -1,6 +1,37 @@
 // Catalan translations. `f_*` keys label the settings fields.
 
 export default {
+  foralBenefitsBasqueHelp:
+    'País Basc: l’assegurança mèdica ordinària tributa. Pensions/EPSV ordinàries: 5.000 € individuals, 8.000 € d’ocupació i 10.000 € conjunts; treballador en actiu, sense rescats ni crèdits d’EPSV preferents. Menjars, transport, guarderia i formació han de complir els requisits legals.',
+  foralBenefitsNavarraHelp:
+    'Navarra: assegurança mèdica fins a 500 € per persona o 1.500 € per al treballador amb discapacitat. Pensions ordinàries: límit de renda del 30 %, o 50 % per a majors de 50, i límits monetaris i empresarials. Menjars, transport, guarderia i formació han de complir els requisits legals.',
+  foralExemptIncome: 'Altres rendes exemptes no laborals (Navarra, € / any)',
+  foralAnnualTitle: 'Altres rendes i lloguer · declaració anual',
+  foralAnnualHelp:
+    'Imports anuals propis. Model positiu de l’any, sense pèrdues ni saldos anteriors: un lloguer de vivienda permanent, benefici net fiscal d’activitat ja calculat i estalvi net no exempt. Navarra: despeses fiscalment deduïbles; País Basc: només finançament i assegurança d’impagament, amb bonificació del 30 %. Intermediació pública elegible: 70 % i contracte registrat a Navarra. Altres zones especials excloses. Lloguer pagat: la teva part d’habitatge habitual menys ajuts exempts. Perfil incrementat: art. 86 basc o família monoparental de l’art. 62.2 navarrès sense convivència ni custòdia compartida. Aquestes rendes afecten la declaració però no s’afegeixen a l’efectiu de la nòmina.',
+  foralRentalGross: 'Lloguer cobrat per un habitatge (€ / any)',
+  foralRentalExpenses: 'Despeses deduïbles de l’immoble (€ / any)',
+  foralRentalExpensesBasque: 'Finançament deduïble de l’immoble (€ / any)',
+  foralRentalInsurance: 'Assegurança d’impagament (€ / any)',
+  foralActivityIncome: 'Benefici net fiscal d’activitat (€ / any)',
+  foralSavingsIncome: 'Estalvi net no exempt i guanys de transmissions (€ / any)',
+  foralOtherWithholding: 'Altres retencions i pagaments a compte (€ / any)',
+  foralRentPaid: 'Lloguer habitual pagat, menys ajuts (€ / any)',
+  foralRentalPublic: 'Lloguer cobrat amb programa públic elegible',
+  foralRentEnhanced: 'Compleixo un perfil especial de deducció incrementada per lloguer',
+  foralAnnualConfirmed: 'Confirmo l’abast i els requisits d’aquestes rendes i deduccions',
+  rowSavingsBase: 'Base liquidable de l’estalvi',
+  rowSavingsTax: 'Quota de l’estalvi abans de deduccions',
+  rowHousingCredit: 'Deducció per lloguer habitual',
+  foralAscendantsNavarraHelp:
+    'Convivència o dependència econòmica en residència; renda no exempta no superior a l’IPREM i unitat familiar no superior a dos IPREM. El repartiment ha de ser igual per a tots.',
+  foralAscendantsBasqueHelp:
+    'Convivència contínua tot l’any o residència pagada amb factura; renda no exempta no superior al SMI, sense unitat familiar que el superi i sense presentar ni haver de presentar IRPF. El repartiment ha de ser igual per a tots.',
+  dependents75Navarra: 'Ascendents a càrrec de 75 o més',
+  dependents65Navarra: 'Ascendents a càrrec 65–74',
+  foralAscendantsConfirmed: 'Confirmo els requisits forals de tots els ascendents',
+  foralAscendantClaimants: 'Persones amb dret a compartir cada ascendent',
+  foralAscendantsUnder65: 'Ascendents elegibles menors de 65',
   childrenUnder6: 'D’aquests, menors de 6 anys (inclou menors de 3)',
   children6to15: 'D’aquests, de 6 a 15 anys',
   childrenBasque: 'Fills amb dret a deducció (fins a 30 anys inclosos)',
@@ -13,9 +44,9 @@ export default {
   foralChildrenNavarraHelp:
     'Fills solters sense discapacitat, adopcions ni canvis familiars durant l’any: conviuen amb tu i renda no exempta fins a l’IPREM. Edats al final de l’any. Còmput íntegre: un únic progenitor amb dret; altrament es reparteix entre dos.',
   foralUnsupported:
-    'Aquest perfil foral no està validat o falten requisits familiars. S’oculten els resultats. Comprova les edats i confirma els requisits dels fills. Cal contracte indefinit, menys de 65 anys, situació familiar 3, sense ascendents, retribució flexible ni pensions.',
+    'Perfil foral no validat o requisits familiars pendents. S’oculten els resultats. Revisa les edats i confirma els requisits de fills i ascendents.',
   foralScope:
-    'Model foral limitat: feina indefinida, menys de 65 anys, situació familiar 3; inclou fills elegibles i discapacitat pròpia acreditada. Exclou ascendents, dependència, discapacitat de familiars, adopcions, canvis familiars durant l’any, retribució flexible i pensions. Feina i residència han de ser al mateix territori. Les propostes d’IRPF comú no canvien les regles forals.',
+    'Model foral de nòmina d’un treballador en actiu i declaració individual: edat, contractes temporals inferiors a l’any, fills i ascendents elegibles, discapacitat pròpia, retribució flexible, pensions ordinàries i rendes positives de l’apartat anual. No és una declaració completa: exclou conjunta, pèrdues i saldos anteriors, dependència, discapacitat familiar, adopcions, EPSV preferents i altres deduccions. Treball i residència al mateix territori. Les propostes d’IRPF comú no en canvien les regles.',
 
   residence: 'Residència fiscal',
   residenceOtherCity: 'Una altra ciutat / sense especificar',

@@ -25,7 +25,11 @@ export function bindPayrollForm(form, state, onChange) {
     if (['residence', 'residenceTerritory', 'residenceCity'].includes(name)) {
       const residence = selectResidence(state.input, name, value);
       if (!residence) return;
-      if (residence.region !== state.input.region) state.input.foralChildrenConfirmed = false;
+      if (residence.region !== state.input.region) {
+        state.input.foralChildrenConfirmed = false;
+        state.input.foralAscendantsConfirmed = false;
+        state.input.foralAnnualConfirmed = false;
+      }
       Object.assign(state.input, residence);
       render();
       onChange();
@@ -34,6 +38,24 @@ export function bindPayrollForm(form, state, onChange) {
     if (!(name in state.input)) return;
 
     const previousGross = grossAnnualOf(state.input);
+    if (['dependents65', 'dependents75', 'foralAscendantsUnder65', 'foralAscendantClaimants'].includes(name)) {
+      state.input.foralAscendantsConfirmed = false;
+      form.elements.foralAscendantsConfirmed.checked = false;
+    }
+    if (
+      name.startsWith('foralRental') ||
+      [
+        'foralExemptIncome',
+        'foralActivityIncome',
+        'foralSavingsIncome',
+        'foralOtherWithholding',
+        'foralRentPaid',
+        'foralRentEnhanced',
+      ].includes(name)
+    ) {
+      state.input.foralAnnualConfirmed = false;
+      form.elements.foralAnnualConfirmed.checked = false;
+    }
     if (name === 'children') state.input.foralChildrenConfirmed = false;
 
     if (type === 'checkbox') state.input[name] = checked;
