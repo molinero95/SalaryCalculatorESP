@@ -2,7 +2,7 @@
 
 Calculadora de nómina para España y simulador de propuestas fiscales. Calcula tu salario neto con la normativa vigente y compáralo con cualquier cambio en los tramos del IRPF, los mínimos o las cotizaciones a la Seguridad Social.
 
-**[Abrir el simulador →](https://molinero95.github.io/simulador-salario-neto/)**
+**[Abrir el simulador →](https://molinero95.github.io/SalaryCalculatorESP/)**
 
 _[English below](#english)_
 
