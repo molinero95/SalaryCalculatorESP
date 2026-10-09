@@ -31,10 +31,10 @@ for (const [pensionIndividual, base, tax] of [
   });
 }
 
-for (const rate of [0, 5, 20]) {
+for (const rate of [0, 5, 20, 20.005]) {
   test(`custom combined flat ${rate}% preserves its annual total`, () => {
     const p = { ...CURRENT_SCENARIO.incomeTax, brackets: [{ upTo: null, rate }] };
     const result = annualTax(DEFAULT_INPUT, p, 100000, 100000);
-    assert.equal(result.tax, ((100000 - 5550) * rate) / 100);
+    assert.equal(result.tax, Math.round((100000 - 5550) * rate) / 100);
   });
 }

@@ -72,6 +72,7 @@ export function annualTax(input, p, base, grossEarnings) {
   const stateScale = combineScales(
     p.brackets,
     GENERAL_REGIONAL_SCALE.map((b) => ({ ...b, rate: -b.rate })),
+    false,
   );
   // Each quota is independently nonnegative; a regional minimum cannot offset state tax.
   const stateQuota = applyScale(stateScale, base) - applyScale(stateScale, Math.min(base, allowance.total));
