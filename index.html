@@ -29,6 +29,15 @@
     </header>
 
     <main class="container">
+      <section class="how-it-works" aria-labelledby="how-title">
+        <h2 id="how-title" class="sr-only" data-i18n="howTitle"></h2>
+        <ol>
+          <li data-i18n="how1"></li>
+          <li data-i18n="how2"></li>
+          <li data-i18n="how3"></li>
+        </ol>
+      </section>
+
       <section class="card" aria-labelledby="details-title">
         <h2 id="details-title" data-i18n="yourDetails"></h2>
         <form id="details-form" class="details-form" autocomplete="off">
@@ -62,6 +71,15 @@
               <label><input type="radio" name="contract" value="permanent" /><span data-i18n="permanent"></span></label>
               <label><input type="radio" name="contract" value="temporary" /><span data-i18n="temporary"></span></label>
             </div>
+          </div>
+
+          <div class="field">
+            <label for="familySituation" data-i18n="familySituation"></label>
+            <select id="familySituation" name="familySituation">
+              <option value="3" data-i18n="situation3"></option>
+              <option value="2" data-i18n="situation2"></option>
+              <option value="1" data-i18n="situation1"></option>
+            </select>
           </div>
 
           <div class="field">
@@ -102,6 +120,42 @@
             <input type="checkbox" name="childrenFullyCounted" />
             <span data-i18n="childrenFullyCounted"></span>
           </label>
+
+          <details class="flexible field-wide">
+            <summary data-i18n="flexTitle"></summary>
+            <p class="help" data-i18n="flexHelp"></p>
+            <div class="fields">
+              <div class="field">
+                <label for="flexMeal" data-i18n="flexMeal"></label>
+                <input id="flexMeal" name="flexMeal" type="number" min="0" step="100" inputmode="decimal" />
+              </div>
+              <div class="field">
+                <label for="workingDays" data-i18n="workingDays"></label>
+                <input id="workingDays" name="workingDays" type="number" min="0" max="366" />
+              </div>
+              <div class="field">
+                <label for="flexTransport" data-i18n="flexTransport"></label>
+                <input id="flexTransport" name="flexTransport" type="number" min="0" step="100" inputmode="decimal" />
+              </div>
+              <div class="field">
+                <label for="flexHealth" data-i18n="flexHealth"></label>
+                <input id="flexHealth" name="flexHealth" type="number" min="0" step="50" inputmode="decimal" />
+              </div>
+              <div class="field">
+                <label for="flexHealthPeople" data-i18n="flexHealthPeople"></label>
+                <input id="flexHealthPeople" name="flexHealthPeople" type="number" min="1" max="15" />
+              </div>
+              <div class="field">
+                <label for="flexChildcare" data-i18n="flexChildcare"></label>
+                <input id="flexChildcare" name="flexChildcare" type="number" min="0" step="100" inputmode="decimal" />
+              </div>
+              <div class="field">
+                <label for="flexTraining" data-i18n="flexTraining"></label>
+                <input id="flexTraining" name="flexTraining" type="number" min="0" step="100" inputmode="decimal" />
+              </div>
+            </div>
+            <p class="warning" id="flex-warning" role="alert" hidden></p>
+          </details>
         </form>
       </section>
 
@@ -110,9 +164,34 @@
         <p class="difference" id="difference"></p>
       </section>
 
-      <section class="card" aria-labelledby="breakdown-title">
-        <h2 id="breakdown-title" data-i18n="breakdown"></h2>
-        <div class="table-scroll" id="breakdown"></div>
+      <section class="card card-simulation" aria-labelledby="simulation-title">
+        <h2 id="simulation-title"><span class="chip chip-simulation" data-i18n="simulation"></span> <span data-i18n="simTitle"></span></h2>
+        <p class="help" data-i18n="simDesc"></p>
+
+        <div class="field field-name">
+          <label for="scenario-name" data-i18n="scenarioName"></label>
+          <input id="scenario-name" type="text" maxlength="60" />
+        </div>
+
+        <div class="toolbar">
+          <button type="button" class="button secondary" id="copy-current" data-i18n="copyCurrent"></button>
+          <button type="button" class="button" id="share" data-i18n="share"></button>
+          <button type="button" class="button secondary" id="export" data-i18n="exportJson"></button>
+          <label class="button secondary">
+            <span data-i18n="importJson"></span>
+            <input type="file" id="import" accept="application/json,.json" hidden />
+          </label>
+        </div>
+
+        <div class="toolbar">
+          <label for="saved-scenarios" data-i18n="myScenarios"></label>
+          <select id="saved-scenarios"></select>
+          <button type="button" class="button secondary" id="load-scenario" data-i18n="load"></button>
+          <button type="button" class="button secondary" id="delete-scenario" data-i18n="delete"></button>
+          <button type="button" class="button" id="save-scenario" data-i18n="save"></button>
+        </div>
+
+        <div id="settings-simulation" class="settings"></div>
       </section>
 
       <section class="card" aria-labelledby="chart-title">
@@ -132,42 +211,21 @@
         </details>
       </section>
 
-      <section class="card" aria-labelledby="settings-title">
-        <h2 id="settings-title" data-i18n="settings"></h2>
-        <p class="help" data-i18n="settingsDesc"></p>
-
-        <div class="settings-bar">
-          <div class="segmented segmented-large" role="radiogroup" id="editing">
-            <label><input type="radio" name="editing" value="current" /><span data-i18n="current"></span></label>
-            <label><input type="radio" name="editing" value="simulation" /><span data-i18n="simulation"></span></label>
-          </div>
-          <div class="field field-name">
-            <label for="scenario-name" data-i18n="scenarioName"></label>
-            <input id="scenario-name" type="text" maxlength="60" />
-          </div>
-        </div>
-
-        <div class="toolbar">
-          <button type="button" class="button secondary" id="copy-current" data-i18n="copyCurrent"></button>
-          <button type="button" class="button secondary" id="reset" data-i18n="reset"></button>
-          <button type="button" class="button" id="share" data-i18n="share"></button>
-          <button type="button" class="button secondary" id="export" data-i18n="exportJson"></button>
-          <label class="button secondary">
-            <span data-i18n="importJson"></span>
-            <input type="file" id="import" accept="application/json,.json" hidden />
-          </label>
-        </div>
-
-        <div class="toolbar">
-          <label for="saved-scenarios" data-i18n="myScenarios"></label>
-          <select id="saved-scenarios"></select>
-          <button type="button" class="button secondary" id="load-scenario" data-i18n="load"></button>
-          <button type="button" class="button secondary" id="delete-scenario" data-i18n="delete"></button>
-          <button type="button" class="button" id="save-scenario" data-i18n="save"></button>
-        </div>
-
-        <div id="settings" class="settings"></div>
+      <section class="card" aria-labelledby="breakdown-title">
+        <h2 id="breakdown-title" data-i18n="breakdown"></h2>
+        <div class="table-scroll" id="breakdown"></div>
       </section>
+
+      <details class="card card-current" aria-labelledby="current-title">
+        <summary>
+          <h2 id="current-title"><span class="chip chip-current" data-i18n="current"></span> <span data-i18n="currentTitle"></span></h2>
+        </summary>
+        <p class="help" data-i18n="currentDesc"></p>
+        <div class="toolbar">
+          <button type="button" class="button secondary" id="reset-current" data-i18n="reset"></button>
+        </div>
+        <div id="settings-current" class="settings"></div>
+      </details>
     </main>
 
     <footer class="site-footer">
@@ -179,6 +237,11 @@
         </p>
       </div>
     </footer>
+
+    <div class="sticky-summary" id="sticky-summary" aria-hidden="true">
+      <span class="sticky-label" data-i18n="stickyHint"></span>
+      <strong id="sticky-value"></strong>
+    </div>
 
     <div class="toast" id="toast" role="status" hidden></div>
   </body>

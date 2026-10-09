@@ -13,7 +13,24 @@ const CHART_RANGE = { from: 12000, to: 150000, step: 1000 };
 const CHART_TABLE_EVERY = 5;
 const SAVE_DELAY_MS = 300;
 const TOAST_MS = 2500;
-const NUMERIC_INPUTS = new Set(['salary', 'payments', 'age', 'children', 'childrenUnder3', 'dependents65', 'dependents75', 'disability']);
+const NUMERIC_INPUTS = new Set([
+  'salary',
+  'payments',
+  'familySituation',
+  'age',
+  'children',
+  'childrenUnder3',
+  'dependents65',
+  'dependents75',
+  'disability',
+  'flexMeal',
+  'workingDays',
+  'flexTransport',
+  'flexHealth',
+  'flexHealthPeople',
+  'flexChildcare',
+  'flexTraining',
+]);
 
 // ---------------------------------------------------------------------------
 // State
@@ -48,7 +65,6 @@ const oneOf = (value, allowed) => (allowed.includes(value) ? value : allowed[0])
 function initialState() {
   const defaults = {
     language: DEFAULT_LANGUAGE,
-    editing: 'simulation',
     chartMode: 'diff',
     input: clone(DEFAULT_INPUT),
     current: clone(CURRENT_SCENARIO),
@@ -60,18 +76,17 @@ function initialState() {
   if (shared) history.replaceState(null, '', location.pathname + location.search);
 
   const state = merge(defaults, shared ?? storage.loadState() ?? {});
-  state.editing = oneOf(state.editing, ['simulation', 'current']);
   state.chartMode = oneOf(state.chartMode, ['diff', 'rate']);
   state.input.period = oneOf(state.input.period, ['annual', 'perPayment']);
   state.input.contract = oneOf(state.input.contract, ['permanent', 'temporary']);
   state.input.payments = oneOf(state.input.payments, [14, 12]);
+  state.input.familySituation = oneOf(state.input.familySituation, [3, 2, 1]);
+  state.input.disability = oneOf(state.input.disability, [0, 33, 65]);
   return state;
 }
 
 const state = initialState();
 
-const editedScenario = () => state[state.editing];
-const referenceScenario = () => (state.editing === 'simulation' ? state.current : CURRENT_SCENARIO);
 const scenarioName = (kind) => state[kind].name || (kind === 'current' ? `${t('current')} · 2026` : t('simulation'));
 const scenarioNames = () => ({ current: scenarioName('current'), simulation: scenarioName('simulation') });
 
@@ -133,7 +148,7 @@ function renderComparisonChart() {
   const isDiff = state.chartMode === 'diff';
 
   const series = isDiff
-    ? [{ name: t('chartDiff'), className: 'series-1', values: pairs.map(([a, b]) => b.netAnnual - a.netAnnual) }]
+    ? [{ name: t('chartDiff'), className: 'series-1', values: pairs.map(([a, b]) => b.netAnnualAfterReturn - a.netAnnualAfterReturn) }]
     : [
         { name: names.current, className: 'series-1', values: pairs.map(([a]) => a.effectiveRate) },
         { name: names.simulation, className: 'series-2', values: pairs.map(([, b]) => b.effectiveRate) },
@@ -176,12 +191,38 @@ window.addEventListener('resize', () => {
 // Settings and saved scenarios
 // ---------------------------------------------------------------------------
 
-function renderSettingsPanel() {
-  document.querySelectorAll('input[name="editing"]').forEach((radio) => (radio.checked = radio.value === state.editing));
+function renderSettingsPanels() {
   const nameInput = $('#scenario-name');
-  nameInput.value = editedScenario().name;
-  nameInput.placeholder = scenarioName(state.editing);
-  renderSettings($('#settings'), { scenario: editedScenario(), reference: referenceScenario(), onChange: update });
+  nameInput.value = state.simulation.name;
+  nameInput.placeholder = scenarioName('simulation');
+
+  renderSettings($('#settings-simulation'), {
+    scenario: state.simulation,
+    reference: state.current,
+    onChange: update,
+    idPrefix: 'simulation',
+    openByDefault: ['groupBrackets'],
+  });
+  renderSettings($('#settings-current'), {
+    scenario: state.current,
+    reference: CURRENT_SCENARIO,
+    // Changing the reference also changes what the simulation is compared to
+    onChange: () => {
+      renderSimulationHighlights();
+      update();
+    },
+    idPrefix: 'current',
+  });
+}
+
+/** Re-renders only the simulation panel, e.g. after the reference changed. */
+function renderSimulationHighlights() {
+  renderSettings($('#settings-simulation'), {
+    scenario: state.simulation,
+    reference: state.current,
+    onChange: update,
+    idPrefix: 'simulation',
+  });
 }
 
 function renderSavedScenarios() {
@@ -200,31 +241,24 @@ function toast(message) {
   toastTimer = setTimeout(() => (element.hidden = true), TOAST_MS);
 }
 
-/** Replaces scenario state, then refreshes the settings panel and results. */
+/** Refreshes the settings panels and results after replacing scenario state. */
 function refreshScenarios() {
-  renderSettingsPanel();
+  renderSettingsPanels();
   update();
 }
 
-$('#editing').addEventListener('change', ({ target }) => {
-  state.editing = target.value;
-  persist();
-  renderSettingsPanel();
-});
-
 $('#scenario-name').addEventListener('input', ({ target }) => {
-  editedScenario().name = target.value.trim();
+  state.simulation.name = target.value.trim();
   update();
 });
 
 $('#copy-current').addEventListener('click', () => {
   state.simulation = { ...clone(state.current), name: state.simulation.name };
-  state.editing = 'simulation';
   refreshScenarios();
 });
 
-$('#reset').addEventListener('click', () => {
-  state[state.editing] = { ...clone(CURRENT_SCENARIO), name: editedScenario().name };
+$('#reset-current').addEventListener('click', () => {
+  state.current = clone(CURRENT_SCENARIO);
   refreshScenarios();
 });
 
@@ -277,7 +311,6 @@ $('#load-scenario').addEventListener('click', () => {
   const saved = storage.listScenarios()[$('#saved-scenarios').value];
   if (!saved) return;
   state.simulation = merge(clone(CURRENT_SCENARIO), saved);
-  state.editing = 'simulation';
   refreshScenarios();
 });
 
@@ -321,8 +354,12 @@ function update() {
     current: computePayroll(state.input, state.current),
     simulation: computePayroll(state.input, state.simulation),
   };
-  renderResults({ cards: $('#results'), summary: $('#difference') }, results);
+  renderResults({ cards: $('#results'), summary: $('#difference'), sticky: $('#sticky-value') }, results);
   renderBreakdown($('#breakdown'), results);
+
+  const flexWarning = $('#flex-warning');
+  flexWarning.hidden = !results.simulation.flexible.overCap;
+  flexWarning.textContent = t('flexOverCap', { cap: state.simulation.flexible.inKindCap });
 
   // The chart evaluates ~280 payrolls, so batch it to the next frame
   cancelAnimationFrame(chartFrame);

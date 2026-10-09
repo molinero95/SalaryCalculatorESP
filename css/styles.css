@@ -106,6 +106,15 @@ select {
   font-variant-numeric: tabular-nums;
 }
 
+select {
+  appearance: none;
+  padding-right: 2.2rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%237a7974' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 1.5l5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  cursor: pointer;
+}
+
 input:focus-visible,
 select:focus-visible,
 button:focus-visible,
@@ -122,6 +131,15 @@ summary:focus-visible,
 
 .muted {
   color: var(--text-muted);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }
 
 .help {
@@ -157,6 +175,49 @@ summary:focus-visible,
 
 .language-select {
   width: auto;
+  padding: 0.4rem 2.2rem 0.4rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  box-shadow: var(--shadow);
+}
+
+/* How it works */
+
+.how-it-works ol {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+}
+
+.how-it-works li {
+  position: relative;
+  padding: 0.9rem 1rem 0.9rem 3.2rem;
+  border-radius: var(--radius);
+  background: var(--surface-2);
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  counter-increment: step;
+}
+
+.how-it-works li::before {
+  content: counter(step);
+  position: absolute;
+  left: 1rem;
+  top: 0.85rem;
+  display: grid;
+  place-items: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--accent-contrast);
+  font-weight: 700;
+  font-size: 0.85rem;
 }
 
 main {
@@ -290,11 +351,6 @@ main {
   color: var(--text-primary);
   font-weight: 600;
   box-shadow: 0 1px 2px rgb(0 0 0 / 0.12);
-}
-
-.segmented-large span {
-  padding: 0.5rem 1.25rem;
-  font-size: 1rem;
 }
 
 .button {
@@ -708,17 +764,83 @@ main {
    Settings
    ========================================================================== */
 
-.settings-bar {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: end;
-  gap: 1rem 1.5rem;
+.card h2 .chip {
+  vertical-align: middle;
+  margin-right: 0.35rem;
+}
+
+.card-simulation {
+  border-left: 4px solid var(--series-2);
+}
+
+.card-current {
+  border-left: 4px solid var(--series-1);
+}
+
+.card-current > summary {
+  cursor: pointer;
+  list-style: none;
+}
+
+.card-current > summary::-webkit-details-marker {
+  display: none;
+}
+
+.card-current > summary h2 {
+  margin: 0;
+}
+
+.card-current > summary h2::after {
+  content: '▸';
+  margin-left: 0.5rem;
+  color: var(--text-muted);
+  display: inline-block;
+  transition: transform 0.15s;
+}
+
+.card-current[open] > summary h2::after {
+  transform: rotate(90deg);
+}
+
+.card-current[open] > summary {
   margin-bottom: 1rem;
 }
 
+.flexible {
+  padding: 0.9rem 1.1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.flexible > summary {
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.flexible[open] > summary {
+  margin-bottom: 1rem;
+}
+
+.flexible .help {
+  margin: 0 0 1rem;
+}
+
+.warning {
+  margin: 1rem 0 0;
+  padding: 0.6rem 0.9rem;
+  border-radius: var(--radius-small);
+  background: var(--negative-bg);
+  color: var(--negative);
+  font-size: 0.9rem;
+}
+
+.warning[hidden] {
+  display: none;
+}
+
 .field-name {
-  flex: 1;
-  min-width: 220px;
+  max-width: 420px;
+  margin-bottom: 1rem;
 }
 
 .toolbar {
@@ -862,6 +984,42 @@ main {
 }
 
 /* ==========================================================================
+   Sticky summary
+   ========================================================================== */
+
+.sticky-summary {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 10;
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  padding: 0.55rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface-1);
+  box-shadow: 0 4px 16px rgb(0 0 0 / 0.12);
+  font-size: 0.85rem;
+}
+
+.sticky-label {
+  color: var(--text-secondary);
+}
+
+.sticky-summary strong {
+  font-variant-numeric: tabular-nums;
+}
+
+.sticky-summary .positive {
+  color: var(--positive);
+}
+
+.sticky-summary .negative {
+  color: var(--negative);
+}
+
+/* ==========================================================================
    Toast
    ========================================================================== */
 
@@ -894,6 +1052,15 @@ main {
 
   .site-header-inner {
     flex-direction: column;
+  }
+
+  .sticky-summary {
+    left: 1rem;
+    justify-content: center;
+  }
+
+  .sticky-label {
+    display: none;
   }
 }
 
