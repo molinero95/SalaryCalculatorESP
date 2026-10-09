@@ -320,7 +320,7 @@ test('one residence selector preserves salary and displays territorial annual br
   await page.selectOption('#residence', 'city:bilbao');
   await expect(page.locator('#region')).toHaveValue('bizkaia');
   await expect(page.locator('#salary')).toHaveValue('73000');
-  await expect(page.locator('#location-brackets')).toContainText('Bilbao → Bizkaia');
+  await expect(page.locator('#location-brackets')).toContainText('Bilbao → País Vasco · Bizkaia');
   await expect(page.locator('#location-brackets a')).toHaveAttribute(
     'href',
     'https://www.bizkaia.eus/documents/880307/15187815/ca_13_2013.pdf',
