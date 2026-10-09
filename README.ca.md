@@ -28,8 +28,8 @@ Calculadora de nòmina per a Espanya i simulador de propostes fiscals. Calcula e
 1. **Seguretat Social**: base de cotització = brut anual / 12, limitada entre la base mínima i la màxima. Per sobre de la base màxima s'aplica la cotització de solidaritat per trams.
 2. **Rendiment net** = brut − cotitzacions.
 3. **Base de retenció** = rendiment net − altres despeses deduïbles (2.000 €, més les de discapacitat) − reducció per rendiments del treball (art. 20 LIRPF).
-4. **Quota** = escala(base) − escala(mínim personal i familiar) , amb el límit del 43 % sobre l'excés del mínim exempt de retenció.
-5. **Tipus de retenció** = quota / brut, arrodonit a dos decimals (mínim 2 % en contractes temporals).
+4. **Quota** = escala(base) − escala(mínim personal i familiar) , amb el límit del 43 % sobre l'excés del mínim exempt de retenció, només fins a 35.200 € bruts.
+5. **Tipus de retenció** = quota / brut, truncat a dos decimals (mínim 2 % en contractes temporals).
 6. Amb **14 pagues**, la Seguretat Social es reparteix en 12 mesos i les pagues extres només suporten IRPF.
 7. La **deducció SMI** no s'aplica a la nòmina: es mostra com a devolució estimada a la renda.
 8. La **retribució flexible** està exempta d'IRPF fins als seus límits, però cotitza a la Seguretat Social.
@@ -40,7 +40,7 @@ Calculadora de nòmina per a Espanya i simulador de propostes fiscals. Calcula e
 | ------------------------------------------ | ------------------------------------------------------------------------------ |
 | Escala de retenció                         | 19 % · 24 % · 30 % · 37 % · 45 % · 47 %                                        |
 | Cotització treballador                     | 4,70 % CC + 1,55 % atur + 0,10 % FP + 0,15 % MEI                               |
-| Base màxima / mínima                       | 5.101,20 € / 1.424,50 € al mes                                                 |
+| Base màxima / mínima                       | 5.101,20 € / 1.424,40 € al mes                                                 |
 | Mínim personal                             | 5.550 €                                                                        |
 | Reducció màxima per rendiments del treball | 7.302 €                                                                        |
 | Deducció SMI (a la renda)                  | 590,89 € fins a 17.094 €, s'anul·la a 20.048,45 €                              |
@@ -100,3 +100,5 @@ S'agraeixen correccions de la normativa i revisions de les traduccions (sobretot
 ## Simulacions i ús sense connexió
 
 Fins a cinc simulacions apareixen automàticament als gràfics i a la taula. Les pestanyes trien quina edites. Les propostes són plantilles editables. La rebaixa estatal per fill és configurable: Vox aplica 4 punts, amb mínim 0 %, sense reduir la part autonòmica. La retenció és estimada. Després de visitar-la amb connexió, funciona sense connexió.
+
+La base de retenció inclou una reducció addicional de 600 € per més de dos descendents. El càlcul anual separa les quotes estatal i autonòmica i els seus mínims. Consulta la [matriu de validació fiscal i les fonts oficials](docs/fiscal-validation.md) per conèixer les proves i els supòsits coberts.

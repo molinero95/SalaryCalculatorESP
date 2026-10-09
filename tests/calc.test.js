@@ -133,9 +133,9 @@ test('individual pension contributions are refunded in the return up to the limi
   close(r.netAnnualAfterReturn, plain.netAnnualAfterReturn - 3000 + 450);
 });
 
-test('employee contributions to a company plan are capped by the employer coefficient', () => {
+test('employee contributions use the shared limit plus the employer-linked increment', () => {
   const r = computePayroll({ ...DEFAULT_INPUT, pensionEmployer: 400, pensionEmployee: 2000 }, CURRENT_SCENARIO);
-  close(r.pension.deductible, 400 + 1000); // 2.5 × 400
+  close(r.pension.deductible, 2400); // 1,500 shared room + 1,400 eligible employment increment
 });
 
 test('employer pension contributions raise the contribution base and employer cost', () => {

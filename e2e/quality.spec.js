@@ -98,3 +98,48 @@ test('result-card simulation tabs stay synchronized with the editor', async ({ p
   await expect(page.locator('.result-simulation h3')).toHaveText('Lower tax');
   await expect(page.locator('#chart .line')).toHaveCount(2);
 });
+
+test('refactored tax engine works after a full offline reload', async ({ page, context }) => {
+  await page.evaluate(async () => {
+    await navigator.serviceWorker.ready;
+    if (!navigator.serviceWorker.controller) {
+      await new Promise((resolve) =>
+        navigator.serviceWorker.addEventListener('controllerchange', resolve, { once: true }),
+      );
+    }
+  });
+  await page.fill('#salary', '45000');
+  await expect(page.locator('.result-current .headline strong')).toHaveText('2.293,93 €');
+  await context.setOffline(true);
+  try {
+    await page.reload();
+    await expect(page.locator('.result-current .headline strong')).toHaveText('2.293,93 €');
+    await page.fill('#salary', '30000');
+    await expect(page.locator('.result-current .headline strong')).toHaveText('1.628,50 €');
+  } finally {
+    await context.setOffline(false);
+  }
+});
+
+test('fractional persisted active simulation restores a valid selection', async ({ page }) => {
+  await page.locator('#add-simulation').click();
+  await expect.poll(() => page.evaluate(() => JSON.parse(localStorage.getItem('net-salary:state'))?.active)).toBe(1);
+  await page.addInitScript(() => {
+    const state = JSON.parse(localStorage.getItem('net-salary:state'));
+    state.active = 0.5;
+    localStorage.setItem('net-salary:state', JSON.stringify(state));
+  });
+  await page.reload();
+  await expect(page.locator('[data-result-simulation="0"]')).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.locator('.result-current .headline strong')).toHaveText('1.628,50 €');
+});
+
+test('breakdown exposes separate annual state and regional quotas', async ({ page }) => {
+  await page.selectOption('#region', 'madrid');
+  await expect(page.locator('#breakdown')).toContainText('Cuota íntegra estatal');
+  await expect(page.locator('#breakdown')).toContainText('Cuota íntegra autonómica');
+  await expect(page.locator('#breakdown')).toContainText('Base liquidable anual estimada');
+  await page.fill('#children', '3');
+  const row = page.locator('#breakdown tr').filter({ hasText: 'Reducción por más de dos descendientes' });
+  await expect(row).toContainText('600');
+});

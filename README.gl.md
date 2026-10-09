@@ -28,8 +28,8 @@ Calculadora de nómina para España e simulador de propostas fiscais. Calcula o 
 1. **Seguridade Social**: base de cotización = bruto anual / 12, limitada entre a base mínima e a máxima. Por riba da base máxima aplícase a cotización de solidariedade por tramos.
 2. **Rendemento neto** = bruto − cotizacións.
 3. **Base de retención** = rendemento neto − outros gastos deducibles (2.000 €, máis os de discapacidade) − redución por rendementos do traballo (art. 20 LIRPF).
-4. **Cota** = escala(base) − escala(mínimo persoal e familiar) , co límite do 43 % sobre o exceso do mínimo exento de retención.
-5. **Tipo de retención** = cota / bruto, arredondado a dous decimais (mínimo 2 % en contratos temporais).
+4. **Cota** = escala(base) − escala(mínimo persoal e familiar) , co límite do 43 % sobre o exceso do mínimo exento de retención, só ata 35.200 € brutos.
+5. **Tipo de retención** = cota / bruto, truncado a dous decimais (mínimo 2 % en contratos temporais).
 6. Con **14 pagas**, a Seguridade Social repártese en 12 meses e as pagas extra só soportan IRPF.
 7. A **dedución SMI** non se aplica na nómina: amósase como devolución estimada na renda.
 8. A **retribución flexible** está exenta de IRPF ata os seus límites, pero cotiza á Seguridade Social.
@@ -40,7 +40,7 @@ Calculadora de nómina para España e simulador de propostas fiscais. Calcula o 
 | ------------------------------------------- | -------------------------------------------------------------------------- |
 | Escala de retención                         | 19 % · 24 % · 30 % · 37 % · 45 % · 47 %                                    |
 | Cotización traballador                      | 4,70 % CC + 1,55 % desemprego + 0,10 % FP + 0,15 % MEI                     |
-| Base máxima / mínima                        | 5.101,20 € / 1.424,50 € ao mes                                             |
+| Base máxima / mínima                        | 5.101,20 € / 1.424,40 € ao mes                                             |
 | Mínimo persoal                              | 5.550 €                                                                    |
 | Redución máxima por rendementos do traballo | 7.302 €                                                                    |
 | Dedución SMI (na renda)                     | 590,89 € ata 17.094 €, anúlase en 20.048,45 €                              |
@@ -100,3 +100,5 @@ Agradécense correccións da normativa e revisións das traducións (sobre todo 
 ## Simulacións e uso sen conexión
 
 Ata cinco simulacións aparecen automaticamente nos gráficos e na táboa. As lapelas escollen cal editar. As propostas son modelos editables. A rebaixa estatal por fillo é configurable: Vox aplica 4 puntos, cun mínimo do 0 %, mantendo a parte autonómica. A retención é estimada. Tras unha visita con conexión, funciona sen conexión.
+
+A base de retención inclúe unha redución adicional de 600 € por máis de dous descendentes. O cálculo anual separa as cotas estatal e autonómica e os seus mínimos. Consulta a [matriz de validación fiscal e as fontes oficiais](docs/fiscal-validation.md) para coñecer as probas e os supostos cubertos.

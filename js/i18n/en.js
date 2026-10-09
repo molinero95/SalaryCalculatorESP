@@ -249,6 +249,10 @@ export default {
   regionGeneral: 'Not specified',
   helpRegion:
     'Payroll withholding does not depend on your region, but the final tax in the annual return does. The Basque Country and Navarre are not covered.',
+  rowLargeFamilyReduction: 'More than two descendants reduction (withholding)',
+  rowAnnualBase: 'Estimated annual taxable base',
+  rowStateTax: 'State gross tax quota',
+  rowRegionalTax: 'Regional gross tax quota',
   rowAnnualTax: 'Estimated annual tax (return)',
   helpAnnualTax:
     'What you would pay in the annual return with your region’s scale. The difference with what was withheld is refunded (+) or owed (−).',
@@ -260,9 +264,9 @@ export default {
     'Raises the top marginal rate to 52 % above €300,000. The programme gives no rates between €120,000 and €300,000, which are kept.',
   proposalPsoeNote: 'Proposes raising the child and dependant allowances, without specific figures.',
   proposalPpNote:
-    'Proposes indexing the scale for inflation and cutting tax on incomes under €40,000, without specific figures.',
+    'Proposes 100 %, 75 %, 50 % and 25 % relief in the first four working years for eligible young people. Not simulated: eligibility inputs are missing.',
   proposalPodemosNote: 'Proposes no withholding up to the minimum wage; the current credit already makes it tax-free.',
-  otherProposals: 'Proposals without specific figures',
+  otherProposals: 'Other proposals not simulated',
   proposalsDisclaimer: 'Based on each party’s official documents; it may not reflect their current position.',
   contextTitle: 'Your salary in context',
   percentileText: 'You earn more than {p} % of employees in Spain.',

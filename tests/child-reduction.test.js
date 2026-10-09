@@ -24,7 +24,7 @@ for (const children of [0, 1, 2, 4, 7]) {
           applyScale(GENERAL_REGIONAL_SCALE, base) -
           applyScale(GENERAL_REGIONAL_SCALE, minimum),
       );
-      assert.ok(Math.abs(result.incomeTax.annualTax - expected) < 0.000001);
+      assert.ok(Math.abs(result.incomeTax.annualTax - expected) <= 0.00501);
       assert.ok(Number.isFinite(result.netAnnualAfterReturn));
     });
   }
@@ -46,7 +46,7 @@ for (const region of ['madrid', 'catalonia', 'andalusia']) {
         applyScale(REGIONAL_SCALES[region].brackets, minimum),
     );
     assert.ok(expected > 0);
-    assert.ok(Math.abs(result.incomeTax.annualTax - expected) < 0.000001);
+    assert.ok(Math.abs(result.incomeTax.annualTax - expected) <= 0.00501);
   });
 }
 

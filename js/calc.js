@@ -1,23 +1,11 @@
 // Payroll engine. Pure functions with no DOM dependencies.
 
 import { GENERAL_REGIONAL_SCALE, combineScales } from './defaults.js';
-import { REGIONAL_SCALES, REGIONAL_ALLOWANCES } from './data/regions.js';
+import { applyScale, withholding, annualTax, employmentIncome } from './tax.js';
+export { applyScale } from './tax.js';
 
 const round2 = (x) => Math.round(x * 100) / 100;
 const sum = (values) => values.reduce((a, b) => a + b, 0);
-
-/** Applies a progressive bracket scale to `base`. */
-export function applyScale(brackets, base) {
-  let tax = 0;
-  let from = 0;
-  for (const { upTo, rate } of brackets) {
-    const ceiling = upTo ?? Infinity;
-    if (base <= from) break;
-    tax += (Math.min(base, ceiling) - from) * (rate / 100);
-    from = ceiling;
-  }
-  return tax;
-}
 
 /**
  * Annual social security contributions for one set of rates (employee or employer).
@@ -88,123 +76,12 @@ function pensionPlan(input, limits, grossEarnings, netEarnings) {
   const { pensionIndividual: individual, pensionEmployee: employee, pensionEmployer: employer } = input;
   const employeeCap = employeeContributionCap(employer, grossEarnings, limits.highIncomeThreshold);
   const employment = Math.min(employer + Math.min(employee, employeeCap), limits.employmentLimit);
+  const eligibleTotal = Math.min(individual, limits.individualLimit) + employee + employer;
   const deductible = Math.min(
-    Math.min(individual, limits.individualLimit) + employment,
-    ((netEarnings + employer) * limits.netIncomeShareLimit) / 100,
+    Math.min(eligibleTotal, limits.individualLimit + employment),
+    (netEarnings * limits.netIncomeShareLimit) / 100,
   );
   return { individual, employee, employer, total: individual + employee + employer, deductible };
-}
-
-function employmentReduction(netEarnings, p) {
-  if (netEarnings <= p.reductionThreshold1) return p.reductionMax;
-  if (netEarnings <= p.reductionThreshold2) {
-    return Math.max(0, p.reductionMax - p.reductionSlope1 * (netEarnings - p.reductionThreshold1));
-  }
-  if (netEarnings <= p.reductionThreshold3) {
-    return Math.max(0, p.reductionValue2 - p.reductionSlope2 * (netEarnings - p.reductionThreshold2));
-  }
-  return 0;
-}
-
-function minWageCredit(
-  grossEarnings,
-  { minWageCredit: amount, minWageCreditFullUpTo: full, minWageCreditEndsAt: end },
-) {
-  if (amount <= 0 || grossEarnings >= end) return 0;
-  if (grossEarnings <= full) return amount;
-  return amount * ((end - grossEarnings) / (end - full));
-}
-
-function personalAllowance(input, p) {
-  let personal = p.personalAllowance;
-  if (input.age >= 65) personal += p.ageOver65Allowance;
-  if (input.age >= 75) personal += p.ageOver75Allowance;
-
-  const perChild = [p.child1Allowance, p.child2Allowance, p.child3Allowance, p.child4Allowance];
-  let children = 0;
-  for (let i = 0; i < input.children; i++) children += perChild[Math.min(i, perChild.length - 1)];
-  children += Math.min(input.childrenUnder3, input.children) * p.childUnder3Allowance;
-  // Without the "fully counted" flag the allowance is shared between both parents
-  if (!input.childrenFullyCounted) children /= 2;
-
-  const dependents =
-    (input.dependents65 + input.dependents75) * p.dependent65Allowance + input.dependents75 * p.dependent75Allowance;
-
-  let disability = 0;
-  if (input.disability >= 65) disability = p.disability65Allowance + p.careAllowance;
-  else if (input.disability >= 33) disability = p.disability33Allowance;
-
-  return { personal, children, dependents, disability, total: personal + children + dependents + disability };
-}
-
-/**
- * Estimated tax due in the annual return. The scenario's brackets are the
- * combined state + general regional scale; the user's region is applied as the
- * difference between its own scale and allowances and the general ones.
- */
-function annualTax(input, p, base, allowance, grossEarnings) {
-  const region = REGIONAL_SCALES[input.region];
-  let tax = applyScale(p.brackets, base) - applyScale(p.brackets, allowance.total);
-
-  if (region) {
-    const regionalAllowance = personalAllowance(input, { ...p, ...REGIONAL_ALLOWANCES[input.region] }).total;
-    tax +=
-      applyScale(region.brackets, base) -
-      applyScale(GENERAL_REGIONAL_SCALE, base) -
-      (applyScale(region.brackets, regionalAllowance) - applyScale(GENERAL_REGIONAL_SCALE, allowance.total));
-  }
-
-  const credit = minWageCredit(grossEarnings, p);
-  return { credit, tax: Math.max(0, Math.max(0, tax) - credit) };
-}
-
-/** Income below which no tax is withheld (art. 81 RIRPF). */
-function withholdingFreeMinimum(input, p) {
-  const children = Math.min(input.children, 2);
-  // Situation 1 (single parent) only exists with children
-  const situation = input.familySituation === 1 && children === 0 ? 3 : input.familySituation;
-  return p[`withholdingFreeMin${situation}_${children}`];
-}
-
-/** Income tax withholding following the general procedure (arts. 82-86 RIRPF). */
-function withholding(input, p, taxableGross, socialSecurity) {
-  const netEarnings = Math.max(0, taxableGross - socialSecurity);
-
-  let otherExpenses = p.generalExpenses;
-  if (input.disability >= 65) otherExpenses += p.disability65Expenses;
-  else if (input.disability >= 33) otherExpenses += p.disability33Expenses;
-
-  otherExpenses = Math.min(netEarnings, otherExpenses);
-  const reduction = round2(employmentReduction(netEarnings, p));
-  // Art. 83.3 RIRPF: only the withholding base gets this reduction.
-  const largeFamilyReduction = input.children > 2 ? 600 : 0;
-  const base = Math.max(0, netEarnings - otherExpenses - reduction - largeFamilyReduction);
-  const allowance = personalAllowance(input, p);
-  const taxOnBase = applyScale(p.brackets, base);
-  const taxOnAllowance = applyScale(p.brackets, allowance.total);
-  const freeMinimum = withholdingFreeMinimum(input, p);
-
-  let amount = Math.max(0, taxOnBase - taxOnAllowance);
-  if (taxableGross <= freeMinimum) amount = 0;
-  else if (taxableGross <= 35200) amount = Math.min(amount, ((taxableGross - freeMinimum) * p.withholdingCap) / 100);
-
-  let rate = taxableGross > 0 ? Math.floor((amount / taxableGross) * 10000) / 100 : 0;
-  if (input.contract === 'temporary' && taxableGross > freeMinimum) rate = Math.max(rate, p.temporaryMinRate);
-
-  return {
-    netEarnings,
-    otherExpenses,
-    reduction,
-    largeFamilyReduction,
-    withholdingBase: base,
-    allowance,
-    taxOnBase,
-    taxOnAllowance,
-    freeMinimum,
-    amount,
-    rate,
-    withheld: round2((taxableGross * rate) / 100),
-  };
 }
 
 export const grossAnnualOf = (input) => (input.period === 'perPayment' ? input.salary * input.payments : input.salary);
@@ -243,16 +120,21 @@ export function computePayroll(input, scenario, grossAnnual = grossAnnualOf(inpu
   // --- Annual return ---
   // Employer pension contributions are imputed as income and reduced again, so
   // only the deductible amount beyond them lowers the base.
-  const pension = pensionPlan(input, scenario.pension, taxableGross, incomeTax.netEarnings);
-  const employerDeducted = Math.min(input.pensionEmployer, pension.deductible);
+  const annualGross = taxableGross + input.pensionEmployer;
+  const annualEarnings = employmentIncome(input, scenario.incomeTax, annualGross, employee.total);
+  const pension = pensionPlan(
+    input,
+    scenario.pension,
+    annualGross,
+    Math.max(0, annualEarnings.netEarnings - annualEarnings.otherExpenses),
+  );
   const annualEmploymentBase = Math.max(0, incomeTax.netEarnings - incomeTax.otherExpenses - incomeTax.reduction);
   const annualBase = Math.max(
     0,
-    annualEmploymentBase - (pension.deductible - employerDeducted) + (input.pensionEmployer - employerDeducted),
+    annualEarnings.netEarnings - annualEarnings.otherExpenses - annualEarnings.reduction - pension.deductible,
   );
-  const annual = annualTax(input, scenario.incomeTax, annualBase, incomeTax.allowance, taxableGross);
-  const pensionTaxSaved =
-    annualTax(input, scenario.incomeTax, annualEmploymentBase, incomeTax.allowance, taxableGross).tax - annual.tax;
+  const annual = annualTax(input, scenario.incomeTax, annualBase, annualGross);
+  const pensionTaxSaved = annualTax(input, scenario.incomeTax, annualEmploymentBase, taxableGross).tax - annual.tax;
 
   // Positive: refund. Negative: to pay, unless the employee doesn't have to file.
   let refund = incomeTax.withheld - annual.tax;
@@ -277,7 +159,17 @@ export function computePayroll(input, scenario, grossAnnual = grossAnnualOf(inpu
     employerCost: gross + employer.total + pension.employer,
     flexible: { ...flexible, taxSaved: taxWithoutFlexible - incomeTax.withheld },
     pension: { ...pension, taxSaved: pensionTaxSaved },
-    incomeTax: { ...incomeTax, annualBase, minWageCredit: annual.credit, annualTax: annual.tax, refund },
+    incomeTax: {
+      ...incomeTax,
+      annualAllowance: annual.allowance,
+      regionalAllowance: annual.regionalAllowance,
+      stateTax: annual.stateTax,
+      regionalTax: annual.regionalTax,
+      annualBase,
+      minWageCredit: annual.credit,
+      annualTax: annual.tax,
+      refund,
+    },
     netAnnual,
     netAnnualAfterReturn,
     netMonthlyAverage: netAnnual / 12,

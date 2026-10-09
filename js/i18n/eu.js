@@ -251,6 +251,10 @@ export default {
   regionGeneral: 'Zehaztu gabe',
   helpRegion:
     'Nominako atxikipena ez dago zure erkidegoaren menpe, baina errentaren azken kuota bai. Euskadi eta Nafarroa ez daude barne.',
+  rowLargeFamilyReduction: 'Bi ondorengo baino gehiagoko murrizketa (atxikipena)',
+  rowAnnualBase: 'Urteko likidazio-oinarri zenbatetsia',
+  rowStateTax: 'Estatuko kuota osoa',
+  rowRegionalTax: 'Autonomia-erkidegoko kuota osoa',
   rowAnnualTax: 'Urteko kuota (errenta, zenbatespena)',
   helpAnnualTax:
     'Zure erkidegoaren eskalarekin aitorpenean ordainduko zenukeena. Atxikitakoarekiko aldea itzuli (+) edo ordaindu (−) egin beharko da.',
@@ -262,10 +266,10 @@ export default {
     'Gehieneko tasa marjinala % 52ra igotzen du 300.000 €-tik gora. Programak ez ditu 120.000 eta 300.000 € arteko tasak zehazten, eta bere horretan uzten dira.',
   proposalPsoeNote: 'Ondorengoengatiko eta mendekoengatiko gutxienekoa igotzea proposatzen du, zifra zehatzik gabe.',
   proposalPpNote:
-    'Tarifa deflaktatzea eta 40.000 €-tik beherako errentei PFEZa jaistea proposatzen du, zifra zehatzik gabe.',
+    'Gazte jakin batzuen lehen lau lan-urteetan % 100, % 75, % 50 eta % 25eko hobariak proposatzen ditu. Ez dira simulatzen: baldintzak egiaztatzeko datuak falta dira.',
   proposalPodemosNote:
     'LGSraino nominan ez atxikitzea proposatzen du; indarreko kenkariak dagoeneko uzten du LGS PFEZik gabe.',
-  otherProposals: 'Zifra zehatzik gabeko proposamenak',
+  otherProposals: 'Simulatu gabeko beste proposamen batzuk',
   proposalsDisclaimer:
     'Alderdi bakoitzaren dokumentu ofizialetan oinarritua; baliteke gaur egungo jarrera ez islatzea.',
   contextTitle: 'Zure soldata testuinguruan',

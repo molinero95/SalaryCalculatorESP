@@ -1,5 +1,5 @@
 // App shell only: external analytics and shared personal data are never cached.
-const CACHE = 'salary-calculator-v4';
+const CACHE = 'salary-calculator-v5';
 const ASSETS = [
   './manifest.webmanifest',
   './assets/app-icon.svg',
@@ -8,6 +8,7 @@ const ASSETS = [
   './css/styles.css',
   './js/chart.js',
   './js/calc.js',
+  './js/tax.js',
   './js/app.js',
   './js/format.js',
   './js/political.js',

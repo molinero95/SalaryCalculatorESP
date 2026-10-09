@@ -87,7 +87,7 @@ export const CURRENT_SCENARIO = {
   },
   // Contribution bases (Orden PJC/297/2026)
   socialSecurity: {
-    minBase: 1424.5,
+    minBase: 1424.4,
     maxBase: 5101.2,
     // Solidarity contribution bands, as % above the maximum base
     solidarityBand1Limit: 10,
@@ -160,14 +160,15 @@ export const GENERAL_REGIONAL_SCALE = [
 ];
 
 /** Adds two bracket scales into a single equivalent scale. */
-export function combineScales(a, b) {
+export function combineScales(a, b, roundRates = true) {
   const limits = [...new Set([...a, ...b].map((br) => br.upTo).filter((x) => x !== null))].sort((x, y) => x - y);
   const rateAt = (scale, amount) => scale.find((br) => br.upTo === null || amount < br.upTo).rate;
 
   let from = 0;
   return [...limits, null].map((upTo) => {
     const probe = upTo === null ? from + 1 : (from + upTo) / 2;
-    const bracket = { upTo, rate: +(rateAt(a, probe) + rateAt(b, probe)).toFixed(2) };
+    const rate = rateAt(a, probe) + rateAt(b, probe);
+    const bracket = { upTo, rate: roundRates ? +rate.toFixed(2) : rate };
     from = upTo;
     return bracket;
   });

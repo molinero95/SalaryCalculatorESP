@@ -28,8 +28,8 @@ Espainiako nomina-kalkulagailua eta proposamen fiskalen simulagailua. Kalkulatu 
 1. **Gizarte Segurantza**: kotizazio-oinarria = urteko gordina / 12, gutxieneko eta gehieneko oinarrien artean mugatuta. Gehieneko oinarritik gora elkartasun-kotizazioa aplikatzen da tarteka.
 2. **Etekin garbia** = gordina − kotizazioak.
 3. **Atxikipen-oinarria** = etekin garbia − beste gastu kengarri batzuk (2.000 €, gehi desgaitasunarenak) − lan-etekinengatiko murrizketa (PFEZL 20. art.).
-4. **Kuota** = eskala(oinarria) − eskala(gutxieneko pertsonal eta familiarra) , atxikipenetik salbuetsitako gutxienekoaren gaineko gehiegizkoaren % 43ko mugarekin.
-5. **Atxikipen-tasa** = kuota / gordina, bi hamartarretara biribilduta (gutxienez % 2 aldi baterako kontratuetan).
+4. **Kuota** = eskala(oinarria) − eskala(gutxieneko pertsonal eta familiarra) , atxikipenetik salbuetsitako gutxienekoaren gaineko gehiegizkoaren % 43ko mugarekin, 35.200 € gordinera arte bakarrik.
+5. **Atxikipen-tasa** = kuota / gordina, bi hamartarretara moztuta (gutxienez % 2 aldi baterako kontratuetan).
 6. **14 ordainsarirekin**, Gizarte Segurantza 12 hilabetetan banatzen da eta aparteko ordainsariek PFEZ bakarrik dute.
 7. **LGS kenkaria** ez da nominan aplikatzen: errentan itzuliko den zenbateko gisa erakusten da.
 8. **Ordainsari malgua** PFEZetik salbuetsita dago bere mugetaraino, baina Gizarte Segurantzan kotizatzen du.
@@ -40,7 +40,7 @@ Espainiako nomina-kalkulagailua eta proposamen fiskalen simulagailua. Kalkulatu 
 | --------------------------------------- | --------------------------------------------------------------------------- |
 | Atxikipen-eskala                        | % 19 · % 24 · % 30 · % 37 · % 45 · % 47                                     |
 | Langilearen kotizazioa                  | % 4,70 CA + % 1,55 langabezia + % 0,10 LH + % 0,15 MEI                      |
-| Gehieneko / gutxieneko oinarria         | 5.101,20 € / 1.424,50 € hilean                                              |
+| Gehieneko / gutxieneko oinarria         | 5.101,20 € / 1.424,40 € hilean                                              |
 | Gutxieneko pertsonala                   | 5.550 €                                                                     |
 | Lan-etekinengatiko gehieneko murrizketa | 7.302 €                                                                     |
 | LGS kenkaria (errentan)                 | 590,89 € 17.094 €-raino; 20.048,45 €-an desagertzen da                      |
@@ -100,3 +100,5 @@ Eskertzen dira araudiaren zuzenketak eta itzulpenen berrikuspenak (batez ere eus
 ## Simulazioak eta konexiorik gabeko erabilera
 
 Bost simulazio arte automatikoki agertzen dira grafikoetan eta taulan. Fitxek editatu beharreko simulazioa hautatzen dute. Proposamenak txantiloi editagarriak dira. Seme-alaba bakoitzeko estatuko tasaren murrizketa konfiguragarria da: Voxek 4 puntu aplikatzen ditu, gutxienez % 0, autonomia-erkidegoko zatia mantenduz. Atxikipena estimazioa da. Lineako bisita baten ondoren, aplikazioak konexiorik gabe funtzionatzen du.
+
+Atxikipen-oinarriak 600 €-ko murrizketa gehigarria du bi ondorengo baino gehiago daudenean. Urteko kalkuluak estatuko eta autonomia-erkidegoko kuotak eta gutxienekoak bereizten ditu. Ikusi [zerga-balioztapenaren matrizea eta iturri ofizialak](docs/fiscal-validation.md) proben estaldura eta hipotesiak ezagutzeko.

@@ -28,8 +28,8 @@ Spanish payroll calculator and tax policy simulator. Work out your take-home pay
 1. **Social security**: contribution base = gross annual salary / 12, clamped between the minimum and maximum bases. Above the maximum base, the solidarity contribution applies in bands.
 2. **Net earnings** = gross − contributions.
 3. **Withholding base** = net earnings − other deductible expenses (€2,000, plus disability-related ones) − employment income reduction (art. 20 LIRPF).
-4. **Tax amount** = scale(base) − scale(personal and family allowance) , capped at 43 % of the excess over the withholding-free minimum.
-5. **Withholding rate** = tax amount / gross, rounded to two decimals (at least 2 % on temporary contracts).
+4. **Tax amount** = scale(base) − scale(personal and family allowance) , capped at 43 % of the excess over the withholding-free minimum, only up to €35,200 gross.
+5. **Withholding rate** = tax amount / gross, truncated to two decimals (at least 2 % on temporary contracts).
 6. With **14 payments**, social security is spread over 12 months and the two extra payments only carry income tax.
 7. The **low-earner credit** is not applied in payroll: it is shown as an estimated refund in the annual return.
 8. **Flexible compensation** is exempt from income tax up to its limits but still pays social security.
@@ -40,7 +40,7 @@ Spanish payroll calculator and tax policy simulator. Work out your take-home pay
 | ----------------------------------- | -------------------------------------------------------------------- |
 | Withholding scale                   | 19 % · 24 % · 30 % · 37 % · 45 % · 47 %                              |
 | Employee contributions              | 4.70 % CC + 1.55 % unemployment + 0.10 % training + 0.15 % MEI       |
-| Maximum / minimum base              | €5,101.20 / €1,424.50 per month                                      |
+| Maximum / minimum base              | €5,101.20 / €1,424.40 per month                                      |
 | Personal allowance                  | €5,550                                                               |
 | Maximum employment income reduction | €7,302                                                               |
 | Low-earner credit (annual return)   | €590.89 up to €17,094, zero at €20,048.45                            |
@@ -100,3 +100,5 @@ Corrections to the tax rules and reviews of the translations (especially Basque 
 ## Simulations and offline use
 
 Up to five simulations appear automatically in all comparison charts and the summary table. Tabs select the simulation to edit. Political proposals are editable starting templates. The state rate reduction per child is configurable; Vox uses 4 percentage points with a zero state-rate floor, preserving regional tax. Payroll withholding remains an estimate. After a full online visit, the app works offline.
+
+Withholding includes an additional €600 reduction for more than two descendants. Annual assessment separates state and regional quotas and minima. See the [fiscal validation matrix and official sources](docs/fiscal-validation.md) for test coverage and supported assumptions.
