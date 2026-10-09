@@ -241,4 +241,8 @@ export default {
   warnSingleParent: 'La situación monoparental requiere al menos un hijo; se calcula como «otras situaciones».',
   print: 'Imprimir o guardar PDF',
   help: 'Ayuda',
+  shareText: 'Con «{name}» cobraría {diff} al año. Compruébalo con tu sueldo:',
+  shareTextNone: 'Simula cómo cambiaría tu sueldo con «{name}»:',
+  shareNative: 'Compartir…',
+  shareNote: 'El enlace incluye la propuesta, no tus datos personales: cada persona la verá con su propio sueldo.',
 };

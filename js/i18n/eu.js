@@ -242,4 +242,8 @@ export default {
     'Guraso bakarreko egoerak gutxienez seme-alaba bat behar du; «beste egoera batzuk» gisa kalkulatzen da.',
   print: 'Inprimatu edo PDF gisa gorde',
   help: 'Laguntza',
+  shareText: '«{name}» proposamenarekin {diff} kobratuko nuke urtean. Egiaztatu zure soldatarekin:',
+  shareTextNone: 'Simulatu nola aldatuko litzatekeen zure soldata «{name}» proposamenarekin:',
+  shareNative: 'Partekatu…',
+  shareNote: 'Estekak proposamena dakar, ez zure datu pertsonalak: bakoitzak bere soldatarekin ikusiko du.',
 };

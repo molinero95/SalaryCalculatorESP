@@ -237,4 +237,8 @@ export default {
   warnSingleParent: 'A situación monoparental require polo menos un fillo; calcúlase como «outras situacións».',
   print: 'Imprimir ou gardar PDF',
   help: 'Axuda',
+  shareText: 'Con «{name}» cobraría {diff} ao ano. Compróbao co teu soldo:',
+  shareTextNone: 'Simula como cambiaría o teu soldo con «{name}»:',
+  shareNative: 'Compartir…',
+  shareNote: 'A ligazón inclúe a proposta, non os teus datos persoais: cada persoa verá coa súa propia nómina.',
 };

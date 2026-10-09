@@ -68,6 +68,17 @@ function merge(base, override) {
   return typeof override === typeof base ? override : base;
 }
 
+/** The parts of `value` that differ from `base` (undefined when equal), to keep share links short. */
+function changesFrom(base, value) {
+  if (isPlainObject(base) && isPlainObject(value)) {
+    const entries = Object.entries(value)
+      .map(([key, item]) => [key, changesFrom(base[key], item)])
+      .filter(([, item]) => item !== undefined);
+    return entries.length ? Object.fromEntries(entries) : undefined;
+  }
+  return JSON.stringify(base) === JSON.stringify(value) ? undefined : value;
+}
+
 const oneOf = (value, allowed) => (allowed.includes(value) ? value : allowed[0]);
 
 function initialState() {
@@ -79,11 +90,12 @@ function initialState() {
     simulation: clone(CURRENT_SCENARIO),
   };
 
-  // A shared link (#s=…) takes precedence over the locally saved state
+  // A shared link (#s=…) is applied on top of the locally saved state, so the
+  // recipient keeps their own personal details
   const shared = location.hash.startsWith('#s=') ? storage.decode(location.hash.slice(3)) : null;
   if (shared) history.replaceState(null, '', location.pathname + location.search);
 
-  const state = merge(defaults, shared ?? storage.loadState() ?? {});
+  const state = merge(merge(defaults, storage.loadState() ?? {}), shared ?? {});
   state.chartMode = oneOf(state.chartMode, ['diff', 'rate']);
   state.input.period = oneOf(state.input.period, ['annual', 'perPayment']);
   state.input.contract = oneOf(state.input.contract, ['permanent', 'temporary']);
@@ -294,9 +306,26 @@ $('#reset-current').addEventListener('click', () => {
   refreshScenarios();
 });
 
+/** Link to the current proposal. Personal details are deliberately left out. */
+function shareUrl() {
+  const payload = {
+    current: changesFrom(CURRENT_SCENARIO, state.current),
+    simulation: changesFrom(CURRENT_SCENARIO, state.simulation),
+  };
+  return `${location.origin}${location.pathname}#s=${storage.encode(payload)}`;
+}
+
+/** Ready-made message for social networks, using the user's own result. */
+function shareText() {
+  const diff = lastResults.simulation.netAnnualAfterReturn - lastResults.current.netAnnualAfterReturn;
+  const name = scenarioName('simulation');
+  return Math.abs(diff) < 0.5
+    ? t('shareTextNone', { name })
+    : t('shareText', { name, diff: formatSignedEuros(diff, 0) });
+}
+
 $('#share').addEventListener('click', async () => {
-  const { input, current, simulation } = state;
-  const url = `${location.origin}${location.pathname}#s=${storage.encode({ input, current, simulation })}`;
+  const url = shareUrl();
   try {
     await navigator.clipboard.writeText(url);
   } catch {
@@ -305,6 +334,28 @@ $('#share').addEventListener('click', async () => {
   }
   toast(t('linkCopied'));
   trackEvent('share');
+});
+
+$('#share-whatsapp').addEventListener('click', () => {
+  window.open(`https://wa.me/?text=${encodeURIComponent(`${shareText()} ${shareUrl()}`)}`, '_blank', 'noopener');
+  trackEvent('share-whatsapp');
+});
+
+$('#share-x').addEventListener('click', () => {
+  const params = new URLSearchParams({ text: shareText(), url: shareUrl() });
+  window.open(`https://x.com/intent/post?${params}`, '_blank', 'noopener');
+  trackEvent('share-x');
+});
+
+const nativeShare = $('#share-native');
+nativeShare.hidden = !navigator.share;
+nativeShare.addEventListener('click', async () => {
+  try {
+    await navigator.share({ title: t('appTitle'), text: shareText(), url: shareUrl() });
+    trackEvent('share-native');
+  } catch {
+    // The user closed the share sheet
+  }
 });
 
 $('#print').addEventListener('click', () => {
@@ -421,12 +472,14 @@ function renderInputWarnings() {
 }
 
 let chartFrame;
+let lastResults;
 function update() {
   const results = {
     names: scenarioNames(),
     current: computePayroll(state.input, state.current),
     simulation: computePayroll(state.input, state.simulation),
   };
+  lastResults = results;
   renderResults({ cards: $('#results'), summary: $('#difference'), sticky: $('#sticky-value') }, results);
   renderBreakdown($('#breakdown'), results);
 

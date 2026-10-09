@@ -242,4 +242,8 @@ export default {
   warnSingleParent: 'La situació monoparental requereix almenys un fill; es calcula com a «altres situacions».',
   print: 'Imprimir o desar PDF',
   help: 'Ajuda',
+  shareText: 'Amb «{name}» cobraria {diff} l’any. Comprova-ho amb el teu sou:',
+  shareTextNone: 'Simula com canviaria el teu sou amb «{name}»:',
+  shareNative: 'Compartir…',
+  shareNote: "L'enllaç inclou la proposta, no les teves dades personals: cadascú la veurà amb el seu propi sou.",
 };

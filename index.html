@@ -9,6 +9,23 @@
       content="Calcula tu salario neto en España (IRPF y Seguridad Social) y simula cómo cambiaría con distintas propuestas fiscales."
     />
     <meta name="author" content="Jaime Molinero Lacave" />
+    <link rel="canonical" href="https://molinero95.github.io/SalaryCalculatorESP/" />
+
+    <!-- Link previews (WhatsApp, X, LinkedIn, Telegram…) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:site_name" content="Simulador de salario neto" />
+    <meta property="og:title" content="Simulador de salario neto" />
+    <meta
+      property="og:description"
+      content="Calcula tu nómina en España y compárala con cualquier propuesta fiscal: tramos del IRPF, mínimos y cotizaciones."
+    />
+    <meta property="og:url" content="https://molinero95.github.io/SalaryCalculatorESP/" />
+    <meta property="og:image" content="https://molinero95.github.io/SalaryCalculatorESP/assets/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Comparativa de nómina actual y simulada" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="theme-color" content="#2a78d6" />
     <link
       rel="icon"
@@ -271,12 +288,17 @@
         <div class="toolbar">
           <button type="button" class="button secondary" id="copy-current" data-i18n="copyCurrent"></button>
           <button type="button" class="button" id="share" data-i18n="share"></button>
+          <button type="button" class="button secondary" id="share-whatsapp">WhatsApp</button>
+          <button type="button" class="button secondary" id="share-x">X</button>
+          <button type="button" class="button secondary" id="share-native" data-i18n="shareNative" hidden></button>
           <button type="button" class="button secondary" id="export" data-i18n="exportJson"></button>
           <label class="button secondary">
             <span data-i18n="importJson"></span>
             <input type="file" id="import" accept="application/json,.json" hidden />
           </label>
         </div>
+
+        <p class="help share-note" data-i18n="shareNote"></p>
 
         <div class="toolbar">
           <label for="saved-scenarios" data-i18n="myScenarios"></label>

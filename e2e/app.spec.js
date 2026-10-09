@@ -95,3 +95,19 @@ test('the simulation editor comes before the results and can be collapsed', asyn
   const resultsY = (await page.locator('#results').boundingBox()).y;
   expect(editorY).toBeLessThan(resultsY);
 });
+
+test('share links only carry the changed proposal, not personal details', async ({ page, context }) => {
+  await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+  await page.fill('#salary', '41234');
+  await page.fill('#scenario-name', 'Mi propuesta');
+  await page.locator('#share').click();
+
+  const url = await page.evaluate(() => navigator.clipboard.readText());
+  const payload = await page.evaluate(async (hash) => {
+    const { decode } = await import('/js/storage.js');
+    return decode(hash);
+  }, url.split('#s=')[1]);
+
+  expect(payload).toEqual({ simulation: { name: 'Mi propuesta' } });
+  expect(url.length).toBeLessThan(120);
+});

@@ -898,6 +898,11 @@ main > *,
   margin: 0 0 1rem;
 }
 
+.share-note {
+  margin: -0.25rem 0 0.75rem;
+  font-size: 0.8rem;
+}
+
 .amounts-period {
   margin-bottom: 1rem;
 }

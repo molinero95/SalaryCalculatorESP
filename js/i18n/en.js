@@ -240,4 +240,8 @@ export default {
   warnSingleParent: 'Single-parent status needs at least one child; it is calculated as “other situations”.',
   print: 'Print or save as PDF',
   help: 'Help',
+  shareText: 'With “{name}” I would take home {diff} a year. Check it with your salary:',
+  shareTextNone: 'See how your salary would change with “{name}”:',
+  shareNative: 'Share…',
+  shareNote: 'The link contains the proposal, not your personal details: everyone sees it with their own salary.',
 };
