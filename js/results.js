@@ -1,6 +1,6 @@
 // Result cards, difference summary and payslip breakdown table.
 
-import { t } from './i18n/index.js';
+import { t, helpTip } from './i18n/index.js';
 import { formatEuros, formatSignedEuros, formatPercent, formatPoints, escapeHtml } from './format.js';
 
 const EPSILON = 0.005;
@@ -42,6 +42,23 @@ function resultCard(kind, name, r, reference, { showRefund, showInKind, showPens
     </article>`;
 }
 
+/** Compact side-by-side comparison, shown instead of reading two stacked cards on mobile. */
+function summaryStrip(names, current, simulation) {
+  const row = (label, a, b) => {
+    const diff = b - a;
+    const tone = Math.abs(diff) < EPSILON ? '' : diff > 0 ? 'positive' : 'negative';
+    return `<tr><th scope="row">${label}</th><td>${formatEuros(a)}</td><td>${formatEuros(b)}</td><td class="${tone}">${Math.abs(diff) < EPSILON ? '—' : formatSignedEuros(diff)}</td></tr>`;
+  };
+  return `
+    <table class="summary-strip">
+      <thead><tr><th></th><th scope="col">${escapeHtml(names.current)}</th><th scope="col">${escapeHtml(names.simulation)}</th><th scope="col">${t('difference')}</th></tr></thead>
+      <tbody>
+        ${row(t(current.payments === 14 ? 'netPerPayment' : 'netMonthly'), mainNet(current), mainNet(simulation))}
+        ${row(t('rowNetAfterReturn'), current.netAnnualAfterReturn, simulation.netAnnualAfterReturn)}
+      </tbody>
+    </table>`;
+}
+
 export function renderResults({ cards, summary, sticky }, { names, current, simulation }) {
   const options = {
     showRefund: current.incomeTax.refund > 0 || simulation.incomeTax.refund > 0,
@@ -49,6 +66,7 @@ export function renderResults({ cards, summary, sticky }, { names, current, simu
     showPension: simulation.pension.total > 0,
   };
   cards.innerHTML =
+    summaryStrip(names, current, simulation) +
     resultCard('current', names.current, current, undefined, options) +
     resultCard('simulation', names.simulation, simulation, current, options);
 
@@ -77,12 +95,12 @@ const BREAKDOWN = [
   {
     title: 'sectionSocialSecurity',
     rows: [
-      { label: 'rowContributionBase', value: (r) => r.employee.monthlyBase },
+      { label: 'rowContributionBase', help: 'helpContributionBase', value: (r) => r.employee.monthlyBase },
       { label: 'rowCommonContingencies', value: (r) => r.employee.items.commonContingencies },
       { label: 'rowUnemployment', value: (r) => r.employee.items.unemployment },
       { label: 'rowTraining', value: (r) => r.employee.items.training },
-      { label: 'rowMei', value: (r) => r.employee.items.mei },
-      { label: 'rowSolidarity', value: (r) => r.employee.items.solidarity, optional: true },
+      { label: 'rowMei', help: 'helpMei', value: (r) => r.employee.items.mei },
+      { label: 'rowSolidarity', help: 'helpSolidarity', value: (r) => r.employee.items.solidarity, optional: true },
       { label: 'rowSocialSecurityTotal', value: (r) => r.employee.total, total: true },
     ],
   },
@@ -108,11 +126,11 @@ const BREAKDOWN = [
       { label: 'rowTaxableGross', value: (r) => r.taxableGross },
       { label: 'rowNetEarnings', value: (r) => r.incomeTax.netEarnings },
       { label: 'rowOtherExpenses', value: (r) => -r.incomeTax.otherExpenses },
-      { label: 'rowEmploymentReduction', value: (r) => -r.incomeTax.reduction, optional: true },
+      { label: 'rowEmploymentReduction', help: 'helpEmploymentReduction', value: (r) => -r.incomeTax.reduction, optional: true },
       { label: 'rowWithholdingBase', value: (r) => r.incomeTax.withholdingBase },
-      { label: 'rowPersonalAllowance', value: (r) => r.incomeTax.allowance.total },
+      { label: 'rowPersonalAllowance', help: 'helpPersonalAllowance', value: (r) => r.incomeTax.allowance.total },
       { label: 'rowWithholdingAmount', value: (r) => r.incomeTax.amount },
-      { label: 'rowWithholdingRate', value: (r) => r.incomeTax.rate, format: formatPercent, formatDiff: formatPoints },
+      { label: 'rowWithholdingRate', help: 'helpWithholdingRate', value: (r) => r.incomeTax.rate, format: formatPercent, formatDiff: formatPoints },
       { label: 'rowIncomeTax', value: (r) => r.incomeTax.withheld, total: true },
       { label: 'rowMinWageCredit', value: (r) => r.incomeTax.minWageCredit, optional: true },
     ],
@@ -142,7 +160,7 @@ const BREAKDOWN = [
     rows: [
       { label: 'rowEmployerContributions', value: (r) => r.employer.total },
       { label: 'rowEmployerCost', value: (r) => r.employerCost, total: true },
-      { label: 'rowTaxWedge', value: (r) => r.taxWedge, format: formatPercent, formatDiff: formatPoints },
+      { label: 'rowTaxWedge', help: 'helpTaxWedge', value: (r) => r.taxWedge, format: formatPercent, formatDiff: formatPoints },
     ],
   },
 ];
@@ -154,7 +172,7 @@ function breakdownRow(row, a, b) {
 
   return `
     <tr class="${classes}">
-      <th scope="row">${t(row.label)}</th>
+      <th scope="row">${t(row.label)}${row.help ? helpTip(row.help) : ''}</th>
       <td>${format(a)}</td>
       <td>${format(b)}</td>
       <td class="${unchanged ? 'muted' : ''}">${unchanged ? '—' : formatDiff(b - a)}</td>

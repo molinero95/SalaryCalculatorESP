@@ -29,9 +29,18 @@ export function t(key, vars = {}) {
   return message.replace(/\{(\w+)\}/g, (_, name) => vars[name] ?? '');
 }
 
+const escapeAttribute = (text) => text.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+
+/** HTML for a small "?" button that reveals the help message `key`. */
+export function helpTip(key) {
+  const text = escapeAttribute(t(key));
+  return `<button type="button" class="help-tip" data-tip="${text}" aria-label="${escapeAttribute(t('help'))}: ${text}">?</button>`;
+}
+
 /** Translates every element annotated with `data-i18n*` attributes. */
 export function translateDocument(root = document) {
   root.querySelectorAll('[data-i18n]').forEach((el) => (el.textContent = t(el.dataset.i18n)));
+  root.querySelectorAll('[data-help]').forEach((el) => (el.innerHTML = helpTip(el.dataset.help)));
   root.querySelectorAll('[data-i18n-aria]').forEach((el) => el.setAttribute('aria-label', t(el.dataset.i18nAria)));
   document.title = t('appTitle');
 }

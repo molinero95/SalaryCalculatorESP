@@ -298,6 +298,11 @@ $('#share').addEventListener('click', async () => {
   trackEvent('share');
 });
 
+$('#print').addEventListener('click', () => {
+  trackEvent('print');
+  window.print();
+});
+
 $('#export').addEventListener('click', () => {
   const { input, current, simulation } = state;
   const blob = new Blob([JSON.stringify({ input, current, simulation }, null, 2)], { type: 'application/json' });
@@ -348,6 +353,20 @@ $('#delete-scenario').addEventListener('click', () => {
 });
 
 // ---------------------------------------------------------------------------
+// Help tips
+// ---------------------------------------------------------------------------
+
+// Tapping a "?" toggles its message (needed on touch screens) without
+// activating the label or checkbox that contains it
+document.addEventListener('click', (event) => {
+  const tip = event.target.closest('.help-tip');
+  document.querySelectorAll('.help-tip.open').forEach((open) => open !== tip && open.classList.remove('open'));
+  if (!tip) return;
+  event.preventDefault();
+  tip.classList.toggle('open');
+});
+
+// ---------------------------------------------------------------------------
 // Language
 // ---------------------------------------------------------------------------
 
@@ -373,6 +392,19 @@ function applyLanguage() {
 // Main loop
 // ---------------------------------------------------------------------------
 
+/** Flags inconsistent personal details instead of silently ignoring them. */
+function renderInputWarnings() {
+  const { children, childrenUnder3, familySituation } = state.input;
+  const warnings = [
+    childrenUnder3 > children && t('warnChildrenUnder3'),
+    familySituation === 1 && children === 0 && t('warnSingleParent'),
+  ].filter(Boolean);
+
+  const element = $('#input-warning');
+  element.hidden = !warnings.length;
+  element.textContent = warnings.join(' ');
+}
+
 let chartFrame;
 function update() {
   const results = {
@@ -382,6 +414,8 @@ function update() {
   };
   renderResults({ cards: $('#results'), summary: $('#difference'), sticky: $('#sticky-value') }, results);
   renderBreakdown($('#breakdown'), results);
+
+  renderInputWarnings();
 
   const flexWarning = $('#flex-warning');
   flexWarning.hidden = !results.simulation.flexible.overCap;

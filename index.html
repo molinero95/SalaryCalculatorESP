@@ -60,7 +60,7 @@
           </div>
 
           <div class="field">
-            <span class="label" data-i18n="payments"></span>
+            <span class="label"><span data-i18n="payments"></span><span data-help="helpPayments"></span></span>
             <div class="segmented" role="radiogroup">
               <label><input type="radio" name="payments" value="12" /><span data-i18n="payments12"></span></label>
               <label><input type="radio" name="payments" value="14" /><span data-i18n="payments14"></span></label>
@@ -76,7 +76,7 @@
           </div>
 
           <div class="field">
-            <label for="familySituation" data-i18n="familySituation"></label>
+            <label for="familySituation"><span data-i18n="familySituation"></span><span data-help="helpFamilySituation"></span></label>
             <select id="familySituation" name="familySituation">
               <option value="3" data-i18n="situation3"></option>
               <option value="2" data-i18n="situation2"></option>
@@ -99,7 +99,7 @@
           </div>
 
           <div class="field">
-            <label for="partTime" data-i18n="partTime"></label>
+            <label for="partTime"><span data-i18n="partTime"></span><span data-help="helpPartTime"></span></label>
             <div class="input-unit">
               <input id="partTime" name="partTime" type="number" min="1" max="100" step="1" />
               <span class="unit">%</span>
@@ -128,8 +128,10 @@
 
           <label class="checkbox field-wide">
             <input type="checkbox" name="childrenFullyCounted" />
-            <span data-i18n="childrenFullyCounted"></span>
+            <span data-i18n="childrenFullyCounted"></span><span data-help="helpChildrenFullyCounted"></span>
           </label>
+
+          <p class="warning field-wide" id="input-warning" role="alert" hidden></p>
 
           <details class="extras field-wide">
             <summary data-i18n="flexTitle"></summary>
@@ -226,13 +228,10 @@
         </form>
       </section>
 
-      <section aria-live="polite">
-        <div class="results" id="results"></div>
-        <p class="difference" id="difference"></p>
-      </section>
-
-      <section class="card card-simulation" aria-labelledby="simulation-title">
-        <h2 id="simulation-title" class="section-title"><span class="chip chip-simulation" data-i18n="simulation"></span><span data-i18n="simTitle"></span></h2>
+      <details class="card card-simulation collapsible" open>
+        <summary>
+          <h2 id="simulation-title" class="section-title"><span class="chip chip-simulation" data-i18n="simulation"></span><span data-i18n="simTitle"></span></h2>
+        </summary>
         <p class="help" data-i18n="simDesc"></p>
 
         <div class="field field-name">
@@ -259,6 +258,11 @@
         </div>
 
         <div id="settings-simulation" class="settings"></div>
+      </details>
+
+      <section aria-live="polite">
+        <div class="results" id="results"></div>
+        <p class="difference" id="difference"></p>
       </section>
 
       <section class="card" aria-labelledby="chart-title">
@@ -279,11 +283,14 @@
       </section>
 
       <section class="card" aria-labelledby="breakdown-title">
-        <h2 id="breakdown-title" data-i18n="breakdown"></h2>
+        <div class="card-header">
+          <h2 id="breakdown-title" data-i18n="breakdown"></h2>
+          <button type="button" class="button secondary no-print" id="print" data-i18n="print"></button>
+        </div>
         <div class="table-scroll" id="breakdown"></div>
       </section>
 
-      <details class="card card-current" aria-labelledby="current-title">
+      <details class="card card-current collapsible">
         <summary>
           <h2 id="current-title" class="section-title"><span class="chip chip-current" data-i18n="current"></span><span data-i18n="currentTitle"></span></h2>
         </summary>

@@ -404,6 +404,57 @@ main > *,
   color: var(--negative);
 }
 
+/* Help tips: "?" button whose message shows on hover, focus or tap */
+.help-tip {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 1.1rem;
+  height: 1.1rem;
+  margin-left: 0.35rem;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--surface-1);
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  font-weight: 700;
+  line-height: 1;
+  vertical-align: middle;
+  cursor: help;
+}
+
+.help-tip::after {
+  content: attr(data-tip);
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 6px);
+  z-index: 20;
+  width: max-content;
+  max-width: min(260px, 80vw);
+  padding: 0.5rem 0.65rem;
+  border-radius: var(--radius-small);
+  background: var(--text-primary);
+  color: var(--surface-1);
+  font-size: 0.8rem;
+  font-weight: 400;
+  line-height: 1.4;
+  text-align: left;
+  white-space: normal;
+  transform: translateX(-50%);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.15s;
+  pointer-events: none;
+}
+
+.help-tip:hover::after,
+.help-tip:focus-visible::after,
+.help-tip.open::after {
+  visibility: visible;
+  opacity: 1;
+}
+
 /* ==========================================================================
    Results
    ========================================================================== */
@@ -551,12 +602,21 @@ main > *,
   background: var(--surface-2);
 }
 
+.summary-strip {
+  display: none;
+}
+
 /* ==========================================================================
    Tables
    ========================================================================== */
 
 .table-scroll {
   overflow-x: auto;
+}
+
+/* The breakdown fits (or stacks on mobile), and scrolling would clip help tips */
+#breakdown.table-scroll {
+  overflow: visible;
 }
 
 .table {
@@ -787,20 +847,20 @@ main > *,
   border-left: 4px solid var(--series-1);
 }
 
-.card-current > summary {
+.collapsible > summary {
   cursor: pointer;
   list-style: none;
 }
 
-.card-current > summary::-webkit-details-marker {
+.collapsible > summary::-webkit-details-marker {
   display: none;
 }
 
-.card-current > summary h2 {
+.collapsible > summary h2 {
   margin: 0;
 }
 
-.card-current > summary h2::after {
+.collapsible > summary h2::after {
   content: '▸';
   margin-left: auto;
   padding-left: 0.5rem;
@@ -809,11 +869,11 @@ main > *,
   transition: transform 0.15s;
 }
 
-.card-current[open] > summary h2::after {
+.collapsible[open] > summary h2::after {
   transform: rotate(90deg);
 }
 
-.card-current[open] > summary {
+.collapsible[open] > summary {
   margin-bottom: 1rem;
 }
 
@@ -1136,6 +1196,52 @@ main > *,
     font-size: 0.9rem;
   }
 
+  .summary-strip {
+    display: table;
+    grid-column: 1 / -1;
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+    font-variant-numeric: tabular-nums;
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+
+  .summary-strip th,
+  .summary-strip td {
+    padding: 0.5rem 0.4rem;
+    text-align: right;
+  }
+
+  .summary-strip th:first-child {
+    text-align: left;
+    font-weight: 500;
+  }
+
+  .summary-strip thead th {
+    color: var(--text-secondary);
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 5.5rem;
+  }
+
+  .summary-strip tbody tr + tr {
+    border-top: 1px solid var(--grid);
+  }
+
+  .summary-strip .positive {
+    color: var(--positive);
+    font-weight: 600;
+  }
+
+  .summary-strip .negative {
+    color: var(--negative);
+    font-weight: 600;
+  }
+
   .difference {
     padding: 0.75rem 1rem;
     font-size: 0.9rem;
@@ -1250,6 +1356,38 @@ main > *,
   .tooltip {
     min-width: 150px;
     font-size: 0.8rem;
+  }
+}
+
+@media print {
+  body {
+    background: #fff;
+    padding: 0;
+  }
+
+  .how-it-works,
+  .language-select,
+  .details-form .extras:not([open]),
+  .card-simulation,
+  .card-current,
+  .sticky-summary,
+  .toast,
+  .no-print,
+  .help-tip,
+  #chart-mode,
+  .data-table,
+  .site-footer a {
+    display: none !important;
+  }
+
+  .card,
+  .result {
+    box-shadow: none;
+    break-inside: avoid;
+  }
+
+  .summary-strip {
+    display: none !important;
   }
 }
 
