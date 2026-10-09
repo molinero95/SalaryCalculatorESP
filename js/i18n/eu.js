@@ -279,5 +279,6 @@ export default {
   compareDesc: 'Aukeratu gehienez 3 agertoki indarreko araudiarekin alderatzeko, zure datuekin.',
   compareEmpty: 'Aukeratu gutxienez agertoki bat.',
   compareChartDesc: 'Urteko diferentzia garbia indarreko araudiarekiko, soldata gordinaren arabera.',
-  yourSimulation: 'Zure simulazioa',
+  newSimulation: '+ Simulazio berria',
+  removeSimulation: 'Simulazioa ezabatu',
 };

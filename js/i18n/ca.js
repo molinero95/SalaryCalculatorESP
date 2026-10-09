@@ -276,5 +276,6 @@ export default {
   compareDesc: 'Tria fins a 3 escenaris per comparar-los amb la normativa vigent fent servir les teves dades.',
   compareEmpty: 'Selecciona almenys un escenari.',
   compareChartDesc: 'Diferència neta anual respecte a la normativa vigent, segons el salari brut.',
-  yourSimulation: 'La teva simulació',
+  newSimulation: '+ Nova simulació',
+  removeSimulation: 'Eliminar simulació',
 };

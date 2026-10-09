@@ -275,5 +275,6 @@ export default {
   compareDesc: 'Elige hasta 3 escenarios para compararlos con la normativa vigente usando tus datos.',
   compareEmpty: 'Selecciona al menos un escenario.',
   compareChartDesc: 'Diferencia neta anual frente a la normativa vigente, según el salario bruto.',
-  yourSimulation: 'Tu simulación',
+  newSimulation: '+ Nueva simulación',
+  removeSimulation: 'Eliminar simulación',
 };

@@ -117,3 +117,23 @@ test('choosing a region shows the estimated tax return result', async ({ page })
   await expect(page.locator('.result-current .metrics')).toContainText('Resultado estimado de la renta');
   await expect(page.locator('.result-current .metrics')).toContainText('+');
 });
+
+test('several simulations can be kept and compared at once', async ({ page }) => {
+  await page.locator('#add-simulation').click();
+  await expect(page.locator('.sim-tab')).toHaveCount(2);
+  await page.fill('#scenario-name', 'Rebaja');
+  await page.locator('#settings-simulation [data-shift]').fill('-2');
+  await page.locator('#settings-simulation [data-apply]').click();
+  await expect(page.locator('#difference')).toHaveClass(/positive/);
+
+  // The first tab is untouched
+  await page.locator('.sim-tab [data-simulation="0"]').click();
+  await expect(page.locator('#difference')).toHaveClass(/neutral/);
+
+  // Both tabs are available in the comparison
+  await expect(page.locator('#compare-options')).toContainText('Rebaja');
+
+  // Tabs survive a reload
+  await page.reload();
+  await expect(page.locator('.sim-tab')).toHaveCount(2);
+});

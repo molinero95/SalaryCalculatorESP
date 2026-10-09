@@ -275,5 +275,6 @@ export default {
   compareDesc: 'Pick up to 3 scenarios to compare with current rules using your details.',
   compareEmpty: 'Select at least one scenario.',
   compareChartDesc: 'Net annual difference vs current rules, by gross salary.',
-  yourSimulation: 'Your simulation',
+  newSimulation: '+ New simulation',
+  removeSimulation: 'Remove simulation',
 };

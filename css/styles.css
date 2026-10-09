@@ -833,6 +833,71 @@ main > *,
    Political simulator: proposals, context and comparison
    ========================================================================== */
 
+.sim-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--grid);
+}
+
+.sim-tab {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface-1);
+}
+
+.sim-tab button {
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.sim-tab [data-simulation] {
+  max-width: 14rem;
+  overflow: hidden;
+  padding: 0.35rem 0.85rem;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sim-tab.active {
+  border-color: var(--series-2);
+  background: var(--series-2);
+}
+
+.sim-tab.active [data-simulation],
+.sim-tab.active .tab-remove {
+  color: #fff;
+  font-weight: 600;
+}
+
+.tab-remove {
+  padding: 0.35rem 0.6rem 0.35rem 0;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}
+
+.sim-add {
+  padding: 0.35rem 0.85rem;
+  border: 1px dashed var(--border);
+  border-radius: 999px;
+  background: none;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.sim-add:hover {
+  border-color: var(--series-2);
+  color: var(--text-primary);
+}
+
 .proposal-info {
   margin: -0.25rem 0 1rem;
   padding: 0.75rem 1rem;

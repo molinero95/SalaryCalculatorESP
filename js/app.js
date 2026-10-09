@@ -17,6 +17,7 @@ const $ = (selector) => document.querySelector(selector);
 const CHART_RANGE = { from: 12000, to: 150000, step: 1000 };
 const CHART_TABLE_EVERY = 5;
 const MAX_COMPARED = 3;
+const MAX_SIMULATIONS = 5;
 const INFLATION_SINCE_BRACKETS = Math.round(cumulativeInflation(BRACKETS_LAST_UPDATED - 1));
 const SAVE_DELAY_MS = 300;
 const TOAST_MS = 2500;
@@ -91,6 +92,29 @@ function changesFrom(base, value) {
 
 const oneOf = (value, allowed) => (allowed.includes(value) ? value : allowed[0]);
 
+const toScenario = (override) => merge(clone(CURRENT_SCENARIO), override);
+
+/** Simulations from saved or imported data (also accepts the old single `simulation`). */
+function simulationList(source) {
+  const list = Array.isArray(source?.simulations)
+    ? source.simulations.filter(isPlainObject).slice(0, MAX_SIMULATIONS).map(toScenario)
+    : [];
+  return list.length ? list : [toScenario(isPlainObject(source?.simulation) ? source.simulation : {})];
+}
+
+/** `state.simulation` always points at the active tab (not saved: `simulations` is). */
+function defineActiveSimulation(target) {
+  target.active = Math.min(Math.max(0, target.active), target.simulations.length - 1);
+  Object.defineProperty(target, 'simulation', {
+    get: () => target.simulations[target.active],
+    set: (scenario) => {
+      target.simulations[target.active] = scenario;
+    },
+    enumerable: false,
+    configurable: true,
+  });
+}
+
 function initialState() {
   const defaults = {
     language: DEFAULT_LANGUAGE,
@@ -98,7 +122,7 @@ function initialState() {
     compare: ['vox2024', 'indexed', 'sumar2023'],
     input: clone(DEFAULT_INPUT),
     current: clone(CURRENT_SCENARIO),
-    simulation: clone(CURRENT_SCENARIO),
+    active: 0,
   };
 
   // A shared link (#s=…) is applied on top of the locally saved state, so the
@@ -106,7 +130,17 @@ function initialState() {
   const shared = location.hash.startsWith('#s=') ? storage.decode(location.hash.slice(3)) : null;
   if (shared) history.replaceState(null, '', location.pathname + location.search);
 
-  const state = merge(merge(defaults, storage.loadState() ?? {}), shared ?? {});
+  const saved = storage.loadState() ?? {};
+  const state = merge(merge(defaults, saved), shared ?? {});
+
+  // Simulations live in a list; a shared simulation opens as a new tab
+  state.simulations = simulationList(saved);
+  if (isPlainObject(shared?.simulation)) {
+    state.simulations = [...state.simulations.slice(0, MAX_SIMULATIONS - 1), toScenario(shared.simulation)];
+    state.active = state.simulations.length - 1;
+  }
+  defineActiveSimulation(state);
+
   state.chartMode = oneOf(state.chartMode, ['diff', 'rate']);
   state.input.period = oneOf(state.input.period, ['annual', 'perPayment']);
   state.input.contract = oneOf(state.input.contract, ['permanent', 'temporary']);
@@ -122,7 +156,9 @@ function initialState() {
 
 const state = initialState();
 
-const scenarioName = (kind) => state[kind].name || (kind === 'current' ? `${t('current')} · 2026` : t('simulation'));
+const simulationName = (index) => state.simulations[index].name || `${t('simulation')} ${index + 1}`;
+const scenarioName = (kind) =>
+  kind === 'current' ? state.current.name || `${t('current')} · 2026` : simulationName(state.active);
 const scenarioNames = () => ({ current: scenarioName('current'), simulation: scenarioName('simulation') });
 
 /** Records an anonymous GoatCounter event, if the counter has loaded. */
@@ -135,6 +171,12 @@ function persist() {
   clearTimeout(saveTimer);
   saveTimer = setTimeout(() => storage.saveState(state), SAVE_DELAY_MS);
 }
+
+// Flush pending changes when the page is closed or reloaded
+window.addEventListener('pagehide', () => {
+  clearTimeout(saveTimer);
+  storage.saveState(state);
+});
 
 // ---------------------------------------------------------------------------
 // Personal details form
@@ -247,7 +289,42 @@ window.addEventListener('resize', () => {
 // Settings and saved scenarios
 // ---------------------------------------------------------------------------
 
+function renderSimulationTabs() {
+  const tabs = state.simulations.map((_, i) => {
+    const active = i === state.active;
+    const remove =
+      state.simulations.length > 1
+        ? `<button type="button" class="tab-remove" data-remove-simulation="${i}" aria-label="${t('removeSimulation')}" title="${t('removeSimulation')}">✕</button>`
+        : '';
+    return `<div class="sim-tab ${active ? 'active' : ''}"><button type="button" role="tab" aria-selected="${active}" data-simulation="${i}">${escapeHtml(simulationName(i))}</button>${remove}</div>`;
+  });
+  const add =
+    state.simulations.length < MAX_SIMULATIONS
+      ? `<button type="button" class="sim-add" id="add-simulation">${t('newSimulation')}</button>`
+      : '';
+  $('#sim-tabs').innerHTML = tabs.join('') + add;
+}
+
+$('#sim-tabs').addEventListener('click', ({ target }) => {
+  const tab = target.closest('[data-simulation]');
+  const remove = target.closest('[data-remove-simulation]');
+  if (remove) {
+    state.simulations.splice(Number(remove.dataset.removeSimulation), 1);
+    state.active = Math.min(state.active, state.simulations.length - 1);
+  } else if (tab) {
+    state.active = Number(tab.dataset.simulation);
+  } else if (target.id === 'add-simulation') {
+    state.simulations.push({ ...clone(state.current), name: '', proposal: '' });
+    state.active = state.simulations.length - 1;
+    trackEvent('add-simulation');
+  } else {
+    return;
+  }
+  refreshScenarios();
+});
+
 function renderSettingsPanels() {
+  renderSimulationTabs();
   const nameInput = $('#scenario-name');
   nameInput.value = state.simulation.name;
   nameInput.placeholder = scenarioName('simulation');
@@ -305,6 +382,7 @@ function refreshScenarios() {
 
 $('#scenario-name').addEventListener('input', ({ target }) => {
   state.simulation.name = target.value.trim();
+  renderSimulationTabs();
   update();
 });
 
@@ -376,8 +454,8 @@ $('#print').addEventListener('click', () => {
 });
 
 $('#export').addEventListener('click', () => {
-  const { input, current, simulation } = state;
-  const blob = new Blob([JSON.stringify({ input, current, simulation }, null, 2)], { type: 'application/json' });
+  const { input, current, simulations } = state;
+  const blob = new Blob([JSON.stringify({ input, current, simulations }, null, 2)], { type: 'application/json' });
   const slug = scenarioName('simulation')
     .normalize('NFD')
     .replace(/[^\w]+/g, '-')
@@ -397,8 +475,13 @@ $('#import').addEventListener('change', async ({ target }) => {
   if (!file) return;
   try {
     const imported = JSON.parse(await file.text());
-    if (!isPlainObject(imported?.simulation)) throw new Error('Invalid scenario file');
-    Object.assign(state, merge(state, imported));
+    if (!isPlainObject(imported?.simulation) && !Array.isArray(imported?.simulations)) {
+      throw new Error('Invalid scenario file');
+    }
+    state.input = merge(state.input, imported.input ?? {});
+    state.current = toScenario(imported.current ?? {});
+    state.simulations = simulationList(imported);
+    state.active = 0;
     renderInput();
     refreshScenarios();
   } catch {
@@ -505,7 +588,7 @@ function comparableScenarios() {
     { name, scenario: merge(clone(CURRENT_SCENARIO), scenario) },
   ]);
   return Object.fromEntries([
-    ['simulation', { name: `${t('yourSimulation')}: ${scenarioName('simulation')}`, scenario: state.simulation }],
+    ...state.simulations.map((scenario, i) => [`sim:${i}`, { name: simulationName(i), scenario }]),
     ...Object.keys(PROPOSALS).map((id) => [
       id,
       { name: proposalName(id), scenario: proposalScenario(id, proposalName(id)) },
