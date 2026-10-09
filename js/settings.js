@@ -2,7 +2,7 @@
 
 import { BRACKET_PRESETS, clone } from './defaults.js';
 import { t } from './i18n/index.js';
-import { formatNumber, escapeHtml } from './format.js';
+import { formatEuros, escapeHtml } from './format.js';
 
 const EUR = '€';
 const PCT = '%';
@@ -143,7 +143,7 @@ function fieldsHtml(fields, scenario, reference) {
       <div class="field ${value !== reference[section][key] ? 'changed' : ''}">
         <label for="${id}">${t(`f_${key}`)}</label>
         <div class="input-unit">
-          <input id="${id}" type="number" step="any" inputmode="decimal" data-field="${section}.${key}" value="${value}" />
+          <input id="${id}" type="number" step="any" inputmode="decimal" data-field="${section}.${key}" value="${escapeHtml(value)}" />
           ${unitSuffix(unit)}
         </div>
       </div>`;
@@ -156,7 +156,7 @@ function bracketRowHtml(bracket, i, brackets) {
   const upTo =
     bracket.upTo === null
       ? `<span class="muted">${t('andAbove')}</span>`
-      : `<div class="input-unit"><input type="number" step="any" min="0" data-up-to="${i}" value="${bracket.upTo}" aria-label="${t('upTo')}" />${unitSuffix(EUR)}</div>`;
+      : `<div class="input-unit"><input type="number" step="any" min="0" data-up-to="${i}" value="${escapeHtml(bracket.upTo)}" aria-label="${t('upTo')}" />${unitSuffix(EUR)}</div>`;
   const remove =
     brackets.length > 1
       ? `<button type="button" class="icon-button" data-remove="${i}" title="${t('removeBracket')}" aria-label="${t('removeBracket')}">✕</button>`
@@ -164,9 +164,9 @@ function bracketRowHtml(bracket, i, brackets) {
 
   return `
     <tr>
-      <td class="num">${formatNumber(from, 2)} €</td>
+      <td class="num">${formatEuros(from)}</td>
       <td>${upTo}</td>
-      <td><div class="input-unit"><input type="number" step="any" data-rate="${i}" value="${bracket.rate}" aria-label="${t('rate')}" />${unitSuffix(PCT)}</div></td>
+      <td><div class="input-unit"><input type="number" step="any" data-rate="${i}" value="${escapeHtml(bracket.rate)}" aria-label="${t('rate')}" />${unitSuffix(PCT)}</div></td>
       <td class="actions">${remove}</td>
     </tr>`;
 }

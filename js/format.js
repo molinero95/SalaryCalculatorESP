@@ -4,7 +4,7 @@ const formatters = new Map();
 
 function formatter(options) {
   const key = getLocale() + JSON.stringify(options);
-  if (!formatters.has(key)) formatters.set(key, new Intl.NumberFormat(getLocale(), options));
+  if (!formatters.has(key)) formatters.set(key, new Intl.NumberFormat(getLocale(), { useGrouping: 'always', ...options }));
   return formatters.get(key);
 }
 
