@@ -1,6 +1,14 @@
 // English translations. `f_*` keys label the settings fields.
 
 export default {
+  residence: 'Tax residence',
+  residenceOtherCity: 'Other city / territory only',
+  residenceForal: 'Foral regime',
+  residenceCommon: 'Common regime',
+  residenceSources: 'Official sources',
+  residenceScope:
+    'Brackets depend on the tax territory, not the city. Not all regional deductions or unreviewed foral profiles are calculated. Stable full-year residence and the same administration for withholding and residence are assumed.',
+
   rowForalQuota: 'Foral quota before credits',
 
   rowForalCredits: 'Foral tax credits',
@@ -20,14 +28,8 @@ export default {
 
   locationBrackets: 'Annual residence brackets · 2026',
 
-  salaryExamples: 'Example salaries',
-
   cityPresetHelp:
-    'The city selects your tax residence. The amounts below are illustrative annual gross salaries, not local averages.',
-
-  cityNone: 'No preset',
-
-  cityPreset: 'City preset',
+    'Choose your city or directly choose your community or territory. Both options set the same tax residence; your salary is preserved.',
 
   f_childRateReduction: 'State rate reduction per child (percentage points)',
   appTitle: 'Net salary simulator',

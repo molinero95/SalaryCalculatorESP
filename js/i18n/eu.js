@@ -1,6 +1,14 @@
 // Basque translations. `f_*` keys label the settings fields.
 
 export default {
+  residence: 'Zerga-egoitza',
+  residenceOtherCity: 'Beste hiria / lurraldea soilik',
+  residenceForal: 'Foru-erregimena',
+  residenceCommon: 'Erregimen erkidea',
+  residenceSources: 'Iturri ofizialak',
+  residenceScope:
+    'Tarteak zerga-lurraldearen araberakoak dira, ez hiriaren araberakoak. Autonomia-kenkari guztiak eta balioztatu gabeko foru-profilak ez dira kalkulatzen. Urte osoko egoitza egonkorra eta atxikipenetarako eta egoitzarako administrazio bera suposatzen dira.',
+
   rowForalQuota: 'Foru-kuota kenkarien aurretik',
 
   rowForalCredits: 'Foru-murrizketak eta kenkariak',
@@ -20,14 +28,8 @@ export default {
 
   locationBrackets: 'Egoitzaren urteko tarteak · 2026',
 
-  salaryExamples: 'Soldata-adibideak',
-
   cityPresetHelp:
-    'Hiriak zerga-egoitza hautatzen du. Ondoko zenbatekoak urteko soldata gordinaren adibideak dira, ez tokiko batezbestekoak.',
-
-  cityNone: 'Txantiloirik gabe',
-
-  cityPreset: 'Hiriaren txantiloia',
+    'Hautatu hiria edo zuzenean erkidegoa edo lurraldea. Bi aukerek zerga-egoitza bera ezartzen dute; soldata mantentzen da.',
 
   f_childRateReduction: 'Estatuko tasaren murrizketa seme-alaba bakoitzeko (ehuneko puntuak)',
   appTitle: 'Soldata garbiaren simulagailua',

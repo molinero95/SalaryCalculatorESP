@@ -1,6 +1,14 @@
 // Spanish (Castilian) translations. `f_*` keys label the settings fields.
 
 export default {
+  residence: 'Residencia fiscal',
+  residenceOtherCity: 'Otra ciudad / solo territorio',
+  residenceForal: 'Régimen foral',
+  residenceCommon: 'Régimen común',
+  residenceSources: 'Fuentes oficiales',
+  residenceScope:
+    'Los tramos dependen del territorio fiscal, no de la ciudad. No se incluyen todas las deducciones autonómicas ni los perfiles forales sin validar. Se supone residencia estable durante todo el año y la misma administración para retenciones y residencia.',
+
   rowForalQuota: 'Cuota foral antes de deducciones',
 
   rowForalCredits: 'Minoraciones y deducciones forales',
@@ -20,14 +28,8 @@ export default {
 
   locationBrackets: 'Tramos anuales de la residencia · 2026',
 
-  salaryExamples: 'Salarios de ejemplo',
-
   cityPresetHelp:
-    'La ciudad selecciona tu residencia fiscal. Los importes siguientes son ejemplos de salario bruto anual, no medias locales.',
-
-  cityNone: 'Sin plantilla',
-
-  cityPreset: 'Plantilla de ciudad',
+    'Elige tu ciudad o directamente tu comunidad o territorio. Ambas opciones establecen la misma residencia fiscal; tu salario se conserva.',
 
   f_childRateReduction: 'Rebaja estatal por hijo (puntos porcentuales)',
   appTitle: 'Simulador de salario neto',

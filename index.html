@@ -105,18 +105,14 @@
             </select>
           </div>
 
-          <div class="field">
-            <label for="region"><span data-i18n="region"></span><span data-help="helpRegion"></span></label>
-            <select id="region" name="region"></select>
-          </div>
-
-          <div class="field">
-            <label for="city" data-i18n="cityPreset"></label>
-            <select id="city" name="city"></select>
+          <div class="field field-full">
+            <label for="residence"><span data-i18n="residence"></span><span data-help="helpRegion"></span></label>
+            <select id="residence" name="residence" aria-describedby="residence-help"></select>
+            <input type="hidden" id="region" name="region" />
+            <input type="hidden" id="city" name="city" />
           </div>
           <div class="field field-full">
-            <p class="help" data-i18n="cityPresetHelp"></p>
-            <div class="toolbar" id="salary-examples" role="group" data-i18n-aria="salaryExamples"></div>
+            <p class="help" id="residence-help" data-i18n="cityPresetHelp"></p>
             <details>
               <summary data-i18n="locationBrackets"></summary>
               <div class="table-scroll" id="location-brackets" tabindex="0"></div>

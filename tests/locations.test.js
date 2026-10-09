@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { CITIES, SALARY_EXAMPLES } from '../js/data/cities.js';
+import { CITIES } from '../js/data/cities.js';
 import { FORAL_TERRITORIES } from '../js/data/foral.js';
 import { REGIONAL_SCALES } from '../js/data/regions.js';
 import { DEFAULT_INPUT, CURRENT_SCENARIO, clone } from '../js/defaults.js';
@@ -38,7 +38,7 @@ test('all 17 communities have city presets and Basque territories remain distinc
 
 for (const city of CITIES) {
   test(`${city.name}: salary examples use the correct residence without nonfinite results`, () => {
-    for (const salary of SALARY_EXAMPLES) {
+    for (const salary of [20000, 30000, 45000, 60000, 90000]) {
       const input = inputFor(city.region, { city: city.id, salary });
       const normalized = normalizeInput(clone(input));
       assert.equal(normalized.city, city.id);

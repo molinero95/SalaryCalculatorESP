@@ -439,6 +439,3 @@ export const CITIES = [
     region: 'navarra',
   },
 ];
-
-// Illustrative salary levels, never local average salary claims.
-export const SALARY_EXAMPLES = [20000, 30000, 45000, 60000, 90000];
