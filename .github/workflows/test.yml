@@ -37,3 +37,27 @@ jobs:
           path: |
             playwright-report/
             test-results/
+
+  residence-visual:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install chromium
+      - name: Check residence layout and fields in every language
+        run: |
+          env -u CI npx playwright test e2e/visual.spec.js --grep 'section: details|dark mode|help tip shows|all fields visible'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: residence-macos-visual
+          path: |
+            playwright-report/
+            test-results/

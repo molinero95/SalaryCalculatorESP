@@ -18,7 +18,7 @@ export function resolveResidence(value) {
   return null;
 }
 
-/** Keep previously saved city/region pairs compatible with the single control. */
+/** Encode saved city/region pairs for compatible residence links and adapters. */
 export function residenceValue(input) {
   const city = CITIES.find(({ id, region }) => id === input.city && region === input.region);
   return city
