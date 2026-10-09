@@ -295,3 +295,11 @@ for (const [region, tax, rate] of [
     close(r.netAnnualAfterReturn, 28050 - tax);
   });
 }
+
+test('invalid direct foral descendant counts cannot index a missing withholding column', () => {
+  for (const children of [-1, 0.5, 21, NaN, Infinity])
+    assert.throws(
+      () => computePayroll(input('bizkaia', { children, foralChildrenConfirmed: true }), CURRENT_SCENARIO),
+      /Unsupported foral/,
+    );
+});

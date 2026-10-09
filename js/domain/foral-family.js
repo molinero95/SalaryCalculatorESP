@@ -5,6 +5,7 @@ export function unsupportedForalFamily(input) {
   const under6 = input.childrenUnder6 ?? 0;
   const age6to15 = input.children6to15 ?? 0;
   return (
+    [children, under3, under6, age6to15].some((value) => !Number.isInteger(value) || value < 0 || value > 20) ||
     under3 > children ||
     (input.region !== 'navarra' &&
       (under6 > children || age6to15 > children || under3 > under6 || under6 + age6to15 > children)) ||
