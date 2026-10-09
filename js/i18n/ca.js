@@ -18,7 +18,10 @@ export default {
     'Model foral limitat: feina indefinida, menys de 65 anys, situació familiar 3; inclou fills elegibles i discapacitat pròpia acreditada. Exclou ascendents, dependència, discapacitat de familiars, adopcions, canvis familiars durant l’any, retribució flexible i pensions. Feina i residència han de ser al mateix territori. Les propostes d’IRPF comú no canvien les regles forals.',
 
   residence: 'Residència fiscal',
-  residenceOtherCity: 'Una altra ciutat / només territori',
+  residenceOtherCity: 'Una altra ciutat / sense especificar',
+  residenceCommunity: 'Comunitat autònoma de residència fiscal',
+  residenceTerritory: 'Territori històric',
+  residenceCity: 'Ciutat (opcional)',
   residenceForal: 'Règim foral',
   residenceCommon: 'Règim comú',
   residenceSources: 'Fonts oficials',
@@ -39,7 +42,7 @@ export default {
   locationBrackets: 'Trams anuals de la residència · 2026',
 
   cityPresetHelp:
-    'Tria la ciutat o directament la comunitat o territori. Les dues opcions estableixen la mateixa residència fiscal; el salari es conserva.',
+    'Tria la comunitat autònoma i, al País Basc, el territori històric. La ciutat és opcional i no canvia els trams del territori. Es conserva el teu salari.',
 
   f_childRateReduction: 'Rebaixa estatal per fill (punts percentuals)',
   appTitle: 'Simulador de salari net',

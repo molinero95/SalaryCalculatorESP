@@ -1,7 +1,8 @@
 // Form adapter: translates browser controls into annual payroll input values.
 import { grossAnnualOf } from '../calc.js';
 import { MONTHS, AMOUNT_FIELDS, PERIOD_OF_AMOUNT, NUMERIC_INPUTS } from '../domain/payroll-input.js';
-import { resolveResidence, residenceValue } from '../domain/residence.js';
+import { selectResidence } from '../domain/residence.js';
+import { renderResidenceOptions } from './residence.js';
 
 export function bindPayrollForm(form, state, onChange) {
   /** Divisor to show a stored annual amount in the period chosen in the form. */
@@ -15,14 +16,14 @@ export function bindPayrollForm(form, state, onChange) {
       else if (name in PERIOD_OF_AMOUNT) control.value = String(Math.round((value / amountDivisor(name)) * 100) / 100);
       else control.value = String(value);
     }
-    form.elements.residence.value = residenceValue(state.input);
+    renderResidenceOptions(form, state.input);
     form.elements.salary.step = state.input.period === 'perPayment' ? 10 : 100;
   }
 
   form.addEventListener('input', ({ target }) => {
     const { name, type, value, checked } = target;
-    if (name === 'residence') {
-      const residence = resolveResidence(value);
+    if (['residence', 'residenceTerritory', 'residenceCity'].includes(name)) {
+      const residence = selectResidence(state.input, name, value);
       if (!residence) return;
       if (residence.region !== state.input.region) state.input.foralChildrenConfirmed = false;
       Object.assign(state.input, residence);

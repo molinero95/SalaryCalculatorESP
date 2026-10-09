@@ -1,3 +1,4 @@
+import { chooseResidence } from './residence-helper.js';
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
@@ -135,7 +136,7 @@ test('fractional persisted active simulation restores a valid selection', async 
 });
 
 test('breakdown exposes separate annual state and regional quotas', async ({ page }) => {
-  await page.selectOption('#residence', 'region:madrid');
+  await chooseResidence(page, 'region:madrid');
   await expect(page.locator('#breakdown')).toContainText('Cuota íntegra estatal');
   await expect(page.locator('#breakdown')).toContainText('Cuota íntegra autonómica');
   await expect(page.locator('#breakdown')).toContainText('Base liquidable anual estimada');
@@ -152,7 +153,7 @@ test('Vox separates payroll withholding and annual regional tax across reloads',
   await expect(page.locator('#proposal-info')).toContainText('Simulación parcial');
   await expect(page.locator('#settings-simulation [data-withholding-brackets] [data-rate="0"]')).toHaveValue('15');
   const payroll = await page.locator('.result-simulation .headline strong').textContent();
-  await page.selectOption('#residence', 'region:madrid');
+  await chooseResidence(page, 'region:madrid');
   await expect(page.locator('.result-simulation .headline strong')).toHaveText(payroll);
   await page.reload();
   await expect(page.locator('#settings-simulation [data-withholding-brackets] [data-rate="0"]')).toHaveValue('15');
@@ -308,16 +309,18 @@ test('anonymous events survive a delayed GoatCounter script load', async ({ page
   await expect.poll(() => page.evaluate(() => window.analyticsEvents?.length)).toBe(2);
 });
 
-test('one residence selector preserves salary and displays territorial annual brackets and sources', async ({
+test('cascading residence selectors preserve salary and display territorial annual brackets and sources', async ({
   page,
 }) => {
-  await expect(page.locator('#residence optgroup')).toHaveCount(19);
+  await expect(page.locator('#residence option')).toHaveCount(18);
+  await expect(page.locator('#residence-territory')).toBeHidden();
+  await expect(page.locator('#residence-city')).toBeVisible();
   await expect(page.locator('#region')).toBeHidden();
   await expect(page.locator('#city')).toBeHidden();
   await expect(page.locator('label[for="residence"]')).toHaveCount(1);
-  await expect(page.locator('label[for="residence"]')).toContainText('Residencia fiscal');
+  await expect(page.locator('label[for="residence"]')).toContainText('Comunidad autónoma de residencia fiscal');
   await page.fill('#salary', '73000');
-  await page.selectOption('#residence', 'city:bilbao');
+  await chooseResidence(page, 'city:bilbao');
   await expect(page.locator('#region')).toHaveValue('bizkaia');
   await expect(page.locator('#salary')).toHaveValue('73000');
   await expect(page.locator('#location-brackets')).toContainText('Bilbao → País Vasco · Bizkaia');
@@ -328,20 +331,20 @@ test('one residence selector preserves salary and displays territorial annual br
   await expect(page.locator('#location-brackets')).toContainText('18.080');
   await expect(page.locator('#location-brackets')).toContainText('49');
   await expect(page.locator('#fiscal-scope')).toBeVisible();
-  await page.selectOption('#residence', 'city:pamplona-iruna');
+  await chooseResidence(page, 'city:pamplona-iruna');
   await expect(page.locator('#region')).toHaveValue('navarra');
   await expect(page.locator('#location-brackets')).toContainText('4.458');
-  await page.selectOption('#residence', 'city:madrid');
+  await chooseResidence(page, 'city:madrid');
   await expect(page.locator('#region')).toHaveValue('madrid');
   await expect(page.locator('#fiscal-scope')).toBeHidden();
-  await page.selectOption('#residence', 'region:catalonia');
+  await chooseResidence(page, 'region:catalonia');
   await expect(page.locator('#city')).toHaveValue('');
   await expect(page.locator('[data-salary]')).toHaveCount(0);
   await expect(page.locator('#region')).toHaveValue('catalonia');
 });
 
 test('Bilbao preset and reviewed payroll survive a complete offline reload', async ({ page, context }) => {
-  await page.selectOption('#residence', 'city:bilbao');
+  await chooseResidence(page, 'city:bilbao');
   await page.evaluate(async () => {
     await navigator.serviceWorker.ready;
     if (!navigator.serviceWorker.controller)
@@ -354,10 +357,12 @@ test('Bilbao preset and reviewed payroll survive a complete offline reload', asy
   try {
     await page.reload();
     await expect(page.locator('#city')).toHaveValue('bilbao');
-    await expect(page.locator('#residence')).toHaveValue('city:bilbao');
+    await expect(page.locator('#residence')).toHaveValue('region:basque');
+    await expect(page.locator('#residence-territory')).toHaveValue('region:bizkaia');
+    await expect(page.locator('#residence-city')).toHaveValue('bilbao');
     await expect(page.locator('#region')).toHaveValue('bizkaia');
     await expect(page.locator('.result-current .headline strong')).toHaveText('1.658,93 €');
-    await page.selectOption('#residence', 'city:pamplona-iruna');
+    await chooseResidence(page, 'city:pamplona-iruna');
     await expect(page.locator('#region')).toHaveValue('navarra');
     await expect(page.locator('.result-current .headline strong')).toHaveText('1.667,50 €');
   } finally {
@@ -368,7 +373,7 @@ test('Bilbao preset and reviewed payroll survive a complete offline reload', asy
 test('unreviewed foral profiles hide every fiscal output and recover when corrected', async ({ page }) => {
   const errors = [];
   page.on('pageerror', (error) => errors.push(error.message));
-  await page.selectOption('#residence', 'city:bilbao');
+  await chooseResidence(page, 'city:bilbao');
   await page.fill('#children', '1');
   await expect(page.locator('#fiscal-scope')).toContainText('Se ocultan los resultados');
   for (const selector of ['#results', '#chart', '#compare-table', '#breakdown', '#sticky-summary'])
@@ -380,7 +385,7 @@ test('unreviewed foral profiles hide every fiscal output and recover when correc
   await expect(page.locator('#results')).toBeVisible();
   await expect(page.locator('#fiscal-scope')).toContainText('Modelo foral limitado');
   await page.fill('#children', '1');
-  await page.selectOption('#residence', 'city:madrid');
+  await chooseResidence(page, 'city:madrid');
   await expect(page.locator('#results')).toBeVisible();
   await expect(page.locator('#fiscal-scope')).toBeHidden();
 });
@@ -389,7 +394,7 @@ test('single residence control remains readable in every language on narrow scre
   await page.setViewportSize({ width: 320, height: 740 });
   for (const language of ['es', 'ca', 'eu', 'gl', 'en']) {
     await page.selectOption('#language', language);
-    await page.selectOption('#residence', 'city:bilbao');
+    await chooseResidence(page, 'city:bilbao');
     await expect(page.locator('#residence')).toBeVisible();
     await expect(page.locator('[data-salary]')).toHaveCount(0);
     const overflowing = await page.evaluate(
@@ -406,7 +411,7 @@ test('single residence control remains readable in every language on narrow scre
 test('reviewed foral children require confirmation, preserve shared withholding and save age groups', async ({
   page,
 }) => {
-  await page.selectOption('#residence', 'city:bilbao');
+  await chooseResidence(page, 'city:bilbao');
   await page.fill('#children', '1');
   await page.fill('#childrenUnder6', '1');
   await expect(page.locator('#results')).toBeHidden();
@@ -424,14 +429,14 @@ test('reviewed foral children require confirmation, preserve shared withholding 
   await expect(page.locator('#foralChildrenConfirmed')).toBeChecked();
   await expect(page.locator('#childrenUnder6')).toHaveValue('1');
   await expect(page.locator('#results')).toBeVisible();
-  await page.selectOption('#residence', 'city:pamplona-iruna');
+  await chooseResidence(page, 'city:pamplona-iruna');
   await expect(page.locator('#foralChildrenConfirmed')).not.toBeChecked();
   await expect(page.locator('#results')).toBeHidden();
   await page.check('#foralChildrenConfirmed');
   await expect(page.locator('#foral-under6-field')).toBeHidden();
   await expect(page.locator('label[for="children"]')).toContainText('menores de 30');
   await expect(page.locator('#results')).toBeVisible();
-  await page.selectOption('#residence', 'region:alava');
+  await chooseResidence(page, 'region:alava');
   await page.check('#foralChildrenConfirmed');
   await expect(page.locator('#foral-age6to15-field')).toBeVisible();
   await page.fill('#children6to15', '1');
@@ -441,7 +446,7 @@ test('reviewed foral children require confirmation, preserve shared withholding 
 });
 
 test('reviewed foral disability and mobility recover output without leaking into common regime', async ({ page }) => {
-  await page.selectOption('#residence', 'city:bilbao');
+  await chooseResidence(page, 'city:bilbao');
   await page.selectOption('#disability', '33');
   await expect(page.locator('#results')).toBeVisible();
   await expect(page.locator('#foral-mobility-field')).toBeVisible();
@@ -449,10 +454,32 @@ test('reviewed foral disability and mobility recover output without leaking into
   await expect(page.locator('#results')).toBeVisible();
   await page.selectOption('#disability', '65');
   await expect(page.locator('#foral-mobility-field')).toBeHidden();
-  await page.selectOption('#residence', 'city:madrid');
+  await chooseResidence(page, 'city:madrid');
   await expect(page.locator('#foral-children-field')).toBeHidden();
   await expect(page.locator('#foral-under6-field')).toBeHidden();
   await expect(page.locator('#foral-mobility-field')).toBeHidden();
   await expect(page.locator('label[for="children"]')).toContainText('25');
   await expect(page.locator('#results')).toBeVisible();
+});
+
+test('community and territory filter cities and restore saved selections', async ({ page }) => {
+  await chooseResidence(page, 'city:bilbao');
+  await expect(page.locator('#residence-territory')).toBeVisible();
+  await expect(page.locator('#residence-city option[value="madrid"]')).toHaveCount(0);
+  await page.selectOption('#residence-territory', 'region:gipuzkoa');
+  await expect(page.locator('#city')).toHaveValue('');
+  await expect(page.locator('#residence-city option[value="bilbao"]')).toHaveCount(0);
+  await expect(page.locator('#residence-city option[value="donostia-san-sebastian"]')).toHaveCount(1);
+  await chooseResidence(page, 'city:bilbao');
+  await page.reload();
+  await expect(page.locator('#residence')).toHaveValue('region:basque');
+  await expect(page.locator('#residence-territory')).toHaveValue('region:bizkaia');
+  await expect(page.locator('#residence-city')).toHaveValue('bilbao');
+  await page.selectOption('#residence', 'region:navarra');
+  await expect(page.locator('#residence-territory')).toBeHidden();
+  await expect(page.locator('#residence-territory')).toBeDisabled();
+  await expect(page.locator('#city')).toHaveValue('');
+  await expect(page.locator('#residence-city option[value="bilbao"]')).toHaveCount(0);
+  await page.selectOption('#residence', 'region:general');
+  await expect(page.locator('#residence-city')).toBeDisabled();
 });

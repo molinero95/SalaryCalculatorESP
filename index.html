@@ -106,10 +106,20 @@
           </div>
 
           <div class="field field-full">
-            <label for="residence"><span data-i18n="residence"></span><span data-help="helpRegion"></span></label>
+            <label for="residence"
+              ><span data-i18n="residenceCommunity"></span><span data-help="helpRegion"></span
+            ></label>
             <select id="residence" name="residence" aria-describedby="residence-help"></select>
             <input type="hidden" id="region" name="region" />
             <input type="hidden" id="city" name="city" />
+          </div>
+          <div class="field" hidden>
+            <label for="residence-territory" data-i18n="residenceTerritory"></label>
+            <select id="residence-territory" name="residenceTerritory" aria-describedby="residence-help"></select>
+          </div>
+          <div class="field">
+            <label for="residence-city" data-i18n="residenceCity"></label>
+            <select id="residence-city" name="residenceCity" aria-describedby="residence-help"></select>
           </div>
           <div class="field field-full">
             <p class="help" id="residence-help" data-i18n="cityPresetHelp"></p>
