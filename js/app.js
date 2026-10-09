@@ -318,7 +318,7 @@ function renderSimulationTabs() {
       state.simulations.length > 1
         ? `<button type="button" class="tab-remove" data-remove-simulation="${i}" aria-label="${t('removeSimulation')}" title="${t('removeSimulation')}">✕</button>`
         : '';
-    return `<div class="sim-tab ${active ? 'active' : ''}"><button type="button" role="tab" aria-selected="${active}" data-simulation="${i}">${escapeHtml(simulationName(i))}</button>${remove}</div>`;
+    return `<div class="sim-tab ${active ? 'active' : ''}"><button type="button" aria-pressed="${active}" data-simulation="${i}">${escapeHtml(simulationName(i))}</button>${remove}</div>`;
   });
   const add =
     state.simulations.length < MAX_SIMULATIONS
@@ -326,6 +326,27 @@ function renderSimulationTabs() {
       : '';
   $('#sim-tabs').innerHTML = tabs.join('') + add;
 }
+
+function renderResultTabs() {
+  const tabs = state.simulations
+    .map(
+      (_, i) =>
+        `<button type="button" class="result-sim-tab ${i === state.active ? 'active' : ''}" aria-pressed="${i === state.active}" data-result-simulation="${i}">${escapeHtml(simulationName(i))}</button>`,
+    )
+    .join('');
+  $('.result-simulation header').insertAdjacentHTML(
+    'afterend',
+    `<div class="result-sim-tabs" role="group" aria-label="${escapeHtml(t('compareTitle'))}">${tabs}</div>`,
+  );
+}
+
+$('#results').addEventListener('click', ({ target }) => {
+  const tab = target.closest('[data-result-simulation]');
+  if (!tab) return;
+  state.active = Number(tab.dataset.resultSimulation);
+  refreshScenarios();
+  $(`[data-result-simulation="${state.active}"]`).focus();
+});
 
 $('#sim-tabs').addEventListener('click', ({ target }) => {
   const tab = target.closest('[data-simulation]');
@@ -722,6 +743,7 @@ function update() {
   };
   lastResults = results;
   renderResults({ cards: $('#results'), summary: $('#difference'), sticky: $('#sticky-value') }, results);
+  renderResultTabs();
   renderBreakdown($('#breakdown'), results);
   renderContext(results.current);
   renderProposalInfo();

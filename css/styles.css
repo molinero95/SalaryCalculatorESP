@@ -10,11 +10,11 @@
   --border: #dcdbd4;
   --text-primary: #0b0b0b;
   --text-secondary: #52514e;
-  --text-muted: #7a7974;
-  --accent: #2a78d6;
+  --text-muted: #66655f;
+  --accent: #2166b9;
   --accent-contrast: #ffffff;
-  --series-1: #2a78d6;
-  --series-2: #eb6834;
+  --series-1: #2166b9;
+  --series-2: #b84b20;
   --series-3: #1baf7a;
   --positive: #0a7a3f;
   --positive-bg: #e3f4ea;
@@ -42,7 +42,7 @@
     --text-muted: #8f8e86;
     --accent: #3987e5;
     --series-1: #3987e5;
-    --series-2: #d95926;
+    --series-2: #b84b20;
     --series-3: #199e70;
     --positive: #4cc38a;
     --positive-bg: #12301f;
@@ -1604,4 +1604,30 @@ main > *,
 }
 .swatch.series-6 {
   background: #bd5486;
+}
+
+.result-sim-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.75rem 0;
+}
+.result-sim-tab {
+  padding: 0.45rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-small);
+  background: var(--surface-1);
+  color: var(--text-primary);
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+.result-sim-tab.active {
+  background: var(--series-2);
+  color: white;
+  border-color: var(--series-2);
+}
+.table-scroll:focus-visible,
+.result-sim-tab:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }

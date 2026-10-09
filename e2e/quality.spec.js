@@ -83,3 +83,18 @@ test('salary input supports keyboard operation and visibly updates', async ({ pa
   await salary.press('Tab');
   await expect(page.locator('.result-current .headline strong')).toHaveText('2.293,61 €');
 });
+
+test('result-card simulation tabs stay synchronized with the editor', async ({ page }) => {
+  await page.locator('#add-simulation').click();
+  await page.fill('#scenario-name', 'Lower tax');
+  await page.locator('#settings-simulation [data-shift]').fill('-2');
+  await page.locator('#settings-simulation [data-apply]').click();
+  await expect(page.locator('.result-sim-tab')).toHaveCount(2);
+  await page.locator('[data-result-simulation="0"]').click();
+  await expect(page.locator('#difference')).toHaveClass(/neutral/);
+  await expect(page.locator('#sim-tabs [data-simulation="0"]')).toHaveAttribute('aria-pressed', 'true');
+  await page.locator('[data-result-simulation="1"]').click();
+  await expect(page.locator('#difference')).toHaveClass(/positive/);
+  await expect(page.locator('.result-simulation h3')).toHaveText('Lower tax');
+  await expect(page.locator('#chart .line')).toHaveCount(2);
+});
