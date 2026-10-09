@@ -246,7 +246,7 @@ export default {
   shareNative: 'Compartir…',
   shareNote: 'El enlace incluye la propuesta, no tus datos personales: cada persona la verá con su propio sueldo.',
   region: 'Comunidad autónoma',
-  regionGeneral: 'Escala general (sin especificar)',
+  regionGeneral: 'No indicada',
   helpRegion:
     'La retención en nómina no depende de tu comunidad, pero la cuota final de la renta sí. País Vasco y Navarra no están incluidas.',
   rowAnnualTax: 'Cuota anual estimada (renta)',
@@ -255,7 +255,7 @@ export default {
   loadProposal: 'Cargar propuesta de partido',
   proposalSource: 'Fuente',
   proposalVoxNote:
-    'Solo cambia el tramo estatal (15 % hasta 70.000 € y 25 % por encima) y sube el mínimo personal a 22.000 €. No incluye la rebaja de 4 puntos por hijo ni los cheques por nacimiento.',
+    'Solo cambia la mitad estatal: 15 % hasta 70.000 € y 25 % por encima; la autonómica se mantiene. Por eso la escala conjunta sube en los primeros tramos (15 % + 9,5 % = 24,5 %), compensado por un mínimo personal de 22.000 €. No incluye la rebaja de 4 puntos por hijo ni los cheques por nacimiento.',
   proposalSumarNote:
     'Sube el tipo marginal máximo al 52 % por encima de 300.000 €. El programa no detalla los tipos entre 120.000 y 300.000 €, que se mantienen.',
   proposalPsoeNote: 'Propone aumentar el mínimo por descendientes y personas dependientes, sin cifras concretas.',

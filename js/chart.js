@@ -162,10 +162,12 @@ function addHoverLayer({ container, root, xs, series, width, plotWidth, plotHeig
         )
         .join('');
 
-    const left = (x / width) * box.width;
-    tooltip.style.left = `${left}px`;
-    tooltip.classList.toggle('flip', left > box.width * 0.6);
+    // Place the tooltip right of the crosshair, or left of it when it doesn't fit
     tooltip.hidden = false;
+    const left = (x / width) * box.width;
+    const gap = 12;
+    const fitsRight = left + gap + tooltip.offsetWidth <= box.width;
+    tooltip.style.left = `${fitsRight ? left + gap : Math.max(0, left - gap - tooltip.offsetWidth)}px`;
   };
 
   const hide = () => {

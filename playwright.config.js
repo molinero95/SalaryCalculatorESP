@@ -4,6 +4,9 @@ export default defineConfig({
   testDir: 'e2e',
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
+  // Screenshot baselines depend on the OS fonts, so visual tests only run locally
+  grepInvert: process.env.CI ? /@visual/ : undefined,
+  expect: { toHaveScreenshot: { maxDiffPixelRatio: 0.01 } },
   retries: process.env.CI ? 1 : 0,
   use: {
     baseURL: 'http://localhost:4173',

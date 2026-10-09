@@ -247,7 +247,7 @@ export default {
   shareNative: 'Compartir…',
   shareNote: "L'enllaç inclou la proposta, no les teves dades personals: cadascú la veurà amb el seu propi sou.",
   region: 'Comunitat autònoma',
-  regionGeneral: 'Escala general (sense especificar)',
+  regionGeneral: 'No indicada',
   helpRegion:
     'La retenció en nòmina no depèn de la teva comunitat, però la quota final de la renda sí. El País Basc i Navarra no hi són.',
   rowAnnualTax: 'Quota anual estimada (renda)',
@@ -256,7 +256,7 @@ export default {
   loadProposal: 'Carregar proposta de partit',
   proposalSource: 'Font',
   proposalVoxNote:
-    'Només canvia el tram estatal (15 % fins a 70.000 € i 25 % per sobre) i apuja el mínim personal a 22.000 €. No inclou la rebaixa de 4 punts per fill ni els xecs per naixement.',
+    "Només canvia la meitat estatal: 15 % fins a 70.000 € i 25 % per sobre; l'autonòmica es manté. Per això l'escala conjunta puja en els primers trams (15 % + 9,5 % = 24,5 %), compensat per un mínim personal de 22.000 €. No inclou la rebaixa de 4 punts per fill ni els xecs per naixement.",
   proposalSumarNote:
     'Apuja el tipus marginal màxim al 52 % per sobre de 300.000 €. El programa no detalla els tipus entre 120.000 i 300.000 €, que es mantenen.',
   proposalPsoeNote: 'Proposa augmentar el mínim per descendents i persones dependents, sense xifres concretes.',

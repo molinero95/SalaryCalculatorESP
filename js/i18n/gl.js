@@ -242,7 +242,7 @@ export default {
   shareNative: 'Compartir…',
   shareNote: 'A ligazón inclúe a proposta, non os teus datos persoais: cada persoa verá coa súa propia nómina.',
   region: 'Comunidade autónoma',
-  regionGeneral: 'Escala xeral (sen especificar)',
+  regionGeneral: 'Non indicada',
   helpRegion:
     'A retención na nómina non depende da túa comunidade, pero a cota final da renda si. O País Vasco e Navarra non están incluídos.',
   rowAnnualTax: 'Cota anual estimada (renda)',
@@ -251,7 +251,7 @@ export default {
   loadProposal: 'Cargar proposta de partido',
   proposalSource: 'Fonte',
   proposalVoxNote:
-    'Só cambia o tramo estatal (15 % ata 70.000 € e 25 % por riba) e sobe o mínimo persoal a 22.000 €. Non inclúe a rebaixa de 4 puntos por fillo nin os cheques por nacemento.',
+    'Só cambia a metade estatal: 15 % ata 70.000 € e 25 % por riba; a autonómica mantense. Por iso a escala conxunta sobe nos primeiros tramos (15 % + 9,5 % = 24,5 %), compensado por un mínimo persoal de 22.000 €. Non inclúe a rebaixa de 4 puntos por fillo nin os cheques por nacemento.',
   proposalSumarNote:
     'Sobe o tipo marxinal máximo ao 52 % por riba de 300.000 €. O programa non detalla os tipos entre 120.000 e 300.000 €, que se manteñen.',
   proposalPsoeNote: 'Propón aumentar o mínimo por descendentes e persoas dependentes, sen cifras concretas.',

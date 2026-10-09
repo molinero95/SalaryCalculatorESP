@@ -247,7 +247,7 @@ export default {
   shareNative: 'Partekatu…',
   shareNote: 'Estekak proposamena dakar, ez zure datu pertsonalak: bakoitzak bere soldatarekin ikusiko du.',
   region: 'Autonomia-erkidegoa',
-  regionGeneral: 'Eskala orokorra (zehaztu gabe)',
+  regionGeneral: 'Zehaztu gabe',
   helpRegion:
     'Nominako atxikipena ez dago zure erkidegoaren menpe, baina errentaren azken kuota bai. Euskadi eta Nafarroa ez daude barne.',
   rowAnnualTax: 'Urteko kuota (errenta, zenbatespena)',
@@ -256,7 +256,7 @@ export default {
   loadProposal: 'Alderdi baten proposamena kargatu',
   proposalSource: 'Iturria',
   proposalVoxNote:
-    'Estatuko tartea bakarrik aldatzen du (% 15 70.000 €-raino eta % 25 hortik gora) eta gutxieneko pertsonala 22.000 €-ra igotzen du. Ez ditu barne hartzen seme-alaba bakoitzeko 4 puntuko jaitsiera ezta jaiotza-txekeak ere.',
+    'Estatuko erdia bakarrik aldatzen du: % 15 70.000 €-raino eta % 25 hortik gora; autonomikoa bere horretan geratzen da. Horregatik eskala bateratua igo egiten da lehen tarteetan (% 15 + % 9,5 = % 24,5), 22.000 €-ko gutxieneko pertsonalarekin konpentsatuta. Ez ditu barne hartzen seme-alaba bakoitzeko 4 puntuko jaitsiera ezta jaiotza-txekeak ere.',
   proposalSumarNote:
     'Gehieneko tasa marjinala % 52ra igotzen du 300.000 €-tik gora. Programak ez ditu 120.000 eta 300.000 € arteko tasak zehazten, eta bere horretan uzten dira.',
   proposalPsoeNote: 'Ondorengoengatiko eta mendekoengatiko gutxienekoa igotzea proposatzen du, zifra zehatzik gabe.',

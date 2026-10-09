@@ -245,7 +245,7 @@ export default {
   shareNative: 'Share…',
   shareNote: 'The link contains the proposal, not your personal details: everyone sees it with their own salary.',
   region: 'Region',
-  regionGeneral: 'General scale (not specified)',
+  regionGeneral: 'Not specified',
   helpRegion:
     'Payroll withholding does not depend on your region, but the final tax in the annual return does. The Basque Country and Navarre are not covered.',
   rowAnnualTax: 'Estimated annual tax (return)',
@@ -254,7 +254,7 @@ export default {
   loadProposal: 'Load a party proposal',
   proposalSource: 'Source',
   proposalVoxNote:
-    'Only changes the state half (15 % up to €70,000 and 25 % above) and raises the personal allowance to €22,000. Excludes the 4-point cut per child and birth payments.',
+    'Only changes the state half: 15 % up to €70,000 and 25 % above; the regional half stays. That is why the combined scale rises in the first brackets (15 % + 9.5 % = 24.5 %), offset by a €22,000 personal allowance. Excludes the 4-point cut per child and birth payments.',
   proposalSumarNote:
     'Raises the top marginal rate to 52 % above €300,000. The programme gives no rates between €120,000 and €300,000, which are kept.',
   proposalPsoeNote: 'Proposes raising the child and dependant allowances, without specific figures.',

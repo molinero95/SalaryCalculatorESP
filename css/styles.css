@@ -764,7 +764,6 @@ main > *,
   position: absolute;
   top: 8px;
   min-width: 180px;
-  margin-left: 12px;
   padding: 0.55rem 0.75rem;
   background: var(--surface-1);
   border: 1px solid var(--border);
@@ -772,10 +771,6 @@ main > *,
   box-shadow: 0 4px 16px rgb(0 0 0 / 0.12);
   font-size: 0.85rem;
   pointer-events: none;
-}
-
-.tooltip.flip {
-  transform: translateX(calc(-100% - 24px));
 }
 
 .tooltip-title {
