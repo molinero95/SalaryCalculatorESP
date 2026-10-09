@@ -7,7 +7,7 @@ import { renderChart, renderDataTable } from './chart.js';
 import { renderResults, renderBreakdown } from './results.js';
 import * as storage from './storage.js';
 import { REGIONAL_SCALES } from './data/regions.js';
-import { PROPOSALS, UNQUANTIFIED_PROPOSALS } from './data/proposals.js';
+import { PROPOSALS, UNMODELLED_PROPOSALS } from './data/proposals.js';
 import { salaryPercentile } from './data/salaries.js';
 import { cumulativeInflation, BRACKETS_LAST_UPDATED } from './data/cpi.js';
 import { proposalScenario, indexedScenario } from './political.js';
@@ -112,7 +112,7 @@ function simulationList(source) {
 
 /** `state.simulation` always points at the active tab (not saved: `simulations` is). */
 function defineActiveSimulation(target) {
-  target.active = Math.min(Math.max(0, target.active), target.simulations.length - 1);
+  target.active = Math.min(Math.max(0, Math.floor(target.active)), target.simulations.length - 1);
   Object.defineProperty(target, 'simulation', {
     get: () => target.simulations[target.active],
     set: (scenario) => {
@@ -571,7 +571,7 @@ function renderProposalControls() {
     Object.keys(PROPOSALS)
       .map((id) => `<option value="${id}">${escapeHtml(proposalName(id))}</option>`)
       .join('');
-  $('#other-proposals').innerHTML = UNQUANTIFIED_PROPOSALS.map(
+  $('#other-proposals').innerHTML = UNMODELLED_PROPOSALS.map(
     (p) =>
       `<li><strong>${p.party}</strong>: ${t(p.note)} <span class="muted">${t('proposalSource')}: ${sourceLink(p)}</span></li>`,
   ).join('');

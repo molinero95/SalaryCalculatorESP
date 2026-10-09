@@ -28,8 +28,8 @@ Calculadora de nómina para España y simulador de propuestas fiscales. Calcula 
 1. **Seguridad Social**: base de cotización = bruto anual / 12, acotada entre la base mínima y la máxima. Por encima de la base máxima se aplica la cotización de solidaridad por tramos.
 2. **Rendimiento neto** = bruto − cotizaciones.
 3. **Base de retención** = rendimiento neto − otros gastos deducibles (2.000 €, más los de discapacidad) − reducción por rendimientos del trabajo (art. 20 LIRPF).
-4. **Cuota** = escala(base) − escala(mínimo personal y familiar) , con el límite del 43 % sobre el exceso del mínimo exento de retención.
-5. **Tipo de retención** = cuota / bruto, redondeado a dos decimales (mínimo 2 % en contratos temporales).
+4. **Cuota** = escala(base) − escala(mínimo personal y familiar) , con el límite del 43 % sobre el exceso del mínimo exento de retención, solo hasta 35.200 € brutos.
+5. **Tipo de retención** = cuota / bruto, truncado a dos decimales (mínimo 2 % en contratos temporales).
 6. Con **14 pagas**, la Seguridad Social se reparte en 12 meses y las pagas extra solo soportan IRPF.
 7. La **deducción SMI** no se aplica en la nómina: se muestra como devolución estimada en la renta.
 8. La **retribución flexible** está exenta de IRPF hasta sus límites, pero cotiza a la Seguridad Social.
@@ -40,7 +40,7 @@ Calculadora de nómina para España y simulador de propuestas fiscales. Calcula 
 | ----------------------------------------- | --------------------------------------------------------------------------- |
 | Escala de retención                       | 19 % · 24 % · 30 % · 37 % · 45 % · 47 %                                     |
 | Cotización trabajador                     | 4,70 % CC + 1,55 % desempleo + 0,10 % FP + 0,15 % MEI                       |
-| Base máxima / mínima                      | 5.101,20 € / 1.424,50 € al mes                                              |
+| Base máxima / mínima                      | 5.101,20 € / 1.424,40 € al mes                                              |
 | Mínimo personal                           | 5.550 €                                                                     |
 | Reducción máxima rendimientos del trabajo | 7.302 €                                                                     |
 | Deducción SMI (en la renta)               | 590,89 € hasta 17.094 €, se anula en 20.048,45 €                            |
@@ -106,3 +106,5 @@ La rebaja estatal por hijo se configura en puntos porcentuales. La plantilla Vox
 La declaración estimada usa la comunidad seleccionada; País Vasco y Navarra quedan fuera. Tras la primera visita completa con conexión, la aplicación puede funcionar sin conexión. El navegador permite instalarla cuando sea compatible. Los datos personales permanecen en el navegador.
 
 Pruebas: `npm test`, `npm run lint`, `npm run test:e2e`. Las referencias visuales originales son de macOS; revisa las capturas antes de actualizar las referencias de otro sistema.
+
+La base de retención incluye una reducción adicional de 600 € por más de dos descendientes. El cálculo anual separa las cuotas estatal y autonómica y sus mínimos. Consulta la [matriz de validación fiscal y sus fuentes oficiales](docs/fiscal-validation.md) para conocer las pruebas y los supuestos cubiertos.

@@ -87,7 +87,7 @@ export const CURRENT_SCENARIO = {
   },
   // Contribution bases (Orden PJC/297/2026)
   socialSecurity: {
-    minBase: 1424.5,
+    minBase: 1424.4,
     maxBase: 5101.2,
     // Solidarity contribution bands, as % above the maximum base
     solidarityBand1Limit: 10,

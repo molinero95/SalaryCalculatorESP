@@ -47,8 +47,8 @@ export const PROPOSALS = {
   },
 };
 
-// Parties whose latest programmes give no figures that can be modelled
-export const UNQUANTIFIED_PROPOSALS = [
+// Proposals not modeled: missing figures or eligibility inputs in this calculator.
+export const UNMODELLED_PROPOSALS = [
   {
     party: 'PSOE',
     title: 'Programa electoral 2023',
@@ -57,8 +57,8 @@ export const UNQUANTIFIED_PROPOSALS = [
   },
   {
     party: 'PP',
-    title: 'Programa electoral 23J y Proposición de Ley 122/000156',
-    url: 'https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-179-1.PDF',
+    title: 'Bonificaciones para jóvenes en los primeros cuatro años de vida laboral',
+    url: 'https://www.pp.es/actualidad/articulos/pp-proponebonificaciones-fiscales-jovenes-primeros-cuatro-anos-su-vida-laboral/',
     note: 'proposalPpNote',
   },
   {

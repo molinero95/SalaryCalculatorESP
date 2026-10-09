@@ -250,6 +250,10 @@ export default {
   regionGeneral: 'No indicada',
   helpRegion:
     'La retención en nómina no depende de tu comunidad, pero la cuota final de la renta sí. País Vasco y Navarra no están incluidas.',
+  rowLargeFamilyReduction: 'Reducción por más de dos descendientes (retención)',
+  rowAnnualBase: 'Base liquidable anual estimada',
+  rowStateTax: 'Cuota íntegra estatal',
+  rowRegionalTax: 'Cuota íntegra autonómica',
   rowAnnualTax: 'Cuota anual estimada (renta)',
   helpAnnualTax:
     'Lo que pagarías en la declaración con la escala de tu comunidad. La diferencia con lo retenido sale a devolver (+) o a pagar (−).',
@@ -260,9 +264,10 @@ export default {
   proposalSumarNote:
     'Sube el tipo marginal máximo al 52 % por encima de 300.000 €. El programa no detalla los tipos entre 120.000 y 300.000 €, que se mantienen.',
   proposalPsoeNote: 'Propone aumentar el mínimo por descendientes y personas dependientes, sin cifras concretas.',
-  proposalPpNote: 'Propone deflactar la tarifa y bajar el IRPF a rentas de menos de 40.000 €, sin cifras concretas.',
+  proposalPpNote:
+    'Propone bonificaciones del 100 %, 75 %, 50 % y 25 % en los primeros cuatro años de vida laboral de determinados jóvenes. No simuladas: faltan datos de elegibilidad.',
   proposalPodemosNote: 'Propone no retener en nómina hasta el SMI; la deducción vigente ya deja el SMI sin IRPF.',
-  otherProposals: 'Propuestas sin cifras concretas',
+  otherProposals: 'Otras propuestas no simuladas',
   proposalsDisclaimer: 'Basado en documentos oficiales de cada partido; puede no reflejar su posición actual.',
   contextTitle: 'Tu salario en contexto',
   percentileText: 'Ganas más que el {p} % de los asalariados en España.',

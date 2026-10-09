@@ -251,6 +251,10 @@ export default {
   regionGeneral: 'No indicada',
   helpRegion:
     'La retenció en nòmina no depèn de la teva comunitat, però la quota final de la renda sí. El País Basc i Navarra no hi són.',
+  rowLargeFamilyReduction: 'Reducció per més de dos descendents (retenció)',
+  rowAnnualBase: 'Base liquidable anual estimada',
+  rowStateTax: 'Quota íntegra estatal',
+  rowRegionalTax: 'Quota íntegra autonòmica',
   rowAnnualTax: 'Quota anual estimada (renda)',
   helpAnnualTax:
     "El que pagaries a la declaració amb l'escala de la teva comunitat. La diferència amb el que s'ha retingut surt a tornar (+) o a pagar (−).",
@@ -261,9 +265,10 @@ export default {
   proposalSumarNote:
     'Apuja el tipus marginal màxim al 52 % per sobre de 300.000 €. El programa no detalla els tipus entre 120.000 i 300.000 €, que es mantenen.',
   proposalPsoeNote: 'Proposa augmentar el mínim per descendents i persones dependents, sense xifres concretes.',
-  proposalPpNote: "Proposa deflactar la tarifa i abaixar l'IRPF a rendes de menys de 40.000 €, sense xifres concretes.",
+  proposalPpNote:
+    'Proposa bonificacions del 100 %, 75 %, 50 % i 25 % en els primers quatre anys de vida laboral de determinats joves. No simulades: falten dades d’elegibilitat.',
   proposalPodemosNote: "Proposa no retenir a la nòmina fins a l'SMI; la deducció vigent ja deixa l'SMI sense IRPF.",
-  otherProposals: 'Propostes sense xifres concretes',
+  otherProposals: 'Altres propostes no simulades',
   proposalsDisclaimer: 'Basat en documents oficials de cada partit; pot no reflectir-ne la posició actual.',
   contextTitle: 'El teu salari en context',
   percentileText: 'Guanyes més que el {p} % dels assalariats a Espanya.',
