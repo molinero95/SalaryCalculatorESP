@@ -806,23 +806,31 @@ main {
   margin-bottom: 1rem;
 }
 
-.flexible {
+.extras {
   padding: 0.9rem 1.1rem;
   border: 1px solid var(--border);
   border-radius: var(--radius);
 }
 
-.flexible > summary {
+.extras > summary {
   font-weight: 600;
   cursor: pointer;
 }
 
-.flexible[open] > summary {
+.extras[open] > summary {
   margin-bottom: 1rem;
 }
 
-.flexible .help {
+.extras .help {
   margin: 0 0 1rem;
+}
+
+.amounts-period {
+  margin-bottom: 1rem;
+}
+
+.amounts-period .segmented {
+  justify-self: start;
 }
 
 .warning {

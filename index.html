@@ -123,13 +123,23 @@
             <span data-i18n="childrenFullyCounted"></span>
           </label>
 
-          <details class="flexible field-wide">
+          <details class="extras field-wide">
             <summary data-i18n="flexTitle"></summary>
             <p class="help" data-i18n="flexHelp"></p>
+            <div class="field amounts-period">
+              <span class="label" data-i18n="amountsIn"></span>
+              <div class="segmented" role="radiogroup">
+                <label><input type="radio" name="flexPeriod" value="annual" /><span data-i18n="annual"></span></label>
+                <label><input type="radio" name="flexPeriod" value="monthly" /><span data-i18n="monthly"></span></label>
+              </div>
+            </div>
             <div class="fields">
               <div class="field">
                 <label for="flexMeal" data-i18n="flexMeal"></label>
-                <input id="flexMeal" name="flexMeal" type="number" min="0" step="100" inputmode="decimal" />
+                <div class="input-unit">
+                  <input id="flexMeal" name="flexMeal" type="number" min="0" step="10" inputmode="decimal" />
+                  <span class="unit">€</span>
+                </div>
               </div>
               <div class="field">
                 <label for="workingDays" data-i18n="workingDays"></label>
@@ -137,11 +147,17 @@
               </div>
               <div class="field">
                 <label for="flexTransport" data-i18n="flexTransport"></label>
-                <input id="flexTransport" name="flexTransport" type="number" min="0" step="100" inputmode="decimal" />
+                <div class="input-unit">
+                  <input id="flexTransport" name="flexTransport" type="number" min="0" step="10" inputmode="decimal" />
+                  <span class="unit">€</span>
+                </div>
               </div>
               <div class="field">
                 <label for="flexHealth" data-i18n="flexHealth"></label>
-                <input id="flexHealth" name="flexHealth" type="number" min="0" step="50" inputmode="decimal" />
+                <div class="input-unit">
+                  <input id="flexHealth" name="flexHealth" type="number" min="0" step="10" inputmode="decimal" />
+                  <span class="unit">€</span>
+                </div>
               </div>
               <div class="field">
                 <label for="flexHealthPeople" data-i18n="flexHealthPeople"></label>
@@ -149,14 +165,55 @@
               </div>
               <div class="field">
                 <label for="flexChildcare" data-i18n="flexChildcare"></label>
-                <input id="flexChildcare" name="flexChildcare" type="number" min="0" step="100" inputmode="decimal" />
+                <div class="input-unit">
+                  <input id="flexChildcare" name="flexChildcare" type="number" min="0" step="10" inputmode="decimal" />
+                  <span class="unit">€</span>
+                </div>
               </div>
               <div class="field">
                 <label for="flexTraining" data-i18n="flexTraining"></label>
-                <input id="flexTraining" name="flexTraining" type="number" min="0" step="100" inputmode="decimal" />
+                <div class="input-unit">
+                  <input id="flexTraining" name="flexTraining" type="number" min="0" step="10" inputmode="decimal" />
+                  <span class="unit">€</span>
+                </div>
               </div>
             </div>
             <p class="warning" id="flex-warning" role="alert" hidden></p>
+          </details>
+
+          <details class="extras field-wide">
+            <summary data-i18n="pensionTitle"></summary>
+            <p class="help" data-i18n="pensionHelp"></p>
+            <div class="field amounts-period">
+              <span class="label" data-i18n="amountsIn"></span>
+              <div class="segmented" role="radiogroup">
+                <label><input type="radio" name="pensionPeriod" value="annual" /><span data-i18n="annual"></span></label>
+                <label><input type="radio" name="pensionPeriod" value="monthly" /><span data-i18n="monthly"></span></label>
+              </div>
+            </div>
+            <div class="fields">
+              <div class="field">
+                <label for="pensionIndividual" data-i18n="pensionIndividual"></label>
+                <div class="input-unit">
+                  <input id="pensionIndividual" name="pensionIndividual" type="number" min="0" step="10" inputmode="decimal" />
+                  <span class="unit">€</span>
+                </div>
+              </div>
+              <div class="field">
+                <label for="pensionEmployee" data-i18n="pensionEmployee"></label>
+                <div class="input-unit">
+                  <input id="pensionEmployee" name="pensionEmployee" type="number" min="0" step="10" inputmode="decimal" />
+                  <span class="unit">€</span>
+                </div>
+              </div>
+              <div class="field">
+                <label for="pensionEmployer" data-i18n="pensionEmployer"></label>
+                <div class="input-unit">
+                  <input id="pensionEmployer" name="pensionEmployer" type="number" min="0" step="10" inputmode="decimal" />
+                  <span class="unit">€</span>
+                </div>
+              </div>
+            </div>
           </details>
         </form>
       </section>

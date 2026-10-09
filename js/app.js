@@ -13,6 +13,17 @@ const CHART_RANGE = { from: 12000, to: 150000, step: 1000 };
 const CHART_TABLE_EVERY = 5;
 const SAVE_DELAY_MS = 300;
 const TOAST_MS = 2500;
+const MONTHS = 12;
+
+/** Annual amounts that the form can show per year or per month, keyed by the period field controlling them. */
+const AMOUNT_FIELDS = {
+  flexPeriod: ['flexMeal', 'flexTransport', 'flexHealth', 'flexChildcare', 'flexTraining'],
+  pensionPeriod: ['pensionIndividual', 'pensionEmployee', 'pensionEmployer'],
+};
+const PERIOD_OF_AMOUNT = Object.fromEntries(
+  Object.entries(AMOUNT_FIELDS).flatMap(([period, fields]) => fields.map((field) => [field, period])),
+);
+
 const NUMERIC_INPUTS = new Set([
   'salary',
   'payments',
@@ -23,13 +34,9 @@ const NUMERIC_INPUTS = new Set([
   'dependents65',
   'dependents75',
   'disability',
-  'flexMeal',
   'workingDays',
-  'flexTransport',
-  'flexHealth',
   'flexHealthPeople',
-  'flexChildcare',
-  'flexTraining',
+  ...Object.keys(PERIOD_OF_AMOUNT),
 ]);
 
 // ---------------------------------------------------------------------------
@@ -82,6 +89,7 @@ function initialState() {
   state.input.payments = oneOf(state.input.payments, [14, 12]);
   state.input.familySituation = oneOf(state.input.familySituation, [3, 2, 1]);
   state.input.disability = oneOf(state.input.disability, [0, 33, 65]);
+  for (const period of Object.keys(AMOUNT_FIELDS)) state.input[period] = oneOf(state.input[period], ['annual', 'monthly']);
   return state;
 }
 
@@ -107,11 +115,15 @@ function persist() {
 
 const form = $('#details-form');
 
+/** Divisor to show a stored annual amount in the period chosen in the form. */
+const amountDivisor = (field) => (state.input[PERIOD_OF_AMOUNT[field]] === 'monthly' ? MONTHS : 1);
+
 function renderInput() {
   for (const [name, value] of Object.entries(state.input)) {
     const control = form.elements[name];
     if (!control) continue;
     if (control.type === 'checkbox') control.checked = value;
+    else if (name in PERIOD_OF_AMOUNT) control.value = String(Math.round((value / amountDivisor(name)) * 100) / 100);
     else control.value = String(value);
   }
   form.elements.salary.step = state.input.period === 'perPayment' ? 10 : 100;
@@ -126,6 +138,10 @@ form.addEventListener('input', ({ target }) => {
   if (type === 'checkbox') state.input[name] = checked;
   else if (NUMERIC_INPUTS.has(name)) state.input[name] = Math.max(0, parseFloat(value) || 0);
   else state.input[name] = value;
+
+  // Amounts are always stored per year
+  if (name in PERIOD_OF_AMOUNT) state.input[name] *= amountDivisor(name);
+  if (name in AMOUNT_FIELDS) renderInput();
 
   // Switching period or number of payments keeps the same gross annual salary
   if (name === 'period' || name === 'payments') {

@@ -14,7 +14,7 @@ function deltaBadge(value, reference, { format = formatSignedEuros, higherIsBett
   return `<span class="delta ${better ? 'positive' : 'negative'}">${format(value - reference)}</span>`;
 }
 
-function resultCard(kind, name, r, reference, { showRefund, showInKind }) {
+function resultCard(kind, name, r, reference, { showRefund, showInKind, showPension }) {
   const rateDelta = (value, ref) => deltaBadge(value, ref, { format: formatPoints, higherIsBetter: false });
   const metric = (label, value, delta = '') => `<div><dt>${label}</dt><dd>${value} ${delta}</dd></div>`;
 
@@ -34,6 +34,7 @@ function resultCard(kind, name, r, reference, { showRefund, showInKind }) {
         ${r.payments === 14 ? metric(t('extraPayment'), formatEuros(r.netExtraPayment), deltaBadge(r.netExtraPayment, reference?.netExtraPayment)) : ''}
         ${showRefund ? metric(t('refund'), formatEuros(r.incomeTax.refund), deltaBadge(r.incomeTax.refund, reference?.incomeTax.refund)) : ''}
         ${showInKind ? metric(t('inKind'), formatEuros(r.flexible.total)) : ''}
+        ${showPension ? metric(t('pensions'), formatEuros(r.pension.total)) : ''}
         ${metric(t('withholding'), formatPercent(r.incomeTax.rate), rateDelta(r.incomeTax.rate, reference?.incomeTax.rate))}
         ${metric(t('effectiveRate'), formatPercent(r.effectiveRate), rateDelta(r.effectiveRate, reference?.effectiveRate))}
         ${metric(t('employerCost'), formatEuros(r.employerCost))}
@@ -45,6 +46,7 @@ export function renderResults({ cards, summary, sticky }, { names, current, simu
   const options = {
     showRefund: current.incomeTax.refund > 0 || simulation.incomeTax.refund > 0,
     showInKind: simulation.flexible.total > 0,
+    showPension: simulation.pension.total > 0,
   };
   cards.innerHTML =
     resultCard('current', names.current, current, undefined, options) +
@@ -93,6 +95,14 @@ const BREAKDOWN = [
     ],
   },
   {
+    title: 'sectionPension',
+    rows: [
+      { label: 'rowPensionTotal', value: (r) => r.pension.total, optional: true },
+      { label: 'rowPensionReduction', value: (r) => r.pension.deductible, optional: true },
+      { label: 'rowPensionSavings', value: (r) => r.pension.taxSaved, optional: true, total: true },
+    ],
+  },
+  {
     title: 'sectionIncomeTax',
     rows: [
       { label: 'rowTaxableGross', value: (r) => r.taxableGross },
@@ -114,14 +124,16 @@ const BREAKDOWN = [
       { label: 'rowSocialSecurityTotal', value: (r) => -r.employee.total },
       { label: 'rowIncomeTax', value: (r) => -r.incomeTax.withheld },
       { label: 'rowFlexTotal', value: (r) => -r.flexible.total, optional: true },
+      { label: 'rowPensionEmployee', value: (r) => -r.pension.employee, optional: true },
       { label: 'rowNetCash', value: (r) => r.netAnnual, total: true, highlight: true },
       { label: 'refund', value: (r) => r.incomeTax.refund, optional: true },
+      { label: 'rowPensionIndividual', value: (r) => -r.pension.individual, optional: true },
       {
         label: 'rowNetAfterReturn',
         value: (r) => r.netAnnualAfterReturn,
         total: true,
         highlight: true,
-        showIf: (a, b) => a.incomeTax.refund > 0 || b.incomeTax.refund > 0,
+        showIf: (a, b) => Math.abs(a.netAnnualAfterReturn - a.netAnnual) > 0 || Math.abs(b.netAnnualAfterReturn - b.netAnnual) > 0,
       },
     ],
   },

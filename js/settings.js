@@ -72,6 +72,15 @@ const GROUPS = [
     ],
   },
   {
+    title: 'groupPension',
+    fields: [
+      ['pension', 'individualLimit', EUR],
+      ['pension', 'employmentLimit', EUR],
+      ['pension', 'netIncomeShareLimit', PCT],
+      ['pension', 'highIncomeThreshold', EUR],
+    ],
+  },
+  {
     title: 'groupEmployee',
     fields: [
       ['employee', 'commonContingencies', PCT],
