@@ -429,6 +429,7 @@ main > *,
 }
 
 .help-tip::after {
+  display: none;
   content: attr(data-tip);
   position: absolute;
   left: 50%;
@@ -455,6 +456,7 @@ main > *,
 .help-tip:hover::after,
 .help-tip:focus-visible::after,
 .help-tip.open::after {
+  display: block;
   visibility: visible;
   opacity: 1;
 }
