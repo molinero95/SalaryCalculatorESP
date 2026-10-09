@@ -314,7 +314,8 @@ test('one residence selector preserves salary and displays territorial annual br
   await expect(page.locator('#residence optgroup')).toHaveCount(19);
   await expect(page.locator('#region')).toBeHidden();
   await expect(page.locator('#city')).toBeHidden();
-  await expect(page.getByLabel('Residencia fiscal', { exact: true })).toHaveCount(1);
+  await expect(page.locator('label[for="residence"]')).toHaveCount(1);
+  await expect(page.locator('label[for="residence"]')).toContainText('Residencia fiscal');
   await page.fill('#salary', '73000');
   await page.selectOption('#residence', 'city:bilbao');
   await expect(page.locator('#region')).toHaveValue('bizkaia');
