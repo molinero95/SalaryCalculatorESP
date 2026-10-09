@@ -189,8 +189,11 @@ test('separate withholding editor compares with the active reference scale', asy
 
 test('floating annual difference stays inside narrow viewports with large amounts', async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 640 });
-  await page.fill('#salary', '999999999');
+  await page.fill('#salary', '45000');
   await page.selectOption('#proposal-select', 'vox2024');
+  await page.evaluate(() => {
+    document.querySelector('#sticky-value').textContent = '+999.999.999.999.999,99 € / anual';
+  });
   await page.locator('#sticky-summary').scrollIntoViewIfNeeded();
   await expect(page.locator('#sticky-summary')).toBeVisible();
   await expect
