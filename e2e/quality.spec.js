@@ -123,6 +123,7 @@ test('refactored tax engine works after a full offline reload', async ({ page, c
 
 test('fractional persisted active simulation restores a valid selection', async ({ page }) => {
   await page.locator('#add-simulation').click();
+  await expect.poll(() => page.evaluate(() => JSON.parse(localStorage.getItem('net-salary:state'))?.active)).toBe(1);
   await page.evaluate(() => {
     const state = JSON.parse(localStorage.getItem('net-salary:state'));
     state.active = 0.5;
