@@ -2,6 +2,7 @@ import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
   testDir: 'e2e',
+  reporter: [['list'], ['html', { open: 'never' }]],
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   // Screenshot baselines depend on the OS fonts, so visual tests only run locally

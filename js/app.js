@@ -56,7 +56,16 @@ const isPlainObject = (value) => value !== null && typeof value === 'object' && 
 const isValidBrackets = (brackets) =>
   Array.isArray(brackets) &&
   brackets.length > 0 &&
-  brackets.every((b) => Number.isFinite(b?.rate) && (b.upTo === null || Number.isFinite(b.upTo))) &&
+  brackets.length <= 100 &&
+  brackets.every(
+    (b, i) =>
+      Number.isFinite(b?.rate) &&
+      b.rate >= 0 &&
+      b.rate <= 100 &&
+      (b.upTo === null
+        ? i === brackets.length - 1
+        : Number.isFinite(b.upTo) && b.upTo > (i ? brackets[i - 1].upTo : 0)),
+  ) &&
   brackets.at(-1).upTo === null;
 
 /**
@@ -74,7 +83,7 @@ function merge(base, override) {
       Object.entries(base).map(([key, value]) => [key, key in override ? merge(value, override[key]) : value]),
     );
   }
-  if (typeof base === 'number') return Number.isFinite(override) ? override : base;
+  if (typeof base === 'number') return Number.isFinite(override) && override >= 0 ? override : base;
   return typeof override === typeof base ? override : base;
 }
 
@@ -114,6 +123,28 @@ function defineActiveSimulation(target) {
   });
 }
 
+function normalizeInput(state) {
+  state.input.period = oneOf(state.input.period, ['annual', 'perPayment']);
+  state.input.contract = oneOf(state.input.contract, ['permanent', 'temporary']);
+  state.input.payments = oneOf(state.input.payments, [14, 12]);
+  state.input.familySituation = oneOf(state.input.familySituation, [3, 2, 1]);
+  state.input.disability = oneOf(state.input.disability, [0, 33, 65]);
+  state.input.partTime = Math.min(100, Math.max(1, state.input.partTime));
+  state.input.region = oneOf(state.input.region, ['general', ...Object.keys(REGIONAL_SCALES)]);
+  for (const period of Object.keys(AMOUNT_FIELDS))
+    state.input[period] = oneOf(state.input[period], ['annual', 'monthly']);
+  for (const field of NUMERIC_INPUTS) {
+    const element = document.querySelector(`input[name="${field}"]`);
+    if (!element) continue;
+    const minimum = element.hasAttribute('min') ? Number(element.min) : 0;
+    const maximum = element.hasAttribute('max') ? Number(element.max) : 1e9;
+    let value = Math.min(maximum, Math.max(minimum, state.input[field]));
+    if (element.step !== 'any' && !['salary', ...Object.keys(PERIOD_OF_AMOUNT)].includes(field))
+      value = Math.floor(value);
+    state.input[field] = value;
+  }
+}
+
 function initialState() {
   const defaults = {
     language: DEFAULT_LANGUAGE,
@@ -140,15 +171,7 @@ function initialState() {
   defineActiveSimulation(state);
 
   state.chartMode = oneOf(state.chartMode, ['diff', 'rate']);
-  state.input.period = oneOf(state.input.period, ['annual', 'perPayment']);
-  state.input.contract = oneOf(state.input.contract, ['permanent', 'temporary']);
-  state.input.payments = oneOf(state.input.payments, [14, 12]);
-  state.input.familySituation = oneOf(state.input.familySituation, [3, 2, 1]);
-  state.input.disability = oneOf(state.input.disability, [0, 33, 65]);
-  state.input.partTime = Math.min(100, Math.max(1, state.input.partTime));
-  state.input.region = oneOf(state.input.region, ['general', ...Object.keys(REGIONAL_SCALES)]);
-  for (const period of Object.keys(AMOUNT_FIELDS))
-    state.input[period] = oneOf(state.input[period], ['annual', 'monthly']);
+  normalizeInput(state);
   return state;
 }
 
@@ -295,7 +318,7 @@ function renderSimulationTabs() {
       state.simulations.length > 1
         ? `<button type="button" class="tab-remove" data-remove-simulation="${i}" aria-label="${t('removeSimulation')}" title="${t('removeSimulation')}">✕</button>`
         : '';
-    return `<div class="sim-tab ${active ? 'active' : ''}"><button type="button" role="tab" aria-selected="${active}" data-simulation="${i}">${escapeHtml(simulationName(i))}</button>${remove}</div>`;
+    return `<div class="sim-tab ${active ? 'active' : ''}"><button type="button" aria-pressed="${active}" data-simulation="${i}">${escapeHtml(simulationName(i))}</button>${remove}</div>`;
   });
   const add =
     state.simulations.length < MAX_SIMULATIONS
@@ -303,6 +326,27 @@ function renderSimulationTabs() {
       : '';
   $('#sim-tabs').innerHTML = tabs.join('') + add;
 }
+
+function renderResultTabs() {
+  const tabs = state.simulations
+    .map(
+      (_, i) =>
+        `<button type="button" class="result-sim-tab ${i === state.active ? 'active' : ''}" aria-pressed="${i === state.active}" data-result-simulation="${i}">${escapeHtml(simulationName(i))}</button>`,
+    )
+    .join('');
+  $('.result-simulation header').insertAdjacentHTML(
+    'afterend',
+    `<div class="result-sim-tabs" role="group" aria-label="${escapeHtml(t('compareTitle'))}">${tabs}</div>`,
+  );
+}
+
+$('#results').addEventListener('click', ({ target }) => {
+  const tab = target.closest('[data-result-simulation]');
+  if (!tab) return;
+  state.active = Number(tab.dataset.resultSimulation);
+  refreshScenarios();
+  $(`[data-result-simulation="${state.active}"]`).focus();
+});
 
 $('#sim-tabs').addEventListener('click', ({ target }) => {
   const tab = target.closest('[data-simulation]');
@@ -478,6 +522,7 @@ $('#import').addEventListener('change', async ({ target }) => {
       throw new Error('Invalid scenario file');
     }
     state.input = merge(state.input, imported.input ?? {});
+    normalizeInput(state);
     state.current = toScenario(imported.current ?? {});
     state.simulations = simulationList(imported);
     state.active = 0;
@@ -698,6 +743,7 @@ function update() {
   };
   lastResults = results;
   renderResults({ cards: $('#results'), summary: $('#difference'), sticky: $('#sticky-value') }, results);
+  renderResultTabs();
   renderBreakdown($('#breakdown'), results);
   renderContext(results.current);
   renderProposalInfo();

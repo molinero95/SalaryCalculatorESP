@@ -117,8 +117,8 @@ function minWageCredit(
 
 function personalAllowance(input, p) {
   let personal = p.personalAllowance;
-  if (input.age > 65) personal += p.ageOver65Allowance;
-  if (input.age > 75) personal += p.ageOver75Allowance;
+  if (input.age >= 65) personal += p.ageOver65Allowance;
+  if (input.age >= 75) personal += p.ageOver75Allowance;
 
   const perChild = [p.child1Allowance, p.child2Allowance, p.child3Allowance, p.child4Allowance];
   let children = 0;

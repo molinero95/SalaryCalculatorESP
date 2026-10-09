@@ -286,7 +286,7 @@
           </h2>
         </summary>
         <p class="help" data-i18n="simDesc"></p>
-        <div class="sim-tabs" role="tablist" id="sim-tabs"></div>
+        <div class="sim-tabs" role="group" data-i18n-aria="compareTitle" id="sim-tabs"></div>
 
         <div class="field field-name">
           <label for="scenario-name" data-i18n="scenarioName"></label>
@@ -377,14 +377,14 @@
         <div class="chart" id="chart"></div>
         <details class="data-table">
           <summary data-i18n="showTable"></summary>
-          <div class="table-scroll" id="chart-table"></div>
+          <div class="table-scroll" tabindex="0" id="chart-table"></div>
         </details>
       </section>
 
       <section class="card" aria-labelledby="compare-title">
         <h2 id="compare-title" data-i18n="compareTitle"></h2>
         <p class="help" data-i18n="compareDesc"></p>
-        <div class="table-scroll" id="compare-table"></div>
+        <div class="table-scroll" tabindex="0" id="compare-table"></div>
         <p class="help compare-chart-help" data-i18n="compareChartDesc"></p>
         <div class="legend" id="compare-legend"></div>
         <div class="chart" id="compare-chart"></div>
@@ -395,7 +395,7 @@
           <h2 id="breakdown-title" data-i18n="breakdown"></h2>
           <button type="button" class="button secondary no-print" id="print" data-i18n="print"></button>
         </div>
-        <div class="table-scroll" id="breakdown"></div>
+        <div class="table-scroll" tabindex="0" id="breakdown"></div>
       </section>
     </main>
 
