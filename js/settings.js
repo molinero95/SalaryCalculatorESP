@@ -195,7 +195,7 @@ function bracketRowHtml(bracket, i, brackets) {
 
   return `
     <tr>
-      <td class="num">${formatEuros(from)}</td>
+      <td class="num">${formatEuros(from, Number.isInteger(from) ? 0 : 2)}</td>
       <td>${upTo}</td>
       <td><div class="input-unit"><input type="number" step="any" data-rate="${i}" value="${escapeHtml(bracket.rate)}" aria-label="${t('rate')}" />${unitSuffix(PCT)}</div></td>
       <td class="actions">${remove}</td>

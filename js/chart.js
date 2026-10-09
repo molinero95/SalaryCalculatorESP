@@ -6,7 +6,7 @@ import { formatCompactEuros, formatEuros, escapeHtml } from './format.js';
 const SVG_NS = 'http://www.w3.org/2000/svg';
 const MARGIN = { top: 16, right: 24, bottom: 36, left: 64 };
 const HEIGHT = 300;
-const MIN_WIDTH = 320;
+const MIN_WIDTH = 260;
 const LABEL_GAP = 14;
 
 function svg(name, attributes = {}, parent) {
@@ -18,7 +18,12 @@ function svg(name, attributes = {}, parent) {
 
 /** "Nice" axis ticks on a 1-2-5 progression. */
 function niceTicks(min, max, target = 5) {
-  const span = max - min || 1;
+  // A flat series gets some room around it instead of a zero-height axis
+  if (min === max) {
+    const padding = Math.abs(max) * 0.1 || 100;
+    [min, max] = [min - padding, max + padding];
+  }
+  const span = max - min;
   const magnitude = 10 ** Math.floor(Math.log10(span / target));
   const step = [1, 2, 5, 10].map((m) => m * magnitude).find((s) => span / s <= target);
   const ticks = [];
