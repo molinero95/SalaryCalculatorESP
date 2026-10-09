@@ -45,6 +45,27 @@ function contributions(grossAnnual, socialSecurity, rates, contract) {
   return { monthlyBase: base, items, total: sum(Object.values(items)) };
 }
 
+/**
+ * Flexible compensation: part of the gross salary paid in kind. Exempt amounts
+ * don't pay income tax, but everything still pays social security.
+ */
+function flexibleCompensation(input, limits, gross) {
+  const healthCap =
+    (input.disability >= 33 ? limits.healthDisabilityLimit : limits.healthLimit) +
+    Math.max(0, input.flexHealthPeople - 1) * limits.healthLimit;
+
+  const total = sum([input.flexMeal, input.flexTransport, input.flexHealth, input.flexChildcare, input.flexTraining]);
+  const exempt = sum([
+    Math.min(input.flexMeal, limits.mealDailyLimit * input.workingDays),
+    Math.min(input.flexTransport, limits.transportLimit),
+    Math.min(input.flexHealth, healthCap),
+    input.flexChildcare,
+    input.flexTraining,
+  ]);
+
+  return { total, exempt, overCap: total > (gross * limits.inKindCap) / 100 };
+}
+
 function employmentReduction(netEarnings, p) {
   if (netEarnings <= p.reductionThreshold1) return p.reductionMax;
   if (netEarnings <= p.reductionThreshold2) {
@@ -56,10 +77,10 @@ function employmentReduction(netEarnings, p) {
   return 0;
 }
 
-function minWageCredit(netEarnings, { minWageCredit: amount, minWageCreditFullUpTo: full, minWageCreditEndsAt: end }) {
-  if (amount <= 0 || netEarnings >= end) return 0;
-  if (netEarnings <= full) return amount;
-  return amount * ((end - netEarnings) / (end - full));
+function minWageCredit(grossEarnings, { minWageCredit: amount, minWageCreditFullUpTo: full, minWageCreditEndsAt: end }) {
+  if (amount <= 0 || grossEarnings >= end) return 0;
+  if (grossEarnings <= full) return amount;
+  return amount * ((end - grossEarnings) / (end - full));
 }
 
 function personalAllowance(input, p) {
@@ -84,6 +105,50 @@ function personalAllowance(input, p) {
   return { personal, children, dependents, disability, total: personal + children + dependents + disability };
 }
 
+/** Income below which no tax is withheld (art. 81 RIRPF). */
+function withholdingFreeMinimum(input, p) {
+  const children = Math.min(input.children, 2);
+  // Situation 1 (single parent) only exists with children
+  const situation = input.familySituation === 1 && children === 0 ? 3 : input.familySituation;
+  return p[`withholdingFreeMin${situation}_${children}`];
+}
+
+/** Income tax withholding following the general procedure (arts. 82-86 RIRPF). */
+function withholding(input, p, taxableGross, socialSecurity) {
+  const netEarnings = Math.max(0, taxableGross - socialSecurity);
+
+  let otherExpenses = p.generalExpenses;
+  if (input.disability >= 65) otherExpenses += p.disability65Expenses;
+  else if (input.disability >= 33) otherExpenses += p.disability33Expenses;
+
+  const reduction = employmentReduction(netEarnings, p);
+  const base = Math.max(0, netEarnings - otherExpenses - reduction);
+  const allowance = personalAllowance(input, p);
+  const taxOnBase = applyScale(p.brackets, base);
+  const taxOnAllowance = applyScale(p.brackets, allowance.total);
+  const freeMinimum = withholdingFreeMinimum(input, p);
+
+  let amount = Math.max(0, taxOnBase - taxOnAllowance);
+  amount = taxableGross <= freeMinimum ? 0 : Math.min(amount, ((taxableGross - freeMinimum) * p.withholdingCap) / 100);
+
+  let rate = taxableGross > 0 ? round2((amount / taxableGross) * 100) : 0;
+  if (input.contract === 'temporary' && taxableGross > freeMinimum) rate = Math.max(rate, p.temporaryMinRate);
+
+  return {
+    netEarnings,
+    otherExpenses,
+    reduction,
+    withholdingBase: base,
+    allowance,
+    taxOnBase,
+    taxOnAllowance,
+    freeMinimum,
+    amount,
+    rate,
+    withheld: (taxableGross * rate) / 100,
+  };
+}
+
 export const grossAnnualOf = (input) => (input.period === 'perPayment' ? input.salary * input.payments : input.salary);
 
 /**
@@ -92,69 +157,46 @@ export const grossAnnualOf = (input) => (input.period === 'perPayment' ? input.s
  */
 export function computePayroll(input, scenario, grossAnnual = grossAnnualOf(input)) {
   const gross = Math.max(0, grossAnnual);
-  const p = scenario.incomeTax;
 
   const employee = contributions(gross, scenario.socialSecurity, scenario.employee, input.contract);
   const employer = contributions(gross, scenario.socialSecurity, scenario.employer, input.contract);
 
-  // --- Income tax withholding rate (IRPF Regulation, general procedure) ---
-  const netEarnings = Math.max(0, gross - employee.total);
+  const flexible = flexibleCompensation(input, scenario.flexible, gross);
+  const taxableGross = gross - flexible.exempt;
+  const incomeTax = withholding(input, scenario.incomeTax, taxableGross, employee.total);
+  const taxWithoutFlexible = flexible.exempt > 0 ? withholding(input, scenario.incomeTax, gross, employee.total).withheld : incomeTax.withheld;
 
-  let otherExpenses = p.generalExpenses;
-  if (input.disability >= 65) otherExpenses += p.disability65Expenses;
-  else if (input.disability >= 33) otherExpenses += p.disability33Expenses;
+  // The low-earner credit is only applied in the annual return, so it shows
+  // up as an estimated refund (capped at what was withheld).
+  const credit = minWageCredit(taxableGross, scenario.incomeTax);
+  const refund = Math.min(credit, incomeTax.withheld);
 
-  const reduction = employmentReduction(netEarnings, p);
-  const withholdingBase = Math.max(0, netEarnings - otherExpenses - reduction);
-  const allowance = personalAllowance(input, p);
+  const netAnnual = gross - flexible.total - employee.total - incomeTax.withheld;
+  const netAnnualAfterReturn = netAnnual + refund;
 
-  const taxOnBase = applyScale(p.brackets, withholdingBase);
-  const taxOnAllowance = applyScale(p.brackets, allowance.total);
-  const credit = minWageCredit(netEarnings, p);
-  let amount = Math.max(0, taxOnBase - taxOnAllowance - credit);
-
-  if (gross <= p.withholdingFreeMinimum) {
-    amount = 0;
-  } else {
-    amount = Math.min(amount, ((gross - p.withholdingFreeMinimum) * p.withholdingCap) / 100);
-  }
-
-  let rate = gross > 0 ? round2((amount / gross) * 100) : 0;
-  if (input.contract === 'temporary' && gross > p.withholdingFreeMinimum) rate = Math.max(rate, p.temporaryMinRate);
-  const incomeTax = (gross * rate) / 100;
-
-  // --- Take-home pay ---
-  // With 14 payments, social security is spread over 12 months and the two
-  // extra payments only carry income tax.
-  const netAnnual = gross - employee.total - incomeTax;
+  // With 14 payments, social security and flexible compensation are spread over
+  // the 12 regular months; the two extra payments only carry income tax.
   const grossPerPayment = gross / input.payments;
-  const taxPerPayment = (grossPerPayment * rate) / 100;
   const hasExtraPayments = input.payments === 14;
+  const taxPerExtraPayment = hasExtraPayments ? (grossPerPayment * incomeTax.rate) / 100 : 0;
+  const taxPerRegularPayment = (incomeTax.withheld - 2 * taxPerExtraPayment) / 12;
 
   return {
     grossAnnual: gross,
+    taxableGross,
     employee,
     employer,
     employerCost: gross + employer.total,
-    incomeTax: {
-      netEarnings,
-      otherExpenses,
-      reduction,
-      withholdingBase,
-      allowance,
-      taxOnBase,
-      taxOnAllowance,
-      minWageCredit: credit,
-      amount,
-      rate,
-      withheld: incomeTax,
-    },
+    flexible: { ...flexible, taxSaved: taxWithoutFlexible - incomeTax.withheld },
+    incomeTax: { ...incomeTax, minWageCredit: credit, refund },
     netAnnual,
+    netAnnualAfterReturn,
     netMonthlyAverage: netAnnual / 12,
     payments: input.payments,
-    netRegularPayment: hasExtraPayments ? grossPerPayment - employee.total / 12 - taxPerPayment : netAnnual / 12,
-    netExtraPayment: hasExtraPayments ? grossPerPayment - taxPerPayment : 0,
-    effectiveRate: gross > 0 ? ((employee.total + incomeTax) / gross) * 100 : 0,
-    taxWedge: gross > 0 ? ((employer.total + employee.total + incomeTax) / (gross + employer.total)) * 100 : 0,
+    netRegularPayment: grossPerPayment - (employee.total + flexible.total) / 12 - taxPerRegularPayment,
+    netExtraPayment: hasExtraPayments ? grossPerPayment - taxPerExtraPayment : 0,
+    effectiveRate: gross > 0 ? ((employee.total + incomeTax.withheld - refund) / gross) * 100 : 0,
+    taxWedge:
+      gross > 0 ? ((employer.total + employee.total + incomeTax.withheld - refund) / (gross + employer.total)) * 100 : 0,
   };
 }

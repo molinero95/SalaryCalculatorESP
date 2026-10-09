@@ -44,16 +44,37 @@ export const CURRENT_SCENARIO = {
     reductionSlope2: 1.14,
     reductionThreshold3: 19747.5,
 
-    // Tax credit for minimum-wage earners (art. 80 bis LIRPF)
-    minWageCredit: 340,
-    minWageCreditFullUpTo: 16576,
-    minWageCreditEndsAt: 18276,
+    // Tax credit for low earners (DA 61ª LIRPF, RDL 5/2026). Based on gross
+    // employment income and applied in the annual return, not in withholding.
+    minWageCredit: 590.89,
+    minWageCreditFullUpTo: 17094,
+    minWageCreditEndsAt: 20048.45,
 
-    // Withholding rules (IRPF Regulation, arts. 80-86)
-    withholdingFreeMinimum: 15876,
+    // Income below which there is no withholding (art. 81 RIRPF), by family
+    // situation (1: single parent, 2: spouse without income, 3: other) and
+    // number of children (0, 1, 2 or more)
+    withholdingFreeMin1_1: 17644,
+    withholdingFreeMin1_2: 18694,
+    withholdingFreeMin2_0: 17197,
+    withholdingFreeMin2_1: 18130,
+    withholdingFreeMin2_2: 19262,
+    withholdingFreeMin3_0: 15876,
+    withholdingFreeMin3_1: 16342,
+    withholdingFreeMin3_2: 16867,
+
+    // Other withholding rules (IRPF Regulation, arts. 85-86)
     withholdingCap: 43,
     temporaryMinRate: 2,
   },
+  // Tax-exempt limits for flexible compensation (art. 42 LIRPF, art. 45-46 RIRPF)
+  flexible: {
+    mealDailyLimit: 11,
+    transportLimit: 1500,
+    healthLimit: 500,
+    healthDisabilityLimit: 1500,
+    inKindCap: 30, // max % of salary paid in kind (art. 26.1 Workers' Statute)
+  },
+  // Contribution bases (Orden PJC/297/2026)
   socialSecurity: {
     minBase: 1424.5,
     maxBase: 5101.2,
@@ -90,6 +111,7 @@ export const DEFAULT_INPUT = {
   period: 'annual', // 'annual' | 'perPayment'
   payments: 14, // 12 | 14
   contract: 'permanent', // 'permanent' | 'temporary'
+  familySituation: 3, // 1 | 2 | 3, see withholdingFreeMin*
   age: 35,
   children: 0,
   childrenUnder3: 0,
@@ -97,6 +119,14 @@ export const DEFAULT_INPUT = {
   dependents65: 0,
   dependents75: 0,
   disability: 0, // 0 | 33 | 65
+  // Flexible compensation, annual amounts in euros
+  flexMeal: 0,
+  workingDays: 220,
+  flexTransport: 0,
+  flexHealth: 0,
+  flexHealthPeople: 1,
+  flexChildcare: 0,
+  flexTraining: 0,
 };
 
 // State half of the income tax scale (art. 63 LIRPF)

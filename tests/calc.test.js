@@ -77,3 +77,42 @@ test('combineScales adds rates over the union of limits', () => {
     { upTo: null, rate: 22 },
   ]);
 });
+
+test('low earners get the minimum wage credit back in the annual return', () => {
+  const r = computePayroll({ ...DEFAULT_INPUT, salary: 17094 }, CURRENT_SCENARIO);
+  close(r.incomeTax.minWageCredit, 590.89);
+  close(r.incomeTax.refund, Math.min(590.89, r.incomeTax.withheld));
+  close(r.netAnnualAfterReturn, r.netAnnual + r.incomeTax.refund);
+});
+
+test('minimum wage credit phases out at 20,048.45 € of gross income', () => {
+  const r = computePayroll({ ...DEFAULT_INPUT, salary: 20048.45 }, CURRENT_SCENARIO);
+  assert.equal(r.incomeTax.minWageCredit, 0);
+});
+
+test('withholding-free minimum depends on family situation', () => {
+  const single = computePayroll({ ...DEFAULT_INPUT, salary: 17000 }, CURRENT_SCENARIO);
+  const spouseNoIncome = computePayroll({ ...DEFAULT_INPUT, salary: 17000, familySituation: 2 }, CURRENT_SCENARIO);
+  assert.equal(single.incomeTax.freeMinimum, 15876);
+  assert.equal(spouseNoIncome.incomeTax.freeMinimum, 17197);
+  assert.equal(spouseNoIncome.incomeTax.rate, 0);
+});
+
+test('flexible compensation lowers income tax but not social security', () => {
+  const flex = { flexMeal: 2000, flexTransport: 1500, flexHealth: 600 };
+  const plain = computePayroll(DEFAULT_INPUT, CURRENT_SCENARIO);
+  const withFlex = computePayroll({ ...DEFAULT_INPUT, ...flex }, CURRENT_SCENARIO);
+
+  close(withFlex.flexible.total, 4100);
+  close(withFlex.flexible.exempt, 4000); // health insurance capped at 500 €
+  close(withFlex.employee.total, plain.employee.total);
+  assert.ok(withFlex.incomeTax.withheld < plain.incomeTax.withheld);
+  close(withFlex.flexible.taxSaved, plain.incomeTax.withheld - withFlex.incomeTax.withheld);
+  // Cash + in-kind value is higher than the plain net salary
+  assert.ok(withFlex.netAnnual + withFlex.flexible.total > plain.netAnnual);
+});
+
+test('14 payments add up to the annual net salary', () => {
+  const r = computePayroll({ ...DEFAULT_INPUT, flexMeal: 1200 }, CURRENT_SCENARIO);
+  close(12 * r.netRegularPayment + 2 * r.netExtraPayment, r.netAnnual);
+});
