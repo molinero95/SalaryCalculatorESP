@@ -4,7 +4,7 @@ Calculadora de nómina para España y simulador de propuestas fiscales. Calcula 
 
 **[Abrir el simulador →](https://molinero95.github.io/SalaryCalculatorESP/)**
 
-_[English below](#english)_
+**Castellano** · [Català](README.ca.md) · [Euskara](README.eu.md) · [Galego](README.gl.md) · [English](README.en.md)
 
 ## Características
 
@@ -78,13 +78,7 @@ En **Settings → Pages** del repositorio, elige _Deploy from a branch_, rama `m
 
 ### Contribuir
 
-Se agradecen correcciones de la normativa y revisiones de las traducciones (sobre todo euskara y galego). Para añadir un idioma, crea `js/i18n/<código>.js` con las mismas claves que `es.js` y regístralo en `js/i18n/index.js`.
-
----
-
-## English
-
-Spanish payroll calculator and tax policy simulator. It computes your take-home pay under the current rules and compares it with any change to income tax brackets, allowances or social security contributions. Everything runs client-side with no dependencies. Run `npm start` to serve it locally and `npm test` to run the engine tests.
+Se agradecen correcciones de la normativa y revisiones de las traducciones (sobre todo euskara y galego). Para añadir un idioma, crea `js/i18n/<código>.js` con las mismas claves que `es.js`, regístralo en `js/i18n/index.js` y añade su `README.<código>.md`.
 
 ## Licencia
 
