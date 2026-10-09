@@ -90,6 +90,11 @@ const state = initialState();
 const scenarioName = (kind) => state[kind].name || (kind === 'current' ? `${t('current')} · 2026` : t('simulation'));
 const scenarioNames = () => ({ current: scenarioName('current'), simulation: scenarioName('simulation') });
 
+/** Records an anonymous GoatCounter event, if the counter has loaded. */
+function trackEvent(name) {
+  window.goatcounter?.count?.({ path: name, title: name, event: true });
+}
+
 let saveTimer;
 function persist() {
   clearTimeout(saveTimer);
@@ -272,6 +277,7 @@ $('#share').addEventListener('click', async () => {
     history.replaceState(null, '', url);
   }
   toast(t('linkCopied'));
+  trackEvent('share');
 });
 
 $('#export').addEventListener('click', () => {
@@ -281,6 +287,7 @@ $('#export').addEventListener('click', () => {
   const link = Object.assign(document.createElement('a'), { href: URL.createObjectURL(blob), download: `${slug}.json` });
   link.click();
   URL.revokeObjectURL(link.href);
+  trackEvent('export-json');
 });
 
 $('#import').addEventListener('change', async ({ target }) => {
@@ -305,6 +312,7 @@ $('#save-scenario').addEventListener('click', () => {
   $('#saved-scenarios').value = state.simulation.name;
   refreshScenarios();
   toast(t('saved'));
+  trackEvent('save-scenario');
 });
 
 $('#load-scenario').addEventListener('click', () => {

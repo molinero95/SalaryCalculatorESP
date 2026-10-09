@@ -17,6 +17,7 @@ Calculadora de nómina para España y simulador de propuestas fiscales. Calcula 
 - **Escenarios guardados**, enlaces para compartir e importación/exportación en JSON.
 - **Cinco idiomas**: castellano, català, euskara, galego e English.
 - Sin dependencias, sin backend, sin cookies: todo se calcula en el navegador.
+  Las visitas se cuentan de forma anónima con [GoatCounter](https://www.goatcounter.com/).
 
 ## Cómo calcula
 

@@ -17,6 +17,7 @@ Spanish payroll calculator and tax policy simulator. Work out your take-home pay
 - **Saved scenarios**, share links and JSON import/export.
 - **Five languages**: Spanish, Catalan, Basque, Galician and English.
 - No dependencies, no backend, no cookies: everything is computed in the browser.
+  Visits are counted anonymously with [GoatCounter](https://www.goatcounter.com/).
 
 ## How it works
 

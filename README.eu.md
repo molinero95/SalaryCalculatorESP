@@ -17,6 +17,7 @@ Espainiako nomina-kalkulagailua eta proposamen fiskalen simulagailua. Kalkulatu 
 - **Gordetako agertokiak**, partekatzeko estekak eta JSON inportazioa/esportazioa.
 - **Bost hizkuntza**: castellano, català, euskara, galego eta English.
 - Mendekotasunik gabe, backendik gabe, cookierik gabe: dena nabigatzailean kalkulatzen da.
+  Bisitak modu anonimoan zenbatzen dira [GoatCounter](https://www.goatcounter.com/) bidez.
 
 ## Nola kalkulatzen du
 
