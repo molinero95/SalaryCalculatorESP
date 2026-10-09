@@ -33,7 +33,7 @@ Runtime uses browser ES modules without external application dependencies. npm p
 
 ## Data flow and compatibility
 
-`DEFAULT_INPUT` and `CURRENT_SCENARIO` provide initial values. `app.js` merges and normalizes persisted/shared state, tracks a list of simulations and selects the active one. `computePayroll(input, scenario)` returns calculation outputs used by cards, breakdowns and charts. Scenario builders clone inputs rather than mutate the current baseline.
+`DEFAULT_INPUT` and `CURRENT_SCENARIO` provide initial values. `app.js` merges and normalizes persisted/shared state, tracks a list of simulations and selects the active one. `computePayroll(input, scenario)` returns calculation outputs used by cards, breakdowns and charts. Scenario builders clone inputs rather than mutate the current baseline. Reviewed templates can use an independent `withholdingBrackets` scale when `useSeparateWithholding` is true; annual `brackets` remain the combined reference. See [proposal-scope.md](proposal-scope.md).
 
 Local storage keys are `net-salary:state` and `net-salary:scenarios`. Persistence is debounced and flushed during page lifecycle events. Browser tests that alter saved state must account for that flush; seed corruption on the next page initialization rather than just before reload. The active simulation index is clamped and floored. Shared links use `#s=`; inspect the import/share code before altering the payload because locally saved personal details and shared simulation settings have different roles.
 

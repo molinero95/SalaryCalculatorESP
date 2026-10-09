@@ -134,6 +134,15 @@ export function renderSettings(container, { scenario, reference, onChange, idPre
 
   container.innerHTML =
     groupHtml('groupBrackets', openGroups, '<div class="brackets" data-brackets></div>') +
+    (scenario.incomeTax.useSeparateWithholding
+      ? groupHtml(
+          'groupWithholdingBrackets',
+          openGroups,
+          '<p class="muted">' +
+            t('separateWithholdingHelp') +
+            '</p><div class="brackets" data-withholding-brackets></div>',
+        )
+      : '') +
     GROUPS.map((group) =>
       groupHtml(group.title, openGroups, fieldsHtml(group.fields, scenario, reference, idPrefix)),
     ).join('');
@@ -148,6 +157,24 @@ export function renderSettings(container, { scenario, reference, onChange, idPre
       },
     });
   renderBracketEditor();
+  if (scenario.incomeTax.useSeparateWithholding) {
+    const editor = container.querySelector('[data-withholding-brackets]');
+    const render = () =>
+      renderBrackets(
+        editor,
+        scenario,
+        reference,
+        {
+          recalculate: onChange,
+          rerender: () => {
+            render();
+            onChange();
+          },
+        },
+        'withholdingBrackets',
+      );
+    render();
+  }
 
   container.querySelectorAll('input[data-field]').forEach((input) => {
     input.addEventListener('input', () => {
@@ -205,8 +232,8 @@ function bracketRowHtml(bracket, i, brackets) {
     </tr>`;
 }
 
-function renderBrackets(container, scenario, reference, { recalculate, rerender }) {
-  const { brackets } = scenario.incomeTax;
+function renderBrackets(container, scenario, reference, { recalculate, rerender }, bracketKey = 'brackets') {
+  const brackets = scenario.incomeTax[bracketKey];
   const presetOptions = Object.entries(BRACKET_PRESETS)
     .map(([id, preset]) => `<option value="${id}">${escapeHtml(preset.name)}</option>`)
     .join('');
@@ -232,7 +259,9 @@ function renderBrackets(container, scenario, reference, { recalculate, rerender 
 
   // Highlights changes and shows the template matching the brackets ("custom" otherwise)
   const markChanged = () => {
-    container.classList.toggle('changed', !sameBrackets(brackets, reference.incomeTax.brackets));
+    const referenceKey =
+      bracketKey === 'withholdingBrackets' && !reference.incomeTax.useSeparateWithholding ? 'brackets' : bracketKey;
+    container.classList.toggle('changed', !sameBrackets(brackets, reference.incomeTax[referenceKey]));
     $('[data-preset]').value = matchingPreset(brackets);
   };
   markChanged();
@@ -275,7 +304,7 @@ function renderBrackets(container, scenario, reference, { recalculate, rerender 
   $('[data-preset]').addEventListener('change', (event) => {
     const preset = BRACKET_PRESETS[event.target.value];
     if (!preset) return;
-    scenario.incomeTax.brackets = clone(preset.brackets);
+    scenario.incomeTax[bracketKey] = clone(preset.brackets);
     rerender();
   });
 

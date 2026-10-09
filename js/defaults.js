@@ -5,6 +5,15 @@ export const CURRENT_SCENARIO = {
   name: '',
   proposal: '', // id in PROPOSALS when the scenario comes from a party proposal
   incomeTax: {
+    useSeparateWithholding: false,
+    withholdingBrackets: [
+      { upTo: 12450, rate: 19 },
+      { upTo: 20200, rate: 24 },
+      { upTo: 35200, rate: 30 },
+      { upTo: 60000, rate: 37 },
+      { upTo: 300000, rate: 45 },
+      { upTo: null, rate: 47 },
+    ],
     // Withholding scale (state + general regional, art. 101 LIRPF).
     // `upTo: null` marks the open-ended top bracket.
     brackets: [

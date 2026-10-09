@@ -106,3 +106,5 @@ Withholding includes an additional €600 reduction for more than two descendant
 ## AI / agent documentation
 
 [AGENTS.md](AGENTS.md) · [Project context](docs/AI_CONTEXT.md) · [Development](CONTRIBUTING.md) · [Decisions and roadmap](docs/ROADMAP.md)
+
+[Scope of reviewed policy templates](docs/proposal-scope.md): annual assessment and payroll withholding are distinct; reload a saved proposal to adopt its reviewed template.

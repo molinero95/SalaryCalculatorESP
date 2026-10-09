@@ -143,3 +143,82 @@ test('breakdown exposes separate annual state and regional quotas', async ({ pag
   const row = page.locator('#breakdown tr').filter({ hasText: 'Reducción por más de dos descendientes' });
   await expect(row).toContainText('600');
 });
+
+test('Vox separates payroll withholding and annual regional tax across reloads', async ({ page }) => {
+  await page.selectOption('#proposal-select', 'vox2024');
+  await expect(page.locator('.result-simulation')).toContainText('Neto anual de nómina');
+  await expect(page.locator('.result-simulation')).toContainText('Neto anual tras la renta');
+  await expect(page.locator('.result-tax-scope').first()).toContainText('comunidad autónoma');
+  await expect(page.locator('#proposal-info')).toContainText('Simulación parcial');
+  await expect(page.locator('#settings-simulation [data-withholding-brackets] [data-rate="0"]')).toHaveValue('15');
+  const payroll = await page.locator('.result-simulation .headline strong').textContent();
+  await page.selectOption('#region', 'madrid');
+  await expect(page.locator('.result-simulation .headline strong')).toHaveText(payroll);
+  await page.reload();
+  await expect(page.locator('#settings-simulation [data-withholding-brackets] [data-rate="0"]')).toHaveValue('15');
+  await expect(page.locator('.result-simulation .headline strong')).toHaveText(payroll);
+  await page.locator('#settings-simulation [data-group="groupWithholdingBrackets"] summary').click();
+  await page.locator('#settings-simulation [data-withholding-brackets] [data-rate="0"]').fill('20');
+  await expect(page.locator('.result-simulation .headline strong')).not.toHaveText(payroll);
+});
+
+test('saving retains a named simulation independently of open tabs', async ({ page }) => {
+  await page.fill('#scenario-name', 'Guardada');
+  await page.selectOption('#proposal-select', 'vox2024');
+  await page.fill('#scenario-name', 'Guardada');
+  const net = await page.locator('.result-simulation .headline strong').textContent();
+  await page.locator('#save-scenario').click();
+  await expect(page.locator('#saved-scenarios')).toHaveValue('Guardada');
+  await page.selectOption('#proposal-select', '');
+  await page.reload();
+  await page.selectOption('#saved-scenarios', 'Guardada');
+  await page.locator('#load-scenario').click();
+  await expect(page.locator('.result-simulation .headline strong')).toHaveText(net);
+  await expect(page.locator('#scenario-name')).toHaveValue('Guardada');
+});
+
+test('separate withholding editor compares with the active reference scale', async ({ page }) => {
+  await page.selectOption('#proposal-select', 'sumar2023');
+  const editor = page.locator('#settings-simulation [data-withholding-brackets]');
+  await expect(editor).not.toHaveClass(/changed/);
+  await page.locator('details:has(> #settings-current) > summary').click();
+  await page.locator('#settings-current [data-group="groupBrackets"] summary').click();
+  await page.locator('#settings-current [data-rate="0"]').fill('20');
+  await expect(editor).toHaveClass(/changed/);
+});
+
+test('floating annual difference stays inside narrow viewports with large amounts', async ({ page }, testInfo) => {
+  await page.setViewportSize({ width: 320, height: 640 });
+  await page.fill('#salary', '45000');
+  await page.selectOption('#proposal-select', 'vox2024');
+  await page.evaluate(() => {
+    document.querySelector('#sticky-value').textContent = '+999.999.999.999.999,99 € / anual';
+  });
+  await page.locator('#sticky-summary').scrollIntoViewIfNeeded();
+  await expect(page.locator('#sticky-summary')).toBeVisible();
+  await testInfo.attach('floating-summary-narrow', {
+    body: await page.screenshot(),
+    contentType: 'image/png',
+  });
+
+  await expect
+    .poll(() =>
+      page.evaluate(() => {
+        const rect = document.querySelector('#sticky-summary').getBoundingClientRect();
+        return (
+          rect.left >= 0 &&
+          rect.right <= document.documentElement.clientWidth &&
+          document.documentElement.scrollWidth <= document.documentElement.clientWidth
+        );
+      }),
+    )
+    .toBe(true);
+  await page.selectOption('#language', 'eu');
+  await testInfo.attach('floating-summary-narrow-basque', {
+    body: await page.screenshot({ fullPage: true }),
+    contentType: 'image/png',
+  });
+  await expect
+    .poll(() => page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth))
+    .toBe(true);
+});

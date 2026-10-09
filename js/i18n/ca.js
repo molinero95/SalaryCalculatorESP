@@ -28,7 +28,7 @@ export default {
   disability65: '≥ 65 %',
   current: 'Actual',
   simulation: 'Simulació',
-  netAnnual: 'Net anual',
+  netAnnual: 'Net anual de nòmina',
   netPerPayment: 'Net per paga',
   netMonthly: 'Net mensual',
   extraPayment: 'Paga extra (×2)',
@@ -260,12 +260,17 @@ export default {
     "El que pagaries a la declaració amb l'escala de la teva comunitat. La diferència amb el que s'ha retingut surt a tornar (+) o a pagar (−).",
   loadProposal: 'Carregar proposta de partit',
   proposalSource: 'Font',
+  payrollAnnualScope:
+    'La nòmina descompta retencions. El net després de la renda incorpora la devolució o el pagament estimat i la comunitat autònoma seleccionada.',
+  groupWithholdingBrackets: 'Escala de retenció independent',
+  separateWithholdingHelp:
+    'Aquests trams només canvien la retenció de nòmina. L’escala principal canvia el càlcul anual.',
   proposalVerified: 'Verificat el',
   proposalPartial: 'Simulació parcial',
   proposalVoxNote:
-    "Només canvia la meitat estatal: 15 % fins a 70.000 € i 25 % per sobre; l'autonòmica es manté. Per això l'escala conjunta puja en els primers trams (15 % + 9,5 % = 24,5 %), compensat per un mínim personal de 22.000 €. Inclou la rebaixa estatal de 4 punts per fill, amb un mínim del 0 %. La retenció és estimada; no inclou els xecs per naixement.",
+    'Proposta de 2024: escala estatal anual del 15 % fins a 70.000 € i 25 % sobre l’excés; manté l’escala autonòmica. L’article 101 proposa una retenció independent del 15 %/25 %. Mínim personal de 22.000 € i rebaixa de 4 punts per fill només a la quota estatal anual. Es mantenen els mínims autonòmics expressos; altres comunitats hereten el mínim proposat. Simulació parcial: conserva les regles reglamentàries i exclou els xecs per naixement.',
   proposalSumarNote:
-    'Apuja el tipus marginal màxim al 52 % per sobre de 300.000 €. El programa no detalla els tipus entre 120.000 i 300.000 €, que es mantenen.',
+    'Apuja el tipus marginal màxim al 52 % per sobre de 300.000 €. El programa no detalla els tipus entre 120.000 i 300.000 €, que es mantenen. La retenció de nòmina es manté: el programa no en defineix una escala nova.',
   proposalPsoeNote: 'Proposa augmentar el mínim per descendents i persones dependents, sense xifres concretes.',
   proposalPpNote:
     'Proposa bonificacions del 100 %, 75 %, 50 % i 25 % en els primers quatre anys de vida laboral de determinats joves. No simulades: falten dades d’elegibilitat.',

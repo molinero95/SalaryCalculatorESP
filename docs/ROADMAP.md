@@ -17,7 +17,7 @@
 ## Implemented foundation
 
 - Multiple simulation tabs, comparison cards/charts and persistent selection.
-- Separate annual state/regional quotas and breakdown labels.
+- Separate annual state/regional quotas and breakdown labels; reviewed proposal withholding scales and explicit payroll/annual card metrics.
 - Official-source threshold/minimum/contribution/pension/flexible-pay regression coverage for the supported fiscal scope.
 - README AI/inaccuracy warnings in all five languages.
 - Validated proposal catalogue, history/provenance, generated-data CI check and verification/partial UI labels.

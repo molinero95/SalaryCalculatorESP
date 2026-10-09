@@ -429,6 +429,7 @@ main > *,
 }
 
 .help-tip::after {
+  display: none;
   content: attr(data-tip);
   position: absolute;
   left: 50%;
@@ -455,6 +456,7 @@ main > *,
 .help-tip:hover::after,
 .help-tip:focus-visible::after,
 .help-tip.open::after {
+  display: block;
   visibility: visible;
   opacity: 1;
 }
@@ -465,7 +467,7 @@ main > *,
 
 .results {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
   gap: 1.25rem;
 }
 
@@ -1243,6 +1245,10 @@ main > *,
    ========================================================================== */
 
 .sticky-summary {
+  max-width: calc(100% - 2rem);
+  min-width: 0;
+  flex-wrap: wrap;
+  overflow-wrap: anywhere;
   position: fixed;
   right: 1rem;
   bottom: 1rem;
@@ -1263,6 +1269,8 @@ main > *,
 }
 
 .sticky-summary strong {
+  min-width: 0;
+  max-width: 100%;
   font-variant-numeric: tabular-nums;
 }
 
@@ -1350,6 +1358,15 @@ main > *,
     display: flex;
   }
 
+  .segmented label {
+    min-width: 0;
+  }
+
+  .segmented span {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
   .fields {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.75rem;
@@ -1374,6 +1391,7 @@ main > *,
 
   .summary-strip {
     display: table;
+    table-layout: fixed;
     grid-column: 1 / -1;
     width: 100%;
     border-collapse: collapse;
@@ -1386,6 +1404,7 @@ main > *,
 
   .summary-strip th,
   .summary-strip td {
+    overflow-wrap: anywhere;
     padding: 0.5rem 0.4rem;
     text-align: right;
   }
@@ -1472,6 +1491,12 @@ main > *,
   .breakdown-table th,
   .breakdown-table td {
     border-bottom: 0;
+  }
+
+  .breakdown-table td {
+    min-width: 0;
+    white-space: normal;
+    overflow-wrap: anywhere;
   }
 
   .breakdown-table thead th:first-child {

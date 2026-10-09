@@ -28,7 +28,7 @@ export default {
   disability65: '≥ 65 %',
   current: 'Actual',
   simulation: 'Simulación',
-  netAnnual: 'Neto anual',
+  netAnnual: 'Neto anual de nómina',
   netPerPayment: 'Neto por paga',
   netMonthly: 'Neto mensual',
   extraPayment: 'Paga extra (×2)',
@@ -259,12 +259,17 @@ export default {
     'Lo que pagarías en la declaración con la escala de tu comunidad. La diferencia con lo retenido sale a devolver (+) o a pagar (−).',
   loadProposal: 'Cargar propuesta de partido',
   proposalSource: 'Fuente',
+  payrollAnnualScope:
+    'La nómina descuenta retenciones. El neto tras la renta incorpora la devolución o el pago estimado y la comunidad autónoma seleccionada.',
+  groupWithholdingBrackets: 'Escala de retención independiente',
+  separateWithholdingHelp:
+    'Estos tramos solo cambian la retención de nómina. La escala principal cambia el cálculo anual.',
   proposalVerified: 'Verificado el',
   proposalPartial: 'Simulación parcial',
   proposalVoxNote:
-    'Solo cambia la mitad estatal: 15 % hasta 70.000 € y 25 % por encima; la autonómica se mantiene. Por eso la escala conjunta sube en los primeros tramos (15 % + 9,5 % = 24,5 %), compensado por un mínimo personal de 22.000 €. Incluye la rebaja estatal de 4 puntos por hijo, con un mínimo del 0 %. La retención es una estimación; no incluye los cheques por nacimiento.',
+    'Propuesta de 2024: escala estatal anual del 15 % hasta 70.000 € y 25 % sobre el exceso; mantiene la escala autonómica. El artículo 101 propone una retención independiente del 15 %/25 %. Mínimo personal de 22.000 € y rebaja de 4 puntos por hijo solo en la cuota estatal anual. Se conservan los mínimos autonómicos fijados expresamente; en otras comunidades se hereda el mínimo propuesto. Simulación parcial: conserva reglas reglamentarias de retención y no incluye cheques por nacimiento.',
   proposalSumarNote:
-    'Sube el tipo marginal máximo al 52 % por encima de 300.000 €. El programa no detalla los tipos entre 120.000 y 300.000 €, que se mantienen.',
+    'Sube el tipo marginal máximo al 52 % por encima de 300.000 €. El programa no detalla los tipos entre 120.000 y 300.000 €, que se mantienen. La retención de nómina se mantiene: el programa no define una escala nueva para ella.',
   proposalPsoeNote: 'Propone aumentar el mínimo por descendientes y personas dependientes, sin cifras concretas.',
   proposalPpNote:
     'Propone bonificaciones del 100 %, 75 %, 50 % y 25 % en los primeros cuatro años de vida laboral de determinados jóvenes. No simuladas: faltan datos de elegibilidad.',

@@ -209,7 +209,7 @@ test('child rate reduction preserves the regional share and never mutates a scen
   const reduced = computePayroll(input, vox);
   const without = computePayroll(input, { ...vox, incomeTax: { ...vox.incomeTax, childRateReduction: 0 } });
   assert.ok(reduced.incomeTax.annualTax < without.incomeTax.annualTax);
-  assert.ok(reduced.incomeTax.withheld < without.incomeTax.withheld);
+  assert.equal(reduced.incomeTax.withheld, without.incomeTax.withheld); // Bill article 101 has a separate withholding scale.
   assert.equal(JSON.stringify(vox), before);
   const many = computePayroll({ ...input, children: 7 }, vox);
   const more = computePayroll(

@@ -38,16 +38,36 @@ export const PROPOSALS = {
         ],
         personalAllowance: 22000,
         childRateReduction: 4,
+        useSeparateWithholding: true,
+        withholdingBrackets: [
+          {
+            upTo: 70000,
+            rate: 15,
+          },
+          {
+            upTo: null,
+            rate: 25,
+          },
+        ],
       },
     },
-    status: 'modelled',
+    status: 'partial',
     verifiedAt: '2026-10-09',
     sourceType: 'official',
-    limitations: [],
+    limitations: [
+      'Article 101 specifies separate 15/25 withholding rates; regulatory calculation details are retained as an estimate. Child rate relief is applied to annual state tax, not inferred for withholding.',
+      'Regional scales remain unchanged. Existing explicitly fixed regional minima are retained; regions without overrides inherit the proposed article 57 minimum. No regional-law adaptation is assumed.',
+      'Birth cheques and other measures outside income tax are not simulated.',
+    ],
     history: [
       {
         date: '2026-10-09',
         description: 'Initial source-reviewed catalogue.',
+      },
+      {
+        date: '2026-10-09',
+        description:
+          'Reviewed bill pages 5–7: separate article 101 withholding scale from article 63 annual state scale; mark regulatory and regional-minimum assumptions.',
       },
     ],
   },
@@ -86,6 +106,33 @@ export const PROPOSALS = {
             rate: 52,
           },
         ],
+        useSeparateWithholding: true,
+        withholdingBrackets: [
+          {
+            upTo: 12450,
+            rate: 19,
+          },
+          {
+            upTo: 20200,
+            rate: 24,
+          },
+          {
+            upTo: 35200,
+            rate: 30,
+          },
+          {
+            upTo: 60000,
+            rate: 37,
+          },
+          {
+            upTo: 300000,
+            rate: 45,
+          },
+          {
+            upTo: null,
+            rate: 47,
+          },
+        ],
       },
     },
     status: 'partial',
@@ -93,11 +140,17 @@ export const PROPOSALS = {
     sourceType: 'official',
     limitations: [
       'Intermediate rates between 120000 and 300000 are not specified; unchanged baseline rates are assumed.',
+      'Annual top-rate scenario only: the programme does not specify a replacement payroll withholding procedure, so current withholding is retained.',
     ],
     history: [
       {
         date: '2026-10-09',
         description: 'Initial source-reviewed catalogue.',
+      },
+      {
+        date: '2026-10-09',
+        description:
+          'Separate annual top-rate proposal from unchanged payroll withholding; no replacement withholding procedure inferred.',
       },
     ],
   },

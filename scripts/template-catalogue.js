@@ -32,19 +32,34 @@ export function validateCatalogue(catalogue) {
     const tax = p.changes?.incomeTax;
     if (!tax || Object.keys(p.changes).some((k) => k !== 'incomeTax')) throw new Error('Unsupported changes');
     for (const [key, value] of Object.entries(tax)) {
-      if (!['brackets', 'personalAllowance', 'childRateReduction'].includes(key))
+      if (
+        ![
+          'brackets',
+          'withholdingBrackets',
+          'useSeparateWithholding',
+          'personalAllowance',
+          'childRateReduction',
+        ].includes(key)
+      )
         throw new Error('Unsupported parameter');
-      if (key !== 'brackets' && (!Number.isFinite(value) || value < 0 || (key === 'childRateReduction' && value > 100)))
+      if (key === 'useSeparateWithholding' && typeof value !== 'boolean') throw new Error('Invalid withholding mode');
+      if (
+        !['brackets', 'withholdingBrackets', 'useSeparateWithholding'].includes(key) &&
+        (!Number.isFinite(value) || value < 0 || (key === 'childRateReduction' && value > 100))
+      )
         throw new Error('Invalid parameter');
     }
     if (!Array.isArray(tax.brackets) || !tax.brackets.length) throw new Error('Missing brackets');
-    let previous = 0;
-    tax.brackets.forEach(({ upTo, rate }, i) => {
-      if (!Number.isFinite(rate) || rate < 0 || rate > 100) throw new Error('Invalid rate');
-      if (i === tax.brackets.length - 1 ? upTo !== null : !Number.isFinite(upTo) || upTo <= previous)
-        throw new Error('Invalid bracket limits');
-      previous = upTo;
-    });
+    if (tax.useSeparateWithholding && !tax.withholdingBrackets?.length) throw new Error('Missing withholding scale');
+    for (const brackets of [tax.brackets, ...(tax.withholdingBrackets ? [tax.withholdingBrackets] : [])]) {
+      let previous = 0;
+      brackets.forEach(({ upTo, rate }, i) => {
+        if (!Number.isFinite(rate) || rate < 0 || rate > 100) throw new Error('Invalid rate');
+        if (i === brackets.length - 1 ? upTo !== null : !Number.isFinite(upTo) || upTo <= previous)
+          throw new Error('Invalid bracket limits');
+        previous = upTo;
+      });
+    }
   }
   return catalogue;
 }
