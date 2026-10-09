@@ -18,7 +18,7 @@ Calculadora de nómina para España y simulador de propuestas fiscales. Calcula 
 - **Retribución flexible**: tarjeta restaurante, transporte, seguro médico, guardería y formación, con sus límites exentos.
 - **Plan de pensiones**: plan individual y de empresa, con el ahorro estimado en la renta.
 - **Gráfico por nivel de salario** para ver a quién beneficia o perjudica una propuesta.
-- **Escenarios guardados**, enlaces para compartir e importación/exportación en JSON.
+- **Enlaces para compartir propuestas** y restauración automática de las simulaciones abiertas en el navegador.
 - **Cinco idiomas**: castellano, català, euskara, galego e English.
 - Sin dependencias, sin backend, sin cookies: todo se calcula en el navegador.
   Las visitas se cuentan de forma anónima con [GoatCounter](https://www.goatcounter.com/).
@@ -113,6 +113,6 @@ La base de retención incluye una reducción adicional de 600 € por más de do
 
 [AGENTS.md](AGENTS.md) · [Contexto del proyecto](docs/AI_CONTEXT.md) · [Desarrollo](CONTRIBUTING.md) · [Decisiones y próximos pasos](docs/ROADMAP.md)
 
-[Scope of reviewed policy templates](docs/proposal-scope.md): annual assessment and payroll withholding are distinct; reload a saved proposal to adopt its reviewed template.
+[Scope of reviewed policy templates](docs/proposal-scope.md): annual assessment and payroll withholding are distinct; reapply a proposal template to adopt its reviewed rules.
 
 El modelo ampliado incluye edad, contratos temporales, ascendientes elegibles, retribución flexible, pensiones ordinarias y determinadas rentas y alquileres anuales; consulta [reglas y exclusiones](docs/foral-payroll.md).

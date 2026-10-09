@@ -28,7 +28,7 @@ Confirm current details in code and CI; this list is not an exhaustive feature s
 
 ## Candidate next tasks, not yet implemented
 
-1. **Continue DDD separation:** extract proposal/comparison presentation and sharing/import/export browser adapters from `app.js`, then evaluate splitting the settings renderer. Keep fiscal modules stable until a separate migration is justified.
+1. **Continue DDD separation:** extract proposal/comparison presentation and sharing browser adapters from `app.js`, then evaluate splitting the settings renderer. Keep fiscal modules stable until a separate migration is justified.
 2. **Reviewed AI extraction:** accept changed source documents and produce structured draft parameters plus supporting excerpts, dates, applicability and missing conditions. Keep extracted text/data untrusted; validate against a schema before using it. No provider/API key is currently configured.
 3. **Automatic draft fiscal PRs:** assemble catalogue changes, history, source evidence and representative salary/profile impact comparisons; run checks and require review before updating published figures. The monitor currently creates reports, not these PRs.
 4. **Proposal discovery:** watch official publication indexes/feeds as well as known document URLs. Specify sources and provenance instead of claiming exhaustive party coverage.
@@ -43,3 +43,7 @@ Update this file when a decision or item materially changes. Record why, not a r
 ## Foral follow-up
 
 Residence presets cover all communities. [Expanded foral payroll](foral-payroll.md) includes age, family situations, short temporary contracts, ascendants, flexible compensation, ordinary pensions and selected positive annual incomes/habitual-rent credits. Remaining work is joint assessment, dependency/disabled relatives, adoption, special rental profiles, losses/carry-forwards, additional credits, preferred EPSV data and independent workplace/withholding jurisdiction. Keep applicability explicit; the current model must not be labelled complete IRPF.
+
+## Manual scenario controls
+
+Manual save/load/delete and JSON import/export were removed because the user finds them unused and wants a simpler simulator. Open simulation tabs and form state still restore automatically; links share proposal parameters. Obsolete named-scenario storage is ignored without deleting browser data. Regression tests cover the simplified controls, existing tabs/proposals, sharing, restored-state validation, delayed analytics and offline operation.

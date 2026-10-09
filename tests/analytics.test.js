@@ -6,13 +6,13 @@ test('events before the async provider loads are delivered once, in order', () =
   let counter = null;
   const events = [];
   const tracker = createEventTracker(() => counter);
-  tracker.track('save-scenario');
+  tracker.track('add-simulation');
   tracker.track('share');
   counter = { count: (event) => events.push(event) };
   tracker.flush();
   tracker.flush();
   assert.deepEqual(events, [
-    { path: 'save-scenario', title: 'save-scenario', event: true },
+    { path: 'add-simulation', title: 'add-simulation', event: true },
     { path: 'share', title: 'share', event: true },
   ]);
 });
@@ -20,8 +20,8 @@ test('events before the async provider loads are delivered once, in order', () =
 test('loaded counters receive events immediately without personal parameters', () => {
   const events = [];
   const tracker = createEventTracker(() => ({ count: (event) => events.push(event) }));
-  tracker.track('export-json');
-  assert.deepEqual(events, [{ path: 'export-json', title: 'export-json', event: true }]);
+  tracker.track('copy-current');
+  assert.deepEqual(events, [{ path: 'copy-current', title: 'copy-current', event: true }]);
 });
 
 test('blocked counters have a bounded queue', () => {

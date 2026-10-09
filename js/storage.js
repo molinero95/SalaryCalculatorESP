@@ -1,7 +1,6 @@
 // Local persistence and URL-safe state serialisation.
 
 const STATE_KEY = 'net-salary:state';
-const SCENARIOS_KEY = 'net-salary:scenarios';
 
 function read(key, fallback) {
   try {
@@ -21,17 +20,6 @@ function write(key, value) {
 
 export const loadState = () => read(STATE_KEY, null);
 export const saveState = (state) => write(STATE_KEY, state);
-
-export const listScenarios = () => read(SCENARIOS_KEY, {});
-
-export function saveScenario(scenario) {
-  write(SCENARIOS_KEY, { ...listScenarios(), [scenario.name]: scenario });
-}
-
-export function deleteScenario(name) {
-  const { [name]: _removed, ...rest } = listScenarios();
-  write(SCENARIOS_KEY, rest);
-}
 
 /** Encodes any JSON value as Unicode-safe, URL-safe base64. */
 export function encode(value) {

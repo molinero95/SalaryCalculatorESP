@@ -18,7 +18,7 @@ Espainiako nomina-kalkulagailua eta proposamen fiskalen simulagailua. Kalkulatu 
 - **Ordainsari malgua**: jatetxe-txartela, garraioa, osasun-asegurua, haurtzaindegia eta prestakuntza, salbuetsitako mugekin.
 - **Pentsio-plana**: banakako plana eta enpresakoa, errentan lortuko den aurrezkiarekin.
 - **Grafikoa soldata-mailaren arabera**, proposamen batek nori mesede edo kalte egiten dion ikusteko.
-- **Gordetako agertokiak**, partekatzeko estekak eta JSON inportazioa/esportazioa.
+- **Proposamenak partekatzeko estekak** eta arakatzaileko simulazio irekien leheneratze automatikoa.
 - **Bost hizkuntza**: castellano, català, euskara, galego eta English.
 - Mendekotasunik gabe, backendik gabe, cookierik gabe: dena nabigatzailean kalkulatzen da.
   Bisitak modu anonimoan zenbatzen dira [GoatCounter](https://www.goatcounter.com/) bidez.
@@ -107,7 +107,7 @@ Atxikipen-oinarriak 600 €-ko murrizketa gehigarria du bi ondorengo baino gehia
 
 [AGENTS.md](AGENTS.md) · [Proiektuaren testuingurua](docs/AI_CONTEXT.md) · [Garapena](CONTRIBUTING.md) · [Erabakiak eta hurrengo urratsak](docs/ROADMAP.md)
 
-[Scope of reviewed policy templates](docs/proposal-scope.md): annual assessment and payroll withholding are distinct; reload a saved proposal to adopt its reviewed template.
+[Scope of reviewed policy templates](docs/proposal-scope.md): annual assessment and payroll withholding are distinct; reapply a proposal template to adopt its reviewed rules.
 
 Zerga-egoitza autonomia erkidegoaren, Euskadiko lurralde historikoaren eta lurraldearen arabera iragazitako aukerako hiriaren bidez hautatzen da. Foru-ereduak baieztatutako seme-alaba hautagarriak eta norberaren desgaitasuna barne hartzen ditu; ikusi [arauak eta mugak](docs/foral-family.md).
 

@@ -18,7 +18,7 @@ Calculadora de nòmina per a Espanya i simulador de propostes fiscals. Calcula e
 - **Retribució flexible**: targeta restaurant, transport, assegurança mèdica, llar d'infants i formació, amb els seus límits exempts.
 - **Pla de pensions**: pla individual i d'empresa, amb l'estalvi estimat a la renda.
 - **Gràfic per nivell de salari** per veure a qui beneficia o perjudica una proposta.
-- **Escenaris desats**, enllaços per compartir i importació/exportació en JSON.
+- **Enllaços per compartir propostes** i restauració automàtica de les simulacions obertes al navegador.
 - **Cinc idiomes**: castellano, català, euskara, galego i English.
 - Sense dependències, sense backend, sense galetes: tot es calcula al navegador.
   Les visites es compten de manera anònima amb [GoatCounter](https://www.goatcounter.com/).
@@ -107,7 +107,7 @@ La base de retenció inclou una reducció addicional de 600 € per més de dos 
 
 [AGENTS.md](AGENTS.md) · [Context del projecte](docs/AI_CONTEXT.md) · [Desenvolupament](CONTRIBUTING.md) · [Decisions i pròxims passos](docs/ROADMAP.md)
 
-[Scope of reviewed policy templates](docs/proposal-scope.md): annual assessment and payroll withholding are distinct; reload a saved proposal to adopt its reviewed template.
+[Scope of reviewed policy templates](docs/proposal-scope.md): annual assessment and payroll withholding are distinct; reapply a proposal template to adopt its reviewed rules.
 
 La residència es tria per comunitat autònoma, territori històric al País Basc i ciutat opcional filtrada pel territori. El model foral inclou fills elegibles confirmats i discapacitat pròpia; vegeu [regles i límits](docs/foral-family.md).
 
