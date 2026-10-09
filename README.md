@@ -13,6 +13,7 @@ Calculadora de nómina para España y simulador de propuestas fiscales. Calcula 
 - **Tramos editables**: añade, quita o modifica tramos; aplica plantillas autonómicas o deflacta todos los límites de una vez.
 - **Todos los parámetros personalizables**: mínimos personales y familiares, reducción por rendimientos del trabajo, deducción SMI, bases de cotización, tipos de la empresa…
 - **Retribución flexible**: tarjeta restaurante, transporte, seguro médico, guardería y formación, con sus límites exentos.
+- **Plan de pensiones**: plan individual y de empresa, con el ahorro estimado en la renta.
 - **Gráfico por nivel de salario** para ver a quién beneficia o perjudica una propuesta.
 - **Escenarios guardados**, enlaces para compartir e importación/exportación en JSON.
 - **Cinco idiomas**: castellano, català, euskara, galego e English.
@@ -41,6 +42,7 @@ Calculadora de nómina para España y simulador de propuestas fiscales. Calcula 
 | Reducción máxima rendimientos del trabajo | 7.302 € |
 | Deducción SMI (en la renta) | 590,89 € hasta 17.094 €, se anula en 20.048,45 € |
 | Mínimo exento de retención | 15.876 € – 19.262 € según situación familiar |
+| Plan de pensiones (reducción) | 1.500 € individual + 8.500 € de empleo, máx. 30 % de rendimientos netos |
 | Retribución flexible exenta | Restaurante 11 €/día · transporte 1.500 €/año · seguro médico 500 €/persona |
 
 > [!IMPORTANT]

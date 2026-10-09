@@ -13,6 +13,7 @@ Espainiako nomina-kalkulagailua eta proposamen fiskalen simulagailua. Kalkulatu 
 - **Tarte editagarriak**: gehitu, kendu edo aldatu tarteak; aplikatu autonomia-erkidegoetako txantiloiak edo deflaktatu muga guztiak batera.
 - **Parametro guztiak pertsonalizagarriak**: gutxieneko pertsonal eta familiarrak, lan-etekinengatiko murrizketa, LGS kenkaria, kotizazio-oinarriak, enpresaren tasak…
 - **Ordainsari malgua**: jatetxe-txartela, garraioa, osasun-asegurua, haurtzaindegia eta prestakuntza, salbuetsitako mugekin.
+- **Pentsio-plana**: banakako plana eta enpresakoa, errentan lortuko den aurrezkiarekin.
 - **Grafikoa soldata-mailaren arabera**, proposamen batek nori mesede edo kalte egiten dion ikusteko.
 - **Gordetako agertokiak**, partekatzeko estekak eta JSON inportazioa/esportazioa.
 - **Bost hizkuntza**: castellano, català, euskara, galego eta English.
@@ -41,6 +42,7 @@ Espainiako nomina-kalkulagailua eta proposamen fiskalen simulagailua. Kalkulatu 
 | Lan-etekinengatiko gehieneko murrizketa | 7.302 € |
 | LGS kenkaria (errentan) | 590,89 € 17.094 €-raino; 20.048,45 €-an desagertzen da |
 | Atxikipenetik salbuetsitako gutxienekoa | 15.876 € – 19.262 €, familia-egoeraren arabera |
+| Pentsio-plana (murrizketa) | 1.500 € banakakoa + 8.500 € enplegukoa, gehienez etekin garbien % 30 |
 | Ordainsari malgu salbuetsia | Jatetxea 11 €/egun · garraioa 1.500 €/urte · osasun-asegurua 500 €/pertsona |
 
 > [!IMPORTANT]

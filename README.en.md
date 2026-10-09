@@ -13,6 +13,7 @@ Spanish payroll calculator and tax policy simulator. Work out your take-home pay
 - **Editable brackets**: add, remove or change brackets; apply regional templates or index every threshold at once.
 - **Every parameter is configurable**: personal and family allowances, employment income reduction, minimum wage tax credit, contribution bases, employer rates…
 - **Flexible compensation**: meal card, transport, health insurance, childcare and training, with their exempt limits.
+- **Pension plans**: individual and company plans, with the estimated saving in the tax return.
 - **Chart by salary level** to see who gains or loses under a proposal.
 - **Saved scenarios**, share links and JSON import/export.
 - **Five languages**: Spanish, Catalan, Basque, Galician and English.
@@ -41,6 +42,7 @@ Spanish payroll calculator and tax policy simulator. Work out your take-home pay
 | Maximum employment income reduction | €7,302 |
 | Low-earner credit (annual return) | €590.89 up to €17,094, zero at €20,048.45 |
 | Withholding-free minimum | €15,876 – €19,262 depending on family situation |
+| Pension plans (tax base reduction) | €1,500 individual + €8,500 employment, max 30 % of net income |
 | Tax-exempt flexible pay | Meals €11/day · transport €1,500/year · health insurance €500/person |
 
 > [!IMPORTANT]

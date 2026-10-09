@@ -13,6 +13,7 @@ Calculadora de nòmina per a Espanya i simulador de propostes fiscals. Calcula e
 - **Trams editables**: afegeix, treu o modifica trams; aplica plantilles autonòmiques o deflacta tots els límits alhora.
 - **Tots els paràmetres personalitzables**: mínims personals i familiars, reducció per rendiments del treball, deducció SMI, bases de cotització, tipus de l'empresa…
 - **Retribució flexible**: targeta restaurant, transport, assegurança mèdica, llar d'infants i formació, amb els seus límits exempts.
+- **Pla de pensions**: pla individual i d'empresa, amb l'estalvi estimat a la renda.
 - **Gràfic per nivell de salari** per veure a qui beneficia o perjudica una proposta.
 - **Escenaris desats**, enllaços per compartir i importació/exportació en JSON.
 - **Cinc idiomes**: castellano, català, euskara, galego i English.
@@ -41,6 +42,7 @@ Calculadora de nòmina per a Espanya i simulador de propostes fiscals. Calcula e
 | Reducció màxima per rendiments del treball | 7.302 € |
 | Deducció SMI (a la renda) | 590,89 € fins a 17.094 €, s'anul·la a 20.048,45 € |
 | Mínim exempt de retenció | 15.876 € – 19.262 € segons la situació familiar |
+| Pla de pensions (reducció) | 1.500 € individual + 8.500 € d'ocupació, màx. 30 % dels rendiments nets |
 | Retribució flexible exempta | Restaurant 11 €/dia · transport 1.500 €/any · assegurança mèdica 500 €/persona |
 
 > [!IMPORTANT]
