@@ -1,6 +1,22 @@
 // Spanish (Castilian) translations. `f_*` keys label the settings fields.
 
 export default {
+  childrenUnder6: 'De ellos, menores de 6 años (incluye menores de 3)',
+  children6to15: 'De ellos, de 6 a 15 años',
+  childrenBasque: 'Hijos con derecho a deducción (hasta 30 años inclusive)',
+  childrenNavarra: 'Hijos con derecho a deducción (menores de 30)',
+  foralChildrenConfirmed: 'Confirmo que todos los hijos indicados cumplen los requisitos forales',
+  foralReducedMobility: 'Movilidad reducida acreditada: BLAM ≥ 25 % (discapacidad 33–64 %)',
+  foralAlavaRural: 'Álava: municipio de menos de 4.000 habitantes y centro principal de intereses familiar en él',
+  foralChildrenBasqueHelp:
+    'Modelo de hijos sin discapacidad, sin adopciones ni cambios familiares durante el año: conviven contigo, no superan el SMI de renta no exenta ni pertenecen a otra unidad familiar que lo supere, y no presentan ni deben presentar IRPF. Introduce las edades al cierre del año. La casilla de cómputo íntegro significa un único progenitor con derecho; sin marcar, se reparte entre dos.',
+  foralChildrenNavarraHelp:
+    'Modelo de hijos solteros sin discapacidad, sin adopciones ni cambios familiares durante el año: conviven contigo y su renta no exenta no supera el IPREM. Introduce las edades al cierre del año. La casilla de cómputo íntegro significa un único progenitor con derecho; sin marcar, se reparte entre dos.',
+  foralUnsupported:
+    'Este perfil foral aún no está validado o faltan requisitos familiares. Se ocultan los resultados. Comprueba las edades y confirma los requisitos de los hijos. El modelo requiere contrato indefinido, menor de 65 años, situación familiar 3, sin ascendientes, retribución flexible ni pensiones.',
+  foralScope:
+    'Modelo foral limitado: empleo indefinido, menor de 65 años, situación familiar 3; incluye hijos elegibles y discapacidad propia acreditada. No incluye ascendientes, dependencia, discapacidad de familiares, adopciones, cambios familiares durante el año, retribución flexible ni pensiones. Trabajo y residencia deben corresponder al mismo territorio. Las propuestas de IRPF común no cambian las reglas forales.',
+
   residence: 'Residencia fiscal',
   residenceOtherCity: 'Otra ciudad / solo territorio',
   residenceForal: 'Régimen foral',
@@ -12,12 +28,6 @@ export default {
   rowForalQuota: 'Cuota foral antes de deducciones',
 
   rowForalCredits: 'Minoraciones y deducciones forales',
-
-  foralUnsupported:
-    'Este perfil foral aún no está validado. Se ocultan los resultados. Para usar el modelo básico: contrato indefinido, menor de 65 años, situación familiar 3, sin hijos, ascendientes, discapacidad, retribución flexible ni pensiones.',
-
-  foralScope:
-    'Modelo foral limitado: empleo indefinido, menor de 65 años, sin familiares, discapacidad, retribución flexible ni pensiones. Se supone que el trabajo y la residencia corresponden al mismo territorio. Las propuestas y los editores de IRPF común no modifican estas reglas forales; sí se pueden simular cotizaciones.',
 
   locationRate: 'Tipo marginal',
 

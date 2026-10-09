@@ -540,6 +540,17 @@ let lastResults;
 function update() {
   cancelAnimationFrame(chartFrame);
   renderLocationBrackets();
+  const foral = isForal(state.input.region);
+  const basque = foral && state.input.region !== 'navarra';
+  $('#foral-under6-field').hidden = !basque;
+  $('#foral-age6to15-field').hidden = state.input.region !== 'alava';
+  $('#foral-children-field').hidden = !foral || state.input.children === 0;
+  $('#foral-mobility-field').hidden = !basque || state.input.disability !== 33;
+  $('#foral-rural-field').hidden = state.input.region !== 'alava' || state.input.children === 0;
+  $('label[for="children"]').textContent = t(
+    foral ? (state.input.region === 'navarra' ? 'childrenNavarra' : 'childrenBasque') : 'children',
+  );
+  $('#foral-children-help').textContent = t(basque ? 'foralChildrenBasqueHelp' : 'foralChildrenNavarraHelp');
   const unsupported = unsupportedFiscalProfile(state.input);
   const scope = $('#fiscal-scope');
   scope.hidden = !isForal(state.input.region);

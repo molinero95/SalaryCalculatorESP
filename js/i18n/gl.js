@@ -1,6 +1,22 @@
 // Galician translations. `f_*` keys label the settings fields.
 
 export default {
+  childrenUnder6: 'Deles, menores de 6 anos (inclúe menores de 3)',
+  children6to15: 'Deles, de 6 a 15 anos',
+  childrenBasque: 'Fillos con dereito a dedución (ata 30 anos inclusive)',
+  childrenNavarra: 'Fillos con dereito a dedución (menores de 30)',
+  foralChildrenConfirmed: 'Confirmo que todos os fillos indicados cumpren os requisitos forais',
+  foralReducedMobility: 'Mobilidade reducida acreditada: BLAM ≥ 25 % (discapacidade 33–64 %)',
+  foralAlavaRural: 'Álava: municipio de menos de 4.000 habitantes e centro principal de intereses familiar nel',
+  foralChildrenBasqueHelp:
+    'Fillos sen discapacidade, adopcións nin cambios familiares durante o ano: conviven contigo, renda non exenta ata o SMI, sen outra unidade familiar que supere o SMI, e non presentan nin deben presentar IRPF. Idades ao final do ano. Cómputo íntegro: un único proxenitor con dereito; doutro xeito repártese entre dous.',
+  foralChildrenNavarraHelp:
+    'Fillos solteiros sen discapacidade, adopcións nin cambios familiares durante o ano: conviven contigo e renda non exenta ata o IPREM. Idades ao final do ano. Cómputo íntegro: un único proxenitor con dereito; doutro xeito repártese entre dous.',
+  foralUnsupported:
+    'Este perfil foral non está validado ou faltan requisitos familiares. Ocúltanse os resultados. Comproba as idades e confirma os requisitos dos fillos. Require contrato indefinido, menos de 65 anos, situación familiar 3, sen ascendentes, retribución flexible nin pensións.',
+  foralScope:
+    'Modelo foral limitado: emprego indefinido, menos de 65 anos, situación familiar 3; inclúe fillos elixibles e discapacidade propia acreditada. Exclúe ascendentes, dependencia, discapacidade de familiares, adopcións, cambios familiares durante o ano, retribución flexible e pensións. Traballo e residencia deben estar no mesmo territorio. As propostas de IRPF común non cambian as regras forais.',
+
   residence: 'Residencia fiscal',
   residenceOtherCity: 'Outra cidade / só territorio',
   residenceForal: 'Réxime foral',
@@ -12,12 +28,6 @@ export default {
   rowForalQuota: 'Cota foral antes de deducións',
 
   rowForalCredits: 'Minoracións e deducións forais',
-
-  foralUnsupported:
-    'Este perfil foral aínda non está validado. Ocúltanse os resultados. O modelo básico require contrato indefinido, menor de 65 anos, situación familiar 3, sen fillos, ascendentes, discapacidade, retribución flexible nin pensións.',
-
-  foralScope:
-    'Modelo foral limitado: contrato indefinido, menor de 65 anos, sen familiares, discapacidade, retribución flexible nin pensións. Suponse traballo e residencia no mesmo territorio. As propostas e editores de IRPF común non modifican estas regras forais; as cotizacións si se poden simular.',
 
   locationRate: 'Tipo marxinal',
 

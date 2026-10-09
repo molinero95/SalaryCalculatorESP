@@ -402,3 +402,57 @@ test('single residence control remains readable in every language on narrow scre
     contentType: 'image/png',
   });
 });
+
+test('reviewed foral children require confirmation, preserve shared withholding and save age groups', async ({
+  page,
+}) => {
+  await page.selectOption('#residence', 'city:bilbao');
+  await page.fill('#children', '1');
+  await page.fill('#childrenUnder6', '1');
+  await expect(page.locator('#results')).toBeHidden();
+  await page.check('#foralChildrenConfirmed');
+  await expect(page.locator('#results')).toBeVisible();
+  await expect(page.locator('label[for="children"]')).toContainText('30 años inclusive');
+  await page.check('input[name="childrenFullyCounted"]');
+  await expect(page.locator('#results')).toBeVisible();
+  await page.fill('#childrenUnder3', '1');
+  await page.fill('#childrenUnder6', '0');
+  await expect(page.locator('#results')).toBeHidden();
+  await page.fill('#childrenUnder6', '1');
+  await expect(page.locator('#results')).toBeVisible();
+  await page.reload();
+  await expect(page.locator('#foralChildrenConfirmed')).toBeChecked();
+  await expect(page.locator('#childrenUnder6')).toHaveValue('1');
+  await expect(page.locator('#results')).toBeVisible();
+  await page.selectOption('#residence', 'city:pamplona-iruna');
+  await expect(page.locator('#foralChildrenConfirmed')).not.toBeChecked();
+  await expect(page.locator('#results')).toBeHidden();
+  await page.check('#foralChildrenConfirmed');
+  await expect(page.locator('#foral-under6-field')).toBeHidden();
+  await expect(page.locator('label[for="children"]')).toContainText('menores de 30');
+  await expect(page.locator('#results')).toBeVisible();
+  await page.selectOption('#residence', 'region:alava');
+  await page.check('#foralChildrenConfirmed');
+  await expect(page.locator('#foral-age6to15-field')).toBeVisible();
+  await page.fill('#children6to15', '1');
+  await expect(page.locator('#results')).toBeHidden();
+  await page.fill('#children6to15', '0');
+  await expect(page.locator('#results')).toBeVisible();
+});
+
+test('reviewed foral disability and mobility recover output without leaking into common regime', async ({ page }) => {
+  await page.selectOption('#residence', 'city:bilbao');
+  await page.selectOption('#disability', '33');
+  await expect(page.locator('#results')).toBeVisible();
+  await expect(page.locator('#foral-mobility-field')).toBeVisible();
+  await page.check('#foralReducedMobility');
+  await expect(page.locator('#results')).toBeVisible();
+  await page.selectOption('#disability', '65');
+  await expect(page.locator('#foral-mobility-field')).toBeHidden();
+  await page.selectOption('#residence', 'city:madrid');
+  await expect(page.locator('#foral-children-field')).toBeHidden();
+  await expect(page.locator('#foral-under6-field')).toBeHidden();
+  await expect(page.locator('#foral-mobility-field')).toBeHidden();
+  await expect(page.locator('label[for="children"]')).toContainText('25');
+  await expect(page.locator('#results')).toBeVisible();
+});

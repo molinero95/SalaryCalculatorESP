@@ -108,3 +108,5 @@ A base de retención inclúe unha redución adicional de 600 € por máis de do
 [AGENTS.md](AGENTS.md) · [Contexto do proxecto](docs/AI_CONTEXT.md) · [Desenvolvemento](CONTRIBUTING.md) · [Decisións e próximos pasos](docs/ROADMAP.md)
 
 [Scope of reviewed policy templates](docs/proposal-scope.md): annual assessment and payroll withholding are distinct; reload a saved proposal to adopt its reviewed template.
+
+O selector único de residencia agrupa as cidades por comunidade/territorio. O modelo foral inclúe fillos elixibles confirmados e discapacidade propia; consulta [regras e límites](docs/foral-family.md).

@@ -1,6 +1,22 @@
 // English translations. `f_*` keys label the settings fields.
 
 export default {
+  childrenUnder6: 'Of these, under 6 (includes under 3)',
+  children6to15: 'Of these, aged 6–15',
+  childrenBasque: 'Eligible children (up to age 30 inclusive)',
+  childrenNavarra: 'Eligible children (under 30)',
+  foralChildrenConfirmed: 'I confirm that every entered child meets the foral eligibility requirements',
+  foralReducedMobility: 'Certified reduced mobility: BLAM ≥ 25% (33–64% disability)',
+  foralAlavaRural: 'Álava: municipality below 4,000 inhabitants and main family interests located there',
+  foralChildrenBasqueHelp:
+    'Children without disability, adoption or family changes during the year: living with you, nonexempt income no higher than SMI, not part of another family unit exceeding SMI, and neither filing nor required to file income tax. Enter year-end ages. Full counting means one eligible parent; otherwise the credit is shared by two.',
+  foralChildrenNavarraHelp:
+    'Unmarried children without disability, adoption or family changes during the year: living with you and nonexempt income no higher than IPREM. Enter year-end ages. Full counting means one eligible parent; otherwise the credit is shared by two.',
+  foralUnsupported:
+    'This foral profile is not yet validated or family requirements are missing. Results are hidden. Check ages and confirm child eligibility. The model requires permanent employment, under 65, family situation 3, no ascendants, flexible pay or pensions.',
+  foralScope:
+    'Limited foral model: permanent employment, under 65, family situation 3; eligible children and certified taxpayer disability included. Excludes ascendants, dependency, relatives’ disability, adoption, family changes during the year, flexible pay and pensions. Workplace and residence must be in the same territory. Common-regime proposals do not alter foral rules.',
+
   residence: 'Tax residence',
   residenceOtherCity: 'Other city / territory only',
   residenceForal: 'Foral regime',
@@ -12,12 +28,6 @@ export default {
   rowForalQuota: 'Foral quota before credits',
 
   rowForalCredits: 'Foral tax credits',
-
-  foralUnsupported:
-    'This foral profile has not been validated. Results are hidden. The basic model requires permanent employment, age under 65, family situation 3, no children, ascendants, disability, flexible pay or pensions.',
-
-  foralScope:
-    'Limited foral model: permanent employment, under 65, no relatives, disability, flexible pay or pensions. Workplace and residence are assumed to be in the same territory. Common-regime proposals and income-tax editors do not change these foral rules; contributions can still be simulated.',
 
   locationRate: 'Marginal rate',
 

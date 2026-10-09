@@ -1,6 +1,22 @@
 // Catalan translations. `f_*` keys label the settings fields.
 
 export default {
+  childrenUnder6: 'D’aquests, menors de 6 anys (inclou menors de 3)',
+  children6to15: 'D’aquests, de 6 a 15 anys',
+  childrenBasque: 'Fills amb dret a deducció (fins a 30 anys inclosos)',
+  childrenNavarra: 'Fills amb dret a deducció (menors de 30)',
+  foralChildrenConfirmed: 'Confirmo que tots els fills indicats compleixen els requisits forals',
+  foralReducedMobility: 'Mobilitat reduïda acreditada: BLAM ≥ 25 % (discapacitat 33–64 %)',
+  foralAlavaRural: 'Àlaba: municipi de menys de 4.000 habitants i centre principal d’interessos familiar en aquest',
+  foralChildrenBasqueHelp:
+    'Fills sense discapacitat, adopcions ni canvis familiars durant l’any: conviuen amb tu, renda no exempta fins a l’SMI, sense altra unitat familiar que superi l’SMI, i no presenten ni han de presentar IRPF. Edats al final de l’any. Còmput íntegre: un únic progenitor amb dret; altrament es reparteix entre dos.',
+  foralChildrenNavarraHelp:
+    'Fills solters sense discapacitat, adopcions ni canvis familiars durant l’any: conviuen amb tu i renda no exempta fins a l’IPREM. Edats al final de l’any. Còmput íntegre: un únic progenitor amb dret; altrament es reparteix entre dos.',
+  foralUnsupported:
+    'Aquest perfil foral no està validat o falten requisits familiars. S’oculten els resultats. Comprova les edats i confirma els requisits dels fills. Cal contracte indefinit, menys de 65 anys, situació familiar 3, sense ascendents, retribució flexible ni pensions.',
+  foralScope:
+    'Model foral limitat: feina indefinida, menys de 65 anys, situació familiar 3; inclou fills elegibles i discapacitat pròpia acreditada. Exclou ascendents, dependència, discapacitat de familiars, adopcions, canvis familiars durant l’any, retribució flexible i pensions. Feina i residència han de ser al mateix territori. Les propostes d’IRPF comú no canvien les regles forals.',
+
   residence: 'Residència fiscal',
   residenceOtherCity: 'Una altra ciutat / només territori',
   residenceForal: 'Règim foral',
@@ -12,12 +28,6 @@ export default {
   rowForalQuota: 'Quota foral abans de deduccions',
 
   rowForalCredits: 'Minoracions i deduccions forals',
-
-  foralUnsupported:
-    'Aquest perfil foral encara no està validat. S’oculten els resultats. El model bàsic exigeix contracte indefinit, menor de 65 anys, situació familiar 3, sense fills, ascendents, discapacitat, retribució flexible ni pensions.',
-
-  foralScope:
-    'Model foral limitat: contracte indefinit, menor de 65 anys, sense familiars, discapacitat, retribució flexible ni pensions. S’assumeix treball i residència al mateix territori. Les propostes i els editors d’IRPF comú no modifiquen aquestes regles forals; les cotitzacions sí es poden simular.',
 
   locationRate: 'Tipus marginal',
 

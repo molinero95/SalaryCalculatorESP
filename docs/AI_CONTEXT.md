@@ -6,7 +6,7 @@ SalaryCalculatorESP estimates Spanish employee payroll and compares editable fis
 
 This software was generated and developed with AI assistance. Fiscal data, translations and results may be incomplete or inaccurate. Preserve that message and describe results as estimates.
 
-The supported fiscal model includes the common regime and a limited foral model for basic employee profiles in Bizkaia, Gipuzkoa, Álava and Navarra. Read [locations.md](locations.md) before changing jurisdiction logic; unsupported foral profiles hide results rather than use common-regime rules. This is not a full Renta WEB declaration: other income, all regional deductions, special employment profiles and every benefit/eligibility case are outside the implemented scope. The authoritative detail is in [fiscal-validation.md](fiscal-validation.md).
+The supported fiscal model includes the common regime and a limited foral model for employee profiles including confirmed eligible children and certified taxpayer disability in Bizkaia, Gipuzkoa, Álava and Navarra. Read [locations.md](locations.md) and [foral-family.md](foral-family.md) before changing jurisdiction logic; unsupported foral profiles hide results rather than use common-regime rules. This is not a full Renta WEB declaration: other income, all regional deductions, special employment profiles and every benefit/eligibility case are outside the implemented scope. The authoritative detail is in [fiscal-validation.md](fiscal-validation.md).
 
 ## Architecture
 

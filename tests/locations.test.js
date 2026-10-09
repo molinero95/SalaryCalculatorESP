@@ -213,7 +213,6 @@ for (const region of Object.keys(FORAL_TERRITORIES)) {
     { children: 1 },
     { childrenUnder3: 1 },
     { age: 65 },
-    { disability: 33 },
     { contract: 'temporary' },
     { dependents65: 1 },
     { familySituation: 2 },
