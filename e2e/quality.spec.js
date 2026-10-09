@@ -383,7 +383,7 @@ test('unreviewed foral profiles hide every fiscal output and recover when correc
   expect(errors).toEqual([]);
   await page.fill('#children', '0');
   await expect(page.locator('#results')).toBeVisible();
-  await expect(page.locator('#fiscal-scope')).toContainText('Modelo foral limitado');
+  await expect(page.locator('#fiscal-scope')).toContainText('Modelo foral de nómina');
   await page.fill('#children', '1');
   await chooseResidence(page, 'city:madrid');
   await expect(page.locator('#results')).toBeVisible();
@@ -507,4 +507,64 @@ test('residence help remains inside narrow viewports in every language', async (
     expect(bounds.overflow).toBeLessThanOrEqual(0);
     await tip.click();
   }
+});
+
+for (const residence of ['region:bizkaia', 'region:gipuzkoa', 'region:alava', 'region:navarra']) {
+  test(`${residence}: expanded foral benefits and annual income work offline`, async ({ page, context }) => {
+    await chooseResidence(page, residence);
+    await page.fill('#age', '66');
+    await page.locator('label:has(input[name="contract"][value="temporary"])').click();
+    await page.selectOption('#familySituation', '2');
+    await expect(page.locator('#results')).toBeVisible();
+    await page.fill('#dependents65', '1');
+    await expect(page.locator('#results')).toBeHidden();
+    await page.check('#foralAscendantsConfirmed');
+    await expect(page.locator('#results')).toBeVisible();
+    await page.locator('#pensionIndividual').locator('xpath=ancestor::details').locator('summary').click();
+    await page.fill('#pensionIndividual', '1500');
+    await expect(page.locator('#results')).toBeVisible();
+    await page.locator('#foral-annual-fields summary').click();
+    await page.fill('#foralSavingsIncome', '1000');
+    await expect(page.locator('#results')).toBeHidden();
+    await page.check('#foralAnnualConfirmed');
+    await expect(page.locator('#results')).toBeVisible();
+    const before = await page.locator('#results').innerText();
+    await page.evaluate(async () => {
+      await navigator.serviceWorker.ready;
+      if (!navigator.serviceWorker.controller)
+        await new Promise((resolve) =>
+          navigator.serviceWorker.addEventListener('controllerchange', resolve, { once: true }),
+        );
+    });
+    await context.setOffline(true);
+    await page.reload();
+    await expect(page.locator('#results')).toHaveText(before);
+    await expect(page.locator('#foralAscendantsConfirmed')).toBeChecked();
+    await page.locator('#foral-annual-fields summary').click();
+    await expect(page.locator('#foralAnnualConfirmed')).toBeChecked();
+    await expect(page.locator('#foralSavingsIncome')).toHaveValue('1000');
+    await context.setOffline(false);
+  });
+}
+test('annual and ascendant confirmations reset when jurisdiction or eligible amounts change', async ({ page }) => {
+  await chooseResidence(page, 'region:bizkaia');
+  await page.fill('#dependents65', '1');
+  await page.check('#foralAscendantsConfirmed');
+  await page.fill('#foralAscendantClaimants', '2');
+  await expect(page.locator('#foralAscendantsConfirmed')).not.toBeChecked();
+  await page.check('#foralAscendantsConfirmed');
+  await page.locator('#foral-annual-fields summary').click();
+  await page.fill('#foralSavingsIncome', '1000');
+  await page.check('#foralAnnualConfirmed');
+  await page.fill('#foralSavingsIncome', '2000');
+  await expect(page.locator('#foralAnnualConfirmed')).not.toBeChecked();
+  await page.check('#foralAnnualConfirmed');
+  await chooseResidence(page, 'region:navarra');
+  await expect(page.locator('#foralAscendantsConfirmed')).not.toBeChecked();
+  await expect(page.locator('#foralAnnualConfirmed')).not.toBeChecked();
+  await expect(page.locator('label[for="dependents65"]')).toHaveText('Ascendientes a cargo 65–74');
+  await expect(page.locator('label[for="dependents75"]')).toHaveText('Ascendientes a cargo 75 o más');
+  await chooseResidence(page, 'city:madrid');
+  await expect(page.locator('#foral-annual-fields')).toBeHidden();
+  await expect(page.locator('#results')).toBeVisible();
 });

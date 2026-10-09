@@ -110,3 +110,5 @@ La base de retenció inclou una reducció addicional de 600 € per més de dos 
 [Scope of reviewed policy templates](docs/proposal-scope.md): annual assessment and payroll withholding are distinct; reload a saved proposal to adopt its reviewed template.
 
 La residència es tria per comunitat autònoma, territori històric al País Basc i ciutat opcional filtrada pel territori. El model foral inclou fills elegibles confirmats i discapacitat pròpia; vegeu [regles i límits](docs/foral-family.md).
+
+El model ampliat inclou edat, contractes temporals, ascendents elegibles, retribució flexible, pensions ordinàries i determinades rendes i lloguers anuals; vegeu [regles i exclusions](docs/foral-payroll.md).

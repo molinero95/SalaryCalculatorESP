@@ -185,6 +185,21 @@
             <input type="checkbox" name="foralAlavaRural" id="foralAlavaRural" />
             <span data-i18n="foralAlavaRural"></span>
           </label>
+          <div class="field" id="foral-ascendants-under65-field" hidden>
+            <label for="foralAscendantsUnder65" data-i18n="foralAscendantsUnder65"></label>
+            <input id="foralAscendantsUnder65" name="foralAscendantsUnder65" type="number" min="0" max="10" />
+          </div>
+          <div class="field" id="foral-ascendant-claimants-field" hidden>
+            <label for="foralAscendantClaimants" data-i18n="foralAscendantClaimants"></label>
+            <input id="foralAscendantClaimants" name="foralAscendantClaimants" type="number" min="1" max="10" />
+          </div>
+          <div class="field field-full" id="foral-ascendants-field" hidden>
+            <label class="checkbox">
+              <input type="checkbox" name="foralAscendantsConfirmed" id="foralAscendantsConfirmed" />
+              <span data-i18n="foralAscendantsConfirmed"></span>
+            </label>
+            <p class="help" id="foral-ascendants-help"></p>
+          </div>
           <div class="field">
             <label for="dependents65" data-i18n="dependents65"></label>
             <input id="dependents65" name="dependents65" type="number" min="0" max="10" />
@@ -199,6 +214,62 @@
             <input type="checkbox" name="childrenFullyCounted" />
             <span data-i18n="childrenFullyCounted"></span><span data-help="helpChildrenFullyCounted"></span>
           </label>
+
+          <details class="extras field-wide" id="foral-annual-fields" hidden>
+            <summary data-i18n="foralAnnualTitle"></summary>
+            <p class="help" data-i18n="foralAnnualHelp"></p>
+            <div class="fields">
+              <div class="field" id="foralExemptIncome-field">
+                <label for="foralExemptIncome" data-i18n="foralExemptIncome"></label
+                ><input id="foralExemptIncome" name="foralExemptIncome" type="number" min="0" step="100" />
+              </div>
+              <div class="field" id="foralRentalGross-field">
+                <label for="foralRentalGross" data-i18n="foralRentalGross"></label
+                ><input id="foralRentalGross" name="foralRentalGross" type="number" min="0" step="100" />
+              </div>
+              <div class="field" id="foralRentalExpenses-field">
+                <label for="foralRentalExpenses" data-i18n="foralRentalExpenses"></label
+                ><input id="foralRentalExpenses" name="foralRentalExpenses" type="number" min="0" step="100" />
+              </div>
+              <div class="field" id="foralRentalInsurance-field">
+                <label for="foralRentalInsurance" data-i18n="foralRentalInsurance"></label
+                ><input id="foralRentalInsurance" name="foralRentalInsurance" type="number" min="0" step="100" />
+              </div>
+              <div class="field" id="foralActivityIncome-field">
+                <label for="foralActivityIncome" data-i18n="foralActivityIncome"></label
+                ><input id="foralActivityIncome" name="foralActivityIncome" type="number" min="0" step="100" />
+              </div>
+              <div class="field" id="foralSavingsIncome-field">
+                <label for="foralSavingsIncome" data-i18n="foralSavingsIncome"></label
+                ><input id="foralSavingsIncome" name="foralSavingsIncome" type="number" min="0" step="100" />
+              </div>
+              <div class="field" id="foralOtherWithholding-field">
+                <label for="foralOtherWithholding" data-i18n="foralOtherWithholding"></label
+                ><input id="foralOtherWithholding" name="foralOtherWithholding" type="number" min="0" step="100" />
+              </div>
+              <div class="field" id="foralRentPaid-field">
+                <label for="foralRentPaid" data-i18n="foralRentPaid"></label
+                ><input id="foralRentPaid" name="foralRentPaid" type="number" min="0" step="100" />
+              </div>
+              <label class="checkbox field-wide"
+                ><input id="foralRentalPublic" name="foralRentalPublic" type="checkbox" /><span
+                  data-i18n="foralRentalPublic"
+                ></span
+              ></label>
+              <label class="checkbox field-wide"
+                ><input id="foralRentEnhanced" name="foralRentEnhanced" type="checkbox" /><span
+                  data-i18n="foralRentEnhanced"
+                ></span
+              ></label>
+              <label class="checkbox field-wide"
+                ><input id="foralAnnualConfirmed" name="foralAnnualConfirmed" type="checkbox" /><span
+                  data-i18n="foralAnnualConfirmed"
+                ></span
+              ></label>
+            </div>
+          </details>
+
+          <p class="help field-wide" id="foral-benefits-help" hidden></p>
 
           <p class="warning field-wide" id="input-warning" role="alert" hidden></p>
 

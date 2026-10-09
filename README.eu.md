@@ -110,3 +110,5 @@ Atxikipen-oinarriak 600 €-ko murrizketa gehigarria du bi ondorengo baino gehia
 [Scope of reviewed policy templates](docs/proposal-scope.md): annual assessment and payroll withholding are distinct; reload a saved proposal to adopt its reviewed template.
 
 Zerga-egoitza autonomia erkidegoaren, Euskadiko lurralde historikoaren eta lurraldearen arabera iragazitako aukerako hiriaren bidez hautatzen da. Foru-ereduak baieztatutako seme-alaba hautagarriak eta norberaren desgaitasuna barne hartzen ditu; ikusi [arauak eta mugak](docs/foral-family.md).
+
+Eredu zabalduak adina, aldi baterako kontratuak, arbaso hautagarriak, ordainsari malgua, pentsio arruntak eta urteko errenta eta alokairu batzuk barne hartzen ditu; ikusi [arauak eta bazterketak](docs/foral-payroll.md).

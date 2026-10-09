@@ -37,7 +37,7 @@ function resultCard(kind, name, r, reference, { showRefund, showInKind, showPens
         ${showInKind ? metric(t('inKind'), formatEuros(r.flexible.total)) : ''}
         ${showPension ? metric(t('pensions'), formatEuros(r.pension.total)) : ''}
         ${metric(t('withholding'), formatPercent(r.incomeTax.rate), rateDelta(r.incomeTax.rate, reference?.incomeTax.rate))}
-        ${metric(t('effectiveRate'), formatPercent(r.effectiveRate), rateDelta(r.effectiveRate, reference?.effectiveRate))}
+        ${r.effectiveRate === null ? '' : metric(t('effectiveRate'), formatPercent(r.effectiveRate), rateDelta(r.effectiveRate, reference?.effectiveRate))}
         ${metric(t('employerCost'), formatEuros(r.employerCost))}
       </dl>
       <p class="muted result-tax-scope">${t('payrollAnnualScope')}</p>
@@ -159,6 +159,21 @@ const BREAKDOWN = [
         showIf: (r) => !r.incomeTax.foral,
       },
       { label: 'rowForalCredits', value: (r) => r.incomeTax.foralCredit, showIf: (r) => r.incomeTax.foral },
+      {
+        label: 'rowSavingsBase',
+        value: (r) => r.incomeTax.savingsBase,
+        showIf: (r) => r.incomeTax.foral && r.incomeTax.savingsBase > 0,
+      },
+      {
+        label: 'rowSavingsTax',
+        value: (r) => r.incomeTax.savingsTax,
+        showIf: (r) => r.incomeTax.foral && r.incomeTax.savingsBase > 0,
+      },
+      {
+        label: 'rowHousingCredit',
+        value: (r) => r.incomeTax.housingCredit,
+        showIf: (r) => r.incomeTax.foral && r.incomeTax.housingCredit > 0,
+      },
       { label: 'rowAnnualBase', value: (r) => r.incomeTax.annualBase },
       { label: 'rowStateTax', value: (r) => r.incomeTax.stateTax, showIf: (r) => !r.incomeTax.foral },
       { label: 'rowRegionalTax', value: (r) => r.incomeTax.regionalTax, showIf: (r) => !r.incomeTax.foral },
@@ -202,6 +217,7 @@ const BREAKDOWN = [
         label: 'rowTaxWedge',
         help: 'helpTaxWedge',
         value: (r) => r.taxWedge,
+        showIf: (r) => r.taxWedge !== null,
         format: formatPercent,
         formatDiff: formatPoints,
       },

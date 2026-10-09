@@ -26,6 +26,6 @@ Domain and application modules must not read DOM, storage, URLs or browser lifec
 
 ## Fiscal and presentation modules
 
-`js/tax.js`, `js/calc.js`, `js/defaults.js` and `js/political.js` retain their public imports and pure calculation behavior. They can be reorganized later with compatibility facades if that change helps maintenance. This PR does not migrate fiscal rules or modify rates.
+`js/tax.js`, `js/calc.js`, `js/defaults.js` and `js/political.js` retain their public imports and pure calculation behavior. They can be reorganized later with compatibility facades if that change helps maintenance. Pension limits now live in `js/domain/pension.js`, and positive foral annual income integration/habitual-rent credits in `js/domain/foral-assessment.js`. These modules remain pure; `calc.js` orchestrates employment and annual contexts without importing UI code.
 
 `js/results.js`, `js/chart.js` and `js/settings.js` remain established renderers. Next extractions are proposal/comparison presentation and browser sharing/import/export adapters from `app.js`, followed by focused settings-editor modules. Each step needs the existing browser/offline regressions and new tests for any extracted rules.

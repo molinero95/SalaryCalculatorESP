@@ -114,3 +114,5 @@ La base de retención incluye una reducción adicional de 600 € por más de do
 [AGENTS.md](AGENTS.md) · [Contexto del proyecto](docs/AI_CONTEXT.md) · [Desarrollo](CONTRIBUTING.md) · [Decisiones y próximos pasos](docs/ROADMAP.md)
 
 [Scope of reviewed policy templates](docs/proposal-scope.md): annual assessment and payroll withholding are distinct; reload a saved proposal to adopt its reviewed template.
+
+El modelo ampliado incluye edad, contratos temporales, ascendientes elegibles, retribución flexible, pensiones ordinarias y determinadas rentas y alquileres anuales; consulta [reglas y exclusiones](docs/foral-payroll.md).

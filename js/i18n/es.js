@@ -1,6 +1,37 @@
 // Spanish (Castilian) translations. `f_*` keys label the settings fields.
 
 export default {
+  foralBenefitsBasqueHelp:
+    'País Vasco: el seguro médico ordinario no está exento. Pensiones/EPSV ordinarias: 5.000 € individuales, 8.000 € de empleo y 10.000 € conjuntos; trabajador en activo, sin rescates ni beneficios de EPSV preferentes. Comidas, transporte, guardería y formación deben cumplir sus requisitos legales.',
+  foralBenefitsNavarraHelp:
+    'Navarra: seguro médico hasta 500 € por persona o 1.500 € para el trabajador con discapacidad. Pensiones ordinarias: límite de renta del 30 %, o 50 % si eres mayor de 50, y límites monetarios y de aportación empresarial. Comidas, transporte, guardería y formación deben cumplir sus requisitos legales.',
+  foralExemptIncome: 'Otras rentas exentas no laborales (Navarra, € / año)',
+  foralAnnualTitle: 'Otras rentas y alquiler · declaración anual',
+  foralAnnualHelp:
+    'Importes anuales propios. Modelo positivo del año, sin pérdidas ni saldos anteriores: un alquiler de vivienda permanente (sin actividad de alquiler), beneficio neto fiscal de actividad ya calculado y ahorro neto sujeto a impuesto (tras exenciones y gastos). En Navarra los gastos del inmueble incluyen los fiscalmente deducibles; en País Vasco solo financiación y seguro de impago, aplicándose la bonificación del 30 %. La opción de intermediación pública exige los requisitos legales y, en Navarra, contrato registrado; aplica el 70 %. No modela otras zonas especiales. El alquiler pagado es tu parte por vivienda habitual tras ayudas exentas. Perfil incrementado: colectivos del art. 86 vasco o familia monoparental del art. 62.2 navarro sin convivencia ni custodia compartida; no se deduce de la situación familiar de nómina. Estas rentas afectan la declaración, pero no se suman al efectivo de la nómina.',
+  foralRentalGross: 'Alquiler cobrado por una vivienda (€ / año)',
+  foralRentalExpenses: 'Gastos deducibles del inmueble (€ / año)',
+  foralRentalExpensesBasque: 'Financiación deducible del inmueble (€ / año)',
+  foralRentalInsurance: 'Seguro de impago del alquiler (€ / año)',
+  foralActivityIncome: 'Beneficio neto fiscal de actividad (€ / año)',
+  foralSavingsIncome: 'Ahorro neto no exento y ganancias de transmisiones (€ / año)',
+  foralOtherWithholding: 'Otras retenciones y pagos a cuenta (€ / año)',
+  foralRentPaid: 'Alquiler habitual pagado, descontadas ayudas (€ / año)',
+  foralRentalPublic: 'Alquiler cobrado mediante programa público elegible',
+  foralRentEnhanced: 'Cumplo un perfil especial de deducción incrementada por alquiler',
+  foralAnnualConfirmed: 'Confirmo el alcance y los requisitos de estas rentas y deducciones',
+  rowSavingsBase: 'Base liquidable del ahorro',
+  rowSavingsTax: 'Cuota del ahorro antes de deducciones',
+  rowHousingCredit: 'Deducción por alquiler habitual',
+  foralAscendantsNavarraHelp:
+    'Convivencia o dependencia económica en residencia; renta no exenta no superior al IPREM y unidad familiar no superior a dos IPREM. El reparto indicado debe ser el mismo para todos.',
+  foralAscendantsBasqueHelp:
+    'Convivencia continua todo el año o residencia pagada con factura; renta no exenta no superior al SMI, sin unidad familiar que lo supere y sin presentar ni estar obligado a presentar IRPF. El reparto indicado debe ser el mismo para todos.',
+  dependents75Navarra: 'Ascendientes a cargo 75 o más',
+  dependents65Navarra: 'Ascendientes a cargo 65–74',
+  foralAscendantsConfirmed: 'Confirmo los requisitos forales de todos los ascendientes',
+  foralAscendantClaimants: 'Personas con derecho a compartir cada ascendiente',
+  foralAscendantsUnder65: 'Ascendientes elegibles menores de 65',
   childrenUnder6: 'De ellos, menores de 6 años (incluye menores de 3)',
   children6to15: 'De ellos, de 6 a 15 años',
   childrenBasque: 'Hijos con derecho a deducción (hasta 30 años inclusive)',
@@ -13,9 +44,9 @@ export default {
   foralChildrenNavarraHelp:
     'Modelo de hijos solteros sin discapacidad, sin adopciones ni cambios familiares durante el año: conviven contigo y su renta no exenta no supera el IPREM. Introduce las edades al cierre del año. La casilla de cómputo íntegro significa un único progenitor con derecho; sin marcar, se reparte entre dos.',
   foralUnsupported:
-    'Este perfil foral aún no está validado o faltan requisitos familiares. Se ocultan los resultados. Comprueba las edades y confirma los requisitos de los hijos. El modelo requiere contrato indefinido, menor de 65 años, situación familiar 3, sin ascendientes, retribución flexible ni pensiones.',
+    'Este perfil foral aún no está validado o faltan requisitos familiares. Se ocultan los resultados. Revisa los grupos de edad y confirma los requisitos de hijos y ascendientes.',
   foralScope:
-    'Modelo foral limitado: empleo indefinido, menor de 65 años, situación familiar 3; incluye hijos elegibles y discapacidad propia acreditada. No incluye ascendientes, dependencia, discapacidad de familiares, adopciones, cambios familiares durante el año, retribución flexible ni pensiones. Trabajo y residencia deben corresponder al mismo territorio. Las propuestas de IRPF común no cambian las reglas forales.',
+    'Modelo foral de nómina de un trabajador en activo y declaración individual: edad, contrato temporal inferior al año, hijos y ascendientes elegibles, discapacidad propia, retribución flexible, pensiones ordinarias y las otras rentas positivas indicadas en el apartado anual. No es una declaración completa: excluye conjunta, pérdidas y saldos anteriores, dependencia, discapacidad de familiares, adopciones, EPSV preferentes y otras deducciones. Trabajo y residencia se asumen en el mismo territorio. Las propuestas de IRPF común no cambian sus reglas.',
 
   residence: 'Residencia fiscal',
   residenceOtherCity: 'Otra ciudad / sin especificar',

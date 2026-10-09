@@ -1,6 +1,37 @@
 // English translations. `f_*` keys label the settings fields.
 
 export default {
+  foralBenefitsBasqueHelp:
+    'Basque Country: ordinary medical insurance is taxable. Ordinary pensions/EPSV: €5,000 individual, €8,000 employment, €10,000 combined; active employee, no withdrawals or preferred EPSV credits. Meal, transport, childcare and training must meet legal eligibility.',
+  foralBenefitsNavarraHelp:
+    'Navarre: medical insurance up to €500 per person or €1,500 for the disabled employee. Ordinary pensions: 30% income limit, 50% when over 50, plus monetary and employer-contribution limits. Meal, transport, childcare and training must meet legal eligibility.',
+  foralExemptIncome: 'Other nonemployment exempt income (Navarre, € / year)',
+  foralAnnualTitle: 'Other income and rent · annual assessment',
+  foralAnnualHelp:
+    'Your annual amounts. Positive current-year model without losses or prior balances: one permanent-housing lease (not a rental business), already calculated taxable business profit, and taxable net savings/transfer gains after exemptions and expenses. Navarre property expenses include legally deductible costs; Basque expenses are financing and nonpayment insurance only, with a 30% rental allowance. Public intermediation requires legal eligibility and, in Navarre, a registered contract; its allowance is 70%. Other special-zone rules are excluded. Rent paid is your share for your main home after exempt subsidies. Enhanced status means Basque article 86 categories or Navarre article 62.2 single-parent status without cohabitation or shared custody; payroll family status does not establish eligibility. This income affects the return but is not added to payroll cash.',
+  foralRentalGross: 'Rent received for one home (€ / year)',
+  foralRentalExpenses: 'Deductible property expenses (€ / year)',
+  foralRentalExpensesBasque: 'Deductible property financing (€ / year)',
+  foralRentalInsurance: 'Rental nonpayment insurance (€ / year)',
+  foralActivityIncome: 'Taxable net business profit (€ / year)',
+  foralSavingsIncome: 'Nonexempt net savings and transfer gains (€ / year)',
+  foralOtherWithholding: 'Other withholding and advance payments (€ / year)',
+  foralRentPaid: 'Main-home rent paid after subsidies (€ / year)',
+  foralRentalPublic: 'Rent received through an eligible public programme',
+  foralRentEnhanced: 'I meet a special enhanced rental-credit category',
+  foralAnnualConfirmed: 'I confirm the scope and eligibility of this income and credits',
+  rowSavingsBase: 'Savings taxable base',
+  rowSavingsTax: 'Savings quota before credits',
+  rowHousingCredit: 'Main-home rental credit',
+  foralAscendantsNavarraHelp:
+    'Cohabitation or financial dependence in residential care; nonexempt income no higher than IPREM and family income no higher than twice IPREM. The same sharing must apply to every ascendant.',
+  foralAscendantsBasqueHelp:
+    'Continuous full-year cohabitation or invoiced residential care paid by you; nonexempt income no higher than SMI, no family unit above SMI, neither filing nor required to file income tax. The same sharing must apply to every ascendant.',
+  dependents75Navarra: 'Dependent ascendants aged 75 or older',
+  dependents65Navarra: 'Dependent ascendants aged 65–74',
+  foralAscendantsConfirmed: 'I confirm the foral requirements for every ascendant',
+  foralAscendantClaimants: 'Eligible claimants sharing each ascendant',
+  foralAscendantsUnder65: 'Eligible ascendants under 65',
   childrenUnder6: 'Of these, under 6 (includes under 3)',
   children6to15: 'Of these, aged 6–15',
   childrenBasque: 'Eligible children (up to age 30 inclusive)',
@@ -13,9 +44,9 @@ export default {
   foralChildrenNavarraHelp:
     'Unmarried children without disability, adoption or family changes during the year: living with you and nonexempt income no higher than IPREM. Enter year-end ages. Full counting means one eligible parent; otherwise the credit is shared by two.',
   foralUnsupported:
-    'This foral profile is not yet validated or family requirements are missing. Results are hidden. Check ages and confirm child eligibility. The model requires permanent employment, under 65, family situation 3, no ascendants, flexible pay or pensions.',
+    'This foral profile is not validated or family requirements are missing. Results are hidden. Check age groups and confirm child and ascendant eligibility.',
   foralScope:
-    'Limited foral model: permanent employment, under 65, family situation 3; eligible children and certified taxpayer disability included. Excludes ascendants, dependency, relatives’ disability, adoption, family changes during the year, flexible pay and pensions. Workplace and residence must be in the same territory. Common-regime proposals do not alter foral rules.',
+    'Foral model for one active employee and individual annual assessment: age, temporary contracts shorter than a year, eligible children and ascendants, own disability, flexible pay, ordinary pensions and the positive income categories in the annual section. Not a complete tax return: excludes joint filing, losses and prior balances, dependency, relatives’ disability, adoption, preferred EPSV and other deductions. Work and residence are assumed in the same territory. Common-regime income-tax proposals do not change these rules.',
 
   residence: 'Tax residence',
   residenceOtherCity: 'Other city / unspecified',

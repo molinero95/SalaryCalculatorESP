@@ -1,5 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { computePayroll } from '../js/calc.js';
 import { applyScale, annualTax } from '../js/tax.js';
 import { REGIONAL_SCALES } from '../js/data/regions.js';
 import { CURRENT_SCENARIO, DEFAULT_INPUT } from '../js/defaults.js';
@@ -44,3 +45,28 @@ test('a regional minimum larger than the base cannot erase the state quota', () 
   close(result.stateTax, 23.75);
   close(result.tax, 23.75);
 });
+
+// Realistic fictional payroll in every common-regime community. Independent
+// published quota rows above and independently recorded 2026 personal minima.
+// €30,000 salary - €1,950 SS - €2,000 expenses = €26,050 annual base.
+// State quota: €2,112.75 + €5,850 × 15% - €5,550 × 9.5% = €2,463.
+const personalMinima = {
+  andalusia: 5790,
+  asturias: 6105,
+  canary: 5606,
+  valencia: 6105,
+  galicia: 5789,
+  madrid: 5956.65,
+};
+for (const [region, rows] of Object.entries(REGIONAL_ROWS)) {
+  test(`${region}: independently worked €30,000 employee payroll`, () => {
+    const r = computePayroll({ ...DEFAULT_INPUT, region }, CURRENT_SCENARIO);
+    const regional = publishedQuota(rows, 26050) - publishedQuota(rows, personalMinima[region] ?? 5550);
+    close(r.employee.total, 1950);
+    close(r.incomeTax.annualBase, 26050);
+    close(r.incomeTax.stateTax, 2463);
+    close(r.incomeTax.annualTax, 2463 + regional, 0.015);
+    close(r.incomeTax.withheld, 4926);
+    close(r.netAnnualAfterReturn, 28050 - r.incomeTax.annualTax);
+  });
+}

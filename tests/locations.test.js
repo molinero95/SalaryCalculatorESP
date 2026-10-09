@@ -209,17 +209,7 @@ for (const region of Object.keys(FORAL_TERRITORIES)) {
     scenario.incomeTax.generalExpenses = 100000;
     assert.deepEqual(computePayroll(inputFor(region), scenario), computePayroll(inputFor(region), CURRENT_SCENARIO));
   });
-  for (const extra of [
-    { children: 1 },
-    { childrenUnder3: 1 },
-    { age: 65 },
-    { contract: 'temporary' },
-    { dependents65: 1 },
-    { familySituation: 2 },
-    { flexMeal: 1 },
-    { pensionIndividual: 1 },
-    { pensionEmployer: 1 },
-  ]) {
+  for (const extra of [{ children: 1 }, { childrenUnder3: 1 }, { dependents65: 1 }]) {
     test(`${region}: unsupported profile ${JSON.stringify(extra)} never uses common rules`, () => {
       assert.throws(() => computePayroll(inputFor(region, extra), CURRENT_SCENARIO), /Unsupported foral/);
     });
