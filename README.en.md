@@ -49,7 +49,7 @@ Spanish payroll calculator and tax policy simulator. Work out your take-home pay
 | Tax-exempt flexible pay             | Meals €11/day · transport €1,500/year · health insurance €500/person |
 
 > [!IMPORTANT]
-> This tool gives estimates only. Some parameters (minimum wage credit, withholding-free minimum, regional scales) may change during the year; all of them can be adjusted in the interface or in [`js/defaults.js`](js/defaults.js). It does not cover the foral territories (Basque Country and Navarre).
+> This tool gives estimates only. Some parameters (minimum wage credit, withholding-free minimum, regional scales) may change during the year; all of them can be adjusted in the interface or in [`js/defaults.js`](js/defaults.js). Includes a limited model for the Basque and Navarre foral territories; see [residence scope](docs/locations.md).
 
 ### Sources
 

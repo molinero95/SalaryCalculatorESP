@@ -1,6 +1,34 @@
 // Basque translations. `f_*` keys label the settings fields.
 
 export default {
+  rowForalQuota: 'Foru-kuota kenkarien aurretik',
+
+  rowForalCredits: 'Foru-murrizketak eta kenkariak',
+
+  foralUnsupported:
+    'Foru-profil hau ez dago oraindik balioztatuta. Emaitzak ezkutatzen dira. Oinarrizko ereduak kontratu mugagabea, 65 urtetik beherako adina, 3. familia-egoera eta seme-alabarik, aurrekorik, desgaitasunik, ordainsari malgurik edo pentsiorik eza eskatzen ditu.',
+
+  foralScope:
+    'Foru-eredu mugatua: kontratu mugagabea, 65 urtetik beherakoa, seniderik, desgaitasunik, ordainsari malgurik edo pentsiorik gabe. Lana eta egoitza lurralde berean daudela suposatzen da. Lurralde erkideko proposamenek eta PFEZ editoreek ez dituzte foru-arau hauek aldatzen; kotizazioak simulatu daitezke.',
+
+  locationRate: 'Tasa marjinala',
+
+  locationBase: 'Oinarri likidagarria',
+
+  locationBracketsHelp:
+    'Indarreko urteko eskala marjinala: estatukoa + autonomikoa lurralde erkidean; eskala osoa foru-lurraldean. Ez da atxikipen-ehunekoa edo simulazioaren eskala.',
+
+  locationBrackets: 'Egoitzaren urteko tarteak · 2026',
+
+  salaryExamples: 'Soldata-adibideak',
+
+  cityPresetHelp:
+    'Hiriak zerga-egoitza hautatzen du. Ondoko zenbatekoak urteko soldata gordinaren adibideak dira, ez tokiko batezbestekoak.',
+
+  cityNone: 'Txantiloirik gabe',
+
+  cityPreset: 'Hiriaren txantiloia',
+
   f_childRateReduction: 'Estatuko tasaren murrizketa seme-alaba bakoitzeko (ehuneko puntuak)',
   appTitle: 'Soldata garbiaren simulagailua',
   appSubtitle: 'Kalkulatu zure nomina Espainian eta alderatu edozein proposamen fiskalekin',
@@ -109,7 +137,7 @@ export default {
   groupEmployee: 'Gizarte Segurantza · Langilea',
   groupEmployer: 'Gizarte Segurantza · Enpresa',
   disclaimer:
-    'Tresna orientagarria. Atxikipena PFEZ Erregelamenduaren prozedura orokorrarekin kalkulatzen du (lurralde erkidea; ez da aplikatzen Euskadin ez Nafarroan, araudi foral propioa baitute). Ez du zure nomina edo errenta-aitorpena ordezten.',
+    'IArekin garatutako orientazio-tresna; datuak eta emaitzak okerrak izan daitezke. Lurralde erkidea eta foru-eredu mugatua barne. Ez du nomina edo aitorpena ordezten.',
   sourceCode: 'Iturburu-kodea',
   f_personalAllowance: 'Gutxieneko pertsonala',
   f_ageOver65Allowance: 'Gehikuntza adinagatik > 65',
@@ -250,7 +278,7 @@ export default {
   region: 'Autonomia-erkidegoa',
   regionGeneral: 'Zehaztu gabe',
   helpRegion:
-    'Nominako atxikipena ez dago zure erkidegoaren menpe, baina errentaren azken kuota bai. Euskadi eta Nafarroa ez daude barne.',
+    'Egoitzak urteko zerga zehazten du. Euskadik hiru foru-lurralde ditu eta Nafarroak bere araubidea. Atxikipenak lantokiaren araberakoak ere badira; foru-ereduak lana eta egoitza lurralde berean daudela suposatzen du.',
   rowLargeFamilyReduction: 'Bi ondorengo baino gehiagoko murrizketa (atxikipena)',
   rowAnnualBase: 'Urteko likidazio-oinarri zenbatetsia',
   rowStateTax: 'Estatuko kuota osoa',

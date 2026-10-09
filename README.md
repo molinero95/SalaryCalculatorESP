@@ -49,7 +49,7 @@ Calculadora de nómina para España y simulador de propuestas fiscales. Calcula 
 | Retribución flexible exenta               | Restaurante 11 €/día · transporte 1.500 €/año · seguro médico 500 €/persona |
 
 > [!IMPORTANT]
-> Es una herramienta orientativa. Algunos parámetros (deducción SMI, mínimo exento de retención, escalas autonómicas) pueden cambiar durante el año; todos se pueden ajustar desde la interfaz o en [`js/defaults.js`](js/defaults.js). No aplica a los territorios forales (País Vasco y Navarra).
+> Es una herramienta orientativa. Algunos parámetros (deducción SMI, mínimo exento de retención, escalas autonómicas) pueden cambiar durante el año; todos se pueden ajustar desde la interfaz o en [`js/defaults.js`](js/defaults.js). Incluye un modelo foral limitado para País Vasco y Navarra; consulta [el alcance por residencia](docs/locations.md).
 
 ### Fuentes
 
@@ -103,7 +103,7 @@ Puedes crear hasta cinco simulaciones. Todas aparecen automáticamente en la tab
 
 La rebaja estatal por hijo se configura en puntos porcentuales. La plantilla Vox aplica 4 puntos por hijo, con un mínimo estatal del 0 %, sin reducir la parte autonómica. La retención de esta propuesta se estima con el procedimiento actual; no reproduce su tabla específica de retenciones ni incluye cheques por nacimiento.
 
-La declaración estimada usa la comunidad seleccionada; País Vasco y Navarra quedan fuera. Tras la primera visita completa con conexión, la aplicación puede funcionar sin conexión. El navegador permite instalarla cuando sea compatible. Los datos personales permanecen en el navegador.
+La declaración estimada usa la residencia seleccionada. Hay plantillas de ciudades, incluido Bilbao, tramos anuales y ejemplos de salario. País Vasco y Navarra cuentan con un modelo limitado para perfiles salariales básicos; los perfiles forales no validados ocultan los resultados. Tras la primera visita completa con conexión, la aplicación puede funcionar sin conexión. El navegador permite instalarla cuando sea compatible. Los datos personales permanecen en el navegador.
 
 Pruebas: `npm test`, `npm run lint`, `npm run test:e2e`. Las referencias visuales originales son de macOS; revisa las capturas antes de actualizar las referencias de otro sistema.
 

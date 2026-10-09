@@ -1,7 +1,7 @@
 // Regional (autonómica) IRPF scales of the 15 common-regime communities in 2026.
 // Thirteen keep their 2025 scale; Comunitat Valenciana (Ley 5/2026) and
 // Extremadura (Ley 2/2026) approved new ones. País Vasco and Navarra have their
-// own foral tax systems and are not covered.
+// own foral tax systems, modelled separately in foral.js.
 // Sources: AEAT, Manual práctico de Renta 2025, "Gravamen autonómico"; Hacienda,
 // Tributación Autonómica. Medidas 2026 (capítulos I y II).
 // https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2025/c15-calculo-impuesto-determinacion-cuotas-integras/gravamen-base-liquidable-general/gravamen-autonomico/

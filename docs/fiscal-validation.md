@@ -30,7 +30,7 @@ Withholding and annual assessment have separate minima: the AEAT withholding alg
 - The temporary-contract option models the minimum withholding rule for a contract shorter than one year. Contracts lasting a year or longer need the general withholding procedure; contract duration is not a separate input.
 - Minimum contribution base defaults to €1,424.40 (monthly groups 4–7). Other contribution groups, daily/hourly minima, professional accident tariffs, pension-plan contribution rebates and special regimes require different inputs/rules. Part-time scaling is an estimate, not an hourly contribution calculation.
 - Health insurance assumes the employee is the only disabled insured person, and that the aggregate premium can use the modeled per-person limits. A per-person premium/disability breakdown is not collected. Meal days and employer childcare/training are assumed to meet legal exemption conditions.
-- Basque/Navarre foral taxation, Ceuta/Melilla/La Palma reductions, pensioner/unemployment profiles, judicial annuities, maternity/family credits and regional deductions are not calculated. The project does not infer deductions from child counts or age without the required eligibility inputs.
+- Foral profiles outside the basic scope described in [locations.md](locations.md), Ceuta/Melilla/La Palma reductions, pensioner/unemployment profiles, judicial annuities, maternity/family credits and regional deductions are not calculated. The project does not infer deductions from child counts or age without the required eligibility inputs.
 - Annual results remain estimates. A passing test proves a covered rule or case, not a full Renta WEB declaration.
 
 ## Verification
@@ -47,3 +47,7 @@ npm run test:e2e
 ## Reviewed proposal scope
 
 See [proposal-scope.md](proposal-scope.md) for the Vox article 63/article 101 distinction, regional minimum assumptions and the limited Sumar annual top-rate scenario. Templates with separate withholding scales do not derive payroll withholding from their combined annual scale.
+
+## Residence coverage
+
+All 17 autonomous communities are selectable. Basque territories and Navarra use separate fixed fiscal rules for the reviewed basic employee profile. See [locations.md](locations.md) for official sources, eligibility, withheld/annual distinctions, examples and the explicitly guarded unsupported profiles.

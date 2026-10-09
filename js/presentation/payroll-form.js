@@ -1,6 +1,7 @@
 // Form adapter: translates browser controls into annual payroll input values.
 import { grossAnnualOf } from '../calc.js';
 import { MONTHS, AMOUNT_FIELDS, PERIOD_OF_AMOUNT, NUMERIC_INPUTS } from '../domain/payroll-input.js';
+import { CITIES } from '../data/cities.js';
 
 export function bindPayrollForm(form, state, onChange) {
   /** Divisor to show a stored annual amount in the period chosen in the form. */
@@ -26,6 +27,14 @@ export function bindPayrollForm(form, state, onChange) {
     if (type === 'checkbox') state.input[name] = checked;
     else if (NUMERIC_INPUTS.has(name)) state.input[name] = Math.max(0, parseFloat(value) || 0);
     else state.input[name] = value;
+
+    if (name === 'city' && value) {
+      const city = CITIES.find((city) => city.id === value);
+      if (city) state.input.region = city.region;
+      else state.input.city = '';
+    }
+    if (name === 'region') state.input.city = '';
+    if (name === 'city' || name === 'region') render();
 
     // Amounts are always stored per year
     if (name in PERIOD_OF_AMOUNT) state.input[name] *= amountDivisor(name);

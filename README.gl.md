@@ -49,7 +49,7 @@ Calculadora de nómina para España e simulador de propostas fiscais. Calcula o 
 | Retribución flexible exenta                 | Restaurante 11 €/día · transporte 1.500 €/ano · seguro médico 500 €/persoa |
 
 > [!IMPORTANT]
-> É unha ferramenta orientativa. Algúns parámetros (dedución SMI, mínimo exento de retención, escalas autonómicas) poden cambiar durante o ano; todos se poden axustar desde a interface ou en [`js/defaults.js`](js/defaults.js). Non se aplica aos territorios forais (País Vasco e Navarra).
+> É unha ferramenta orientativa. Algúns parámetros (dedución SMI, mínimo exento de retención, escalas autonómicas) poden cambiar durante o ano; todos se poden axustar desde a interface ou en [`js/defaults.js`](js/defaults.js). Inclúe un modelo foral limitado para o País Vasco e Navarra; consulta [o alcance por residencia](docs/locations.md).
 
 ### Fontes
 

@@ -132,7 +132,8 @@ export const DEFAULT_INPUT = {
   payments: 14, // 12 | 14
   contract: 'permanent', // 'permanent' | 'temporary'
   partTime: 100, // % of a full-time working week
-  region: 'general', // key of REGIONAL_SCALES, or 'general'
+  region: 'general', // common-regime community or foral territory
+  city: '', // optional residence preset; it must match the selected region
   familySituation: 3, // 1 | 2 | 3, see withholdingFreeMin*
   age: 35,
   children: 0,

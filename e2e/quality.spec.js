@@ -307,3 +307,86 @@ test('anonymous events survive a delayed GoatCounter script load', async ({ page
   await page.locator('#add-simulation').click();
   await expect.poll(() => page.evaluate(() => window.analyticsEvents?.length)).toBe(2);
 });
+
+test('city presets select all tax jurisdictions, preserve salary and display distinct annual brackets', async ({
+  page,
+}) => {
+  await expect(page.locator('#region option')).toHaveCount(20);
+  await page.fill('#salary', '73000');
+  await page.selectOption('#city', 'bilbao');
+  await expect(page.locator('#region')).toHaveValue('bizkaia');
+  await expect(page.locator('#salary')).toHaveValue('73000');
+  await expect(page.locator('#location-brackets')).toContainText('18.080');
+  await expect(page.locator('#location-brackets')).toContainText('49');
+  await expect(page.locator('#fiscal-scope')).toBeVisible();
+  await page.selectOption('#city', 'pamplona-iruna');
+  await expect(page.locator('#region')).toHaveValue('navarra');
+  await expect(page.locator('#location-brackets')).toContainText('4.458');
+  await page.selectOption('#city', 'madrid');
+  await expect(page.locator('#region')).toHaveValue('madrid');
+  await expect(page.locator('#fiscal-scope')).toBeHidden();
+  await page.selectOption('#region', 'catalonia');
+  await expect(page.locator('#city')).toHaveValue('');
+  await page.locator('[data-salary="45000"]').click();
+  await expect(page.locator('#salary')).toHaveValue('45000');
+  await expect(page.locator('#region')).toHaveValue('catalonia');
+});
+
+test('Bilbao preset and reviewed payroll survive a complete offline reload', async ({ page, context }) => {
+  await page.selectOption('#city', 'bilbao');
+  await page.evaluate(async () => {
+    await navigator.serviceWorker.ready;
+    if (!navigator.serviceWorker.controller)
+      await new Promise((resolve) =>
+        navigator.serviceWorker.addEventListener('controllerchange', resolve, { once: true }),
+      );
+  });
+  await expect(page.locator('.result-current .headline strong')).toHaveText('1.658,93 €');
+  await context.setOffline(true);
+  try {
+    await page.reload();
+    await expect(page.locator('#city')).toHaveValue('bilbao');
+    await expect(page.locator('#region')).toHaveValue('bizkaia');
+    await expect(page.locator('.result-current .headline strong')).toHaveText('1.658,93 €');
+    await page.selectOption('#city', 'pamplona-iruna');
+    await expect(page.locator('#region')).toHaveValue('navarra');
+    await expect(page.locator('.result-current .headline strong')).toHaveText('1.667,50 €');
+  } finally {
+    await context.setOffline(false);
+  }
+});
+
+test('unreviewed foral profiles hide every fiscal output and recover when corrected', async ({ page }) => {
+  await page.selectOption('#city', 'bilbao');
+  await page.fill('#children', '1');
+  await expect(page.locator('#fiscal-scope')).toContainText('Se ocultan los resultados');
+  for (const selector of ['#results', '#chart', '#compare-table', '#breakdown', '#sticky-summary'])
+    await expect(page.locator(selector)).toBeHidden();
+  await page.fill('#children', '0');
+  await expect(page.locator('#results')).toBeVisible();
+  await expect(page.locator('#fiscal-scope')).toContainText('Modelo foral limitado');
+  await page.fill('#children', '1');
+  await page.selectOption('#city', 'madrid');
+  await expect(page.locator('#results')).toBeVisible();
+  await expect(page.locator('#fiscal-scope')).toBeHidden();
+});
+
+test('city controls and salary examples remain readable in every language on narrow screens', async ({
+  page,
+}, testInfo) => {
+  await page.setViewportSize({ width: 320, height: 740 });
+  for (const language of ['es', 'ca', 'eu', 'gl', 'en']) {
+    await page.selectOption('#language', language);
+    await page.selectOption('#city', 'bilbao');
+    await expect(page.locator('#city')).toBeVisible();
+    await expect(page.locator('#salary-examples button')).toHaveCount(5);
+    const overflowing = await page.evaluate(
+      () => document.documentElement.scrollWidth > document.documentElement.clientWidth,
+    );
+    expect(overflowing).toBe(false);
+  }
+  await testInfo.attach('bilbao-presets-mobile', {
+    body: await page.screenshot({ fullPage: true }),
+    contentType: 'image/png',
+  });
+});
