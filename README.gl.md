@@ -1,5 +1,8 @@
 # Simulador de salario neto
 
+> [!WARNING]
+> Este proxecto xerouse e desenvolveuse coa axuda da intelixencia artificial. O código, os datos fiscais, as traducións e os resultados poden conter erros ou non estar completamente actualizados. Os tests comproban determinados comportamentos, pero non garanten a exactitude fiscal. Usa os resultados como estimacións e contrástaos con fontes oficiais ou asesoramento profesional antes de tomar decisións.
+
 Calculadora de nómina para España e simulador de propostas fiscais. Calcula o teu salario neto coa normativa vixente e compárao con calquera cambio nos tramos do IRPF, os mínimos ou as cotizacións á Seguridade Social.
 
 **[Abrir o simulador →](https://molinero95.github.io/SalaryCalculatorESP/)**
@@ -93,3 +96,7 @@ Agradécense correccións da normativa e revisións das traducións (sobre todo 
 ## Licenza
 
 [MIT](LICENSE) © 2026 Jaime Molinero Lacave
+
+## Simulacións e uso sen conexión
+
+Ata cinco simulacións aparecen automaticamente nos gráficos e na táboa. As lapelas escollen cal editar. As propostas son modelos editables. A rebaixa estatal por fillo é configurable: Vox aplica 4 puntos, cun mínimo do 0 %, mantendo a parte autonómica. A retención é estimada. Tras unha visita con conexión, funciona sen conexión.

@@ -1,6 +1,6 @@
 // Payroll engine. Pure functions with no DOM dependencies.
 
-import { GENERAL_REGIONAL_SCALE } from './defaults.js';
+import { GENERAL_REGIONAL_SCALE, combineScales } from './defaults.js';
 import { REGIONAL_SCALES, REGIONAL_ALLOWANCES } from './data/regions.js';
 
 const round2 = (x) => Math.round(x * 100) / 100;
@@ -209,6 +209,19 @@ export const grossAnnualOf = (input) => (input.period === 'perPayment' ? input.s
  * `grossAnnual` can be overridden to evaluate other salary levels with the same profile.
  */
 export function computePayroll(input, scenario, grossAnnual = grossAnnualOf(input)) {
+  // Reduce only the state share; preserve the general regional share and its floor.
+  const reduction = Math.max(0, scenario.incomeTax.childRateReduction ?? 0) * Math.max(0, input.children);
+  if (reduction > 0) {
+    const brackets = combineScales(
+      scenario.incomeTax.brackets,
+      GENERAL_REGIONAL_SCALE.map((b) => ({ ...b, rate: -b.rate })),
+    );
+    const reduced = brackets.map((b) => ({ ...b, rate: Math.max(0, b.rate - reduction) }));
+    scenario = {
+      ...scenario,
+      incomeTax: { ...scenario.incomeTax, brackets: combineScales(reduced, GENERAL_REGIONAL_SCALE) },
+    };
+  }
   const gross = Math.max(0, grossAnnual);
 
   // Employer pension contributions are part of the contribution base

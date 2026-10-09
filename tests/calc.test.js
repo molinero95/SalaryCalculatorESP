@@ -200,3 +200,21 @@ test('indexing brackets for inflation lowers the tax on the same salary', async 
     computePayroll(DEFAULT_INPUT, indexed).netAnnual > computePayroll(DEFAULT_INPUT, CURRENT_SCENARIO).netAnnual,
   );
 });
+
+test('child rate reduction preserves the regional share and never mutates a scenario', async () => {
+  const { proposalScenario } = await import('../js/political.js');
+  const vox = proposalScenario('vox2024', 'Vox');
+  const before = JSON.stringify(vox);
+  const input = { ...DEFAULT_INPUT, salary: 73000, children: 2, region: 'madrid' };
+  const reduced = computePayroll(input, vox);
+  const without = computePayroll(input, { ...vox, incomeTax: { ...vox.incomeTax, childRateReduction: 0 } });
+  assert.ok(reduced.incomeTax.annualTax < without.incomeTax.annualTax);
+  assert.ok(reduced.incomeTax.withheld < without.incomeTax.withheld);
+  assert.equal(JSON.stringify(vox), before);
+  const many = computePayroll({ ...input, children: 7 }, vox);
+  const more = computePayroll(
+    { ...input, children: 7 },
+    { ...vox, incomeTax: { ...vox.incomeTax, childRateReduction: 100 } },
+  );
+  assert.equal(many.incomeTax.annualTax, more.incomeTax.annualTax);
+});

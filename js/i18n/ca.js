@@ -1,6 +1,7 @@
 // Catalan translations. `f_*` keys label the settings fields.
 
 export default {
+  f_childRateReduction: 'Rebaixa estatal per fill (punts percentuals)',
   appTitle: 'Simulador de salari net',
   appSubtitle: 'Calcula la teva nòmina a Espanya i compara-la amb qualsevol proposta fiscal',
   language: 'Idioma',
@@ -256,7 +257,7 @@ export default {
   loadProposal: 'Carregar proposta de partit',
   proposalSource: 'Font',
   proposalVoxNote:
-    "Només canvia la meitat estatal: 15 % fins a 70.000 € i 25 % per sobre; l'autonòmica es manté. Per això l'escala conjunta puja en els primers trams (15 % + 9,5 % = 24,5 %), compensat per un mínim personal de 22.000 €. No inclou la rebaixa de 4 punts per fill ni els xecs per naixement.",
+    "Només canvia la meitat estatal: 15 % fins a 70.000 € i 25 % per sobre; l'autonòmica es manté. Per això l'escala conjunta puja en els primers trams (15 % + 9,5 % = 24,5 %), compensat per un mínim personal de 22.000 €. Inclou la rebaixa estatal de 4 punts per fill, amb un mínim del 0 %. La retenció és estimada; no inclou els xecs per naixement.",
   proposalSumarNote:
     'Apuja el tipus marginal màxim al 52 % per sobre de 300.000 €. El programa no detalla els tipus entre 120.000 i 300.000 €, que es mantenen.',
   proposalPsoeNote: 'Proposa augmentar el mínim per descendents i persones dependents, sense xifres concretes.',
@@ -272,8 +273,8 @@ export default {
     "Des del {year} els preus han pujat un {inflation} % i els trams de l'IRPF no s'han actualitzat. Si trams i mínims pugessin amb la inflació, cobraries {amount} més l'any.",
   creepSimulate: 'Simular trams actualitzats amb l’IPC',
   creepScenarioName: 'Trams actualitzats amb l’IPC (+{inflation} %)',
-  compareTitle: 'Comparar propostes',
-  compareDesc: 'Tria fins a 3 escenaris per comparar-los amb la normativa vigent fent servir les teves dades.',
+  compareTitle: 'Comparar simulacions',
+  compareDesc: 'Totes les simulacions es comparen automàticament amb la normativa vigent.',
   compareEmpty: 'Selecciona almenys un escenari.',
   compareChartDesc: 'Diferència neta anual respecte a la normativa vigent, segons el salari brut.',
   newSimulation: '+ Nova simulació',

@@ -4,6 +4,7 @@ import globals from 'globals';
 export default [
   { ignores: ['node_modules/', 'test-results/', 'playwright-report/'] },
   js.configs.recommended,
+  { files: ['sw.js'], languageOptions: { globals: globals.serviceworker } },
   {
     files: ['js/**/*.js'],
     languageOptions: { globals: globals.browser },

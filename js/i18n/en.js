@@ -1,6 +1,7 @@
 // English translations. `f_*` keys label the settings fields.
 
 export default {
+  f_childRateReduction: 'State rate reduction per child (percentage points)',
   appTitle: 'Net salary simulator',
   appSubtitle: 'Work out your Spanish payslip and compare it with any tax proposal',
   language: 'Language',
@@ -254,7 +255,7 @@ export default {
   loadProposal: 'Load a party proposal',
   proposalSource: 'Source',
   proposalVoxNote:
-    'Only changes the state half: 15 % up to €70,000 and 25 % above; the regional half stays. That is why the combined scale rises in the first brackets (15 % + 9.5 % = 24.5 %), offset by a €22,000 personal allowance. Excludes the 4-point cut per child and birth payments.',
+    'Only the state share changes: 15 % up to €70,000 and 25 % above, with a €22,000 personal allowance. Each child reduces state rates by 4 percentage points, down to 0 %. Regional tax remains unchanged. Payroll withholding is estimated; birth payments are excluded.',
   proposalSumarNote:
     'Raises the top marginal rate to 52 % above €300,000. The programme gives no rates between €120,000 and €300,000, which are kept.',
   proposalPsoeNote: 'Proposes raising the child and dependant allowances, without specific figures.',
@@ -271,8 +272,8 @@ export default {
     'Since {year} prices have risen {inflation} % and income tax brackets have not been updated. If brackets and allowances rose with inflation, you would take home {amount} more a year.',
   creepSimulate: 'Simulate brackets indexed to inflation',
   creepScenarioName: 'Brackets indexed to inflation (+{inflation} %)',
-  compareTitle: 'Compare proposals',
-  compareDesc: 'Pick up to 3 scenarios to compare with current rules using your details.',
+  compareTitle: 'Compare simulations',
+  compareDesc: 'All your simulations are automatically compared with current rules.',
   compareEmpty: 'Select at least one scenario.',
   compareChartDesc: 'Net annual difference vs current rules, by gross salary.',
   newSimulation: '+ New simulation',

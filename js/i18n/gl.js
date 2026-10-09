@@ -1,6 +1,7 @@
 // Galician translations. `f_*` keys label the settings fields.
 
 export default {
+  f_childRateReduction: 'Rebaixa estatal por fillo (puntos porcentuais)',
   appTitle: 'Simulador de salario neto',
   appSubtitle: 'Calcula a túa nómina en España e compárala con calquera proposta fiscal',
   language: 'Idioma',
@@ -251,7 +252,7 @@ export default {
   loadProposal: 'Cargar proposta de partido',
   proposalSource: 'Fonte',
   proposalVoxNote:
-    'Só cambia a metade estatal: 15 % ata 70.000 € e 25 % por riba; a autonómica mantense. Por iso a escala conxunta sobe nos primeiros tramos (15 % + 9,5 % = 24,5 %), compensado por un mínimo persoal de 22.000 €. Non inclúe a rebaixa de 4 puntos por fillo nin os cheques por nacemento.',
+    'Só cambia a parte estatal: 15 % ata 70.000 € e 25 % por riba, cun mínimo persoal de 22.000 €. Cada fillo reduce os tipos estatais en 4 puntos, ata o 0 %. A parte autonómica mantense. A retención é estimada; non inclúe os cheques por nacemento.',
   proposalSumarNote:
     'Sobe o tipo marxinal máximo ao 52 % por riba de 300.000 €. O programa non detalla os tipos entre 120.000 e 300.000 €, que se manteñen.',
   proposalPsoeNote: 'Propón aumentar o mínimo por descendentes e persoas dependentes, sen cifras concretas.',
@@ -267,8 +268,8 @@ export default {
     'Desde {year} os prezos subiron un {inflation} % e os tramos do IRPF non se actualizaron. Se tramos e mínimos subisen coa inflación, cobrarías {amount} máis ao ano.',
   creepSimulate: 'Simular tramos actualizados co IPC',
   creepScenarioName: 'Tramos actualizados co IPC (+{inflation} %)',
-  compareTitle: 'Comparar propostas',
-  compareDesc: 'Escolle ata 3 escenarios para comparalos coa normativa vixente usando os teus datos.',
+  compareTitle: 'Comparar simulacións',
+  compareDesc: 'Todas as simulacións compáranse automaticamente coa normativa vixente.',
   compareEmpty: 'Selecciona polo menos un escenario.',
   compareChartDesc: 'Diferenza neta anual fronte á normativa vixente, segundo o salario bruto.',
   newSimulation: '+ Nova simulación',

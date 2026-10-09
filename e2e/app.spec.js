@@ -131,9 +131,40 @@ test('several simulations can be kept and compared at once', async ({ page }) =>
   await expect(page.locator('#difference')).toHaveClass(/neutral/);
 
   // Both tabs are available in the comparison
-  await expect(page.locator('#compare-options')).toContainText('Rebaja');
+  await expect(page.locator('#compare-table')).toContainText('Rebaja');
+
+  await expect(page.locator('#chart .line')).toHaveCount(2);
+  await expect(page.locator('#compare-chart .line')).toHaveCount(2);
+  await expect(page.locator('#compare-options')).toHaveCount(0);
 
   // Tabs survive a reload
   await page.reload();
   await expect(page.locator('.sim-tab')).toHaveCount(2);
+});
+
+test('all five simulations appear in both chart modes without selection', async ({ page }) => {
+  for (let i = 1; i < 5; i++) await page.locator('#add-simulation').click();
+  await expect(page.locator('#chart .line')).toHaveCount(5);
+  await expect(page.locator('#compare-chart .line')).toHaveCount(5);
+  await page.locator('input[name="chartMode"][value="rate"]').check();
+  await expect(page.locator('#chart .line')).toHaveCount(6);
+  await page.locator('[data-remove-simulation="2"]').click();
+  await expect(page.locator('#chart .line')).toHaveCount(5);
+  await expect(page.locator('#compare-chart .line')).toHaveCount(4);
+});
+
+test('app reloads and calculates offline after caching the app shell', async ({ page, context }) => {
+  await page.evaluate(async () => {
+    await navigator.serviceWorker.ready;
+    if (!navigator.serviceWorker.controller)
+      await new Promise((resolve) =>
+        navigator.serviceWorker.addEventListener('controllerchange', resolve, { once: true }),
+      );
+  });
+  await context.setOffline(true);
+  await page.reload();
+  await expect(page.locator('#add-simulation')).toBeVisible();
+  await page.locator('#add-simulation').click();
+  await expect(page.locator('#chart .line')).toHaveCount(2);
+  await context.setOffline(false);
 });
