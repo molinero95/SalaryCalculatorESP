@@ -33,7 +33,7 @@ test('hashes source bytes and distinguishes changed, unchanged, new URLs and err
   assert.equal(classifySource(current, current), 'unchanged');
   assert.equal(classifySource({ ...current, sha256: 'other' }, current), 'changed');
   assert.equal(classifySource(undefined, current), 'baseline-needed');
-  assert.equal(classifySource({ ...current, url: 'https://other.org' }, current), 'baseline-needed');
+  assert.equal(classifySource({ ...current, url: 'https://other.org' }, current), 'changed');
   assert.equal(classifySource(current, { error: 'HTTP 404' }), 'unavailable');
 });
 for (const [label, fetcher] of [

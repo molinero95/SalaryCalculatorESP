@@ -5,7 +5,8 @@ import { cataloguePath, validateCatalogue } from './template-catalogue.js';
 
 export function classifySource(previous, current) {
   if (current.error) return 'unavailable';
-  if (!previous || previous.url !== current.url) return 'baseline-needed';
+  if (!previous) return 'baseline-needed';
+  if (previous.url !== current.url) return 'changed';
   return previous.sha256 === current.sha256 ? 'unchanged' : 'changed';
 }
 
