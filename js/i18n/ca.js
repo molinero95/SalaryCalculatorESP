@@ -268,7 +268,7 @@ export default {
   proposalVerified: 'Verificat el',
   proposalPartial: 'Simulació parcial',
   proposalVoxNote:
-    "Només canvia la meitat estatal: 15 % fins a 70.000 € i 25 % per sobre; l'autonòmica es manté. Per això l'escala conjunta puja en els primers trams (15 % + 9,5 % = 24,5 %), compensat per un mínim personal de 22.000 €. Inclou la rebaixa estatal de 4 punts per fill, amb un mínim del 0 %. La retenció és estimada; no inclou els xecs per naixement.",
+    'Proposta de 2024: escala estatal anual del 15 % fins a 70.000 € i 25 % sobre l’excés; manté l’escala autonòmica. L’article 101 proposa una retenció independent del 15 %/25 %. Mínim personal de 22.000 € i rebaixa de 4 punts per fill només a la quota estatal anual. Es mantenen els mínims autonòmics expressos; altres comunitats hereten el mínim proposat. Simulació parcial: conserva les regles reglamentàries i exclou els xecs per naixement.',
   proposalSumarNote:
     'Apuja el tipus marginal màxim al 52 % per sobre de 300.000 €. El programa no detalla els tipus entre 120.000 i 300.000 €, que es mantenen. La retenció de nòmina es manté: el programa no en defineix una escala nova.',
   proposalPsoeNote: 'Proposa augmentar el mínim per descendents i persones dependents, sense xifres concretes.',

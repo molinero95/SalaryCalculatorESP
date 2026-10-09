@@ -259,7 +259,9 @@ function renderBrackets(container, scenario, reference, { recalculate, rerender 
 
   // Highlights changes and shows the template matching the brackets ("custom" otherwise)
   const markChanged = () => {
-    container.classList.toggle('changed', !sameBrackets(brackets, reference.incomeTax[bracketKey]));
+    const referenceKey =
+      bracketKey === 'withholdingBrackets' && !reference.incomeTax.useSeparateWithholding ? 'brackets' : bracketKey;
+    container.classList.toggle('changed', !sameBrackets(brackets, reference.incomeTax[referenceKey]));
     $('[data-preset]').value = matchingPreset(brackets);
   };
   markChanged();

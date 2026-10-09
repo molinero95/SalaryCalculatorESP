@@ -161,3 +161,27 @@ test('Vox separates payroll withholding and annual regional tax across reloads',
   await page.locator('#settings-simulation [data-withholding-brackets] [data-rate="0"]').fill('20');
   await expect(page.locator('.result-simulation .headline strong')).not.toHaveText(payroll);
 });
+
+test('saving retains a named simulation independently of open tabs', async ({ page }) => {
+  await page.fill('#scenario-name', 'Guardada');
+  await page.selectOption('#proposal-select', 'vox2024');
+  await page.fill('#scenario-name', 'Guardada');
+  const net = await page.locator('.result-simulation .headline strong').textContent();
+  await page.locator('#save-scenario').click();
+  await expect(page.locator('#saved-scenarios')).toHaveValue('Guardada');
+  await page.selectOption('#proposal-select', '');
+  await page.reload();
+  await page.selectOption('#saved-scenarios', 'Guardada');
+  await page.locator('#load-scenario').click();
+  await expect(page.locator('.result-simulation .headline strong')).toHaveText(net);
+  await expect(page.locator('#scenario-name')).toHaveValue('Guardada');
+});
+
+test('separate withholding editor compares with the active reference scale', async ({ page }) => {
+  await page.selectOption('#proposal-select', 'sumar2023');
+  const editor = page.locator('#settings-simulation [data-withholding-brackets]');
+  await expect(editor).not.toHaveClass(/changed/);
+  await page.locator('#settings-current [data-group="groupBrackets"] summary').click();
+  await page.locator('#settings-current [data-rate="0"]').fill('20');
+  await expect(editor).toHaveClass(/changed/);
+});
