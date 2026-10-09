@@ -27,6 +27,7 @@ const PERIOD_OF_AMOUNT = Object.fromEntries(
 const NUMERIC_INPUTS = new Set([
   'salary',
   'payments',
+  'partTime',
   'familySituation',
   'age',
   'children',
@@ -89,6 +90,7 @@ function initialState() {
   state.input.payments = oneOf(state.input.payments, [14, 12]);
   state.input.familySituation = oneOf(state.input.familySituation, [3, 2, 1]);
   state.input.disability = oneOf(state.input.disability, [0, 33, 65]);
+  state.input.partTime = Math.min(100, Math.max(1, state.input.partTime));
   for (const period of Object.keys(AMOUNT_FIELDS)) state.input[period] = oneOf(state.input[period], ['annual', 'monthly']);
   return state;
 }

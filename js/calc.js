@@ -16,9 +16,13 @@ export function applyScale(brackets, base) {
   return tax;
 }
 
-/** Annual social security contributions for one set of rates (employee or employer). */
-function contributions(grossAnnual, socialSecurity, rates, contract) {
-  const { minBase, maxBase, solidarityBand1Limit, solidarityBand2Limit } = socialSecurity;
+/**
+ * Annual social security contributions for one set of rates (employee or employer).
+ * Part-time workers have the minimum base reduced in proportion to their hours.
+ */
+function contributions(grossAnnual, socialSecurity, rates, { contract, partTime }) {
+  const { maxBase, solidarityBand1Limit, solidarityBand2Limit } = socialSecurity;
+  const minBase = (socialSecurity.minBase * partTime) / 100;
   const monthly = grossAnnual / 12;
   const base = Math.min(Math.max(monthly, minBase), maxBase);
   const unemployment = contract === 'temporary' ? rates.unemploymentTemporary : rates.unemploymentPermanent;
@@ -182,8 +186,8 @@ export function computePayroll(input, scenario, grossAnnual = grossAnnualOf(inpu
 
   // Employer pension contributions are part of the contribution base
   const contributionBase = gross + input.pensionEmployer;
-  const employee = contributions(contributionBase, scenario.socialSecurity, scenario.employee, input.contract);
-  const employer = contributions(contributionBase, scenario.socialSecurity, scenario.employer, input.contract);
+  const employee = contributions(contributionBase, scenario.socialSecurity, scenario.employee, input);
+  const employer = contributions(contributionBase, scenario.socialSecurity, scenario.employer, input);
 
   const flexible = flexibleCompensation(input, scenario.flexible, gross);
   const taxableGross = gross - flexible.exempt;

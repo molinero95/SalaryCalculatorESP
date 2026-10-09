@@ -217,4 +217,5 @@ export default {
   f_employmentLimit: "Límit pla d'ocupació",
   f_netIncomeShareLimit: 'Màxim sobre rendiments nets',
   f_highIncomeThreshold: "Renda a partir de la qual la teva aportació no pot superar la de l'empresa",
+  partTime: 'Jornada',
 };

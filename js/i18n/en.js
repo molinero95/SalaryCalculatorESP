@@ -217,4 +217,5 @@ export default {
   f_employmentLimit: 'Employment plan limit',
   f_netIncomeShareLimit: 'Maximum over net income',
   f_highIncomeThreshold: 'Income above which your contribution can’t exceed the employer’s',
+  partTime: 'Working hours',
 };

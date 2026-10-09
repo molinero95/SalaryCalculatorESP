@@ -144,3 +144,12 @@ test('payments still add up with pension contributions deducted in payroll', () 
   const r = computePayroll({ ...DEFAULT_INPUT, pensionEmployee: 600 }, CURRENT_SCENARIO);
   close(12 * r.netRegularPayment + 2 * r.netExtraPayment, r.netAnnual);
 });
+
+test('part-time workers contribute on their actual salary, not the full-time minimum base', () => {
+  const fullTime = computePayroll({ ...DEFAULT_INPUT, salary: 12000 }, CURRENT_SCENARIO);
+  const halfTime = computePayroll({ ...DEFAULT_INPUT, salary: 12000, partTime: 50 }, CURRENT_SCENARIO);
+
+  assert.equal(fullTime.employee.monthlyBase, CURRENT_SCENARIO.socialSecurity.minBase);
+  close(halfTime.employee.monthlyBase, 1000);
+  close(halfTime.employee.total, 12000 * 0.065);
+});

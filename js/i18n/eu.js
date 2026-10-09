@@ -217,4 +217,5 @@ export default {
   f_employmentLimit: 'Enplegu-planaren muga',
   f_netIncomeShareLimit: 'Etekin garbien gaineko gehienekoa',
   f_highIncomeThreshold: 'Zure ekarpenak enpresarena gainditu ezin duen errenta',
+  partTime: 'Lanaldia',
 };

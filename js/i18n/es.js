@@ -217,4 +217,5 @@ export default {
   f_employmentLimit: 'Límite plan de empleo',
   f_netIncomeShareLimit: 'Máximo sobre rendimientos netos',
   f_highIncomeThreshold: 'Renta desde la que tu aportación no puede superar la de la empresa',
+  partTime: 'Jornada',
 };

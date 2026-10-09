@@ -118,6 +118,7 @@ export const DEFAULT_INPUT = {
   period: 'annual', // 'annual' | 'perPayment'
   payments: 14, // 12 | 14
   contract: 'permanent', // 'permanent' | 'temporary'
+  partTime: 100, // % of a full-time working week
   familySituation: 3, // 1 | 2 | 3, see withholdingFreeMin*
   age: 35,
   children: 0,
