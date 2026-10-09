@@ -158,7 +158,7 @@ const BREAKDOWN = [
         optional: true,
         showIf: (r) => !r.incomeTax.foral,
       },
-      { label: 'rowForalCredits', value: (r) => r.incomeTax.minWageCredit, showIf: (r) => r.incomeTax.foral },
+      { label: 'rowForalCredits', value: (r) => r.incomeTax.foralCredit, showIf: (r) => r.incomeTax.foral },
       { label: 'rowAnnualBase', value: (r) => r.incomeTax.annualBase },
       { label: 'rowStateTax', value: (r) => r.incomeTax.stateTax, showIf: (r) => !r.incomeTax.foral },
       { label: 'rowRegionalTax', value: (r) => r.incomeTax.regionalTax, showIf: (r) => !r.incomeTax.foral },

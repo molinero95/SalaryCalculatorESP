@@ -357,11 +357,16 @@ test('Bilbao preset and reviewed payroll survive a complete offline reload', asy
 });
 
 test('unreviewed foral profiles hide every fiscal output and recover when corrected', async ({ page }) => {
+  const errors = [];
+  page.on('pageerror', (error) => errors.push(error.message));
   await page.selectOption('#city', 'bilbao');
   await page.fill('#children', '1');
   await expect(page.locator('#fiscal-scope')).toContainText('Se ocultan los resultados');
   for (const selector of ['#results', '#chart', '#compare-table', '#breakdown', '#sticky-summary'])
     await expect(page.locator(selector)).toBeHidden();
+  await page.setViewportSize({ width: 640, height: 900 });
+  await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))));
+  expect(errors).toEqual([]);
   await page.fill('#children', '0');
   await expect(page.locator('#results')).toBeVisible();
   await expect(page.locator('#fiscal-scope')).toContainText('Modelo foral limitado');

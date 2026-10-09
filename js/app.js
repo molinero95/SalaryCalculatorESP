@@ -72,6 +72,7 @@ $('#salary-examples').addEventListener('click', ({ target }) => {
 // ---------------------------------------------------------------------------
 
 function renderComparisonChart() {
+  if (unsupportedFiscalProfile(state.input)) return;
   const xs = [];
   for (let x = CHART_RANGE.from; x <= CHART_RANGE.to; x += CHART_RANGE.step) xs.push(x);
 
