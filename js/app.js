@@ -1,5 +1,17 @@
+import { toScenario } from './domain/scenario.js';
+import {
+  createSession,
+  importSession,
+  sharePayload,
+  MAX_SIMULATIONS,
+  selectSimulation,
+  addSimulation,
+  removeSimulation,
+} from './application/simulation-session.js';
+import { createSessionPersistence } from './infrastructure/session-persistence.js';
+import { bindPayrollForm } from './presentation/payroll-form.js';
 import { computePayroll, grossAnnualOf } from './calc.js';
-import { CURRENT_SCENARIO, DEFAULT_INPUT, clone } from './defaults.js';
+import { CURRENT_SCENARIO, clone } from './defaults.js';
 import { LANGUAGES, DEFAULT_LANGUAGE, setLanguage, t, translateDocument } from './i18n/index.js';
 import { formatEuros, formatSignedEuros, formatPercent, formatCompactEuros, escapeHtml } from './format.js';
 import { renderSettings } from './settings.js';
@@ -16,166 +28,12 @@ const $ = (selector) => document.querySelector(selector);
 
 const CHART_RANGE = { from: 12000, to: 150000, step: 1000 };
 const CHART_TABLE_EVERY = 5;
-const MAX_SIMULATIONS = 5;
 const INFLATION_SINCE_BRACKETS = Math.round(cumulativeInflation(BRACKETS_LAST_UPDATED - 1));
-const SAVE_DELAY_MS = 300;
 const TOAST_MS = 2500;
-const MONTHS = 12;
-
-/** Annual amounts that the form can show per year or per month, keyed by the period field controlling them. */
-const AMOUNT_FIELDS = {
-  flexPeriod: ['flexMeal', 'flexTransport', 'flexHealth', 'flexChildcare', 'flexTraining'],
-  pensionPeriod: ['pensionIndividual', 'pensionEmployee', 'pensionEmployer'],
-};
-const PERIOD_OF_AMOUNT = Object.fromEntries(
-  Object.entries(AMOUNT_FIELDS).flatMap(([period, fields]) => fields.map((field) => [field, period])),
-);
-
-const NUMERIC_INPUTS = new Set([
-  'salary',
-  'payments',
-  'partTime',
-  'familySituation',
-  'age',
-  'children',
-  'childrenUnder3',
-  'dependents65',
-  'dependents75',
-  'disability',
-  'workingDays',
-  'flexHealthPeople',
-  ...Object.keys(PERIOD_OF_AMOUNT),
-]);
-
-// ---------------------------------------------------------------------------
-// State
-// ---------------------------------------------------------------------------
-
-const isPlainObject = (value) => value !== null && typeof value === 'object' && !Array.isArray(value);
-
-const isValidBrackets = (brackets) =>
-  Array.isArray(brackets) &&
-  brackets.length > 0 &&
-  brackets.length <= 100 &&
-  brackets.every(
-    (b, i) =>
-      Number.isFinite(b?.rate) &&
-      b.rate >= 0 &&
-      b.rate <= 100 &&
-      (b.upTo === null
-        ? i === brackets.length - 1
-        : Number.isFinite(b.upTo) && b.upTo > (i ? brackets[i - 1].upTo : 0)),
-  ) &&
-  brackets.at(-1).upTo === null;
-
-/**
- * Deep-merges untrusted `override` (saved state, shared link, imported file) into
- * `base`. Unknown keys are dropped and values whose type doesn't match are ignored.
- */
-const isStringList = (list) => Array.isArray(list) && list.every((item) => typeof item === 'string');
-
-function merge(base, override) {
-  if (isStringList(base)) return isStringList(override) ? override : base;
-  if (Array.isArray(base)) return isValidBrackets(override) ? override : base;
-  if (isPlainObject(base)) {
-    if (!isPlainObject(override)) return base;
-    return Object.fromEntries(
-      Object.entries(base).map(([key, value]) => [key, key in override ? merge(value, override[key]) : value]),
-    );
-  }
-  if (typeof base === 'number') return Number.isFinite(override) && override >= 0 ? override : base;
-  return typeof override === typeof base ? override : base;
-}
-
-/** The parts of `value` that differ from `base` (undefined when equal), to keep share links short. */
-function changesFrom(base, value) {
-  if (isPlainObject(base) && isPlainObject(value)) {
-    const entries = Object.entries(value)
-      .map(([key, item]) => [key, changesFrom(base[key], item)])
-      .filter(([, item]) => item !== undefined);
-    return entries.length ? Object.fromEntries(entries) : undefined;
-  }
-  return JSON.stringify(base) === JSON.stringify(value) ? undefined : value;
-}
-
-const oneOf = (value, allowed) => (allowed.includes(value) ? value : allowed[0]);
-
-const toScenario = (override) => merge(clone(CURRENT_SCENARIO), override);
-
-/** Simulations from saved or imported data (also accepts the old single `simulation`). */
-function simulationList(source) {
-  const list = Array.isArray(source?.simulations)
-    ? source.simulations.filter(isPlainObject).slice(0, MAX_SIMULATIONS).map(toScenario)
-    : [];
-  return list.length ? list : [toScenario(isPlainObject(source?.simulation) ? source.simulation : {})];
-}
-
-/** `state.simulation` always points at the active tab (not saved: `simulations` is). */
-function defineActiveSimulation(target) {
-  target.active = Math.min(Math.max(0, Math.floor(target.active)), target.simulations.length - 1);
-  Object.defineProperty(target, 'simulation', {
-    get: () => target.simulations[target.active],
-    set: (scenario) => {
-      target.simulations[target.active] = scenario;
-    },
-    enumerable: false,
-    configurable: true,
-  });
-}
-
-function normalizeInput(state) {
-  state.input.period = oneOf(state.input.period, ['annual', 'perPayment']);
-  state.input.contract = oneOf(state.input.contract, ['permanent', 'temporary']);
-  state.input.payments = oneOf(state.input.payments, [14, 12]);
-  state.input.familySituation = oneOf(state.input.familySituation, [3, 2, 1]);
-  state.input.disability = oneOf(state.input.disability, [0, 33, 65]);
-  state.input.partTime = Math.min(100, Math.max(1, state.input.partTime));
-  state.input.region = oneOf(state.input.region, ['general', ...Object.keys(REGIONAL_SCALES)]);
-  for (const period of Object.keys(AMOUNT_FIELDS))
-    state.input[period] = oneOf(state.input[period], ['annual', 'monthly']);
-  for (const field of NUMERIC_INPUTS) {
-    const element = document.querySelector(`input[name="${field}"]`);
-    if (!element) continue;
-    const minimum = element.hasAttribute('min') ? Number(element.min) : 0;
-    const maximum = element.hasAttribute('max') ? Number(element.max) : 1e9;
-    let value = Math.min(maximum, Math.max(minimum, state.input[field]));
-    if (element.step !== 'any' && !['salary', ...Object.keys(PERIOD_OF_AMOUNT)].includes(field))
-      value = Math.floor(value);
-    state.input[field] = value;
-  }
-}
-
-function initialState() {
-  const defaults = {
-    language: DEFAULT_LANGUAGE,
-    chartMode: 'diff',
-    input: clone(DEFAULT_INPUT),
-    current: clone(CURRENT_SCENARIO),
-    active: 0,
-  };
-
-  // A shared link (#s=…) is applied on top of the locally saved state, so the
-  // recipient keeps their own personal details
-  const shared = location.hash.startsWith('#s=') ? storage.decode(location.hash.slice(3)) : null;
-  if (shared) history.replaceState(null, '', location.pathname + location.search);
-
-  const saved = storage.loadState() ?? {};
-  const state = merge(merge(defaults, saved), shared ?? {});
-
-  // Simulations live in a list; a shared simulation opens as a new tab
-  state.simulations = simulationList(saved);
-  if (isPlainObject(shared?.simulation)) {
-    state.simulations = [...state.simulations.slice(0, MAX_SIMULATIONS - 1), toScenario(shared.simulation)];
-    state.active = state.simulations.length - 1;
-  }
-  defineActiveSimulation(state);
-
-  state.chartMode = oneOf(state.chartMode, ['diff', 'rate']);
-  normalizeInput(state);
-  return state;
-}
-
-const state = initialState();
+// Restore browser state at the composition boundary.
+const shared = location.hash.startsWith('#s=') ? storage.decode(location.hash.slice(3)) : null;
+if (shared) history.replaceState(null, '', location.pathname + location.search);
+const state = createSession(storage.loadState() ?? {}, shared, { defaultLanguage: DEFAULT_LANGUAGE });
 
 const simulationName = (index) => state.simulations[index].name || `${t('simulation')} ${index + 1}`;
 const scenarioName = (kind) =>
@@ -187,61 +45,15 @@ function trackEvent(name) {
   window.goatcounter?.count?.({ path: name, title: name, event: true });
 }
 
-let saveTimer;
-function persist() {
-  clearTimeout(saveTimer);
-  saveTimer = setTimeout(() => storage.saveState(state), SAVE_DELAY_MS);
-}
-
-// Flush pending changes when the page is closed or reloaded
-window.addEventListener('pagehide', () => {
-  clearTimeout(saveTimer);
-  storage.saveState(state);
-});
+const persistence = createSessionPersistence(storage, state);
+const persist = () => persistence.schedule();
+window.addEventListener('pagehide', () => persistence.flush());
 
 // ---------------------------------------------------------------------------
 // Personal details form
 // ---------------------------------------------------------------------------
 
-const form = $('#details-form');
-
-/** Divisor to show a stored annual amount in the period chosen in the form. */
-const amountDivisor = (field) => (state.input[PERIOD_OF_AMOUNT[field]] === 'monthly' ? MONTHS : 1);
-
-function renderInput() {
-  for (const [name, value] of Object.entries(state.input)) {
-    const control = form.elements[name];
-    if (!control) continue;
-    if (control.type === 'checkbox') control.checked = value;
-    else if (name in PERIOD_OF_AMOUNT) control.value = String(Math.round((value / amountDivisor(name)) * 100) / 100);
-    else control.value = String(value);
-  }
-  form.elements.salary.step = state.input.period === 'perPayment' ? 10 : 100;
-}
-
-form.addEventListener('input', ({ target }) => {
-  const { name, type, value, checked } = target;
-  if (!(name in state.input)) return;
-
-  const previousGross = grossAnnualOf(state.input);
-
-  if (type === 'checkbox') state.input[name] = checked;
-  else if (NUMERIC_INPUTS.has(name)) state.input[name] = Math.max(0, parseFloat(value) || 0);
-  else state.input[name] = value;
-
-  // Amounts are always stored per year
-  if (name in PERIOD_OF_AMOUNT) state.input[name] *= amountDivisor(name);
-  if (name in AMOUNT_FIELDS) renderInput();
-
-  // Switching period or number of payments keeps the same gross annual salary
-  if (name === 'period' || name === 'payments') {
-    const { period, payments } = state.input;
-    state.input.salary = period === 'perPayment' ? Math.round((previousGross / payments) * 100) / 100 : previousGross;
-    renderInput();
-  }
-
-  update();
-});
+const renderInput = bindPayrollForm($('#details-form'), state, update);
 
 // ---------------------------------------------------------------------------
 // Chart
@@ -343,7 +155,7 @@ function renderResultTabs() {
 $('#results').addEventListener('click', ({ target }) => {
   const tab = target.closest('[data-result-simulation]');
   if (!tab) return;
-  state.active = Number(tab.dataset.resultSimulation);
+  selectSimulation(state, Number(tab.dataset.resultSimulation));
   refreshScenarios();
   $(`[data-result-simulation="${state.active}"]`).focus();
 });
@@ -352,13 +164,11 @@ $('#sim-tabs').addEventListener('click', ({ target }) => {
   const tab = target.closest('[data-simulation]');
   const remove = target.closest('[data-remove-simulation]');
   if (remove) {
-    state.simulations.splice(Number(remove.dataset.removeSimulation), 1);
-    state.active = Math.min(state.active, state.simulations.length - 1);
+    removeSimulation(state, Number(remove.dataset.removeSimulation));
   } else if (tab) {
-    state.active = Number(tab.dataset.simulation);
+    selectSimulation(state, Number(tab.dataset.simulation));
   } else if (target.id === 'add-simulation') {
-    state.simulations.push({ ...clone(state.current), name: '', proposal: '' });
-    state.active = state.simulations.length - 1;
+    addSimulation(state);
     trackEvent('add-simulation');
   } else {
     return;
@@ -441,10 +251,7 @@ $('#reset-current').addEventListener('click', () => {
 
 /** Link to the current proposal. Personal details are deliberately left out. */
 function shareUrl() {
-  const payload = {
-    current: changesFrom(CURRENT_SCENARIO, state.current),
-    simulation: changesFrom(CURRENT_SCENARIO, state.simulation),
-  };
+  const payload = sharePayload(state);
   return `${location.origin}${location.pathname}#s=${storage.encode(payload)}`;
 }
 
@@ -518,14 +325,7 @@ $('#import').addEventListener('change', async ({ target }) => {
   if (!file) return;
   try {
     const imported = JSON.parse(await file.text());
-    if (!isPlainObject(imported?.simulation) && !Array.isArray(imported?.simulations)) {
-      throw new Error('Invalid scenario file');
-    }
-    state.input = merge(state.input, imported.input ?? {});
-    normalizeInput(state);
-    state.current = toScenario(imported.current ?? {});
-    state.simulations = simulationList(imported);
-    state.active = 0;
+    importSession(state, imported);
     renderInput();
     refreshScenarios();
   } catch {
@@ -546,7 +346,7 @@ $('#save-scenario').addEventListener('click', () => {
 $('#load-scenario').addEventListener('click', () => {
   const saved = storage.listScenarios()[$('#saved-scenarios').value];
   if (!saved) return;
-  state.simulation = merge(clone(CURRENT_SCENARIO), saved);
+  state.simulation = toScenario(saved);
   refreshScenarios();
 });
 

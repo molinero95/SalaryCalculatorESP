@@ -14,7 +14,7 @@ Read this file first. It applies to the whole repository. User instructions take
 
 - The product is a static Spanish payroll estimator and fiscal proposal simulator. Preserve its offline operation, editable scenarios and five languages.
 - Use English identifiers and code comments. UI strings belong in all five dictionaries (`es`, `ca`, `eu`, `gl`, `en`). Communicate with the user in their language.
-- Keep calculation code pure and DOM-free. Put fiscal rules in `js/tax.js`, payroll orchestration in `js/calc.js`, defaults/data in their existing modules and UI behaviour in `js/app.js`/rendering modules.
+- Keep calculation code pure and DOM-free. Put fiscal rules in `js/tax.js`, payroll orchestration in `js/calc.js`, scenario/input rules in `js/domain/`, session use cases in `js/application/`, persistence adapters in `js/infrastructure/` and browser UI adapters in `js/presentation/`. `js/app.js` composes these modules; existing rendering modules keep their public paths. See `docs/architecture.md`.
 - This is AI-assisted software. Preserve the README warnings about possible inaccuracies. Tests and coverage do not establish fiscal certification.
 - Verify fiscal updates against primary sources. Record the applicable year, publication date, rule, eligibility and assumptions. Distinguish enacted law from political proposals and annual assessment from payroll withholding.
 - Never fill missing political rates or eligibility conditions with invented facts. Mark incomplete models explicitly. A successful download is not human verification.
