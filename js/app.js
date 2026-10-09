@@ -1,3 +1,4 @@
+import { createEventTracker } from './infrastructure/analytics.js';
 import { toScenario } from './domain/scenario.js';
 import {
   createSession,
@@ -40,10 +41,9 @@ const scenarioName = (kind) =>
   kind === 'current' ? state.current.name || `${t('current')} · 2026` : simulationName(state.active);
 const scenarioNames = () => ({ current: scenarioName('current'), simulation: scenarioName('simulation') });
 
-/** Records an anonymous GoatCounter event, if the counter has loaded. */
-function trackEvent(name) {
-  window.goatcounter?.count?.({ path: name, title: name, event: true });
-}
+const analytics = createEventTracker(() => window.goatcounter);
+const trackEvent = (name) => analytics.track(name);
+document.querySelector('script[data-goatcounter]')?.addEventListener('load', () => analytics.flush());
 
 const persistence = createSessionPersistence(storage, state);
 const persist = () => persistence.schedule();
