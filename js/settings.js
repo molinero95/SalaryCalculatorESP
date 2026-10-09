@@ -49,9 +49,26 @@ const GROUPS = [
   {
     title: 'groupWithholding',
     fields: [
-      ['incomeTax', 'withholdingFreeMinimum', EUR],
+      ['incomeTax', 'withholdingFreeMin3_0', EUR],
+      ['incomeTax', 'withholdingFreeMin3_1', EUR],
+      ['incomeTax', 'withholdingFreeMin3_2', EUR],
+      ['incomeTax', 'withholdingFreeMin2_0', EUR],
+      ['incomeTax', 'withholdingFreeMin2_1', EUR],
+      ['incomeTax', 'withholdingFreeMin2_2', EUR],
+      ['incomeTax', 'withholdingFreeMin1_1', EUR],
+      ['incomeTax', 'withholdingFreeMin1_2', EUR],
       ['incomeTax', 'withholdingCap', PCT],
       ['incomeTax', 'temporaryMinRate', PCT],
+    ],
+  },
+  {
+    title: 'groupFlexible',
+    fields: [
+      ['flexible', 'mealDailyLimit', EUR],
+      ['flexible', 'transportLimit', EUR],
+      ['flexible', 'healthLimit', EUR],
+      ['flexible', 'healthDisabilityLimit', EUR],
+      ['flexible', 'inKindCap', PCT],
     ],
   },
   {
@@ -89,20 +106,25 @@ const GROUPS = [
 ];
 
 const sameBrackets = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+const matchingPreset = (brackets) =>
+  Object.keys(BRACKET_PRESETS).find((id) => sameBrackets(brackets, BRACKET_PRESETS[id].brackets)) ?? '';
 const sortBrackets = (brackets) => brackets.sort((a, b) => (a.upTo ?? Infinity) - (b.upTo ?? Infinity));
 const unitSuffix = (unit) => (unit ? `<span class="unit">${unit}</span>` : '');
 
 /**
  * Renders the settings of `scenario` into `container`, highlighting values that
- * differ from `reference`. `onChange` runs after every edit.
+ * differ from `reference`. `onChange` runs after every edit. `idPrefix` keeps
+ * element ids unique when several panels are on the page.
  */
-export function renderSettings(container, { scenario, reference, onChange }) {
-  const openGroups = new Set([...container.querySelectorAll('details[open]')].map((d) => d.dataset.group));
-  if (!container.children.length) openGroups.add('groupBrackets');
+export function renderSettings(container, { scenario, reference, onChange, idPrefix, openByDefault = [] }) {
+  const isFirstRender = !container.children.length;
+  const openGroups = new Set(
+    isFirstRender ? openByDefault : [...container.querySelectorAll('details[open]')].map((d) => d.dataset.group),
+  );
 
   container.innerHTML =
     groupHtml('groupBrackets', openGroups, '<div class="brackets" data-brackets></div>') +
-    GROUPS.map((group) => groupHtml(group.title, openGroups, fieldsHtml(group.fields, scenario, reference))).join('');
+    GROUPS.map((group) => groupHtml(group.title, openGroups, fieldsHtml(group.fields, scenario, reference, idPrefix))).join('');
 
   const bracketsContainer = container.querySelector('[data-brackets]');
   const renderBracketEditor = () =>
@@ -135,10 +157,10 @@ function groupHtml(title, openGroups, content) {
     </details>`;
 }
 
-function fieldsHtml(fields, scenario, reference) {
+function fieldsHtml(fields, scenario, reference, idPrefix) {
   const items = fields.map(([section, key, unit]) => {
     const value = scenario[section][key];
-    const id = `field-${section}-${key}`;
+    const id = `${idPrefix}-${section}-${key}`;
     return `
       <div class="field ${value !== reference[section][key] ? 'changed' : ''}">
         <label for="${id}">${t(`f_${key}`)}</label>
@@ -173,16 +195,14 @@ function bracketRowHtml(bracket, i, brackets) {
 
 function renderBrackets(container, scenario, reference, { recalculate, rerender }) {
   const { brackets } = scenario.incomeTax;
-  const markChanged = () => container.classList.toggle('changed', !sameBrackets(brackets, reference.incomeTax.brackets));
   const presetOptions = Object.entries(BRACKET_PRESETS)
     .map(([id, preset]) => `<option value="${id}">${escapeHtml(preset.name)}</option>`)
     .join('');
 
-  markChanged();
   container.innerHTML = `
     <p class="help">${t('groupBracketsHelp')}</p>
     <label class="inline-field">${t('template')}
-      <select data-preset><option value="">${t('choose')}</option>${presetOptions}</select>
+      <select data-preset><option value="">${t('custom')}</option>${presetOptions}</select>
     </label>
     <table class="bracket-table">
       <thead><tr><th>${t('from')}</th><th>${t('upTo')}</th><th>${t('rate')}</th><th></th></tr></thead>
@@ -197,6 +217,13 @@ function renderBrackets(container, scenario, reference, { recalculate, rerender 
     </fieldset>`;
 
   const $ = (selector) => container.querySelector(selector);
+
+  // Highlights changes and shows the template matching the brackets ("custom" otherwise)
+  const markChanged = () => {
+    container.classList.toggle('changed', !sameBrackets(brackets, reference.incomeTax.brackets));
+    $('[data-preset]').value = matchingPreset(brackets);
+  };
+  markChanged();
 
   container.querySelectorAll('[data-rate]').forEach((input) =>
     input.addEventListener('input', () => {
