@@ -148,11 +148,12 @@ export function computePayroll(input, scenario, grossAnnual = grossAnnualOf(inpu
 
   // Positive: refund. Negative: to pay, unless the employee doesn't have to file.
   let refund = incomeTax.withheld - annual.tax;
-  if (
-    refund < 0 &&
-    taxableGross <= (foral ? (input.region === 'navarra' ? 14500 : 20000) : scenario.incomeTax.filingThreshold)
-  )
-    refund = 0;
+  const exemptFromFiling = foral
+    ? input.region === 'navarra'
+      ? taxableGross < 17000
+      : taxableGross <= 20000
+    : taxableGross <= scenario.incomeTax.filingThreshold;
+  if (refund < 0 && exemptFromFiling) refund = 0;
 
   const netAnnual = gross - flexible.total - employee.total - incomeTax.withheld - pension.employee;
   const netAnnualAfterReturn = netAnnual + refund - pension.individual;

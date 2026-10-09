@@ -74,14 +74,46 @@ for (const region of ['bizkaia', 'gipuzkoa', 'alava']) {
       close(foralAnnualTax(inputFor(region), base).tax, quota - 1615);
     });
   }
-  // DF 134/2025, DF 27/2025 and DF 42/2025, zero-descendant column.
-  for (const [ceiling, before, after] of [
-    [20000, 0, 7],
-    [29790, 14, 15],
-    [56780, 21, 22],
-    [236060, 39, 40],
-  ]) {
+  // Published zero-descendant column, entered independently of production data.
+  const upperRows = [
+    [20000, 0],
+    [20510, 7],
+    [21300, 8],
+    [22150, 9],
+    [23220, 10],
+    [24050, 11],
+    [25410, 12],
+    [27440, 13],
+    [29790, 14],
+    [32610, 15],
+    [36350, 16],
+    [40670, 17],
+    [44560, 18],
+    [48060, 19],
+    [52020, 20],
+    [56780, 21],
+    [61820, 22],
+    [65710, 23],
+    [70080, 24],
+    [75020, 25],
+    [80730, 26],
+    [86770, 27],
+    [92190, 28],
+    [98350, 29],
+    [105380, 30],
+    [113180, 31],
+    [122030, 32],
+    [132200, 33],
+    [144140, 34],
+    [157300, 35],
+    [172280, 36],
+    [190410, 37],
+    [212820, 38],
+    [236060, 39],
+  ];
+  for (const [ceiling, before] of upperRows) {
     test(`${region}: withholding changes after inclusive upper bound ${ceiling}`, () => {
+      const after = ceiling === 20000 ? 7 : before + 1;
       assert.equal(foralWithholding(inputFor(region), ceiling - 0.01, 0).rate, before);
       assert.equal(foralWithholding(inputFor(region), ceiling, 0).rate, before);
       assert.equal(foralWithholding(inputFor(region), ceiling + 0.01, 0).rate, after);
@@ -125,13 +157,38 @@ for (const [base, quota] of [
   test(`Navarra: published annual quota at ${base}`, () =>
     close(applyScale(FORAL_TERRITORIES.navarra.brackets, base), quota));
 }
-for (const [floor, before, after] of [
-  [17000, 0, 2],
-  [18500, 2, 4],
-  [27500, 13.3, 14.6],
-  [146000, 36.2, 38],
-]) {
+// Hacienda Navarra article 71, 2026 wording including January correction.
+const navarreRows = [
+  [17000, 2],
+  [18500, 4],
+  [19750, 6],
+  [21250, 8.5],
+  [23250, 11],
+  [25250, 13.3],
+  [27500, 14.6],
+  [30250, 15.8],
+  [32250, 17],
+  [35750, 18.1],
+  [41250, 20],
+  [48000, 22.1],
+  [55000, 24.1],
+  [62000, 26.1],
+  [69250, 28.3],
+  [75250, 29.6],
+  [82250, 30.8],
+  [94750, 32.2],
+  [107250, 33.5],
+  [120000, 35.1],
+  [132750, 36.2],
+  [146000, 38],
+  [200000, 40],
+  [280000, 42],
+  [350000, 43],
+];
+for (const [index, [floor, after]] of navarreRows.entries()) {
   test(`Navarra: withholding changes only above ${floor}`, () => {
+    const before = index ? navarreRows[index - 1][1] : 0;
+    assert.equal(foralWithholding(inputFor('navarra'), floor - 0.01, 0).rate, before);
     assert.equal(foralWithholding(inputFor('navarra'), floor, 0).rate, before);
     assert.equal(foralWithholding(inputFor('navarra'), floor + 0.01, 0).rate, after);
   });
@@ -169,3 +226,19 @@ for (const region of Object.keys(FORAL_TERRITORIES)) {
     });
   }
 }
+
+test('Navarra: €400,000 withholding uses the final 43% band', () => {
+  const result = computePayroll(inputFor('navarra', { salary: 400000 }), CURRENT_SCENARIO);
+  assert.equal(result.incomeTax.withheld, 172000);
+});
+test('Navarra: exclusive employment filing exemption is strictly below €17,000 in 2026', () => {
+  const scenario = clone(CURRENT_SCENARIO);
+  for (const key of Object.keys(scenario.employee)) scenario.employee[key] = 0;
+  const below = computePayroll(inputFor('navarra', { salary: 16500 }), scenario);
+  close(below.incomeTax.annualTax, 218.88);
+  assert.equal(below.incomeTax.refund, 0);
+  const edge = computePayroll(inputFor('navarra', { salary: 17000 }), scenario);
+  close(edge.incomeTax.annualTax, 413.88);
+  close(edge.incomeTax.refund, -413.88);
+  assert.equal(computePayroll(inputFor('navarra', { salary: 16999.99 }), scenario).incomeTax.refund, 0);
+});
