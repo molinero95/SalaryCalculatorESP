@@ -18,7 +18,7 @@ test('malformed imports show an error without changing the payslip', async ({ pa
   const before = await page.locator('.result-current .headline strong').textContent();
   await importJson(page, '{broken');
   await expect(page.locator('#toast')).toBeVisible();
-  await expect(page.locator('.result-current .headline strong')).toHaveText(before);
+  await expect(page.locator('.result-current .headline strong')).toHaveText(before, { useInnerText: true });
 });
 
 test('import normalizes personal ranges and rejects invalid bracket order', async ({ page }) => {
@@ -510,7 +510,7 @@ test('residence help remains inside narrow viewports in every language', async (
 });
 
 for (const residence of ['region:bizkaia', 'region:gipuzkoa', 'region:alava', 'region:navarra']) {
-  test(`${residence}: expanded foral benefits and annual income work offline`, async ({ page, context }) => {
+  test(`${residence}: expanded foral benefits and annual income work offline`, async ({ page, context }, testInfo) => {
     await chooseResidence(page, residence);
     await page.fill('#age', '66');
     await page.locator('label:has(input[name="contract"][value="temporary"])').click();
@@ -528,6 +528,14 @@ for (const residence of ['region:bizkaia', 'region:gipuzkoa', 'region:alava', 'r
     await expect(page.locator('#results')).toBeHidden();
     await page.check('#foralAnnualConfirmed');
     await expect(page.locator('#results')).toBeVisible();
+    await testInfo.attach('expanded-foral-form', {
+      body: await page.locator('#details-form').screenshot(),
+      contentType: 'image/png',
+    });
+    await testInfo.attach('expanded-foral-results', {
+      body: await page.locator('#results').screenshot(),
+      contentType: 'image/png',
+    });
     const before = await page.locator('#results').innerText();
     await page.evaluate(async () => {
       await navigator.serviceWorker.ready;
@@ -538,7 +546,7 @@ for (const residence of ['region:bizkaia', 'region:gipuzkoa', 'region:alava', 'r
     });
     await context.setOffline(true);
     await page.reload();
-    await expect(page.locator('#results')).toHaveText(before);
+    await expect(page.locator('#results')).toHaveText(before, { useInnerText: true });
     await expect(page.locator('#foralAscendantsConfirmed')).toBeChecked();
     await page.locator('#foral-annual-fields summary').click();
     await expect(page.locator('#foralAnnualConfirmed')).toBeChecked();
