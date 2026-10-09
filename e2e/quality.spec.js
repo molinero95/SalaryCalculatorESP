@@ -81,7 +81,7 @@ test('salary input supports keyboard operation and visibly updates', async ({ pa
   await salary.press('ControlOrMeta+A');
   await salary.pressSequentially('45000');
   await salary.press('Tab');
-  await expect(page.locator('.result-current .headline strong')).toHaveText('2.293,61 €');
+  await expect(page.locator('.result-current .headline strong')).toHaveText('2.293,93 €');
 });
 
 test('result-card simulation tabs stay synchronized with the editor', async ({ page }) => {

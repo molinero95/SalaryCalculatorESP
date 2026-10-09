@@ -174,23 +174,28 @@ function withholding(input, p, taxableGross, socialSecurity) {
   if (input.disability >= 65) otherExpenses += p.disability65Expenses;
   else if (input.disability >= 33) otherExpenses += p.disability33Expenses;
 
-  const reduction = employmentReduction(netEarnings, p);
-  const base = Math.max(0, netEarnings - otherExpenses - reduction);
+  otherExpenses = Math.min(netEarnings, otherExpenses);
+  const reduction = round2(employmentReduction(netEarnings, p));
+  // Art. 83.3 RIRPF: only the withholding base gets this reduction.
+  const largeFamilyReduction = input.children > 2 ? 600 : 0;
+  const base = Math.max(0, netEarnings - otherExpenses - reduction - largeFamilyReduction);
   const allowance = personalAllowance(input, p);
   const taxOnBase = applyScale(p.brackets, base);
   const taxOnAllowance = applyScale(p.brackets, allowance.total);
   const freeMinimum = withholdingFreeMinimum(input, p);
 
   let amount = Math.max(0, taxOnBase - taxOnAllowance);
-  amount = taxableGross <= freeMinimum ? 0 : Math.min(amount, ((taxableGross - freeMinimum) * p.withholdingCap) / 100);
+  if (taxableGross <= freeMinimum) amount = 0;
+  else if (taxableGross <= 35200) amount = Math.min(amount, ((taxableGross - freeMinimum) * p.withholdingCap) / 100);
 
-  let rate = taxableGross > 0 ? round2((amount / taxableGross) * 100) : 0;
+  let rate = taxableGross > 0 ? Math.floor((amount / taxableGross) * 10000) / 100 : 0;
   if (input.contract === 'temporary' && taxableGross > freeMinimum) rate = Math.max(rate, p.temporaryMinRate);
 
   return {
     netEarnings,
     otherExpenses,
     reduction,
+    largeFamilyReduction,
     withholdingBase: base,
     allowance,
     taxOnBase,
@@ -198,7 +203,7 @@ function withholding(input, p, taxableGross, socialSecurity) {
     freeMinimum,
     amount,
     rate,
-    withheld: (taxableGross * rate) / 100,
+    withheld: round2((taxableGross * rate) / 100),
   };
 }
 
@@ -222,7 +227,7 @@ export function computePayroll(input, scenario, grossAnnual = grossAnnualOf(inpu
       incomeTax: { ...scenario.incomeTax, brackets: combineScales(reduced, GENERAL_REGIONAL_SCALE) },
     };
   }
-  const gross = Math.max(0, grossAnnual);
+  const gross = round2(Math.max(0, grossAnnual));
 
   // Employer pension contributions are part of the contribution base
   const contributionBase = gross + input.pensionEmployer;
@@ -240,13 +245,14 @@ export function computePayroll(input, scenario, grossAnnual = grossAnnualOf(inpu
   // only the deductible amount beyond them lowers the base.
   const pension = pensionPlan(input, scenario.pension, taxableGross, incomeTax.netEarnings);
   const employerDeducted = Math.min(input.pensionEmployer, pension.deductible);
+  const annualEmploymentBase = Math.max(0, incomeTax.netEarnings - incomeTax.otherExpenses - incomeTax.reduction);
   const annualBase = Math.max(
     0,
-    incomeTax.withholdingBase - (pension.deductible - employerDeducted) + (input.pensionEmployer - employerDeducted),
+    annualEmploymentBase - (pension.deductible - employerDeducted) + (input.pensionEmployer - employerDeducted),
   );
   const annual = annualTax(input, scenario.incomeTax, annualBase, incomeTax.allowance, taxableGross);
   const pensionTaxSaved =
-    annualTax(input, scenario.incomeTax, incomeTax.withholdingBase, incomeTax.allowance, taxableGross).tax - annual.tax;
+    annualTax(input, scenario.incomeTax, annualEmploymentBase, incomeTax.allowance, taxableGross).tax - annual.tax;
 
   // Positive: refund. Negative: to pay, unless the employee doesn't have to file.
   let refund = incomeTax.withheld - annual.tax;
@@ -271,7 +277,7 @@ export function computePayroll(input, scenario, grossAnnual = grossAnnualOf(inpu
     employerCost: gross + employer.total + pension.employer,
     flexible: { ...flexible, taxSaved: taxWithoutFlexible - incomeTax.withheld },
     pension: { ...pension, taxSaved: pensionTaxSaved },
-    incomeTax: { ...incomeTax, minWageCredit: annual.credit, annualTax: annual.tax, refund },
+    incomeTax: { ...incomeTax, annualBase, minWageCredit: annual.credit, annualTax: annual.tax, refund },
     netAnnual,
     netAnnualAfterReturn,
     netMonthlyAverage: netAnnual / 12,
