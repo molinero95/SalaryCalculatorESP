@@ -181,6 +181,7 @@ test('separate withholding editor compares with the active reference scale', asy
   await page.selectOption('#proposal-select', 'sumar2023');
   const editor = page.locator('#settings-simulation [data-withholding-brackets]');
   await expect(editor).not.toHaveClass(/changed/);
+  await page.locator('details:has(> #settings-current) > summary').click();
   await page.locator('#settings-current [data-group="groupBrackets"] summary').click();
   await page.locator('#settings-current [data-rate="0"]').fill('20');
   await expect(editor).toHaveClass(/changed/);
