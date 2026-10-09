@@ -251,3 +251,59 @@ test('extracted pension form retains annual units and checkbox state across relo
   await expect(page.locator('#pensionIndividual')).toHaveValue('1440');
   await expect(page.locator('#pensionEmployer')).toHaveValue('2400');
 });
+
+test('annual and monthly amount labels remain whole on narrow screens in every language', async ({
+  page,
+}, testInfo) => {
+  await page.setViewportSize({ width: 320, height: 640 });
+  for (const language of ['es', 'ca', 'eu', 'gl', 'en']) {
+    await page.selectOption('#language', language);
+    await page.evaluate(() =>
+      document.querySelectorAll('details.extras').forEach((details) => {
+        details.open = true;
+      }),
+    );
+    for (const field of ['flexPeriod', 'pensionPeriod']) {
+      const label = page.locator(`label:has(input[name="${field}"][value="monthly"]) span`);
+      await expect(label).toBeVisible();
+      expect(
+        await label.evaluate((element) => {
+          const range = document.createRange();
+          range.selectNodeContents(element);
+          return range.getClientRects().length;
+        }),
+      ).toBe(1);
+    }
+    expect(
+      await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth),
+    ).toBe(true);
+  }
+  await testInfo.attach('monthly-controls-narrow', {
+    body: await page.screenshot({ fullPage: true }),
+    contentType: 'image/png',
+  });
+});
+
+test('anonymous events survive a delayed GoatCounter script load', async ({ page }) => {
+  let release;
+  const ready = new Promise((resolve) => {
+    release = resolve;
+  });
+  await page.route('https://gc.zgo.at/count.js', async (route) => {
+    await ready;
+    await route.fulfill({
+      contentType: 'application/javascript',
+      body: 'window.analyticsEvents = []; window.goatcounter = {count: event => window.analyticsEvents.push(event)};',
+    });
+  });
+  await page.reload({ waitUntil: 'domcontentloaded' });
+  await page.fill('#salary', '73000');
+  await page.fill('#scenario-name', 'Private proposal');
+  await page.locator('#save-scenario').click();
+  release();
+  await expect
+    .poll(() => page.evaluate(() => window.analyticsEvents))
+    .toEqual([{ path: 'save-scenario', title: 'save-scenario', event: true }]);
+  await page.locator('#add-simulation').click();
+  await expect.poll(() => page.evaluate(() => window.analyticsEvents?.length)).toBe(2);
+});

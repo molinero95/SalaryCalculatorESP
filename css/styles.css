@@ -1080,6 +1080,18 @@ main > *,
 
 .amounts-period .segmented {
   justify-self: start;
+  max-width: 100%;
+  flex-wrap: wrap;
+}
+
+.amounts-period .segmented label {
+  flex: 0 0 auto;
+  min-width: max-content;
+}
+
+.amounts-period .segmented span {
+  white-space: nowrap;
+  overflow-wrap: normal;
 }
 
 .warning {
