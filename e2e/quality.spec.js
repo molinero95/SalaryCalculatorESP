@@ -196,6 +196,27 @@ test('floating annual difference stays inside narrow viewports with large amount
   });
   await page.locator('#sticky-summary').scrollIntoViewIfNeeded();
   await expect(page.locator('#sticky-summary')).toBeVisible();
+  console.log(
+    'Overflow sources',
+    await page.evaluate(() => {
+      const limit = document.documentElement.clientWidth;
+      const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+      const found = [];
+      while (walker.nextNode()) {
+        const node = walker.currentNode;
+        if (!node.textContent.trim()) continue;
+        const range = document.createRange();
+        range.selectNodeContents(node);
+        if ([...range.getClientRects()].some((r) => r.right > limit)) {
+          found.push({
+            text: node.textContent.trim().slice(0, 80),
+            parent: node.parentElement.outerHTML.slice(0, 200),
+          });
+        }
+      }
+      return { width: limit, scroll: document.documentElement.scrollWidth, found };
+    }),
+  );
 
   await expect
     .poll(() =>
