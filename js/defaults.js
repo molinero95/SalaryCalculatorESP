@@ -1,0 +1,178 @@
+// Default parameters: Spanish payroll rules in force (common territory, 2026).
+// Amounts are in euros and rates in percent. See README for sources.
+
+export const CURRENT_SCENARIO = {
+  name: '',
+  incomeTax: {
+    // Withholding scale (state + general regional, art. 101 LIRPF).
+    // `upTo: null` marks the open-ended top bracket.
+    brackets: [
+      { upTo: 12450, rate: 19 },
+      { upTo: 20200, rate: 24 },
+      { upTo: 35200, rate: 30 },
+      { upTo: 60000, rate: 37 },
+      { upTo: 300000, rate: 45 },
+      { upTo: null, rate: 47 },
+    ],
+
+    // Personal and family allowance (arts. 57-61 LIRPF)
+    personalAllowance: 5550,
+    ageOver65Allowance: 1150,
+    ageOver75Allowance: 1400,
+    child1Allowance: 2400,
+    child2Allowance: 2700,
+    child3Allowance: 4000,
+    child4Allowance: 4500,
+    childUnder3Allowance: 2800,
+    dependent65Allowance: 1150,
+    dependent75Allowance: 1400,
+    disability33Allowance: 3000,
+    disability65Allowance: 9000,
+    careAllowance: 3000,
+
+    // Deductible expenses (art. 19 LIRPF)
+    generalExpenses: 2000,
+    disability33Expenses: 3500,
+    disability65Expenses: 7750,
+
+    // Employment income reduction (art. 20 LIRPF)
+    reductionMax: 7302,
+    reductionThreshold1: 14852,
+    reductionSlope1: 1.75,
+    reductionThreshold2: 17673.52,
+    reductionValue2: 2364.34,
+    reductionSlope2: 1.14,
+    reductionThreshold3: 19747.5,
+
+    // Tax credit for minimum-wage earners (art. 80 bis LIRPF)
+    minWageCredit: 340,
+    minWageCreditFullUpTo: 16576,
+    minWageCreditEndsAt: 18276,
+
+    // Withholding rules (IRPF Regulation, arts. 80-86)
+    withholdingFreeMinimum: 15876,
+    withholdingCap: 43,
+    temporaryMinRate: 2,
+  },
+  socialSecurity: {
+    minBase: 1424.5,
+    maxBase: 5101.2,
+    // Solidarity contribution bands, as % above the maximum base
+    solidarityBand1Limit: 10,
+    solidarityBand2Limit: 50,
+  },
+  employee: {
+    commonContingencies: 4.7,
+    unemploymentPermanent: 1.55,
+    unemploymentTemporary: 1.6,
+    training: 0.1,
+    mei: 0.15,
+    solidarity1: 0.19,
+    solidarity2: 0.21,
+    solidarity3: 0.24,
+  },
+  employer: {
+    commonContingencies: 23.6,
+    unemploymentPermanent: 5.5,
+    unemploymentTemporary: 6.7,
+    training: 0.6,
+    fogasa: 0.2,
+    mei: 0.75,
+    workAccidents: 1.5,
+    solidarity1: 0.96,
+    solidarity2: 1.04,
+    solidarity3: 1.22,
+  },
+};
+
+export const DEFAULT_INPUT = {
+  salary: 30000,
+  period: 'annual', // 'annual' | 'perPayment'
+  payments: 14, // 12 | 14
+  contract: 'permanent', // 'permanent' | 'temporary'
+  age: 35,
+  children: 0,
+  childrenUnder3: 0,
+  childrenFullyCounted: false,
+  dependents65: 0,
+  dependents75: 0,
+  disability: 0, // 0 | 33 | 65
+};
+
+// State half of the income tax scale (art. 63 LIRPF)
+const STATE_SCALE = [
+  { upTo: 12450, rate: 9.5 },
+  { upTo: 20200, rate: 12 },
+  { upTo: 35200, rate: 15 },
+  { upTo: 60000, rate: 18.5 },
+  { upTo: 300000, rate: 22.5 },
+  { upTo: null, rate: 24.5 },
+];
+
+// Regional scales (approx. 2025 tax year). Payroll withholding always uses the
+// general scale; regional ones approximate the final tax in the annual return.
+const REGIONAL_SCALES = {
+  madrid: [
+    { upTo: 13362.22, rate: 8.5 },
+    { upTo: 19004.63, rate: 10.7 },
+    { upTo: 35425.68, rate: 12.8 },
+    { upTo: 57320.4, rate: 17.4 },
+    { upTo: null, rate: 20.5 },
+  ],
+  catalonia: [
+    { upTo: 12450, rate: 10.5 },
+    { upTo: 17707.2, rate: 12 },
+    { upTo: 21000, rate: 14 },
+    { upTo: 33007.2, rate: 15 },
+    { upTo: 53407.2, rate: 18.8 },
+    { upTo: 90000, rate: 21.5 },
+    { upTo: 120000, rate: 23.5 },
+    { upTo: 175000, rate: 24.5 },
+    { upTo: null, rate: 25.5 },
+  ],
+  andalusia: [
+    { upTo: 13000, rate: 9.5 },
+    { upTo: 21100, rate: 12 },
+    { upTo: 35200, rate: 15 },
+    { upTo: 60000, rate: 18.5 },
+    { upTo: null, rate: 22.5 },
+  ],
+  valencia: [
+    { upTo: 12000, rate: 9 },
+    { upTo: 22000, rate: 12 },
+    { upTo: 32000, rate: 15 },
+    { upTo: 42000, rate: 17.5 },
+    { upTo: 52000, rate: 20 },
+    { upTo: 62000, rate: 22.5 },
+    { upTo: 72000, rate: 25 },
+    { upTo: 100000, rate: 26.5 },
+    { upTo: 150000, rate: 27.5 },
+    { upTo: 200000, rate: 28.5 },
+    { upTo: null, rate: 29.5 },
+  ],
+};
+
+/** Adds two bracket scales into a single equivalent scale. */
+export function combineScales(a, b) {
+  const limits = [...new Set([...a, ...b].map((br) => br.upTo).filter((x) => x !== null))].sort((x, y) => x - y);
+  const rateAt = (scale, amount) => scale.find((br) => br.upTo === null || amount < br.upTo).rate;
+
+  let from = 0;
+  return [...limits, null].map((upTo) => {
+    const probe = upTo === null ? from + 1 : (from + upTo) / 2;
+    const bracket = { upTo, rate: +(rateAt(a, probe) + rateAt(b, probe)).toFixed(2) };
+    from = upTo;
+    return bracket;
+  });
+}
+
+export const BRACKET_PRESETS = {
+  general: { name: 'General (retención en nómina)', brackets: CURRENT_SCENARIO.incomeTax.brackets },
+  madrid: { name: 'Estatal + Madrid', brackets: combineScales(STATE_SCALE, REGIONAL_SCALES.madrid) },
+  catalonia: { name: 'Estatal + Catalunya', brackets: combineScales(STATE_SCALE, REGIONAL_SCALES.catalonia) },
+  andalusia: { name: 'Estatal + Andalucía', brackets: combineScales(STATE_SCALE, REGIONAL_SCALES.andalusia) },
+  valencia: { name: 'Estatal + C. Valenciana', brackets: combineScales(STATE_SCALE, REGIONAL_SCALES.valencia) },
+  flat20: { name: 'Flat tax 20 %', brackets: [{ upTo: null, rate: 20 }] },
+};
+
+export const clone = (value) => structuredClone(value);

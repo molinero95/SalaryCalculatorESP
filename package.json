@@ -1,0 +1,13 @@
+{
+  "name": "simulador-salario-neto",
+  "version": "1.0.0",
+  "description": "Spanish net salary calculator and tax proposal simulator",
+  "author": "Jaime Molinero Lacave",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "python3 -m http.server 8000",
+    "test": "node --test tests/"
+  }
+}
