@@ -255,6 +255,8 @@ export default {
     'O que pagarías na declaración coa escala da túa comunidade. A diferenza co retido sae a devolver (+) ou a pagar (−).',
   loadProposal: 'Cargar proposta de partido',
   proposalSource: 'Fonte',
+  proposalVerified: 'Verificado o',
+  proposalPartial: 'Simulación parcial',
   proposalVoxNote:
     'Só cambia a parte estatal: 15 % ata 70.000 € e 25 % por riba, cun mínimo persoal de 22.000 €. Cada fillo reduce os tipos estatais en 4 puntos, ata o 0 %. A parte autonómica mantense. A retención é estimada; non inclúe os cheques por nacemento.',
   proposalSumarNote:

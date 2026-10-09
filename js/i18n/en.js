@@ -258,6 +258,8 @@ export default {
     'What you would pay in the annual return with your region’s scale. The difference with what was withheld is refunded (+) or owed (−).',
   loadProposal: 'Load a party proposal',
   proposalSource: 'Source',
+  proposalVerified: 'Verified on',
+  proposalPartial: 'Partial simulation',
   proposalVoxNote:
     'Only the state share changes: 15 % up to €70,000 and 25 % above, with a €22,000 personal allowance. Each child reduces state rates by 4 percentage points, down to 0 %. Regional tax remains unchanged. Payroll withholding is estimated; birth payments are excluded.',
   proposalSumarNote:

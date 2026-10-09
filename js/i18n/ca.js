@@ -260,6 +260,8 @@ export default {
     "El que pagaries a la declaració amb l'escala de la teva comunitat. La diferència amb el que s'ha retingut surt a tornar (+) o a pagar (−).",
   loadProposal: 'Carregar proposta de partit',
   proposalSource: 'Font',
+  proposalVerified: 'Verificat el',
+  proposalPartial: 'Simulació parcial',
   proposalVoxNote:
     "Només canvia la meitat estatal: 15 % fins a 70.000 € i 25 % per sobre; l'autonòmica es manté. Per això l'escala conjunta puja en els primers trams (15 % + 9,5 % = 24,5 %), compensat per un mínim personal de 22.000 €. Inclou la rebaixa estatal de 4 punts per fill, amb un mínim del 0 %. La retenció és estimada; no inclou els xecs per naixement.",
   proposalSumarNote:

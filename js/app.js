@@ -584,7 +584,7 @@ function renderProposalInfo() {
   const info = $('#proposal-info');
   info.hidden = !proposal;
   if (proposal)
-    info.innerHTML = `<p>${t(proposal.note)}</p><p class="muted">${t('proposalSource')}: ${sourceLink(proposal)}</p>`;
+    info.innerHTML = `<p>${t(proposal.note)}</p><p class="muted">${t('proposalSource')}: ${sourceLink(proposal)}</p><p class="muted">${t('proposalVerified')}: ${escapeHtml(proposal.verifiedAt)}${proposal.status === 'partial' ? ` · ${t('proposalPartial')}` : ''}</p>`;
 }
 
 $('#proposal-select').addEventListener('change', ({ target }) => {
