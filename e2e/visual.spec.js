@@ -91,6 +91,7 @@ test.describe('@visual fields fit in every language', () => {
         };
 
         for (const select of document.querySelectorAll('main select')) {
+          if (select.closest('[hidden]')) continue;
           if (!visible(select)) {
             issues.push(`hidden select #${select.id}`);
             continue;
@@ -103,6 +104,7 @@ test.describe('@visual fields fit in every language', () => {
         }
 
         for (const input of document.querySelectorAll('main input:not([type="radio"]):not([type="file"])')) {
+          if (input.type === 'hidden' || input.closest('[hidden]')) continue;
           if (!visible(input)) issues.push(`hidden input ${input.id || input.name || input.dataset.field}`);
         }
 

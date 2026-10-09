@@ -37,3 +37,30 @@ jobs:
           path: |
             playwright-report/
             test-results/
+
+  residence-visual-capture:
+    if: github.head_ref == 'feat/cascading-tax-residence'
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install chromium
+      - name: Capture affected macOS baselines for review
+        run: |
+          env -u CI npx playwright test e2e/visual.spec.js --grep 'section: details|dark mode|help tip shows' --update-snapshots
+      - name: Check fields in every language
+        run: env -u CI npx playwright test e2e/visual.spec.js --grep 'all fields visible'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: residence-macos-visual-review
+          path: |
+            e2e/visual.spec.js-snapshots/details-*-darwin.png
+            e2e/visual.spec.js-snapshots/dark-mode-*-darwin.png
+            e2e/visual.spec.js-snapshots/help-tip-*-darwin.png
+            playwright-report/
+            test-results/
