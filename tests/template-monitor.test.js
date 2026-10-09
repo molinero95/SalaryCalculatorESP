@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { validateCatalogue, renderCatalogue, cataloguePath } from '../scripts/template-catalogue.js';
-import { inspectSource, classifySource, checkSources } from '../scripts/check-template-sources.js';
+import { inspectSource, classifySource, checkSources, nextBaseline } from '../scripts/check-template-sources.js';
 const catalogue = JSON.parse(await readFile(cataloguePath, 'utf8'));
 test('catalogue validates and generates both modelled proposals and notes', () => {
   assert.equal(validateCatalogue(catalogue), catalogue);
@@ -26,7 +26,7 @@ for (const [label, mutate] of [
     assert.throws(() => validateCatalogue(copy));
   });
 }
-const fakeFetch = async () => new Response('source text', { headers: { 'content-type': 'application/pdf' } });
+const fakeFetch = async () => new Response('%PDF-source text', { headers: { 'content-type': 'application/pdf' } });
 test('hashes source bytes and distinguishes changed, unchanged, new URLs and errors', async () => {
   const current = await inspectSource('https://example.org', fakeFetch);
   assert.match(current.sha256, /^[a-f0-9]{64}$/);
@@ -61,4 +61,35 @@ test('all catalogue sources are inspected without changing verified dates or cal
   assert.equal(second.results.length, catalogue.proposals.length);
   assert.ok(second.results.every((r) => r.status === 'unchanged'));
   assert.equal(JSON.stringify(catalogue), before);
+});
+
+test('PDF URLs reject HTML challenge pages and spoofed PDF content', async () => {
+  assert.ok(
+    (
+      await inspectSource(
+        'https://example.org/a.pdf',
+        async () => new Response('challenge', { headers: { 'content-type': 'text/html' } }),
+      )
+    ).error,
+  );
+  assert.ok(
+    (
+      await inspectSource(
+        'https://example.org/a.pdf',
+        async () => new Response('challenge', { headers: { 'content-type': 'application/pdf' } }),
+      )
+    ).error,
+  );
+});
+
+test('one failing source does not block healthy baselines or approve changed ones', () => {
+  const baseline = { changed: { url: 'old', sha256: 'old' }, failed: { url: 'failed', sha256: 'old' } };
+  const results = [
+    { id: 'new', url: 'new', sha256: 'new', status: 'baseline-needed' },
+    { id: 'changed', url: 'old', sha256: 'new', status: 'changed' },
+    { id: 'failed', url: 'failed', error: '404', status: 'unavailable' },
+  ];
+  assert.deepEqual(nextBaseline(baseline, results), { ...baseline, new: { url: 'new', sha256: 'new' } });
+  assert.equal(nextBaseline(baseline, results, true).changed.sha256, 'new');
+  assert.equal(nextBaseline(baseline, results, true).failed.sha256, 'old');
 });

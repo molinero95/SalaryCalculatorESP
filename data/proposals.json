@@ -105,17 +105,21 @@
       "id": "psoe2023",
       "party": "PSOE",
       "title": "Programa electoral 2023",
-      "url": "https://theobjective.com/wp-content/uploads/2023/07/PROGRAMA_ELECTORAL-GENERALES-2023-1.pdf",
+      "url": "https://www.psoe.es/media-content/2023/07/PROGRAMA_ELECTORAL-GENERALES-2023.pdf",
       "note": "proposalPsoeNote",
-      "date": "2023-07",
+      "date": "2023-07-07",
       "status": "unmodelled",
       "verifiedAt": "2026-10-09",
-      "sourceType": "secondary",
+      "sourceType": "official",
       "limitations": ["Not enough supported parameters or eligibility inputs to calculate this proposal."],
       "history": [
         {
           "date": "2026-10-09",
           "description": "Initial catalogue; secondary documents require primary-source replacement."
+        },
+        {
+          "date": "2026-10-09",
+          "description": "Replace inaccessible secondary copy with official party programme."
         }
       ]
     },

@@ -17,14 +17,18 @@ export async function inspectSource(url, fetcher = fetch) {
     });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const contentType = response.headers.get('content-type') ?? '';
+    if (new URL(url).pathname.toLowerCase().endsWith('.pdf') && !/application\/pdf/i.test(contentType))
+      throw new Error('Expected PDF; server returned another document');
     if (!/application\/pdf|text\/html|text\/plain/i.test(contentType)) throw new Error('Unsupported content type');
     const reader = response.body.getReader();
     const hash = createHash('sha256');
     let bytes = 0;
+    let prefix = Buffer.alloc(0);
     while (true) {
       const { value, done } = await reader.read();
       if (done) break;
       bytes += value.length;
+      if (prefix.length < 5) prefix = Buffer.concat([prefix, Buffer.from(value)]).subarray(0, 5);
       if (bytes > 20 * 1024 * 1024) {
         await reader.cancel();
         throw new Error('Source exceeds 20 MiB');
@@ -32,10 +36,21 @@ export async function inspectSource(url, fetcher = fetch) {
       hash.update(value);
     }
     if (!bytes) throw new Error('Empty source');
+    if (/application\/pdf/i.test(contentType) && prefix.toString() !== '%PDF-')
+      throw new Error('Invalid PDF signature');
     return { url, finalUrl: response.url, contentType, bytes, sha256: hash.digest('hex') };
   } catch (error) {
     return { url, error: error.message };
   }
+}
+
+export function nextBaseline(baseline, results, acceptChanges = false) {
+  const next = { ...baseline };
+  for (const r of results) {
+    if (r.status === 'unavailable' || (r.status === 'changed' && !acceptChanges)) continue;
+    next[r.id] = { url: r.url, sha256: r.sha256 };
+  }
+  return next;
 }
 
 export async function checkSources(catalogue, baseline, fetcher = fetch) {
@@ -77,9 +92,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   if (process.env.GITHUB_STEP_SUMMARY) await writeFile(process.env.GITHUB_STEP_SUMMARY, summary, { flag: 'a' });
   const unavailable = report.results.some((r) => r.status === 'unavailable');
   const changed = report.results.some((r) => r.status === 'changed');
-  if (!unavailable && (!changed || process.env.ACCEPT_SOURCE_BASELINE === 'true')) {
-    const next = Object.fromEntries(report.results.map((r) => [r.id, { url: r.url, sha256: r.sha256 }]));
-    await writeFile('.source-monitor/baseline.json', JSON.stringify(next, null, 2));
-  }
+  const next = nextBaseline(baseline, report.results, process.env.ACCEPT_SOURCE_BASELINE === 'true');
+  await writeFile('.source-monitor/baseline.json', JSON.stringify(next, null, 2));
   if (unavailable || (changed && process.env.ACCEPT_SOURCE_BASELINE !== 'true')) process.exitCode = 1;
 }

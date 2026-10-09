@@ -35,7 +35,7 @@ jobs:
         env:
           ACCEPT_SOURCE_BASELINE: ${{ inputs.accept_baseline == true && 'true' || 'false' }}
       - uses: actions/cache/save@v4
-        if: success()
+        if: always() && hashFiles('.source-monitor/baseline.json') != ''
         with:
           path: .source-monitor/baseline.json
           key: template-sources-v1-${{ github.run_id }}-${{ github.run_attempt }}
