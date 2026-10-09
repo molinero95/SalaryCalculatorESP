@@ -66,6 +66,28 @@ function flexibleCompensation(input, limits, gross) {
   return { total, exempt, overCap: total > (gross * limits.inKindCap) / 100 };
 }
 
+/**
+ * Largest employee contribution to an employment plan that reduces the tax base,
+ * based on the employer contribution (art. 52.1.b LIRPF).
+ */
+function employeeContributionCap(employer, grossEarnings, highIncomeThreshold) {
+  if (grossEarnings > highIncomeThreshold || employer > 1500) return employer;
+  if (employer <= 500) return employer * 2.5;
+  return 1250 + 0.25 * (employer - 500);
+}
+
+/** Pension contributions and how much of them reduces the tax base. */
+function pensionPlan(input, limits, grossEarnings, netEarnings) {
+  const { pensionIndividual: individual, pensionEmployee: employee, pensionEmployer: employer } = input;
+  const employeeCap = employeeContributionCap(employer, grossEarnings, limits.highIncomeThreshold);
+  const employment = Math.min(employer + Math.min(employee, employeeCap), limits.employmentLimit);
+  const deductible = Math.min(
+    Math.min(individual, limits.individualLimit) + employment,
+    ((netEarnings + employer) * limits.netIncomeShareLimit) / 100,
+  );
+  return { individual, employee, employer, total: individual + employee + employer, deductible };
+}
+
 function employmentReduction(netEarnings, p) {
   if (netEarnings <= p.reductionThreshold1) return p.reductionMax;
   if (netEarnings <= p.reductionThreshold2) {
@@ -158,24 +180,38 @@ export const grossAnnualOf = (input) => (input.period === 'perPayment' ? input.s
 export function computePayroll(input, scenario, grossAnnual = grossAnnualOf(input)) {
   const gross = Math.max(0, grossAnnual);
 
-  const employee = contributions(gross, scenario.socialSecurity, scenario.employee, input.contract);
-  const employer = contributions(gross, scenario.socialSecurity, scenario.employer, input.contract);
+  // Employer pension contributions are part of the contribution base
+  const contributionBase = gross + input.pensionEmployer;
+  const employee = contributions(contributionBase, scenario.socialSecurity, scenario.employee, input.contract);
+  const employer = contributions(contributionBase, scenario.socialSecurity, scenario.employer, input.contract);
 
   const flexible = flexibleCompensation(input, scenario.flexible, gross);
   const taxableGross = gross - flexible.exempt;
   const incomeTax = withholding(input, scenario.incomeTax, taxableGross, employee.total);
   const taxWithoutFlexible = flexible.exempt > 0 ? withholding(input, scenario.incomeTax, gross, employee.total).withheld : incomeTax.withheld;
 
-  // The low-earner credit is only applied in the annual return, so it shows
-  // up as an estimated refund (capped at what was withheld).
+  // Pension contributions and the low-earner credit only apply in the annual
+  // return, so they show up as an estimated refund (capped at what was withheld).
+  // Employer contributions are imputed as income and reduced again, so only the
+  // deductible amount beyond them lowers the base.
+  const pension = pensionPlan(input, scenario.pension, taxableGross, incomeTax.netEarnings);
+  const employerDeducted = Math.min(input.pensionEmployer, pension.deductible);
+  const baseAfterPension = Math.max(
+    0,
+    incomeTax.withholdingBase - (pension.deductible - employerDeducted) + (input.pensionEmployer - employerDeducted),
+  );
+  const taxAfterPension = Math.max(0, applyScale(scenario.incomeTax.brackets, baseAfterPension) - incomeTax.taxOnAllowance);
+  const pensionTaxSaved = Math.max(0, incomeTax.taxOnBase - incomeTax.taxOnAllowance) - taxAfterPension;
+
   const credit = minWageCredit(taxableGross, scenario.incomeTax);
-  const refund = Math.min(credit, incomeTax.withheld);
+  const refund = Math.min(credit + pensionTaxSaved, incomeTax.withheld);
 
-  const netAnnual = gross - flexible.total - employee.total - incomeTax.withheld;
-  const netAnnualAfterReturn = netAnnual + refund;
+  const netAnnual = gross - flexible.total - employee.total - incomeTax.withheld - pension.employee;
+  const netAnnualAfterReturn = netAnnual + refund - pension.individual;
 
-  // With 14 payments, social security and flexible compensation are spread over
-  // the 12 regular months; the two extra payments only carry income tax.
+  // With 14 payments, social security, flexible compensation and pension
+  // contributions are spread over the 12 regular months; the two extra
+  // payments only carry income tax.
   const grossPerPayment = gross / input.payments;
   const hasExtraPayments = input.payments === 14;
   const taxPerExtraPayment = hasExtraPayments ? (grossPerPayment * incomeTax.rate) / 100 : 0;
@@ -186,14 +222,15 @@ export function computePayroll(input, scenario, grossAnnual = grossAnnualOf(inpu
     taxableGross,
     employee,
     employer,
-    employerCost: gross + employer.total,
+    employerCost: gross + employer.total + pension.employer,
     flexible: { ...flexible, taxSaved: taxWithoutFlexible - incomeTax.withheld },
+    pension: { ...pension, taxSaved: pensionTaxSaved },
     incomeTax: { ...incomeTax, minWageCredit: credit, refund },
     netAnnual,
     netAnnualAfterReturn,
     netMonthlyAverage: netAnnual / 12,
     payments: input.payments,
-    netRegularPayment: grossPerPayment - (employee.total + flexible.total) / 12 - taxPerRegularPayment,
+    netRegularPayment: grossPerPayment - (employee.total + flexible.total + pension.employee) / 12 - taxPerRegularPayment,
     netExtraPayment: hasExtraPayments ? grossPerPayment - taxPerExtraPayment : 0,
     effectiveRate: gross > 0 ? ((employee.total + incomeTax.withheld - refund) / gross) * 100 : 0,
     taxWedge:

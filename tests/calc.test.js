@@ -116,3 +116,31 @@ test('14 payments add up to the annual net salary', () => {
   const r = computePayroll({ ...DEFAULT_INPUT, flexMeal: 1200 }, CURRENT_SCENARIO);
   close(12 * r.netRegularPayment + 2 * r.netExtraPayment, r.netAnnual);
 });
+
+test('individual pension contributions are refunded in the return up to the limit', () => {
+  const plain = computePayroll(DEFAULT_INPUT, CURRENT_SCENARIO);
+  const r = computePayroll({ ...DEFAULT_INPUT, pensionIndividual: 3000 }, CURRENT_SCENARIO);
+
+  assert.equal(r.pension.deductible, 1500);
+  close(r.pension.taxSaved, 1500 * 0.3); // 30 % marginal rate at 30,000 €
+  close(r.netAnnual, plain.netAnnual); // paid outside payroll
+  close(r.netAnnualAfterReturn, plain.netAnnualAfterReturn - 3000 + 450);
+});
+
+test('employee contributions to a company plan are capped by the employer coefficient', () => {
+  const r = computePayroll({ ...DEFAULT_INPUT, pensionEmployer: 400, pensionEmployee: 2000 }, CURRENT_SCENARIO);
+  close(r.pension.deductible, 400 + 1000); // 2.5 × 400
+});
+
+test('employer pension contributions raise the contribution base and employer cost', () => {
+  const plain = computePayroll(DEFAULT_INPUT, CURRENT_SCENARIO);
+  const r = computePayroll({ ...DEFAULT_INPUT, pensionEmployer: 1200 }, CURRENT_SCENARIO);
+  assert.ok(r.employee.total > plain.employee.total);
+  close(r.employerCost, plain.employerCost + 1200 + (r.employer.total - plain.employer.total));
+  close(r.pension.taxSaved, 0);
+});
+
+test('payments still add up with pension contributions deducted in payroll', () => {
+  const r = computePayroll({ ...DEFAULT_INPUT, pensionEmployee: 600 }, CURRENT_SCENARIO);
+  close(12 * r.netRegularPayment + 2 * r.netExtraPayment, r.netAnnual);
+});

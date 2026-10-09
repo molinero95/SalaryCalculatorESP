@@ -74,6 +74,13 @@ export const CURRENT_SCENARIO = {
     healthDisabilityLimit: 1500,
     inKindCap: 30, // max % of salary paid in kind (art. 26.1 Workers' Statute)
   },
+  // Pension plan contributions reducing the tax base (arts. 51-52 LIRPF)
+  pension: {
+    individualLimit: 1500,
+    employmentLimit: 8500, // extra room for employment plans (employer + employee)
+    netIncomeShareLimit: 30, // max % of net employment income
+    highIncomeThreshold: 60000, // above this, employee contributions can't exceed the employer's
+  },
   // Contribution bases (Orden PJC/297/2026)
   socialSecurity: {
     minBase: 1424.5,
@@ -119,7 +126,9 @@ export const DEFAULT_INPUT = {
   dependents65: 0,
   dependents75: 0,
   disability: 0, // 0 | 33 | 65
-  // Flexible compensation, annual amounts in euros
+  // Flexible compensation and pension plans, stored as annual amounts in euros.
+  // `*Period` only controls whether the form shows them per year or per month.
+  flexPeriod: 'annual', // 'annual' | 'monthly'
   flexMeal: 0,
   workingDays: 220,
   flexTransport: 0,
@@ -127,6 +136,10 @@ export const DEFAULT_INPUT = {
   flexHealthPeople: 1,
   flexChildcare: 0,
   flexTraining: 0,
+  pensionPeriod: 'annual', // 'annual' | 'monthly'
+  pensionIndividual: 0,
+  pensionEmployee: 0,
+  pensionEmployer: 0,
 };
 
 // State half of the income tax scale (art. 63 LIRPF)
