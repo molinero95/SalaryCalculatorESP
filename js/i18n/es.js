@@ -259,6 +259,8 @@ export default {
     'Lo que pagarías en la declaración con la escala de tu comunidad. La diferencia con lo retenido sale a devolver (+) o a pagar (−).',
   loadProposal: 'Cargar propuesta de partido',
   proposalSource: 'Fuente',
+  proposalVerified: 'Verificado el',
+  proposalPartial: 'Simulación parcial',
   proposalVoxNote:
     'Solo cambia la mitad estatal: 15 % hasta 70.000 € y 25 % por encima; la autonómica se mantiene. Por eso la escala conjunta sube en los primeros tramos (15 % + 9,5 % = 24,5 %), compensado por un mínimo personal de 22.000 €. Incluye la rebaja estatal de 4 puntos por hijo, con un mínimo del 0 %. La retención es una estimación; no incluye los cheques por nacimiento.',
   proposalSumarNote:

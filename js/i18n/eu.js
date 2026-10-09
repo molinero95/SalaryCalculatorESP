@@ -260,6 +260,8 @@ export default {
     'Zure erkidegoaren eskalarekin aitorpenean ordainduko zenukeena. Atxikitakoarekiko aldea itzuli (+) edo ordaindu (−) egin beharko da.',
   loadProposal: 'Alderdi baten proposamena kargatu',
   proposalSource: 'Iturria',
+  proposalVerified: 'Egiaztatze-data',
+  proposalPartial: 'Simulazio partziala',
   proposalVoxNote:
     'Estatuko zatia bakarrik aldatzen da: % 15 70.000 € arte eta % 25 hortik gora, 22.000 €-ko gutxieneko pertsonalarekin. Seme-alaba bakoitzak estatuko tasak 4 puntu murrizten ditu, % 0 arte. Autonomia-erkidegoko zatia mantentzen da. Atxikipena estimazioa da; jaiotzagatiko ordainketak ez dira sartzen.',
   proposalSumarNote:

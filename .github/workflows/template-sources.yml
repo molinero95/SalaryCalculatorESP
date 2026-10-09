@@ -1,0 +1,48 @@
+name: Template source review
+
+on:
+  schedule:
+    - cron: '23 7 * * 1'
+  workflow_dispatch:
+    inputs:
+      accept_baseline:
+        description: Accept source fingerprints after reviewing the report (does not approve fiscal parameters)
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: template-source-review
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/cache/restore@v4
+        with:
+          path: .source-monitor/baseline.json
+          key: template-sources-v1-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: template-sources-v1-
+      - run: node scripts/check-template-sources.js
+        env:
+          ACCEPT_SOURCE_BASELINE: ${{ inputs.accept_baseline == true && 'true' || 'false' }}
+      - uses: actions/cache/save@v4
+        if: always() && hashFiles('.source-monitor/baseline.json') != ''
+        with:
+          path: .source-monitor/baseline.json
+          key: template-sources-v1-${{ github.run_id }}-${{ github.run_attempt }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: template-source-report
+          path: .source-monitor/report.*
+          retention-days: 90
+          include-hidden-files: true
