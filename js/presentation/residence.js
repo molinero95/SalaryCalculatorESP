@@ -7,13 +7,13 @@ import { t } from '../i18n/index.js';
 import { escapeHtml, formatEuros, formatPercent } from '../format.js';
 
 export function renderResidenceOptions(select, input) {
-  const regions = Object.entries(RESIDENCE_REGIONS).sort(([, a], [, b]) => a.name.localeCompare(b.name));
+  const regions = Object.entries(RESIDENCE_REGIONS).sort(([, a], [, b]) => a.name.localeCompare(b.name, 'es'));
   select.innerHTML =
     `<option value="region:general">${escapeHtml(t('regionGeneral'))}</option>` +
     regions
       .map(([key, { name }]) => {
-        const cities = CITIES.filter(({ region }) => region === key).sort((a, b) => a.name.localeCompare(b.name));
-        return `<optgroup label="${escapeHtml(name)}"><option value="region:${key}">${escapeHtml(name)} · ${escapeHtml(t('residenceOtherCity'))}</option>${cities.map(({ id, name: cityName }) => `<option value="city:${id}">${escapeHtml(cityName)} · ${escapeHtml(name)}</option>`).join('')}</optgroup>`;
+        const cities = CITIES.filter(({ region }) => region === key).sort((a, b) => a.name.localeCompare(b.name, 'es'));
+        return `<optgroup label="${escapeHtml(name)}"><option value="region:${key}">${escapeHtml(name)} · ${escapeHtml(t('residenceOtherCity'))}</option>${cities.map(({ id, name: cityName }) => `<option value="city:${id}">${escapeHtml(name)} · ${escapeHtml(cityName)}</option>`).join('')}</optgroup>`;
       })
       .join('');
   select.value = residenceValue(input);
