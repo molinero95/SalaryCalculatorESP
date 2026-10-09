@@ -196,6 +196,19 @@ test('floating annual difference stays inside narrow viewports with large amount
   });
   await page.locator('#sticky-summary').scrollIntoViewIfNeeded();
   await expect(page.locator('#sticky-summary')).toBeVisible();
+  console.log(
+    'Narrow layout diagnostics',
+    await page.evaluate(() => ({
+      viewport: innerWidth,
+      scroll: document.documentElement.scrollWidth,
+      summary: document.querySelector('#sticky-summary').getBoundingClientRect().toJSON(),
+      overflow: [...document.querySelectorAll('body *')]
+        .filter((e) => e.getBoundingClientRect().right > innerWidth)
+        .slice(0, 12)
+        .map((e) => ({ tag: e.tagName, id: e.id, cls: e.className, right: e.getBoundingClientRect().right })),
+    })),
+  );
+
   await expect
     .poll(() =>
       page.evaluate(() => {
