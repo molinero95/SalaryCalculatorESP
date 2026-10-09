@@ -204,7 +204,7 @@ test('floating annual difference stays inside narrow viewports with large amount
       summary: document.querySelector('#sticky-summary').getBoundingClientRect().toJSON(),
       overflow: [...document.querySelectorAll('body *')]
         .filter((e) => e.getBoundingClientRect().right > innerWidth)
-        .slice(0, 12)
+        .slice(0, 80)
         .map((e) => ({ tag: e.tagName, id: e.id, cls: e.className, right: e.getBoundingClientRect().right })),
     })),
   );

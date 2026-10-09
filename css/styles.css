@@ -1380,6 +1380,7 @@ main > *,
 
   .summary-strip {
     display: table;
+    table-layout: fixed;
     grid-column: 1 / -1;
     width: 100%;
     border-collapse: collapse;
@@ -1392,6 +1393,7 @@ main > *,
 
   .summary-strip th,
   .summary-strip td {
+    overflow-wrap: anywhere;
     padding: 0.5rem 0.4rem;
     text-align: right;
   }
