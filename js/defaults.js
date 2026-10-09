@@ -3,6 +3,7 @@
 
 export const CURRENT_SCENARIO = {
   name: '',
+  proposal: '', // id in PROPOSALS when the scenario comes from a party proposal
   incomeTax: {
     // Withholding scale (state + general regional, art. 101 LIRPF).
     // `upTo: null` marks the open-ended top bracket.

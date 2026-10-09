@@ -248,4 +248,28 @@ export default {
   rowAnnualTax: 'Cota anual estimada (renda)',
   helpAnnualTax:
     'O que pagarías na declaración coa escala da túa comunidade. A diferenza co retido sae a devolver (+) ou a pagar (−).',
+  loadProposal: 'Cargar proposta de partido',
+  proposalSource: 'Fonte',
+  proposalVoxNote:
+    'Só cambia o tramo estatal (15 % ata 70.000 € e 25 % por riba) e sobe o mínimo persoal a 22.000 €. Non inclúe a rebaixa de 4 puntos por fillo nin os cheques por nacemento.',
+  proposalSumarNote:
+    'Sobe o tipo marxinal máximo ao 52 % por riba de 300.000 €. O programa non detalla os tipos entre 120.000 e 300.000 €, que se manteñen.',
+  proposalPsoeNote: 'Propón aumentar o mínimo por descendentes e persoas dependentes, sen cifras concretas.',
+  proposalPpNote: 'Propón deflactar a tarifa e baixar o IRPF a rendas de menos de 40.000 €, sen cifras concretas.',
+  proposalPodemosNote: 'Propón non reter na nómina ata o SMI; a dedución vixente xa deixa o SMI sen IRPF.',
+  otherProposals: 'Propostas sen cifras concretas',
+  proposalsDisclaimer: 'Baseado en documentos oficiais de cada partido; pode non reflectir a súa posición actual.',
+  contextTitle: 'O teu salario en contexto',
+  percentileText: 'Gañas máis ca o {p} % dos asalariados en España.',
+  percentileSource: 'Fonte: AEAT, salarios de 2024 anualizados.',
+  creepTitle: 'Progresividade en frío',
+  creepText:
+    'Desde {year} os prezos subiron un {inflation} % e os tramos do IRPF non se actualizaron. Se tramos e mínimos subisen coa inflación, cobrarías {amount} máis ao ano.',
+  creepSimulate: 'Simular tramos actualizados co IPC',
+  creepScenarioName: 'Tramos actualizados co IPC (+{inflation} %)',
+  compareTitle: 'Comparar propostas',
+  compareDesc: 'Escolle ata 3 escenarios para comparalos coa normativa vixente usando os teus datos.',
+  compareEmpty: 'Selecciona polo menos un escenario.',
+  compareChartDesc: 'Diferenza neta anual fronte á normativa vixente, segundo o salario bruto.',
+  yourSimulation: 'A túa simulación',
 };

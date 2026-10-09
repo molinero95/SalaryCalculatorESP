@@ -253,4 +253,31 @@ export default {
   rowAnnualTax: 'Urteko kuota (errenta, zenbatespena)',
   helpAnnualTax:
     'Zure erkidegoaren eskalarekin aitorpenean ordainduko zenukeena. Atxikitakoarekiko aldea itzuli (+) edo ordaindu (−) egin beharko da.',
+  loadProposal: 'Alderdi baten proposamena kargatu',
+  proposalSource: 'Iturria',
+  proposalVoxNote:
+    'Estatuko tartea bakarrik aldatzen du (% 15 70.000 €-raino eta % 25 hortik gora) eta gutxieneko pertsonala 22.000 €-ra igotzen du. Ez ditu barne hartzen seme-alaba bakoitzeko 4 puntuko jaitsiera ezta jaiotza-txekeak ere.',
+  proposalSumarNote:
+    'Gehieneko tasa marjinala % 52ra igotzen du 300.000 €-tik gora. Programak ez ditu 120.000 eta 300.000 € arteko tasak zehazten, eta bere horretan uzten dira.',
+  proposalPsoeNote: 'Ondorengoengatiko eta mendekoengatiko gutxienekoa igotzea proposatzen du, zifra zehatzik gabe.',
+  proposalPpNote:
+    'Tarifa deflaktatzea eta 40.000 €-tik beherako errentei PFEZa jaistea proposatzen du, zifra zehatzik gabe.',
+  proposalPodemosNote:
+    'LGSraino nominan ez atxikitzea proposatzen du; indarreko kenkariak dagoeneko uzten du LGS PFEZik gabe.',
+  otherProposals: 'Zifra zehatzik gabeko proposamenak',
+  proposalsDisclaimer:
+    'Alderdi bakoitzaren dokumentu ofizialetan oinarritua; baliteke gaur egungo jarrera ez islatzea.',
+  contextTitle: 'Zure soldata testuinguruan',
+  percentileText: 'Espainiako soldatapekoen % {p} baino gehiago irabazten duzu.',
+  percentileSource: 'Iturria: AEAT, 2024ko soldatak urtekotuta.',
+  creepTitle: 'Hotzeko progresibitatea',
+  creepText:
+    '{year}tik prezioak % {inflation} igo dira eta PFEZaren tarteak ez dira eguneratu. Tarteak eta gutxienekoak inflazioarekin igoko balira, urtean {amount} gehiago kobratuko zenuke.',
+  creepSimulate: 'KPIarekin eguneratutako tarteak simulatu',
+  creepScenarioName: 'KPIarekin eguneratutako tarteak (+% {inflation})',
+  compareTitle: 'Proposamenak alderatu',
+  compareDesc: 'Aukeratu gehienez 3 agertoki indarreko araudiarekin alderatzeko, zure datuekin.',
+  compareEmpty: 'Aukeratu gutxienez agertoki bat.',
+  compareChartDesc: 'Urteko diferentzia garbia indarreko araudiarekiko, soldata gordinaren arabera.',
+  yourSimulation: 'Zure simulazioa',
 };

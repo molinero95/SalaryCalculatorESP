@@ -290,6 +290,17 @@
           <input id="scenario-name" type="text" maxlength="60" />
         </div>
 
+        <div class="field field-name">
+          <label for="proposal-select" data-i18n="loadProposal"></label>
+          <select id="proposal-select"></select>
+        </div>
+        <div class="proposal-info" id="proposal-info" hidden></div>
+        <details class="other-proposals">
+          <summary data-i18n="otherProposals"></summary>
+          <ul id="other-proposals"></ul>
+          <p class="help" data-i18n="proposalsDisclaimer"></p>
+        </details>
+
         <div class="toolbar">
           <button type="button" class="button secondary" id="copy-current" data-i18n="copyCurrent"></button>
           <button type="button" class="button" id="share" data-i18n="share"></button>
@@ -334,6 +345,22 @@
         <p class="difference" id="difference"></p>
       </section>
 
+      <section class="card" aria-labelledby="context-title">
+        <h2 id="context-title" data-i18n="contextTitle"></h2>
+        <div class="context-grid">
+          <div>
+            <p class="context-figure" id="percentile-text"></p>
+            <div class="percentile-bar" aria-hidden="true"><span id="percentile-marker"></span></div>
+            <p class="help" data-i18n="percentileSource"></p>
+          </div>
+          <div>
+            <h3 data-i18n="creepTitle"></h3>
+            <p id="creep-text"></p>
+            <button type="button" class="button secondary" id="creep-simulate" data-i18n="creepSimulate"></button>
+          </div>
+        </div>
+      </section>
+
       <section class="card" aria-labelledby="chart-title">
         <div class="card-header">
           <h2 id="chart-title" data-i18n="chartTitle"></h2>
@@ -349,6 +376,16 @@
           <summary data-i18n="showTable"></summary>
           <div class="table-scroll" id="chart-table"></div>
         </details>
+      </section>
+
+      <section class="card" aria-labelledby="compare-title">
+        <h2 id="compare-title" data-i18n="compareTitle"></h2>
+        <p class="help" data-i18n="compareDesc"></p>
+        <div class="compare-options" id="compare-options"></div>
+        <div class="table-scroll" id="compare-table"></div>
+        <p class="help compare-chart-help" data-i18n="compareChartDesc"></p>
+        <div class="legend" id="compare-legend"></div>
+        <div class="chart" id="compare-chart"></div>
       </section>
 
       <section class="card" aria-labelledby="breakdown-title">

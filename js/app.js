@@ -1,17 +1,23 @@
 import { computePayroll, grossAnnualOf } from './calc.js';
 import { CURRENT_SCENARIO, DEFAULT_INPUT, clone } from './defaults.js';
 import { LANGUAGES, DEFAULT_LANGUAGE, setLanguage, t, translateDocument } from './i18n/index.js';
-import { formatSignedEuros, formatPercent, formatCompactEuros, escapeHtml } from './format.js';
+import { formatEuros, formatSignedEuros, formatPercent, formatCompactEuros, escapeHtml } from './format.js';
 import { renderSettings } from './settings.js';
 import { renderChart, renderDataTable } from './chart.js';
 import { renderResults, renderBreakdown } from './results.js';
 import * as storage from './storage.js';
 import { REGIONAL_SCALES } from './data/regions.js';
+import { PROPOSALS, UNQUANTIFIED_PROPOSALS } from './data/proposals.js';
+import { salaryPercentile } from './data/salaries.js';
+import { cumulativeInflation, BRACKETS_LAST_UPDATED } from './data/cpi.js';
+import { proposalScenario, indexedScenario } from './political.js';
 
 const $ = (selector) => document.querySelector(selector);
 
 const CHART_RANGE = { from: 12000, to: 150000, step: 1000 };
 const CHART_TABLE_EVERY = 5;
+const MAX_COMPARED = 3;
+const INFLATION_SINCE_BRACKETS = Math.round(cumulativeInflation(BRACKETS_LAST_UPDATED - 1));
 const SAVE_DELAY_MS = 300;
 const TOAST_MS = 2500;
 const MONTHS = 12;
@@ -57,7 +63,10 @@ const isValidBrackets = (brackets) =>
  * Deep-merges untrusted `override` (saved state, shared link, imported file) into
  * `base`. Unknown keys are dropped and values whose type doesn't match are ignored.
  */
+const isStringList = (list) => Array.isArray(list) && list.every((item) => typeof item === 'string');
+
 function merge(base, override) {
+  if (isStringList(base)) return isStringList(override) ? override : base;
   if (Array.isArray(base)) return isValidBrackets(override) ? override : base;
   if (isPlainObject(base)) {
     if (!isPlainObject(override)) return base;
@@ -86,6 +95,7 @@ function initialState() {
   const defaults = {
     language: DEFAULT_LANGUAGE,
     chartMode: 'diff',
+    compare: ['vox2024', 'indexed', 'sumar2023'],
     input: clone(DEFAULT_INPUT),
     current: clone(CURRENT_SCENARIO),
     simulation: clone(CURRENT_SCENARIO),
@@ -421,6 +431,158 @@ $('#delete-scenario').addEventListener('click', () => {
 });
 
 // ---------------------------------------------------------------------------
+// Party proposals
+// ---------------------------------------------------------------------------
+
+const proposalName = (id) => `${PROPOSALS[id].party} (${PROPOSALS[id].date.slice(0, 4)})`;
+const sourceLink = ({ title, url, date }) =>
+  `<a href="${url}" target="_blank" rel="noopener">${escapeHtml(title)}</a>${date ? ` · ${date}` : ''}`;
+
+function renderProposalControls() {
+  $('#proposal-select').innerHTML =
+    `<option value="">${t('custom')}</option>` +
+    Object.keys(PROPOSALS)
+      .map((id) => `<option value="${id}">${escapeHtml(proposalName(id))}</option>`)
+      .join('');
+  $('#other-proposals').innerHTML = UNQUANTIFIED_PROPOSALS.map(
+    (p) =>
+      `<li><strong>${p.party}</strong>: ${t(p.note)} <span class="muted">${t('proposalSource')}: ${sourceLink(p)}</span></li>`,
+  ).join('');
+  renderProposalInfo();
+}
+
+function renderProposalInfo() {
+  const proposal = PROPOSALS[state.simulation.proposal];
+  $('#proposal-select').value = proposal ? state.simulation.proposal : '';
+  const info = $('#proposal-info');
+  info.hidden = !proposal;
+  if (proposal)
+    info.innerHTML = `<p>${t(proposal.note)}</p><p class="muted">${t('proposalSource')}: ${sourceLink(proposal)}</p>`;
+}
+
+$('#proposal-select').addEventListener('change', ({ target }) => {
+  state.simulation = target.value
+    ? proposalScenario(target.value, proposalName(target.value))
+    : { ...clone(state.current), name: '', proposal: '' };
+  trackEvent(`proposal-${target.value || 'custom'}`);
+  refreshScenarios();
+});
+
+// ---------------------------------------------------------------------------
+// Context: salary percentile and bracket creep
+// ---------------------------------------------------------------------------
+
+const indexedName = () => t('creepScenarioName', { inflation: INFLATION_SINCE_BRACKETS });
+
+function renderContext(current) {
+  const percentile = Math.floor(salaryPercentile(current.grossAnnual));
+  $('#percentile-text').textContent = t('percentileText', { p: percentile });
+  $('#percentile-marker').style.left = `${percentile}%`;
+
+  const indexed = computePayroll(state.input, indexedScenario(state.current, INFLATION_SINCE_BRACKETS, ''));
+  $('#creep-text').textContent = t('creepText', {
+    year: BRACKETS_LAST_UPDATED,
+    inflation: INFLATION_SINCE_BRACKETS,
+    amount: formatEuros(indexed.netAnnualAfterReturn - current.netAnnualAfterReturn, 0),
+  });
+}
+
+$('#creep-simulate').addEventListener('click', () => {
+  state.simulation = indexedScenario(state.current, INFLATION_SINCE_BRACKETS, indexedName());
+  trackEvent('simulate-indexed-brackets');
+  refreshScenarios();
+  $('.card-simulation').scrollIntoView({ behavior: 'smooth' });
+});
+
+// ---------------------------------------------------------------------------
+// Comparison of several scenarios
+// ---------------------------------------------------------------------------
+
+/** Every scenario that can be compared, keyed by a stable id. */
+function comparableScenarios() {
+  const saved = Object.entries(storage.listScenarios()).map(([name, scenario]) => [
+    `saved:${name}`,
+    { name, scenario: merge(clone(CURRENT_SCENARIO), scenario) },
+  ]);
+  return Object.fromEntries([
+    ['simulation', { name: `${t('yourSimulation')}: ${scenarioName('simulation')}`, scenario: state.simulation }],
+    ...Object.keys(PROPOSALS).map((id) => [
+      id,
+      { name: proposalName(id), scenario: proposalScenario(id, proposalName(id)) },
+    ]),
+    ['indexed', { name: indexedName(), scenario: indexedScenario(state.current, INFLATION_SINCE_BRACKETS, '') }],
+    ...saved,
+  ]);
+}
+
+function renderComparison() {
+  const options = comparableScenarios();
+  state.compare = state.compare.filter((id) => id in options);
+  const full = state.compare.length >= MAX_COMPARED;
+
+  $('#compare-options').innerHTML = Object.entries(options)
+    .map(([id, { name }]) => {
+      const checked = state.compare.includes(id);
+      return `<label class="checkbox"><input type="checkbox" value="${escapeHtml(id)}" ${checked ? 'checked' : ''} ${full && !checked ? 'disabled' : ''} /><span>${escapeHtml(name)}</span></label>`;
+    })
+    .join('');
+
+  const selected = state.compare.map((id, i) => ({ ...options[id], className: `series-${i + 1}` }));
+  const current = computePayroll(state.input, state.current);
+
+  if (!selected.length) {
+    $('#compare-table').innerHTML = `<p class="muted">${t('compareEmpty')}</p>`;
+    $('#compare-chart').replaceChildren();
+    $('#compare-legend').innerHTML = '';
+    return;
+  }
+
+  const rows = [
+    { name: scenarioName('current'), result: current },
+    ...selected.map((s) => ({ ...s, result: computePayroll(state.input, s.scenario) })),
+  ];
+  $('#compare-table').innerHTML = `
+    <table class="table">
+      <thead><tr><th scope="col"></th><th scope="col">${t('rowNetAfterReturn')}</th><th scope="col">${t('difference')}</th><th scope="col">${t('effectiveRate')}</th></tr></thead>
+      <tbody>${rows
+        .map(({ name, className, result }) => {
+          const diff = result.netAnnualAfterReturn - current.netAnnualAfterReturn;
+          const swatch = className ? `<span class="swatch ${className}"></span> ` : '';
+          return `<tr><th scope="row">${swatch}${escapeHtml(name)}</th><td>${formatEuros(result.netAnnualAfterReturn)}</td><td>${className ? formatSignedEuros(diff) : '—'}</td><td>${formatPercent(result.effectiveRate)}</td></tr>`;
+        })
+        .join('')}</tbody>
+    </table>`;
+
+  const xs = [];
+  for (let x = CHART_RANGE.from; x <= CHART_RANGE.to; x += CHART_RANGE.step * 2) xs.push(x);
+  const baseline = xs.map((gross) => computePayroll(state.input, state.current, gross).netAnnualAfterReturn);
+  const series = selected.map(({ name, className, scenario }) => ({
+    name,
+    className,
+    values: xs.map((gross, i) => computePayroll(state.input, scenario, gross).netAnnualAfterReturn - baseline[i]),
+  }));
+
+  $('#compare-legend').innerHTML = series
+    .map((s) => `<span class="legend-item"><span class="swatch ${s.className}"></span>${escapeHtml(s.name)}</span>`)
+    .join('');
+  renderChart($('#compare-chart'), {
+    xs,
+    series,
+    formatValue: (v) => formatSignedEuros(v, 0),
+    formatAxis: formatCompactEuros,
+    marker: grossAnnualOf(state.input),
+  });
+}
+
+$('#compare-options').addEventListener('change', ({ target }) => {
+  state.compare = target.checked
+    ? [...state.compare, target.value].slice(0, MAX_COMPARED)
+    : state.compare.filter((id) => id !== target.value);
+  persist();
+  renderComparison();
+});
+
+// ---------------------------------------------------------------------------
 // Help tips
 // ---------------------------------------------------------------------------
 
@@ -459,6 +621,7 @@ function renderRegionOptions() {
 function applyLanguage() {
   setLanguage(state.language);
   renderRegionOptions();
+  renderProposalControls();
   languageSelect.value = state.language;
   translateDocument();
   renderSavedScenarios();
@@ -493,6 +656,8 @@ function update() {
   lastResults = results;
   renderResults({ cards: $('#results'), summary: $('#difference'), sticky: $('#sticky-value') }, results);
   renderBreakdown($('#breakdown'), results);
+  renderContext(results.current);
+  renderProposalInfo();
 
   renderInputWarnings();
 
@@ -502,7 +667,10 @@ function update() {
 
   // The chart evaluates ~280 payrolls, so batch it to the next frame
   cancelAnimationFrame(chartFrame);
-  chartFrame = requestAnimationFrame(renderComparisonChart);
+  chartFrame = requestAnimationFrame(() => {
+    renderComparisonChart();
+    renderComparison();
+  });
   persist();
 }
 

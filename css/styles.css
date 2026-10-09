@@ -15,6 +15,7 @@
   --accent-contrast: #ffffff;
   --series-1: #2a78d6;
   --series-2: #eb6834;
+  --series-3: #1baf7a;
   --positive: #0a7a3f;
   --positive-bg: #e3f4ea;
   --negative: #b42318;
@@ -42,6 +43,7 @@
     --accent: #3987e5;
     --series-1: #3987e5;
     --series-2: #d95926;
+    --series-3: #199e70;
     --positive: #4cc38a;
     --positive-bg: #12301f;
     --negative: #f2817a;
@@ -716,6 +718,10 @@ main > *,
   stroke: var(--series-2);
 }
 
+.chart-svg .line.series-3 {
+  stroke: var(--series-3);
+}
+
 .chart-svg .marker {
   stroke: var(--text-muted);
   stroke-dasharray: 4 4;
@@ -743,6 +749,10 @@ main > *,
 
 .chart-svg .dot.series-2 {
   fill: var(--series-2);
+}
+
+.chart-svg .dot.series-3 {
+  fill: var(--series-3);
 }
 
 .chart-svg .hit-area {
@@ -813,6 +823,105 @@ main > *,
 
 .swatch.series-2 {
   background: var(--series-2);
+}
+
+.swatch.series-3 {
+  background: var(--series-3);
+}
+
+/* ==========================================================================
+   Political simulator: proposals, context and comparison
+   ========================================================================== */
+
+.proposal-info {
+  margin: -0.25rem 0 1rem;
+  padding: 0.75rem 1rem;
+  border-left: 3px solid var(--series-2);
+  border-radius: var(--radius-small);
+  background: var(--surface-2);
+  font-size: 0.9rem;
+}
+
+.proposal-info p {
+  margin: 0;
+}
+
+.proposal-info p + p {
+  margin-top: 0.35rem;
+  font-size: 0.8rem;
+}
+
+.other-proposals {
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.other-proposals summary {
+  cursor: pointer;
+  color: var(--text-secondary);
+}
+
+.other-proposals ul {
+  margin: 0.5rem 0;
+  padding-left: 1.2rem;
+}
+
+.other-proposals li + li {
+  margin-top: 0.4rem;
+}
+
+.context-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.context-grid h3 {
+  margin-bottom: 0.4rem;
+  font-size: 1rem;
+}
+
+.context-grid p {
+  margin: 0 0 0.75rem;
+}
+
+.context-figure {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.percentile-bar {
+  position: relative;
+  height: 8px;
+  margin: 0.5rem 0 0.9rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--surface-2), var(--series-1));
+}
+
+.percentile-bar span {
+  position: absolute;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  border: 3px solid var(--surface-1);
+  border-radius: 50%;
+  background: var(--text-primary);
+  transform: translate(-50%, -50%);
+}
+
+.compare-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.compare-options .checkbox:has(input:disabled) {
+  opacity: 0.5;
+}
+
+.compare-chart-help {
+  margin-top: 1rem;
 }
 
 .data-table {

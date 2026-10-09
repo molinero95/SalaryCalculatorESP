@@ -252,4 +252,28 @@ export default {
   rowAnnualTax: 'Cuota anual estimada (renta)',
   helpAnnualTax:
     'Lo que pagarías en la declaración con la escala de tu comunidad. La diferencia con lo retenido sale a devolver (+) o a pagar (−).',
+  loadProposal: 'Cargar propuesta de partido',
+  proposalSource: 'Fuente',
+  proposalVoxNote:
+    'Solo cambia el tramo estatal (15 % hasta 70.000 € y 25 % por encima) y sube el mínimo personal a 22.000 €. No incluye la rebaja de 4 puntos por hijo ni los cheques por nacimiento.',
+  proposalSumarNote:
+    'Sube el tipo marginal máximo al 52 % por encima de 300.000 €. El programa no detalla los tipos entre 120.000 y 300.000 €, que se mantienen.',
+  proposalPsoeNote: 'Propone aumentar el mínimo por descendientes y personas dependientes, sin cifras concretas.',
+  proposalPpNote: 'Propone deflactar la tarifa y bajar el IRPF a rentas de menos de 40.000 €, sin cifras concretas.',
+  proposalPodemosNote: 'Propone no retener en nómina hasta el SMI; la deducción vigente ya deja el SMI sin IRPF.',
+  otherProposals: 'Propuestas sin cifras concretas',
+  proposalsDisclaimer: 'Basado en documentos oficiales de cada partido; puede no reflejar su posición actual.',
+  contextTitle: 'Tu salario en contexto',
+  percentileText: 'Ganas más que el {p} % de los asalariados en España.',
+  percentileSource: 'Fuente: AEAT, salarios de 2024 anualizados.',
+  creepTitle: 'Progresividad en frío',
+  creepText:
+    'Desde {year} los precios han subido un {inflation} % y los tramos del IRPF no se han actualizado. Si tramos y mínimos subieran con la inflación, cobrarías {amount} más al año.',
+  creepSimulate: 'Simular tramos actualizados con el IPC',
+  creepScenarioName: 'Tramos actualizados con el IPC (+{inflation} %)',
+  compareTitle: 'Comparar propuestas',
+  compareDesc: 'Elige hasta 3 escenarios para compararlos con la normativa vigente usando tus datos.',
+  compareEmpty: 'Selecciona al menos un escenario.',
+  compareChartDesc: 'Diferencia neta anual frente a la normativa vigente, según el salario bruto.',
+  yourSimulation: 'Tu simulación',
 };

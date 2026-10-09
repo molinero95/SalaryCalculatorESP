@@ -180,3 +180,23 @@ test('employees under the filing threshold never owe money in the return', () =>
   const r = computePayroll({ ...DEFAULT_INPUT, salary: 21000, region: 'rioja' }, CURRENT_SCENARIO);
   assert.ok(r.incomeTax.refund >= 0);
 });
+
+test('party proposals are applied on top of current rules', async () => {
+  const { proposalScenario } = await import('../js/political.js');
+  const vox = proposalScenario('vox2024', 'Vox');
+  assert.equal(vox.incomeTax.personalAllowance, 22000);
+  assert.deepEqual(vox.incomeTax.brackets.slice(0, 2), [
+    { upTo: 12450, rate: 24.5 },
+    { upTo: 20200, rate: 27 },
+  ]);
+  assert.equal(vox.incomeTax.child1Allowance, CURRENT_SCENARIO.incomeTax.child1Allowance);
+});
+
+test('indexing brackets for inflation lowers the tax on the same salary', async () => {
+  const { indexedScenario } = await import('../js/political.js');
+  const indexed = indexedScenario(CURRENT_SCENARIO, 28, 'IPC');
+  assert.equal(indexed.incomeTax.brackets[0].upTo, 15936);
+  assert.ok(
+    computePayroll(DEFAULT_INPUT, indexed).netAnnual > computePayroll(DEFAULT_INPUT, CURRENT_SCENARIO).netAnnual,
+  );
+});

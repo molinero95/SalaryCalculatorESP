@@ -253,4 +253,28 @@ export default {
   rowAnnualTax: 'Quota anual estimada (renda)',
   helpAnnualTax:
     "El que pagaries a la declaració amb l'escala de la teva comunitat. La diferència amb el que s'ha retingut surt a tornar (+) o a pagar (−).",
+  loadProposal: 'Carregar proposta de partit',
+  proposalSource: 'Font',
+  proposalVoxNote:
+    'Només canvia el tram estatal (15 % fins a 70.000 € i 25 % per sobre) i apuja el mínim personal a 22.000 €. No inclou la rebaixa de 4 punts per fill ni els xecs per naixement.',
+  proposalSumarNote:
+    'Apuja el tipus marginal màxim al 52 % per sobre de 300.000 €. El programa no detalla els tipus entre 120.000 i 300.000 €, que es mantenen.',
+  proposalPsoeNote: 'Proposa augmentar el mínim per descendents i persones dependents, sense xifres concretes.',
+  proposalPpNote: "Proposa deflactar la tarifa i abaixar l'IRPF a rendes de menys de 40.000 €, sense xifres concretes.",
+  proposalPodemosNote: "Proposa no retenir a la nòmina fins a l'SMI; la deducció vigent ja deixa l'SMI sense IRPF.",
+  otherProposals: 'Propostes sense xifres concretes',
+  proposalsDisclaimer: 'Basat en documents oficials de cada partit; pot no reflectir-ne la posició actual.',
+  contextTitle: 'El teu salari en context',
+  percentileText: 'Guanyes més que el {p} % dels assalariats a Espanya.',
+  percentileSource: 'Font: AEAT, salaris del 2024 anualitzats.',
+  creepTitle: 'Progressivitat en fred',
+  creepText:
+    "Des del {year} els preus han pujat un {inflation} % i els trams de l'IRPF no s'han actualitzat. Si trams i mínims pugessin amb la inflació, cobraries {amount} més l'any.",
+  creepSimulate: 'Simular trams actualitzats amb l’IPC',
+  creepScenarioName: 'Trams actualitzats amb l’IPC (+{inflation} %)',
+  compareTitle: 'Comparar propostes',
+  compareDesc: 'Tria fins a 3 escenaris per comparar-los amb la normativa vigent fent servir les teves dades.',
+  compareEmpty: 'Selecciona almenys un escenari.',
+  compareChartDesc: 'Diferència neta anual respecte a la normativa vigent, segons el salari brut.',
+  yourSimulation: 'La teva simulació',
 };
