@@ -1,22 +1,34 @@
 import { CITIES } from '../data/cities.js';
 import { residenceSources } from '../data/residence-sources.js';
-import { RESIDENCE_REGIONS, residenceValue } from '../domain/residence.js';
+import { RESIDENCE_REGIONS, RESIDENCE_COMMUNITIES, residenceCommunity, residenceCities } from '../domain/residence.js';
 import { FORAL_TERRITORIES } from '../data/foral.js';
 import { GENERAL_REGIONAL_SCALE, CURRENT_SCENARIO, combineScales } from '../defaults.js';
 import { t } from '../i18n/index.js';
 import { escapeHtml, formatEuros, formatPercent } from '../format.js';
 
-export function renderResidenceOptions(select, input) {
-  const regions = Object.entries(RESIDENCE_REGIONS).sort(([, a], [, b]) => a.name.localeCompare(b.name, 'es'));
-  select.innerHTML =
+export function renderResidenceOptions(form, input) {
+  const community = form.elements.residence;
+  const territory = form.elements.residenceTerritory;
+  const city = form.elements.residenceCity;
+  const communities = Object.entries(RESIDENCE_COMMUNITIES).sort(([, a], [, b]) => a.name.localeCompare(b.name, 'es'));
+  community.innerHTML =
     `<option value="region:general">${escapeHtml(t('regionGeneral'))}</option>` +
-    regions
-      .map(([key, { name }]) => {
-        const cities = CITIES.filter(({ region }) => region === key).sort((a, b) => a.name.localeCompare(b.name, 'es'));
-        return `<optgroup label="${escapeHtml(name)}"><option value="region:${key}">${escapeHtml(name)} · ${escapeHtml(t('residenceOtherCity'))}</option>${cities.map(({ id, name: cityName }) => `<option value="city:${id}">${escapeHtml(name)} · ${escapeHtml(cityName)}</option>`).join('')}</optgroup>`;
-      })
+    communities.map(([key, { name }]) => `<option value="region:${key}">${escapeHtml(name)}</option>`).join('');
+  community.value = `region:${residenceCommunity(input.region)}`;
+  const basque = residenceCommunity(input.region) === 'basque';
+  territory.closest('.field').hidden = !basque;
+  territory.disabled = !basque;
+  territory.innerHTML = ['alava', 'bizkaia', 'gipuzkoa']
+    .map((key) => `<option value="region:${key}">${escapeHtml(FORAL_TERRITORIES[key].name.split(' · ')[1])}</option>`)
+    .join('');
+  territory.value = basque ? `region:${input.region}` : 'region:bizkaia';
+  city.innerHTML =
+    `<option value="">${escapeHtml(t('residenceOtherCity'))}</option>` +
+    residenceCities(input.region)
+      .map(({ id, name }) => `<option value="${id}">${escapeHtml(name)}</option>`)
       .join('');
-  select.value = residenceValue(input);
+  city.value = residenceCities(input.region).some(({ id }) => id === input.city) ? input.city : '';
+  city.disabled = input.region === 'general';
 }
 
 export function renderResidenceBrackets(element, input) {

@@ -1,3 +1,4 @@
+import { chooseResidence } from './residence-helper.js';
 import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
@@ -113,7 +114,7 @@ test('share links only carry the changed proposal, not personal details', async 
 });
 
 test('choosing a region shows the estimated tax return result', async ({ page }) => {
-  await page.selectOption('#residence', 'region:madrid');
+  await chooseResidence(page, 'region:madrid');
   await expect(page.locator('.result-current .metrics')).toContainText('Resultado estimado de la renta');
   await expect(page.locator('.result-current .metrics')).toContainText('+');
 });

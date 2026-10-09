@@ -1672,7 +1672,9 @@ main > *,
 .field-full {
   grid-column: 1 / -1;
 }
-#residence {
+#residence,
+#residence-territory,
+#residence-city {
   width: 100%;
   min-width: 0;
 }

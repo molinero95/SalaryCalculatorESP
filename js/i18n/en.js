@@ -18,7 +18,10 @@ export default {
     'Limited foral model: permanent employment, under 65, family situation 3; eligible children and certified taxpayer disability included. Excludes ascendants, dependency, relatives’ disability, adoption, family changes during the year, flexible pay and pensions. Workplace and residence must be in the same territory. Common-regime proposals do not alter foral rules.',
 
   residence: 'Tax residence',
-  residenceOtherCity: 'Other city / territory only',
+  residenceOtherCity: 'Other city / unspecified',
+  residenceCommunity: 'Tax residence: autonomous community',
+  residenceTerritory: 'Historical territory',
+  residenceCity: 'City (optional)',
   residenceForal: 'Foral regime',
   residenceCommon: 'Common regime',
   residenceSources: 'Official sources',
@@ -39,7 +42,7 @@ export default {
   locationBrackets: 'Annual residence brackets · 2026',
 
   cityPresetHelp:
-    'Choose your city or directly choose your community or territory. Both options set the same tax residence; your salary is preserved.',
+    'Choose the autonomous community and, in the Basque Country, the historical territory. The city is optional and does not change the territorial tax bands. Your salary is preserved.',
 
   f_childRateReduction: 'State rate reduction per child (percentage points)',
   appTitle: 'Net salary simulator',

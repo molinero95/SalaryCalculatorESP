@@ -18,7 +18,10 @@ export default {
     'Modelo foral limitado: empleo indefinido, menor de 65 años, situación familiar 3; incluye hijos elegibles y discapacidad propia acreditada. No incluye ascendientes, dependencia, discapacidad de familiares, adopciones, cambios familiares durante el año, retribución flexible ni pensiones. Trabajo y residencia deben corresponder al mismo territorio. Las propuestas de IRPF común no cambian las reglas forales.',
 
   residence: 'Residencia fiscal',
-  residenceOtherCity: 'Otra ciudad / solo territorio',
+  residenceOtherCity: 'Otra ciudad / sin especificar',
+  residenceCommunity: 'Comunidad autónoma de residencia fiscal',
+  residenceTerritory: 'Territorio histórico',
+  residenceCity: 'Ciudad (opcional)',
   residenceForal: 'Régimen foral',
   residenceCommon: 'Régimen común',
   residenceSources: 'Fuentes oficiales',
@@ -39,7 +42,7 @@ export default {
   locationBrackets: 'Tramos anuales de la residencia · 2026',
 
   cityPresetHelp:
-    'Elige tu ciudad o directamente tu comunidad o territorio. Ambas opciones establecen la misma residencia fiscal; tu salario se conserva.',
+    'Elige la comunidad autónoma y, en País Vasco, el territorio histórico. La ciudad es opcional y no cambia los tramos de ese territorio. Tu salario se conserva.',
 
   f_childRateReduction: 'Rebaja estatal por hijo (puntos porcentuales)',
   appTitle: 'Simulador de salario neto',

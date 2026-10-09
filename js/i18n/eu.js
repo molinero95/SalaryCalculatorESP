@@ -18,7 +18,10 @@ export default {
     'Foru-eredu mugatua: kontratu mugagabea, 65 urtetik behera, 3. familia-egoera; seme-alaba hautagarriak eta norberaren desgaitasun egiaztatua barne. Aurrekoak, mendekotasuna, senideen desgaitasuna, adopzioak, urteko familia-aldaketak, ordainsari malgua eta pentsio-ekarpenak kanpo. Lana eta egoitza lurralde berean. Erregimen erkideko proposamenek ez dituzte foru-arauak aldatzen.',
 
   residence: 'Zerga-egoitza',
-  residenceOtherCity: 'Beste hiria / lurraldea soilik',
+  residenceOtherCity: 'Beste hiria / zehaztu gabe',
+  residenceCommunity: 'Zerga-egoitzaren autonomia erkidegoa',
+  residenceTerritory: 'Lurralde historikoa',
+  residenceCity: 'Hiria (aukerakoa)',
   residenceForal: 'Foru-erregimena',
   residenceCommon: 'Erregimen erkidea',
   residenceSources: 'Iturri ofizialak',
@@ -39,7 +42,7 @@ export default {
   locationBrackets: 'Egoitzaren urteko tarteak · 2026',
 
   cityPresetHelp:
-    'Hautatu hiria edo zuzenean erkidegoa edo lurraldea. Bi aukerek zerga-egoitza bera ezartzen dute; soldata mantentzen da.',
+    'Aukeratu autonomia erkidegoa eta, Euskadin, lurralde historikoa. Hiria aukerakoa da eta ez ditu lurraldeko zerga-tarteak aldatzen. Zure soldata mantentzen da.',
 
   f_childRateReduction: 'Estatuko tasaren murrizketa seme-alaba bakoitzeko (ehuneko puntuak)',
   appTitle: 'Soldata garbiaren simulagailua',

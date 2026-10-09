@@ -501,7 +501,7 @@ languageSelect.addEventListener('change', ({ target }) => {
 });
 
 function renderRegionOptions() {
-  renderResidenceOptions($('#residence'), state.input);
+  renderResidenceOptions($('#details-form'), state.input);
 }
 
 function renderLocationBrackets() {
