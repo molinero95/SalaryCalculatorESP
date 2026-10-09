@@ -12,6 +12,7 @@ Spanish payroll calculator and tax policy simulator. Work out your take-home pay
 - **Side-by-side comparison** between the current rules and a simulation, with a line-by-line breakdown and differences.
 - **Editable brackets**: add, remove or change brackets; apply regional templates or index every threshold at once.
 - **Every parameter is configurable**: personal and family allowances, employment income reduction, minimum wage tax credit, contribution bases, employer rates…
+- **Flexible compensation**: meal card, transport, health insurance, childcare and training, with their exempt limits.
 - **Chart by salary level** to see who gains or loses under a proposal.
 - **Saved scenarios**, share links and JSON import/export.
 - **Five languages**: Spanish, Catalan, Basque, Galician and English.
@@ -22,9 +23,11 @@ Spanish payroll calculator and tax policy simulator. Work out your take-home pay
 1. **Social security**: contribution base = gross annual salary / 12, clamped between the minimum and maximum bases. Above the maximum base, the solidarity contribution applies in bands.
 2. **Net earnings** = gross − contributions.
 3. **Withholding base** = net earnings − other deductible expenses (€2,000, plus disability-related ones) − employment income reduction (art. 20 LIRPF).
-4. **Tax amount** = scale(base) − scale(personal and family allowance) − minimum wage credit, capped at 43 % of the excess over the withholding-free minimum.
+4. **Tax amount** = scale(base) − scale(personal and family allowance) , capped at 43 % of the excess over the withholding-free minimum.
 5. **Withholding rate** = tax amount / gross, rounded to two decimals (at least 2 % on temporary contracts).
 6. With **14 payments**, social security is spread over 12 months and the two extra payments only carry income tax.
+7. The **low-earner credit** is not applied in payroll: it is shown as an estimated refund in the annual return.
+8. **Flexible compensation** is exempt from income tax up to its limits but still pays social security.
 
 ### Default values (2026)
 
@@ -35,7 +38,9 @@ Spanish payroll calculator and tax policy simulator. Work out your take-home pay
 | Maximum / minimum base | €5,101.20 / €1,424.50 per month |
 | Personal allowance | €5,550 |
 | Maximum employment income reduction | €7,302 |
-| Minimum wage tax credit | €340 |
+| Low-earner credit (annual return) | €590.89 up to €17,094, zero at €20,048.45 |
+| Withholding-free minimum | €15,876 – €19,262 depending on family situation |
+| Tax-exempt flexible pay | Meals €11/day · transport €1,500/year · health insurance €500/person |
 
 > [!IMPORTANT]
 > This tool gives estimates only. Some parameters (minimum wage credit, withholding-free minimum, regional scales) may change during the year; all of them can be adjusted in the interface or in [`js/defaults.js`](js/defaults.js). It does not cover the foral territories (Basque Country and Navarre).
@@ -44,6 +49,8 @@ Spanish payroll calculator and tax policy simulator. Work out your take-home pay
 
 - [Law 35/2006 on IRPF](https://www.boe.es/buscar/act.php?id=BOE-A-2006-20764) — arts. 19, 20, 57-61, 63, 80 bis and 101.
 - [IRPF Regulation (RD 439/2007)](https://www.boe.es/buscar/act.php?id=BOE-A-2007-6820) — arts. 80-86 (withholding procedure).
+- [Royal Decree-law 5/2026](https://www.boe.es/buscar/doc.php?id=BOE-A-2026-3810) — low-earner credit (DA 61ª LIRPF).
+- Orden PJC/297/2026 — 2026 contribution bases and rates.
 - [Spanish Tax Agency — withholding on employment income](https://sede.agenciatributaria.gob.es/).
 - [Social Security — contribution bases and rates](https://www.seg-social.es/wps/portal/wss/internet/Trabajadores/CotizacionRecaudacionTrabajadores/36537).
 

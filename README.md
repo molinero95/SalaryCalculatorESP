@@ -12,6 +12,7 @@ Calculadora de nómina para España y simulador de propuestas fiscales. Calcula 
 - **Comparación lado a lado** entre el escenario actual y una simulación, con desglose línea a línea y diferencias.
 - **Tramos editables**: añade, quita o modifica tramos; aplica plantillas autonómicas o deflacta todos los límites de una vez.
 - **Todos los parámetros personalizables**: mínimos personales y familiares, reducción por rendimientos del trabajo, deducción SMI, bases de cotización, tipos de la empresa…
+- **Retribución flexible**: tarjeta restaurante, transporte, seguro médico, guardería y formación, con sus límites exentos.
 - **Gráfico por nivel de salario** para ver a quién beneficia o perjudica una propuesta.
 - **Escenarios guardados**, enlaces para compartir e importación/exportación en JSON.
 - **Cinco idiomas**: castellano, català, euskara, galego e English.
@@ -22,9 +23,11 @@ Calculadora de nómina para España y simulador de propuestas fiscales. Calcula 
 1. **Seguridad Social**: base de cotización = bruto anual / 12, acotada entre la base mínima y la máxima. Por encima de la base máxima se aplica la cotización de solidaridad por tramos.
 2. **Rendimiento neto** = bruto − cotizaciones.
 3. **Base de retención** = rendimiento neto − otros gastos deducibles (2.000 €, más los de discapacidad) − reducción por rendimientos del trabajo (art. 20 LIRPF).
-4. **Cuota** = escala(base) − escala(mínimo personal y familiar) − deducción SMI, con el límite del 43 % sobre el exceso del mínimo exento de retención.
+4. **Cuota** = escala(base) − escala(mínimo personal y familiar) , con el límite del 43 % sobre el exceso del mínimo exento de retención.
 5. **Tipo de retención** = cuota / bruto, redondeado a dos decimales (mínimo 2 % en contratos temporales).
 6. Con **14 pagas**, la Seguridad Social se reparte en 12 meses y las pagas extra solo soportan IRPF.
+7. La **deducción SMI** no se aplica en la nómina: se muestra como devolución estimada en la renta.
+8. La **retribución flexible** está exenta de IRPF hasta sus límites, pero cotiza a la Seguridad Social.
 
 ### Valores por defecto (2026)
 
@@ -35,7 +38,9 @@ Calculadora de nómina para España y simulador de propuestas fiscales. Calcula 
 | Base máxima / mínima | 5.101,20 € / 1.424,50 € al mes |
 | Mínimo personal | 5.550 € |
 | Reducción máxima rendimientos del trabajo | 7.302 € |
-| Deducción SMI | 340 € |
+| Deducción SMI (en la renta) | 590,89 € hasta 17.094 €, se anula en 20.048,45 € |
+| Mínimo exento de retención | 15.876 € – 19.262 € según situación familiar |
+| Retribución flexible exenta | Restaurante 11 €/día · transporte 1.500 €/año · seguro médico 500 €/persona |
 
 > [!IMPORTANT]
 > Es una herramienta orientativa. Algunos parámetros (deducción SMI, mínimo exento de retención, escalas autonómicas) pueden cambiar durante el año; todos se pueden ajustar desde la interfaz o en [`js/defaults.js`](js/defaults.js). No aplica a los territorios forales (País Vasco y Navarra).
@@ -44,6 +49,8 @@ Calculadora de nómina para España y simulador de propuestas fiscales. Calcula 
 
 - [Ley 35/2006 del IRPF](https://www.boe.es/buscar/act.php?id=BOE-A-2006-20764) — arts. 19, 20, 57-61, 63, 80 bis y 101.
 - [Reglamento del IRPF (RD 439/2007)](https://www.boe.es/buscar/act.php?id=BOE-A-2007-6820) — arts. 80-86 (procedimiento de retención).
+- [Real Decreto-ley 5/2026](https://www.boe.es/buscar/doc.php?id=BOE-A-2026-3810) — deducción para rentas bajas (DA 61ª LIRPF).
+- Orden PJC/297/2026 — bases y tipos de cotización para 2026.
 - [Agencia Tributaria — retenciones sobre rendimientos del trabajo](https://sede.agenciatributaria.gob.es/).
 - [Seguridad Social — bases y tipos de cotización](https://www.seg-social.es/wps/portal/wss/internet/Trabajadores/CotizacionRecaudacionTrabajadores/36537).
 

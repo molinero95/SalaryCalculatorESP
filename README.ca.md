@@ -12,6 +12,7 @@ Calculadora de nòmina per a Espanya i simulador de propostes fiscals. Calcula e
 - **Comparació costat a costat** entre l'escenari actual i una simulació, amb desglossament línia a línia i diferències.
 - **Trams editables**: afegeix, treu o modifica trams; aplica plantilles autonòmiques o deflacta tots els límits alhora.
 - **Tots els paràmetres personalitzables**: mínims personals i familiars, reducció per rendiments del treball, deducció SMI, bases de cotització, tipus de l'empresa…
+- **Retribució flexible**: targeta restaurant, transport, assegurança mèdica, llar d'infants i formació, amb els seus límits exempts.
 - **Gràfic per nivell de salari** per veure a qui beneficia o perjudica una proposta.
 - **Escenaris desats**, enllaços per compartir i importació/exportació en JSON.
 - **Cinc idiomes**: castellano, català, euskara, galego i English.
@@ -22,9 +23,11 @@ Calculadora de nòmina per a Espanya i simulador de propostes fiscals. Calcula e
 1. **Seguretat Social**: base de cotització = brut anual / 12, limitada entre la base mínima i la màxima. Per sobre de la base màxima s'aplica la cotització de solidaritat per trams.
 2. **Rendiment net** = brut − cotitzacions.
 3. **Base de retenció** = rendiment net − altres despeses deduïbles (2.000 €, més les de discapacitat) − reducció per rendiments del treball (art. 20 LIRPF).
-4. **Quota** = escala(base) − escala(mínim personal i familiar) − deducció SMI, amb el límit del 43 % sobre l'excés del mínim exempt de retenció.
+4. **Quota** = escala(base) − escala(mínim personal i familiar) , amb el límit del 43 % sobre l'excés del mínim exempt de retenció.
 5. **Tipus de retenció** = quota / brut, arrodonit a dos decimals (mínim 2 % en contractes temporals).
 6. Amb **14 pagues**, la Seguretat Social es reparteix en 12 mesos i les pagues extres només suporten IRPF.
+7. La **deducció SMI** no s'aplica a la nòmina: es mostra com a devolució estimada a la renda.
+8. La **retribució flexible** està exempta d'IRPF fins als seus límits, però cotitza a la Seguretat Social.
 
 ### Valors per defecte (2026)
 
@@ -35,7 +38,9 @@ Calculadora de nòmina per a Espanya i simulador de propostes fiscals. Calcula e
 | Base màxima / mínima | 5.101,20 € / 1.424,50 € al mes |
 | Mínim personal | 5.550 € |
 | Reducció màxima per rendiments del treball | 7.302 € |
-| Deducció SMI | 340 € |
+| Deducció SMI (a la renda) | 590,89 € fins a 17.094 €, s'anul·la a 20.048,45 € |
+| Mínim exempt de retenció | 15.876 € – 19.262 € segons la situació familiar |
+| Retribució flexible exempta | Restaurant 11 €/dia · transport 1.500 €/any · assegurança mèdica 500 €/persona |
 
 > [!IMPORTANT]
 > És una eina orientativa. Alguns paràmetres (deducció SMI, mínim exempt de retenció, escales autonòmiques) poden canviar durant l'any; tots es poden ajustar des de la interfície o a [`js/defaults.js`](js/defaults.js). No s'aplica als territoris forals (País Basc i Navarra).
@@ -44,6 +49,8 @@ Calculadora de nòmina per a Espanya i simulador de propostes fiscals. Calcula e
 
 - [Llei 35/2006 de l'IRPF](https://www.boe.es/buscar/act.php?id=BOE-A-2006-20764) — arts. 19, 20, 57-61, 63, 80 bis i 101.
 - [Reglament de l'IRPF (RD 439/2007)](https://www.boe.es/buscar/act.php?id=BOE-A-2007-6820) — arts. 80-86 (procediment de retenció).
+- [Reial decret llei 5/2026](https://www.boe.es/buscar/doc.php?id=BOE-A-2026-3810) — deducció per a rendes baixes (DA 61a LIRPF).
+- Ordre PJC/297/2026 — bases i tipus de cotització per al 2026.
 - [Agència Tributària — retencions sobre rendiments del treball](https://sede.agenciatributaria.gob.es/).
 - [Seguretat Social — bases i tipus de cotització](https://www.seg-social.es/wps/portal/wss/internet/Trabajadores/CotizacionRecaudacionTrabajadores/36537).
 
