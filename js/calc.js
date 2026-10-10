@@ -6,6 +6,7 @@ import { GENERAL_REGIONAL_SCALE, combineScales } from './defaults.js';
 import { applyScale, withholding, annualTax, employmentIncome } from './tax.js';
 import { isForal, unsupportedFiscalProfile, unsupportedFiscalScenario } from './domain/fiscal-profile.js';
 import { foralEmploymentIncome, foralWithholding, foralAnnualTax } from './foral-tax.js';
+import { assessHousing } from './domain/housing.js';
 export { applyScale } from './tax.js';
 
 const round2 = (x) => Math.round(x * 100) / 100;
@@ -194,6 +195,8 @@ export function computePayroll(input, scenario, grossAnnual = grossAnnualOf(inpu
     employerCost: gross + employer.total + pension.employer,
     flexible: { ...flexible, taxSaved: taxWithoutFlexible - incomeTax.withheld },
     pension: { ...pension, taxSaved: pensionTaxSaved },
+    // Housing rules considered for this profile; no amount above includes them yet.
+    housing: assessHousing(input),
     incomeTax: {
       ...incomeTax,
       foral,
