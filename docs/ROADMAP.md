@@ -16,6 +16,7 @@
 
 ## Implemented foundation
 
+- Three product views: salary calculator, editable simulations and documented political proposals, sharing personal inputs; default salary entry and simulation entry for shared links.
 - Multiple simulation tabs, comparison cards/charts and persistent selection.
 - Initial DDD separation: scenario/input boundaries, session use cases, persistence scheduling and payroll form adapter; see [architecture.md](architecture.md).
 - Separate annual state/regional quotas and breakdown labels; reviewed proposal withholding scales and explicit payroll/annual card metrics.

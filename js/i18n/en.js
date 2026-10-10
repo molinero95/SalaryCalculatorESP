@@ -1,6 +1,18 @@
 // English translations. `f_*` keys label the settings fields.
 
 export default {
+  navigationLabel: 'Calculator sections',
+  navSalary: 'Your salary',
+  navSimulation: 'Simulate changes',
+  navProposals: 'Political proposals',
+  viewSalaryDescription:
+    'Calculate your payroll and annual estimate using your details. Available tax details and deductions depend on your residence.',
+  viewSimulationDescription:
+    'Edit the rules and compare simulations with your reference. Your personal details stay the same when switching sections.',
+  viewProposalsDescription:
+    'Explore documented proposals. Selecting one opens its simulation using your current details.',
+  proposalsIntro:
+    'Proposals are not current law. Sources, dates and calculation limitations are shown; measures without sufficient data are information only.',
   foralBenefitsBasqueHelp:
     'Basque Country: ordinary medical insurance is taxable. Ordinary pensions/EPSV: €5,000 individual, €8,000 employment, €10,000 combined; active employee, no withdrawals or preferred EPSV credits. Meal, transport, childcare and training must meet legal eligibility.',
   foralBenefitsNavarraHelp:
@@ -220,8 +232,8 @@ export default {
   f_solidarity3: 'Solidarity: band 3',
   howTitle: 'How it works',
   how1: 'Enter your gross salary and personal situation.',
-  how2: 'In “Proposal to simulate”, change brackets, allowances or contributions to reflect the measure you want to test.',
-  how3: 'Instantly compare your current payslip with the simulated one, and save or share the proposal with a link.',
+  how2: 'In “Simulate changes”, edit brackets, allowances or contributions to evaluate a measure.',
+  how3: 'Compare your payslip with the simulation and share the proposal with a link.',
   simTitle: 'Proposal to simulate',
   simDesc:
     'Define the change you want to test here. It starts from the current rules; any value you modify is highlighted.',

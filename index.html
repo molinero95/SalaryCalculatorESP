@@ -38,7 +38,7 @@
     <!-- Privacy-friendly, cookie-free visit counter -->
     <script data-goatcounter="https://molinero95.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
   </head>
-  <body>
+  <body data-view="salary">
     <header class="site-header">
       <div class="container site-header-inner">
         <div>
@@ -50,6 +50,38 @@
     </header>
 
     <main class="container">
+      <nav id="product-navigation" class="product-navigation no-print" role="tablist" data-i18n-aria="navigationLabel">
+        <button
+          type="button"
+          id="tab-salary"
+          role="tab"
+          data-view="salary"
+          aria-selected="true"
+          aria-controls="results-section"
+          data-i18n="navSalary"
+        ></button>
+        <button
+          type="button"
+          id="tab-simulation"
+          role="tab"
+          data-view="simulation"
+          aria-selected="false"
+          aria-controls="simulation-panel"
+          tabindex="-1"
+          data-i18n="navSimulation"
+        ></button>
+        <button
+          type="button"
+          id="tab-proposals"
+          role="tab"
+          data-view="proposals"
+          aria-selected="false"
+          aria-controls="proposals-panel"
+          tabindex="-1"
+          data-i18n="navProposals"
+        ></button>
+      </nav>
+      <p class="help view-description" id="view-description"></p>
       <section class="how-it-works" aria-labelledby="how-title">
         <h2 id="how-title" class="sr-only" data-i18n="howTitle"></h2>
         <ol>
@@ -393,20 +425,9 @@
         </form>
       </section>
 
-      <details class="card card-simulation collapsible" open>
-        <summary>
-          <h2 id="simulation-title" class="section-title">
-            <span class="chip chip-simulation" data-i18n="simulation"></span><span data-i18n="simTitle"></span>
-          </h2>
-        </summary>
-        <p class="help" data-i18n="simDesc"></p>
-        <div class="sim-tabs" role="group" data-i18n-aria="compareTitle" id="sim-tabs"></div>
-
-        <div class="field field-name">
-          <label for="scenario-name" data-i18n="scenarioName"></label>
-          <input id="scenario-name" type="text" maxlength="60" />
-        </div>
-
+      <section class="card" id="proposals-panel" role="tabpanel" aria-labelledby="tab-proposals" hidden>
+        <h2 data-i18n="navProposals"></h2>
+        <p class="help" data-i18n="proposalsIntro"></p>
         <div class="field field-name">
           <label for="proposal-select" data-i18n="loadProposal"></label>
           <select id="proposal-select"></select>
@@ -417,21 +438,40 @@
           <ul id="other-proposals"></ul>
           <p class="help" data-i18n="proposalsDisclaimer"></p>
         </details>
+      </section>
 
-        <div class="toolbar">
-          <button type="button" class="button secondary" id="copy-current" data-i18n="copyCurrent"></button>
-          <button type="button" class="button" id="share" data-i18n="share"></button>
-          <button type="button" class="button secondary" id="share-whatsapp">WhatsApp</button>
-          <button type="button" class="button secondary" id="share-x">X</button>
-          <button type="button" class="button secondary" id="share-native" data-i18n="shareNative" hidden></button>
-        </div>
+      <section id="simulation-panel" role="tabpanel" aria-labelledby="tab-simulation" hidden>
+        <details class="card card-simulation collapsible" open>
+          <summary>
+            <h2 id="simulation-title" class="section-title">
+              <span class="chip chip-simulation" data-i18n="simulation"></span><span data-i18n="simTitle"></span>
+            </h2>
+          </summary>
+          <p class="help" data-i18n="simDesc"></p>
+          <div class="sim-tabs" role="group" data-i18n-aria="compareTitle" id="sim-tabs"></div>
 
-        <p class="help share-note" data-i18n="shareNote"></p>
+          <div class="field field-name">
+            <label for="scenario-name" data-i18n="scenarioName"></label>
+            <input id="scenario-name" type="text" maxlength="60" />
+          </div>
 
-        <div id="settings-simulation" class="settings"></div>
-      </details>
+          <div class="proposal-info" id="simulation-proposal-info" hidden></div>
 
-      <details class="card card-current collapsible">
+          <div class="toolbar">
+            <button type="button" class="button secondary" id="copy-current" data-i18n="copyCurrent"></button>
+            <button type="button" class="button" id="share" data-i18n="share"></button>
+            <button type="button" class="button secondary" id="share-whatsapp">WhatsApp</button>
+            <button type="button" class="button secondary" id="share-x">X</button>
+            <button type="button" class="button secondary" id="share-native" data-i18n="shareNative" hidden></button>
+          </div>
+
+          <p class="help share-note" data-i18n="shareNote"></p>
+
+          <div id="settings-simulation" class="settings"></div>
+        </details>
+      </section>
+
+      <details class="card card-current collapsible" hidden>
         <summary>
           <h2 id="current-title" class="section-title">
             <span class="chip chip-current" data-i18n="current"></span><span data-i18n="currentTitle"></span>
@@ -444,7 +484,7 @@
         <div id="settings-current" class="settings"></div>
       </details>
 
-      <section aria-live="polite">
+      <section id="results-section" role="tabpanel" aria-labelledby="tab-salary" aria-live="polite">
         <div class="results" id="results"></div>
         <p class="difference" id="difference"></p>
       </section>
