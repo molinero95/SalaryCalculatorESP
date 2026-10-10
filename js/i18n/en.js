@@ -335,7 +335,7 @@ export default {
   rowRegionalTax: 'Regional gross tax quota',
   rowAnnualTax: 'Estimated annual tax (return)',
   helpAnnualTax:
-    'What you would pay in the annual return with your region’s scale. The difference with what was withheld is refunded (+) or owed (−).',
+    'What you would pay in the annual return with your region’s scale. The difference with what was withheld is refunded (+) or owed (−). Under the common regime it excludes regional deductions (housing, children, studies…) and state housing deductions: if you qualify for any, your actual result may be better.',
   loadProposal: 'Load a party proposal',
   proposalSource: 'Source',
   payrollAnnualScope:

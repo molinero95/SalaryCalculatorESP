@@ -161,9 +161,6 @@ export const DEFAULT_INPUT = {
   dependents65: 0,
   dependents75: 0,
   disability: 0, // 0 | 33 | 65
-  // Housing (docs/housing-deductions-2026.md). Recorded but not yet used in any amount.
-  housingTenure: 'notProvided', // 'notProvided' | 'tenant' | 'owner' | 'other'
-  housingRentPaid: 0, // annual rent paid for the habitual dwelling, in euros
   // Flexible compensation and pension plans, stored as annual amounts in euros.
   // `*Period` only controls whether the form shows them per year or per month.
   flexPeriod: 'annual', // 'annual' | 'monthly'

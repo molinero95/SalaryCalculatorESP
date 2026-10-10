@@ -337,7 +337,7 @@ export default {
   rowRegionalTax: 'Quota íntegra autonòmica',
   rowAnnualTax: 'Quota anual estimada (renda)',
   helpAnnualTax:
-    "El que pagaries a la declaració amb l'escala de la teva comunitat. La diferència amb el que s'ha retingut surt a tornar (+) o a pagar (−).",
+    "El que pagaries a la declaració amb l'escala de la teva comunitat. La diferència amb el que s'ha retingut surt a tornar (+) o a pagar (−). En règim comú no inclou deduccions autonòmiques (habitatge, fills, estudis…) ni deduccions estatals per habitatge: si hi tens dret, el resultat real pot ser millor.",
   loadProposal: 'Carregar proposta de partit',
   proposalSource: 'Font',
   payrollAnnualScope:

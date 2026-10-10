@@ -9,7 +9,7 @@ Priorities agreed on 10 October 2026. This is the canonical list of pending work
 - Start each PR from current `main`. Keep one independently reviewable increment per PR; link its backlog ID and update status when work starts or merges. Move completed items to the completion log with the PR link.
 - Sources changing or downloading successfully do not approve fiscal parameters. Verify the legal text, applicable year, effective dates and eligibility before changing calculations or `verifiedAt`.
 - Preserve five languages, offline use, personal-data-free shared links, and the distinction between payroll withholding and annual assessment. Use the checks required by [CONTRIBUTING.md](../CONTRIBUTING.md).
-- Claude owns housing implementation. Codex owns the proposed freshness and monitoring work; this allocation is not a claim that those tasks are running. Coordinate shared input, translation and app-shell files before editing them.
+- Codex owns the proposed freshness and monitoring work; this allocation is not a claim that those tasks are running. Coordinate shared input, translation and app-shell files before editing them.
 
 ## Prioritized queue
 
@@ -21,13 +21,12 @@ Priorities agreed on 10 October 2026. This is the canonical list of pending work
 | TEST-01     | P1       | Cover fiscal-year rollover and stale data behaviour                     | Ready       | Codex      | FRESH-03, FRESH-04 for new behaviour               |
 | TEST-02     | P1       | Verify an installed app upgrades from an older offline cache            | Ready       | Codex      | —                                                  |
 | DATA-01     | P1       | Trace each parameter group to legal articles and fixtures               | Ready       | Codex      | —                                                  |
-| HOUSE-01    | P1       | Implement housing in separately reviewed phases                         | Assigned    | Claude     | PR #22 research; primary-source checks per rule    |
 | POLICY-01   | P1       | Discover additional proposals and verify missing eligibility            | Research    | Unassigned | Primary sources and supported inputs               |
 | PAYERS-01   | P1       | Model several employment payers and mid-year job changes                | Research    | Unassigned | Verified annual aggregation and withholding inputs |
 | WORK-01     | P1       | Make salaried-worker scope explicit and support partial-year employment | Research    | Unassigned | PAYERS-01 for mixed employment histories           |
 | SELF-01     | P1       | Add a self-employed income and contribution estimator                   | Research    | Unassigned | Primary AEAT/Seguridad Social and foral sources    |
 | MIXED-01    | P1       | Combine salaried employment and self-employment (pluriactivity)         | Blocked     | Unassigned | PAYERS-01, WORK-01, SELF-01                        |
-| REFACTOR-01 | P2       | Extract proposal/comparison rendering and sharing adapters              | Ready       | Codex      | Coordinate with housing UI work                    |
+| REFACTOR-01 | P2       | Extract proposal/comparison rendering and sharing adapters              | Ready       | Codex      | Coordinate shared presentation files               |
 | TEST-03     | P2       | Extend portable visual regression coverage                              | Research    | Unassigned | Reviewed rendering environment                     |
 | AUTO-01     | P2       | Produce reviewed fiscal-update drafts from source changes               | Blocked     | Unassigned | FRESH-02, DATA-01; extraction design               |
 | SCOPE-01    | P2       | Extend foral assessment and unsupported profiles                        | Research    | Unassigned | Official fixtures and eligibility inputs           |
@@ -64,11 +63,7 @@ Start from an older app-shell cache and saved session, deploy the new version, a
 
 ### DATA-01 — parameter evidence
 
-For each supported group, record legal article/table, fiscal period, effective date where applicable, supported eligibility, verification evidence and associated independent fixtures. Distinguish legal text from official summaries and historical manuals. Fail validation for missing group coverage or incompatible metadata; never reset verification dates merely to pass a check. Housing adds provenance for each new rule as it is implemented.
-
-### HOUSE-01 — Claude handoff
-
-Research and proposed phases are in [PR #22](https://github.com/molinero95/SalaryCalculatorESP/pull/22). The research document is not yet merged at backlog creation. Implement the full plan in one PR per phase: input/provenance guards, state transitional rules, regional tenant rules, municipality-dependent rules, buyer rules and landlord scope. Verify original regional legal texts before implementing regional rules. Leave unclear temporal applicability and unstable measures pending. Family-unit income conditions must be collected or explicitly guarded; individual filing alone does not satisfy those conditions. Each phase includes independent threshold fixtures, applicable translations, offline checks and updated scope documentation. Codex reviews each delivery.
+For each supported group, record legal article/table, fiscal period, effective date where applicable, supported eligibility, verification evidence and associated independent fixtures. Distinguish legal text from official summaries and historical manuals. Fail validation for missing group coverage or incompatible metadata; never reset verification dates merely to pass a check.
 
 ### POLICY-01 — additional proposals
 
@@ -80,7 +75,7 @@ Collect actual gross employment income, employee contributions, relevant benefit
 
 ### WORK-01 — salaried employment scope
 
-The existing calculator already supports the basic salaried-worker profile. Make that scope visible and add explicit employment periods, contract and contribution assumptions as needed for partial-year or changed-job calculations. Preserve the current full-year single-payer results. Distinguish actual annual amounts from annualized offer simulations, and identify unmodelled contribution groups or special employment regimes. Test partial years, irregular payment schedules and a return to the existing default profile. Coordinate input changes with PAYERS-01 and Claude's housing work.
+The existing calculator already supports the basic salaried-worker profile. Make that scope visible and add explicit employment periods, contract and contribution assumptions as needed for partial-year or changed-job calculations. Preserve the current full-year single-payer results. Distinguish actual annual amounts from annualized offer simulations, and identify unmodelled contribution groups or special employment regimes. Test partial years, irregular payment schedules and a return to the existing default profile. Coordinate input changes with PAYERS-01.
 
 ### SELF-01 — self-employed activity
 
@@ -112,7 +107,7 @@ Define user stories and data requirements before implementation. Offer compariso
 
 ## Recommended execution order
 
-Codex: specify discovery coverage (FRESH-01), use the persistent review ledger (FRESH-02), then implement visible status and review deadlines (FRESH-03/FRESH-04). Add rollover and upgrade regressions with those changes. Claude: housing phases independently, coordinating shared files. Employment expansion follows with PAYERS-01 and WORK-01, then SELF-01 and MIXED-01 after source and input specification. Refactoring follows these reliability improvements unless it is necessary for a specific change.
+Codex: specify discovery coverage (FRESH-01), use the persistent review ledger (FRESH-02), then implement visible status and review deadlines (FRESH-03/FRESH-04). Add rollover and upgrade regressions with those changes. Employment expansion follows with PAYERS-01 and WORK-01, then SELF-01 and MIXED-01 after source and input specification. Refactoring follows these reliability improvements unless it is necessary for a specific change.
 
 ## Completion log
 

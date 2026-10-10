@@ -337,7 +337,7 @@ export default {
   rowRegionalTax: 'Autonomia-erkidegoko kuota osoa',
   rowAnnualTax: 'Urteko kuota (errenta, zenbatespena)',
   helpAnnualTax:
-    'Zure erkidegoaren eskalarekin aitorpenean ordainduko zenukeena. Atxikitakoarekiko aldea itzuli (+) edo ordaindu (−) egin beharko da.',
+    'Zure erkidegoaren eskalarekin aitorpenean ordainduko zenukeena. Atxikitakoarekiko aldea itzuli (+) edo ordaindu (−) egin beharko da. Araubide erkidean ez ditu sartzen kenkari autonomikoak (etxebizitza, seme-alabak, ikasketak…) ezta etxebizitzagatiko estatuko kenkariak ere: horietakoren baterako eskubidea baduzu, benetako emaitza hobea izan daiteke.',
   loadProposal: 'Alderdi baten proposamena kargatu',
   proposalSource: 'Iturria',
   payrollAnnualScope:

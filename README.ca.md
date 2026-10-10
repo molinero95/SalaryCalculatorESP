@@ -26,7 +26,7 @@ La retenció és un pagament a compte. La renda estimada separa quotes i mínims
 
 País Basc i Navarra tenen regles pròpies per als perfils suportats. Les propostes o edicions fiscals no modelades mostren un avís, no un resultat simulat idèntic. El perfil salarial principal assumeix un pagador i un any complet. No hi ha models complets de diversos pagadors, autònoms, pluriactivitat o declaració conjunta; determinades rendes addicionals forals no equivalen a un model complet d’autònom. [Residència](docs/locations.md) · [Abast foral](docs/foral-payroll.md) · [Validació](docs/fiscal-validation.md).
 
-## Propostes i habitatge
+## Propostes
 
 | Plantilla calculable | Abast parcial                                                              |
 | -------------------- | -------------------------------------------------------------------------- |
@@ -36,7 +36,7 @@ País Basc i Navarra tenen regles pròpies per als perfils suportats. Les propos
 
 PP, PSOE, Podemos 2025 i Ciudadanos tenen entrades informatives quan falten dades verificades. No són models complets ni un catàleg exhaustiu. Les simulacions antigues no es reescriuen: torna a aplicar la proposta per adoptar les regles revisades. [Fonts i abast](docs/proposal-scope.md) · [Catàleg](data/proposals.json).
 
-**Habitatge:** hi ha dades inicials i explicacions de regles omeses; encara no es calculen les noves deduccions del pla. [Pla](https://github.com/molinero95/SalaryCalculatorESP/pull/22) · [Backlog](docs/BACKLOG.md).
+**Deduccions:** en règim comú l’estimació de la renda no inclou deduccions autonòmiques ni per habitatge; el resultat real pot ser millor. [Backlog](docs/BACKLOG.md).
 
 ## Actualització i alertes
 
@@ -67,7 +67,7 @@ CI comprova unitats, catàleg, navegador/accessibilitat i captures seleccionades
 El [backlog complet](docs/BACKLOG.md) registra prioritats, estat, responsables, dependències i criteris d’acceptació. Les alertes persistents estan implementades; resta pendent:
 
 - **P0 — actualitat fiscal:** descobrir publicacions oficials noves, mostrar exercici/verificació i reforçar terminis i salut del monitor.
-- **P1 — abast i proves:** habitatge per fases (Claude), canvi d’exercici, actualitzacions de memòria cau, traçabilitat i més propostes verificades.
+- **P1 — abast i proves:** canvi d’exercici, actualitzacions de memòria cau, traçabilitat i més propostes verificades.
 - **P1 — perfils laborals:** diversos pagadors, canvis d’empresa, treball assalariat parcial, autònoms i pluriactivitat.
 - **P2 — evolució:** refactor de presentació/enllaços, proves visuals, esborranys fiscals revisats, ampliacions forals, comparació d’ofertes i estimacions de permisos/baixes.
 
