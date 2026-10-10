@@ -16,7 +16,6 @@ Priorities agreed on 10 October 2026. This is the canonical list of pending work
 | ID          | Priority | Work                                                                    | Status   | Owner      | Depends on                                         |
 | ----------- | -------- | ----------------------------------------------------------------------- | -------- | ---------- | -------------------------------------------------- |
 | FRESH-01    | P0       | Discover new official fiscal publications                               | Research | Codex      | —                                                  |
-| FRESH-02    | P0       | Persist and track source-review alerts                                  | Ready    | Codex      | —                                                  |
 | FRESH-03    | P0       | Show fiscal year, verification and pending scope in results             | Ready    | Codex      | FRESH-02 for live alert status                     |
 | FRESH-04    | P0       | Apply source-specific review deadlines and monitor health checks        | Research | Codex      | —                                                  |
 | TEST-01     | P1       | Cover fiscal-year rollover and stale data behaviour                     | Ready    | Codex      | FRESH-03, FRESH-04 for new behaviour               |
@@ -111,8 +110,10 @@ Define user stories and data requirements before implementation. Offer compariso
 
 ## Recommended execution order
 
-Codex: specify discovery coverage (FRESH-01), implement persistent alerts (FRESH-02), then visible status and review deadlines (FRESH-03/FRESH-04). Add rollover and upgrade regressions with those changes. Claude: housing phases independently, coordinating shared files. Employment expansion follows with PAYERS-01 and WORK-01, then SELF-01 and MIXED-01 after source and input specification. Refactoring follows these reliability improvements unless it is necessary for a specific change.
+Codex: specify discovery coverage (FRESH-01), use the persistent review ledger (FRESH-02), then implement visible status and review deadlines (FRESH-03/FRESH-04). Add rollover and upgrade regressions with those changes. Claude: housing phases independently, coordinating shared files. Employment expansion follows with PAYERS-01 and WORK-01, then SELF-01 and MIXED-01 after source and input specification. Refactoring follows these reliability improvements unless it is necessary for a specific change.
 
 ## Completion log
 
-No items from this backlog have been completed yet. Previously merged work belongs to the implemented foundation in [ROADMAP.md](ROADMAP.md), not this pending queue.
+- **FRESH-02:** persistent review cases, deduplication, recovery tracking and evidence-backed workflow reviews are implemented in [PR #27](https://github.com/molinero95/SalaryCalculatorESP/pull/27). Reporting uses Actions summaries/artifacts and the `monitor-state` ledger; dedicated notification delivery remains separate work.
+
+Previously merged work belongs to the implemented foundation in [ROADMAP.md](ROADMAP.md), not this pending queue.

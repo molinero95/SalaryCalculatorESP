@@ -3,6 +3,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { cataloguePath, validateCatalogue } from './template-catalogue.js';
 import { fiscalSourcesPath, validateFiscalSources, staleGroups } from './fiscal-sources.js';
+import { emptyAlerts, reconcileAlerts, reviewAlert, openAlerts, alertSummary } from './source-alerts.js';
 
 const SUPPORTED_TYPES = /application\/pdf|text\/html|text\/plain|application\/(?:[\w.+-]+\+)?(?:xml|json)|text\/xml/i;
 
@@ -68,15 +69,20 @@ export async function checkSources(catalogue, baseline, fetcher = fetch, fiscalS
   validateCatalogue(catalogue);
   if (fiscalSources) validateFiscalSources(fiscalSources);
   const targets = [
-    ...catalogue.proposals.map((p) => ({ id: p.id, party: p.party, sourceType: p.sourceType, url: p.url })),
+    ...catalogue.proposals.map((p) => ({ id: p.id, party: p.party, sourceType: p.sourceType, url: p.url, covers: [] })),
     ...(fiscalSources?.sources ?? [])
       .filter((s) => s.monitorUrl)
-      .map((s) => ({ id: `fiscal:${s.id}`, sourceType: 'enacted', url: s.monitorUrl })),
+      .map((s) => ({ id: `fiscal:${s.id}`, sourceType: 'enacted', url: s.monitorUrl, covers: s.covers })),
   ];
   const results = [];
   for (const target of targets) {
     const source = await inspectSource(target.url, fetcher);
-    results.push({ ...target, ...source, status: classifySource(baseline[target.id], source) });
+    results.push({
+      ...target,
+      ...source,
+      previousSha256: baseline[target.id]?.sha256,
+      status: classifySource(baseline[target.id], source),
+    });
   }
   return { checkedAt: new Date().toISOString(), results };
 }
@@ -90,12 +96,45 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   } catch (error) {
     if (error.code !== 'ENOENT') throw error;
   }
+  let alerts = emptyAlerts();
+  try {
+    alerts = JSON.parse(await readFile('.source-monitor/alerts.json', 'utf8'));
+  } catch (error) {
+    if (error.code !== 'ENOENT') throw error;
+  }
   const report = await checkSources(catalogue, baseline, fetch, fiscalSources);
   report.staleGroups = staleGroups(fiscalSources, report.checkedAt.slice(0, 10));
+  alerts = reconcileAlerts(alerts, report);
   await mkdir('.source-monitor', { recursive: true });
+  // Persist new findings even if a requested review action is invalid.
+  await writeFile('.source-monitor/alerts.json', JSON.stringify(alerts, null, 2));
+  if (process.env.SOURCE_ALERT_ID) {
+    try {
+      alerts = reviewAlert(
+        alerts,
+        {
+          id: process.env.SOURCE_ALERT_ID,
+          signature: process.env.SOURCE_ALERT_SIGNATURE,
+          status: process.env.SOURCE_ALERT_STATUS,
+          evidence: process.env.SOURCE_ALERT_EVIDENCE,
+          actor: process.env.GITHUB_ACTOR ?? process.env.SOURCE_ALERT_ACTOR,
+        },
+        report.checkedAt,
+      );
+      await writeFile('.source-monitor/alerts.json', JSON.stringify(alerts, null, 2));
+    } catch (error) {
+      report.reviewError = error.message;
+    }
+  }
+
+  report.openAlerts = openAlerts(alerts);
+
   await writeFile('.source-monitor/report.json', JSON.stringify(report, null, 2));
   const summary = [
     '# Template source review',
+    '',
+    alertSummary(alerts),
+    ...(report.reviewError ? [`Review action rejected: ${report.reviewError}`, ''] : []),
     '',
     'Source fingerprints detect document changes, not verified fiscal changes. HTML layout and PDF metadata can cause false positives.',
     '',
@@ -119,6 +158,12 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const next = nextBaseline(baseline, report.results, process.env.ACCEPT_SOURCE_BASELINE === 'true');
   await writeFile('.source-monitor/baseline.json', JSON.stringify(next, null, 2));
   // Accepting fingerprints never clears staleness: that needs a reviewed verifiedAt update.
-  if (unavailable || report.staleGroups.length || (changed && process.env.ACCEPT_SOURCE_BASELINE !== 'true'))
+  if (
+    report.reviewError ||
+    openAlerts(alerts).length ||
+    unavailable ||
+    report.staleGroups.length ||
+    (changed && process.env.ACCEPT_SOURCE_BASELINE !== 'true')
+  )
     process.exitCode = 1;
 }

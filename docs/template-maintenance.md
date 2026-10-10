@@ -10,6 +10,22 @@ The first successful download for each source creates its fingerprint baseline. 
 
 Fingerprints detect byte changes. HTML layout, cookies, bot challenges returned with HTTP 200 and PDF metadata can cause false positives or hide the real document. Read the source before accepting its fingerprint. Download success never updates `verifiedAt`, fiscal parameters or legal status. This monitor checks known URLs; it does not discover new party proposals or new publication URLs, such as next year's contribution order or a reissued AEAT withholding algorithm.
 
+## Persistent review cases
+
+The workflow also saves `alerts.json` beside `baseline.json` on `monitor-state`. Changed documents, unavailable sources and stale parameter groups create stable case IDs, for example `changed:fiscal:lirpf`, `unavailable:navarra` or `stale:withholding`. Repeated observations update the same case, retaining first/last detection, occurrence count, affected groups, observed fingerprints/errors and review history. A new changed fingerprint reopens a closed document case.
+
+An open case remains open when the source recovers or a fingerprint is accepted. The report distinguishes a currently detected finding from a recovered finding that still needs review. Open cases keep the run failing even when downloads are healthy; a failure can therefore mean unresolved maintenance work, not a payroll regression.
+
+After reading the relevant source, manually run **Template source review** with `alert_id`, `alert_signature` (copied exactly from the latest `alerts.json`), `alert_status` and `alert_evidence`:
+
+- `reviewed`: checked and no parameter implementation is needed; include the reasoning. An unavailable or stale case must first stop being detected.
+- `implementation-needed`: reviewed and a fiscal/data change remains necessary; the case stays open.
+- `implemented`: supply the exact `https://github.com/molinero95/SalaryCalculatorESP/pull/NUMBER` URL as evidence. The maintainer must verify that the linked change actually resolves the case; URL validation does not verify a PR's merge state or fiscal correctness.
+
+The workflow records the triggering GitHub actor and timestamp. The expected signature must match the current case, so a document changing during the review run cannot be approved using an old report. Review evidence is required; invalid actions leave the case and normal monitoring reports intact and fail the run. `accept_baseline` is separate and does not review a case or update `verifiedAt`. A still-stale case cannot be closed by accepting a fingerprint or supplying a PR URL; update and verify the applicable catalogue parameters first.
+
+Reports and the full case ledger are uploaded as Actions artifacts. The chosen surface for this increment is the GitHub Actions summary plus the persistent `monitor-state` ledger; it sends no dedicated email, Slack message or GitHub issue notification. GitHub's existing workflow notifications depend on account settings. Publication discovery, app-visible status and delivery of dedicated notifications remain separate work. A failed remote-state restore stops the run rather than replacing the ledger with empty state. Do not manually remove pending cases to make a run green.
+
 ## Enacted-law sources and staleness
 
 `data/fiscal-sources.json` records, for every parameter group of the enacted-law baseline (state scale, allowances, withholding, contributions, each regional scale, regional minima and each foral territory), its primary source, the fiscal year it applies to and the date a human last verified the parameters (`verifiedAt`). `scripts/fiscal-sources.js` validates it; a test fails if any region or foral territory in the data files has no source.
