@@ -22,4 +22,7 @@ test('PP deflation stays informational with its primary source and no fabricated
   await expect(page.locator('#other-proposals')).toContainText('No fija el porcentaje');
   await expect(page.locator('#other-proposals a[href*="BOCG_D_15_219_2014"]')).toBeVisible();
   await expect(page.locator('#proposal-select option[value="pp2025deflation"]')).toHaveCount(0);
+  await expect(page.locator('#other-proposals')).toContainText('Ciudadanos');
+  await expect(page.locator('#other-proposals a[href$="/13363"]')).toBeVisible();
+  await expect(page.locator('#proposal-select option[value="ciudadanos2023families"]')).toHaveCount(0);
 });

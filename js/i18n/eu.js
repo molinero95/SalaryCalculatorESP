@@ -349,6 +349,8 @@ export default {
   proposalPartial: 'Simulazio partziala',
   proposalPodemos2019Note:
     'Podemosen 2019ko programaren agertoki historiko partziala (263. neurria): urteko lehen tartea % 18an soilik simulatzen da, egungo muga, gainerako tarteak eta minimoak mantenduta. Murrizketa agertokiaren estatuko zatiari esleitzen zaio; autonomia-erkidegoko arauak mantentzen dira. Errenta handien, kapitalaren, kenkarien edo foru-erreformen neurriak ez dira modelatzen. Nominaren atxikipena ez da aldatzen. Ez da programa osoa edo egungo proposamena.',
+  proposalCiudadanosFamiliesNote:
+    '2023ko iragarpen historikoa: bigarren seme-alabatik aurrerako familientzako kenkariak. Oinarria, mugak eta aplikatzeko modua zehaztu gabe daude; informazioa soilik erakusten da, aurrezkia kalkulatu gabe.',
   proposalPpDeflationNote:
     'PPren parlamentuko proposamena, 2025eko otsailaren 20an argitaratua: PFEZaren gutxienez lehen hiru tarteak, minimoak eta kenkari pertsonalak deflaktatzea eskatzen du. Ez du ehunekorik edo azken zenbatekorik zehazten; beraz, ez da aurrezkirik kalkulatzen. Proposamen historikoa da, ez indarreko araudia.',
   proposalVoxNote:

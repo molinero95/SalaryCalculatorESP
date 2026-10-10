@@ -349,6 +349,8 @@ export default {
   proposalPartial: 'Simulació parcial',
   proposalPodemos2019Note:
     'Escenari històric parcial del programa de Podemos de 2019 (mesura 263): només se simula el primer tram anual al 18 %, mantenint el límit vigent i la resta de trams i mínims. La rebaixa s’assigna a la part estatal de l’escenari; les regles autonòmiques es mantenen. No es modelen les mesures per a rendes altes, capital o deduccions, ni una reforma foral. La retenció de nòmina no canvia. No representa el programa complet ni una proposta actual.',
+  proposalCiudadanosFamiliesNote:
+    'Anunci històric de 2023 de deduccions per a famílies a partir del segon fill. No concreta la base, els límits ni com aplicar la deducció; es mostra com a informació i no calcula estalvi.',
   proposalPpDeflationNote:
     'Proposició parlamentària del PP publicada el 20 de febrer de 2025: demana deflactar almenys els tres primers trams, mínims i deduccions personals de l’IRPF. No fixa el percentatge ni els imports finals, de manera que no es calcula un estalvi. És una proposta històrica, no normativa vigent.',
   proposalVoxNote:

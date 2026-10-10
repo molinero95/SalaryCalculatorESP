@@ -346,6 +346,8 @@ export default {
   proposalPartial: 'Partial simulation',
   proposalPodemos2019Note:
     'Historical partial scenario from the 2019 Podemos programme (measure 263): only the 18% first annual band is simulated, retaining the current threshold, remaining bands and allowances. The reduction is assigned to the scenario state component; regional rules stay unchanged. High-income, capital-income, deduction and foral reforms are not modelled. Payroll withholding is unchanged. This is neither the full programme nor a current proposal.',
+  proposalCiudadanosFamiliesNote:
+    'Historical 2023 announcement of deductions for families with a second child. The calculation base, limits and deduction mechanism are unspecified; informational only, with no calculated savings.',
   proposalPpDeflationNote:
     'PP parliamentary proposal published on 20 February 2025: requests deflation of at least the first three income-tax bands, allowances and personal deductions. No percentage or final amounts are specified, so no saving is calculated. This is a historical proposal, not current law.',
   proposalVoxNote:

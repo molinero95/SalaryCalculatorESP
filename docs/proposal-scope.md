@@ -40,3 +40,5 @@ Independent example: base €26,050 and taxpayer minimum €5,550 yield an annua
 ## PP: parliamentary deflation request, February 2025
 
 Primary source: [Senate BOCG 219, 20 February 2025](https://www.congreso.es/public_oficiales/L15/SEN/BOCG/2025/BOCG_D_15_219_2014.PDF), proposal 622/000059, additional provision. It requests deflation of at least the first three bands, minima and personal deductions but supplies no factor or final amounts. It remains informational and is not labelled enacted law.
+
+Ciudadanos’ official 4 May 2023 family announcement is informational. It does not define the tax base, deduction mechanism, limits or full eligibility needed to calculate its family deduction. Employer contribution exemptions are outside the employee payroll model. The source is linked in the catalogue; no numerical savings are inferred.

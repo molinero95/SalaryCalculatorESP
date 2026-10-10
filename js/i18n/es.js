@@ -348,6 +348,8 @@ export default {
   proposalPartial: 'Simulación parcial',
   proposalPodemos2019Note:
     'Escenario histórico parcial del programa de Podemos de 2019 (medida 263): solo se simula el primer tramo anual al 18 %, conservando el límite vigente y los restantes tramos y mínimos. La rebaja se asigna a la parte estatal del escenario; las reglas autonómicas se mantienen. No se modelan las medidas para rentas altas, capital o deducciones, ni una reforma foral. La retención de nómina no cambia. No representa el programa completo ni una propuesta actual.',
+  proposalCiudadanosFamiliesNote:
+    'Anuncio histórico de 2023 de deducciones para familias a partir del segundo hijo. No concreta la base, los límites ni cómo aplicar la deducción; se muestra como información y no calcula ahorro.',
   proposalPpDeflationNote:
     'Proposición parlamentaria del PP publicada el 20 de febrero de 2025: pide deflactar al menos los tres primeros tramos, mínimos y deducciones personales del IRPF. No fija el porcentaje ni los importes finales, por lo que no se calcula un ahorro. Es una propuesta histórica, no normativa vigente.',
   proposalVoxNote:

@@ -317,4 +317,25 @@ export const UNMODELLED_PROPOSALS = [
       },
     ],
   },
+  {
+    id: 'ciudadanos2023families',
+    party: 'Ciudadanos',
+    title: 'A por el segundo hijo · anuncio de deducciones familiares (2023)',
+    date: '2023-05-04',
+    url: 'https://www.ciudadanos-cs.org/prensa/ciudadanos-propone-el-plan-mas-ambicioso-de-fomento-de-la-natalidad-con-ayudas-directas-y-deducciones-fiscales-por-el-segundo-hijo/13363',
+    note: 'proposalCiudadanosFamiliesNote',
+    status: 'unmodelled',
+    verifiedAt: '2026-10-10',
+    sourceType: 'official',
+    limitations: [
+      'Historical announcement, not enacted law. The ten-point family deduction has no defined tax base, quota mechanism, limits or full eligibility rules. School expenses and employer contributions cannot be inferred from employee payroll inputs.',
+    ],
+    history: [
+      {
+        date: '2026-10-10',
+        description:
+          'Review official press release dated 4 May 2023; retain as informational without invented parameters.',
+      },
+    ],
+  },
 ];
