@@ -299,3 +299,20 @@ test('invalid direct foral descendant counts cannot index a missing withholding 
       /Unsupported foral/,
     );
 });
+
+test('a blocked foral profile names every reason, so the interface can say what is missing', async () => {
+  const { foralProfileIssues } = await import('../js/domain/fiscal-profile.js');
+  const { DEFAULT_INPUT } = await import('../js/defaults.js');
+  const base = { ...DEFAULT_INPUT, region: 'bizkaia' };
+  assert.deepEqual(foralProfileIssues(base), []);
+  assert.deepEqual(foralProfileIssues({ ...base, region: 'madrid', children: 2 }), []);
+  // A leftover under-3 count with no children blocks the estimate.
+  assert.deepEqual(foralProfileIssues({ ...base, childrenUnder3: 1 }), ['foralIssueAgeGroups']);
+  assert.deepEqual(foralProfileIssues({ ...base, children: 1 }), ['foralIssueChildren']);
+  assert.deepEqual(foralProfileIssues({ ...base, dependents65: 1 }), ['foralIssueAscendants']);
+  assert.deepEqual(foralProfileIssues({ ...base, foralRentalGross: 6000 }), ['foralIssueAnnual']);
+  assert.deepEqual(foralProfileIssues({ ...base, region: 'alava', city: 'vitoria-gasteiz', foralAlavaRural: true }), [
+    'foralIssueAlavaRural',
+  ]);
+  assert.deepEqual(foralProfileIssues({ ...base, children: 1.5 }), ['foralIssueInvalid', 'foralIssueChildren']);
+});

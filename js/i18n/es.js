@@ -55,6 +55,18 @@ export default {
     'Modelo de hijos sin discapacidad, sin adopciones ni cambios familiares durante el año: conviven contigo, no superan el SMI de renta no exenta ni pertenecen a otra unidad familiar que lo supere, y no presentan ni deben presentar IRPF. Introduce las edades al cierre del año. La casilla de cómputo íntegro significa un único progenitor con derecho; sin marcar, se reparte entre dos.',
   foralChildrenNavarraHelp:
     'Modelo de hijos solteros sin discapacidad, sin adopciones ni cambios familiares durante el año: conviven contigo y su renta no exenta no supera el IPREM. Introduce las edades al cierre del año. La casilla de cómputo íntegro significa un único progenitor con derecho; sin marcar, se reparte entre dos.',
+  foralResultsHidden: 'No mostramos resultados para este perfil foral hasta resolver esto:',
+  foralIssueChildren:
+    'Marca la casilla que confirma que los hijos indicados cumplen los requisitos forales, o pon 0 hijos.',
+  foralIssueAgeGroups:
+    'Los grupos de edad de los hijos no cuadran con el total (por ejemplo, más menores de 3 o de 6 años que hijos). Corrígelos o ponlos a 0.',
+  foralIssueAscendants: 'Marca la casilla que confirma los requisitos de los ascendientes indicados, o ponlos a 0.',
+  foralIssueAnnual:
+    'Confirma los importes anuales adicionales (alquiler cobrado, ahorro, actividad u otras retenciones) o déjalos a 0.',
+  foralIssueAlavaRural: 'Vitoria-Gasteiz no puede marcarse como zona rural de Álava.',
+  foralIssueInvalid: 'Hay un dato familiar o anual fuera de rango; revisa los números introducidos.',
+  foralIssueScenario:
+    'Los parámetros de «Actual» se han modificado. En territorios forales solo se calcula con la normativa vigente: pulsa «Restablecer valores oficiales» en Actual.',
   foralUnsupported:
     'Este perfil foral aún no está validado o faltan requisitos familiares. Se ocultan los resultados. Revisa los grupos de edad y confirma los requisitos de hijos y ascendientes.',
   foralScenarioUnsupported:
