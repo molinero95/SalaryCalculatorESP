@@ -353,8 +353,10 @@ export default {
     '2023ko iragarpen historikoa: bigarren seme-alabatik aurrerako familientzako kenkariak. Oinarria, mugak eta aplikatzeko modua zehaztu gabe daude; informazioa soilik erakusten da, aurrezkia kalkulatu gabe.',
   proposalPpDeflationNote:
     'PPren parlamentuko proposamena, 2025eko otsailaren 20an argitaratua: PFEZaren gutxienez lehen hiru tarteak, minimoak eta kenkari pertsonalak deflaktatzea eskatzen du. Ez du ehunekorik edo azken zenbatekorik zehazten; beraz, ez da aurrezkirik kalkulatzen. Proposamen historikoa da, ez indarreko araudia.',
+  withholdingShortfall:
+    'Simulazio honen atxikipenak ez du zerga osoa estaltzen: errentan {amount} ordaindu beharko lirateke. Hileko garbiaren zati bat itzuli beharreko aurrerakina da.',
   proposalVoxNote:
-    '2024ko proposamena: urteko estatuko tasa % 15 da 70.000 € arte eta % 25 hortik gora; autonomia-erkidegoko eskala mantentzen da. 101. artikuluak % 15/% 25eko atxikipen bereizia proposatzen du. Gutxieneko pertsonala 22.000 € da; seme-alabako 4 puntuko murrizketa urteko estatuko kuotan soilik aplikatzen da. Erkidegoek berariaz ezarritako gutxienekoak mantentzen dira; besteek proposatutako gutxienekoa erabiltzen dute. Simulazio partziala: egungo atxikipen-arauak mantentzen ditu eta jaiotza-txekeak kanpoan uzten ditu.',
+    '2024ko proposamena: urteko estatuko tasa % 15 da 70.000 € arte eta % 25 hortik gora; autonomia-erkidegoko eskala mantentzen da. 22.000 €-ko gutxieneko pertsonala eta seme-alabako 4 puntuko murrizketa estatuko kuotan soilik, proposamenak dioen bezala; kuota autonomikoak egungo gutxienekoak mantentzen ditu. 101. artikuluak % 15/% 25eko atxikipena proposatzen du zati autonomikorik gabe: nominak gutxiago atxikitzen du, baina kuota autonomikoa errentan ordaintzen da. Simulazio partziala: egungo atxikipen-arauak mantentzen ditu eta jaiotza-txekeak kanpoan uzten ditu.',
   proposalSumarNote:
     'Gehieneko tasa marjinala % 52ra igotzen du 300.000 €-tik gora. Programak ez ditu 120.000 eta 300.000 € arteko tasak zehazten, eta bere horretan uzten dira. Nominaren atxikipena mantentzen da: programak ez du ordezko eskalarik zehazten.',
   proposalPsoeNote: 'Ondorengoengatiko eta mendekoengatiko gutxienekoa igotzea proposatzen du, zifra zehatzik gabe.',

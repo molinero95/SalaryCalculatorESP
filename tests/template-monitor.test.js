@@ -20,6 +20,7 @@ for (const [label, mutate] of [
   ['closed final bracket', (c) => (c.proposals[0].changes.incomeTax.brackets.at(-1).upTo = 999999)],
   ['missing partial limitations', (c) => (c.proposals[1].limitations = [])],
   ['invalid withholding mode', (c) => (c.proposals[0].changes.incomeTax.useSeparateWithholding = 'yes')],
+  ['invalid allowance scope', (c) => (c.proposals[0].changes.incomeTax.stateOnlyAllowances = 'yes')],
   ['missing separate withholding scale', (c) => delete c.proposals[0].changes.incomeTax.withholdingBrackets],
   ['invalid separate withholding rate', (c) => (c.proposals[0].changes.incomeTax.withholdingBrackets[0].rate = 101)],
 ]) {

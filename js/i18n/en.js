@@ -350,8 +350,10 @@ export default {
     'Historical 2023 announcement of deductions for families with a second child. The calculation base, limits and deduction mechanism are unspecified; informational only, with no calculated savings.',
   proposalPpDeflationNote:
     'PP parliamentary proposal published on 20 February 2025: requests deflation of at least the first three income-tax bands, allowances and personal deductions. No percentage or final amounts are specified, so no saving is calculated. This is a historical proposal, not current law.',
+  withholdingShortfall:
+    'This simulation’s withholding does not cover the whole tax: the annual return would show {amount} to pay. Part of the monthly net is an advance you pay back.',
   proposalVoxNote:
-    '2024 proposal: annual state rates of 15 % up to €70,000 and 25 % above, retaining regional rates. Article 101 proposes separate 15 %/25 % withholding. Personal minimum €22,000; four-point child relief applies only to annual state tax. Explicit regional minima are retained; other regions inherit the proposed minimum. Partial simulation: existing regulatory withholding rules retained; birth cheques excluded.',
+    '2024 proposal: annual state rates of 15 % up to €70,000 and 25 % above, retaining regional rates. The €22,000 personal minimum and four-point child relief apply only to the state quota, as the proposal states; the regional quota keeps today’s minima. Article 101 proposes 15 %/25 % withholding with no regional share: payroll withholds less, but the regional quota is paid in the annual return. Partial simulation: existing regulatory withholding rules retained; birth cheques excluded.',
   proposalSumarNote:
     'Raises the top marginal rate to 52 % above €300,000. The programme gives no rates between €120,000 and €300,000, which are kept. Payroll withholding is retained: the programme does not specify a replacement scale.',
   proposalPsoeNote: 'Proposes raising the child and dependant allowances, without specific figures.',

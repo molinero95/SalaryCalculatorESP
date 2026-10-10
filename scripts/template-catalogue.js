@@ -39,12 +39,14 @@ export function validateCatalogue(catalogue) {
           'useSeparateWithholding',
           'personalAllowance',
           'childRateReduction',
+          'stateOnlyAllowances',
         ].includes(key)
       )
         throw new Error('Unsupported parameter');
       if (key === 'useSeparateWithholding' && typeof value !== 'boolean') throw new Error('Invalid withholding mode');
+      if (key === 'stateOnlyAllowances' && typeof value !== 'boolean') throw new Error('Invalid allowance scope');
       if (
-        !['brackets', 'withholdingBrackets', 'useSeparateWithholding'].includes(key) &&
+        !['brackets', 'withholdingBrackets', 'useSeparateWithholding', 'stateOnlyAllowances'].includes(key) &&
         (!Number.isFinite(value) || value < 0 || (key === 'childRateReduction' && value > 100))
       )
         throw new Error('Invalid parameter');
