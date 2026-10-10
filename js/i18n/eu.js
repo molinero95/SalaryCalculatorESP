@@ -383,10 +383,10 @@ export default {
   housingHelp:
     'Oraingoz, estatuko araubide iragankorrak soilik kalkulatzen dira: 2015 aurreko kontratua duen alokairua eta 2013 aurreko erosketa. Etxebizitzagatiko kenkari autonomikoak eta alokairuagatiko estatuko kenkari berria ez dira oraindik sartzen.',
   housingTenure: 'Zure ohiko etxebizitza',
-  housingTenureNotProvided: 'Nahiago dut ez adierazi',
-  housingTenureTenant: 'Alokairuan bizi naiz',
-  housingTenureOwner: 'Nirea da',
-  housingTenureOther: 'Beste egoera bat',
+  housingTenureNotProvided: 'Adierazi gabe',
+  housingTenureTenant: 'Alokairua',
+  housingTenureOwner: 'Jabetza',
+  housingTenureOther: 'Bestelakoa',
   housingRentPaid: 'Urtean ordaindutako alokairua (€ / urte)',
   housingLeaseBefore2015:
     'Nire kontratua 2015eko urtarrilaren 1a baino lehenagokoa da, data horren aurretik alokairua ordaindu nuen eta 2015 aurreko urteren batean alokairuagatiko estatuko kenkarirako eskubidea nuen.',

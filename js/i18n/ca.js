@@ -381,10 +381,10 @@ export default {
   housingHelp:
     'De moment només es calculen els règims transitoris estatals: lloguer amb contracte anterior al 2015 i compra anterior al 2013. Les deduccions autonòmiques per habitatge i la nova deducció estatal per lloguer encara no s’hi inclouen.',
   housingTenure: 'El teu habitatge habitual',
-  housingTenureNotProvided: 'Prefereixo no indicar-ho',
-  housingTenureTenant: 'Visc de lloguer',
-  housingTenureOwner: 'És de la meva propietat',
-  housingTenureOther: 'Una altra situació',
+  housingTenureNotProvided: 'Sense indicar',
+  housingTenureTenant: 'Lloguer',
+  housingTenureOwner: 'Propietat',
+  housingTenureOther: 'Una altra',
   housingRentPaid: 'Lloguer pagat durant l’any (€ / any)',
   housingLeaseBefore2015:
     'El meu contracte és anterior a l’1 de gener de 2015, vaig pagar lloguer abans d’aquesta data i tenia dret a la deducció estatal per lloguer en algun any anterior al 2015.',

@@ -380,10 +380,10 @@ export default {
   housingHelp:
     'De momento solo se calculan los regímenes transitorios estatales: alquiler con contrato anterior a 2015 y compra anterior a 2013. Las deducciones autonómicas por vivienda y la nueva deducción estatal por alquiler aún no se incluyen.',
   housingTenure: 'Tu vivienda habitual',
-  housingTenureNotProvided: 'Prefiero no indicarlo',
-  housingTenureTenant: 'Vivo de alquiler',
-  housingTenureOwner: 'Es de mi propiedad',
-  housingTenureOther: 'Otra situación',
+  housingTenureNotProvided: 'Sin indicar',
+  housingTenureTenant: 'Alquiler',
+  housingTenureOwner: 'Propiedad',
+  housingTenureOther: 'Otra',
   housingRentPaid: 'Alquiler pagado en el año (€ / año)',
   housingLeaseBefore2015:
     'Mi contrato es anterior al 1 de enero de 2015, pagué alquiler antes de esa fecha y tenía derecho a la deducción estatal por alquiler en algún año anterior a 2015.',

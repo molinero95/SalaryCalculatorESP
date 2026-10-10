@@ -378,10 +378,10 @@ export default {
   housingHelp:
     'Only the state transitional regimes are calculated for now: renting under a lease signed before 2015 and buying before 2013. Regional housing deductions and the new state rent deduction are not included yet.',
   housingTenure: 'Your main home',
-  housingTenureNotProvided: 'I prefer not to say',
-  housingTenureTenant: 'I rent it',
-  housingTenureOwner: 'I own it',
-  housingTenureOther: 'Other situation',
+  housingTenureNotProvided: 'Not stated',
+  housingTenureTenant: 'Renting',
+  housingTenureOwner: 'Owned',
+  housingTenureOther: 'Other',
   housingRentPaid: 'Rent paid in the year (€ / year)',
   housingLeaseBefore2015:
     'My lease was signed before 1 January 2015, I paid rent before that date and I was entitled to the state rent deduction in a year before 2015.',
