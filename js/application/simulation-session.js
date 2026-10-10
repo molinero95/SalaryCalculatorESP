@@ -72,7 +72,7 @@ export function importSession(state, imported) {
 export function sharePayload(state) {
   return {
     current: changesFrom(CURRENT_SCENARIO, state.current),
-    simulation: changesFrom(CURRENT_SCENARIO, state.simulation),
+    simulation: changesFrom(CURRENT_SCENARIO, state.simulation) ?? {},
   };
 }
 
@@ -93,6 +93,7 @@ export function removeSimulation(state, index) {
   if (state.simulations.length <= 1 || !Number.isInteger(index) || index < 0 || index >= state.simulations.length)
     return false;
   state.simulations.splice(index, 1);
+  if (index < state.active) state.active -= 1;
   state.active = Math.min(state.active, state.simulations.length - 1);
   return true;
 }

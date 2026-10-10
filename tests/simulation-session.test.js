@@ -105,7 +105,40 @@ test('sharing includes only changed active scenario rules, never personal data o
   assert.deepEqual(JSON.parse(JSON.stringify(sharePayload(state))), {
     simulation: { name: 'Active', incomeTax: { generalExpenses: 3000 } },
   });
-  assert.deepEqual(JSON.parse(JSON.stringify(sharePayload(createSession()))), {});
+  assert.deepEqual(JSON.parse(JSON.stringify(sharePayload(createSession()))), { simulation: {} });
+});
+
+test('sharing unchanged rules opens those rules rather than a recipient existing proposal', () => {
+  const shared = JSON.parse(JSON.stringify(sharePayload(createSession())));
+  const recipient = createSession(
+    { input: { salary: 73000, region: 'navarra' }, simulations: [{ name: 'Vox', proposal: 'vox2024' }] },
+    shared,
+  );
+  assert.equal(recipient.active, 1);
+  assert.deepEqual(recipient.simulation, CURRENT_SCENARIO);
+  assert.equal(recipient.simulations[0].proposal, 'vox2024');
+  assert.equal(recipient.input.salary, 73000);
+  assert.equal(recipient.input.region, 'navarra');
+});
+
+test('removing an inactive tab preserves the selected scenario identity', () => {
+  const state = createSession({ simulations: [{ name: 'A' }, { name: 'B' }, { name: 'C' }], active: 1 });
+  const selected = state.simulation;
+  assert.equal(removeSimulation(state, 0), true);
+  assert.equal(state.active, 0);
+  assert.equal(state.simulation, selected);
+  assert.equal(removeSimulation(state, 1), true);
+  assert.equal(state.active, 0);
+  assert.equal(state.simulation, selected);
+});
+
+test('removing the selected tab selects the next tab or the preceding last tab', () => {
+  const state = createSession({ simulations: [{ name: 'A' }, { name: 'B' }, { name: 'C' }], active: 1 });
+  assert.equal(removeSimulation(state, 1), true);
+  assert.equal(state.simulation.name, 'C');
+  assert.equal(removeSimulation(state, 1), true);
+  assert.equal(state.simulation.name, 'A');
+  assert.equal(state.active, 0);
 });
 
 test('tab commands enforce capacity, selection and a nonempty session', () => {

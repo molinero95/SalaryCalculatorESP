@@ -142,3 +142,48 @@ for (const language of ['es', 'ca', 'eu', 'gl', 'en']) {
     }
   });
 }
+
+test('sharing unchanged rules opens a new default simulation over a saved proposal', async ({ page }) => {
+  const hash = await page.evaluate(async () => {
+    const { encode } = await import('/js/storage.js');
+    return encode({ simulation: {} });
+  });
+  await page.locator('#tab-proposals').click();
+  await page.selectOption('#proposal-select', 'vox2024');
+  await page.goto(`/?unchanged-share#s=${hash}`);
+  await expect(page.locator('.sim-tab')).toHaveCount(2);
+  await expect(page.locator('.result-simulation h3')).not.toContainText('Vox');
+  await expect(page.locator('.result-simulation .headline strong')).toHaveText('1.628,50 €');
+});
+
+test('removing an earlier simulation keeps the active edited result', async ({ page }) => {
+  await page.locator('#tab-simulation').click();
+  await page.locator('#add-simulation').click();
+  await page.fill('#scenario-name', 'Keep me');
+  await page.locator('#settings-simulation [data-shift]').fill('-1');
+  await page.locator('#settings-simulation [data-apply]').click();
+  const result = await page.locator('.result-simulation .headline strong').textContent();
+  await page.locator('#add-simulation').click();
+  await page.locator('[data-simulation="1"]').click();
+  await page.locator('[data-remove-simulation="0"]').click();
+  await expect(page.locator('#scenario-name')).toHaveValue('Keep me');
+  await expect(page.locator('.result-simulation .headline strong')).toHaveText(result);
+});
+
+test('a restored unsupported foral reference initializes and can be reset', async ({ page }) => {
+  await page.addInitScript(() => {
+    localStorage.setItem(
+      'net-salary:state',
+      JSON.stringify({ input: { region: 'navarra' }, current: { incomeTax: { personalAllowance: 10000 } } }),
+    );
+  });
+  const errors = [];
+  page.on('pageerror', (error) => errors.push(error.message));
+  await page.reload();
+  await expect(page.locator('#fiscal-scope')).toContainText('Esta simulación no está modelada');
+  await page.locator('#tab-simulation').click();
+  await page.locator('.card-current summary').click();
+  await page.locator('#reset-current').click();
+  await expect(page.locator('.result-current .headline strong')).toBeVisible();
+  expect(errors).toEqual([]);
+});
