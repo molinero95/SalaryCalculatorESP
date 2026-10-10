@@ -10,6 +10,17 @@ async function expectView(page, view) {
   }
   await expect(page.locator('#simulation-panel')).toBeVisible({ visible: view === 'simulation' });
   await expect(page.locator('#proposals-panel')).toBeVisible({ visible: view === 'proposals' });
+  const results = page.locator('#results-section');
+  if (view === 'salary') {
+    await expect(results).toHaveAttribute('role', 'tabpanel');
+    await expect(results).toHaveAttribute('aria-labelledby', 'tab-salary');
+    await expect(tab(page, 'salary')).toHaveAttribute('aria-selected', 'true');
+  } else if (view === 'simulation') {
+    await expect(results).toHaveAttribute('role', 'region');
+    await expect(results).toHaveAttribute('aria-labelledby', 'simulation-title');
+  } else {
+    await expect(results).toBeHidden();
+  }
 }
 
 test.beforeEach(async ({ page }) => {
