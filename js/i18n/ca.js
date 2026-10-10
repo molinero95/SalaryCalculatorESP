@@ -1,6 +1,18 @@
 // Catalan translations. `f_*` keys label the settings fields.
 
 export default {
+  navigationLabel: 'Seccions de la calculadora',
+  navSalary: 'El teu salari',
+  navSimulation: 'Simular canvis',
+  navProposals: 'Propostes polítiques',
+  viewSalaryDescription:
+    'Calcula la nòmina i l’estimació anual amb les teves dades. Els detalls fiscals i les deduccions disponibles depenen de la residència.',
+  viewSimulationDescription:
+    'Edita les regles i compara simulacions amb la referència. Les dades personals es conserven en canviar de secció.',
+  viewProposalsDescription:
+    'Consulta propostes documentades. En triar-ne una, s’obrirà la simulació amb les dades actuals.',
+  proposalsIntro:
+    'Les propostes no són normativa vigent. Mostrem fonts, dates i límits del càlcul; les mesures sense prou dades es presenten només com a informació.',
   foralBenefitsBasqueHelp:
     'País Basc: l’assegurança mèdica ordinària tributa. Pensions/EPSV ordinàries: 5.000 € individuals, 8.000 € d’ocupació i 10.000 € conjunts; treballador en actiu, sense rescats ni crèdits d’EPSV preferents. Menjars, transport, guarderia i formació han de complir els requisits legals.',
   foralBenefitsNavarraHelp:

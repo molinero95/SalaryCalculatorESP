@@ -1,6 +1,18 @@
 // Basque translations. `f_*` keys label the settings fields.
 
 export default {
+  navigationLabel: 'Kalkulagailuaren atalak',
+  navSalary: 'Zure soldata',
+  navSimulation: 'Aldaketak simulatu',
+  navProposals: 'Proposamen politikoak',
+  viewSalaryDescription:
+    'Kalkulatu nomina eta urteko estimazioa zure datuekin. Zerga xehetasunak eta kenkari erabilgarriak bizilekuaren araberakoak dira.',
+  viewSimulationDescription:
+    'Editatu arauak eta alderatu simulazioak erreferentziarekin. Datu pertsonalak mantentzen dira atalez aldatzean.',
+  viewProposalsDescription:
+    'Kontsultatu dokumentatutako proposamenak. Bat hautatzean, simulazioa irekiko da uneko datuekin.',
+  proposalsIntro:
+    'Proposamenak ez dira indarreko araudia. Iturriak, datak eta kalkuluaren mugak erakusten ditugu; datu nahikorik gabeko neurriak informazioa baino ez dira.',
   foralBenefitsBasqueHelp:
     'Euskadi: osasun aseguru arruntak zergak ordaintzen ditu. Pentsio/BGAE arruntak: 5.000 € banakakoak, 8.000 € enplegukoak eta 10.000 € guztira; langile aktiboa, erreskaterik edo lehentasunezko BGAE kenkaririk gabe. Otordu, garraio, haur eskola eta prestakuntzak lege baldintzak bete behar dituzte.',
   foralBenefitsNavarraHelp:

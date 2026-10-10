@@ -4,6 +4,7 @@ import AxeBuilder from '@axe-core/playwright';
 
 test.beforeEach(async ({ page }) => {
   await page.goto('/');
+  await page.locator('#product-navigation [data-view="simulation"]').click();
 });
 
 async function restoreState(page, value) {
@@ -12,6 +13,7 @@ async function restoreState(page, value) {
     value,
   );
   await page.reload();
+  await page.locator('#product-navigation [data-view="simulation"]').click();
 }
 
 test('malformed stored state restores a valid default payslip', async ({ page }) => {
@@ -113,6 +115,7 @@ test('refactored tax engine works after a full offline reload', async ({ page, c
   await context.setOffline(true);
   try {
     await page.reload();
+    await page.locator('#product-navigation [data-view="simulation"]').click();
     await expect(page.locator('.result-current .headline strong')).toHaveText('2.293,93 €');
     await page.fill('#salary', '30000');
     await expect(page.locator('.result-current .headline strong')).toHaveText('1.628,50 €');
@@ -130,6 +133,7 @@ test('fractional persisted active simulation restores a valid selection', async 
     localStorage.setItem('net-salary:state', JSON.stringify(state));
   });
   await page.reload();
+  await page.locator('#product-navigation [data-view="simulation"]').click();
   await expect(page.locator('[data-result-simulation="0"]')).toHaveAttribute('aria-pressed', 'true');
   await expect(page.locator('.result-current .headline strong')).toHaveText('1.628,50 €');
 });
@@ -145,16 +149,18 @@ test('breakdown exposes separate annual state and regional quotas', async ({ pag
 });
 
 test('Vox separates payroll withholding and annual regional tax across reloads', async ({ page }) => {
+  await page.locator('#product-navigation [data-view="proposals"]').click();
   await page.selectOption('#proposal-select', 'vox2024');
   await expect(page.locator('.result-simulation')).toContainText('Neto anual de nómina');
   await expect(page.locator('.result-simulation')).toContainText('Neto anual tras la renta');
   await expect(page.locator('.result-tax-scope').first()).toContainText('comunidad autónoma');
-  await expect(page.locator('#proposal-info')).toContainText('Simulación parcial');
+  await expect(page.locator('#simulation-proposal-info')).toContainText('Simulación parcial');
   await expect(page.locator('#settings-simulation [data-withholding-brackets] [data-rate="0"]')).toHaveValue('15');
   const payroll = await page.locator('.result-simulation .headline strong').textContent();
   await chooseResidence(page, 'region:madrid');
   await expect(page.locator('.result-simulation .headline strong')).toHaveText(payroll);
   await page.reload();
+  await page.locator('#product-navigation [data-view="simulation"]').click();
   await expect(page.locator('#settings-simulation [data-withholding-brackets] [data-rate="0"]')).toHaveValue('15');
   await expect(page.locator('.result-simulation .headline strong')).toHaveText(payroll);
   await page.locator('#settings-simulation [data-group="groupWithholdingBrackets"] summary').click();
@@ -165,10 +171,12 @@ test('Vox separates payroll withholding and annual regional tax across reloads',
 test('manual scenario storage is absent while open simulations restore automatically', async ({ page }) => {
   const legacy = { Unused: { name: 'Unused' } };
   await page.evaluate((value) => localStorage.setItem('net-salary:scenarios', JSON.stringify(value)), legacy);
+  await page.locator('#product-navigation [data-view="proposals"]').click();
   await page.selectOption('#proposal-select', 'vox2024');
   await page.fill('#scenario-name', 'Propuesta abierta');
   const net = await page.locator('.result-simulation .headline strong').textContent();
   await page.reload();
+  await page.locator('#product-navigation [data-view="simulation"]').click();
   for (const id of ['save-scenario', 'load-scenario', 'delete-scenario', 'saved-scenarios', 'export', 'import'])
     await expect(page.locator('#' + id)).toHaveCount(0);
   await expect(page.locator('.result-simulation .headline strong')).toHaveText(net);
@@ -177,6 +185,7 @@ test('manual scenario storage is absent while open simulations restore automatic
 });
 
 test('separate withholding editor compares with the active reference scale', async ({ page }) => {
+  await page.locator('#product-navigation [data-view="proposals"]').click();
   await page.selectOption('#proposal-select', 'sumar2023');
   const editor = page.locator('#settings-simulation [data-withholding-brackets]');
   await expect(editor).not.toHaveClass(/changed/);
@@ -189,6 +198,7 @@ test('separate withholding editor compares with the active reference scale', asy
 test('floating annual difference stays inside narrow viewports with large amounts', async ({ page }, testInfo) => {
   await page.setViewportSize({ width: 320, height: 640 });
   await page.fill('#salary', '45000');
+  await page.locator('#product-navigation [data-view="proposals"]').click();
   await page.selectOption('#proposal-select', 'vox2024');
   await page.evaluate(() => {
     document.querySelector('#sticky-value').textContent = '+999.999.999.999.999,99 € / anual';
@@ -229,6 +239,7 @@ test('extracted form preserves annual gross across period changes and reload', a
   await page.locator('label:has(input[name="payments"][value="12"])').click();
   await expect(page.locator('#salary')).toHaveValue('3500');
   await page.reload();
+  await page.locator('#product-navigation [data-view="simulation"]').click();
   await expect(page.locator('#salary')).toHaveValue('3500');
   await expect(page.locator('input[name="period"][value="perPayment"]')).toBeChecked();
   await page.locator('label:has(input[name="period"][value="annual"])').click();
@@ -245,6 +256,7 @@ test('extracted pension form retains annual units and checkbox state across relo
   await expect(page.locator('#pensionIndividual')).toHaveValue('1440');
   await expect(page.locator('#pensionEmployer')).toHaveValue('2400');
   await page.reload();
+  await page.locator('#product-navigation [data-view="simulation"]').click();
   await expect(page.locator('input[name="childrenFullyCounted"]')).toBeChecked();
   await page.locator('#pensionIndividual').locator('xpath=ancestor::details').locator('summary').click();
   await expect(page.locator('#pensionIndividual')).toHaveValue('1440');
@@ -354,6 +366,7 @@ test('Bilbao preset and reviewed payroll survive a complete offline reload', asy
   await context.setOffline(true);
   try {
     await page.reload();
+    await page.locator('#product-navigation [data-view="simulation"]').click();
     await expect(page.locator('#city')).toHaveValue('bilbao');
     await expect(page.locator('#residence')).toHaveValue('region:basque');
     await expect(page.locator('#residence-territory')).toHaveValue('region:bizkaia');
@@ -424,6 +437,7 @@ test('reviewed foral children require confirmation, preserve shared withholding 
   await page.fill('#childrenUnder6', '1');
   await expect(page.locator('#results')).toBeVisible();
   await page.reload();
+  await page.locator('#product-navigation [data-view="simulation"]').click();
   await expect(page.locator('#foralChildrenConfirmed')).toBeChecked();
   await expect(page.locator('#childrenUnder6')).toHaveValue('1');
   await expect(page.locator('#results')).toBeVisible();
@@ -470,6 +484,7 @@ test('community and territory filter cities and restore saved selections', async
   await expect(page.locator('#residence-city option[value="donostia-san-sebastian"]')).toHaveCount(1);
   await chooseResidence(page, 'city:bilbao');
   await page.reload();
+  await page.locator('#product-navigation [data-view="simulation"]').click();
   await expect(page.locator('#residence')).toHaveValue('region:basque');
   await expect(page.locator('#residence-territory')).toHaveValue('region:bizkaia');
   await expect(page.locator('#residence-city')).toHaveValue('bilbao');
@@ -544,6 +559,7 @@ for (const residence of ['region:bizkaia', 'region:gipuzkoa', 'region:alava', 'r
     });
     await context.setOffline(true);
     await page.reload();
+    await page.locator('#product-navigation [data-view="simulation"]').click();
     await expect(page.locator('#results')).toHaveText(before, { useInnerText: true });
     await expect(page.locator('#foralAscendantsConfirmed')).toBeChecked();
     await page.locator('#foral-annual-fields summary').click();

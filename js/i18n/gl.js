@@ -1,6 +1,17 @@
 // Galician translations. `f_*` keys label the settings fields.
 
 export default {
+  navigationLabel: 'Seccións da calculadora',
+  navSalary: 'O teu salario',
+  navSimulation: 'Simular cambios',
+  navProposals: 'Propostas políticas',
+  viewSalaryDescription:
+    'Calcula a nómina e a estimación anual cos teus datos. Os detalles fiscais e as deducións dispoñibles dependen da residencia.',
+  viewSimulationDescription:
+    'Edita as regras e compara simulacións coa referencia. Os datos persoais consérvanse ao cambiar de sección.',
+  viewProposalsDescription: 'Consulta propostas documentadas. Ao elixir unha, abrirase a simulación cos datos actuais.',
+  proposalsIntro:
+    'As propostas non son normativa vixente. Amosamos fontes, datas e límites do cálculo; as medidas sen datos suficientes preséntanse só como información.',
   foralBenefitsBasqueHelp:
     'País Vasco: o seguro médico ordinario tributa. Pensións/EPSV ordinarias: 5.000 € individuais, 8.000 € de emprego e 10.000 € conxuntos; traballador en activo, sen rescates nin créditos de EPSV preferentes. Comidas, transporte, gardería e formación deben cumprir os requisitos legais.',
   foralBenefitsNavarraHelp:

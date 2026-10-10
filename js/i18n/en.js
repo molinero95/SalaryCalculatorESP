@@ -1,6 +1,18 @@
 // English translations. `f_*` keys label the settings fields.
 
 export default {
+  navigationLabel: 'Calculator sections',
+  navSalary: 'Your salary',
+  navSimulation: 'Simulate changes',
+  navProposals: 'Political proposals',
+  viewSalaryDescription:
+    'Calculate your payroll and annual estimate using your details. Available tax details and deductions depend on your residence.',
+  viewSimulationDescription:
+    'Edit the rules and compare simulations with your reference. Your personal details stay the same when switching sections.',
+  viewProposalsDescription:
+    'Explore documented proposals. Selecting one opens its simulation using your current details.',
+  proposalsIntro:
+    'Proposals are not current law. Sources, dates and calculation limitations are shown; measures without sufficient data are information only.',
   foralBenefitsBasqueHelp:
     'Basque Country: ordinary medical insurance is taxable. Ordinary pensions/EPSV: €5,000 individual, €8,000 employment, €10,000 combined; active employee, no withdrawals or preferred EPSV credits. Meal, transport, childcare and training must meet legal eligibility.',
   foralBenefitsNavarraHelp:
