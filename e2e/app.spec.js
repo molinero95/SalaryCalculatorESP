@@ -110,7 +110,7 @@ test('share links only carry the changed proposal, not personal details', async 
     return decode(hash);
   }, url.split('#s=')[1]);
 
-  expect(payload).toEqual({ simulation: { name: 'Mi propuesta' } });
+  expect(payload).toEqual({ current: {}, simulation: { name: 'Mi propuesta' } });
   expect(url.length).toBeLessThan(120);
 });
 

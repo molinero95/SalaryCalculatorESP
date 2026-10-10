@@ -46,6 +46,7 @@ export function createSession(saved = {}, shared = null, { defaultLanguage = 'es
     active: 0,
   };
   const state = merge(merge(defaults, saved), shared ?? {});
+  if (isPlainObject(shared?.current)) state.current = toScenario(shared.current);
   state.simulations = simulationList(saved);
   if (isPlainObject(shared?.simulation)) {
     state.simulations = [...state.simulations.slice(0, MAX_SIMULATIONS - 1), toScenario(shared.simulation)];
@@ -71,8 +72,8 @@ export function importSession(state, imported) {
 /** Personal details and inactive tabs are deliberately excluded from public links. */
 export function sharePayload(state) {
   return {
-    current: changesFrom(CURRENT_SCENARIO, state.current),
-    simulation: changesFrom(CURRENT_SCENARIO, state.simulation),
+    current: changesFrom(CURRENT_SCENARIO, state.current) ?? {},
+    simulation: changesFrom(CURRENT_SCENARIO, state.simulation) ?? {},
   };
 }
 
@@ -93,6 +94,7 @@ export function removeSimulation(state, index) {
   if (state.simulations.length <= 1 || !Number.isInteger(index) || index < 0 || index >= state.simulations.length)
     return false;
   state.simulations.splice(index, 1);
+  if (index < state.active) state.active -= 1;
   state.active = Math.min(state.active, state.simulations.length - 1);
   return true;
 }
