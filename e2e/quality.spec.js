@@ -308,6 +308,8 @@ test('anonymous events survive a delayed GoatCounter script load', async ({ page
     });
   });
   await page.reload({ waitUntil: 'domcontentloaded' });
+  await expect(page.locator('.result-current .headline strong')).toHaveText('1.628,50 €');
+  await page.locator('#product-navigation [data-view="simulation"]').click();
   await page.fill('#salary', '73000');
   await page.fill('#scenario-name', 'Private proposal');
   await page.locator('#add-simulation').click();
