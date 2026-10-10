@@ -372,7 +372,7 @@ export default {
   removeSimulation: 'Eliminar simulación',
   housingTitle: 'Vivenda habitual · declaración anual',
   housingHelp:
-    'Calcúlanse os réximes transitorios estatais (alugueiro con contrato anterior a 2015 e compra anterior a 2013) e a dedución autonómica por alugueiro dos perfís xerais en Andalucía, Asturias, Illes Balears, Castela-A Mancha, Cataluña, Estremadura, Galicia, Madrid, Murcia e A Rioxa. Aínda non se inclúen Canarias, Cantabria, Castela e León, a Comunitat Valenciana, as variantes por municipio, as deducións autonómicas por compra ou para arrendadores nin a nova dedución estatal por alugueiro.',
+    'Calcúlanse os réximes transitorios estatais (alugueiro con contrato anterior a 2015 e compra anterior a 2013) e a dedución autonómica por alugueiro dos perfís xerais en Andalucía, Asturias, Illes Balears, Castela-A Mancha, Cataluña, Estremadura, Galicia, Madrid, Murcia e A Rioxa. Tamén a dedución autonómica por compra que non depende do municipio en Andalucía, Estremadura, Madrid, Murcia e A Rioxa. Aínda non se inclúen Canarias, Cantabria, Castela e León, a Comunitat Valenciana, as variantes por municipio, o resto de deducións autonómicas por compra, as de arrendadores nin a nova dedución estatal por alugueiro.',
   housingTenure: 'A túa vivenda habitual',
   housingTenureNotProvided: 'Sen indicar',
   housingTenureTenant: 'Alugueiro',
@@ -382,6 +382,12 @@ export default {
   housingLeaseBefore2015:
     'O meu contrato é anterior ao 1 de xaneiro de 2015, paguei alugueiro antes desa data e tiña dereito á dedución estatal por alugueiro nalgún ano anterior a 2015.',
   housingInvestment: 'Pagado este ano pola vivenda: amortización, xuros e gastos (€ / ano)',
+  housingInterestPaid: 'Do pagado, xuros do préstamo hipotecario (€ / ano)',
+  housingFirstDwelling: 'É a miña primeira vivenda habitual.',
+  housingProtectedDwelling: 'É unha vivenda protexida segundo a normativa da miña comunidade.',
+  housingNewBuild: 'Mercouna en primeira transmisión dentro dos tres anos seguintes á declaración de obra nova.',
+  housingBuyerConfirmed:
+    'Cumpro os requisitos formais da dedución autonómica por compra: vivenda habitual na comunidade durante polo menos tres anos, o meu patrimonio aumenta polo menos no investido sen contar xuros, os xuros son dun préstamo hipotecario para mercala e non apliquei antes a dedución por outra vivenda habitual.',
   housingPurchaseBefore2013:
     'Mercheina, ou paguei a súa construción, antes do 1 de xaneiro de 2013, xa me aplicaba a dedución por vivenda antes de 2013 e o meu patrimonio aumenta polo menos no investido este ano sen contar xuros.',
   housingLoanWithholding:
@@ -402,5 +408,5 @@ export default {
     'As deducións reducen o imposto da declaración anual sen deixar as cotas en negativo. Só a compra anterior a 2013 con préstamo comunicado rebaixa ademais a retención en 2 puntos se cobras menos de 33.007,20 € ao ano; a dedución autonómica por alugueiro non cambia a nómina. Calcúlase en tributación individual. A base do aforro só se usa nos límites de renda; o seu imposto non se calcula. Non se recollen os colectivos de vítimas, desemprego ou viuvez. En Cataluña, Comunitat Valenciana e Illes Balears a compra aínda non se calcula porque falta confirmar a súa porcentaxe autonómica.',
   rowHousingDeduction: 'Deducións por vivenda',
   helpHousingDeduction:
-    'Alugueiro con contrato anterior a 2015: 10,05 % do alugueiro, cunha base máxima de 9.040 € que se reduce desde 17.707,20 € de base impoñible e desaparece en 24.107,20 €; metade na cota estatal e metade na autonómica. Compra anterior a 2013: 7,5 % estatal e 7,5 % autonómico sobre un máximo de 9.040 €. Dedución autonómica por alugueiro: porcentaxe e límite da túa comunidade tras comprobar idade, colectivo e renda; só reduce a cota autonómica.',
+    'Alugueiro con contrato anterior a 2015: 10,05 % do alugueiro, cunha base máxima de 9.040 € que se reduce desde 17.707,20 € de base impoñible e desaparece en 24.107,20 €; metade na cota estatal e metade na autonómica. Compra anterior a 2013: 7,5 % estatal e 7,5 % autonómico sobre un máximo de 9.040 €. Dedución autonómica por alugueiro: porcentaxe e límite da túa comunidade tras comprobar idade, colectivo e renda; só reduce a cota autonómica. Dedución autonómica por compra: porcentaxe do pagado ou dos xuros, coa base e o límite da túa comunidade; só reduce a cota autonómica.',
 };

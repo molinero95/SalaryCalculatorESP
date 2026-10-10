@@ -376,7 +376,7 @@ export default {
   removeSimulation: 'Remove simulation',
   housingTitle: 'Main home · annual assessment',
   housingHelp:
-    'The state transitional regimes (renting under a lease signed before 2015 and buying before 2013) and the regional rent deduction for general profiles in Andalusia, Asturias, the Balearic Islands, Castilla-La Mancha, Catalonia, Extremadura, Galicia, Madrid, Murcia and La Rioja are calculated. The Canary Islands, Cantabria, Castilla y León, the Valencian Community, municipality-dependent variants, regional purchase and landlord deductions and the new state rent deduction are not included yet.',
+    'The state transitional regimes (renting under a lease signed before 2015 and buying before 2013) and the regional rent deduction for general profiles in Andalusia, Asturias, the Balearic Islands, Castilla-La Mancha, Catalonia, Extremadura, Galicia, Madrid, Murcia and La Rioja are calculated. So is the regional purchase deduction that does not depend on the municipality in Andalusia, Extremadura, Madrid, Murcia and La Rioja. The Canary Islands, Cantabria, Castilla y León, the Valencian Community, municipality-dependent variants, other regional purchase deductions, landlord deductions and the new state rent deduction are not included yet.',
   housingTenure: 'Your main home',
   housingTenureNotProvided: 'Not stated',
   housingTenureTenant: 'Renting',
@@ -386,6 +386,12 @@ export default {
   housingLeaseBefore2015:
     'My lease was signed before 1 January 2015, I paid rent before that date and I was entitled to the state rent deduction in a year before 2015.',
   housingInvestment: 'Paid this year for the home: principal, interest and costs (€ / year)',
+  housingInterestPaid: 'Of that, mortgage interest (€ / year)',
+  housingFirstDwelling: 'It is my first habitual dwelling.',
+  housingProtectedDwelling: 'It is officially protected housing under my community’s rules.',
+  housingNewBuild: 'I bought it as the first transfer within three years of the new-build declaration.',
+  housingBuyerConfirmed:
+    'I meet the formal requirements of the regional purchase deduction: habitual dwelling in the community for at least three years, my net worth grows by at least the amount invested excluding interest, the interest is on a mortgage taken to buy it, and I have not claimed the deduction for another habitual dwelling before.',
   housingPurchaseBefore2013:
     'I bought it, or paid for its construction, before 1 January 2013, I already claimed the housing deduction before 2013, and my net worth grows at least by this year’s investment excluding interest.',
   housingLoanWithholding:
@@ -406,5 +412,5 @@ export default {
     'Deductions reduce the annual tax without making either quota negative. Only the pre-2013 purchase with a reported loan also lowers withholding by 2 points if you earn less than €33,007.20 a year; the regional rent deduction does not change payroll. Individual filing is assumed. The savings base is used only in the income limits; its tax is not calculated. Groups such as victims, the unemployed or widowed people are not collected. In Catalonia, the Valencian Community and the Balearic Islands the purchase is not calculated yet because its regional rate still has to be confirmed.',
   rowHousingDeduction: 'Housing deductions',
   helpHousingDeduction:
-    'Lease signed before 2015: 10.05% of rent on a base of up to €9,040, reduced from a taxable base of €17,707.20 and gone at €24,107.20; half against the state quota and half against the regional one. Purchase before 2013: 7.5% state and 7.5% regional on up to €9,040. Regional rent deduction: your community’s rate and cap after checking age, group and income; it only reduces the regional quota.',
+    'Lease signed before 2015: 10.05% of rent on a base of up to €9,040, reduced from a taxable base of €17,707.20 and gone at €24,107.20; half against the state quota and half against the regional one. Purchase before 2013: 7.5% state and 7.5% regional on up to €9,040. Regional rent deduction: your community’s rate and cap after checking age, group and income; it only reduces the regional quota. Regional purchase deduction: a percentage of the amount paid or of the interest, with your community’s base and cap; it only reduces the regional quota.',
 };

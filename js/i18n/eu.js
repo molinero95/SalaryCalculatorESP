@@ -381,7 +381,7 @@ export default {
   removeSimulation: 'Simulazioa ezabatu',
   housingTitle: 'Ohiko etxebizitza · urteko aitorpena',
   housingHelp:
-    'Estatuko araubide iragankorrak (2015 aurreko kontratua duen alokairua eta 2013 aurreko erosketa) eta profil orokorren alokairuagatiko kenkari autonomikoa kalkulatzen dira Andaluzian, Asturiasen, Balear Uharteetan, Gaztela-Mantxan, Katalunian, Extremaduran, Galizian, Madrilen, Murtzian eta Errioxan. Oraindik ez dira sartzen Kanariak, Kantabria, Gaztela eta Leon, Valentziako Erkidegoa, udalerriaren araberako aldaerak, erosketagatiko edo errentatzaileentzako kenkari autonomikoak, ezta alokairuagatiko estatuko kenkari berria ere.',
+    'Estatuko araubide iragankorrak (2015 aurreko kontratua duen alokairua eta 2013 aurreko erosketa) eta profil orokorren alokairuagatiko kenkari autonomikoa kalkulatzen dira Andaluzian, Asturiasen, Balear Uharteetan, Gaztela-Mantxan, Katalunian, Extremaduran, Galizian, Madrilen, Murtzian eta Errioxan. Baita udalerriaren mende ez dagoen erosketagatiko kenkari autonomikoa ere Andaluzian, Extremaduran, Madrilen, Murtzian eta Errioxan. Oraindik ez dira sartzen Kanariak, Kantabria, Gaztela eta Leon, Valentziako Erkidegoa, udalerriaren araberako aldaerak, erosketagatiko gainerako kenkari autonomikoak, errentatzaileentzakoak, ezta alokairuagatiko estatuko kenkari berria ere.',
   housingTenure: 'Zure ohiko etxebizitza',
   housingTenureNotProvided: 'Adierazi gabe',
   housingTenureTenant: 'Alokairua',
@@ -391,6 +391,12 @@ export default {
   housingLeaseBefore2015:
     'Nire kontratua 2015eko urtarrilaren 1a baino lehenagokoa da, data horren aurretik alokairua ordaindu nuen eta 2015 aurreko urteren batean alokairuagatiko estatuko kenkarirako eskubidea nuen.',
   housingInvestment: 'Aurten etxebizitzagatik ordaindua: amortizazioa, interesak eta gastuak (€ / urte)',
+  housingInterestPaid: 'Ordaindutakotik, mailegu hipotekarioaren interesak (€ / urte)',
+  housingFirstDwelling: 'Nire lehen ohiko etxebizitza da.',
+  housingProtectedDwelling: 'Etxebizitza babestua da nire erkidegoko araudiaren arabera.',
+  housingNewBuild: 'Lehen eskualdaketan erosi nuen, obra berriaren adierazpenetik hiru urteko epean.',
+  housingBuyerConfirmed:
+    'Erosketagatiko kenkari autonomikoaren baldintza formalak betetzen ditut: ohiko etxebizitza erkidegoan gutxienez hiru urtez, nire ondarea gutxienez inbertitutakoa handitzen da interesak kontatu gabe, interesak erosteko mailegu hipotekario batenak dira eta ez nuen lehenago beste ohiko etxebizitza batengatiko kenkaria aplikatu.',
   housingPurchaseBefore2013:
     '2013ko urtarrilaren 1a baino lehen erosi nuen, edo eraikuntza ordaindu nuen, 2013 aurretik etxebizitzagatiko kenkaria aplikatzen nuen eta nire ondarea gutxienez aurten inbertitutakoa handitzen da, interesak kontatu gabe.',
   housingLoanWithholding:
@@ -411,5 +417,5 @@ export default {
     'Kenkariek urteko aitorpeneko zerga murrizten dute, kuotak negatiboan utzi gabe. 2013 aurreko erosketak, jakinarazitako maileguarekin, atxikipena ere 2 puntu jaisten du urtean 33.007,20 € baino gutxiago kobratzen baduzu; alokairuagatiko kenkari autonomikoak ez du nomina aldatzen. Banakako tributazioan kalkulatzen da. Aurrezkiaren oinarria errenta mugetan soilik erabiltzen da; haren zerga ez da kalkulatzen. Ez dira jasotzen biktimen, langabeziaren edo alarguntasunaren taldeak. Katalunian, Valentziako Erkidegoan eta Balear Uharteetan erosketa ez da oraindik kalkulatzen, ehuneko autonomikoa berretsi gabe dagoelako.',
   rowHousingDeduction: 'Etxebizitzagatiko kenkariak',
   helpHousingDeduction:
-    '2015 aurreko kontratua duen alokairua: alokairuaren % 10,05, 9.040 €-ko oinarri maximoarekin, 17.707,20 €-ko zerga oinarritik aurrera murrizten dena eta 24.107,20 €-an desagertzen dena; erdia estatuko kuotan eta erdia autonomikoan. 2013 aurreko erosketa: % 7,5 estatukoa eta % 7,5 autonomikoa, gehienez 9.040 €-ren gainean. Alokairuagatiko kenkari autonomikoa: zure erkidegoko ehunekoa eta muga, adina, taldea eta errenta egiaztatu ondoren; kuota autonomikoa soilik murrizten du.',
+    '2015 aurreko kontratua duen alokairua: alokairuaren % 10,05, 9.040 €-ko oinarri maximoarekin, 17.707,20 €-ko zerga oinarritik aurrera murrizten dena eta 24.107,20 €-an desagertzen dena; erdia estatuko kuotan eta erdia autonomikoan. 2013 aurreko erosketa: % 7,5 estatukoa eta % 7,5 autonomikoa, gehienez 9.040 €-ren gainean. Alokairuagatiko kenkari autonomikoa: zure erkidegoko ehunekoa eta muga, adina, taldea eta errenta egiaztatu ondoren; kuota autonomikoa soilik murrizten du. Erosketagatiko kenkari autonomikoa: ordaindutakoaren edo interesen ehunekoa, zure erkidegoko oinarri eta mugarekin; kuota autonomikoa soilik murrizten du.',
 };

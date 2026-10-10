@@ -71,6 +71,7 @@ test('research facts are kept: four state rules, only DT 18ª touches payroll, t
     HOUSING_RULES.filter((rule) => rule.region !== null && rule.level === 'L1').map((rule) => rule.id),
     [
       'AND-1',
+      'AND-2',
       'AST-1',
       'BAL-1',
       'CLM-1',
@@ -79,10 +80,15 @@ test('research facts are kept: four state rules, only DT 18ª touches payroll, t
       'CLM-4',
       'CAT-1',
       'EXT-1',
+      'EXT-2',
+      'EXT-4',
       'GAL-1',
       'RIO-1',
+      'RIO-2',
       'MAD-1',
+      'MAD-2',
       'MUR-1',
+      'MUR-2',
     ],
   );
   assert.ok(HOUSING_RULES.filter((rule) => rule.region !== null).every((rule) => ['L1', 'L2'].includes(rule.level)));
@@ -136,7 +142,7 @@ test('without eligibility confirmed nothing is applied, and every skipped rule s
   assert.equal(tenant['MAD-1'], 'requirementsNotConfirmed');
   assert.equal(tenant.S1, 'provisionalLaw');
   assert.equal(tenant.S2, 'notEligible');
-  assert.equal(tenant['MAD-6'], 'notImplemented');
+  assert.equal(tenant['MAD-6'], 'municipalityRequired');
   assert.equal(tenant['MAD-2'], 'notApplicableToTenure');
   assert.equal(tenant['L-MAD-a'], 'requiresRentalIncome');
   assert.equal(tenant.S4, 'requiresRentalIncome');

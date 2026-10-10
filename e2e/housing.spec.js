@@ -59,3 +59,25 @@ test('changing the community clears region-specific housing attestations', async
   await expect(page.locator('#housingLeaseDays')).toHaveValue('365');
   await expect(page.locator('#housingCoTenants')).toHaveValue('1');
 });
+
+test('a young Madrid buyer gets the interest deduction after confirming its requirements', async ({ page }) => {
+  await chooseResidence(page, 'region:madrid');
+  await page.fill('#salary', '30000');
+  await page.fill('#age', '29');
+  await page.locator('#housing-fields > summary').click();
+  await page.selectOption('#housingTenure', 'owner');
+  await expect(page.locator('#housingInterestPaid-field')).toBeVisible();
+  await expect(page.locator('#housingNewBuild-field')).toBeHidden();
+  await expect(page.locator('#housingProtectedDwelling-field')).toBeHidden();
+  await page.fill('#housingInvestment', '8000');
+  await page.fill('#housingInterestPaid', '3000');
+  const body = page.locator('body');
+  await expect(body).not.toContainText('Deducciones por vivienda');
+  await page.locator('#housingBuyerConfirmed-field').click();
+  await expect(body).toContainText('Deducciones por vivienda');
+  await expect(body).toContainText('750,00');
+  await chooseResidence(page, 'region:murcia');
+  await expect(page.locator('#housingBuyerConfirmed')).not.toBeChecked();
+  await expect(page.locator('#housingNewBuild-field')).toBeVisible();
+  await expect(page.locator('#housingInterestPaid-field')).toBeHidden();
+});

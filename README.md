@@ -40,7 +40,7 @@ PP, PSOE, Podemos 2025 y Ciudadanos incluyen entradas informativas sin cálculo 
 
 El perfil salarial principal supone un pagador y un año completo. No hay un modelo completo de varios pagadores, autónomos, pluriactividad o declaración conjunta. El modelo foral admite determinadas rentas adicionales, pero eso no equivale a una calculadora completa de actividad autónoma. Las condiciones no soportadas deben consultarse en la documentación fiscal.
 
-**Vivienda:** calcula los regímenes transitorios estatales (alquiler anterior a 2015 y compra anterior a 2013) y la deducción autonómica por alquiler de los perfiles generales en 10 comunidades; el resto de reglas se explica como omitida. Las ampliaciones se implementan por fases verificadas. [Plan de vivienda](https://github.com/molinero95/SalaryCalculatorESP/pull/22) · [Backlog priorizado](docs/BACKLOG.md).
+**Vivienda:** calcula los regímenes transitorios estatales (alquiler anterior a 2015 y compra anterior a 2013) y la deducción autonómica por alquiler de los perfiles generales en 10 comunidades y la deducción autonómica por compra que no depende del municipio en 5; el resto de reglas se explica como omitida. Las ampliaciones se implementan por fases verificadas. [Plan de vivienda](https://github.com/molinero95/SalaryCalculatorESP/pull/22) · [Backlog priorizado](docs/BACKLOG.md).
 
 ## Datos y alertas de mantenimiento
 

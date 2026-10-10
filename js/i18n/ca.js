@@ -379,7 +379,7 @@ export default {
   removeSimulation: 'Eliminar simulació',
   housingTitle: 'Habitatge habitual · declaració anual',
   housingHelp:
-    'Es calculen els règims transitoris estatals (lloguer amb contracte anterior al 2015 i compra anterior al 2013) i la deducció autonòmica per lloguer dels perfils generals a Andalusia, Astúries, les Illes Balears, Castella-la Manxa, Catalunya, Extremadura, Galícia, Madrid, Múrcia i la Rioja. Encara no s’hi inclouen Canàries, Cantàbria, Castella i Lleó, la Comunitat Valenciana, les variants per municipi, les deduccions autonòmiques per compra o per a arrendadors ni la nova deducció estatal per lloguer.',
+    'Es calculen els règims transitoris estatals (lloguer amb contracte anterior al 2015 i compra anterior al 2013) i la deducció autonòmica per lloguer dels perfils generals a Andalusia, Astúries, les Illes Balears, Castella-la Manxa, Catalunya, Extremadura, Galícia, Madrid, Múrcia i la Rioja. També la deducció autonòmica per compra que no depèn del municipi a Andalusia, Extremadura, Madrid, Múrcia i la Rioja. Encara no s’hi inclouen Canàries, Cantàbria, Castella i Lleó, la Comunitat Valenciana, les variants per municipi, la resta de deduccions autonòmiques per compra, les d’arrendadors ni la nova deducció estatal per lloguer.',
   housingTenure: 'El teu habitatge habitual',
   housingTenureNotProvided: 'Sense indicar',
   housingTenureTenant: 'Lloguer',
@@ -389,6 +389,12 @@ export default {
   housingLeaseBefore2015:
     'El meu contracte és anterior a l’1 de gener de 2015, vaig pagar lloguer abans d’aquesta data i tenia dret a la deducció estatal per lloguer en algun any anterior al 2015.',
   housingInvestment: 'Pagat aquest any per l’habitatge: amortització, interessos i despeses (€ / any)',
+  housingInterestPaid: 'Del que s’ha pagat, interessos del préstec hipotecari (€ / any)',
+  housingFirstDwelling: 'És el meu primer habitatge habitual.',
+  housingProtectedDwelling: 'És un habitatge protegit segons la normativa de la meva comunitat.',
+  housingNewBuild: 'El vaig comprar en primera transmissió dins dels tres anys següents a la declaració d’obra nova.',
+  housingBuyerConfirmed:
+    'Compleixo els requisits formals de la deducció autonòmica per compra: habitatge habitual a la comunitat durant almenys tres anys, el meu patrimoni augmenta almenys en el que he invertit sense comptar interessos, els interessos són d’un préstec hipotecari per comprar-lo i no vaig aplicar abans la deducció per un altre habitatge habitual.',
   housingPurchaseBefore2013:
     'El vaig comprar, o en vaig pagar la construcció, abans de l’1 de gener de 2013, ja m’aplicava la deducció per habitatge abans del 2013 i el meu patrimoni augmenta almenys en allò invertit aquest any sense comptar interessos.',
   housingLoanWithholding:
@@ -409,5 +415,5 @@ export default {
     'Les deduccions redueixen l’impost de la declaració anual sense deixar les quotes en negatiu. Només la compra anterior al 2013 amb préstec comunicat rebaixa a més la retenció en 2 punts si cobres menys de 33.007,20 € l’any; la deducció autonòmica per lloguer no canvia la nòmina. Es calcula en tributació individual. La base de l’estalvi només s’usa en els límits de renda; el seu impost no es calcula. No es recullen els col·lectius de víctimes, atur o viduïtat. A Catalunya, la Comunitat Valenciana i les Illes Balears la compra encara no es calcula perquè falta confirmar-ne el percentatge autonòmic.',
   rowHousingDeduction: 'Deduccions per habitatge',
   helpHousingDeduction:
-    'Lloguer amb contracte anterior al 2015: 10,05 % del lloguer, amb base màxima de 9.040 € que es redueix a partir de 17.707,20 € de base imposable i desapareix a 24.107,20 €; meitat a la quota estatal i meitat a l’autonòmica. Compra anterior al 2013: 7,5 % estatal i 7,5 % autonòmic sobre un màxim de 9.040 €. Deducció autonòmica per lloguer: percentatge i límit de la teva comunitat després de comprovar edat, col·lectiu i renda; només redueix la quota autonòmica.',
+    'Lloguer amb contracte anterior al 2015: 10,05 % del lloguer, amb base màxima de 9.040 € que es redueix a partir de 17.707,20 € de base imposable i desapareix a 24.107,20 €; meitat a la quota estatal i meitat a l’autonòmica. Compra anterior al 2013: 7,5 % estatal i 7,5 % autonòmic sobre un màxim de 9.040 €. Deducció autonòmica per lloguer: percentatge i límit de la teva comunitat després de comprovar edat, col·lectiu i renda; només redueix la quota autonòmica. Deducció autonòmica per compra: percentatge del que s’ha pagat o dels interessos, amb la base i el límit de la teva comunitat; només redueix la quota autonòmica.',
 };

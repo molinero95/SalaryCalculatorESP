@@ -169,6 +169,11 @@ export const DEFAULT_INPUT = {
   housingInvestment: 0, // annual amount paid for the habitual dwelling: principal, interest and costs
   housingPurchaseBefore2013: false, // confirms DT 18ª eligibility (purchase and deduction before 2013)
   housingLoanWithholding: false, // the payer was told about a qualifying loan (form 145)
+  housingInterestPaid: 0, // mortgage interest included in housingInvestment, in euros
+  housingFirstDwelling: false, // the dwelling is the buyer's first habitual dwelling
+  housingProtectedDwelling: false, // the dwelling is officially protected housing in the community
+  housingNewBuild: false, // first transfer within three years of the new-build declaration (Murcia)
+  housingBuyerConfirmed: false, // confirms the formal requirements of the regional purchase deduction
   housingRentAid: 0, // public rent aid received in the year, in euros
   housingCoTenants: 1, // taxpayers entitled to the deduction for the same lease, this one included
   housingLeaseDays: 365, // days of 2026 with the lease in force (Castilla-La Mancha prorates by them)

@@ -36,7 +36,7 @@ País Basc i Navarra tenen regles pròpies per als perfils suportats. Les propos
 
 PP, PSOE, Podemos 2025 i Ciudadanos tenen entrades informatives quan falten dades verificades. No són models complets ni un catàleg exhaustiu. Les simulacions antigues no es reescriuen: torna a aplicar la proposta per adoptar les regles revisades. [Fonts i abast](docs/proposal-scope.md) · [Catàleg](data/proposals.json).
 
-**Habitatge:** es calculen els règims transitoris estatals (lloguer anterior al 2015 i compra anterior al 2013) i la deducció autonòmica per lloguer dels perfils generals a 10 comunitats; la resta de regles s’expliquen com a omeses. [Pla](https://github.com/molinero95/SalaryCalculatorESP/pull/22) · [Backlog](docs/BACKLOG.md).
+**Habitatge:** es calculen els règims transitoris estatals (lloguer anterior al 2015 i compra anterior al 2013) i la deducció autonòmica per lloguer dels perfils generals a 10 comunitats i la deducció autonòmica per compra que no depèn del municipi a 5; la resta de regles s’expliquen com a omeses. [Pla](https://github.com/molinero95/SalaryCalculatorESP/pull/22) · [Backlog](docs/BACKLOG.md).
 
 ## Actualització i alertes
 

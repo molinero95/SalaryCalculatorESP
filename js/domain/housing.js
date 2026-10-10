@@ -1,11 +1,13 @@
 // Housing deductions: input model, the state transitional rules and the record of
 // which researched rules apply (docs/housing-deductions-2026.md).
 // Calculated: the frozen state transitional regimes (DT 15ª rent, DT 18ª purchase
-// and its withholding reduction) and the regional tenant deductions for general
-// profiles (housing-tenant.js). Every other candidate rule is reported as skipped
+// and its withholding reduction), the regional tenant deductions for general
+// profiles (housing-tenant.js) and the regional buyer deductions that do not depend
+// on the municipality (housing-buyer.js). Every other candidate rule is reported as skipped
 // with the reason it was not applied.
 import { HOUSING_RULES, DT18_REGIONAL_RATE_PENDING } from '../data/housing-rules.js';
 import { REGIONAL_TENANT_RULES, PENDING_TENANT_RULES } from './housing-tenant.js';
+import { REGIONAL_BUYER_RULES, PENDING_BUYER_RULES } from './housing-buyer.js';
 import { REGIONAL_SCALES } from '../data/regions.js';
 import { isForal } from './fiscal-profile.js';
 
@@ -42,6 +44,7 @@ const HOUSING_AMOUNTS = [
   'housingRentAid',
   'housingSavingsBase',
   'housingFamilyUnitOtherBase',
+  'housingInterestPaid',
 ];
 const HOUSING_FLAGS = [
   'housingLeaseBefore2015',
@@ -52,6 +55,10 @@ const HOUSING_FLAGS = [
   'housingSingleParent',
   'housingTwoMinorChildren',
   'housingFamilyUnitConfirmed',
+  'housingBuyerConfirmed',
+  'housingFirstDwelling',
+  'housingProtectedDwelling',
+  'housingNewBuild',
 ];
 const amount = (value) => {
   const number = Number(value);
@@ -67,6 +74,8 @@ export const REGIONAL_HOUSING_ATTESTATIONS = [
   'housingSingleParent',
   'housingTwoMinorChildren',
   'housingFamilyUnitConfirmed',
+  'housingBuyerConfirmed',
+  'housingProtectedDwelling',
 ];
 
 const integerIn = (value, min, max, fallback) => {
@@ -94,6 +103,13 @@ export function housingRulesFor(region) {
 /** True when the community has a calculated regional tenant deduction. */
 export function hasRegionalTenantRule(region) {
   return housingRulesFor(region).some((rule) => Object.hasOwn(REGIONAL_TENANT_RULES, rule.id));
+}
+
+/** Ids of the calculated regional buyer rules of the community (the form asks only for their facts). */
+export function regionalBuyerRules(region) {
+  return housingRulesFor(region)
+    .map((rule) => rule.id)
+    .filter((id) => Object.hasOwn(REGIONAL_BUYER_RULES, id));
 }
 
 const SIDES_BY_TENURE = { tenant: ['tenant', 'any'], owner: ['buyer', 'any'], other: [] };
@@ -144,6 +160,16 @@ function regionalTenant(rule, input, income) {
   return result.regional > 0 ? { state: 0, regional: result.regional } : { reason: 'noAmount' };
 }
 
+/** Regional buyer rule: common guards, then the community's own test. */
+function regionalBuyer(rule, input, income) {
+  if (!(input.housingInvestment > 0)) return { reason: 'noAmount' };
+  if (!input.housingBuyerConfirmed) return { reason: 'requirementsNotConfirmed' };
+  if (!Object.values(income).every(Number.isFinite)) return { reason: 'incomeNotProvided' };
+  const result = REGIONAL_BUYER_RULES[rule.id](input, income);
+  if (result.reason) return result;
+  return result.regional > 0 ? { state: 0, regional: result.regional } : { reason: 'noAmount' };
+}
+
 function evaluate(rule, input, tenure, income) {
   if (rule.side === 'landlord') return { reason: 'requiresRentalIncome' };
   if (tenure === 'notProvided') return { reason: 'housingNotProvided' };
@@ -153,6 +179,8 @@ function evaluate(rule, input, tenure, income) {
   if (rule.id === 'S3') return transitionalPurchase(input);
   if (Object.hasOwn(PENDING_TENANT_RULES, rule.id)) return { reason: PENDING_TENANT_RULES[rule.id] };
   if (Object.hasOwn(REGIONAL_TENANT_RULES, rule.id)) return regionalTenant(rule, input, income);
+  if (Object.hasOwn(PENDING_BUYER_RULES, rule.id)) return { reason: PENDING_BUYER_RULES[rule.id] };
+  if (Object.hasOwn(REGIONAL_BUYER_RULES, rule.id)) return regionalBuyer(rule, input, income);
   return { reason: 'notImplemented' };
 }
 

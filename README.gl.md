@@ -36,7 +36,7 @@ País Vasco e Navarra teñen regras propias para os perfís soportados. As propo
 
 PP, PSOE, Podemos 2025 e Ciudadanos teñen entradas informativas cando faltan datos verificados. Non son modelos completos nin un catálogo exhaustivo. As simulacións antigas non se reescriben: aplica de novo a proposta para adoptar as regras revisadas. [Fontes e alcance](docs/proposal-scope.md) · [Catálogo](data/proposals.json).
 
-**Vivenda:** calcúlanse os réximes transitorios estatais (alugueiro anterior a 2015 e compra anterior a 2013) e a dedución autonómica por alugueiro dos perfís xerais en 10 comunidades; o resto de regras explícanse como omitidas. [Plan](https://github.com/molinero95/SalaryCalculatorESP/pull/22) · [Backlog](docs/BACKLOG.md).
+**Vivenda:** calcúlanse os réximes transitorios estatais (alugueiro anterior a 2015 e compra anterior a 2013) e a dedución autonómica por alugueiro dos perfís xerais en 10 comunidades e a dedución autonómica por compra que non depende do municipio en 5; o resto de regras explícanse como omitidas. [Plan](https://github.com/molinero95/SalaryCalculatorESP/pull/22) · [Backlog](docs/BACKLOG.md).
 
 ## Actualización e alertas
 

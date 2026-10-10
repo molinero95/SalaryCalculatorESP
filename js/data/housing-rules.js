@@ -59,7 +59,7 @@ const regional = (region, rules) =>
   }));
 
 /**
- * Regional tenant rules checked against the regional consolidated text on
+ * Regional tenant (phase 2) and buyer (phase 4) rules checked against the regional consolidated text on
  * 2026-10-10 (docs/housing-deductions-2026.md, "Phase 2 implementation").
  */
 const REGIONAL_TEXT_CHECKED = {
@@ -76,6 +76,13 @@ const REGIONAL_TEXT_CHECKED = {
   'AST-1': 'https://www.boe.es/eli/es-as/dlg/2014/10/22/2/con',
   'MUR-1': 'https://www.boe.es/eli/es-mc/dlg/2010/11/05/1/con',
   'RIO-1': 'https://www.boe.es/eli/es-ri/l/2017/10/27/10/con',
+  // Regional buyer rules checked in housing phase 4.
+  'MAD-2': 'https://www.boe.es/buscar/act.php?id=BOCM-m-2010-90068',
+  'AND-2': 'https://www.boe.es/eli/es-an/l/2021/10/20/5/con',
+  'EXT-2': 'https://www.boe.es/eli/es-ex/dlg/2018/04/10/1/con',
+  'EXT-4': 'https://www.boe.es/eli/es-ex/dlg/2018/04/10/1/con',
+  'MUR-2': 'https://www.boe.es/eli/es-mc/dlg/2010/11/05/1/con',
+  'RIO-2': 'https://www.boe.es/eli/es-ri/l/2017/10/27/10/con',
 };
 const promote = (rule) =>
   Object.hasOwn(REGIONAL_TEXT_CHECKED, rule.id) ? { ...rule, level: 'L1', url: REGIONAL_TEXT_CHECKED[rule.id] } : rule;

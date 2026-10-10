@@ -378,7 +378,7 @@ export default {
   removeSimulation: 'Eliminar simulación',
   housingTitle: 'Vivienda habitual · declaración anual',
   housingHelp:
-    'Se calculan los regímenes transitorios estatales (alquiler con contrato anterior a 2015 y compra anterior a 2013) y la deducción autonómica por alquiler de los perfiles generales en Andalucía, Asturias, Illes Balears, Castilla-La Mancha, Cataluña, Extremadura, Galicia, Madrid, Murcia y La Rioja. Aún no se incluyen Canarias, Cantabria, Castilla y León, la Comunitat Valenciana, las variantes por municipio, las deducciones autonómicas por compra o para arrendadores ni la nueva deducción estatal por alquiler.',
+    'Se calculan los regímenes transitorios estatales (alquiler con contrato anterior a 2015 y compra anterior a 2013) y la deducción autonómica por alquiler de los perfiles generales en Andalucía, Asturias, Illes Balears, Castilla-La Mancha, Cataluña, Extremadura, Galicia, Madrid, Murcia y La Rioja. También la deducción autonómica por compra que no depende del municipio en Andalucía, Extremadura, Madrid, Murcia y La Rioja. Aún no se incluyen Canarias, Cantabria, Castilla y León, la Comunitat Valenciana, las variantes por municipio, el resto de deducciones autonómicas por compra, las de arrendadores ni la nueva deducción estatal por alquiler.',
   housingTenure: 'Tu vivienda habitual',
   housingTenureNotProvided: 'Sin indicar',
   housingTenureTenant: 'Alquiler',
@@ -388,6 +388,13 @@ export default {
   housingLeaseBefore2015:
     'Mi contrato es anterior al 1 de enero de 2015, pagué alquiler antes de esa fecha y tenía derecho a la deducción estatal por alquiler en algún año anterior a 2015.',
   housingInvestment: 'Pagado este año por la vivienda: amortización, intereses y gastos (€ / año)',
+  housingInterestPaid: 'De lo pagado, intereses del préstamo hipotecario (€ / año)',
+  housingFirstDwelling: 'Es mi primera vivienda habitual.',
+  housingProtectedDwelling: 'Es una vivienda protegida según la normativa de mi comunidad.',
+  housingNewBuild:
+    'La compré en primera transmisión dentro de los tres años siguientes a la declaración de obra nueva.',
+  housingBuyerConfirmed:
+    'Cumplo los requisitos formales de la deducción autonómica por compra: vivienda habitual en la comunidad durante al menos tres años, mi patrimonio aumenta al menos en lo invertido sin contar intereses, los intereses son de un préstamo hipotecario para comprarla y no apliqué antes la deducción por otra vivienda habitual.',
   housingPurchaseBefore2013:
     'La compré, o pagué su construcción, antes del 1 de enero de 2013, ya me aplicaba la deducción por vivienda antes de 2013 y mi patrimonio aumenta al menos en lo invertido este año sin contar intereses.',
   housingLoanWithholding:
@@ -408,5 +415,5 @@ export default {
     'Las deducciones reducen el impuesto de la declaración anual sin dejar las cuotas en negativo. Solo la compra anterior a 2013 con préstamo comunicado rebaja además la retención en 2 puntos si cobras menos de 33.007,20 € al año; la deducción autonómica por alquiler no cambia la nómina. Se calcula en tributación individual. La base del ahorro solo se usa en los límites de renta; su impuesto no se calcula. No se recogen los colectivos de víctimas, desempleo o viudedad. En Cataluña, Comunitat Valenciana e Illes Balears la compra aún no se calcula porque falta confirmar su porcentaje autonómico.',
   rowHousingDeduction: 'Deducciones por vivienda',
   helpHousingDeduction:
-    'Alquiler con contrato anterior a 2015: 10,05 % del alquiler, con base máxima de 9.040 € que se reduce desde 17.707,20 € de base imponible y desaparece en 24.107,20 €; mitad en cuota estatal y mitad autonómica. Compra anterior a 2013: 7,5 % estatal y 7,5 % autonómico sobre un máximo de 9.040 €. Deducción autonómica por alquiler: porcentaje y límite de tu comunidad tras comprobar edad, colectivo y renta; solo reduce la cuota autonómica.',
+    'Alquiler con contrato anterior a 2015: 10,05 % del alquiler, con base máxima de 9.040 € que se reduce desde 17.707,20 € de base imponible y desaparece en 24.107,20 €; mitad en cuota estatal y mitad autonómica. Compra anterior a 2013: 7,5 % estatal y 7,5 % autonómico sobre un máximo de 9.040 €. Deducción autonómica por alquiler: porcentaje y límite de tu comunidad tras comprobar edad, colectivo y renta; solo reduce la cuota autonómica. Deducción autonómica por compra: porcentaje de lo pagado o de los intereses, con la base y el límite de tu comunidad; solo reduce la cuota autonómica.',
 };

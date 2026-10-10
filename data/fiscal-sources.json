@@ -159,7 +159,7 @@
       "id": "housingmadrid",
       "title": "Comunidad de Madrid, TR D.Leg. 1/2010 (texto consolidado), arts. 8, 12 and 18",
       "url": "https://www.boe.es/buscar/act.php?id=BOCM-m-2010-90068",
-      "covers": ["housing.regionalTenant"],
+      "covers": ["housing.regionalTenant", "housing.regionalBuyer"],
       "fiscalYear": 2026,
       "verifiedAt": "2026-10-10"
     },
@@ -173,9 +173,9 @@
     },
     {
       "id": "housingextremadura",
-      "title": "Extremadura, TR D.Leg. 1/2018, arts. 9 and 12 bis",
+      "title": "Extremadura, TR D.Leg. 1/2018, arts. 8, 9, 11 quater and 12 bis",
       "url": "https://www.boe.es/eli/es-ex/dlg/2018/04/10/1/con",
-      "covers": ["housing.regionalTenant"],
+      "covers": ["housing.regionalTenant", "housing.regionalBuyer"],
       "fiscalYear": 2026,
       "verifiedAt": "2026-10-10"
     },
@@ -213,9 +213,9 @@
     },
     {
       "id": "housingandalusia",
-      "title": "Andalucía, Ley 5/2021, art. 10",
+      "title": "Andalucía, Ley 5/2021, arts. 9 and 10",
       "url": "https://www.boe.es/eli/es-an/l/2021/10/20/5/con",
-      "covers": ["housing.regionalTenant"],
+      "covers": ["housing.regionalTenant", "housing.regionalBuyer"],
       "fiscalYear": 2026,
       "verifiedAt": "2026-10-10"
     },
@@ -229,17 +229,17 @@
     },
     {
       "id": "housingmurcia",
-      "title": "Región de Murcia, TR D.Leg. 1/2010, art. 1.Trece",
+      "title": "Región de Murcia, TR D.Leg. 1/2010, art. 1.Uno and 1.Trece",
       "url": "https://www.boe.es/eli/es-mc/dlg/2010/11/05/1/con",
-      "covers": ["housing.regionalTenant"],
+      "covers": ["housing.regionalTenant", "housing.regionalBuyer"],
       "fiscalYear": 2026,
       "verifiedAt": "2026-10-10"
     },
     {
       "id": "housingrioja",
-      "title": "La Rioja, Ley 10/2017, art. 32.12",
+      "title": "La Rioja, Ley 10/2017, art. 32.11 and 32.12",
       "url": "https://www.boe.es/eli/es-ri/l/2017/10/27/10/con",
-      "covers": ["housing.regionalTenant"],
+      "covers": ["housing.regionalTenant", "housing.regionalBuyer"],
       "fiscalYear": 2026,
       "verifiedAt": "2026-10-10"
     }

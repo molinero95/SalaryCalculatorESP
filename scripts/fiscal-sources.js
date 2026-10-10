@@ -19,6 +19,7 @@ export const REQUIRED_GROUPS = [
   'regionalAllowances',
   'housing.state',
   'housing.regionalTenant',
+  'housing.regionalBuyer',
   ...Object.keys(REGIONAL_SCALES).map((region) => `regional.${region}`),
   ...Object.keys(FORAL_TERRITORIES).map((territory) => `foral.${territory}`),
 ];

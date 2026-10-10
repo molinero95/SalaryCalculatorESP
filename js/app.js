@@ -20,7 +20,7 @@ import { renderResults, renderBreakdown } from './results.js';
 import * as storage from './storage.js';
 import { renderResidenceOptions, renderResidenceBrackets } from './presentation/residence.js';
 import { isForal, unsupportedFiscalProfile, unsupportedFiscalScenario } from './domain/fiscal-profile.js';
-import { hasRegionalTenantRule } from './domain/housing.js';
+import { hasRegionalTenantRule, regionalBuyerRules } from './domain/housing.js';
 import { PROPOSALS, UNMODELLED_PROPOSALS } from './data/proposals.js';
 import { salaryPercentile } from './data/salaries.js';
 import { cumulativeInflation, BRACKETS_LAST_UPDATED } from './data/cpi.js';
@@ -551,6 +551,14 @@ function update() {
     'housingRegionalConfirmed',
   ])
     $(`#${field}-field`).hidden = !regionalTenant;
+  // Regional purchase deductions: only the facts the community's calculated rules use.
+  const buyerRules = tenure === 'owner' ? regionalBuyerRules(state.input.region) : [];
+  const buyerUses = (...ids) => ids.some((id) => buyerRules.includes(id));
+  $('#housingInterestPaid-field').hidden = !buyerUses('MAD-2', 'EXT-2', 'EXT-4');
+  $('#housingFirstDwelling-field').hidden = !buyerUses('EXT-2', 'EXT-4');
+  $('#housingProtectedDwelling-field').hidden = !buyerUses('AND-2', 'EXT-2');
+  $('#housingNewBuild-field').hidden = !buyerUses('MUR-2');
+  $('#housingBuyerConfirmed-field').hidden = buyerRules.length === 0;
   $('#housingLeaseDays-field').hidden = !regionalTenant || state.input.region !== 'castillaLaMancha';
   $('#housingTwoMinorChildren-field').hidden = !regionalTenant || state.input.region !== 'galicia';
   $('#housingFamilyUnitConfirmed-field').hidden = !regionalTenant || state.input.region !== 'madrid';
