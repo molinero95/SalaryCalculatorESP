@@ -62,6 +62,19 @@ function summaryStrip(names, current, simulation) {
 }
 
 export function renderResults({ cards, summary, sticky }, { names, current, simulation }) {
+  if (!simulation) {
+    const options = {
+      showRefund: Math.abs(current.incomeTax.refund) >= 0.5,
+      showInKind: current.flexible.total > 0,
+      showPension: current.pension.total > 0,
+    };
+    cards.innerHTML =
+      resultCard('current', names.current, current, undefined, options) +
+      `<article class="result result-simulation"><header><span class="chip chip-simulation">${t('simulation')}</span><h3>${escapeHtml(names.simulation)}</h3></header><p class="warning">${t('foralScenarioUnsupported')}</p></article>`;
+    summary.textContent = '';
+    sticky.textContent = '';
+    return;
+  }
   const options = {
     showRefund: Math.abs(current.incomeTax.refund) >= 0.5 || Math.abs(simulation.incomeTax.refund) >= 0.5,
     showInKind: simulation.flexible.total > 0,

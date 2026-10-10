@@ -57,6 +57,8 @@ export default {
     'Fills solters sense discapacitat, adopcions ni canvis familiars durant l’any: conviuen amb tu i renda no exempta fins a l’IPREM. Edats al final de l’any. Còmput íntegre: un únic progenitor amb dret; altrament es reparteix entre dos.',
   foralUnsupported:
     'Perfil foral no validat o requisits familiars pendents. S’oculten els resultats. Revisa les edats i confirma els requisits de fills i ascendents.',
+  foralScenarioUnsupported:
+    'Aquesta simulació no està modelada per al teu territori foral. Les propostes polítiques i els canvis de l’IRPF, límits de retribució flexible o pensions del règim comú no s’apliquen a Navarra, Bizkaia, Gipuzkoa o Àlaba. No mostrem un net ni una diferència simulats. Pots consultar el salari vigent o simular canvis de cotitzacions.',
   foralScope:
     'Model foral de nòmina d’un treballador en actiu i declaració individual: edat, contractes temporals inferiors a l’any, fills i ascendents elegibles, discapacitat pròpia, retribució flexible, pensions ordinàries i rendes positives de l’apartat anual. No és una declaració completa: exclou conjunta, pèrdues i saldos anteriors, dependència, discapacitat familiar, adopcions, EPSV preferents i altres deduccions. Treball i residència al mateix territori. Les propostes d’IRPF comú no en canvien les regles.',
 

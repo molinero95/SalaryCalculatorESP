@@ -1,3 +1,4 @@
+import { CURRENT_SCENARIO } from '../defaults.js';
 import { FORAL_ANNUAL_AMOUNTS } from './foral-assessment.js';
 import { unsupportedForalFamily } from './foral-family.js';
 import { FORAL_TERRITORIES } from '../data/foral.js';
@@ -23,4 +24,17 @@ export function unsupportedFiscalProfile(input) {
     (input.foralAscendantClaimants ?? 1) > 10 ||
     (ascendants > 0 && input.foralAscendantsConfirmed !== true)
   );
+}
+
+/** These scenario groups are replaced by territorial rules in the foral engine. */
+export function unsupportedFiscalScenario(input, scenario) {
+  if (!isForal(input.region)) return false;
+  if (scenario.proposal) return true;
+  const equal = (a, b) => {
+    if (a === b) return true;
+    if (!a || !b || typeof a !== 'object' || typeof b !== 'object') return false;
+    const keys = Object.keys(a);
+    return keys.length === Object.keys(b).length && keys.every((key) => Object.hasOwn(b, key) && equal(a[key], b[key]));
+  };
+  return ['incomeTax', 'flexible', 'pension'].some((key) => !equal(scenario[key], CURRENT_SCENARIO[key]));
 }

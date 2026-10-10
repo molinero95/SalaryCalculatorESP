@@ -207,7 +207,7 @@ for (const region of Object.keys(FORAL_TERRITORIES)) {
     const scenario = clone(CURRENT_SCENARIO);
     scenario.incomeTax.brackets = [{ upTo: null, rate: 0 }];
     scenario.incomeTax.generalExpenses = 100000;
-    assert.deepEqual(computePayroll(inputFor(region), scenario), computePayroll(inputFor(region), CURRENT_SCENARIO));
+    assert.throws(() => computePayroll(inputFor(region), scenario), /Unsupported foral fiscal scenario/);
   });
   for (const extra of [{ children: 1 }, { childrenUnder3: 1 }, { dependents65: 1 }]) {
     test(`${region}: unsupported profile ${JSON.stringify(extra)} never uses common rules`, () => {
