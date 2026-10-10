@@ -146,7 +146,7 @@ for (const language of ['es', 'ca', 'eu', 'gl', 'en']) {
 test('sharing unchanged rules opens a new default simulation over a saved proposal', async ({ page }) => {
   const hash = await page.evaluate(async () => {
     const { encode } = await import('/js/storage.js');
-    return encode({ simulation: {} });
+    return encode({ current: {}, simulation: {} });
   });
   await page.locator('#tab-proposals').click();
   await page.selectOption('#proposal-select', 'vox2024');
@@ -182,7 +182,7 @@ test('a restored unsupported foral reference initializes and can be reset', asyn
   await page.reload();
   await expect(page.locator('#fiscal-scope')).toContainText('Esta simulación no está modelada');
   await page.locator('#tab-simulation').click();
-  await page.locator('.card-current summary').click();
+  await page.locator('.card-current > summary').click();
   await page.locator('#reset-current').click();
   await expect(page.locator('.result-current .headline strong')).toBeVisible();
   expect(errors).toEqual([]);

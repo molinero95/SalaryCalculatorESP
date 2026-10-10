@@ -103,9 +103,10 @@ test('sharing includes only changed active scenario rules, never personal data o
   state.simulation.name = 'Active';
   state.simulation.incomeTax.generalExpenses = 3000;
   assert.deepEqual(JSON.parse(JSON.stringify(sharePayload(state))), {
+    current: {},
     simulation: { name: 'Active', incomeTax: { generalExpenses: 3000 } },
   });
-  assert.deepEqual(JSON.parse(JSON.stringify(sharePayload(createSession()))), { simulation: {} });
+  assert.deepEqual(JSON.parse(JSON.stringify(sharePayload(createSession()))), { current: {}, simulation: {} });
 });
 
 test('sharing unchanged rules opens those rules rather than a recipient existing proposal', () => {
@@ -216,4 +217,13 @@ test('each restored scenario owns its arrays, independently of the source object
 test('the browser injects language configuration without an application translation dependency', () => {
   assert.equal(createSession({}, null, { defaultLanguage: 'en' }).language, 'en');
   assert.equal(createSession({ language: 'ca' }, null, { defaultLanguage: 'en' }).language, 'ca');
+});
+
+test('shared default reference replaces recipient custom rules while preserving personal input', () => {
+  const state = createSession(
+    { input: { salary: 73000 }, current: { incomeTax: { personalAllowance: 10000 } } },
+    sharePayload(createSession()),
+  );
+  assert.deepEqual(state.current, CURRENT_SCENARIO);
+  assert.equal(state.input.salary, 73000);
 });
