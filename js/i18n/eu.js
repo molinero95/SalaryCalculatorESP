@@ -233,8 +233,8 @@ export default {
   f_solidarity3: 'Elkartasuna: 3. tartea',
   howTitle: 'Nola dabil',
   how1: 'Sartu zure soldata gordina eta zure egoera pertsonala.',
-  how2: '«Proposamena simulatu» atalean, aldatu tarteak, gutxienekoak edo kotizazioak ebaluatu nahi duzun neurria islatzeko.',
-  how3: 'Alderatu berehala zure egungo nomina simulatuarekin, eta gorde edo partekatu proposamena esteka batekin.',
+  how2: '«Aldaketak simulatu» atalean, aldatu tarteak, gutxienekoak edo kotizazioak neurri bat ebaluatzeko.',
+  how3: 'Alderatu nomina simulazioarekin eta partekatu proposamena esteka batekin.',
   simTitle: 'Proposamena simulatu',
   simDesc:
     'Zehaztu hemen ebaluatu nahi duzun aldaketa. Indarreko araudia du abiapuntu; aldatzen dituzun balioak nabarmendu egiten dira.',

@@ -232,8 +232,8 @@ export default {
   f_solidarity3: 'Solidaritat: tram 3',
   howTitle: 'Com funciona',
   how1: 'Introdueix el teu salari brut i la teva situació personal.',
-  how2: 'A «Proposta a simular», canvia trams, mínims o cotitzacions per reflectir la mesura que vulguis avaluar.',
-  how3: "Compara a l'instant la teva nòmina actual amb la simulada, i desa o comparteix la proposta amb un enllaç.",
+  how2: 'A «Simular canvis», modifica trams, mínims o cotitzacions per avaluar una mesura.',
+  how3: 'Compara la nòmina amb la simulació i comparteix la proposta amb un enllaç.',
   simTitle: 'Proposta a simular',
   simDesc:
     'Defineix aquí el canvi que vols avaluar. Parteix de la normativa vigent; els valors que modifiquis es ressalten.',

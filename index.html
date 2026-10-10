@@ -440,41 +440,36 @@
         </details>
       </section>
 
-      <details
-        id="simulation-panel"
-        role="tabpanel"
-        aria-labelledby="tab-simulation"
-        class="card card-simulation collapsible"
-        open
-        hidden
-      >
-        <summary>
-          <h2 id="simulation-title" class="section-title">
-            <span class="chip chip-simulation" data-i18n="simulation"></span><span data-i18n="simTitle"></span>
-          </h2>
-        </summary>
-        <p class="help" data-i18n="simDesc"></p>
-        <div class="sim-tabs" role="group" data-i18n-aria="compareTitle" id="sim-tabs"></div>
+      <section id="simulation-panel" role="tabpanel" aria-labelledby="tab-simulation" hidden>
+        <details class="card card-simulation collapsible" open>
+          <summary>
+            <h2 id="simulation-title" class="section-title">
+              <span class="chip chip-simulation" data-i18n="simulation"></span><span data-i18n="simTitle"></span>
+            </h2>
+          </summary>
+          <p class="help" data-i18n="simDesc"></p>
+          <div class="sim-tabs" role="group" data-i18n-aria="compareTitle" id="sim-tabs"></div>
 
-        <div class="field field-name">
-          <label for="scenario-name" data-i18n="scenarioName"></label>
-          <input id="scenario-name" type="text" maxlength="60" />
-        </div>
+          <div class="field field-name">
+            <label for="scenario-name" data-i18n="scenarioName"></label>
+            <input id="scenario-name" type="text" maxlength="60" />
+          </div>
 
-        <div class="proposal-info" id="simulation-proposal-info" hidden></div>
+          <div class="proposal-info" id="simulation-proposal-info" hidden></div>
 
-        <div class="toolbar">
-          <button type="button" class="button secondary" id="copy-current" data-i18n="copyCurrent"></button>
-          <button type="button" class="button" id="share" data-i18n="share"></button>
-          <button type="button" class="button secondary" id="share-whatsapp">WhatsApp</button>
-          <button type="button" class="button secondary" id="share-x">X</button>
-          <button type="button" class="button secondary" id="share-native" data-i18n="shareNative" hidden></button>
-        </div>
+          <div class="toolbar">
+            <button type="button" class="button secondary" id="copy-current" data-i18n="copyCurrent"></button>
+            <button type="button" class="button" id="share" data-i18n="share"></button>
+            <button type="button" class="button secondary" id="share-whatsapp">WhatsApp</button>
+            <button type="button" class="button secondary" id="share-x">X</button>
+            <button type="button" class="button secondary" id="share-native" data-i18n="shareNative" hidden></button>
+          </div>
 
-        <p class="help share-note" data-i18n="shareNote"></p>
+          <p class="help share-note" data-i18n="shareNote"></p>
 
-        <div id="settings-simulation" class="settings"></div>
-      </details>
+          <div id="settings-simulation" class="settings"></div>
+        </details>
+      </section>
 
       <details class="card card-current collapsible" hidden>
         <summary>

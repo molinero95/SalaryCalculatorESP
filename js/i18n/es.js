@@ -232,8 +232,8 @@ export default {
   f_solidarity3: 'Solidaridad: tramo 3',
   howTitle: 'Cómo funciona',
   how1: 'Introduce tu salario bruto y tu situación personal.',
-  how2: 'En «Propuesta a simular», cambia tramos, mínimos o cotizaciones para reflejar la medida que quieras evaluar.',
-  how3: 'Compara al instante tu nómina actual con la simulada, y guarda o comparte la propuesta con un enlace.',
+  how2: 'En «Simular cambios», modifica tramos, mínimos o cotizaciones para evaluar una medida.',
+  how3: 'Compara tu nómina con la simulación y comparte la propuesta con un enlace.',
   simTitle: 'Propuesta a simular',
   simDesc:
     'Define aquí el cambio que quieres evaluar. Parte de la normativa vigente; los valores que modifiques se resaltan.',

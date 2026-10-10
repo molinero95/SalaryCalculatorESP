@@ -60,6 +60,8 @@ const navigation = bindProductNavigation(
 
 function applyViewVisibility() {
   const view = navigation.view;
+  $('#results-section').setAttribute('role', view === 'salary' ? 'tabpanel' : 'region');
+  $('#results-section').setAttribute('aria-labelledby', view === 'salary' ? 'tab-salary' : 'simulation-title');
   $('#simulation-panel').hidden = view !== 'simulation';
   $('.card-current').hidden = view !== 'simulation';
   $('#proposals-panel').hidden = view !== 'proposals';

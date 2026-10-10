@@ -232,8 +232,8 @@ export default {
   f_solidarity3: 'Solidarity: band 3',
   howTitle: 'How it works',
   how1: 'Enter your gross salary and personal situation.',
-  how2: 'In “Proposal to simulate”, change brackets, allowances or contributions to reflect the measure you want to test.',
-  how3: 'Instantly compare your current payslip with the simulated one, and save or share the proposal with a link.',
+  how2: 'In “Simulate changes”, edit brackets, allowances or contributions to evaluate a measure.',
+  how3: 'Compare your payslip with the simulation and share the proposal with a link.',
   simTitle: 'Proposal to simulate',
   simDesc:
     'Define the change you want to test here. It starts from the current rules; any value you modify is highlighted.',
