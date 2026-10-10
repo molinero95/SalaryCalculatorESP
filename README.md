@@ -42,6 +42,8 @@ El perfil salarial principal supone un pagador y un año completo. No hay un mod
 
 **Vivienda:** calcula los regímenes transitorios estatales (alquiler anterior a 2015 y compra anterior a 2013) y la deducción autonómica por alquiler de los perfiles generales en 10 comunidades; el resto de reglas se explica como omitida. Las ampliaciones se implementan por fases verificadas. [Plan de vivienda](https://github.com/molinero95/SalaryCalculatorESP/pull/22) · [Backlog priorizado](docs/BACKLOG.md).
 
+**Estado de desarrollo:** las fases 1 y 2 están en revisión en las PR [#26](https://github.com/molinero95/SalaryCalculatorESP/pull/26) y [#29](https://github.com/molinero95/SalaryCalculatorESP/pull/29), aún sin fusionar. Las referencias visuales de macOS ya pasan en CI. Para la fase 3 están preparados los [datos de población del INE de 2025](docs/housing-municipal-data.md), con 8.132 municipios y códigos oficiales; quedan las listas autonómicas de despoblación y verificar la fecha de población que exige cada regla. Disponer de estos datos no activa deducciones municipales.
+
 ## Datos y alertas de mantenimiento
 
 El catálogo fiscal registra ejercicio, fuentes y fechas de verificación. Un workflow semanal (lunes) y manual comprueba las URLs conocidas y detecta cambios, fuentes inaccesibles y grupos de parámetros pendientes de revisión. Los casos persisten con historial y requieren revisión explícita con evidencia; recuperar una fuente o aceptar su huella no los cierra.

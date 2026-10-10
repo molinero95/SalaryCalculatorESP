@@ -42,6 +42,8 @@ The main employment profile assumes one payer and a complete year. Multiple paye
 
 **Housing:** the state transitional regimes (lease before 2015, purchase before 2013) and the regional rent deduction for general profiles in 10 communities are calculated; other rules are explained as skipped. Further phases require verified rules. [Housing plan](https://github.com/molinero95/SalaryCalculatorESP/pull/22) · [Prioritized backlog](docs/BACKLOG.md).
 
+**Development status:** phases 1 and 2 are under review in PRs [#26](https://github.com/molinero95/SalaryCalculatorESP/pull/26) and [#29](https://github.com/molinero95/SalaryCalculatorESP/pull/29), still unmerged. Reviewed macOS visual references now pass CI. Phase 3 has [INE 2025 population data](docs/housing-municipal-data.md) for 8,132 municipalities with official codes; regional depopulation lists and the population reference date required by each rule remain to be verified. These data do not activate municipal deductions.
+
 ## Data maintenance and alerts
 
 The fiscal catalogue records fiscal years, sources and verification dates. A weekly Monday/manual workflow checks known URLs for document changes, unavailable sources and overdue parameter groups. Cases persist with history until an explicit evidence-backed review; source recovery or fingerprint acceptance does not close them.

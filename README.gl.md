@@ -38,6 +38,8 @@ PP, PSOE, Podemos 2025 e Ciudadanos teñen entradas informativas cando faltan da
 
 **Vivenda:** calcúlanse os réximes transitorios estatais (alugueiro anterior a 2015 e compra anterior a 2013) e a dedución autonómica por alugueiro dos perfís xerais en 10 comunidades; o resto de regras explícanse como omitidas. [Plan](https://github.com/molinero95/SalaryCalculatorESP/pull/22) · [Backlog](docs/BACKLOG.md).
 
+**Estado do desenvolvemento:** as fases 1 e 2 están en revisión nas PR [#26](https://github.com/molinero95/SalaryCalculatorESP/pull/26) e [#29](https://github.com/molinero95/SalaryCalculatorESP/pull/29), aínda sen fusionar. As referencias visuais de macOS xa pasan en CI. Para a fase 3 están preparados os [datos de poboación do INE de 2025](docs/housing-municipal-data.md), con 8.132 municipios e códigos oficiais; quedan as listas autonómicas de despoboamento e verificar a data de poboación que esixe cada regra. Estes datos non activan deducións municipais.
+
 ## Actualización e alertas
 
 O catálogo rexistra exercicio, fontes e datas de verificación. O monitor semanal (luns) e manual comproba URLs coñecidas: cambios, fontes inaccesibles e parámetros pendentes de revisión. Os casos persisten con historial e esixen revisión con evidencia; recuperar a fonte ou aceptar a pegada non os pecha.

@@ -39,6 +39,10 @@ Update this file when a decision or item materially changes. Record why, not a r
 
 Residence presets cover all communities. [Expanded foral payroll](foral-payroll.md) includes age, family situations, short temporary contracts, ascendants, flexible compensation, ordinary pensions and selected positive annual incomes/habitual-rent credits. Remaining work is joint assessment, dependency/disabled relatives, adoption, special rental profiles, losses/carry-forwards, additional credits, preferred EPSV data and independent workplace/withholding jurisdiction. Keep applicability explicit; the current model must not be labelled complete IRPF.
 
+## Housing municipal-data boundary
+
+The [municipal population handoff](housing-municipal-data.md) supplies official 2025 INE codes and populations for housing research. Keep it separate from residence presets and runtime fiscal eligibility until the rule-specific date, population threshold and any official depopulation designation are verified. Prepared data and passing visual checks do not complete HOUSE-01; phase/review status lives in [BACKLOG.md](BACKLOG.md#house-01--claude-handoff).
+
 ## Manual scenario controls
 
 Manual save/load/delete and JSON import/export were removed because the user finds them unused and wants a simpler simulator. Open simulation tabs and form state still restore automatically; links share proposal parameters. Obsolete named-scenario storage is ignored without deleting browser data. Regression tests cover the simplified controls, existing tabs/proposals, sharing, restored-state validation, delayed analytics and offline operation.

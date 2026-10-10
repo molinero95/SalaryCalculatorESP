@@ -21,7 +21,7 @@ Priorities agreed on 10 October 2026. This is the canonical list of pending work
 | TEST-01     | P1       | Cover fiscal-year rollover and stale data behaviour                     | Ready       | Codex      | FRESH-03, FRESH-04 for new behaviour               |
 | TEST-02     | P1       | Verify an installed app upgrades from an older offline cache            | Ready       | Codex      | —                                                  |
 | DATA-01     | P1       | Trace each parameter group to legal articles and fixtures               | Ready       | Codex      | —                                                  |
-| HOUSE-01    | P1       | Implement housing in separately reviewed phases                         | Assigned    | Claude     | PR #22 research; primary-source checks per rule    |
+| HOUSE-01    | P1       | Implement housing in separately reviewed phases                         | In progress | Claude     | PR #22 research; primary-source checks per rule    |
 | POLICY-01   | P1       | Discover additional proposals and verify missing eligibility            | Research    | Unassigned | Primary sources and supported inputs               |
 | PAYERS-01   | P1       | Model several employment payers and mid-year job changes                | Research    | Unassigned | Verified annual aggregation and withholding inputs |
 | WORK-01     | P1       | Make salaried-worker scope explicit and support partial-year employment | Research    | Unassigned | PAYERS-01 for mixed employment histories           |
@@ -67,6 +67,14 @@ Start from an older app-shell cache and saved session, deploy the new version, a
 For each supported group, record legal article/table, fiscal period, effective date where applicable, supported eligibility, verification evidence and associated independent fixtures. Distinguish legal text from official summaries and historical manuals. Fail validation for missing group coverage or incompatible metadata; never reset verification dates merely to pass a check. Housing adds provenance for each new rule as it is implemented.
 
 ### HOUSE-01 — Claude handoff
+
+Current phase status on this branch (11 October 2026):
+
+- **Phases 1–2:** implementation is in open, unmerged PRs [#26](https://github.com/molinero95/SalaryCalculatorESP/pull/26) and [#29](https://github.com/molinero95/SalaryCalculatorESP/pull/29). Fiscal review remains required before integration.
+- **Visual unblock:** reviewed macOS references are published in #29 and [CI run 38090827051](https://github.com/molinero95/SalaryCalculatorESP/actions/runs/38090827051) passed lint, tests/browser checks and residence visuals. This validates rendering, not fiscal completeness; it does not change #26's earlier CI result.
+- **Phase 3 data:** [INE 2025 population for 8,132 municipalities](housing-municipal-data.md) is available in CSV/JSON with official codes and provenance. Remaining dependencies are regional depopulation lists and the population date/eligibility required by each rule. Do not apply deductions based on population alone where a legal designation is required.
+- **Phase 4:** municipality-dependent buyer rules share those dependencies; independently verified rules can be reviewed separately.
+- **Phase 5:** common-regime landlord support still requires a rental-income assessment module and verified relief rules.
 
 Research and proposed phases are in [PR #22](https://github.com/molinero95/SalaryCalculatorESP/pull/22). The research document is not yet merged at backlog creation. Implement the full plan in one PR per phase: input/provenance guards, state transitional rules, regional tenant rules, municipality-dependent rules, buyer rules and landlord scope. Verify original regional legal texts before implementing regional rules. Leave unclear temporal applicability and unstable measures pending. Family-unit income conditions must be collected or explicitly guarded; individual filing alone does not satisfy those conditions. Each phase includes independent threshold fixtures, applicable translations, offline checks and updated scope documentation. Codex reviews each delivery.
 

@@ -38,6 +38,8 @@ PP, PSOE, Podemos 2025 eta Ciudadanos informazio gisa agertzen dira egiaztatutak
 
 **Etxebizitza:** estatuko araubide iragankorrak (2015 aurreko alokairua eta 2013 aurreko erosketa) eta profil orokorren alokairuagatiko kenkari autonomikoa 10 erkidegotan kalkulatzen dira; gainerako arauak aplikatu gabe gisa azaltzen dira. [Plana](https://github.com/molinero95/SalaryCalculatorESP/pull/22) · [Backlog](docs/BACKLOG.md).
 
+**Garapenaren egoera:** 1. eta 2. faseak berrikusten ari dira [#26](https://github.com/molinero95/SalaryCalculatorESP/pull/26) eta [#29](https://github.com/molinero95/SalaryCalculatorESP/pull/29) PRetan; oraindik ez dira bateratu. Berrikusitako macOS erreferentzia bisualek CI probak gainditzen dituzte. 3. faserako [INEren 2025eko biztanleria-datuak](docs/housing-municipal-data.md) prest daude: 8.132 udalerri eta kode ofizialak. Autonomia-erkidegoetako despopulazio-zerrendak eta arau bakoitzak eskatzen duen biztanleriaren erreferentzia-data egiaztatzea falta da. Datu horiek ez dituzte udalerrien araberako kenkariak aktibatzen.
+
 ## Eguneratzea eta alertak
 
 Katalogoak zerga-ekitaldia, iturriak eta egiaztapen-datak jasotzen ditu. Asteko (astelehena) eta eskuzko monitoreak URL ezagunak egiaztatzen ditu: aldaketak, eskuraezinak diren iturriak eta berrikusi beharreko parametroak. Kasuek historia gordetzen dute eta frogadun berrikuspena behar dute; iturria berreskuratzeak edo hatz-marka onartzeak ez ditu ixten.

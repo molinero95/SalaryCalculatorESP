@@ -38,6 +38,8 @@ PP, PSOE, Podemos 2025 i Ciudadanos tenen entrades informatives quan falten dade
 
 **Habitatge:** es calculen els règims transitoris estatals (lloguer anterior al 2015 i compra anterior al 2013) i la deducció autonòmica per lloguer dels perfils generals a 10 comunitats; la resta de regles s’expliquen com a omeses. [Pla](https://github.com/molinero95/SalaryCalculatorESP/pull/22) · [Backlog](docs/BACKLOG.md).
 
+**Estat del desenvolupament:** les fases 1 i 2 estan en revisió a les PR [#26](https://github.com/molinero95/SalaryCalculatorESP/pull/26) i [#29](https://github.com/molinero95/SalaryCalculatorESP/pull/29), encara sense fusionar. Les referències visuals de macOS ja passen a CI. Per a la fase 3 estan preparades les [dades de població de l’INE del 2025](docs/housing-municipal-data.md), amb 8.132 municipis i codis oficials; resten les llistes autonòmiques de despoblament i verificar la data de població que exigeix cada regla. Aquestes dades no activen deduccions municipals.
+
 ## Actualització i alertes
 
 El catàleg registra exercici, fonts i dates de verificació. El monitor setmanal (dilluns) i manual comprova URLs conegudes: canvis, fonts inaccessibles i paràmetres pendents de revisió. Els casos persisteixen amb historial i exigeixen una revisió amb evidència; recuperar la font o acceptar l’empremta no els tanca.

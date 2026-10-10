@@ -63,6 +63,10 @@ Catalogue states are `modelled`, `partial` and `unmodelled`. Executable template
 
 Publication date, human verification date and automated download time are distinct. The weekly monitor hashes known URLs, rejects invalid PDF responses and preserves unapproved changed fingerprints. A bounded BOE general-provision title scan produces persistent review candidates. It does not cover AEAT/party indexes or original regional/foral bulletins and cannot interpret fiscal significance. Persistent cases on `monitor-state` require explicit evidence-backed reviews; recovery or fingerprint acceptance does not close pending cases. Actions summaries/artifacts are the reporting surface, not dedicated notification delivery. See [template-maintenance.md](template-maintenance.md) for review actions and baseline acceptance.
 
+## Housing review handoff
+
+Housing phases 1 and 2 remain in open PRs #26 and #29. The reviewed macOS snapshots in #29 pass CI; earlier snapshot failures are not a request to regenerate them again. [Municipal population data](housing-municipal-data.md) for 2025 are prepared as development-only CSV/JSON, keyed by official INE codes. They are not loaded by the app. Phase 3 still needs regional depopulation lists and rule-specific population reference dates; fiscal approval remains separate. See [HOUSE-01](BACKLOG.md#house-01--claude-handoff) for phase dependencies.
+
 ## Start a new session
 
 Read AGENTS.md, inspect Git status/branch and the current task, then read the relevant module, documentation and tests. Use repository files and current CI as the source of implementation truth; this context is not a claim that a particular branch or pending PR is up to date. Ask only for missing decisions that block the task. End with a concise handoff that distinguishes completed work, pending work and actual validation.
