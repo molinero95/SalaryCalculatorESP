@@ -42,7 +42,7 @@ PP, PSOE, Podemos 2025 i Ciudadanos tenen entrades informatives quan falten dade
 
 El catàleg registra exercici, fonts i dates de verificació. El monitor setmanal (dilluns) i manual comprova URLs conegudes: canvis, fonts inaccessibles i paràmetres pendents de revisió. Els casos persisteixen amb historial i exigeixen una revisió amb evidència; recuperar la font o acceptar l’empremta no els tanca.
 
-Informes a **GitHub Actions → Template source review**, fitxers descarregables i branca `monitor-state`. Els avisos de GitHub depenen dels ajustos del compte; no hi ha missatges dedicats ni alertes de manteniment dins de la calculadora. La descoberta de publicacions noves i les actualitzacions fiscals automàtiques són pendents. [Monitor](docs/template-maintenance.md) · [Fonts fiscals](data/fiscal-sources.json).
+Informes a **GitHub Actions → Template source review**, fitxers descarregables i branca `monitor-state`. Els avisos de GitHub depenen dels ajustos del compte; no hi ha missatges dedicats ni alertes de manteniment dins de la calculadora. Una cerca de títols del BOE de 14 dies detecta candidats; els índexs d’AEAT, butlletins autonòmics/forals originals, partits i actualitzacions fiscals automàtiques són pendents. [Monitor](docs/template-maintenance.md) · [Fonts fiscals](data/fiscal-sources.json).
 
 ## Privacitat i desenvolupament
 

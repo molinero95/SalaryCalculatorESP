@@ -42,7 +42,7 @@ PP, PSOE, Podemos 2025 e Ciudadanos teñen entradas informativas cando faltan da
 
 O catálogo rexistra exercicio, fontes e datas de verificación. O monitor semanal (luns) e manual comproba URLs coñecidas: cambios, fontes inaccesibles e parámetros pendentes de revisión. Os casos persisten con historial e esixen revisión con evidencia; recuperar a fonte ou aceptar a pegada non os pecha.
 
-Informes en **GitHub Actions → Template source review**, ficheiros descargables e rama `monitor-state`. Os avisos de GitHub dependen dos axustes da conta; non hai mensaxes dedicadas nin alertas de mantemento na calculadora. A descoberta de publicacións novas e as actualizacións fiscais automáticas están pendentes. [Monitor](docs/template-maintenance.md) · [Fontes fiscais](data/fiscal-sources.json).
+Informes en **GitHub Actions → Template source review**, ficheiros descargables e rama `monitor-state`. Os avisos de GitHub dependen dos axustes da conta; non hai mensaxes dedicadas nin alertas de mantemento na calculadora. Unha busca de títulos do BOE de 14 días detecta candidatos; os índices da AEAT, boletíns autonómicos/forais orixinais, partidos e actualizacións fiscais automáticas están pendentes. [Monitor](docs/template-maintenance.md) · [Fontes fiscais](data/fiscal-sources.json).
 
 ## Privacidade e desenvolvemento
 
