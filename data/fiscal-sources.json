@@ -1,0 +1,158 @@
+{
+  "schemaVersion": 1,
+  "note": "Provenance of the enacted-law parameters in js/defaults.js, js/data/regions.js and js/data/foral.js. verifiedAt is the date a human last checked the parameters against the source, not the date a download succeeded. Initial verifiedAt values are the date these sources were recorded in docs/fiscal-validation.md, docs/foral-payroll.md and the data file comments.",
+  "sources": [
+    {
+      "id": "lirpf",
+      "title": "Ley 35/2006 del IRPF (texto consolidado)",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2006-20764",
+      "monitorUrl": "https://www.boe.es/datosabiertos/api/legislacion-consolidada/id/BOE-A-2006-20764/metadatos",
+      "covers": [
+        "state.scale",
+        "state.allowances",
+        "state.employmentIncome",
+        "state.minWageCredit",
+        "state.filingThreshold",
+        "flexible",
+        "pension"
+      ],
+      "fiscalYear": 2026,
+      "verifiedAt": "2026-10-09"
+    },
+    {
+      "id": "rirpf",
+      "title": "Real Decreto 439/2007, Reglamento del IRPF (texto consolidado)",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2007-6820",
+      "monitorUrl": "https://www.boe.es/datosabiertos/api/legislacion-consolidada/id/BOE-A-2007-6820/metadatos",
+      "covers": ["withholding", "flexible"],
+      "fiscalYear": 2026,
+      "verifiedAt": "2026-10-09"
+    },
+    {
+      "id": "aeatwithholding2026",
+      "title": "AEAT, algoritmo de cálculo de retenciones 2026 (versión 10 de septiembre)",
+      "url": "https://sede.agenciatributaria.gob.es/static_files/Sede/Programas_ayuda/Retenciones/2026/Algoritmo%20Retenciones-2026_10sept.pdf",
+      "monitorUrl": "https://sede.agenciatributaria.gob.es/static_files/Sede/Programas_ayuda/Retenciones/2026/Algoritmo%20Retenciones-2026_10sept.pdf",
+      "covers": ["withholding"],
+      "fiscalYear": 2026,
+      "verifiedAt": "2026-10-09"
+    },
+    {
+      "id": "contributions2026",
+      "title": "Orden PJC/297/2026, cotización a la Seguridad Social 2026",
+      "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-7296",
+      "monitorUrl": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-7296",
+      "covers": ["socialSecurity"],
+      "fiscalYear": 2026,
+      "verifiedAt": "2026-10-09"
+    },
+    {
+      "id": "regionalmeasures2026",
+      "title": "Ministerio de Hacienda, Tributación Autonómica. Medidas 2026, capítulo I",
+      "url": "https://www.hacienda.gob.es/sgfal/financiacionterritorial/autonomica/capitulo-i-tributacion-autonomica-2026.pdf",
+      "monitorUrl": "https://www.hacienda.gob.es/sgfal/financiacionterritorial/autonomica/capitulo-i-tributacion-autonomica-2026.pdf",
+      "covers": [
+        "regional.andalusia",
+        "regional.aragon",
+        "regional.asturias",
+        "regional.balearic",
+        "regional.canary",
+        "regional.cantabria",
+        "regional.castillaLaMancha",
+        "regional.castillaLeon",
+        "regional.catalonia",
+        "regional.galicia",
+        "regional.madrid",
+        "regional.murcia",
+        "regional.rioja",
+        "regionalAllowances"
+      ],
+      "fiscalYear": 2026,
+      "verifiedAt": "2026-10-09"
+    },
+    {
+      "id": "aeatregionalscales2025",
+      "title": "AEAT, Manual práctico de Renta 2025, gravamen autonómico (escalas que se mantienen en 2026)",
+      "url": "https://sede.agenciatributaria.gob.es/Sede/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2025/c15-calculo-impuesto-determinacion-cuotas-integras/gravamen-base-liquidable-general/gravamen-autonomico.html",
+      "covers": [
+        "regional.andalusia",
+        "regional.aragon",
+        "regional.asturias",
+        "regional.balearic",
+        "regional.canary",
+        "regional.cantabria",
+        "regional.castillaLaMancha",
+        "regional.castillaLeon",
+        "regional.catalonia",
+        "regional.galicia",
+        "regional.madrid",
+        "regional.murcia",
+        "regional.rioja"
+      ],
+      "fiscalYear": 2025,
+      "verifiedAt": "2026-10-09"
+    },
+    {
+      "id": "aeatregionalallowances2025",
+      "title": "AEAT, Manual práctico de Renta 2025, cuadro de mínimos estatal y autonómicos",
+      "url": "https://sede.agenciatributaria.gob.es/Sede/en_gb/ayuda/manuales-videos-folletos/manuales-practicos/irpf-2025/c14-adecuacion-impuesto-circunstancias-personales/minimo-autonomico-personal-familiar/cuadro-minimos-personales-familiares-estatal-autonomicos.html",
+      "covers": ["regionalAllowances"],
+      "fiscalYear": 2025,
+      "verifiedAt": "2026-10-09"
+    },
+    {
+      "id": "valencia2026",
+      "title": "Comunitat Valenciana, Ley 5/2026, art. 18",
+      "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2026-19331",
+      "monitorUrl": "https://www.boe.es/buscar/doc.php?id=BOE-A-2026-19331",
+      "covers": ["regional.valencia"],
+      "fiscalYear": 2026,
+      "verifiedAt": "2026-10-09"
+    },
+    {
+      "id": "extremadura2026",
+      "title": "Extremadura, Ley 2/2026, disposición final 2.1",
+      "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2026-17839",
+      "monitorUrl": "https://www.boe.es/buscar/doc.php?id=BOE-A-2026-17839",
+      "covers": ["regional.extremadura"],
+      "fiscalYear": 2026,
+      "verifiedAt": "2026-10-09"
+    },
+    {
+      "id": "bizkaia",
+      "title": "Bizkaia, Norma Foral 13/2013 del IRPF (consolidada a 1 de enero de 2026)",
+      "url": "https://www.bizkaia.eus/documents/880307/15187815/ca_13_2013.pdf",
+      "monitorUrl": "https://www.bizkaia.eus/documents/880307/15187815/ca_13_2013.pdf",
+      "covers": ["foral.bizkaia"],
+      "fiscalYear": 2026,
+      "verifiedAt": "2026-10-09"
+    },
+    {
+      "id": "gipuzkoa",
+      "title": "Gipuzkoa, Norma Foral 3/2014 del IRPF (consolidada)",
+      "url": "https://www.gipuzkoa.eus/documents/2456431/80760262/NF+3-2014+%282025-3%29.pdf/8ab5c95c-3f89-8fdf-5cb8-01950e3983cc",
+      "monitorUrl": "https://www.gipuzkoa.eus/documents/2456431/80760262/NF+3-2014+%282025-3%29.pdf/8ab5c95c-3f89-8fdf-5cb8-01950e3983cc",
+      "covers": ["foral.gipuzkoa"],
+      "fiscalYear": 2026,
+      "verifiedAt": "2026-10-09"
+    },
+    {
+      "id": "alava",
+      "title": "Álava, Norma Foral 33/2013 del IRPF (consolidada)",
+      "url": "https://web.araba.eus/documents/d/araba/indice_norma-foral_irpf_cas-7-pdf",
+      "monitorUrl": "https://web.araba.eus/documents/d/araba/indice_norma-foral_irpf_cas-7-pdf",
+      "covers": ["foral.alava"],
+      "fiscalYear": 2026,
+      "verifiedAt": "2026-10-09"
+    },
+    {
+      "id": "navarra",
+      "title": "Navarra, DFL 4/2008, texto refundido del IRPF (consolidado)",
+      "url": "https://www.navarra.es/es/web/normativa-hacienda/-/texto-refundido-de-la-ley-foral-del-impuesto-sobre-la-renta-de-las-personas-f%C3%ADsicas-dfl-4/2008-de-2-de-junio-",
+      "monitorUrl": "https://www.navarra.es/es/web/normativa-hacienda/-/texto-refundido-de-la-ley-foral-del-impuesto-sobre-la-renta-de-las-personas-f%C3%ADsicas-dfl-4/2008-de-2-de-junio-",
+      "covers": ["foral.navarra"],
+      "fiscalYear": 2026,
+      "verifiedAt": "2026-10-09"
+    }
+  ]
+}

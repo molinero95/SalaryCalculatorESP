@@ -10,8 +10,9 @@ on:
         type: boolean
         default: false
 
+# Write access only to push the fingerprint baseline to the monitor-state branch.
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: template-source-review
@@ -20,25 +21,45 @@ concurrency:
 jobs:
   check:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - uses: actions/cache/restore@v4
-        with:
-          path: .source-monitor/baseline.json
-          key: template-sources-v1-${{ github.run_id }}-${{ github.run_attempt }}
-          restore-keys: template-sources-v1-
+      # The baseline lives in git on an orphan branch, not in Actions cache: caches
+      # are evicted after 7 days without use, which a weekly run can hit, and a lost
+      # baseline would silently adopt a changed document as the new reference.
+      - name: Restore baseline from monitor-state branch
+        run: |
+          mkdir -p .source-monitor
+          if git fetch --depth=1 origin +refs/heads/monitor-state:refs/remotes/origin/monitor-state; then
+            git show origin/monitor-state:baseline.json > .source-monitor/baseline.json
+          else
+            echo "::warning::No monitor-state branch yet; this run creates the first baseline."
+          fi
       - run: node scripts/check-template-sources.js
         env:
           ACCEPT_SOURCE_BASELINE: ${{ inputs.accept_baseline == true && 'true' || 'false' }}
-      - uses: actions/cache/save@v4
+      - name: Save baseline to monitor-state branch
         if: always() && hashFiles('.source-monitor/baseline.json') != ''
-        with:
-          path: .source-monitor/baseline.json
-          key: template-sources-v1-${{ github.run_id }}-${{ github.run_attempt }}
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          if git rev-parse --verify -q origin/monitor-state >/dev/null; then
+            git worktree add --detach "$RUNNER_TEMP/state" origin/monitor-state
+          else
+            git worktree add --orphan -b monitor-state "$RUNNER_TEMP/state"
+          fi
+          cp .source-monitor/baseline.json "$RUNNER_TEMP/state/baseline.json"
+          cd "$RUNNER_TEMP/state"
+          git add baseline.json
+          if git diff --cached --quiet; then
+            echo "Baseline unchanged."
+          else
+            git commit -m "Update source monitor baseline (run ${{ github.run_id }})"
+            git push origin HEAD:refs/heads/monitor-state
+          fi
       - uses: actions/upload-artifact@v4
         if: always()
         with:
