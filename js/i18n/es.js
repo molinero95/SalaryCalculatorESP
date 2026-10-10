@@ -57,6 +57,8 @@ export default {
     'Modelo de hijos solteros sin discapacidad, sin adopciones ni cambios familiares durante el año: conviven contigo y su renta no exenta no supera el IPREM. Introduce las edades al cierre del año. La casilla de cómputo íntegro significa un único progenitor con derecho; sin marcar, se reparte entre dos.',
   foralUnsupported:
     'Este perfil foral aún no está validado o faltan requisitos familiares. Se ocultan los resultados. Revisa los grupos de edad y confirma los requisitos de hijos y ascendientes.',
+  foralScenarioUnsupported:
+    'Esta simulación no está modelada para tu territorio foral. Las propuestas políticas y los cambios del IRPF, límites de retribución flexible o pensiones del régimen común no se aplican a Navarra, Bizkaia, Gipuzkoa o Álava. No mostramos un neto ni una diferencia simulados. Puedes consultar tu salario vigente o simular cambios de cotizaciones.',
   foralScope:
     'Modelo foral de nómina de un trabajador en activo y declaración individual: edad, contrato temporal inferior al año, hijos y ascendientes elegibles, discapacidad propia, retribución flexible, pensiones ordinarias y las otras rentas positivas indicadas en el apartado anual. No es una declaración completa: excluye conjunta, pérdidas y saldos anteriores, dependencia, discapacidad de familiares, adopciones, EPSV preferentes y otras deducciones. Trabajo y residencia se asumen en el mismo territorio. Las propuestas de IRPF común no cambian sus reglas.',
 

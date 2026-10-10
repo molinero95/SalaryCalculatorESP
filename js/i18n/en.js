@@ -57,6 +57,8 @@ export default {
     'Unmarried children without disability, adoption or family changes during the year: living with you and nonexempt income no higher than IPREM. Enter year-end ages. Full counting means one eligible parent; otherwise the credit is shared by two.',
   foralUnsupported:
     'This foral profile is not validated or family requirements are missing. Results are hidden. Check age groups and confirm child and ascendant eligibility.',
+  foralScenarioUnsupported:
+    'This simulation is not modelled for your foral territory. Political proposals and changes to common-regime income tax, flexible-pay limits or pension limits do not apply to Navarra, Bizkaia, Gipuzkoa or Álava. No simulated net pay or difference is shown. You can consult your current salary or simulate contribution changes.',
   foralScope:
     'Foral model for one active employee and individual annual assessment: age, temporary contracts shorter than a year, eligible children and ascendants, own disability, flexible pay, ordinary pensions and the positive income categories in the annual section. Not a complete tax return: excludes joint filing, losses and prior balances, dependency, relatives’ disability, adoption, preferred EPSV and other deductions. Work and residence are assumed in the same territory. Common-regime income-tax proposals do not change these rules.',
 

@@ -103,7 +103,7 @@ for (const region of regions) {
       pensionEmployee: 1000,
       pensionEmployer: 1000,
     });
-    assert.deepEqual(computePayroll(i, scenario), computePayroll(i, CURRENT_SCENARIO));
+    assert.throws(() => computePayroll(i, scenario), /Unsupported foral fiscal scenario/);
   });
 }
 for (const region of regions.slice(0, 3)) {

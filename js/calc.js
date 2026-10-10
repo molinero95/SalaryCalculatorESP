@@ -4,7 +4,7 @@ import { foralAdditionalIncome } from './domain/foral-assessment.js';
 import { pensionPlan } from './domain/pension.js';
 import { GENERAL_REGIONAL_SCALE, combineScales } from './defaults.js';
 import { applyScale, withholding, annualTax, employmentIncome } from './tax.js';
-import { isForal, unsupportedFiscalProfile } from './domain/fiscal-profile.js';
+import { isForal, unsupportedFiscalProfile, unsupportedFiscalScenario } from './domain/fiscal-profile.js';
 import { foralEmploymentIncome, foralWithholding, foralAnnualTax } from './foral-tax.js';
 export { applyScale } from './tax.js';
 
@@ -75,6 +75,7 @@ export const grossAnnualOf = (input) => (input.period === 'perPayment' ? input.s
  */
 export function computePayroll(input, scenario, grossAnnual = grossAnnualOf(input)) {
   if (unsupportedFiscalProfile(input)) throw new RangeError('Unsupported foral fiscal profile');
+  if (unsupportedFiscalScenario(input, scenario)) throw new RangeError('Unsupported foral fiscal scenario');
   const foral = isForal(input.region);
   const calculateWithholding = foral ? (i, p, gross, ss) => foralWithholding(i, gross, ss) : withholding;
   const calculateEarnings = foral ? (i, p, gross, ss) => foralEmploymentIncome(i, gross, ss) : employmentIncome;

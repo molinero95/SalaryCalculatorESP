@@ -19,7 +19,7 @@ import { renderChart, renderDataTable } from './chart.js';
 import { renderResults, renderBreakdown } from './results.js';
 import * as storage from './storage.js';
 import { renderResidenceOptions, renderResidenceBrackets } from './presentation/residence.js';
-import { isForal, unsupportedFiscalProfile } from './domain/fiscal-profile.js';
+import { isForal, unsupportedFiscalProfile, unsupportedFiscalScenario } from './domain/fiscal-profile.js';
 import { PROPOSALS, UNMODELLED_PROPOSALS } from './data/proposals.js';
 import { salaryPercentile } from './data/salaries.js';
 import { cumulativeInflation, BRACKETS_LAST_UPDATED } from './data/cpi.js';
@@ -82,20 +82,28 @@ const renderInput = bindPayrollForm($('#details-form'), state, update);
 // ---------------------------------------------------------------------------
 
 function renderComparisonChart() {
-  if (unsupportedFiscalProfile(state.input) || $('#chart-title').closest('section').hidden) return;
+  if (
+    unsupportedFiscalProfile(state.input) ||
+    unsupportedFiscalScenario(state.input, state.current) ||
+    $('#chart-title').closest('section').hidden
+  )
+    return;
   const xs = [];
   for (let x = CHART_RANGE.from; x <= CHART_RANGE.to; x += CHART_RANGE.step) xs.push(x);
 
   const baseline = xs.map((gross) => computePayroll(state.input, state.current, gross));
   const isDiff = state.chartMode === 'diff';
-  const simulations = state.simulations.map((scenario, i) => ({
-    name: simulationName(i),
-    className: `series-${i + 2}`,
-    values: xs.map((gross, j) => {
-      const result = computePayroll(state.input, scenario, gross);
-      return isDiff ? result.netAnnualAfterReturn - baseline[j].netAnnualAfterReturn : result.effectiveRate;
-    }),
-  }));
+  const simulations = state.simulations
+    .map((scenario, i) => ({ scenario, i }))
+    .filter(({ scenario }) => !unsupportedFiscalScenario(state.input, scenario))
+    .map(({ scenario, i }) => ({
+      name: simulationName(i),
+      className: `series-${i + 2}`,
+      values: xs.map((gross, j) => {
+        const result = computePayroll(state.input, scenario, gross);
+        return isDiff ? result.netAnnualAfterReturn - baseline[j].netAnnualAfterReturn : result.effectiveRate;
+      }),
+    }));
   const series = isDiff
     ? simulations
     : [
@@ -163,13 +171,16 @@ function renderSimulationTabs() {
 }
 
 function renderResultTabs() {
+  const header = $('.result-simulation header');
+  if (!header) return;
+  $('.result-simulation .result-sim-tabs')?.remove();
   const tabs = state.simulations
     .map(
       (_, i) =>
         `<button type="button" class="result-sim-tab ${i === state.active ? 'active' : ''}" aria-pressed="${i === state.active}" data-result-simulation="${i}">${escapeHtml(simulationName(i))}</button>`,
     )
     .join('');
-  $('.result-simulation header').insertAdjacentHTML(
+  header.insertAdjacentHTML(
     'afterend',
     `<div class="result-sim-tabs" role="group" aria-label="${escapeHtml(t('compareTitle'))}">${tabs}</div>`,
   );
@@ -372,6 +383,8 @@ function renderContext(current) {
   $('#percentile-text').textContent = t('percentileText', { p: percentile });
   $('#percentile-marker').style.left = `${percentile}%`;
 
+  $('#creep-text').parentElement.hidden = isForal(state.input.region);
+  if (isForal(state.input.region)) return;
   const indexed = computePayroll(state.input, indexedScenario(state.current, INFLATION_SINCE_BRACKETS, ''));
   $('#creep-text').textContent = t('creepText', {
     year: BRACKETS_LAST_UPDATED,
@@ -402,13 +415,18 @@ function renderComparison() {
 
   const rows = [
     { name: scenarioName('current'), result: current },
-    ...selected.map((s) => ({ ...s, result: computePayroll(state.input, s.scenario) })),
+    ...selected.map((s) => ({
+      ...s,
+      result: unsupportedFiscalScenario(state.input, s.scenario) ? null : computePayroll(state.input, s.scenario),
+    })),
   ];
   $('#compare-table').innerHTML = `
     <table class="table">
       <thead><tr><th scope="col"></th><th scope="col">${t('rowNetAfterReturn')}</th><th scope="col">${t('difference')}</th><th scope="col">${t('effectiveRate')}</th></tr></thead>
       <tbody>${rows
         .map(({ name, className, result }) => {
+          if (!result)
+            return `<tr><th scope="row">${escapeHtml(name)}</th><td colspan="3">${t('foralScenarioUnsupported')}</td></tr>`;
           const diff = result.netAnnualAfterReturn - current.netAnnualAfterReturn;
           const swatch = className ? `<span class="swatch ${className}"></span> ` : '';
           return `<tr><th scope="row">${swatch}${escapeHtml(name)}</th><td>${formatEuros(result.netAnnualAfterReturn)}</td><td>${className ? formatSignedEuros(diff) : '—'}</td><td>${result.effectiveRate === null ? '—' : formatPercent(result.effectiveRate)}</td></tr>`;
@@ -419,15 +437,20 @@ function renderComparison() {
   const xs = [];
   for (let x = CHART_RANGE.from; x <= CHART_RANGE.to; x += CHART_RANGE.step * 2) xs.push(x);
   const baseline = xs.map((gross) => computePayroll(state.input, state.current, gross).netAnnualAfterReturn);
-  const series = selected.map(({ name, className, scenario }) => ({
-    name,
-    className,
-    values: xs.map((gross, i) => computePayroll(state.input, scenario, gross).netAnnualAfterReturn - baseline[i]),
-  }));
+  const series = selected
+    .filter(({ scenario }) => !unsupportedFiscalScenario(state.input, scenario))
+    .map(({ name, className, scenario }) => ({
+      name,
+      className,
+      values: xs.map((gross, i) => computePayroll(state.input, scenario, gross).netAnnualAfterReturn - baseline[i]),
+    }));
 
+  $('#compare-chart').hidden = series.length === 0;
+  $('#compare-chart').innerHTML = '';
   $('#compare-legend').innerHTML = series
     .map((s) => `<span class="legend-item"><span class="swatch ${s.className}"></span>${escapeHtml(s.name)}</span>`)
     .join('');
+  if (!series.length) return;
   renderChart($('#compare-chart'), {
     xs,
     series,
@@ -533,14 +556,19 @@ function update() {
     foral ? (state.input.region === 'navarra' ? 'childrenNavarra' : 'childrenBasque') : 'children',
   );
   $('#foral-children-help').textContent = t(basque ? 'foralChildrenBasqueHelp' : 'foralChildrenNavarraHelp');
-  const unsupported = unsupportedFiscalProfile(state.input);
+  const unsupportedReference = unsupportedFiscalScenario(state.input, state.current);
+  const unsupportedSimulation = unsupportedFiscalScenario(state.input, state.simulation);
+  const unsupported = unsupportedFiscalProfile(state.input) || unsupportedReference;
   const scope = $('#fiscal-scope');
   scope.hidden = !isForal(state.input.region);
-  scope.textContent = t(unsupported ? 'foralUnsupported' : 'foralScope');
+  scope.textContent = t(
+    unsupportedReference ? 'foralScenarioUnsupported' : unsupported ? 'foralUnsupported' : 'foralScope',
+  );
   const outputSections = ['#results', '#context-title', '#chart-title', '#compare-title', '#breakdown-title'];
   for (const selector of outputSections) $(selector).closest('section').hidden = unsupported;
   $('#chart-title').closest('section').hidden =
     unsupported ||
+    !state.simulations.some((scenario) => !unsupportedFiscalScenario(state.input, scenario)) ||
     (foral &&
       [
         'foralRentalGross',
@@ -551,7 +579,8 @@ function update() {
       ].some((key) => state.input[key] > 0));
   $('#sticky-summary').hidden = unsupported;
   applyViewVisibility();
-  for (const id of ['share-whatsapp', 'share-x', 'share-native']) $(`#${id}`).disabled = unsupported;
+  for (const id of ['share-whatsapp', 'share-x', 'share-native'])
+    $(`#${id}`).disabled = unsupported || unsupportedSimulation;
   renderInputWarnings();
   if (unsupported) {
     lastResults = null;
@@ -563,19 +592,22 @@ function update() {
   const results = {
     names: scenarioNames(),
     current: computePayroll(state.input, state.current),
-    simulation: computePayroll(state.input, state.simulation),
+    simulation: unsupportedSimulation ? null : computePayroll(state.input, state.simulation),
   };
   lastResults = results;
   renderResults({ cards: $('#results'), summary: $('#difference'), sticky: $('#sticky-value') }, results);
   renderResultTabs();
-  renderBreakdown($('#breakdown'), results);
+  $('#difference').hidden = unsupportedSimulation || navigation.view !== 'simulation';
+  $('#sticky-summary').hidden = unsupportedSimulation || navigation.view !== 'simulation';
+  $('#breakdown-title').closest('section').hidden = unsupportedSimulation && navigation.view !== 'salary';
+  renderBreakdown($('#breakdown'), { ...results, simulation: results.simulation ?? results.current });
   renderContext(results.current);
   renderProposalInfo();
 
   renderInputWarnings();
 
   const flexWarning = $('#flex-warning');
-  flexWarning.hidden = !results.simulation.flexible.overCap;
+  flexWarning.hidden = !results.simulation?.flexible.overCap;
   flexWarning.textContent = t('flexOverCap', { cap: state.simulation.flexible.inKindCap });
 
   // The chart evaluates ~280 payrolls, so batch it to the next frame

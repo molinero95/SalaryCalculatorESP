@@ -26,3 +26,7 @@ Primary source: [Un programa para ti](https://movimientosumar.es/wp-content/uplo
 Cards show annual payroll net separately from net after the estimated tax return. The regional selection affects annual assessment, not the national payroll withholding procedure. Pension cash contributions and supported filing assumptions still apply as documented in fiscal-validation.md.
 
 Independent quota/threshold and integration tests: `tests/proposal-scope.test.js`; browser persistence/editor/card checks: `e2e/quality.spec.js`. Coverage and passing cases are not proof that a political proposal is complete.
+
+## Foral scenario applicability
+
+Common-regime political proposals and edits to the common income-tax, flexible-pay or pension parameter groups are not modelled for Navarra, Bizkaia, Gipuzkoa or Álava. The payroll engine rejects these scenarios instead of silently returning unchanged territorial results. The UI keeps current payroll visible, replaces unsupported simulation figures with an explicit notice, excludes unsupported chart series and marks comparison-table rows unavailable. Unsupported comparisons cannot generate result-based social messages. Returning to a common-regime residence or copying current rules restores the comparison. Employee/employer contribution changes remain supported. Common-regime inflation indexing is hidden for foral residence. Saved and shared scenarios are preserved, not rewritten.

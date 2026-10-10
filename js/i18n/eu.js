@@ -57,6 +57,8 @@ export default {
     'Desgaitasunik, adopziorik edo urteko familia-aldaketarik gabeko seme-alaba ezkongabeak: zurekin bizi dira eta salbuetsi gabeko errentak ez du IPREM gainditzen. Urte amaierako adinak. Zenbaketa osoa: eskubidea duen guraso bakarra; bestela bien artean banatzen da.',
   foralUnsupported:
     'Foru profila ez dago balioztatuta edo familia baldintzak falta dira. Emaitzak ezkutatzen dira. Egiaztatu adinak eta baieztatu seme-alaben eta arbasoen baldintzak.',
+  foralScenarioUnsupported:
+    'Simulazio hau ez dago zure foru-lurralderako modelatuta. Proposamen politikoak eta araubide erkideko PFEZaren, ordainsari malguaren mugen edo pentsioen mugen aldaketak ez dira Nafarroan, Bizkaian, Gipuzkoan edo Araban aplikatzen. Ez dugu simulatutako soldata garbirik edo alderik erakusten. Indarreko soldata kontsulta dezakezu edo kotizazioen aldaketak simulatu.',
   foralScope:
     'Langile aktibo bakarraren foru nomina eta banakako aitorpen eredua: adina, urtebetetik beherako aldi baterako kontratuak, seme-alaba eta arbaso hautagarriak, norberaren desgaitasuna, ordainsari malgua, pentsio arruntak eta urteko ataleko errenta positiboak. Ez da aitorpen osoa: baterako aitorpena, galerak eta aurreko saldoak, mendekotasuna, senideen desgaitasuna, adopzioak, lehentasunezko BGAE eta beste kenkariak kanpoan. Lana eta bizilekua lurralde berean. Erregimen komuneko PFEZ proposamenek ez dituzte arauak aldatzen.',
 
