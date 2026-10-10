@@ -331,7 +331,7 @@ export default {
   rowRegionalTax: 'Cota íntegra autonómica',
   rowAnnualTax: 'Cota anual estimada (renda)',
   helpAnnualTax:
-    'O que pagarías na declaración coa escala da túa comunidade. A diferenza co retido sae a devolver (+) ou a pagar (−).',
+    'O que pagarías na declaración coa escala da túa comunidade. A diferenza co retido sae a devolver (+) ou a pagar (−). En réxime común non inclúe deducións autonómicas (vivenda, fillos, estudos…) nin deducións estatais por vivenda: se tes dereito a algunha, o resultado real pode ser mellor.',
   loadProposal: 'Cargar proposta de partido',
   proposalSource: 'Fonte',
   payrollAnnualScope:

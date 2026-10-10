@@ -40,7 +40,7 @@ PP, PSOE, Podemos 2025 y Ciudadanos incluyen entradas informativas sin cálculo 
 
 El perfil salarial principal supone un pagador y un año completo. No hay un modelo completo de varios pagadores, autónomos, pluriactividad o declaración conjunta. El modelo foral admite determinadas rentas adicionales, pero eso no equivale a una calculadora completa de actividad autónoma. Las condiciones no soportadas deben consultarse en la documentación fiscal.
 
-**Vivienda:** la fase inicial recoge datos y explica las reglas omitidas; todavía no calcula las nuevas deducciones de vivienda del plan. Las ampliaciones se implementan por fases verificadas. [Plan de vivienda](https://github.com/molinero95/SalaryCalculatorESP/pull/22) · [Backlog priorizado](docs/BACKLOG.md).
+**Deducciones:** en régimen común la estimación de la renta no incluye deducciones autonómicas ni deducciones por vivienda; el resultado real puede ser mejor. [Backlog priorizado](docs/BACKLOG.md).
 
 ## Datos y alertas de mantenimiento
 
@@ -75,7 +75,7 @@ GitHub Pages publica desde `main`, carpeta raíz. Consulta la configuración act
 El [backlog completo](docs/BACKLOG.md) registra prioridades, estado, responsables, dependencias y criterios de aceptación. Las alertas persistentes ya están implementadas; lo siguiente sigue pendiente:
 
 - **P0 — actualidad fiscal:** descubrir publicaciones oficiales nuevas, mostrar ejercicio y verificación en resultados, y reforzar los plazos de revisión y la salud del monitor.
-- **P1 — cobertura y pruebas:** desarrollar vivienda por fases (Claude), probar el cambio de ejercicio y las actualizaciones de caché, mejorar la trazabilidad y ampliar propuestas verificadas.
+- **P1 — cobertura y pruebas:** probar el cambio de ejercicio y las actualizaciones de caché, mejorar la trazabilidad y ampliar propuestas verificadas.
 - **P1 — perfiles laborales:** varios pagadores y cambios de empresa, períodos parciales por cuenta ajena, autónomos y pluriactividad.
 - **P2 — evolución:** refactor de presentación y enlaces, cobertura visual, borradores de actualización fiscal revisados, ampliaciones forales, comparación de ofertas y estimaciones de permisos/bajas.
 

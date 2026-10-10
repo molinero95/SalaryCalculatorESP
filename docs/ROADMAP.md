@@ -29,7 +29,7 @@ Confirm current details in code and CI; this list is not an exhaustive feature s
 
 ## Prioritized next work
 
-The canonical pending queue, owners, dependencies and acceptance criteria are in [BACKLOG.md](BACKLOG.md). Fiscal currency, publication discovery, persistent review alerts and visible verification status take priority over general refactoring. Claude owns the separate housing implementation phases proposed in [PR #22](https://github.com/molinero95/SalaryCalculatorESP/pull/22); regional rules require original legal-text verification before implementation.
+The canonical pending queue, owners, dependencies and acceptance criteria are in [BACKLOG.md](BACKLOG.md). Fiscal currency, publication discovery, persistent review alerts and visible verification status take priority over general refactoring. Housing deductions are out of scope: they mostly affect the annual return, not payroll, and regional rules would need yearly review in every community. The research in [PR #22](https://github.com/molinero95/SalaryCalculatorESP/pull/22) is kept for reference.
 
 A live check during the source-monitor implementation found that the official PSOE PDF returned HTML in that execution environment. Treat this as a dated observation, not a permanent source outage; future reports must determine its current availability. Source-monitor errors should not be mistaken for failed payroll calculations.
 

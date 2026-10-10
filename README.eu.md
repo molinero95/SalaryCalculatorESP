@@ -26,7 +26,7 @@ Atxikipena aurrerakin bat da. Urteko estimazioak estatuko eta autonomia-erkidego
 
 Euskal lurraldeek eta Nafarroak beren arauak erabiltzen dituzte onartutako profiletarako. Modelatu gabeko proposamen edo aldaketa fiskalek abisua erakusten dute, ez emaitza simulatu berdina. Soldata-profil nagusiak ordaintzaile bakarra eta urte osoa suposatzen ditu. Ez dago hainbat ordaintzaile, autonomo, jarduera anitz edo baterako aitorpenaren eredu osorik; foru-profiletako urteko errenta gehigarri batzuek ez dute autonomoaren kalkulagailu osoa osatzen. [Egoitza](docs/locations.md) · [Foru-irismena](docs/foral-payroll.md) · [Baliozkotzea](docs/fiscal-validation.md).
 
-## Proposamenak eta etxebizitza
+## Proposamenak
 
 | Kalkula daitekeen txantiloia | Irismen partziala                                                                          |
 | ---------------------------- | ------------------------------------------------------------------------------------------ |
@@ -36,7 +36,7 @@ Euskal lurraldeek eta Nafarroak beren arauak erabiltzen dituzte onartutako profi
 
 PP, PSOE, Podemos 2025 eta Ciudadanos informazio gisa agertzen dira egiaztatutako datuak falta direnean. Ez dira eredu osoak edo katalogo exhaustiboa. Gordetako simulazioak ez dira berridazten: aplikatu berriro txantiloia berrikusitako arauak hartzeko. [Iturriak eta irismena](docs/proposal-scope.md) · [Katalogoa](data/proposals.json).
 
-**Etxebizitza:** hasierako datuak eta aplikatu gabeko arauen azalpenak daude; planeko kenkari berriak oraindik ez dira kalkulatzen. [Plana](https://github.com/molinero95/SalaryCalculatorESP/pull/22) · [Backlog](docs/BACKLOG.md).
+**Kenkariak:** araubide erkidean errentaren estimazioak ez ditu sartzen kenkari autonomikoak ezta etxebizitzagatikoak ere; benetako emaitza hobea izan daiteke. [Backlog](docs/BACKLOG.md).
 
 ## Eguneratzea eta alertak
 
@@ -67,7 +67,7 @@ CI-k unitateak, katalogoa, nabigatzailea/irisgarritasuna eta macOSeko hautatutak
 [Backlog osoak](docs/BACKLOG.md) lehentasunak, egoera, arduradunak, mendekotasunak eta onarpen-irizpideak jasotzen ditu. Alerta iraunkorrak ezarrita daude; egiteko daude:
 
 - **P0 — eguneratze fiskala:** argitalpen ofizial berriak aurkitzea, ekitaldia/egiaztapena erakustea eta berrikuspen-epeak eta monitorearen egoera indartzea.
-- **P1 — irismena eta probak:** etxebizitza faseka (Claude), ekitaldi-aldaketa, cache-eguneratzeak, trazabilitatea eta egiaztatutako proposamen gehiago.
+- **P1 — irismena eta probak:** ekitaldi-aldaketa, cache-eguneratzeak, trazabilitatea eta egiaztatutako proposamen gehiago.
 - **P1 — lan-profilak:** hainbat ordaintzaile, enpresa-aldaketak, urtearen zati bateko soldatapeko lana, autonomoak eta jarduera anitzak.
 - **P2 — bilakaera:** aurkezpen/esteken refaktorizazioa, ikusizko probak, berrikusitako zirriborro fiskalak, foru-irismen zabalagoa, eskaintzen konparazioa eta baimen/bajen estimazioak.
 

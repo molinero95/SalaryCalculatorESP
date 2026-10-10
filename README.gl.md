@@ -26,7 +26,7 @@ A retención é un pagamento a conta. A renda estimada separa cotas e mínimos e
 
 País Vasco e Navarra teñen regras propias para os perfís soportados. As propostas ou edicións fiscais non modeladas mostran un aviso, non un resultado simulado idéntico. O perfil salarial principal supón un pagador e un ano completo. Non hai modelos completos de varios pagadores, autónomos, pluriactividade ou declaración conxunta; determinadas rendas adicionais forais non equivalen a un modelo completo de autónomo. [Residencia](docs/locations.md) · [Alcance foral](docs/foral-payroll.md) · [Validación](docs/fiscal-validation.md).
 
-## Propostas e vivenda
+## Propostas
 
 | Modelo calculable | Alcance parcial                                                                  |
 | ----------------- | -------------------------------------------------------------------------------- |
@@ -36,7 +36,7 @@ País Vasco e Navarra teñen regras propias para os perfís soportados. As propo
 
 PP, PSOE, Podemos 2025 e Ciudadanos teñen entradas informativas cando faltan datos verificados. Non son modelos completos nin un catálogo exhaustivo. As simulacións antigas non se reescriben: aplica de novo a proposta para adoptar as regras revisadas. [Fontes e alcance](docs/proposal-scope.md) · [Catálogo](data/proposals.json).
 
-**Vivenda:** hai datos iniciais e explicacións das regras omitidas; aínda non se calculan as novas deducións do plan. [Plan](https://github.com/molinero95/SalaryCalculatorESP/pull/22) · [Backlog](docs/BACKLOG.md).
+**Deducións:** en réxime común a estimación da renda non inclúe deducións autonómicas nin por vivenda; o resultado real pode ser mellor. [Backlog](docs/BACKLOG.md).
 
 ## Actualización e alertas
 
@@ -67,7 +67,7 @@ CI comproba unidades, catálogo, navegador/accesibilidade e capturas seleccionad
 O [backlog completo](docs/BACKLOG.md) rexistra prioridades, estado, responsables, dependencias e criterios de aceptación. As alertas persistentes están implementadas; queda pendente:
 
 - **P0 — actualidade fiscal:** descubrir publicacións oficiais novas, mostrar exercicio/verificación e reforzar prazos e saúde do monitor.
-- **P1 — alcance e probas:** vivenda por fases (Claude), cambio de exercicio, actualizacións de caché, trazabilidade e máis propostas verificadas.
+- **P1 — alcance e probas:** cambio de exercicio, actualizacións de caché, trazabilidade e máis propostas verificadas.
 - **P1 — perfís laborais:** varios pagadores, cambios de empresa, traballo asalariado parcial, autónomos e pluriactividade.
 - **P2 — evolución:** refactor de presentación/ligazóns, probas visuais, borradores fiscais revisados, ampliacións forais, comparación de ofertas e estimacións de permisos/baixas.
 

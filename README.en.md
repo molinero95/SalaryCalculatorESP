@@ -40,7 +40,7 @@ PP, PSOE, Podemos 2025 and Ciudadanos have informational entries where verified 
 
 The main employment profile assumes one payer and a complete year. Multiple payers, self-employment, pluriactivity and joint filing have no complete model. Selected additional annual incomes in foral profiles do not constitute a complete self-employed calculator.
 
-**Housing:** initial inputs and skipped-rule explanations are implemented; the new housing deductions in the plan are not yet calculated. Further phases require verified rules. [Housing plan](https://github.com/molinero95/SalaryCalculatorESP/pull/22) · [Prioritized backlog](docs/BACKLOG.md).
+**Deductions:** under the common regime the annual-return estimate excludes regional deductions and housing deductions; the actual result may be better. [Prioritized backlog](docs/BACKLOG.md).
 
 ## Data maintenance and alerts
 
@@ -75,7 +75,7 @@ GitHub Pages publishes from `main`, repository root; check current repository se
 The [complete backlog](docs/BACKLOG.md) records priorities, status, owners, dependencies and acceptance criteria. Persistent alerts are implemented; remaining work includes:
 
 - **P0 — fiscal currency:** discover new official publications, show fiscal year/verification in results and strengthen review deadlines and monitor health.
-- **P1 — scope and validation:** phased housing implementation (Claude), year-rollover/cache-upgrade checks, source traceability and additional verified proposals.
+- **P1 — scope and validation:** year-rollover/cache-upgrade checks, source traceability and additional verified proposals.
 - **P1 — employment profiles:** multiple payers/job changes, partial-year employment, self-employment and pluriactivity.
 - **P2 — evolution:** presentation/sharing refactors, visual coverage, reviewed fiscal-update drafts, broader foral scope, offer comparisons and leave/sick-pay estimates.
 
