@@ -9,110 +9,84 @@ Calculadora de nómina para España y simulador de propuestas fiscales. Calcula 
 
 **Castellano** · [Català](README.ca.md) · [Euskara](README.eu.md) · [Galego](README.gl.md) · [English](README.en.md)
 
-## Características
+## Qué puedes hacer
 
-- **Nómina completa**: cotizaciones del trabajador (contingencias comunes, desempleo, formación, MEI y cotización de solidaridad), retención de IRPF según el procedimiento general del Reglamento y coste para la empresa.
-- **Comparación lado a lado** entre el escenario actual y hasta cinco simulaciones, con desglose línea a línea y diferencias.
-- **Tramos editables**: añade, quita o modifica tramos; carga propuestas editables o deflacta todos los límites de una vez.
-- **Todos los parámetros personalizables**: mínimos personales y familiares, reducción por rendimientos del trabajo, deducción SMI, bases de cotización, tipos de la empresa…
-- **Retribución flexible**: tarjeta restaurante, transporte, seguro médico, guardería y formación, con sus límites exentos.
-- **Plan de pensiones**: plan individual y de empresa, con el ahorro estimado en la renta.
-- **Gráfico por nivel de salario** para ver a quién beneficia o perjudica una propuesta.
-- **Enlaces para compartir propuestas** y restauración automática de las simulaciones abiertas en el navegador.
-- **Cinco idiomas**: castellano, català, euskara, galego e English.
-- Sin dependencias, sin backend, sin cookies: todo se calcula en el navegador.
-  Las visitas se cuentan de forma anónima con [GoatCounter](https://www.goatcounter.com/).
+- **Tu salario:** estimar la nómina, la retención de IRPF, las cotizaciones del trabajador y el coste empresarial; distinguir 12 y 14 pagas y el neto anual de nómina del neto tras la renta estimada.
+- **Residencia y familia:** seleccionar las 17 comunidades, territorio histórico en País Vasco y ciudad opcional; introducir edad, hijos, ascendientes, discapacidad y las confirmaciones de elegibilidad disponibles.
+- **Retribución flexible y pensiones:** valorar restaurante, transporte, seguro médico, guardería y formación, además de aportaciones individuales y de empresa, dentro del alcance documentado.
+- **Simular cambios:** editar parámetros y escalas, comparar hasta cinco escenarios con tarjetas, tabla, desglose y gráficos por salario; aplicar deflactación en el régimen común.
+- **Propuestas políticas:** cargar plantillas parciales editables y consultar sus fuentes, fechas, supuestos y medidas pendientes.
+- **Compartir y continuar:** compartir reglas de una simulación sin incluir datos personales; restaurar automáticamente entradas y pestañas guardadas en ese navegador.
+- **Instalación y uso sin conexión:** después de una primera carga completa con conexión, usar la app sin conexión e instalarla si el navegador lo permite.
+- **Cinco idiomas:** castellano, català, euskara, galego e English.
 
-## Cómo calcula
+## Nómina y renta son cálculos distintos
 
-1. **Seguridad Social**: base de cotización = bruto anual / 12, acotada entre la base mínima y la máxima. Por encima de la base máxima se aplica la cotización de solidaridad por tramos.
-2. **Rendimiento neto** = bruto − cotizaciones.
-3. **Base de retención** = rendimiento neto − otros gastos deducibles (2.000 €, más los de discapacidad) − reducción por rendimientos del trabajo (art. 20 LIRPF).
-4. **Cuota** = escala(base) − escala(mínimo personal y familiar) , con el límite del 43 % sobre el exceso del mínimo exento de retención, solo hasta 35.200 € brutos.
-5. **Tipo de retención** = cuota / bruto, truncado a dos decimales (mínimo 2 % en contratos temporales).
-6. Con **14 pagas**, la Seguridad Social se reparte en 12 meses y las pagas extra solo soportan IRPF.
-7. La **deducción SMI** no se aplica en la nómina: se muestra como devolución estimada en la renta.
-8. La **retribución flexible** está exenta de IRPF hasta sus límites, pero cotiza a la Seguridad Social.
+La retención de nómina es un pago a cuenta. La estimación anual separa las cuotas estatal y autonómica y sus mínimos, y muestra el saldo estimado a pagar o devolver. Cambiar de comunidad en régimen común puede modificar la renta anual sin cambiar la nómina. Una devolución no está garantizada.
 
-### Valores por defecto (2026)
+País Vasco y Navarra usan reglas territoriales propias para los perfiles soportados. Una propuesta del régimen común o una edición fiscal no modelada para esos territorios se muestra como no disponible; no se presenta un neto idéntico como resultado de la propuesta. Consulta [residencia](docs/locations.md), [alcance foral](docs/foral-payroll.md) y [validación fiscal](docs/fiscal-validation.md).
 
-| Parámetro                                 | Valor                                                                       |
-| ----------------------------------------- | --------------------------------------------------------------------------- |
-| Escala de retención                       | 19 % · 24 % · 30 % · 37 % · 45 % · 47 %                                     |
-| Cotización trabajador                     | 4,70 % CC + 1,55 % desempleo + 0,10 % FP + 0,15 % MEI                       |
-| Base máxima / mínima                      | 5.101,20 € / 1.424,40 € al mes                                              |
-| Mínimo personal                           | 5.550 €                                                                     |
-| Reducción máxima rendimientos del trabajo | 7.302 €                                                                     |
-| Deducción SMI (en la renta)               | 590,89 € hasta 17.094 €, se anula en 20.048,45 €                            |
-| Mínimo exento de retención                | 15.876 € – 19.262 € según situación familiar                                |
-| Plan de pensiones (reducción)             | 1.500 € individual + 8.500 € de empleo, máx. 30 % de rendimientos netos     |
-| Retribución flexible exenta               | Restaurante 11 €/día · transporte 1.500 €/año · seguro médico 500 €/persona |
+## Propuestas disponibles
 
-> [!IMPORTANT]
-> Es una herramienta orientativa. Algunos parámetros (deducción SMI, mínimo exento de retención, escalas autonómicas) pueden cambiar durante el año; todos se pueden ajustar desde la interfaz o en [`js/defaults.js`](js/defaults.js). Incluye un modelo foral limitado para País Vasco y Navarra; consulta [el alcance por residencia](docs/locations.md).
+| Plantilla calculable | Alcance                                                                                                                      |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| VOX 2024             | Escenarios parciales con escalas anual y de retención separadas; reducción estatal por hijo. No representa todo el programa. |
+| Sumar 2023           | Escenario parcial del tipo marginal superior anual; mantiene la retención actual.                                            |
+| Podemos 2019         | Escenario histórico parcial del primer tramo anual; mantiene la retención actual y el resto de supuestos documentados.       |
 
-### Fuentes
+PP, PSOE, Podemos 2025 y Ciudadanos incluyen entradas informativas sin cálculo cuando faltan parámetros o condiciones verificadas. No son modelos completos ni un catálogo exhaustivo. Las plantillas anteriores guardadas no se reescriben automáticamente: vuelve a aplicar una propuesta para adoptar sus reglas revisadas. [Alcance y fuentes](docs/proposal-scope.md) · [Catálogo](data/proposals.json).
 
-- [Ley 35/2006 del IRPF](https://www.boe.es/buscar/act.php?id=BOE-A-2006-20764) — arts. 19, 20, 57-61, 63, 80 bis y 101.
-- [Reglamento del IRPF (RD 439/2007)](https://www.boe.es/buscar/act.php?id=BOE-A-2007-6820) — arts. 80-86 (procedimiento de retención).
-- [Real Decreto-ley 5/2026](https://www.boe.es/buscar/doc.php?id=BOE-A-2026-3810) — deducción para rentas bajas (DA 61ª LIRPF).
-- Orden PJC/297/2026 — bases y tipos de cotización para 2026.
-- [Agencia Tributaria — retenciones sobre rendimientos del trabajo](https://sede.agenciatributaria.gob.es/).
-- [Seguridad Social — bases y tipos de cotización](https://www.seg-social.es/wps/portal/wss/internet/Trabajadores/CotizacionRecaudacionTrabajadores/36537).
+## Alcance y trabajo pendiente
 
-## Desarrollo
+El perfil salarial principal supone un pagador y un año completo. No hay un modelo completo de varios pagadores, autónomos, pluriactividad o declaración conjunta. El modelo foral admite determinadas rentas adicionales, pero eso no equivale a una calculadora completa de actividad autónoma. Las condiciones no soportadas deben consultarse en la documentación fiscal.
 
-No hace falta compilar nada: es HTML, CSS y JavaScript con módulos ES.
+**Vivienda:** la fase inicial recoge datos y explica las reglas omitidas; todavía no calcula las nuevas deducciones de vivienda del plan. Las ampliaciones se implementan por fases verificadas. [Plan de vivienda](https://github.com/molinero95/SalaryCalculatorESP/pull/22) · [Backlog priorizado](docs/BACKLOG.md).
+
+## Datos y alertas de mantenimiento
+
+El catálogo fiscal registra ejercicio, fuentes y fechas de verificación. Un workflow semanal (lunes) y manual comprueba las URLs conocidas y detecta cambios, fuentes inaccesibles y grupos de parámetros pendientes de revisión. Los casos persisten con historial y requieren revisión explícita con evidencia; recuperar una fuente o aceptar su huella no los cierra.
+
+Los informes aparecen en **GitHub Actions → Template source review**, con archivos descargables y estado guardado en la rama `monitor-state`. Las notificaciones de GitHub dependen de los ajustes de la cuenta: no hay envíos dedicados ni avisos de mantenimiento dentro de la calculadora. El monitor descubre candidatos en títulos del BOE dentro de una ventana de 14 días; no cubre todavía los índices de AEAT, boletines autonómicos/forales originales ni partidos, y no actualiza automáticamente las reglas fiscales. [Funcionamiento del monitor](docs/template-maintenance.md) · [Fuentes fiscales](data/fiscal-sources.json).
+
+## Privacidad y arquitectura
+
+Los cálculos y datos personales se procesan en el navegador; la sesión se guarda localmente. Los enlaces compartidos contienen reglas de simulación, no el salario ni los datos familiares. La app es estática, con HTML, CSS y módulos JavaScript, sin backend para los cálculos ni dependencias externas de ejecución de la aplicación. [GoatCounter](https://www.goatcounter.com/) registra visitas anónimas; sí existen peticiones externas de analítica.
+
+## Desarrollo y comprobaciones
+
+Usa Node.js 22, npm y Python 3. No hay compilación de la aplicación.
 
 ```bash
-npm start   # servidor local en http://localhost:8000
-npm test    # tests del motor de cálculo (Node 18+)
+npm ci
+npm start                  # http://localhost:8000
+npm test
+npm run lint
+npm run templates:check
+npx playwright install --with-deps chromium
+npm run test:e2e
 ```
 
-```
-├── index.html
-├── css/styles.css
-├── js/
-│   ├── app.js          # estado y orquestación de la interfaz
-│   ├── calc.js         # motor de cálculo (funciones puras)
-│   ├── defaults.js     # parámetros vigentes y plantillas de tramos
-│   ├── settings.js     # editor de ajustes y tramos
-│   ├── results.js      # tarjetas de resultado y desglose
-│   ├── chart.js        # gráfico SVG
-│   ├── format.js       # formato de números
-│   ├── storage.js      # localStorage y enlaces compartidos
-│   └── i18n/           # traducciones (una por idioma)
-└── tests/
-```
+CI ejecuta pruebas unitarias, comprobaciones de catálogo, navegador/accesibilidad y referencias visuales seleccionadas en macOS. Las pruebas no certifican la exactitud fiscal. Al cambiar el catálogo canónico, ejecuta `npm run templates:build`; al cambiar archivos de la app cacheados, revisa la versión de `sw.js`. [Guía de desarrollo](CONTRIBUTING.md) · [Arquitectura](docs/architecture.md).
 
-### Publicar en GitHub Pages
+GitHub Pages publica desde `main`, carpeta raíz. Consulta la configuración actual del repositorio antes de cambiar el despliegue.
 
-En **Settings → Pages** del repositorio, elige _Deploy from a branch_, rama `main` y carpeta `/ (root)`.
+## Backlog: próximos pasos
 
-### Contribuir
+El [backlog completo](docs/BACKLOG.md) registra prioridades, estado, responsables, dependencias y criterios de aceptación. Las alertas persistentes ya están implementadas; lo siguiente sigue pendiente:
 
-Se agradecen correcciones de la normativa y revisiones de las traducciones (sobre todo euskara y galego). Para añadir un idioma, crea `js/i18n/<código>.js` con las mismas claves que `es.js`, regístralo en `js/i18n/index.js` y añade su `README.<código>.md`.
+- **P0 — actualidad fiscal:** descubrir publicaciones oficiales nuevas, mostrar ejercicio y verificación en resultados, y reforzar los plazos de revisión y la salud del monitor.
+- **P1 — cobertura y pruebas:** desarrollar vivienda por fases (Claude), probar el cambio de ejercicio y las actualizaciones de caché, mejorar la trazabilidad y ampliar propuestas verificadas.
+- **P1 — perfiles laborales:** varios pagadores y cambios de empresa, períodos parciales por cuenta ajena, autónomos y pluriactividad.
+- **P2 — evolución:** refactor de presentación y enlaces, cobertura visual, borradores de actualización fiscal revisados, ampliaciones forales, comparación de ofertas y estimaciones de permisos/bajas.
+
+Una tarea del backlog no implica que la función esté disponible. Consulta su estado y la PR correspondiente antes de usarla como capacidad de la app.
+
+## Documentación y contribuciones
+
+[AGENTS.md](AGENTS.md) · [Contexto](docs/AI_CONTEXT.md) · [Decisiones](docs/ROADMAP.md) · [Backlog](docs/BACKLOG.md).
+
+Se agradecen revisiones fiscales y de traducciones. Cada actualización fiscal necesita fuentes originales, período y elegibilidad claros, ejemplos independientes y pruebas. Los cambios de interfaz deben mantener los cinco idiomas y el uso sin conexión.
 
 ## Licencia
 
 [MIT](LICENSE) © 2026 Jaime Molinero Lacave
-
-## Simulaciones y uso sin conexión
-
-Puedes crear hasta cinco simulaciones. Todas aparecen automáticamente en la tabla comparativa y en los gráficos; las pestañas solo eligen cuál estás editando. Las propuestas políticas son plantillas editables para una simulación.
-
-La rebaja estatal por hijo se configura en puntos porcentuales. La plantilla Vox aplica 4 puntos por hijo, con un mínimo estatal del 0 %, sin reducir la parte autonómica. La retención de esta propuesta se estima con el procedimiento actual; no reproduce su tabla específica de retenciones ni incluye cheques por nacimiento.
-
-La declaración estimada usa la residencia seleccionada. La residencia fiscal se elige por comunidad autónoma, territorio histórico en País Vasco y ciudad opcional filtrada, incluido Bilbao. Se muestran los tramos anuales y las fuentes oficiales del territorio. País Vasco y Navarra cuentan con un modelo limitado para perfiles salariales con hijos elegibles confirmados y discapacidad propia; los perfiles forales no validados ocultan los resultados. Tras la primera visita completa con conexión, la aplicación puede funcionar sin conexión. El navegador permite instalarla cuando sea compatible. Los datos personales permanecen en el navegador.
-
-Pruebas: `npm test`, `npm run lint`, `npm run test:e2e`. Las referencias visuales originales son de macOS; revisa las capturas antes de actualizar las referencias de otro sistema.
-
-La base de retención incluye una reducción adicional de 600 € por más de dos descendientes. El cálculo anual separa las cuotas estatal y autonómica y sus mínimos. Consulta la [matriz de validación fiscal y sus fuentes oficiales](docs/fiscal-validation.md) para conocer las pruebas y los supuestos cubiertos.
-
-## Documentación para agentes de IA
-
-[AGENTS.md](AGENTS.md) · [Contexto del proyecto](docs/AI_CONTEXT.md) · [Desarrollo](CONTRIBUTING.md) · [Decisiones y próximos pasos](docs/ROADMAP.md)
-
-[Scope of reviewed policy templates](docs/proposal-scope.md): annual assessment and payroll withholding are distinct; reapply a proposal template to adopt its reviewed rules.
-
-El modelo ampliado incluye edad, contratos temporales, ascendientes elegibles, retribución flexible, pensiones ordinarias y determinadas rentas y alquileres anuales; consulta [reglas y exclusiones](docs/foral-payroll.md).

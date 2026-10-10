@@ -17,7 +17,8 @@
     "test:coverage": "node --test --experimental-test-coverage tests/*.test.js",
     "templates:build": "node scripts/template-catalogue.js",
     "templates:check": "node scripts/template-catalogue.js --check",
-    "templates:sources": "node scripts/check-template-sources.js"
+    "templates:sources": "node scripts/check-template-sources.js",
+    "sources:discover": "node scripts/discover-boe.js"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.13.0",
