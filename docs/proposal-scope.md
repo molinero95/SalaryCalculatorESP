@@ -30,3 +30,13 @@ Independent quota/threshold and integration tests: `tests/proposal-scope.test.js
 ## Foral scenario applicability
 
 Common-regime political proposals and edits to the common income-tax, flexible-pay or pension parameter groups are not modelled for Navarra, Bizkaia, Gipuzkoa or Álava. The payroll engine rejects these scenarios instead of silently returning unchanged territorial results. The UI keeps current payroll visible, replaces unsupported simulation figures with an explicit notice, excludes unsupported chart series and marks comparison-table rows unavailable. Unsupported comparisons cannot generate result-based social messages. Returning to a common-regime residence or copying current rules restores the comparison. Employee/employer contribution changes remain supported. Common-regime inflation indexing is hidden for foral residence. Saved and shared scenarios are preserved, not rewritten.
+
+## Podemos: historical 2019 first-band component
+
+Primary source: [official 2019 programme](https://podemos.info/wp-content/uploads/2019/10/Podemos_programa_generales_10N.pdf), measure 263, printed pages 109–110. Only the stated 18% first non-exempt annual rate is simulated. The current threshold, other bands and minima are explicit scenario assumptions; the state component absorbs the one-point reference reduction while regional rules are retained. High-income progression, capital-income treatment and deduction changes are excluded. Current payroll withholding is retained. This is not a full reconstruction, a current programme or a foral proposal. The catalogue month follows the official hosted copy; its original publication day is unconfirmed.
+
+Independent example: base €26,050 and taxpayer minimum €5,550 yield an annual saving `(12,450 − 5,550) × 1% = €69`; withholding is unchanged.
+
+## PP: parliamentary deflation request, February 2025
+
+Primary source: [Senate BOCG 219, 20 February 2025](https://www.congreso.es/public_oficiales/L15/SEN/BOCG/2025/BOCG_D_15_219_2014.PDF), proposal 622/000059, additional provision. It requests deflation of at least the first three bands, minima and personal deductions but supplies no factor or final amounts. It remains informational and is not labelled enacted law.

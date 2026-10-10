@@ -154,6 +154,87 @@ export const PROPOSALS = {
       },
     ],
   },
+  podemos2019: {
+    id: 'podemos2019',
+    party: 'Podemos',
+    title: 'Programa electoral 2019 · escenario parcial del primer tramo',
+    date: '2019-10',
+    url: 'https://podemos.info/wp-content/uploads/2019/10/Podemos_programa_generales_10N.pdf',
+    note: 'proposalPodemos2019Note',
+    changes: {
+      incomeTax: {
+        brackets: [
+          {
+            upTo: 12450,
+            rate: 18,
+          },
+          {
+            upTo: 20200,
+            rate: 24,
+          },
+          {
+            upTo: 35200,
+            rate: 30,
+          },
+          {
+            upTo: 60000,
+            rate: 37,
+          },
+          {
+            upTo: 300000,
+            rate: 45,
+          },
+          {
+            upTo: null,
+            rate: 47,
+          },
+        ],
+        useSeparateWithholding: true,
+        withholdingBrackets: [
+          {
+            upTo: 12450,
+            rate: 19,
+          },
+          {
+            upTo: 20200,
+            rate: 24,
+          },
+          {
+            upTo: 35200,
+            rate: 30,
+          },
+          {
+            upTo: 60000,
+            rate: 37,
+          },
+          {
+            upTo: 300000,
+            rate: 45,
+          },
+          {
+            upTo: null,
+            rate: 47,
+          },
+        ],
+      },
+    },
+    status: 'partial',
+    verifiedAt: '2026-10-10',
+    sourceType: 'official',
+    limitations: [
+      'Historical 2019 programme, measure 263, printed pages 109–110. Date records the month of the official hosted copy; an exact original publication day is not established.',
+      'Only the 18% first non-exempt band is modelled. The current first-band threshold and all remaining bands and minima are retained as explicit assumptions; proposed high-income, capital-income and deduction changes are not modelled.',
+      'The programme does not split state/regional rates: this hypothetical annual component reduces the common-regime reference first rate by one point, retaining the selected regional rules. It is not a complete proposal or a foral reform.',
+      'No replacement payroll withholding procedure is specified; current withholding is retained.',
+    ],
+    history: [
+      {
+        date: '2026-10-10',
+        description:
+          'Review official 2019 programme measure 263; model only first-band annual reduction, retain current withholding and explicitly exclude unspecified components.',
+      },
+    ],
+  },
 };
 
 export const UNMODELLED_PROPOSALS = [
@@ -212,6 +293,27 @@ export const UNMODELLED_PROPOSALS = [
       {
         date: '2026-10-09',
         description: 'Initial catalogue; secondary documents require primary-source replacement.',
+      },
+    ],
+  },
+  {
+    id: 'pp2025deflation',
+    party: 'PP',
+    title: 'Proposición de Ley 622/000059 · deflactación del IRPF',
+    date: '2025-02-20',
+    url: 'https://www.congreso.es/public_oficiales/L15/SEN/BOCG/2025/BOCG_D_15_219_2014.PDF',
+    note: 'proposalPpDeflationNote',
+    status: 'unmodelled',
+    verifiedAt: '2026-10-10',
+    sourceType: 'official',
+    limitations: [
+      'Historical parliamentary proposal, not enacted law. The additional provision requests deflation of at least the first three bands, minima and personal deductions without specifying percentages or final amounts; no numerical scenario can be derived.',
+    ],
+    history: [
+      {
+        date: '2026-10-10',
+        description:
+          'Record Senate proposal published 20 February 2025, additional provision; do not invent a deflation factor.',
       },
     ],
   },

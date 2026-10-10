@@ -347,6 +347,10 @@ export default {
     'Aquests trams només canvien la retenció de nòmina. L’escala principal canvia el càlcul anual.',
   proposalVerified: 'Verificat el',
   proposalPartial: 'Simulació parcial',
+  proposalPodemos2019Note:
+    'Escenari històric parcial del programa de Podemos de 2019 (mesura 263): només se simula el primer tram anual al 18 %, mantenint el límit vigent i la resta de trams i mínims. La rebaixa s’assigna a la part estatal de l’escenari; les regles autonòmiques es mantenen. No es modelen les mesures per a rendes altes, capital o deduccions, ni una reforma foral. La retenció de nòmina no canvia. No representa el programa complet ni una proposta actual.',
+  proposalPpDeflationNote:
+    'Proposició parlamentària del PP publicada el 20 de febrer de 2025: demana deflactar almenys els tres primers trams, mínims i deduccions personals de l’IRPF. No fixa el percentatge ni els imports finals, de manera que no es calcula un estalvi. És una proposta històrica, no normativa vigent.',
   proposalVoxNote:
     'Proposta de 2024: escala estatal anual del 15 % fins a 70.000 € i 25 % sobre l’excés; manté l’escala autonòmica. L’article 101 proposa una retenció independent del 15 %/25 %. Mínim personal de 22.000 € i rebaixa de 4 punts per fill només a la quota estatal anual. Es mantenen els mínims autonòmics expressos; altres comunitats hereten el mínim proposat. Simulació parcial: conserva les regles reglamentàries i exclou els xecs per naixement.',
   proposalSumarNote:

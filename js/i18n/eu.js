@@ -347,6 +347,10 @@ export default {
     'Tarte hauek nominaren atxikipena soilik aldatzen dute. Eskala nagusiak urteko kalkulua aldatzen du.',
   proposalVerified: 'Egiaztatze-data',
   proposalPartial: 'Simulazio partziala',
+  proposalPodemos2019Note:
+    'Podemosen 2019ko programaren agertoki historiko partziala (263. neurria): urteko lehen tartea % 18an soilik simulatzen da, egungo muga, gainerako tarteak eta minimoak mantenduta. Murrizketa agertokiaren estatuko zatiari esleitzen zaio; autonomia-erkidegoko arauak mantentzen dira. Errenta handien, kapitalaren, kenkarien edo foru-erreformen neurriak ez dira modelatzen. Nominaren atxikipena ez da aldatzen. Ez da programa osoa edo egungo proposamena.',
+  proposalPpDeflationNote:
+    'PPren parlamentuko proposamena, 2025eko otsailaren 20an argitaratua: PFEZaren gutxienez lehen hiru tarteak, minimoak eta kenkari pertsonalak deflaktatzea eskatzen du. Ez du ehunekorik edo azken zenbatekorik zehazten; beraz, ez da aurrezkirik kalkulatzen. Proposamen historikoa da, ez indarreko araudia.',
   proposalVoxNote:
     '2024ko proposamena: urteko estatuko tasa % 15 da 70.000 € arte eta % 25 hortik gora; autonomia-erkidegoko eskala mantentzen da. 101. artikuluak % 15/% 25eko atxikipen bereizia proposatzen du. Gutxieneko pertsonala 22.000 € da; seme-alabako 4 puntuko murrizketa urteko estatuko kuotan soilik aplikatzen da. Erkidegoek berariaz ezarritako gutxienekoak mantentzen dira; besteek proposatutako gutxienekoa erabiltzen dute. Simulazio partziala: egungo atxikipen-arauak mantentzen ditu eta jaiotza-txekeak kanpoan uzten ditu.',
   proposalSumarNote:
