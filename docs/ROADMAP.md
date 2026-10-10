@@ -27,15 +27,9 @@
 
 Confirm current details in code and CI; this list is not an exhaustive feature specification.
 
-## Candidate next tasks, not yet implemented
+## Prioritized next work
 
-1. **Continue DDD separation:** extract proposal/comparison presentation and sharing browser adapters from `app.js`, then evaluate splitting the settings renderer. Keep fiscal modules stable until a separate migration is justified.
-2. **Reviewed AI extraction:** accept changed source documents and produce structured draft parameters plus supporting excerpts, dates, applicability and missing conditions. Keep extracted text/data untrusted; validate against a schema before using it. No provider/API key is currently configured.
-3. **Automatic draft fiscal PRs:** assemble catalogue changes, history, source evidence and representative salary/profile impact comparisons; run checks and require review before updating published figures. The monitor currently creates reports, not these PRs.
-4. **Proposal discovery:** watch official publication indexes/feeds as well as known document URLs. Specify sources and provenance instead of claiming exhaustive party coverage.
-5. **Additional eligible proposals:** collect the inputs needed for PP youth relief and resolve unspecified intermediate rates/conditions for other proposals. Do not invent missing policy details.
-6. **Broader fiscal scope:** prioritize special profiles, additional deductions or foral regimes only after defining independent official fixtures and explicit applicability.
-7. **Visual regression portability:** assess platform-specific baselines or a consistent rendering environment before adding screenshot checks to CI.
+The canonical pending queue, owners, dependencies and acceptance criteria are in [BACKLOG.md](BACKLOG.md). Fiscal currency, publication discovery, persistent review alerts and visible verification status take priority over general refactoring. Claude owns the separate housing implementation phases proposed in [PR #22](https://github.com/molinero95/SalaryCalculatorESP/pull/22); regional rules require original legal-text verification before implementation.
 
 A live check during the source-monitor implementation found that the official PSOE PDF returned HTML in that execution environment. Treat this as a dated observation, not a permanent source outage; future reports must determine its current availability. Source-monitor errors should not be mistaken for failed payroll calculations.
 
