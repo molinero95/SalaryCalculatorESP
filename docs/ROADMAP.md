@@ -35,7 +35,8 @@ Confirm current details in code and CI; this list is not an exhaustive feature s
 4. **Proposal discovery:** watch official publication indexes/feeds as well as known document URLs. Specify sources and provenance instead of claiming exhaustive party coverage.
 5. **Additional eligible proposals:** collect the inputs needed for PP youth relief and resolve unspecified intermediate rates/conditions for other proposals. Do not invent missing policy details.
 6. **Broader fiscal scope:** prioritize special profiles, additional deductions or foral regimes only after defining independent official fixtures and explicit applicability.
-7. **Visual regression portability:** assess platform-specific baselines or a consistent rendering environment before adding screenshot checks to CI.
+7. **Housing deductions:** research, 2026 rule matrix, worked examples and a phased plan are in [housing-deductions-2026.md](housing-deductions-2026.md). Nothing is implemented; most regional rules are verified only against the Ministry of Finance compendium and need checking against regional texts first.
+8. **Visual regression portability:** assess platform-specific baselines or a consistent rendering environment before adding screenshot checks to CI.
 
 A live check during the source-monitor implementation found that the official PSOE PDF returned HTML in that execution environment. Treat this as a dated observation, not a permanent source outage; future reports must determine its current availability. Source-monitor errors should not be mistaken for failed payroll calculations.
 
