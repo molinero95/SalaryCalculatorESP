@@ -55,6 +55,18 @@ export default {
     'Fills sense discapacitat, adopcions ni canvis familiars durant l’any: conviuen amb tu, renda no exempta fins a l’SMI, sense altra unitat familiar que superi l’SMI, i no presenten ni han de presentar IRPF. Edats al final de l’any. Còmput íntegre: un únic progenitor amb dret; altrament es reparteix entre dos.',
   foralChildrenNavarraHelp:
     'Fills solters sense discapacitat, adopcions ni canvis familiars durant l’any: conviuen amb tu i renda no exempta fins a l’IPREM. Edats al final de l’any. Còmput íntegre: un únic progenitor amb dret; altrament es reparteix entre dos.',
+  foralResultsHidden: 'No mostrem resultats per a aquest perfil foral fins que es resolgui això:',
+  foralIssueChildren:
+    'Marca la casella que confirma que els fills indicats compleixen els requisits forals, o posa 0 fills.',
+  foralIssueAgeGroups:
+    'Els grups d’edat dels fills no quadren amb el total (per exemple, més menors de 3 o de 6 anys que fills). Corregeix-los o posa’ls a 0.',
+  foralIssueAscendants: 'Marca la casella que confirma els requisits dels ascendents indicats, o posa’ls a 0.',
+  foralIssueAnnual:
+    'Confirma els imports anuals addicionals (lloguer cobrat, estalvi, activitat o altres retencions) o deixa’ls a 0.',
+  foralIssueAlavaRural: 'Vitoria-Gasteiz no es pot marcar com a zona rural d’Àlaba.',
+  foralIssueInvalid: 'Hi ha una dada familiar o anual fora de rang; revisa els números introduïts.',
+  foralIssueScenario:
+    'Els paràmetres d’«Actual» s’han modificat. Als territoris forals només es calcula amb la normativa vigent: prem «Restablir valors oficials» a Actual.',
   foralUnsupported:
     'Perfil foral no validat o requisits familiars pendents. S’oculten els resultats. Revisa les edats i confirma els requisits de fills i ascendents.',
   foralScenarioUnsupported:

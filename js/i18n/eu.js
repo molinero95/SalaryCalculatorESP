@@ -55,6 +55,18 @@ export default {
     'Desgaitasunik, adopziorik edo urteko familia-aldaketarik gabeko seme-alabak: zurekin bizi dira, salbuetsi gabeko errentak ez du SMI gainditzen, ez daude SMI gainditzen duen beste familia-unitate batean, eta ez dute PFEZ aurkezten edo aurkeztu beharrik. Urte amaierako adinak. Zenbaketa osoa: eskubidea duen guraso bakarra; bestela bien artean banatzen da.',
   foralChildrenNavarraHelp:
     'Desgaitasunik, adopziorik edo urteko familia-aldaketarik gabeko seme-alaba ezkongabeak: zurekin bizi dira eta salbuetsi gabeko errentak ez du IPREM gainditzen. Urte amaierako adinak. Zenbaketa osoa: eskubidea duen guraso bakarra; bestela bien artean banatzen da.',
+  foralResultsHidden: 'Ez dugu emaitzarik erakusten foru-profil honetarako hau konpondu arte:',
+  foralIssueChildren:
+    'Markatu adierazitako seme-alabek foru-baldintzak betetzen dituztela berresten duen laukia, edo jarri 0 seme-alaba.',
+  foralIssueAgeGroups:
+    'Seme-alaben adin-taldeak ez datoz bat guztizkoarekin (adibidez, 3 edo 6 urtetik beherako gehiago seme-alabak baino). Zuzendu edo jarri 0.',
+  foralIssueAscendants: 'Markatu adierazitako aurrekoen baldintzak berresten dituen laukia, edo jarri 0.',
+  foralIssueAnnual:
+    'Berretsi urteko zenbateko gehigarriak (jasotako alokairua, aurrezkia, jarduera edo beste atxikipen batzuk) edo utzi 0an.',
+  foralIssueAlavaRural: 'Vitoria-Gasteiz ezin da Arabako landa-eremu gisa markatu.',
+  foralIssueInvalid: 'Familiako edo urteko datu bat tartetik kanpo dago; berrikusi sartutako zenbakiak.',
+  foralIssueScenario:
+    '«Egungoa»ren parametroak aldatu dira. Foru-lurraldeetan indarreko araudiarekin soilik kalkulatzen da: sakatu «Berrezarri balio ofizialak» Egungoan.',
   foralUnsupported:
     'Foru profila ez dago balioztatuta edo familia baldintzak falta dira. Emaitzak ezkutatzen dira. Egiaztatu adinak eta baieztatu seme-alaben eta arbasoen baldintzak.',
   foralScenarioUnsupported:

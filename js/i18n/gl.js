@@ -54,6 +54,18 @@ export default {
     'Fillos sen discapacidade, adopcións nin cambios familiares durante o ano: conviven contigo, renda non exenta ata o SMI, sen outra unidade familiar que supere o SMI, e non presentan nin deben presentar IRPF. Idades ao final do ano. Cómputo íntegro: un único proxenitor con dereito; doutro xeito repártese entre dous.',
   foralChildrenNavarraHelp:
     'Fillos solteiros sen discapacidade, adopcións nin cambios familiares durante o ano: conviven contigo e renda non exenta ata o IPREM. Idades ao final do ano. Cómputo íntegro: un único proxenitor con dereito; doutro xeito repártese entre dous.',
+  foralResultsHidden: 'Non amosamos resultados para este perfil foral ata resolver isto:',
+  foralIssueChildren:
+    'Marca a caixa que confirma que os fillos indicados cumpren os requisitos forais, ou pon 0 fillos.',
+  foralIssueAgeGroups:
+    'Os grupos de idade dos fillos non cadran co total (por exemplo, máis menores de 3 ou de 6 anos ca fillos). Corríxeos ou ponos a 0.',
+  foralIssueAscendants: 'Marca a caixa que confirma os requisitos dos ascendentes indicados, ou ponos a 0.',
+  foralIssueAnnual:
+    'Confirma os importes anuais adicionais (alugueiro cobrado, aforro, actividade ou outras retencións) ou déixaos a 0.',
+  foralIssueAlavaRural: 'Vitoria-Gasteiz non se pode marcar como zona rural de Álava.',
+  foralIssueInvalid: 'Hai un dato familiar ou anual fóra de rango; revisa os números introducidos.',
+  foralIssueScenario:
+    'Os parámetros de «Actual» modificáronse. Nos territorios forais só se calcula coa normativa vixente: preme «Restablecer valores oficiais» en Actual.',
   foralUnsupported:
     'Perfil foral non validado ou requisitos familiares pendentes. Ocúltanse os resultados. Revisa as idades e confirma os requisitos de fillos e ascendentes.',
   foralScenarioUnsupported:

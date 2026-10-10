@@ -1,30 +1,36 @@
 import { CURRENT_SCENARIO } from '../defaults.js';
 import { FORAL_ANNUAL_AMOUNTS } from './foral-assessment.js';
-import { unsupportedForalFamily } from './foral-family.js';
+import { foralFamilyIssues } from './foral-family.js';
 import { FORAL_TERRITORIES } from '../data/foral.js';
 
 export const isForal = (region) => Object.hasOwn(FORAL_TERRITORIES, region);
 
-/** Never silently substitute common-regime rules for an unreviewed foral profile. */
-export function unsupportedFiscalProfile(input) {
-  if (!isForal(input.region)) return false;
-  const ascendants =
-    (input.dependents65 ?? 0) +
-    (input.dependents75 ?? 0) +
-    (input.region === 'navarra' ? 0 : (input.foralAscendantsUnder65 ?? 0));
-  return (
-    FORAL_ANNUAL_AMOUNTS.some((key) => !Number.isFinite(input[key] ?? 0) || (input[key] ?? 0) < 0) ||
-    (FORAL_ANNUAL_AMOUNTS.some((key) => (input[key] ?? 0) > 0) && input.foralAnnualConfirmed !== true) ||
-    unsupportedForalFamily(input) ||
-    [input.dependents65 ?? 0, input.dependents75 ?? 0, input.foralAscendantsUnder65 ?? 0].some(
-      (value) => !Number.isInteger(value) || value < 0 || value > 10,
-    ) ||
-    !Number.isInteger(input.foralAscendantClaimants ?? 1) ||
-    (input.foralAscendantClaimants ?? 1) < 1 ||
-    (input.foralAscendantClaimants ?? 1) > 10 ||
-    (ascendants > 0 && input.foralAscendantsConfirmed !== true)
-  );
+/**
+ * Why a foral profile cannot be estimated yet, as message keys (empty when it can).
+ * Never silently substitute common-regime rules for an unreviewed foral profile.
+ */
+export function foralProfileIssues(input) {
+  if (!isForal(input.region)) return [];
+  const issues = [];
+  const annual = FORAL_ANNUAL_AMOUNTS.map((key) => input[key] ?? 0);
+  const counts = [input.dependents65 ?? 0, input.dependents75 ?? 0, input.foralAscendantsUnder65 ?? 0];
+  const claimants = input.foralAscendantClaimants ?? 1;
+  if (
+    annual.some((value) => !Number.isFinite(value) || value < 0) ||
+    counts.some((value) => !Number.isInteger(value) || value < 0 || value > 10) ||
+    !Number.isInteger(claimants) ||
+    claimants < 1 ||
+    claimants > 10
+  )
+    issues.push('foralIssueInvalid');
+  if (annual.some((value) => value > 0) && input.foralAnnualConfirmed !== true) issues.push('foralIssueAnnual');
+  issues.push(...foralFamilyIssues(input));
+  const ascendants = counts[0] + counts[1] + (input.region === 'navarra' ? 0 : counts[2]);
+  if (ascendants > 0 && input.foralAscendantsConfirmed !== true) issues.push('foralIssueAscendants');
+  return [...new Set(issues)];
 }
+
+export const unsupportedFiscalProfile = (input) => foralProfileIssues(input).length > 0;
 
 /** These scenario groups are replaced by territorial rules in the foral engine. */
 export function unsupportedFiscalScenario(input, scenario) {
