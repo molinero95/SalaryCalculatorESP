@@ -18,7 +18,11 @@ const changed = {
 };
 const report = (results = [changed], checkedAt = first, staleGroups = []) => ({ results, checkedAt, staleGroups });
 const review = (ledger, status = 'reviewed', evidence = 'Read the original text; metadata only.') =>
-  reviewAlert(ledger, { id: 'changed:fiscal:lirpf', status, evidence, actor: 'reviewer' }, ledger.checkedAt);
+  reviewAlert(
+    ledger,
+    { id: 'changed:fiscal:lirpf', status, evidence, actor: 'reviewer', signature: ledger.alerts[0].signature },
+    ledger.checkedAt,
+  );
 
 test('repeated findings share an id and preserve first detection, affected groups and input', () => {
   const original = emptyAlerts();
@@ -55,6 +59,27 @@ test('explicit no-change review stays closed for the same bytes and reopens for 
   }
 });
 
+test('a review based on an older document cannot close newer evidence', () => {
+  const one = reconcileAlerts(emptyAlerts(), report());
+  const newer = reconcileAlerts(one, report([{ ...changed, sha256: 'newer' }], later));
+  assert.throws(
+    () =>
+      reviewAlert(
+        newer,
+        {
+          id: one.alerts[0].id,
+          signature: one.alerts[0].signature,
+          status: 'reviewed',
+          evidence: 'Reviewed the previous document only.',
+          actor: 'person',
+        },
+        later,
+      ),
+    /evidence changed/,
+  );
+  assert.equal(newer.alerts[0].status, 'pending');
+});
+
 test('implementation-needed survives healthy downloads and implementation records a PR', () => {
   const needed = review(reconcileAlerts(emptyAlerts(), report()), 'implementation-needed');
   const healthy = reconcileAlerts(needed, report([], later));
@@ -74,7 +99,13 @@ test('unavailable sources update one case even when the failure reason changes',
   assert.throws(() =>
     reviewAlert(
       two,
-      { id: 'unavailable:fiscal:lirpf', status: 'reviewed', evidence: 'Source is still down.', actor: 'person' },
+      {
+        id: 'unavailable:fiscal:lirpf',
+        signature: failed.url,
+        status: 'reviewed',
+        evidence: 'Source is still down.',
+        actor: 'person',
+      },
       later,
     ),
   );
@@ -83,6 +114,7 @@ test('unavailable sources update one case even when the failure reason changes',
     recovered,
     {
       id: 'unavailable:fiscal:lirpf',
+      signature: failed.url,
       status: 'reviewed',
       evidence: 'Source recovered and its text was checked.',
       actor: 'person',
@@ -97,6 +129,7 @@ test('stale groups cannot be closed while stale and do not silently close after 
   const one = reconcileAlerts(emptyAlerts(), report([], first, ['withholding']));
   const action = {
     id: 'stale:withholding',
+    signature: '2026',
     status: 'reviewed',
     evidence: 'Verified against current algorithm.',
     actor: 'person',
@@ -109,12 +142,19 @@ test('stale groups cannot be closed while stale and do not silently close after 
 
 test('invalid reviews, corrupted state and older reports fail rather than losing state', () => {
   const one = reconcileAlerts(emptyAlerts(), report());
-  for (const patch of [{ id: 'unknown' }, { actor: '' }, { evidence: '' }, { status: 'closed' }])
+  for (const patch of [
+    { id: 'unknown' },
+    { signature: 'old evidence' },
+    { actor: '' },
+    { evidence: '' },
+    { status: 'closed' },
+  ])
     assert.throws(() =>
       reviewAlert(
         one,
         {
           id: 'changed:fiscal:lirpf',
+          signature: one.alerts[0].signature,
           status: 'reviewed',
           evidence: 'Reviewed original source.',
           actor: 'person',
@@ -151,6 +191,7 @@ test('CLI persists open cases across accepted baselines and explicit reviews wit
     assert.equal(ledger.alerts[0].id, 'changed:vox2024');
     const invalid = run({
       SOURCE_ALERT_ID: 'changed:vox2024',
+      SOURCE_ALERT_SIGNATURE: ledger.alerts[0].signature,
       SOURCE_ALERT_STATUS: 'reviewed',
       SOURCE_ALERT_EVIDENCE: '',
       GITHUB_ACTOR: 'reviewer',
@@ -166,6 +207,7 @@ test('CLI persists open cases across accepted baselines and explicit reviews wit
     assert.equal(healthy.alerts[0].active, false);
     const final = run({
       SOURCE_ALERT_ID: 'changed:vox2024',
+      SOURCE_ALERT_SIGNATURE: ledger.alerts[0].signature,
       SOURCE_ALERT_STATUS: 'reviewed',
       SOURCE_ALERT_EVIDENCE: 'Checked programme text; formatting only.',
       GITHUB_ACTOR: 'reviewer',

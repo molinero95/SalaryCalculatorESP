@@ -13,27 +13,26 @@ Priorities agreed on 10 October 2026. This is the canonical list of pending work
 
 ## Prioritized queue
 
-| ID          | Priority | Work                                                                    | Status      | Owner      | Depends on                                         |
-| ----------- | -------- | ----------------------------------------------------------------------- | ----------- | ---------- | -------------------------------------------------- |
-| FRESH-01    | P0       | Discover new official fiscal publications                               | Research    | Codex      | —                                                  |
-| FRESH-02    | P0       | Persist and track source-review alerts                                  | In progress | Codex      | —                                                  |
-| FRESH-03    | P0       | Show fiscal year, verification and pending scope in results             | Ready       | Codex      | FRESH-02 for live alert status                     |
-| FRESH-04    | P0       | Apply source-specific review deadlines and monitor health checks        | Research    | Codex      | —                                                  |
-| TEST-01     | P1       | Cover fiscal-year rollover and stale data behaviour                     | Ready       | Codex      | FRESH-03, FRESH-04 for new behaviour               |
-| TEST-02     | P1       | Verify an installed app upgrades from an older offline cache            | Ready       | Codex      | —                                                  |
-| DATA-01     | P1       | Trace each parameter group to legal articles and fixtures               | Ready       | Codex      | —                                                  |
-| HOUSE-01    | P1       | Implement housing in separately reviewed phases                         | Assigned    | Claude     | PR #22 research; primary-source checks per rule    |
-| POLICY-01   | P1       | Discover additional proposals and verify missing eligibility            | Research    | Unassigned | Primary sources and supported inputs               |
-| PAYERS-01   | P1       | Model several employment payers and mid-year job changes                | Research    | Unassigned | Verified annual aggregation and withholding inputs |
-| WORK-01     | P1       | Make salaried-worker scope explicit and support partial-year employment | Research    | Unassigned | PAYERS-01 for mixed employment histories           |
-| SELF-01     | P1       | Add a self-employed income and contribution estimator                   | Research    | Unassigned | Primary AEAT/Seguridad Social and foral sources    |
-| MIXED-01    | P1       | Combine salaried employment and self-employment (pluriactivity)         | Blocked     | Unassigned | PAYERS-01, WORK-01, SELF-01                        |
-| REFACTOR-01 | P2       | Extract proposal/comparison rendering and sharing adapters              | Ready       | Codex      | Coordinate with housing UI work                    |
-| TEST-03     | P2       | Extend portable visual regression coverage                              | Research    | Unassigned | Reviewed rendering environment                     |
-| AUTO-01     | P2       | Produce reviewed fiscal-update drafts from source changes               | Blocked     | Unassigned | FRESH-02, DATA-01; extraction design               |
-| SCOPE-01    | P2       | Extend foral assessment and unsupported profiles                        | Research    | Unassigned | Official fixtures and eligibility inputs           |
-| PRODUCT-01  | P2       | Compare salary or job offers                                            | Research    | Unassigned | Define inputs and comparison scope                 |
-| PRODUCT-02  | P2       | Estimate birth leave, breastfeeding leave and sick-leave effects        | Research    | Unassigned | Verify rules, dates, contracts and required inputs |
+| ID          | Priority | Work                                                                    | Status   | Owner      | Depends on                                         |
+| ----------- | -------- | ----------------------------------------------------------------------- | -------- | ---------- | -------------------------------------------------- |
+| FRESH-01    | P0       | Discover new official fiscal publications                               | Research | Codex      | —                                                  |
+| FRESH-03    | P0       | Show fiscal year, verification and pending scope in results             | Ready    | Codex      | FRESH-02 for live alert status                     |
+| FRESH-04    | P0       | Apply source-specific review deadlines and monitor health checks        | Research | Codex      | —                                                  |
+| TEST-01     | P1       | Cover fiscal-year rollover and stale data behaviour                     | Ready    | Codex      | FRESH-03, FRESH-04 for new behaviour               |
+| TEST-02     | P1       | Verify an installed app upgrades from an older offline cache            | Ready    | Codex      | —                                                  |
+| DATA-01     | P1       | Trace each parameter group to legal articles and fixtures               | Ready    | Codex      | —                                                  |
+| HOUSE-01    | P1       | Implement housing in separately reviewed phases                         | Assigned | Claude     | PR #22 research; primary-source checks per rule    |
+| POLICY-01   | P1       | Discover additional proposals and verify missing eligibility            | Research | Unassigned | Primary sources and supported inputs               |
+| PAYERS-01   | P1       | Model several employment payers and mid-year job changes                | Research | Unassigned | Verified annual aggregation and withholding inputs |
+| WORK-01     | P1       | Make salaried-worker scope explicit and support partial-year employment | Research | Unassigned | PAYERS-01 for mixed employment histories           |
+| SELF-01     | P1       | Add a self-employed income and contribution estimator                   | Research | Unassigned | Primary AEAT/Seguridad Social and foral sources    |
+| MIXED-01    | P1       | Combine salaried employment and self-employment (pluriactivity)         | Blocked  | Unassigned | PAYERS-01, WORK-01, SELF-01                        |
+| REFACTOR-01 | P2       | Extract proposal/comparison rendering and sharing adapters              | Ready    | Codex      | Coordinate with housing UI work                    |
+| TEST-03     | P2       | Extend portable visual regression coverage                              | Research | Unassigned | Reviewed rendering environment                     |
+| AUTO-01     | P2       | Produce reviewed fiscal-update drafts from source changes               | Blocked  | Unassigned | FRESH-02, DATA-01; extraction design               |
+| SCOPE-01    | P2       | Extend foral assessment and unsupported profiles                        | Research | Unassigned | Official fixtures and eligibility inputs           |
+| PRODUCT-01  | P2       | Compare salary or job offers                                            | Research | Unassigned | Define inputs and comparison scope                 |
+| PRODUCT-02  | P2       | Estimate birth leave, breastfeeding leave and sick-leave effects        | Research | Unassigned | Verify rules, dates, contracts and required inputs |
 
 ## Acceptance criteria
 
@@ -111,8 +110,10 @@ Define user stories and data requirements before implementation. Offer compariso
 
 ## Recommended execution order
 
-Codex: specify discovery coverage (FRESH-01), implement persistent alerts (FRESH-02), then visible status and review deadlines (FRESH-03/FRESH-04). Add rollover and upgrade regressions with those changes. Claude: housing phases independently, coordinating shared files. Employment expansion follows with PAYERS-01 and WORK-01, then SELF-01 and MIXED-01 after source and input specification. Refactoring follows these reliability improvements unless it is necessary for a specific change.
+Codex: specify discovery coverage (FRESH-01), use the persistent review ledger (FRESH-02), then implement visible status and review deadlines (FRESH-03/FRESH-04). Add rollover and upgrade regressions with those changes. Claude: housing phases independently, coordinating shared files. Employment expansion follows with PAYERS-01 and WORK-01, then SELF-01 and MIXED-01 after source and input specification. Refactoring follows these reliability improvements unless it is necessary for a specific change.
 
 ## Completion log
 
-No items from this backlog have been completed yet. Previously merged work belongs to the implemented foundation in [ROADMAP.md](ROADMAP.md), not this pending queue.
+- **FRESH-02:** persistent review cases, deduplication, recovery tracking and evidence-backed workflow reviews are implemented in [PR #27](https://github.com/molinero95/SalaryCalculatorESP/pull/27). Reporting uses Actions summaries/artifacts and the `monitor-state` ledger; dedicated notification delivery remains separate work.
+
+Previously merged work belongs to the implemented foundation in [ROADMAP.md](ROADMAP.md), not this pending queue.

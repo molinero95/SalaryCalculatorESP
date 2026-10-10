@@ -84,7 +84,7 @@ export function reconcileAlerts(previous, report) {
 }
 
 /** An explicit review records a person and evidence; accepting fingerprints is separate. */
-export function reviewAlert(previous, { id, status, evidence, actor }, at) {
+export function reviewAlert(previous, { id, status, evidence, actor, signature }, at) {
   validateAlerts(previous);
   if (!validTime(at) || (previous.checkedAt && Date.parse(at) < Date.parse(previous.checkedAt)))
     throw new Error('Invalid review date');
@@ -96,6 +96,8 @@ export function reviewAlert(previous, { id, status, evidence, actor }, at) {
   const alert = ledger.alerts.find((item) => item.id === id);
   if (!alert) throw new Error('Unknown alert id');
   if (!OPEN.has(alert.status)) throw new Error('Alert is already closed');
+  if (signature !== alert.signature)
+    throw new Error('Alert evidence changed; review the latest report before retrying');
   if (status === 'implemented' && !/^https:\/\/github\.com\/molinero95\/SalaryCalculatorESP\/pull\/\d+$/.test(evidence))
     throw new Error('Implementation evidence must link to a repository PR');
   if (status !== 'implementation-needed' && alert.kind !== 'changed' && alert.active)

@@ -114,6 +114,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
         alerts,
         {
           id: process.env.SOURCE_ALERT_ID,
+          signature: process.env.SOURCE_ALERT_SIGNATURE,
           status: process.env.SOURCE_ALERT_STATUS,
           evidence: process.env.SOURCE_ALERT_EVIDENCE,
           actor: process.env.GITHUB_ACTOR ?? process.env.SOURCE_ALERT_ACTOR,

@@ -13,6 +13,10 @@ on:
         description: Optional persistent alert ID to review (from report)
         type: string
         default: ''
+      alert_signature:
+        description: Copy the exact signature from alerts.json (prevents reviewing changed evidence)
+        type: string
+        default: ''
       alert_status:
         description: Review outcome (ignored without alert_id)
         type: choice
@@ -69,6 +73,7 @@ jobs:
         env:
           ACCEPT_SOURCE_BASELINE: ${{ inputs.accept_baseline == true && 'true' || 'false' }}
           SOURCE_ALERT_ID: ${{ inputs.alert_id }}
+          SOURCE_ALERT_SIGNATURE: ${{ inputs.alert_signature }}
           SOURCE_ALERT_STATUS: ${{ inputs.alert_status }}
           SOURCE_ALERT_EVIDENCE: ${{ inputs.alert_evidence }}
       - name: Save baseline to monitor-state branch
