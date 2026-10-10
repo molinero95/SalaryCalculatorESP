@@ -340,6 +340,12 @@ export default {
   separateWithholdingHelp: 'Estes tramos só cambian a retención de nómina. A escala principal cambia o cálculo anual.',
   proposalVerified: 'Verificado o',
   proposalPartial: 'Simulación parcial',
+  proposalPodemos2019Note:
+    'Escenario histórico parcial do programa de Podemos de 2019 (medida 263): só se simula o primeiro tramo anual ao 18 %, mantendo o límite vixente e os restantes tramos e mínimos. A rebaixa asígnase á parte estatal do escenario; as regras autonómicas mantéñense. Non se modelan as medidas para rendas altas, capital ou deducións, nin unha reforma foral. A retención da nómina non cambia. Non representa o programa completo nin unha proposta actual.',
+  proposalCiudadanosFamiliesNote:
+    'Anuncio histórico de 2023 de deducións para familias a partir do segundo fillo. Non concreta a base, os límites nin como aplicar a dedución; móstrase como información e non calcula aforro.',
+  proposalPpDeflationNote:
+    'Proposición parlamentaria do PP publicada o 20 de febreiro de 2025: pide deflactar polo menos os tres primeiros tramos, mínimos e deducións persoais do IRPF. Non fixa a porcentaxe nin os importes finais, polo que non se calcula un aforro. É unha proposta histórica, non normativa vixente.',
   proposalVoxNote:
     'Proposta de 2024: escala estatal anual do 15 % ata 70.000 € e 25 % sobre o exceso; mantén a escala autonómica. O artigo 101 propón unha retención independente do 15 %/25 %. Mínimo persoal de 22.000 € e rebaixa de 4 puntos por fillo só na cota estatal anual. Mantéñense os mínimos autonómicos expresos; outras comunidades herdan o mínimo proposto. Simulación parcial: conserva as regras regulamentarias e exclúe os cheques por nacemento.',
   proposalSumarNote:
