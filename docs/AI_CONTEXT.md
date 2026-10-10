@@ -33,7 +33,7 @@ The supported fiscal model includes the common regime and a limited foral model 
 | Persistence            | `js/storage.js`                                                               | Automatic browser-session state and Unicode-safe URL serialization                                                                                       |
 | Offline                | `sw.js`, `manifest.webmanifest`                                               | App-shell precache and installable/offline experience                                                                                                    |
 | Context data           | `js/data/cpi.js`, `js/data/salaries.js`                                       | Inflation/salary reference data; inspect their dates before treating as current                                                                          |
-| Monitoring             | `scripts/check-template-sources.js`, `.github/workflows/template-sources.yml` | Known-source fingerprints and review reports; does not change fiscal calculations                                                                        |
+| Monitoring             | `scripts/check-template-sources.js`, `.github/workflows/template-sources.yml` | Known-source fingerprints, persistent review cases and reports; does not change fiscal calculations                                                      |
 | Validation             | `tests/`, `e2e/`, `.github/workflows/test.yml`                                | Node tests, Playwright/axe checks and CI                                                                                                                 |
 
 Runtime uses browser ES modules without external application dependencies. npm packages provide development/testing tooling. GoatCounter records anonymous visits; do not describe the app as having no external requests whatsoever.
@@ -59,9 +59,9 @@ These are navigation hints, not a substitute for the fiscal source matrix or the
 
 ## Proposal maintenance
 
-Catalogue states are `modelled`, `partial` and `unmodelled`. Executable templates require official sources. Incomplete notes can retain an explicitly identified secondary source. Vox and Sumar currently supply templates; other entries are contextual notes. A partial template retains documented assumptions, not a complete reconstruction of an election programme.
+Catalogue states are `modelled`, `partial` and `unmodelled`. Executable templates require official sources. Incomplete notes can retain an explicitly identified secondary source. Vox 2024, Sumar 2023 and the historical Podemos 2019 first-band component supply partial templates; other entries are contextual notes. A partial template retains documented assumptions, not a complete reconstruction of an election programme.
 
-Publication date, human verification date and automated download time are distinct. The weekly monitor hashes known URLs, rejects invalid PDF responses and preserves unapproved changed fingerprints. It cannot discover new announcements or interpret their fiscal significance. See [template-maintenance.md](template-maintenance.md) for baseline acceptance and cache limitations.
+Publication date, human verification date and automated download time are distinct. The weekly monitor hashes known URLs, rejects invalid PDF responses and preserves unapproved changed fingerprints. It cannot discover new announcements or interpret their fiscal significance. Persistent cases on `monitor-state` require explicit evidence-backed reviews; recovery or fingerprint acceptance does not close pending cases. Actions summaries/artifacts are the reporting surface, not dedicated notification delivery. See [template-maintenance.md](template-maintenance.md) for review actions and baseline acceptance.
 
 ## Start a new session
 

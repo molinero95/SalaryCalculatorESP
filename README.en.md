@@ -9,106 +9,84 @@ Spanish payroll calculator and tax policy simulator. Work out your take-home pay
 
 [Castellano](README.md) · [Català](README.ca.md) · [Euskara](README.eu.md) · [Galego](README.gl.md) · **English**
 
-## Features
+## What you can do
 
-- **Full payslip**: employee contributions (common contingencies, unemployment, training, MEI and solidarity contribution), income tax withholding following the general procedure in the IRPF Regulation, and employer cost.
-- **Side-by-side comparison** between the current rules and a simulation, with a line-by-line breakdown and differences.
-- **Editable brackets**: add, remove or change brackets; apply regional templates or index every threshold at once.
-- **Every parameter is configurable**: personal and family allowances, employment income reduction, minimum wage tax credit, contribution bases, employer rates…
-- **Flexible compensation**: meal card, transport, health insurance, childcare and training, with their exempt limits.
-- **Pension plans**: individual and company plans, with the estimated saving in the tax return.
-- **Chart by salary level** to see who gains or loses under a proposal.
-- **Proposal sharing links** and automatic restoration of open simulations in the browser.
-- **Five languages**: Spanish, Catalan, Basque, Galician and English.
-- No dependencies, no backend, no cookies: everything is computed in the browser.
-  Visits are counted anonymously with [GoatCounter](https://www.goatcounter.com/).
+- **Your salary:** estimate payroll, IRPF withholding, employee contributions and employer cost; distinguish 12/14 payments, annual payroll net and net after the estimated tax return.
+- **Residence and family:** select all 17 communities, Basque historical territory and an optional city; enter age, children, ascendants, disability and supported eligibility confirmations.
+- **Flexible compensation and pensions:** assess meal, transport, health insurance, childcare and training benefits and individual/employer pension contributions within documented limits.
+- **Simulate changes:** edit parameters and scales, compare up to five scenarios through cards, tables, breakdowns and salary charts; index thresholds in the common regime.
+- **Political proposals:** load editable partial templates with sources, dates, assumptions and excluded measures.
+- **Share and resume:** share simulation rules without personal details and automatically restore inputs and open tabs in the same browser.
+- **Offline and installable:** after a complete first online load, use the app offline and install it in supporting browsers.
+- **Five languages:** Spanish, Catalan, Basque, Galician and English.
 
-## How it works
+## Payroll and annual assessment
 
-1. **Social security**: contribution base = gross annual salary / 12, clamped between the minimum and maximum bases. Above the maximum base, the solidarity contribution applies in bands.
-2. **Net earnings** = gross − contributions.
-3. **Withholding base** = net earnings − other deductible expenses (€2,000, plus disability-related ones) − employment income reduction (art. 20 LIRPF).
-4. **Tax amount** = scale(base) − scale(personal and family allowance) , capped at 43 % of the excess over the withholding-free minimum, only up to €35,200 gross.
-5. **Withholding rate** = tax amount / gross, truncated to two decimals (at least 2 % on temporary contracts).
-6. With **14 payments**, social security is spread over 12 months and the two extra payments only carry income tax.
-7. The **low-earner credit** is not applied in payroll: it is shown as an estimated refund in the annual return.
-8. **Flexible compensation** is exempt from income tax up to its limits but still pays social security.
+Payroll withholding is an advance payment. Annual assessment separates state/regional quotas and allowances and estimates a payable or refundable balance. Changing common-regime residence can change annual assessment without changing payroll. A refund is not guaranteed.
 
-### Default values (2026)
+Basque territories and Navarra use their own rules for supported profiles. Unsupported common-regime proposals or fiscal edits show an unavailable notice rather than an unchanged simulated result. [Residence](docs/locations.md) · [Foral scope](docs/foral-payroll.md) · [Fiscal validation](docs/fiscal-validation.md).
 
-| Parameter                           | Value                                                                |
-| ----------------------------------- | -------------------------------------------------------------------- |
-| Withholding scale                   | 19 % · 24 % · 30 % · 37 % · 45 % · 47 %                              |
-| Employee contributions              | 4.70 % CC + 1.55 % unemployment + 0.10 % training + 0.15 % MEI       |
-| Maximum / minimum base              | €5,101.20 / €1,424.40 per month                                      |
-| Personal allowance                  | €5,550                                                               |
-| Maximum employment income reduction | €7,302                                                               |
-| Low-earner credit (annual return)   | €590.89 up to €17,094, zero at €20,048.45                            |
-| Withholding-free minimum            | €15,876 – €19,262 depending on family situation                      |
-| Pension plans (tax base reduction)  | €1,500 individual + €8,500 employment, max 30 % of net income        |
-| Tax-exempt flexible pay             | Meals €11/day · transport €1,500/year · health insurance €500/person |
+## Available policy templates
 
-> [!IMPORTANT]
-> This tool gives estimates only. Some parameters (minimum wage credit, withholding-free minimum, regional scales) may change during the year; all of them can be adjusted in the interface or in [`js/defaults.js`](js/defaults.js). Includes a limited model for the Basque and Navarre foral territories; see [residence scope](docs/locations.md).
+| Executable template | Scope                                                                                                    |
+| ------------------- | -------------------------------------------------------------------------------------------------------- |
+| VOX 2024            | Partial annual and separate withholding scales; state child-rate reduction. Not the full programme.      |
+| Sumar 2023          | Partial annual top marginal rate; current withholding retained.                                          |
+| Podemos 2019        | Historical partial first annual band; current withholding and documented remaining assumptions retained. |
 
-### Sources
+PP, PSOE, Podemos 2025 and Ciudadanos have informational entries where verified parameters or eligibility are missing. These are not complete models or exhaustive party coverage. Saved older scenarios are not silently rewritten; reapply a template to adopt reviewed rules. [Scope and sources](docs/proposal-scope.md) · [Catalogue](data/proposals.json).
 
-- [Law 35/2006 on IRPF](https://www.boe.es/buscar/act.php?id=BOE-A-2006-20764) — arts. 19, 20, 57-61, 63, 80 bis and 101.
-- [IRPF Regulation (RD 439/2007)](https://www.boe.es/buscar/act.php?id=BOE-A-2007-6820) — arts. 80-86 (withholding procedure).
-- [Royal Decree-law 5/2026](https://www.boe.es/buscar/doc.php?id=BOE-A-2026-3810) — low-earner credit (DA 61ª LIRPF).
-- Orden PJC/297/2026 — 2026 contribution bases and rates.
-- [Spanish Tax Agency — withholding on employment income](https://sede.agenciatributaria.gob.es/).
-- [Social Security — contribution bases and rates](https://www.seg-social.es/wps/portal/wss/internet/Trabajadores/CotizacionRecaudacionTrabajadores/36537).
+## Supported scope and pending work
 
-## Development
+The main employment profile assumes one payer and a complete year. Multiple payers, self-employment, pluriactivity and joint filing have no complete model. Selected additional annual incomes in foral profiles do not constitute a complete self-employed calculator.
 
-There is no build step: it is plain HTML, CSS and JavaScript ES modules.
+**Housing:** initial inputs and skipped-rule explanations are implemented; the new housing deductions in the plan are not yet calculated. Further phases require verified rules. [Housing plan](https://github.com/molinero95/SalaryCalculatorESP/pull/22) · [Prioritized backlog](docs/BACKLOG.md).
+
+## Data maintenance and alerts
+
+The fiscal catalogue records fiscal years, sources and verification dates. A weekly Monday/manual workflow checks known URLs for document changes, unavailable sources and overdue parameter groups. Cases persist with history until an explicit evidence-backed review; source recovery or fingerprint acceptance does not close them.
+
+Reports are in **GitHub Actions → Template source review**, downloadable artifacts and the `monitor-state` branch. GitHub notifications depend on account settings; no dedicated messages or in-app maintenance alerts are configured. New publication discovery and automatic fiscal updates are not implemented. [Monitor instructions](docs/template-maintenance.md) · [Fiscal sources](data/fiscal-sources.json).
+
+## Privacy and architecture
+
+Calculations and personal data stay in the browser, with local session storage. Shared links carry simulation rules, not salary/family inputs. Static HTML, CSS and JavaScript ES modules need no calculation backend or external application runtime dependencies. [GoatCounter](https://www.goatcounter.com/) records anonymous visits, so analytics makes external requests.
+
+## Development and checks
+
+Use Node.js 22, npm and Python 3. No application build is required.
 
 ```bash
-npm start   # local server at http://localhost:8000
-npm test    # payroll engine tests (Node 18+)
+npm ci
+npm start                  # http://localhost:8000
+npm test
+npm run lint
+npm run templates:check
+npx playwright install --with-deps chromium
+npm run test:e2e
 ```
 
-```
-├── index.html
-├── css/styles.css
-├── js/
-│   ├── app.js          # state and UI orchestration
-│   ├── calc.js         # payroll engine (pure functions)
-│   ├── defaults.js     # current parameters and bracket templates
-│   ├── settings.js     # settings and bracket editor
-│   ├── results.js      # result cards and breakdown
-│   ├── chart.js        # SVG chart
-│   ├── format.js       # number formatting
-│   ├── storage.js      # localStorage and share links
-│   └── i18n/           # translations (one file per language)
-└── tests/
-```
+CI runs unit, catalogue, browser/accessibility and selected macOS visual checks; tests do not certify tax accuracy. Run `npm run templates:build` after canonical catalogue edits and review the `sw.js` cache version after changing cached app files. [Development](CONTRIBUTING.md) · [Architecture](docs/architecture.md).
 
-### Deploying to GitHub Pages
+GitHub Pages publishes from `main`, repository root; check current repository settings before changing deployment.
 
-In the repository's **Settings → Pages**, choose _Deploy from a branch_, branch `main` and folder `/ (root)`.
+## Backlog: next steps
 
-### Contributing
+The [complete backlog](docs/BACKLOG.md) records priorities, status, owners, dependencies and acceptance criteria. Persistent alerts are implemented; remaining work includes:
 
-Corrections to the tax rules and reviews of the translations (especially Basque and Galician) are welcome. To add a language, create `js/i18n/<code>.js` with the same keys as `es.js`, register it in `js/i18n/index.js` and add its `README.<code>.md`.
+- **P0 — fiscal currency:** discover new official publications, show fiscal year/verification in results and strengthen review deadlines and monitor health.
+- **P1 — scope and validation:** phased housing implementation (Claude), year-rollover/cache-upgrade checks, source traceability and additional verified proposals.
+- **P1 — employment profiles:** multiple payers/job changes, partial-year employment, self-employment and pluriactivity.
+- **P2 — evolution:** presentation/sharing refactors, visual coverage, reviewed fiscal-update drafts, broader foral scope, offer comparisons and leave/sick-pay estimates.
+
+A backlog entry is not an available feature. Check its status and implementation PR before treating it as supported.
+
+## Documentation and contributions
+
+[AGENTS.md](AGENTS.md) · [Context](docs/AI_CONTEXT.md) · [Decisions](docs/ROADMAP.md) · [Backlog](docs/BACKLOG.md).
+
+Fiscal and translation reviews are welcome. Fiscal changes require original sources, applicable periods/eligibility and independent tested examples. UI changes preserve all five languages and offline use.
 
 ## License
 
 [MIT](LICENSE) © 2026 Jaime Molinero Lacave
-
-## Simulations and offline use
-
-Up to five simulations appear automatically in all comparison charts and the summary table. Tabs select the simulation to edit. Political proposals are editable starting templates. The state rate reduction per child is configurable; Vox uses 4 percentage points with a zero state-rate floor, preserving regional tax. Payroll withholding remains an estimate. After a full online visit, the app works offline.
-
-Withholding includes an additional €600 reduction for more than two descendants. Annual assessment separates state and regional quotas and minima. See the [fiscal validation matrix and official sources](docs/fiscal-validation.md) for test coverage and supported assumptions.
-
-## AI / agent documentation
-
-[AGENTS.md](AGENTS.md) · [Project context](docs/AI_CONTEXT.md) · [Development](CONTRIBUTING.md) · [Decisions and roadmap](docs/ROADMAP.md)
-
-[Scope of reviewed policy templates](docs/proposal-scope.md): annual assessment and payroll withholding are distinct; reapply a proposal template to adopt its reviewed rules.
-
-Tax residence uses cascading community, historical-territory (Basque Country only) and optional city selectors. Cities are filtered to the selected territory. The foral model includes confirmed eligible children and taxpayer disability; see [rules and limits](docs/foral-family.md).
-
-The expanded model includes age, short temporary contracts, eligible ascendants, flexible pay, ordinary pensions and selected annual income/rent categories; see [rules and exclusions](docs/foral-payroll.md).

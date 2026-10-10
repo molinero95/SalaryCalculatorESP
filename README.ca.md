@@ -9,106 +9,76 @@ Calculadora de nòmina per a Espanya i simulador de propostes fiscals. Calcula e
 
 [Castellano](README.md) · **Català** · [Euskara](README.eu.md) · [Galego](README.gl.md) · [English](README.en.md)
 
-## Característiques
+## Funcions disponibles
 
-- **Nòmina completa**: cotitzacions del treballador (contingències comunes, atur, formació, MEI i cotització de solidaritat), retenció d'IRPF segons el procediment general del Reglament i cost per a l'empresa.
-- **Comparació costat a costat** entre l'escenari actual i una simulació, amb desglossament línia a línia i diferències.
-- **Trams editables**: afegeix, treu o modifica trams; aplica plantilles autonòmiques o deflacta tots els límits alhora.
-- **Tots els paràmetres personalitzables**: mínims personals i familiars, reducció per rendiments del treball, deducció SMI, bases de cotització, tipus de l'empresa…
-- **Retribució flexible**: targeta restaurant, transport, assegurança mèdica, llar d'infants i formació, amb els seus límits exempts.
-- **Pla de pensions**: pla individual i d'empresa, amb l'estalvi estimat a la renda.
-- **Gràfic per nivell de salari** per veure a qui beneficia o perjudica una proposta.
-- **Enllaços per compartir propostes** i restauració automàtica de les simulacions obertes al navegador.
-- **Cinc idiomes**: castellano, català, euskara, galego i English.
-- Sense dependències, sense backend, sense galetes: tot es calcula al navegador.
-  Les visites es compten de manera anònima amb [GoatCounter](https://www.goatcounter.com/).
+- **El teu salari:** estimació de nòmina, retenció d’IRPF, cotitzacions i cost empresarial; 12/14 pagues, net anual de nòmina i net després de la renda estimada.
+- **Residència i família:** 17 comunitats, territori històric basc i ciutat opcional; edat, fills, ascendents, discapacitat i confirmacions d’elegibilitat disponibles.
+- **Retribució flexible i pensions:** restaurant, transport, assegurança mèdica, escola bressol, formació i aportacions individuals/d’empresa dins de l’abast documentat.
+- **Simulacions:** paràmetres i escales editables, fins a cinc escenaris, targetes, taula, desglossament i gràfics per salari; deflactació en règim comú.
+- **Propostes polítiques:** plantilles parcials amb fonts, dates i supòsits.
+- **Compartir i reprendre:** enllaços amb regles sense dades personals i restauració local d’entrades i pestanyes.
+- **Sense connexió i instal·lació:** després d’una primera càrrega completa amb connexió, ús fora de línia i instal·lació si el navegador ho permet.
+- **Cinc idiomes:** castellà, català, basc, gallec i anglès.
 
-## Com calcula
+## Nòmina, renda i abast
 
-1. **Seguretat Social**: base de cotització = brut anual / 12, limitada entre la base mínima i la màxima. Per sobre de la base màxima s'aplica la cotització de solidaritat per trams.
-2. **Rendiment net** = brut − cotitzacions.
-3. **Base de retenció** = rendiment net − altres despeses deduïbles (2.000 €, més les de discapacitat) − reducció per rendiments del treball (art. 20 LIRPF).
-4. **Quota** = escala(base) − escala(mínim personal i familiar) , amb el límit del 43 % sobre l'excés del mínim exempt de retenció, només fins a 35.200 € bruts.
-5. **Tipus de retenció** = quota / brut, truncat a dos decimals (mínim 2 % en contractes temporals).
-6. Amb **14 pagues**, la Seguretat Social es reparteix en 12 mesos i les pagues extres només suporten IRPF.
-7. La **deducció SMI** no s'aplica a la nòmina: es mostra com a devolució estimada a la renda.
-8. La **retribució flexible** està exempta d'IRPF fins als seus límits, però cotitza a la Seguretat Social.
+La retenció és un pagament a compte. La renda estimada separa quotes i mínims estatals/autonòmics i calcula un saldo a pagar o retornar; no garanteix una devolució. Canviar de comunitat en règim comú pot modificar la renda sense modificar la nòmina.
 
-### Valors per defecte (2026)
+País Basc i Navarra tenen regles pròpies per als perfils suportats. Les propostes o edicions fiscals no modelades mostren un avís, no un resultat simulat idèntic. El perfil salarial principal assumeix un pagador i un any complet. No hi ha models complets de diversos pagadors, autònoms, pluriactivitat o declaració conjunta; determinades rendes addicionals forals no equivalen a un model complet d’autònom. [Residència](docs/locations.md) · [Abast foral](docs/foral-payroll.md) · [Validació](docs/fiscal-validation.md).
 
-| Paràmetre                                  | Valor                                                                          |
-| ------------------------------------------ | ------------------------------------------------------------------------------ |
-| Escala de retenció                         | 19 % · 24 % · 30 % · 37 % · 45 % · 47 %                                        |
-| Cotització treballador                     | 4,70 % CC + 1,55 % atur + 0,10 % FP + 0,15 % MEI                               |
-| Base màxima / mínima                       | 5.101,20 € / 1.424,40 € al mes                                                 |
-| Mínim personal                             | 5.550 €                                                                        |
-| Reducció màxima per rendiments del treball | 7.302 €                                                                        |
-| Deducció SMI (a la renda)                  | 590,89 € fins a 17.094 €, s'anul·la a 20.048,45 €                              |
-| Mínim exempt de retenció                   | 15.876 € – 19.262 € segons la situació familiar                                |
-| Pla de pensions (reducció)                 | 1.500 € individual + 8.500 € d'ocupació, màx. 30 % dels rendiments nets        |
-| Retribució flexible exempta                | Restaurant 11 €/dia · transport 1.500 €/any · assegurança mèdica 500 €/persona |
+## Propostes i habitatge
 
-> [!IMPORTANT]
-> És una eina orientativa. Alguns paràmetres (deducció SMI, mínim exempt de retenció, escales autonòmiques) poden canviar durant l'any; tots es poden ajustar des de la interfície o a [`js/defaults.js`](js/defaults.js). Inclou un model foral limitat per al País Basc i Navarra; consulta [l’abast per residència](docs/locations.md).
+| Plantilla calculable | Abast parcial                                                              |
+| -------------------- | -------------------------------------------------------------------------- |
+| VOX 2024             | Escales anual i de retenció separades; reducció estatal per fill.          |
+| Sumar 2023           | Tipus marginal superior anual; retenció actual.                            |
+| Podemos 2019         | Primer tram anual històric; retenció actual i altres supòsits documentats. |
 
-### Fonts
+PP, PSOE, Podemos 2025 i Ciudadanos tenen entrades informatives quan falten dades verificades. No són models complets ni un catàleg exhaustiu. Les simulacions antigues no es reescriuen: torna a aplicar la proposta per adoptar les regles revisades. [Fonts i abast](docs/proposal-scope.md) · [Catàleg](data/proposals.json).
 
-- [Llei 35/2006 de l'IRPF](https://www.boe.es/buscar/act.php?id=BOE-A-2006-20764) — arts. 19, 20, 57-61, 63, 80 bis i 101.
-- [Reglament de l'IRPF (RD 439/2007)](https://www.boe.es/buscar/act.php?id=BOE-A-2007-6820) — arts. 80-86 (procediment de retenció).
-- [Reial decret llei 5/2026](https://www.boe.es/buscar/doc.php?id=BOE-A-2026-3810) — deducció per a rendes baixes (DA 61a LIRPF).
-- Ordre PJC/297/2026 — bases i tipus de cotització per al 2026.
-- [Agència Tributària — retencions sobre rendiments del treball](https://sede.agenciatributaria.gob.es/).
-- [Seguretat Social — bases i tipus de cotització](https://www.seg-social.es/wps/portal/wss/internet/Trabajadores/CotizacionRecaudacionTrabajadores/36537).
+**Habitatge:** hi ha dades inicials i explicacions de regles omeses; encara no es calculen les noves deduccions del pla. [Pla](https://github.com/molinero95/SalaryCalculatorESP/pull/22) · [Backlog](docs/BACKLOG.md).
 
-## Desenvolupament
+## Actualització i alertes
 
-No cal compilar res: és HTML, CSS i JavaScript amb mòduls ES.
+El catàleg registra exercici, fonts i dates de verificació. El monitor setmanal (dilluns) i manual comprova URLs conegudes: canvis, fonts inaccessibles i paràmetres pendents de revisió. Els casos persisteixen amb historial i exigeixen una revisió amb evidència; recuperar la font o acceptar l’empremta no els tanca.
+
+Informes a **GitHub Actions → Template source review**, fitxers descarregables i branca `monitor-state`. Els avisos de GitHub depenen dels ajustos del compte; no hi ha missatges dedicats ni alertes de manteniment dins de la calculadora. La descoberta de publicacions noves i les actualitzacions fiscals automàtiques són pendents. [Monitor](docs/template-maintenance.md) · [Fonts fiscals](data/fiscal-sources.json).
+
+## Privacitat i desenvolupament
+
+Càlculs i dades personals al navegador, amb sessió local. Els enllaços només comparteixen regles, no salari ni família. HTML, CSS i mòduls JavaScript estàtics, sense backend de càlcul ni dependències externes d’execució de l’aplicació. [GoatCounter](https://www.goatcounter.com/) compta visites anònimes i fa peticions externes.
+
+Node.js 22, npm i Python 3; sense compilació de l’aplicació:
 
 ```bash
-npm start   # servidor local a http://localhost:8000
-npm test    # tests del motor de càlcul (Node 18+)
+npm ci
+npm start
+npm test
+npm run lint
+npm run templates:check
+npx playwright install --with-deps chromium
+npm run test:e2e
 ```
 
-```
-├── index.html
-├── css/styles.css
-├── js/
-│   ├── app.js          # estat i orquestració de la interfície
-│   ├── calc.js         # motor de càlcul (funcions pures)
-│   ├── defaults.js     # paràmetres vigents i plantilles de trams
-│   ├── settings.js     # editor de configuració i trams
-│   ├── results.js      # targetes de resultat i desglossament
-│   ├── chart.js        # gràfic SVG
-│   ├── format.js       # format de nombres
-│   ├── storage.js      # localStorage i enllaços compartits
-│   └── i18n/           # traduccions (una per idioma)
-└── tests/
-```
+CI comprova unitats, catàleg, navegador/accessibilitat i captures seleccionades en macOS. Els tests no certifiquen exactitud fiscal. Genera el catàleg amb `npm run templates:build` després de modificar-lo; revisa la versió de memòria cau de `sw.js` quan canviïn fitxers de l’app. GitHub Pages publica des de `main`, carpeta arrel. [Desenvolupament](CONTRIBUTING.md) · [Arquitectura](docs/architecture.md).
 
-### Publicar a GitHub Pages
+## Backlog: pròxims passos
 
-A **Settings → Pages** del repositori, tria _Deploy from a branch_, branca `main` i carpeta `/ (root)`.
+El [backlog complet](docs/BACKLOG.md) registra prioritats, estat, responsables, dependències i criteris d’acceptació. Les alertes persistents estan implementades; resta pendent:
 
-### Contribuir
+- **P0 — actualitat fiscal:** descobrir publicacions oficials noves, mostrar exercici/verificació i reforçar terminis i salut del monitor.
+- **P1 — abast i proves:** habitatge per fases (Claude), canvi d’exercici, actualitzacions de memòria cau, traçabilitat i més propostes verificades.
+- **P1 — perfils laborals:** diversos pagadors, canvis d’empresa, treball assalariat parcial, autònoms i pluriactivitat.
+- **P2 — evolució:** refactor de presentació/enllaços, proves visuals, esborranys fiscals revisats, ampliacions forals, comparació d’ofertes i estimacions de permisos/baixes.
 
-S'agraeixen correccions de la normativa i revisions de les traduccions (sobretot euskara i galego). Per afegir un idioma, crea `js/i18n/<codi>.js` amb les mateixes claus que `es.js`, registra'l a `js/i18n/index.js` i afegeix-ne el `README.<codi>.md`.
+Una tasca pendent no és una funció disponible; consulta l’estat i la PR d’implementació.
+
+## Documentació i contribucions
+
+[AGENTS.md](AGENTS.md) · [Context](docs/AI_CONTEXT.md) · [Decisions](docs/ROADMAP.md) · [Backlog](docs/BACKLOG.md).
+
+Les correccions fiscals requereixen fonts originals, període, elegibilitat i exemples independents provats. La interfície manté cinc idiomes i ús sense connexió.
 
 ## Llicència
 
 [MIT](LICENSE) © 2026 Jaime Molinero Lacave
-
-## Simulacions i ús sense connexió
-
-Fins a cinc simulacions apareixen automàticament als gràfics i a la taula. Les pestanyes trien quina edites. Les propostes són plantilles editables. La rebaixa estatal per fill és configurable: Vox aplica 4 punts, amb mínim 0 %, sense reduir la part autonòmica. La retenció és estimada. Després de visitar-la amb connexió, funciona sense connexió.
-
-La base de retenció inclou una reducció addicional de 600 € per més de dos descendents. El càlcul anual separa les quotes estatal i autonòmica i els seus mínims. Consulta la [matriu de validació fiscal i les fonts oficials](docs/fiscal-validation.md) per conèixer les proves i els supòsits coberts.
-
-## Documentació per a agents d’IA
-
-[AGENTS.md](AGENTS.md) · [Context del projecte](docs/AI_CONTEXT.md) · [Desenvolupament](CONTRIBUTING.md) · [Decisions i pròxims passos](docs/ROADMAP.md)
-
-[Scope of reviewed policy templates](docs/proposal-scope.md): annual assessment and payroll withholding are distinct; reapply a proposal template to adopt its reviewed rules.
-
-La residència es tria per comunitat autònoma, territori històric al País Basc i ciutat opcional filtrada pel territori. El model foral inclou fills elegibles confirmats i discapacitat pròpia; vegeu [regles i límits](docs/foral-family.md).
-
-El model ampliat inclou edat, contractes temporals, ascendents elegibles, retribució flexible, pensions ordinàries i determinades rendes i lloguers anuals; vegeu [regles i exclusions](docs/foral-payroll.md).

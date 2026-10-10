@@ -9,106 +9,76 @@ Espainiako nomina-kalkulagailua eta proposamen fiskalen simulagailua. Kalkulatu 
 
 [Castellano](README.md) · [Català](README.ca.md) · **Euskara** · [Galego](README.gl.md) · [English](README.en.md)
 
-## Ezaugarriak
+## Erabilgarri dauden funtzioak
 
-- **Nomina osoa**: langilearen kotizazioak (continjentzia arruntak, langabezia, lanbide-heziketa, MEI eta elkartasun-kotizazioa), PFEZ atxikipena Erregelamenduaren prozedura orokorraren arabera, eta enpresaren kostua.
-- **Alderaketa alboz albo** egungo agertokiaren eta simulazio baten artean, lerroz lerroko xehapenarekin eta aldeekin.
-- **Tarte editagarriak**: gehitu, kendu edo aldatu tarteak; aplikatu autonomia-erkidegoetako txantiloiak edo deflaktatu muga guztiak batera.
-- **Parametro guztiak pertsonalizagarriak**: gutxieneko pertsonal eta familiarrak, lan-etekinengatiko murrizketa, LGS kenkaria, kotizazio-oinarriak, enpresaren tasak…
-- **Ordainsari malgua**: jatetxe-txartela, garraioa, osasun-asegurua, haurtzaindegia eta prestakuntza, salbuetsitako mugekin.
-- **Pentsio-plana**: banakako plana eta enpresakoa, errentan lortuko den aurrezkiarekin.
-- **Grafikoa soldata-mailaren arabera**, proposamen batek nori mesede edo kalte egiten dion ikusteko.
-- **Proposamenak partekatzeko estekak** eta arakatzaileko simulazio irekien leheneratze automatikoa.
-- **Bost hizkuntza**: castellano, català, euskara, galego eta English.
-- Mendekotasunik gabe, backendik gabe, cookierik gabe: dena nabigatzailean kalkulatzen da.
-  Bisitak modu anonimoan zenbatzen dira [GoatCounter](https://www.goatcounter.com/) bidez.
+- **Zure soldata:** nominaren, PFEZ atxikipenaren, kotizazioen eta enpresaren kostuaren estimazioa; 12/14 ordainsari, urteko nomina garbia eta errenta-aitorpenaren ondorengo estimazioa.
+- **Egoitza eta familia:** 17 autonomia-erkidego, euskal lurralde historikoa eta aukerako hiria; adina, seme-alabak, aurreko ahaideak, desgaitasuna eta baldintzen baieztapenak.
+- **Ordainsari malgua eta pentsioak:** jatetxea, garraioa, osasun-asegurua, haur-eskolak, prestakuntza eta norberaren/enpresaren ekarpenak, dokumentatutako irismenaren barruan.
+- **Simulazioak:** parametro eta eskala editagarriak, bost agertoki arte, txartelak, taula, banakapena eta soldataren araberako grafikoak; araubide erkideko deflaktazioa.
+- **Proposamen politikoak:** txantiloi partzialak, iturri, data eta hipotesiekin.
+- **Partekatu eta jarraitu:** arauak partekatzeko estekak, datu pertsonalik gabe, eta sarreren/fitxen tokiko berreskuratzea.
+- **Konexiorik gabe eta instalazioa:** lehen karga osoa linean egin ondoren, lineaz kanpoko erabilera eta instalazioa nabigatzaile bateragarrietan.
+- **Bost hizkuntza:** gaztelania, katalana, euskara, galegoa eta ingelesa.
 
-## Nola kalkulatzen du
+## Nomina, errenta eta irismena
 
-1. **Gizarte Segurantza**: kotizazio-oinarria = urteko gordina / 12, gutxieneko eta gehieneko oinarrien artean mugatuta. Gehieneko oinarritik gora elkartasun-kotizazioa aplikatzen da tarteka.
-2. **Etekin garbia** = gordina − kotizazioak.
-3. **Atxikipen-oinarria** = etekin garbia − beste gastu kengarri batzuk (2.000 €, gehi desgaitasunarenak) − lan-etekinengatiko murrizketa (PFEZL 20. art.).
-4. **Kuota** = eskala(oinarria) − eskala(gutxieneko pertsonal eta familiarra) , atxikipenetik salbuetsitako gutxienekoaren gaineko gehiegizkoaren % 43ko mugarekin, 35.200 € gordinera arte bakarrik.
-5. **Atxikipen-tasa** = kuota / gordina, bi hamartarretara moztuta (gutxienez % 2 aldi baterako kontratuetan).
-6. **14 ordainsarirekin**, Gizarte Segurantza 12 hilabetetan banatzen da eta aparteko ordainsariek PFEZ bakarrik dute.
-7. **LGS kenkaria** ez da nominan aplikatzen: errentan itzuliko den zenbateko gisa erakusten da.
-8. **Ordainsari malgua** PFEZetik salbuetsita dago bere mugetaraino, baina Gizarte Segurantzan kotizatzen du.
+Atxikipena aurrerakin bat da. Urteko estimazioak estatuko eta autonomia-erkidegoko kuotak eta gutxienekoak bereizten ditu, eta ordaindu edo itzultzeko saldoa kalkulatzen du; itzulketa ez dago bermatuta. Araubide erkidean egoitza aldatzeak urteko errenta alda dezake, nomina aldatu gabe.
 
-### Balio lehenetsiak (2026)
+Euskal lurraldeek eta Nafarroak beren arauak erabiltzen dituzte onartutako profiletarako. Modelatu gabeko proposamen edo aldaketa fiskalek abisua erakusten dute, ez emaitza simulatu berdina. Soldata-profil nagusiak ordaintzaile bakarra eta urte osoa suposatzen ditu. Ez dago hainbat ordaintzaile, autonomo, jarduera anitz edo baterako aitorpenaren eredu osorik; foru-profiletako urteko errenta gehigarri batzuek ez dute autonomoaren kalkulagailu osoa osatzen. [Egoitza](docs/locations.md) · [Foru-irismena](docs/foral-payroll.md) · [Baliozkotzea](docs/fiscal-validation.md).
 
-| Parametroa                              | Balioa                                                                      |
-| --------------------------------------- | --------------------------------------------------------------------------- |
-| Atxikipen-eskala                        | % 19 · % 24 · % 30 · % 37 · % 45 · % 47                                     |
-| Langilearen kotizazioa                  | % 4,70 CA + % 1,55 langabezia + % 0,10 LH + % 0,15 MEI                      |
-| Gehieneko / gutxieneko oinarria         | 5.101,20 € / 1.424,40 € hilean                                              |
-| Gutxieneko pertsonala                   | 5.550 €                                                                     |
-| Lan-etekinengatiko gehieneko murrizketa | 7.302 €                                                                     |
-| LGS kenkaria (errentan)                 | 590,89 € 17.094 €-raino; 20.048,45 €-an desagertzen da                      |
-| Atxikipenetik salbuetsitako gutxienekoa | 15.876 € – 19.262 €, familia-egoeraren arabera                              |
-| Pentsio-plana (murrizketa)              | 1.500 € banakakoa + 8.500 € enplegukoa, gehienez etekin garbien % 30        |
-| Ordainsari malgu salbuetsia             | Jatetxea 11 €/egun · garraioa 1.500 €/urte · osasun-asegurua 500 €/pertsona |
+## Proposamenak eta etxebizitza
 
-> [!IMPORTANT]
-> Tresna orientagarria da. Parametro batzuk (LGS kenkaria, atxikipenetik salbuetsitako gutxienekoa, autonomia-erkidegoetako eskalak) urtean zehar alda daitezke; denak interfazetik edo [`js/defaults.js`](js/defaults.js) fitxategian doi daitezke. Euskadi eta Nafarroarako foru-eredu mugatua barne; ikusi [egoitzaren araberako irismena](docs/locations.md).
+| Kalkula daitekeen txantiloia | Irismen partziala                                                                          |
+| ---------------------------- | ------------------------------------------------------------------------------------------ |
+| VOX 2024                     | Urteko eta atxikipeneko eskala bereiziak; seme-alabako estatuko tasa-murrizketa.           |
+| Sumar 2023                   | Urteko goiko tasa marjinala; egungo atxikipena.                                            |
+| Podemos 2019                 | Urteko lehen tarte historikoa; egungo atxikipena eta dokumentatutako gainerako hipotesiak. |
 
-### Iturriak
+PP, PSOE, Podemos 2025 eta Ciudadanos informazio gisa agertzen dira egiaztatutako datuak falta direnean. Ez dira eredu osoak edo katalogo exhaustiboa. Gordetako simulazioak ez dira berridazten: aplikatu berriro txantiloia berrikusitako arauak hartzeko. [Iturriak eta irismena](docs/proposal-scope.md) · [Katalogoa](data/proposals.json).
 
-- [PFEZaren 35/2006 Legea](https://www.boe.es/buscar/act.php?id=BOE-A-2006-20764) — 19., 20., 57-61., 63., 80 bis eta 101. art.
-- [PFEZaren Erregelamendua (439/2007 ED)](https://www.boe.es/buscar/act.php?id=BOE-A-2007-6820) — 80-86. art. (atxikipen-prozedura).
-- [5/2026 Errege Lege-dekretua](https://www.boe.es/buscar/doc.php?id=BOE-A-2026-3810) — errenta baxuetarako kenkaria (PFEZL 61. XG).
-- PJC/297/2026 Agindua — 2026ko kotizazio-oinarriak eta -tasak.
-- [Zerga Agentzia — lan-etekinen gaineko atxikipenak](https://sede.agenciatributaria.gob.es/).
-- [Gizarte Segurantza — kotizazio-oinarriak eta -tasak](https://www.seg-social.es/wps/portal/wss/internet/Trabajadores/CotizacionRecaudacionTrabajadores/36537).
+**Etxebizitza:** hasierako datuak eta aplikatu gabeko arauen azalpenak daude; planeko kenkari berriak oraindik ez dira kalkulatzen. [Plana](https://github.com/molinero95/SalaryCalculatorESP/pull/22) · [Backlog](docs/BACKLOG.md).
 
-## Garapena
+## Eguneratzea eta alertak
 
-Ez da ezer konpilatu behar: HTML, CSS eta JavaScript (ES moduluak) hutsa da.
+Katalogoak zerga-ekitaldia, iturriak eta egiaztapen-datak jasotzen ditu. Asteko (astelehena) eta eskuzko monitoreak URL ezagunak egiaztatzen ditu: aldaketak, eskuraezinak diren iturriak eta berrikusi beharreko parametroak. Kasuek historia gordetzen dute eta frogadun berrikuspena behar dute; iturria berreskuratzeak edo hatz-marka onartzeak ez ditu ixten.
+
+Txostenak **GitHub Actions → Template source review** atalean, deskargatzeko fitxategietan eta `monitor-state` adarrean daude. GitHub-en jakinarazpenak kontuaren ezarpenen araberakoak dira; ez dago mezu dedikaturik edo kalkulagailuko mantentze-alertarik. Argitalpen berrien bilaketa eta eguneratze fiskal automatikoak egiteko daude. [Monitorea](docs/template-maintenance.md) · [Iturri fiskalak](data/fiscal-sources.json).
+
+## Pribatutasuna eta garapena
+
+Kalkuluak eta datu pertsonalak nabigatzailean daude, tokiko saioarekin. Estekek arauak partekatzen dituzte, ez soldata edo familia. HTML, CSS eta JavaScript modulu estatikoak, kalkulu-backendik eta aplikazioaren kanpoko exekuzio-mendekotasunik gabe. [GoatCounter](https://www.goatcounter.com/) bisita anonimoak zenbatzen ditu eta kanpoko eskaerak egiten ditu.
+
+Node.js 22, npm eta Python 3; aplikazioa konpilatu beharrik gabe:
 
 ```bash
-npm start   # zerbitzari lokala http://localhost:8000 helbidean
-npm test    # kalkulu-motorraren testak (Node 18+)
+npm ci
+npm start
+npm test
+npm run lint
+npm run templates:check
+npx playwright install --with-deps chromium
+npm run test:e2e
 ```
 
-```
-├── index.html
-├── css/styles.css
-├── js/
-│   ├── app.js          # egoera eta interfazearen orkestrazioa
-│   ├── calc.js         # kalkulu-motorra (funtzio hutsak)
-│   ├── defaults.js     # indarreko parametroak eta tarte-txantiloiak
-│   ├── settings.js     # ezarpen- eta tarte-editorea
-│   ├── results.js      # emaitza-txartelak eta xehapena
-│   ├── chart.js        # SVG grafikoa
-│   ├── format.js       # zenbakien formatua
-│   ├── storage.js      # localStorage eta partekatzeko estekak
-│   └── i18n/           # itzulpenak (bat hizkuntza bakoitzeko)
-└── tests/
-```
+CI-k unitateak, katalogoa, nabigatzailea/irisgarritasuna eta macOSeko hautatutako irudiak egiaztatzen ditu. Testek ez dute zuzentasun fiskala ziurtatzen. Katalogoa aldatu ondoren, exekutatu `npm run templates:build`; cacheko app-fitxategiak aldatzean, berrikusi `sw.js` bertsioa. GitHub Pages-ek `main` adarreko erro-karpetatik argitaratzen du. [Garapena](CONTRIBUTING.md) · [Arkitektura](docs/architecture.md).
 
-### GitHub Pages-en argitaratu
+## Backlog: hurrengo urratsak
 
-Biltegiaren **Settings → Pages** atalean, aukeratu _Deploy from a branch_, `main` adarra eta `/ (root)` karpeta.
+[Backlog osoak](docs/BACKLOG.md) lehentasunak, egoera, arduradunak, mendekotasunak eta onarpen-irizpideak jasotzen ditu. Alerta iraunkorrak ezarrita daude; egiteko daude:
 
-### Lagundu
+- **P0 — eguneratze fiskala:** argitalpen ofizial berriak aurkitzea, ekitaldia/egiaztapena erakustea eta berrikuspen-epeak eta monitorearen egoera indartzea.
+- **P1 — irismena eta probak:** etxebizitza faseka (Claude), ekitaldi-aldaketa, cache-eguneratzeak, trazabilitatea eta egiaztatutako proposamen gehiago.
+- **P1 — lan-profilak:** hainbat ordaintzaile, enpresa-aldaketak, urtearen zati bateko soldatapeko lana, autonomoak eta jarduera anitzak.
+- **P2 — bilakaera:** aurkezpen/esteken refaktorizazioa, ikusizko probak, berrikusitako zirriborro fiskalak, foru-irismen zabalagoa, eskaintzen konparazioa eta baimen/bajen estimazioak.
 
-Eskertzen dira araudiaren zuzenketak eta itzulpenen berrikuspenak (batez ere euskara eta galegoa). Hizkuntza bat gehitzeko, sortu `js/i18n/<kodea>.js` `es.js`-ren gako berberekin, erregistratu `js/i18n/index.js`-en eta gehitu bere `README.<kodea>.md`.
+Egiteko zeregin bat ez da erabilgarri dagoen funtzioa; begiratu egoera eta ezarpenaren PRa.
+
+## Dokumentazioa eta ekarpenak
+
+[AGENTS.md](AGENTS.md) · [Testuingurua](docs/AI_CONTEXT.md) · [Erabakiak](docs/ROADMAP.md) · [Backlog](docs/BACKLOG.md).
+
+Aldaketa fiskalek jatorrizko iturriak, aldia, baldintzak eta egiaztatutako adibide independenteak behar dituzte. Interfazeak bost hizkuntzak eta lineaz kanpoko erabilera mantentzen ditu.
 
 ## Lizentzia
 
 [MIT](LICENSE) © 2026 Jaime Molinero Lacave
-
-## Simulazioak eta konexiorik gabeko erabilera
-
-Bost simulazio arte automatikoki agertzen dira grafikoetan eta taulan. Fitxek editatu beharreko simulazioa hautatzen dute. Proposamenak txantiloi editagarriak dira. Seme-alaba bakoitzeko estatuko tasaren murrizketa konfiguragarria da: Voxek 4 puntu aplikatzen ditu, gutxienez % 0, autonomia-erkidegoko zatia mantenduz. Atxikipena estimazioa da. Lineako bisita baten ondoren, aplikazioak konexiorik gabe funtzionatzen du.
-
-Atxikipen-oinarriak 600 €-ko murrizketa gehigarria du bi ondorengo baino gehiago daudenean. Urteko kalkuluak estatuko eta autonomia-erkidegoko kuotak eta gutxienekoak bereizten ditu. Ikusi [zerga-balioztapenaren matrizea eta iturri ofizialak](docs/fiscal-validation.md) proben estaldura eta hipotesiak ezagutzeko.
-
-## IA agenteentzako dokumentazioa
-
-[AGENTS.md](AGENTS.md) · [Proiektuaren testuingurua](docs/AI_CONTEXT.md) · [Garapena](CONTRIBUTING.md) · [Erabakiak eta hurrengo urratsak](docs/ROADMAP.md)
-
-[Scope of reviewed policy templates](docs/proposal-scope.md): annual assessment and payroll withholding are distinct; reapply a proposal template to adopt its reviewed rules.
-
-Zerga-egoitza autonomia erkidegoaren, Euskadiko lurralde historikoaren eta lurraldearen arabera iragazitako aukerako hiriaren bidez hautatzen da. Foru-ereduak baieztatutako seme-alaba hautagarriak eta norberaren desgaitasuna barne hartzen ditu; ikusi [arauak eta mugak](docs/foral-family.md).
-
-Eredu zabalduak adina, aldi baterako kontratuak, arbaso hautagarriak, ordainsari malgua, pentsio arruntak eta urteko errenta eta alokairu batzuk barne hartzen ditu; ikusi [arauak eta bazterketak](docs/foral-payroll.md).

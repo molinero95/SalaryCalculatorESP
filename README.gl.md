@@ -9,106 +9,76 @@ Calculadora de nómina para España e simulador de propostas fiscais. Calcula o 
 
 [Castellano](README.md) · [Català](README.ca.md) · [Euskara](README.eu.md) · **Galego** · [English](README.en.md)
 
-## Características
+## Funcións dispoñibles
 
-- **Nómina completa**: cotizacións do traballador (continxencias comúns, desemprego, formación, MEI e cotización de solidariedade), retención de IRPF segundo o procedemento xeral do Regulamento e custo para a empresa.
-- **Comparación lado a lado** entre o escenario actual e unha simulación, con desagregación liña a liña e diferenzas.
-- **Tramos editables**: engade, quita ou modifica tramos; aplica modelos autonómicos ou deflacta todos os límites dunha vez.
-- **Todos os parámetros personalizables**: mínimos persoais e familiares, redución por rendementos do traballo, dedución SMI, bases de cotización, tipos da empresa…
-- **Retribución flexible**: tarxeta restaurante, transporte, seguro médico, escola infantil e formación, cos seus límites exentos.
-- **Plan de pensións**: plan individual e de empresa, co aforro estimado na renda.
-- **Gráfico por nivel de salario** para ver a quen beneficia ou prexudica unha proposta.
-- **Ligazóns para compartir propostas** e restauración automática das simulacións abertas no navegador.
-- **Cinco idiomas**: castellano, català, euskara, galego e English.
-- Sen dependencias, sen backend, sen cookies: todo se calcula no navegador.
-  As visitas cóntanse de forma anónima con [GoatCounter](https://www.goatcounter.com/).
+- **O teu salario:** estimación de nómina, retención do IRPF, cotizacións e custo empresarial; 12/14 pagas, neto anual de nómina e neto tras a renda estimada.
+- **Residencia e familia:** 17 comunidades, territorio histórico vasco e cidade opcional; idade, fillos, ascendentes, discapacidade e confirmacións de elixibilidade dispoñibles.
+- **Retribución flexible e pensións:** restaurante, transporte, seguro médico, gardaría, formación e achegas individuais/da empresa dentro do alcance documentado.
+- **Simulacións:** parámetros e escalas editables, ata cinco escenarios, tarxetas, táboa, desglose e gráficos por salario; deflactación no réxime común.
+- **Propostas políticas:** modelos parciais con fontes, datas e supostos.
+- **Compartir e continuar:** ligazóns con regras sen datos persoais e restauración local de entradas e lapelas.
+- **Sen conexión e instalación:** tras unha primeira carga completa con conexión, uso sen conexión e instalación se o navegador o permite.
+- **Cinco idiomas:** castelán, catalán, éuscaro, galego e inglés.
 
-## Como calcula
+## Nómina, renda e alcance
 
-1. **Seguridade Social**: base de cotización = bruto anual / 12, limitada entre a base mínima e a máxima. Por riba da base máxima aplícase a cotización de solidariedade por tramos.
-2. **Rendemento neto** = bruto − cotizacións.
-3. **Base de retención** = rendemento neto − outros gastos deducibles (2.000 €, máis os de discapacidade) − redución por rendementos do traballo (art. 20 LIRPF).
-4. **Cota** = escala(base) − escala(mínimo persoal e familiar) , co límite do 43 % sobre o exceso do mínimo exento de retención, só ata 35.200 € brutos.
-5. **Tipo de retención** = cota / bruto, truncado a dous decimais (mínimo 2 % en contratos temporais).
-6. Con **14 pagas**, a Seguridade Social repártese en 12 meses e as pagas extra só soportan IRPF.
-7. A **dedución SMI** non se aplica na nómina: amósase como devolución estimada na renda.
-8. A **retribución flexible** está exenta de IRPF ata os seus límites, pero cotiza á Seguridade Social.
+A retención é un pagamento a conta. A renda estimada separa cotas e mínimos estatais/autonómicos e calcula un saldo a pagar ou devolver; non garante unha devolución. Cambiar de comunidade no réxime común pode modificar a renda sen modificar a nómina.
 
-### Valores por defecto (2026)
+País Vasco e Navarra teñen regras propias para os perfís soportados. As propostas ou edicións fiscais non modeladas mostran un aviso, non un resultado simulado idéntico. O perfil salarial principal supón un pagador e un ano completo. Non hai modelos completos de varios pagadores, autónomos, pluriactividade ou declaración conxunta; determinadas rendas adicionais forais non equivalen a un modelo completo de autónomo. [Residencia](docs/locations.md) · [Alcance foral](docs/foral-payroll.md) · [Validación](docs/fiscal-validation.md).
 
-| Parámetro                                   | Valor                                                                      |
-| ------------------------------------------- | -------------------------------------------------------------------------- |
-| Escala de retención                         | 19 % · 24 % · 30 % · 37 % · 45 % · 47 %                                    |
-| Cotización traballador                      | 4,70 % CC + 1,55 % desemprego + 0,10 % FP + 0,15 % MEI                     |
-| Base máxima / mínima                        | 5.101,20 € / 1.424,40 € ao mes                                             |
-| Mínimo persoal                              | 5.550 €                                                                    |
-| Redución máxima por rendementos do traballo | 7.302 €                                                                    |
-| Dedución SMI (na renda)                     | 590,89 € ata 17.094 €, anúlase en 20.048,45 €                              |
-| Mínimo exento de retención                  | 15.876 € – 19.262 € segundo a situación familiar                           |
-| Plan de pensións (redución)                 | 1.500 € individual + 8.500 € de emprego, máx. 30 % dos rendementos netos   |
-| Retribución flexible exenta                 | Restaurante 11 €/día · transporte 1.500 €/ano · seguro médico 500 €/persoa |
+## Propostas e vivenda
 
-> [!IMPORTANT]
-> É unha ferramenta orientativa. Algúns parámetros (dedución SMI, mínimo exento de retención, escalas autonómicas) poden cambiar durante o ano; todos se poden axustar desde a interface ou en [`js/defaults.js`](js/defaults.js). Inclúe un modelo foral limitado para o País Vasco e Navarra; consulta [o alcance por residencia](docs/locations.md).
+| Modelo calculable | Alcance parcial                                                                  |
+| ----------------- | -------------------------------------------------------------------------------- |
+| VOX 2024          | Escalas anual e de retención separadas; redución estatal por fillo.              |
+| Sumar 2023        | Tipo marxinal superior anual; retención actual.                                  |
+| Podemos 2019      | Primeiro tramo anual histórico; retención actual e outros supostos documentados. |
 
-### Fontes
+PP, PSOE, Podemos 2025 e Ciudadanos teñen entradas informativas cando faltan datos verificados. Non son modelos completos nin un catálogo exhaustivo. As simulacións antigas non se reescriben: aplica de novo a proposta para adoptar as regras revisadas. [Fontes e alcance](docs/proposal-scope.md) · [Catálogo](data/proposals.json).
 
-- [Lei 35/2006 do IRPF](https://www.boe.es/buscar/act.php?id=BOE-A-2006-20764) — arts. 19, 20, 57-61, 63, 80 bis e 101.
-- [Regulamento do IRPF (RD 439/2007)](https://www.boe.es/buscar/act.php?id=BOE-A-2007-6820) — arts. 80-86 (procedemento de retención).
-- [Real decreto lei 5/2026](https://www.boe.es/buscar/doc.php?id=BOE-A-2026-3810) — dedución para rendas baixas (DA 61ª LIRPF).
-- Orde PJC/297/2026 — bases e tipos de cotización para 2026.
-- [Axencia Tributaria — retencións sobre rendementos do traballo](https://sede.agenciatributaria.gob.es/).
-- [Seguridade Social — bases e tipos de cotización](https://www.seg-social.es/wps/portal/wss/internet/Trabajadores/CotizacionRecaudacionTrabajadores/36537).
+**Vivenda:** hai datos iniciais e explicacións das regras omitidas; aínda non se calculan as novas deducións do plan. [Plan](https://github.com/molinero95/SalaryCalculatorESP/pull/22) · [Backlog](docs/BACKLOG.md).
 
-## Desenvolvemento
+## Actualización e alertas
 
-Non fai falta compilar nada: é HTML, CSS e JavaScript con módulos ES.
+O catálogo rexistra exercicio, fontes e datas de verificación. O monitor semanal (luns) e manual comproba URLs coñecidas: cambios, fontes inaccesibles e parámetros pendentes de revisión. Os casos persisten con historial e esixen revisión con evidencia; recuperar a fonte ou aceptar a pegada non os pecha.
+
+Informes en **GitHub Actions → Template source review**, ficheiros descargables e rama `monitor-state`. Os avisos de GitHub dependen dos axustes da conta; non hai mensaxes dedicadas nin alertas de mantemento na calculadora. A descoberta de publicacións novas e as actualizacións fiscais automáticas están pendentes. [Monitor](docs/template-maintenance.md) · [Fontes fiscais](data/fiscal-sources.json).
+
+## Privacidade e desenvolvemento
+
+Cálculos e datos persoais no navegador, con sesión local. As ligazóns só comparten regras, non salario nin familia. HTML, CSS e módulos JavaScript estáticos, sen backend de cálculo nin dependencias externas de execución da aplicación. [GoatCounter](https://www.goatcounter.com/) conta visitas anónimas e fai peticións externas.
+
+Node.js 22, npm e Python 3; sen compilación da aplicación:
 
 ```bash
-npm start   # servidor local en http://localhost:8000
-npm test    # tests do motor de cálculo (Node 18+)
+npm ci
+npm start
+npm test
+npm run lint
+npm run templates:check
+npx playwright install --with-deps chromium
+npm run test:e2e
 ```
 
-```
-├── index.html
-├── css/styles.css
-├── js/
-│   ├── app.js          # estado e orquestración da interface
-│   ├── calc.js         # motor de cálculo (funcións puras)
-│   ├── defaults.js     # parámetros vixentes e modelos de tramos
-│   ├── settings.js     # editor de axustes e tramos
-│   ├── results.js      # tarxetas de resultado e desagregación
-│   ├── chart.js        # gráfico SVG
-│   ├── format.js       # formato de números
-│   ├── storage.js      # localStorage e ligazóns compartidas
-│   └── i18n/           # traducións (unha por idioma)
-└── tests/
-```
+CI comproba unidades, catálogo, navegador/accesibilidade e capturas seleccionadas en macOS. Os tests non certifican exactitude fiscal. Xera o catálogo con `npm run templates:build` tras modificalo; revisa a versión da caché de `sw.js` cando cambien ficheiros da app. GitHub Pages publica desde `main`, cartafol raíz. [Desenvolvemento](CONTRIBUTING.md) · [Arquitectura](docs/architecture.md).
 
-### Publicar en GitHub Pages
+## Backlog: próximos pasos
 
-En **Settings → Pages** do repositorio, escolle _Deploy from a branch_, rama `main` e cartafol `/ (root)`.
+O [backlog completo](docs/BACKLOG.md) rexistra prioridades, estado, responsables, dependencias e criterios de aceptación. As alertas persistentes están implementadas; queda pendente:
 
-### Contribuír
+- **P0 — actualidade fiscal:** descubrir publicacións oficiais novas, mostrar exercicio/verificación e reforzar prazos e saúde do monitor.
+- **P1 — alcance e probas:** vivenda por fases (Claude), cambio de exercicio, actualizacións de caché, trazabilidade e máis propostas verificadas.
+- **P1 — perfís laborais:** varios pagadores, cambios de empresa, traballo asalariado parcial, autónomos e pluriactividade.
+- **P2 — evolución:** refactor de presentación/ligazóns, probas visuais, borradores fiscais revisados, ampliacións forais, comparación de ofertas e estimacións de permisos/baixas.
 
-Agradécense correccións da normativa e revisións das traducións (sobre todo euskara e galego). Para engadir un idioma, crea `js/i18n/<código>.js` coas mesmas claves que `es.js`, rexístrao en `js/i18n/index.js` e engade o seu `README.<código>.md`.
+Unha tarefa pendente non é unha función dispoñible; consulta o estado e a PR de implementación.
+
+## Documentación e contribucións
+
+[AGENTS.md](AGENTS.md) · [Contexto](docs/AI_CONTEXT.md) · [Decisións](docs/ROADMAP.md) · [Backlog](docs/BACKLOG.md).
+
+As correccións fiscais requiren fontes orixinais, período, elixibilidade e exemplos independentes probados. A interface mantén cinco idiomas e uso sen conexión.
 
 ## Licenza
 
 [MIT](LICENSE) © 2026 Jaime Molinero Lacave
-
-## Simulacións e uso sen conexión
-
-Ata cinco simulacións aparecen automaticamente nos gráficos e na táboa. As lapelas escollen cal editar. As propostas son modelos editables. A rebaixa estatal por fillo é configurable: Vox aplica 4 puntos, cun mínimo do 0 %, mantendo a parte autonómica. A retención é estimada. Tras unha visita con conexión, funciona sen conexión.
-
-A base de retención inclúe unha redución adicional de 600 € por máis de dous descendentes. O cálculo anual separa as cotas estatal e autonómica e os seus mínimos. Consulta a [matriz de validación fiscal e as fontes oficiais](docs/fiscal-validation.md) para coñecer as probas e os supostos cubertos.
-
-## Documentación para axentes de IA
-
-[AGENTS.md](AGENTS.md) · [Contexto do proxecto](docs/AI_CONTEXT.md) · [Desenvolvemento](CONTRIBUTING.md) · [Decisións e próximos pasos](docs/ROADMAP.md)
-
-[Scope of reviewed policy templates](docs/proposal-scope.md): annual assessment and payroll withholding are distinct; reapply a proposal template to adopt its reviewed rules.
-
-A residencia escóllese por comunidade autónoma, territorio histórico no País Vasco e cidade opcional filtrada polo territorio. O modelo foral inclúe fillos elixibles confirmados e discapacidade propia; consulta [regras e límites](docs/foral-family.md).
-
-O modelo ampliado inclúe idade, contratos temporais, ascendentes elixibles, retribución flexible, pensións ordinarias e determinadas rendas e alugueiros anuais; consulta [regras e exclusións](docs/foral-payroll.md).
