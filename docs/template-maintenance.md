@@ -12,7 +12,7 @@ Fingerprints detect byte changes. HTML layout, cookies, bot challenges returned 
 
 ## New BOE publication discovery (partial coverage)
 
-The same weekly/manual workflow also runs `npm run sources:discover`, even if known-source checks fail. It queries the official [BOE sumario API](https://www.boe.es/datosabiertos/api/api.php) using JSON; [technical documentation](https://www.boe.es/datosabiertos/documentos/APIsumarioBOE.pdf) describes dates and ordinary/extraordinary editions. Source attribution is retained in candidate metadata: Agencia Estatal Boletín Oficial del Estado. Data reuse is subject to the BOE's conditions.
+The same weekly/manual workflow also runs `npm run sources:discover`, even if known-source checks fail. It queries the official [BOE sumario API](https://www.boe.es/datosabiertos/api/api.php) using JSON; [technical documentation](https://www.boe.es/datosabiertos/documentos/APIsumarioBOE.pdf) describes dates and ordinary/extraordinary editions. Live JSON on 2 and 5 October 2026 also uses `texto` child wrappers; parser regressions cover both those structures and the documented direct forms. Source attribution is retained in candidate metadata: Agencia Estatal Boletín Oficial del Estado. Data reuse is subject to the BOE's conditions.
 
 The default window is the 14 completed UTC days ending yesterday. Manual `boe_end_date` (`YYYY-MM-DD`, strictly before today UTC) selects a 14-day backfill. The overlap catches short interruptions, not an unlimited history: after more than 14 days without a working scan, manually scan all missed windows. The report lists every checked date, a documented API 404 as `no-edition`, and malformed/unavailable responses as errors. A scan does not advance or imply a complete historical cursor.
 

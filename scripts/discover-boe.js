@@ -7,6 +7,14 @@ import { emptyAlerts, reconcileAlerts, openAlerts, alertSummary } from './source
 export const BOE_API = 'https://www.boe.es/datosabiertos/api/boe/sumario/';
 export const DISCOVERY_DAYS = 14;
 const list = (value) => (value === undefined ? [] : Array.isArray(value) ? value : [value]);
+// Some live JSON editions wrap child nodes in `texto`, unlike the documentation example.
+const children = (node, key, depth = 0) => {
+  if (!node || typeof node !== 'object' || depth > 4) throw new Error('Invalid BOE node');
+  return [
+    ...list(node[key]),
+    ...(node.texto && typeof node.texto === 'object' ? children(node.texto, key, depth + 1) : []),
+  ];
+};
 const dateValue = (value) => {
   const date = new Date(`${value}T00:00:00Z`);
   if (!/^\d{4}-\d{2}-\d{2}$/.test(value) || isNaN(date) || date.toISOString().slice(0, 10) !== value)
@@ -49,36 +57,37 @@ export function parseBoeSummary(payload, date) {
     throw new Error('Invalid BOE summary or mismatched publication date');
   const candidates = new Map();
   for (const edition of list(summary.diario)) {
-    if (!edition.seccion || !list(edition.seccion).length) throw new Error('BOE edition is missing sections');
-    for (const section of list(edition.seccion)) {
+    const sections = children(edition, 'seccion');
+    if (!sections.length) throw new Error('BOE edition is missing sections');
+    for (const section of sections) {
       if (String(section.codigo) !== '1') continue;
-      if (!section.departamento || !list(section.departamento).length)
-        throw new Error('BOE general provisions are missing departments');
-      for (const department of list(section.departamento)) {
-        const containers = [department, ...list(department.epigrafe)];
-        if (!containers.some((container) => list(container.item).length))
-          throw new Error('BOE department is missing provisions');
-        for (const container of containers) {
-          for (const item of list(container.item)) {
-            if (typeof item.titulo !== 'string' || !/^BOE-A-\d{4}-\d+$/.test(item.identificador))
-              throw new Error('Invalid BOE provision');
-            const reasons = matchFiscalTitle(item.titulo);
-            if (!reasons.length) continue;
-            // Never follow URLs supplied by the feed; derive a canonical official URL from its ID.
-            const candidate = {
-              id: item.identificador,
-              title: item.titulo,
-              publishedAt: date,
-              publisher: 'Agencia Estatal Boletín Oficial del Estado',
-              url: `https://www.boe.es/diario_boe/txt.php?id=${item.identificador}`,
-              reasons,
-              groups: [],
-            };
-            candidate.signature = createHash('sha256').update(JSON.stringify(candidate)).digest('hex');
-            if (candidates.has(candidate.id) && candidates.get(candidate.id).signature !== candidate.signature)
-              throw new Error('Conflicting duplicate BOE provision');
-            candidates.set(candidate.id, candidate);
-          }
+      const departments = children(section, 'departamento');
+      if (!departments.length) throw new Error('BOE general provisions are missing departments');
+      for (const department of departments) {
+        const items = [
+          ...children(department, 'item'),
+          ...children(department, 'epigrafe').flatMap((epigraph) => children(epigraph, 'item')),
+        ];
+        if (!items.length) throw new Error('BOE department is missing provisions');
+        for (const item of items) {
+          if (typeof item.titulo !== 'string' || !/^BOE-A-\d{4}-\d+$/.test(item.identificador))
+            throw new Error('Invalid BOE provision');
+          const reasons = matchFiscalTitle(item.titulo);
+          if (!reasons.length) continue;
+          // Never follow URLs supplied by the feed; derive a canonical official URL from its ID.
+          const candidate = {
+            id: item.identificador,
+            title: item.titulo,
+            publishedAt: date,
+            publisher: 'Agencia Estatal Boletín Oficial del Estado',
+            url: `https://www.boe.es/diario_boe/txt.php?id=${item.identificador}`,
+            reasons,
+            groups: [],
+          };
+          candidate.signature = createHash('sha256').update(JSON.stringify(candidate)).digest('hex');
+          if (candidates.has(candidate.id) && candidates.get(candidate.id).signature !== candidate.signature)
+            throw new Error('Conflicting duplicate BOE provision');
+          candidates.set(candidate.id, candidate);
         }
       }
     }

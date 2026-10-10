@@ -1,5 +1,10 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { mkdtemp, mkdir, readFile, writeFile, rm } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { spawnSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 import {
   discoveryDates,
   matchFiscalTitle,
@@ -69,6 +74,32 @@ test('parser handles array/singleton and direct/epigraph provisions across extra
   assert.equal(candidates[0].publishedAt, date);
   assert.equal(candidates[0].url, 'https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20823');
   assert.match(candidates[0].signature, /^[a-f0-9]{64}$/);
+});
+
+test('live-format texto wrappers in extraordinary editions and departments preserve publications', () => {
+  const data = payload();
+  data.data.sumario.diario = [
+    {
+      seccion: {
+        codigo: '1',
+        texto: {
+          departamento: {
+            texto: { epigrafe: [{ item: provision('Derogación de medidas de vivienda', 'BOE-A-2026-20526') }] },
+          },
+        },
+      },
+    },
+    {
+      seccion: {
+        codigo: '1',
+        departamento: { texto: { epigrafe: [{ item: provision('Orden sobre el IRPF', 'BOE-A-2026-20587') }] } },
+      },
+    },
+  ];
+  assert.deepEqual(
+    parseBoeSummary(data, date).map((p) => p.id),
+    ['BOE-A-2026-20526', 'BOE-A-2026-20587'],
+  );
 });
 
 test('parser deduplicates identical provisions and rejects malformed/conflicting responses', () => {
@@ -155,4 +186,54 @@ test('discovery and known-source scans preserve one another’s active alerts an
     publications: [{ ...publication, signature: 'revised' }],
   });
   assert.equal(changed.alerts[1].status, 'pending');
+});
+
+test('discovery CLI persists candidates and reports while preserving existing source cases', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'salary-discovery-'));
+  try {
+    await mkdir(join(directory, '.source-monitor'));
+    const known = reconcileAlerts(emptyAlerts(), {
+      checkedAt: '2020-01-01T00:00:00Z',
+      results: [{ id: 'known', status: 'unavailable', url: 'https://example.org/known', error: '502' }],
+    });
+    await writeFile(join(directory, '.source-monitor/alerts.json'), JSON.stringify(known));
+    const runner = fileURLToPath(new URL('../scripts/discover-boe.js', import.meta.url));
+    const data = payload();
+    data.data.sumario.metadatos.fecha_publicacion = '20200110';
+    data.data.sumario.diario.seccion.departamento.epigrafe.item.identificador = 'BOE-A-2020-1';
+    const code = `globalThis.fetch = async (url) => url.endsWith('20200110') ? new Response(${JSON.stringify(JSON.stringify(data))}, {headers:{'content-type':'application/json'}}) : new Response('', {status:404}); process.argv[1]=${JSON.stringify(runner)}; await import(${JSON.stringify(new URL('../scripts/discover-boe.js', import.meta.url).href)});`;
+    const run = () =>
+      spawnSync(process.execPath, ['--input-type=module', '-e', code], {
+        cwd: directory,
+        encoding: 'utf8',
+        env: { ...process.env, BOE_DISCOVERY_END: '2020-01-10', GITHUB_STEP_SUMMARY: '' },
+      });
+    const first = run();
+    assert.equal(first.status, 1, first.stderr);
+    const ledger = JSON.parse(await readFile(join(directory, '.source-monitor/alerts.json'), 'utf8'));
+    assert.equal(ledger.alerts.length, 2);
+    assert.equal(ledger.alerts[0].active, true);
+    assert.equal(ledger.alerts[1].id, 'publication:BOE-A-2020-1');
+    const closed = reviewAlert(
+      ledger,
+      {
+        id: ledger.alerts[1].id,
+        signature: ledger.alerts[1].signature,
+        status: 'reviewed',
+        actor: 'person',
+        evidence: 'Original provision reviewed; outside supported scope.',
+      },
+      ledger.checkedAt,
+    );
+    await writeFile(join(directory, '.source-monitor/alerts.json'), JSON.stringify(closed));
+    assert.equal(run().status, 1); // The unrelated known-source review still remains open.
+    const repeated = JSON.parse(await readFile(join(directory, '.source-monitor/alerts.json'), 'utf8'));
+    assert.equal(repeated.alerts.length, 2);
+    assert.equal(repeated.alerts[1].status, 'reviewed');
+    const report = JSON.parse(await readFile(join(directory, '.source-monitor/report-boe.json'), 'utf8'));
+    assert.equal(report.scans.length, 14);
+    assert.match(await readFile(join(directory, '.source-monitor/report-boe.md'), 'utf8'), /Not covered: AEAT/);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
 });
