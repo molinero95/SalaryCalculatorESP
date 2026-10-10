@@ -1,7 +1,7 @@
 // Persistent maintenance cases. No fiscal parameters or verification dates are changed here.
 const OPEN = new Set(['pending', 'implementation-needed']);
 const STATUSES = new Set([...OPEN, 'reviewed', 'implemented']);
-const KINDS = new Set(['changed', 'unavailable', 'stale']);
+const KINDS = new Set(['changed', 'unavailable', 'stale', 'publication']);
 const validTime = (value) => typeof value === 'string' && !isNaN(Date.parse(value));
 
 export const emptyAlerts = () => ({ schemaVersion: 1, checkedAt: null, alerts: [] });
@@ -40,7 +40,16 @@ export function reconcileAlerts(previous, report) {
     throw new Error('Cannot apply an older report');
   const ledger = structuredClone(previous);
   ledger.checkedAt = report.checkedAt;
+  const scope = report.scope ?? 'sources';
   const findings = [
+    ...(report.publications ?? []).map((p) => ({
+      kind: 'publication',
+      target: p.id,
+      url: p.url,
+      groups: p.groups ?? [],
+      signature: p.signature,
+      evidence: p,
+    })),
     ...report.results
       .filter((r) => ['changed', 'unavailable'].includes(r.status))
       .map((r) => ({
@@ -62,8 +71,11 @@ export function reconcileAlerts(previous, report) {
       evidence: { fiscalYear: Number(report.checkedAt.slice(0, 4)) },
     })),
   ];
-  for (const alert of ledger.alerts) alert.active = false;
+  for (const alert of ledger.alerts) {
+    if ((alert.scope ?? 'sources') === scope) alert.active = false;
+  }
   for (const finding of findings) {
+    finding.scope = scope;
     const id = `${finding.kind}:${finding.target}`;
     let alert = ledger.alerts.find((item) => item.id === id);
     if (!alert) {
@@ -72,7 +84,7 @@ export function reconcileAlerts(previous, report) {
       alert.history.push({ at: report.checkedAt, action: 'detected', evidence: finding.evidence });
     } else if (alert.signature !== finding.signature || !OPEN.has(alert.status)) {
       // A reviewed changed document remains acknowledged until its bytes/URL change again.
-      if (alert.signature !== finding.signature || finding.kind !== 'changed') {
+      if (alert.signature !== finding.signature || !['changed', 'publication'].includes(finding.kind)) {
         alert.status = 'pending';
         alert.history.push({ at: report.checkedAt, action: 'reopened', evidence: finding.evidence });
       }
@@ -100,7 +112,7 @@ export function reviewAlert(previous, { id, status, evidence, actor, signature }
     throw new Error('Alert evidence changed; review the latest report before retrying');
   if (status === 'implemented' && !/^https:\/\/github\.com\/molinero95\/SalaryCalculatorESP\/pull\/\d+$/.test(evidence))
     throw new Error('Implementation evidence must link to a repository PR');
-  if (status !== 'implementation-needed' && alert.kind !== 'changed' && alert.active)
+  if (status !== 'implementation-needed' && !['changed', 'publication'].includes(alert.kind) && alert.active)
     throw new Error('Resolve source availability or stale parameters before closing this alert');
   alert.status = status;
   alert.history.push({ at, action: status, actor: actor.trim(), evidence: evidence.trim() });

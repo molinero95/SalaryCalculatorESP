@@ -46,7 +46,7 @@ El perfil salarial principal supone un pagador y un año completo. No hay un mod
 
 El catálogo fiscal registra ejercicio, fuentes y fechas de verificación. Un workflow semanal (lunes) y manual comprueba las URLs conocidas y detecta cambios, fuentes inaccesibles y grupos de parámetros pendientes de revisión. Los casos persisten con historial y requieren revisión explícita con evidencia; recuperar una fuente o aceptar su huella no los cierra.
 
-Los informes aparecen en **GitHub Actions → Template source review**, con archivos descargables y estado guardado en la rama `monitor-state`. Las notificaciones de GitHub dependen de los ajustes de la cuenta: no hay envíos dedicados ni avisos de mantenimiento dentro de la calculadora. El monitor no descubre todavía todas las publicaciones nuevas ni actualiza automáticamente las reglas fiscales. [Funcionamiento del monitor](docs/template-maintenance.md) · [Fuentes fiscales](data/fiscal-sources.json).
+Los informes aparecen en **GitHub Actions → Template source review**, con archivos descargables y estado guardado en la rama `monitor-state`. Las notificaciones de GitHub dependen de los ajustes de la cuenta: no hay envíos dedicados ni avisos de mantenimiento dentro de la calculadora. El monitor descubre candidatos en títulos del BOE dentro de una ventana de 14 días; no cubre todavía los índices de AEAT, boletines autonómicos/forales originales ni partidos, y no actualiza automáticamente las reglas fiscales. [Funcionamiento del monitor](docs/template-maintenance.md) · [Fuentes fiscales](data/fiscal-sources.json).
 
 ## Privacidad y arquitectura
 

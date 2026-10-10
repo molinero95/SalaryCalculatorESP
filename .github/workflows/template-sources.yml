@@ -25,6 +25,10 @@ on:
           - implementation-needed
           - implemented
         default: reviewed
+      boe_end_date:
+        description: Optional YYYY-MM-DD completed day for a 14-day BOE backfill (default yesterday UTC)
+        type: string
+        default: ''
       alert_evidence:
         description: Review reasoning, or repository PR URL for implemented
         type: string
@@ -76,6 +80,11 @@ jobs:
           SOURCE_ALERT_SIGNATURE: ${{ inputs.alert_signature }}
           SOURCE_ALERT_STATUS: ${{ inputs.alert_status }}
           SOURCE_ALERT_EVIDENCE: ${{ inputs.alert_evidence }}
+      - name: Discover new BOE publications
+        if: always() && env.MONITOR_STATE_RESTORED == 'true'
+        run: node scripts/discover-boe.js
+        env:
+          BOE_DISCOVERY_END: ${{ inputs.boe_end_date }}
       - name: Save baseline to monitor-state branch
         if: always() && env.MONITOR_STATE_RESTORED == 'true' && (hashFiles('.source-monitor/baseline.json') != '' || hashFiles('.source-monitor/alerts.json') != '')
         run: |
@@ -106,7 +115,8 @@ jobs:
         with:
           name: template-source-report
           path: |
-            .source-monitor/report.*
+            .source-monitor/report*.json
+            .source-monitor/report*.md
             .source-monitor/alerts.json
           retention-days: 90
           include-hidden-files: true

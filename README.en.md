@@ -46,7 +46,7 @@ The main employment profile assumes one payer and a complete year. Multiple paye
 
 The fiscal catalogue records fiscal years, sources and verification dates. A weekly Monday/manual workflow checks known URLs for document changes, unavailable sources and overdue parameter groups. Cases persist with history until an explicit evidence-backed review; source recovery or fingerprint acceptance does not close them.
 
-Reports are in **GitHub Actions → Template source review**, downloadable artifacts and the `monitor-state` branch. GitHub notifications depend on account settings; no dedicated messages or in-app maintenance alerts are configured. New publication discovery and automatic fiscal updates are not implemented. [Monitor instructions](docs/template-maintenance.md) · [Fiscal sources](data/fiscal-sources.json).
+Reports are in **GitHub Actions → Template source review**, downloadable artifacts and the `monitor-state` branch. GitHub notifications depend on account settings; no dedicated messages or in-app maintenance alerts are configured. A 14-day BOE title scan discovers review candidates; AEAT indexes, original regional/foral bulletins, party indexes and automatic fiscal updates remain unsupported. [Monitor instructions](docs/template-maintenance.md) · [Fiscal sources](data/fiscal-sources.json).
 
 ## Privacy and architecture
 

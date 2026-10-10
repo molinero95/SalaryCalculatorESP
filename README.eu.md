@@ -42,7 +42,7 @@ PP, PSOE, Podemos 2025 eta Ciudadanos informazio gisa agertzen dira egiaztatutak
 
 Katalogoak zerga-ekitaldia, iturriak eta egiaztapen-datak jasotzen ditu. Asteko (astelehena) eta eskuzko monitoreak URL ezagunak egiaztatzen ditu: aldaketak, eskuraezinak diren iturriak eta berrikusi beharreko parametroak. Kasuek historia gordetzen dute eta frogadun berrikuspena behar dute; iturria berreskuratzeak edo hatz-marka onartzeak ez ditu ixten.
 
-Txostenak **GitHub Actions → Template source review** atalean, deskargatzeko fitxategietan eta `monitor-state` adarrean daude. GitHub-en jakinarazpenak kontuaren ezarpenen araberakoak dira; ez dago mezu dedikaturik edo kalkulagailuko mantentze-alertarik. Argitalpen berrien bilaketa eta eguneratze fiskal automatikoak egiteko daude. [Monitorea](docs/template-maintenance.md) · [Iturri fiskalak](data/fiscal-sources.json).
+Txostenak **GitHub Actions → Template source review** atalean, deskargatzeko fitxategietan eta `monitor-state` adarrean daude. GitHub-en jakinarazpenak kontuaren ezarpenen araberakoak dira; ez dago mezu dedikaturik edo kalkulagailuko mantentze-alertarik. BOEko 14 eguneko titulu-bilaketak hautagaiak aurkitzen ditu; AEAT indizeak, jatorrizko autonomia/foru-buletinak, alderdien indizeak eta eguneratze fiskal automatikoak egiteko daude. [Monitorea](docs/template-maintenance.md) · [Iturri fiskalak](data/fiscal-sources.json).
 
 ## Pribatutasuna eta garapena
 
