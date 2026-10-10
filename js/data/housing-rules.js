@@ -63,9 +63,8 @@ const regional = (region, rules) =>
  * 2026-10-10 (docs/housing-deductions-2026.md, "Phase 2 implementation").
  */
 const REGIONAL_TEXT_CHECKED = {
-  'MAD-1': 'https://www.boe.es/buscar/doc.php?id=BOE-A-2025-3303',
+  'MAD-1': 'https://www.boe.es/buscar/act.php?id=BOCM-m-2010-90068',
   'CAT-1': 'https://www.boe.es/eli/es-ct/dlg/2024/03/12/1/con',
-  'VAL-1': 'https://www.boe.es/eli/es-vc/l/1997/12/23/13/con',
   'EXT-1': 'https://www.boe.es/eli/es-ex/dlg/2018/04/10/1/con',
   'CLM-1': 'https://www.boe.es/eli/es-cm/l/2013/11/21/8/con',
   'CLM-2': 'https://www.boe.es/eli/es-cm/l/2013/11/21/8/con',

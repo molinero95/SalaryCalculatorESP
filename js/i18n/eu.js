@@ -381,13 +381,13 @@ export default {
   removeSimulation: 'Simulazioa ezabatu',
   housingTitle: 'Ohiko etxebizitza · urteko aitorpena',
   housingHelp:
-    'Estatuko araubide iragankorrak (2015 aurreko kontratua duen alokairua eta 2013 aurreko erosketa) eta profil orokorren alokairuagatiko kenkari autonomikoa kalkulatzen dira Andaluzian, Asturiasen, Balear Uharteetan, Gaztela-Mantxan, Katalunian, Valentziako Erkidegoan, Extremaduran, Galizian, Madrilen, Murtzian eta Errioxan. Oraindik ez dira sartzen Kanariak, Kantabria, Gaztela eta Leon, udalerriaren araberako aldaerak, erosketagatiko edo errentatzaileentzako kenkari autonomikoak, ezta alokairuagatiko estatuko kenkari berria ere.',
+    'Estatuko araubide iragankorrak (2015 aurreko kontratua duen alokairua eta 2013 aurreko erosketa) eta profil orokorren alokairuagatiko kenkari autonomikoa kalkulatzen dira Andaluzian, Asturiasen, Balear Uharteetan, Gaztela-Mantxan, Katalunian, Extremaduran, Galizian, Madrilen, Murtzian eta Errioxan. Oraindik ez dira sartzen Kanariak, Kantabria, Gaztela eta Leon, Valentziako Erkidegoa, udalerriaren araberako aldaerak, erosketagatiko edo errentatzaileentzako kenkari autonomikoak, ezta alokairuagatiko estatuko kenkari berria ere.',
   housingTenure: 'Zure ohiko etxebizitza',
   housingTenureNotProvided: 'Adierazi gabe',
   housingTenureTenant: 'Alokairua',
   housingTenureOwner: 'Jabetza',
   housingTenureOther: 'Bestelakoa',
-  housingRentPaid: 'Urtean ordaindutako alokairua (€ / urte)',
+  housingRentPaid: 'Zuk urtean ordaindutako alokairua (€ / urte)',
   housingLeaseBefore2015:
     'Nire kontratua 2015eko urtarrilaren 1a baino lehenagokoa da, data horren aurretik alokairua ordaindu nuen eta 2015 aurreko urteren batean alokairuagatiko estatuko kenkarirako eskubidea nuen.',
   housingInvestment: 'Aurten etxebizitzagatik ordaindua: amortizazioa, interesak eta gastuak (€ / urte)',
@@ -396,6 +396,8 @@ export default {
   housingLoanWithholding:
     'Nire enpresari jakinarazi diot (145 eredua) kenkari honetarako eskubidea ematen duen mailegu batekin finantzatzen dudala.',
   housingRentAid: 'Jasotako alokairurako laguntza publikoak (€ / urte)',
+  housingCoTenants: 'Kontratu beragatik kenkarirako eskubidea duten pertsonak, zu barne',
+  housingLeaseDays: 'Kontratua indarrean egon den 2026ko egunak',
   housingSavingsBase: 'Aurrezkiaren zerga oinarria: interesak, dibidenduak eta irabaziak (€ / urte)',
   housingLargeFamily: 'Familia ugariaren titulua daukat.',
   housingSingleParent: 'Familia gurasobakarra osatzen dut nire erkidegoko araudiaren arabera.',

@@ -376,13 +376,13 @@ export default {
   removeSimulation: 'Remove simulation',
   housingTitle: 'Main home · annual assessment',
   housingHelp:
-    'The state transitional regimes (renting under a lease signed before 2015 and buying before 2013) and the regional rent deduction for general profiles in Andalusia, Asturias, the Balearic Islands, Castilla-La Mancha, Catalonia, the Valencian Community, Extremadura, Galicia, Madrid, Murcia and La Rioja are calculated. The Canary Islands, Cantabria, Castilla y León, municipality-dependent variants, regional purchase and landlord deductions and the new state rent deduction are not included yet.',
+    'The state transitional regimes (renting under a lease signed before 2015 and buying before 2013) and the regional rent deduction for general profiles in Andalusia, Asturias, the Balearic Islands, Castilla-La Mancha, Catalonia, Extremadura, Galicia, Madrid, Murcia and La Rioja are calculated. The Canary Islands, Cantabria, Castilla y León, the Valencian Community, municipality-dependent variants, regional purchase and landlord deductions and the new state rent deduction are not included yet.',
   housingTenure: 'Your main home',
   housingTenureNotProvided: 'Not stated',
   housingTenureTenant: 'Renting',
   housingTenureOwner: 'Owned',
   housingTenureOther: 'Other',
-  housingRentPaid: 'Rent paid in the year (€ / year)',
+  housingRentPaid: 'Rent you pay in the year (€ / year)',
   housingLeaseBefore2015:
     'My lease was signed before 1 January 2015, I paid rent before that date and I was entitled to the state rent deduction in a year before 2015.',
   housingInvestment: 'Paid this year for the home: principal, interest and costs (€ / year)',
@@ -391,6 +391,8 @@ export default {
   housingLoanWithholding:
     'I told my employer (form 145) that I finance it with a loan that qualifies for this deduction.',
   housingRentAid: 'Public rent aid received (€ / year)',
+  housingCoTenants: 'People entitled to the deduction for the same lease, including you',
+  housingLeaseDays: 'Days of 2026 with the lease in force',
   housingSavingsBase: 'Savings taxable base: interest, dividends and gains (€ / year)',
   housingLargeFamily: 'I hold a large-family title.',
   housingSingleParent: 'I head a single-parent family as defined by my community.',

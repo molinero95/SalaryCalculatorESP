@@ -2,6 +2,7 @@
 import { grossAnnualOf } from '../calc.js';
 import { MONTHS, AMOUNT_FIELDS, PERIOD_OF_AMOUNT, NUMERIC_INPUTS } from '../domain/payroll-input.js';
 import { selectResidence } from '../domain/residence.js';
+import { REGIONAL_HOUSING_ATTESTATIONS } from '../domain/housing.js';
 import { renderResidenceOptions } from './residence.js';
 
 export function bindPayrollForm(form, state, onChange) {
@@ -29,6 +30,7 @@ export function bindPayrollForm(form, state, onChange) {
         state.input.foralChildrenConfirmed = false;
         state.input.foralAscendantsConfirmed = false;
         state.input.foralAnnualConfirmed = false;
+        for (const flag of REGIONAL_HOUSING_ATTESTATIONS) state.input[flag] = false;
       }
       Object.assign(state.input, residence);
       render();

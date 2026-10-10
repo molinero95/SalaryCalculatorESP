@@ -39,6 +39,8 @@ export const NUMERIC_INPUTS = new Set([
   'housingRentAid',
   'housingSavingsBase',
   'housingFamilyUnitOtherBase',
+  'housingCoTenants',
+  'housingLeaseDays',
   ...Object.keys(PERIOD_OF_AMOUNT),
 ]);
 
@@ -63,6 +65,8 @@ export const INPUT_LIMITS = {
   housingRentAid: {},
   housingSavingsBase: {},
   housingFamilyUnitOtherBase: {},
+  housingCoTenants: { min: 1, max: 10, integer: true },
+  housingLeaseDays: { max: 365, integer: true },
   ...Object.fromEntries(Object.keys(PERIOD_OF_AMOUNT).map((field) => [field, {}])),
 };
 

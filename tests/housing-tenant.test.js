@@ -82,13 +82,7 @@ const cases = {
     ],
   ],
   valencia: [
-    ['no condition: 20 %', 'VAL-1', { age: 40, housingRentPaid: 3000 }, { bl: 20000 }, 600],
-    ['age 35: 25 %', 'VAL-1', { age: 35, housingRentPaid: 3000 }, { bl: 20000 }, 750],
-    ['two conditions: 30 % capped', 'VAL-1', { age: 30, disability: 65, housingRentPaid: 6000 }, { bl: 20000 }, 1100],
-    ['cap halved at 28,500', 'VAL-1', { age: 30, housingRentPaid: 3000 }, { bl: 28500 }, 475],
-    ['cap zero at 30,000', 'VAL-1', { age: 30, housingRentPaid: 3000 }, { bl: 30000 }, 'noAmount'],
-    ['above 30,000', 'VAL-1', { age: 30, housingRentPaid: 3000 }, { bl: 30000.01 }, 'incomeAboveLimit'],
-    ['liquid base, not taxable base', 'VAL-1', { age: 40, housingRentPaid: 3000 }, { bi: 31000, bl: 26000 }, 600],
+    ['pending until art. 4.Cuatro is read', 'VAL-1', { age: 30, housingRentPaid: 3000 }, {}, 'primaryTextPending'],
   ],
   extremadura: [
     ['30 % capped', 'EXT-1', { age: 30, housingRentPaid: 4000 }, { bi: 25000 }, 1000],
@@ -116,6 +110,35 @@ const cases = {
       300,
     ],
     ['over 36 without a group', 'CLM-1', { age: 40, housingRentPaid: 2000 }, { bi: 12000 }, 'notEligible'],
+    // Arts. 9 ter to 9 quinquies: 500 × days / 365, divided among entitled taxpayers.
+    [
+      'single parent, lease in force 182 days',
+      'CLM-1',
+      { age: 40, housingRentPaid: 4800, housingSingleParent: true, housingLeaseDays: 182 },
+      { bi: 12000 },
+      249.32,
+    ],
+    [
+      'under 36 is not prorated',
+      'CLM-1',
+      { age: 30, housingRentPaid: 4800, housingLeaseDays: 182 },
+      { bi: 12000 },
+      500,
+    ],
+    [
+      'single parent, two claimants',
+      'CLM-1',
+      { age: 40, housingRentPaid: 4800, housingSingleParent: true, housingCoTenants: 2 },
+      { bi: 12000 },
+      250,
+    ],
+    [
+      'single parent without lease days',
+      'CLM-1',
+      { age: 40, housingRentPaid: 4800, housingSingleParent: true, housingLeaseDays: 0 },
+      { bi: 12000 },
+      'leaseDaysNotProvided',
+    ],
     [
       'one compatible deduction only',
       'CLM-2',
@@ -215,6 +238,22 @@ for (const [region, list] of Object.entries(cases))
   for (const [label, id, input, context, expected] of list)
     test(`${id} ${label}`, () => assert.equal(claim(id, region, input, context), expected));
 
+for (const [region, id, input, expected] of [
+  ['catalonia', 'CAT-1', { age: 30, housingRentPaid: 12000, housingLargeFamily: true }, 500],
+  ['catalonia', 'CAT-1', { age: 30, housingRentPaid: 9600, housingCoTenants: 3 }, 333.33],
+  ['galicia', 'GAL-1', { age: 35, housingRentPaid: 6000 }, 150],
+  ['extremadura', 'EXT-1', { age: 30, housingRentPaid: 4000 }, 500],
+  ['murcia', 'MUR-1', { age: 40, housingRentPaid: 4000 }, 150],
+  ['rioja', 'RIO-1', { age: 30, housingRentPaid: 4000 }, 150],
+  ['asturias', 'AST-1', { age: 30, housingRentPaid: 6000 }, 750],
+  // Each taxpayer deducts their own payments within the full caps.
+  ['andalusia', 'AND-1', { age: 30, housingRentPaid: 10000 }, 1200],
+  ['balearic', 'BAL-1', { age: 33, housingRentPaid: 5000 }, 530],
+  ['madrid', 'MAD-1', { age: 30, housingRentPaid: 9600 }, 1237.2],
+])
+  test(`${id} with ${input.housingCoTenants ?? 2} entitled taxpayers on one lease`, () =>
+    assert.equal(claim(id, region, { housingCoTenants: 2, ...input }, { bi: 15000, bl: 15000 }), expected));
+
 test('regional tenant rules need the formal requirements, a rent and the income magnitudes', () => {
   assert.equal(
     claim('MAD-1', 'madrid', { age: 30, housingRentPaid: 9600, housingRegionalConfirmed: false }),
@@ -266,4 +305,15 @@ test('payroll: the regional deduction is limited to the regional quota', () => {
   assert.equal(result.housing.regional, 1237.2);
   assert.ok(result.incomeTax.housingDeduction < 1237.2);
   assert.equal(result.incomeTax.housingDeduction, Math.round(result.incomeTax.regionalTax * 100) / 100);
+});
+
+test('payroll: the pension saving includes a housing deduction gained by lowering the base', () => {
+  // Gross 21,925 €: liquid base 21,925 × 0.935 − 2,000 = 18,499.88 €, above La Rioja's
+  // 18,030 €. A 1,500 € pension contribution brings it to 16,999.88 €, so RIO-1 gives
+  // 10 % of 4,000 € capped at 300 € only with the contribution.
+  const input = tenant('rioja', { salary: 21925, age: 30, housingRentPaid: 4000, pensionIndividual: 1500 });
+  const withRent = computePayroll(input, clone(CURRENT_SCENARIO));
+  const without = computePayroll({ ...input, housingTenure: 'notProvided' }, clone(CURRENT_SCENARIO));
+  assert.equal(withRent.incomeTax.housingDeduction, 300);
+  assert.equal(Math.round((withRent.pension.taxSaved - without.pension.taxSaved) * 100) / 100, 300);
 });

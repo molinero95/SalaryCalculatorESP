@@ -40,7 +40,7 @@ PP, PSOE, Podemos 2025 and Ciudadanos have informational entries where verified 
 
 The main employment profile assumes one payer and a complete year. Multiple payers, self-employment, pluriactivity and joint filing have no complete model. Selected additional annual incomes in foral profiles do not constitute a complete self-employed calculator.
 
-**Housing:** the state transitional regimes (lease before 2015, purchase before 2013) and the regional rent deduction for general profiles in 11 communities are calculated; other rules are explained as skipped. Further phases require verified rules. [Housing plan](https://github.com/molinero95/SalaryCalculatorESP/pull/22) · [Prioritized backlog](docs/BACKLOG.md).
+**Housing:** the state transitional regimes (lease before 2015, purchase before 2013) and the regional rent deduction for general profiles in 10 communities are calculated; other rules are explained as skipped. Further phases require verified rules. [Housing plan](https://github.com/molinero95/SalaryCalculatorESP/pull/22) · [Prioritized backlog](docs/BACKLOG.md).
 
 ## Data maintenance and alerts
 

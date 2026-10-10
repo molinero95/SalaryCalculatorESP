@@ -45,3 +45,17 @@ test('communities without a calculated tenant rule do not ask for its facts', as
   await expect(page.locator('#housingTwoMinorChildren-field')).toBeVisible();
   await expect(page.locator('#housingFamilyUnitConfirmed-field')).toBeHidden();
 });
+
+test('changing the community clears region-specific housing attestations', async ({ page }) => {
+  await chooseResidence(page, 'region:madrid');
+  await page.locator('#housing-fields > summary').click();
+  await page.selectOption('#housingTenure', 'tenant');
+  await page.locator('#housingRegionalConfirmed-field').click();
+  await page.locator('#housingFamilyUnitConfirmed-field').click();
+  await expect(page.locator('#housingRegionalConfirmed')).toBeChecked();
+  await chooseResidence(page, 'region:castillaLaMancha');
+  await expect(page.locator('#housingRegionalConfirmed')).not.toBeChecked();
+  await expect(page.locator('#housingLeaseDays-field')).toBeVisible();
+  await expect(page.locator('#housingLeaseDays')).toHaveValue('365');
+  await expect(page.locator('#housingCoTenants')).toHaveValue('1');
+});

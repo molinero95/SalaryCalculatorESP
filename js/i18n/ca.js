@@ -379,13 +379,13 @@ export default {
   removeSimulation: 'Eliminar simulació',
   housingTitle: 'Habitatge habitual · declaració anual',
   housingHelp:
-    'Es calculen els règims transitoris estatals (lloguer amb contracte anterior al 2015 i compra anterior al 2013) i la deducció autonòmica per lloguer dels perfils generals a Andalusia, Astúries, les Illes Balears, Castella-la Manxa, Catalunya, la Comunitat Valenciana, Extremadura, Galícia, Madrid, Múrcia i la Rioja. Encara no s’hi inclouen Canàries, Cantàbria, Castella i Lleó, les variants per municipi, les deduccions autonòmiques per compra o per a arrendadors ni la nova deducció estatal per lloguer.',
+    'Es calculen els règims transitoris estatals (lloguer amb contracte anterior al 2015 i compra anterior al 2013) i la deducció autonòmica per lloguer dels perfils generals a Andalusia, Astúries, les Illes Balears, Castella-la Manxa, Catalunya, Extremadura, Galícia, Madrid, Múrcia i la Rioja. Encara no s’hi inclouen Canàries, Cantàbria, Castella i Lleó, la Comunitat Valenciana, les variants per municipi, les deduccions autonòmiques per compra o per a arrendadors ni la nova deducció estatal per lloguer.',
   housingTenure: 'El teu habitatge habitual',
   housingTenureNotProvided: 'Sense indicar',
   housingTenureTenant: 'Lloguer',
   housingTenureOwner: 'Propietat',
   housingTenureOther: 'Una altra',
-  housingRentPaid: 'Lloguer pagat durant l’any (€ / any)',
+  housingRentPaid: 'Lloguer que pagues tu durant l’any (€ / any)',
   housingLeaseBefore2015:
     'El meu contracte és anterior a l’1 de gener de 2015, vaig pagar lloguer abans d’aquesta data i tenia dret a la deducció estatal per lloguer en algun any anterior al 2015.',
   housingInvestment: 'Pagat aquest any per l’habitatge: amortització, interessos i despeses (€ / any)',
@@ -394,6 +394,8 @@ export default {
   housingLoanWithholding:
     'He comunicat a la meva empresa (model 145) que el finanço amb un préstec que dona dret a aquesta deducció.',
   housingRentAid: 'Ajudes públiques al lloguer cobrades (€ / any)',
+  housingCoTenants: 'Persones amb dret a la deducció pel mateix contracte, tu inclòs',
+  housingLeaseDays: 'Dies del 2026 amb el contracte en vigor',
   housingSavingsBase: 'Base imposable de l’estalvi: interessos, dividends i guanys (€ / any)',
   housingLargeFamily: 'Tinc títol de família nombrosa.',
   housingSingleParent: 'Formo una família monoparental segons la normativa de la meva comunitat.',

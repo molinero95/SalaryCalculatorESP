@@ -78,7 +78,6 @@ test('research facts are kept: four state rules, only DT 18ª touches payroll, t
       'CLM-3',
       'CLM-4',
       'CAT-1',
-      'VAL-1',
       'EXT-1',
       'GAL-1',
       'RIO-1',

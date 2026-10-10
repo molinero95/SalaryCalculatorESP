@@ -58,11 +58,29 @@ const amount = (value) => {
   return Number.isFinite(number) ? Math.min(MAX_AMOUNT, Math.max(0, number)) : 0;
 };
 
+/**
+ * Attestations whose meaning depends on the community (formal requirements, regional
+ * family definitions, family-unit data): a change of residence must clear them.
+ */
+export const REGIONAL_HOUSING_ATTESTATIONS = [
+  'housingRegionalConfirmed',
+  'housingSingleParent',
+  'housingTwoMinorChildren',
+  'housingFamilyUnitConfirmed',
+];
+
+const integerIn = (value, min, max, fallback) => {
+  const number = Number(value);
+  return Number.isFinite(number) ? Math.min(max, Math.max(min, Math.floor(number))) : fallback;
+};
+
 /** Normalizes the housing fields in place; unknown or invalid values fall back to "not provided". */
 export function normalizeHousing(input) {
   input.housingTenure = HOUSING_TENURES.includes(input.housingTenure) ? input.housingTenure : 'notProvided';
   for (const field of HOUSING_AMOUNTS) input[field] = amount(input[field]);
   for (const flag of HOUSING_FLAGS) input[flag] = input[flag] === true;
+  input.housingCoTenants = integerIn(input.housingCoTenants, 1, 10, 1);
+  input.housingLeaseDays = integerIn(input.housingLeaseDays, 0, 365, 365);
   return input;
 }
 

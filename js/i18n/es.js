@@ -378,13 +378,13 @@ export default {
   removeSimulation: 'Eliminar simulación',
   housingTitle: 'Vivienda habitual · declaración anual',
   housingHelp:
-    'Se calculan los regímenes transitorios estatales (alquiler con contrato anterior a 2015 y compra anterior a 2013) y la deducción autonómica por alquiler de los perfiles generales en Andalucía, Asturias, Illes Balears, Castilla-La Mancha, Cataluña, Comunitat Valenciana, Extremadura, Galicia, Madrid, Murcia y La Rioja. Aún no se incluyen Canarias, Cantabria, Castilla y León, las variantes por municipio, las deducciones autonómicas por compra o para arrendadores ni la nueva deducción estatal por alquiler.',
+    'Se calculan los regímenes transitorios estatales (alquiler con contrato anterior a 2015 y compra anterior a 2013) y la deducción autonómica por alquiler de los perfiles generales en Andalucía, Asturias, Illes Balears, Castilla-La Mancha, Cataluña, Extremadura, Galicia, Madrid, Murcia y La Rioja. Aún no se incluyen Canarias, Cantabria, Castilla y León, la Comunitat Valenciana, las variantes por municipio, las deducciones autonómicas por compra o para arrendadores ni la nueva deducción estatal por alquiler.',
   housingTenure: 'Tu vivienda habitual',
   housingTenureNotProvided: 'Sin indicar',
   housingTenureTenant: 'Alquiler',
   housingTenureOwner: 'Propiedad',
   housingTenureOther: 'Otra',
-  housingRentPaid: 'Alquiler pagado en el año (€ / año)',
+  housingRentPaid: 'Alquiler que pagas tú en el año (€ / año)',
   housingLeaseBefore2015:
     'Mi contrato es anterior al 1 de enero de 2015, pagué alquiler antes de esa fecha y tenía derecho a la deducción estatal por alquiler en algún año anterior a 2015.',
   housingInvestment: 'Pagado este año por la vivienda: amortización, intereses y gastos (€ / año)',
@@ -393,6 +393,8 @@ export default {
   housingLoanWithholding:
     'He comunicado a mi empresa (modelo 145) que la financio con un préstamo que da derecho a esta deducción.',
   housingRentAid: 'Ayudas públicas al alquiler cobradas (€ / año)',
+  housingCoTenants: 'Personas con derecho a la deducción por el mismo contrato, incluido tú',
+  housingLeaseDays: 'Días de 2026 con el contrato en vigor',
   housingSavingsBase: 'Base imponible del ahorro: intereses, dividendos y ganancias (€ / año)',
   housingLargeFamily: 'Tengo título de familia numerosa.',
   housingSingleParent: 'Formo una familia monoparental según la normativa de mi comunidad.',

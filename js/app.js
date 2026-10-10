@@ -543,8 +543,15 @@ function update() {
   // Regional tenant deductions: only the communities with a calculated rule ask for their facts.
   const regionalTenant = tenure === 'tenant' && hasRegionalTenantRule(state.input.region);
   $('#housingSavingsBase-field').hidden = tenure !== 'tenant';
-  for (const field of ['housingRentAid', 'housingLargeFamily', 'housingSingleParent', 'housingRegionalConfirmed'])
+  for (const field of [
+    'housingRentAid',
+    'housingCoTenants',
+    'housingLargeFamily',
+    'housingSingleParent',
+    'housingRegionalConfirmed',
+  ])
     $(`#${field}-field`).hidden = !regionalTenant;
+  $('#housingLeaseDays-field').hidden = !regionalTenant || state.input.region !== 'castillaLaMancha';
   $('#housingTwoMinorChildren-field').hidden = !regionalTenant || state.input.region !== 'galicia';
   $('#housingFamilyUnitConfirmed-field').hidden = !regionalTenant || state.input.region !== 'madrid';
   $('#housingFamilyUnitOtherBase-field').hidden =

@@ -141,19 +141,27 @@ export function computePayroll(input, scenario, grossAnnual = grossAnnualOf(inpu
   // Housing income tests use the general taxable base (before pension reductions),
   // the general liquid base (after them) and the minimum of the annual return.
   const annualMinimum = personalAllowance(input, scenario.incomeTax, true);
-  const housing = foral
-    ? assessHousing(input)
-    : assessHousing(input, {
-        baseImponible: Math.max(
-          0,
-          annualEarnings.netEarnings + additional.general - annualEarnings.otherExpenses - annualEarnings.reduction,
-        ),
-        baseLiquidable: annualBase,
-        minimum: annualMinimum.total,
-        descendantMinimum: annualMinimum.children,
-        taxableGross,
-      });
+  const housingFor = (baseImponible, baseLiquidable) =>
+    foral
+      ? assessHousing(input)
+      : assessHousing(input, {
+          baseImponible,
+          baseLiquidable,
+          minimum: annualMinimum.total,
+          descendantMinimum: annualMinimum.children,
+          taxableGross,
+        });
+  const housing = housingFor(
+    Math.max(
+      0,
+      annualEarnings.netEarnings + additional.general - annualEarnings.otherExpenses - annualEarnings.reduction,
+    ),
+    annualBase,
+  );
   const housingClaim = { state: housing.state, regional: housing.regional };
+  // Without pension contributions the bases change, and so may the housing deductions.
+  const baseWithoutPension = annualEmploymentBase + additional.general;
+  const housingWithoutPension = housingFor(baseWithoutPension, baseWithoutPension);
   const annual = calculateAnnual(input, scenario.incomeTax, annualBase, annualGross, {
     netEmploymentIncome:
       input.region === 'navarra'
@@ -175,7 +183,7 @@ export function computePayroll(input, scenario, grossAnnual = grossAnnualOf(inpu
         additional.incomeForCredits,
       baseBeforePension: annualEmploymentBase + additional.general + additional.savings,
       savingsBase: additional.savings,
-      housing: housingClaim,
+      housing: { state: housingWithoutPension.state, regional: housingWithoutPension.regional },
     }).tax - annual.tax;
 
   // Positive: refund. Negative: to pay, unless the employee doesn't have to file.
