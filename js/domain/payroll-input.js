@@ -3,6 +3,7 @@ import { FORAL_ANNUAL_AMOUNTS } from './foral-assessment.js';
 import { REGIONAL_SCALES } from '../data/regions.js';
 import { FORAL_TERRITORIES } from '../data/foral.js';
 import { CITIES } from '../data/cities.js';
+import { normalizeHousing } from './housing.js';
 
 export const MONTHS = 12;
 
@@ -70,5 +71,5 @@ export function normalizeInput(input) {
     const value = Math.min(max, Math.max(min, input[field]));
     input[field] = integer ? Math.floor(value) : value;
   }
-  return input;
+  return normalizeHousing(input);
 }
