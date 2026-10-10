@@ -17,6 +17,8 @@ for (const region of ['navarra', 'bizkaia', 'gipuzkoa', 'alava']) {
     await expect(page.locator('#breakdown')).toBeHidden();
     await expect(page.locator('#compare-table')).toContainText('Esta simulación no está modelada');
     await expect(page.locator('#share-whatsapp')).toBeDisabled();
+    if (region === 'navarra')
+      await page.locator('#results-section').screenshot({ path: test.info().outputPath('unsupported-foral.png') });
     await page.locator('#tab-salary').click();
     await expect(page.locator('#breakdown')).toBeVisible();
     await expect(page.locator('#creep-simulate')).toBeHidden();
@@ -57,5 +59,19 @@ test('restored and offline unsupported simulation does not resurrect fake result
     await expect(page.locator('.result-simulation')).toContainText('This simulation is not modelled');
   } finally {
     await context.setOffline(false);
+  }
+});
+
+test('foral applicability notice fits 320px in all languages', async ({ page }) => {
+  await page.goto('/');
+  await page.setViewportSize({ width: 320, height: 740 });
+  await chooseResidence(page, 'region:navarra');
+  await page.locator('#tab-proposals').click();
+  await page.selectOption('#proposal-select', 'vox2024');
+  for (const language of ['es', 'ca', 'eu', 'gl', 'en']) {
+    await page.selectOption('#language', language);
+    await expect(page.locator('.result-simulation .warning')).toBeVisible();
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    await expect(page.locator('.result-simulation .headline')).toHaveCount(0);
   }
 });

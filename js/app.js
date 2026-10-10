@@ -171,13 +171,16 @@ function renderSimulationTabs() {
 }
 
 function renderResultTabs() {
+  const header = $('.result-simulation header');
+  if (!header) return;
+  $('.result-simulation .result-sim-tabs')?.remove();
   const tabs = state.simulations
     .map(
       (_, i) =>
         `<button type="button" class="result-sim-tab ${i === state.active ? 'active' : ''}" aria-pressed="${i === state.active}" data-result-simulation="${i}">${escapeHtml(simulationName(i))}</button>`,
     )
     .join('');
-  $('.result-simulation header').insertAdjacentHTML(
+  header.insertAdjacentHTML(
     'afterend',
     `<div class="result-sim-tabs" role="group" aria-label="${escapeHtml(t('compareTitle'))}">${tabs}</div>`,
   );
