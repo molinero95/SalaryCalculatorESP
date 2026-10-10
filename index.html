@@ -247,6 +247,66 @@
             <span data-i18n="childrenFullyCounted"></span><span data-help="helpChildrenFullyCounted"></span>
           </label>
 
+          <details class="extras field-wide" id="housing-fields">
+            <summary data-i18n="housingTitle"></summary>
+            <p class="help" data-i18n="housingHelp"></p>
+            <div class="fields">
+              <div class="field">
+                <label for="housingTenure" data-i18n="housingTenure"></label>
+                <select id="housingTenure" name="housingTenure">
+                  <option value="notProvided" data-i18n="housingTenureNotProvided"></option>
+                  <option value="tenant" data-i18n="housingTenureTenant"></option>
+                  <option value="owner" data-i18n="housingTenureOwner"></option>
+                  <option value="other" data-i18n="housingTenureOther"></option>
+                </select>
+              </div>
+              <div class="field" id="housingRentPaid-field" hidden>
+                <label for="housingRentPaid" data-i18n="housingRentPaid"></label>
+                <div class="input-unit">
+                  <input
+                    id="housingRentPaid"
+                    name="housingRentPaid"
+                    type="number"
+                    min="0"
+                    step="100"
+                    inputmode="decimal"
+                  />
+                  <span class="unit">€</span>
+                </div>
+              </div>
+              <label class="checkbox field-wide" id="housingLeaseBefore2015-field" hidden
+                ><input id="housingLeaseBefore2015" name="housingLeaseBefore2015" type="checkbox" /><span
+                  data-i18n="housingLeaseBefore2015"
+                ></span
+              ></label>
+              <div class="field" id="housingInvestment-field" hidden>
+                <label for="housingInvestment" data-i18n="housingInvestment"></label>
+                <div class="input-unit">
+                  <input
+                    id="housingInvestment"
+                    name="housingInvestment"
+                    type="number"
+                    min="0"
+                    step="100"
+                    inputmode="decimal"
+                  />
+                  <span class="unit">€</span>
+                </div>
+              </div>
+              <label class="checkbox field-wide" id="housingPurchaseBefore2013-field" hidden
+                ><input id="housingPurchaseBefore2013" name="housingPurchaseBefore2013" type="checkbox" /><span
+                  data-i18n="housingPurchaseBefore2013"
+                ></span
+              ></label>
+              <label class="checkbox field-wide" id="housingLoanWithholding-field" hidden
+                ><input id="housingLoanWithholding" name="housingLoanWithholding" type="checkbox" /><span
+                  data-i18n="housingLoanWithholding"
+                ></span
+              ></label>
+            </div>
+            <p class="help" data-i18n="housingScope"></p>
+          </details>
+
           <details class="extras field-wide" id="foral-annual-fields" hidden>
             <summary data-i18n="foralAnnualTitle"></summary>
             <p class="help" data-i18n="foralAnnualHelp"></p>

@@ -161,9 +161,13 @@ export const DEFAULT_INPUT = {
   dependents65: 0,
   dependents75: 0,
   disability: 0, // 0 | 33 | 65
-  // Housing (docs/housing-deductions-2026.md). Recorded but not yet used in any amount.
+  // Housing (docs/housing-deductions-2026.md). Only the state transitional regimes are calculated.
   housingTenure: 'notProvided', // 'notProvided' | 'tenant' | 'owner' | 'other'
   housingRentPaid: 0, // annual rent paid for the habitual dwelling, in euros
+  housingLeaseBefore2015: false, // confirms DT 15ª eligibility (lease and deduction before 2015)
+  housingInvestment: 0, // annual amount paid for the habitual dwelling: principal, interest and costs
+  housingPurchaseBefore2013: false, // confirms DT 18ª eligibility (purchase and deduction before 2013)
+  housingLoanWithholding: false, // the payer was told about a qualifying loan (form 145)
   // Flexible compensation and pension plans, stored as annual amounts in euros.
   // `*Period` only controls whether the form shows them per year or per month.
   flexPeriod: 'annual', // 'annual' | 'monthly'

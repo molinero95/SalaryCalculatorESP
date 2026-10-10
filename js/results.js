@@ -191,6 +191,12 @@ const BREAKDOWN = [
       { label: 'rowStateTax', value: (r) => r.incomeTax.stateTax, showIf: (r) => !r.incomeTax.foral },
       { label: 'rowRegionalTax', value: (r) => r.incomeTax.regionalTax, showIf: (r) => !r.incomeTax.foral },
       { label: 'rowForalQuota', value: (r) => r.incomeTax.regionalTax, showIf: (r) => r.incomeTax.foral },
+      {
+        label: 'rowHousingDeduction',
+        help: 'helpHousingDeduction',
+        value: (r) => -r.incomeTax.housingDeduction,
+        showIf: (r) => !r.incomeTax.foral && r.incomeTax.housingDeduction > 0,
+      },
       { label: 'rowAnnualTax', help: 'helpAnnualTax', value: (r) => r.incomeTax.annualTax, total: true },
     ],
   },

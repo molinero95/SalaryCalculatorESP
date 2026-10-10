@@ -1,7 +1,13 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { HOUSING_RULES, HOUSING_RESEARCH } from '../js/data/housing-rules.js';
-import { normalizeHousing, housingRulesFor, assessHousing, HOUSING_TENURES } from '../js/domain/housing.js';
+import {
+  normalizeHousing,
+  housingRulesFor,
+  assessHousing,
+  housingWithholdingPoints,
+  HOUSING_TENURES,
+} from '../js/domain/housing.js';
 import { normalizeInput } from '../js/domain/payroll-input.js';
 import { computePayroll } from '../js/calc.js';
 import { CURRENT_SCENARIO, DEFAULT_INPUT, clone } from '../js/defaults.js';
@@ -96,35 +102,40 @@ test('candidate rules are the state ones plus the selected community; foral terr
   for (const region of ['bizkaia', 'gipuzkoa', 'alava', 'navarra']) assert.deepEqual(ids(region), []);
 });
 
-test('nothing is applied and every skipped rule says why', () => {
+test('without eligibility confirmed nothing is applied, and every skipped rule says why', () => {
   const reasons = (input) =>
     Object.fromEntries(assessHousing({ ...clone(DEFAULT_INPUT), ...input }).skipped.map((s) => [s.id, s.reason]));
 
   const notProvided = assessHousing({ ...clone(DEFAULT_INPUT), region: 'madrid' });
   assert.equal(notProvided.modelled, false);
   assert.equal(notProvided.scope, 'stateAndRegional');
-  assert.equal(notProvided.deduction, 0);
+  assert.equal(notProvided.claimed, 0);
   assert.deepEqual(notProvided.applied, []);
   assert.equal(reasons({ region: 'madrid' })['MAD-1'], 'housingNotProvided');
 
   const tenant = reasons({ region: 'madrid', housingTenure: 'tenant', housingRentPaid: 9600 });
   assert.equal(tenant['MAD-1'], 'notImplemented');
-  assert.equal(tenant.S1, 'notImplemented');
+  assert.equal(tenant.S1, 'provisionalLaw');
+  assert.equal(tenant.S2, 'notEligible');
   assert.equal(tenant['MAD-6'], 'notImplemented');
   assert.equal(tenant['MAD-2'], 'notApplicableToTenure');
   assert.equal(tenant['L-MAD-a'], 'requiresRentalIncome');
   assert.equal(tenant.S4, 'requiresRentalIncome');
 
   const owner = reasons({ region: 'madrid', housingTenure: 'owner' });
-  assert.equal(owner.S3, 'notImplemented');
+  assert.equal(owner.S3, 'notEligible');
   assert.equal(owner['MAD-1'], 'notApplicableToTenure');
 
-  assert.ok(Object.values(reasons({ region: 'madrid', housingTenure: 'other' })).every((r) => r !== 'notImplemented'));
+  assert.ok(
+    Object.values(reasons({ region: 'madrid', housingTenure: 'other' })).every(
+      (r) => r === 'notApplicableToTenure' || r === 'requiresRentalIncome',
+    ),
+  );
   assert.equal(assessHousing({ ...clone(DEFAULT_INPUT), region: 'general' }).scope, 'stateOnly');
   assert.equal(assessHousing({ ...clone(DEFAULT_INPUT), region: 'navarra' }).scope, 'foralTerritory');
 });
 
-test('housing inputs never change any payroll or annual amount in this phase', () => {
+test('housing inputs without confirmed eligibility leave every payroll and annual amount unchanged', () => {
   const withoutHousing = (result) => {
     const { housing, ...rest } = result;
     assert.equal(housing.deduction, 0);
@@ -132,11 +143,156 @@ test('housing inputs never change any payroll or annual amount in this phase', (
   };
   for (const region of ['madrid', 'catalonia', 'general', 'bizkaia']) {
     const base = { ...clone(DEFAULT_INPUT), region, salary: 28000 };
-    const renting = { ...base, housingTenure: 'tenant', housingRentPaid: 9600 };
-    assert.deepEqual(
-      withoutHousing(computePayroll(renting, CURRENT_SCENARIO)),
-      withoutHousing(computePayroll(base, CURRENT_SCENARIO)),
-      region,
-    );
+    for (const housing of [
+      { housingTenure: 'tenant', housingRentPaid: 9600 },
+      { housingTenure: 'owner', housingInvestment: 9000, housingLoanWithholding: true },
+      { housingTenure: 'other', housingLeaseBefore2015: true, housingPurchaseBefore2013: true },
+    ])
+      assert.deepEqual(
+        withoutHousing(computePayroll({ ...base, ...housing }, CURRENT_SCENARIO)),
+        withoutHousing(computePayroll(base, CURRENT_SCENARIO)),
+        region,
+      );
   }
+});
+
+// Expected values below are hand-calculated from art. 68.7 LIRPF as worded on
+// 31-12-2014 (DT 15ª) and arts. 68.1/78 as worded on 31-12-2012 (DT 18ª), not
+// from the constants in js/domain/housing.js.
+const tenantInput = (rent, extra = {}) => ({
+  ...clone(DEFAULT_INPUT),
+  region: 'madrid',
+  housingTenure: 'tenant',
+  housingRentPaid: rent,
+  housingLeaseBefore2015: true,
+  ...extra,
+});
+const claim = (input, baseImponible) => assessHousing(input, { baseImponible });
+const rounded = (x) => Math.round(x * 100) / 100;
+
+for (const [label, base, rent, total] of [
+  ['full base below 17,707.20', 17000, 9600, 908.52], // 10.05 % × 9,040
+  ['rent below the cap', 17000, 6000, 603], // 10.05 % × 6,000
+  ['tapered base (AEAT example base 2,835.17)', 22100, 9600, 284.93], // 9,040 − 1.4125 × 4,392.80
+  ['just below the ceiling', 24107.19, 9600, 0], // base 0.014 €
+]) {
+  test(`DT 15ª rent: ${label}`, () => {
+    const result = claim(tenantInput(rent), base);
+    assert.equal(rounded(result.claimed), total);
+    assert.equal(rounded(result.state), rounded(result.regional));
+  });
+}
+
+test('DT 15ª rent stops at a taxable base of 24,107.20 € and needs confirmed eligibility', () => {
+  const skip = (input, base) => claim(input, base).skipped.find((s) => s.id === 'S2')?.reason;
+  assert.equal(skip(tenantInput(9600), 24107.2), 'incomeAboveLimit');
+  assert.equal(skip(tenantInput(9600, { housingLeaseBefore2015: false }), 10000), 'notEligible');
+  assert.equal(skip(tenantInput(0), 10000), 'noAmount');
+  assert.equal(skip(tenantInput(9600), Number.NaN), 'incomeAboveLimit');
+});
+
+const ownerInput = (investment, extra = {}) => ({
+  ...clone(DEFAULT_INPUT),
+  region: 'madrid',
+  housingTenure: 'owner',
+  housingInvestment: investment,
+  housingPurchaseBefore2013: true,
+  ...extra,
+});
+
+test('DT 18ª purchase: 7.5 % state and 7.5 % default regional share on up to 9,040 €', () => {
+  for (const [investment, share] of [
+    [10000, 678], // 9,040 × 7.5 %
+    [4000, 300],
+  ]) {
+    const result = assessHousing(ownerInput(investment));
+    assert.equal(rounded(result.state), share);
+    assert.equal(rounded(result.regional), share);
+  }
+  assert.equal(rounded(assessHousing(ownerInput(10000, { region: 'general' })).claimed), 1356);
+  for (const region of ['catalonia', 'valencia', 'balearic'])
+    assert.equal(
+      assessHousing(ownerInput(10000, { region })).skipped.find((s) => s.id === 'S3').reason,
+      'regionalRatePending',
+    );
+  assert.deepEqual(assessHousing(ownerInput(10000, { region: 'navarra' })).applied, []);
+});
+
+test('DT 18ª withholding reduction needs a reported loan and pay below 33,007.20 €', () => {
+  const points = (input, gross) => housingWithholdingPoints(input, gross);
+  const loan = ownerInput(9000, { housingLoanWithholding: true });
+  assert.equal(points(loan, 30000), 2);
+  assert.equal(points(loan, 33007.19), 2);
+  assert.equal(points(loan, 33007.2), 0);
+  assert.equal(points(ownerInput(9000), 30000), 0);
+  assert.equal(points({ ...loan, housingPurchaseBefore2013: false }, 30000), 0);
+  assert.equal(points({ ...loan, housingTenure: 'tenant' }, 30000), 0);
+  assert.equal(points({ ...loan, region: 'bizkaia' }, 30000), 0);
+});
+
+test('payroll: Madrid, 20,000 € gross, pre-2015 lease with 6,000 € rent', () => {
+  // SS 6.5 % = 1,300; net 18,700; other expenses 2,000; reduction
+  // 2,364.34 − 1.14 × (18,700 − 17,673.52) = 1,194.15; taxable base 15,505.85.
+  // State quota: 1,182.75 + 3,055.85 × 12 % − 527.25 = 1,022.20.
+  // Madrid quota: 1,135.79 + 2,143.63 × 10.7 % − 506.32 = 858.84.
+  // Employment credit (DA 61ª): 590.89 − 0.2 × 2,906 = 9.69.
+  // Without housing: 1,871.35. Rent deduction 10.05 % × 6,000 = 603 → 1,268.35.
+  const base = { ...clone(DEFAULT_INPUT), region: 'madrid', salary: 20000 };
+  const renting = { ...base, housingTenure: 'tenant', housingRentPaid: 6000, housingLeaseBefore2015: true };
+  const without = computePayroll(base, CURRENT_SCENARIO);
+  const withRent = computePayroll(renting, CURRENT_SCENARIO);
+  assert.equal(without.incomeTax.annualTax, 1871.35);
+  assert.equal(withRent.incomeTax.annualTax, 1268.35);
+  assert.equal(withRent.incomeTax.housingDeduction, 603);
+  assert.equal(withRent.housing.deduction, 603);
+  assert.equal(withRent.incomeTax.withheld, without.incomeTax.withheld);
+  // Below 22,000 € a single-payer employee need not file: no payment is shown without
+  // housing, while the deduction turns the result into a refund worth filing for.
+  assert.equal(without.incomeTax.refund, 0);
+  assert.equal(rounded(withRent.incomeTax.refund), rounded(withRent.incomeTax.withheld - 1268.35));
+  assert.ok(withRent.incomeTax.refund > 0);
+});
+
+test('payroll: DT 18ª with a reported loan lowers the withholding rate by exactly 2 points', () => {
+  const base = { ...clone(DEFAULT_INPUT), region: 'madrid', salary: 30000 };
+  const owner = { ...ownerInput(10000, { housingLoanWithholding: true }), salary: 30000 };
+  const without = computePayroll(base, CURRENT_SCENARIO);
+  const withLoan = computePayroll(owner, CURRENT_SCENARIO);
+  assert.equal(rounded(without.incomeTax.rate - withLoan.incomeTax.rate), 2);
+  assert.equal(withLoan.incomeTax.housingDeduction, 1356);
+  assert.equal(rounded(without.incomeTax.annualTax - withLoan.incomeTax.annualTax), 1356);
+});
+
+test('DT 18ª makes filing compulsory, so a payment due is no longer hidden', () => {
+  // 20,000 € in Madrid: the annual tax (1,871.35 €) exceeds withholding, but filing is
+  // not compulsory below 22,000 €, so the engine shows no payment. Claiming DT 18ª
+  // (100 € paid → 15 € deduction) with a reported loan lowers withholding by 2
+  // points and makes filing compulsory, so the payment due must appear.
+  const base = { ...clone(DEFAULT_INPUT), region: 'madrid', salary: 20000 };
+  const owner = { ...ownerInput(100, { housingLoanWithholding: true }), salary: 20000 };
+  const without = computePayroll(base, CURRENT_SCENARIO);
+  const result = computePayroll(owner, CURRENT_SCENARIO);
+  assert.equal(without.incomeTax.refund, 0);
+  assert.equal(result.incomeTax.annualTax, 1856.35);
+  assert.equal(rounded(without.incomeTax.rate - result.incomeTax.rate), 2);
+  assert.equal(rounded(result.incomeTax.refund), rounded(result.incomeTax.withheld - 1856.35));
+  assert.ok(result.incomeTax.refund < 0);
+});
+
+test('the withholding reduction also needs amounts paid for the home', () => {
+  assert.equal(housingWithholdingPoints(ownerInput(0, { housingLoanWithholding: true }), 30000), 0);
+});
+
+test('a housing deduction never makes a liquid quota negative', () => {
+  const lowIncome = {
+    ...clone(DEFAULT_INPUT),
+    region: 'madrid',
+    salary: 15000,
+    housingTenure: 'tenant',
+    housingRentPaid: 9000,
+    housingLeaseBefore2015: true,
+  };
+  const result = computePayroll(lowIncome, CURRENT_SCENARIO);
+  assert.ok(result.incomeTax.housingDeduction <= result.incomeTax.stateTax + result.incomeTax.regionalTax + 0.01);
+  assert.ok(result.incomeTax.annualTax >= 0);
 });

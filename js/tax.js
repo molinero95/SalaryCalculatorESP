@@ -1,6 +1,7 @@
 // Pure income-tax rules. Withholding and annual assessment use distinct allowances.
 import { GENERAL_REGIONAL_SCALE, combineScales } from './defaults.js';
 import { REGIONAL_SCALES, REGIONAL_ALLOWANCES } from './data/regions.js';
+import { housingWithholdingPoints } from './domain/housing.js';
 const round2 = (x) => Math.round(x * 100) / 100;
 
 /** Applies a progressive bracket scale to `base`. */
@@ -63,7 +64,7 @@ export function personalAllowance(input, p, annual = false) {
  * combined state + general regional scale. Each annual quota uses its own
  * scale and minimum, independently of payroll withholding.
  */
-export function annualTax(input, p, base, grossEarnings) {
+export function annualTax(input, p, base, grossEarnings, { housing } = {}) {
   const allowance = personalAllowance(input, p, true);
   const regionalParameters = { ...p, ...REGIONAL_ALLOWANCES[input.region] };
   if (input.region === 'balearic' && input.age > 65) regionalParameters.personalAllowance = 6105;
@@ -83,14 +84,20 @@ export function annualTax(input, p, base, grossEarnings) {
     0,
     applyScale(regionalScale, base) - applyScale(regionalScale, Math.min(base, regionalAllowance.total)),
   );
+  // Housing deductions reduce each liquid quota, which cannot become negative (arts. 67.2, 77.2 LIRPF).
+  const stateHousing = Math.min(Math.max(0, stateTax), housing?.state ?? 0);
+  const regionalHousing = Math.min(regionalTax, housing?.regional ?? 0);
   const credit = Math.min(Math.max(0, stateTax + regionalTax), minWageCredit(grossEarnings, p));
+  // DA 61ª: the employment credit is subtracted from the total liquid quota.
+  const liquidQuota = stateTax - stateHousing + regionalTax - regionalHousing;
   return {
     allowance,
     regionalAllowance,
     stateTax,
     regionalTax,
+    housingDeduction: round2(stateHousing + regionalHousing),
     credit,
-    tax: round2(Math.max(0, stateTax + regionalTax - credit)),
+    tax: round2(Math.max(0, liquidQuota - credit)),
   };
 }
 
@@ -132,6 +139,9 @@ export function withholding(input, p, taxableGross, socialSecurity) {
   else if (taxableGross <= 35200) amount = Math.min(amount, ((taxableGross - freeMinimum) * p.withholdingCap) / 100);
 
   let rate = taxableGross > 0 ? Math.floor((amount / taxableGross) * 10000) / 100 : 0;
+  // Art. 86.1 RIRPF: DT 18ª buyers with a qualifying loan, before the minimum of art. 86.2.
+  const housingPoints = housingWithholdingPoints(input, taxableGross);
+  if (housingPoints > 0) rate = Math.max(0, Math.round((rate - housingPoints) * 100) / 100);
   if (input.contract === 'temporary' && taxableGross > 0) rate = Math.max(rate, p.temporaryMinRate);
 
   return {
@@ -145,6 +155,7 @@ export function withholding(input, p, taxableGross, socialSecurity) {
     taxOnAllowance,
     freeMinimum,
     amount,
+    housingPoints,
     rate,
     withheld: round2((taxableGross * rate) / 100),
   };

@@ -130,6 +130,17 @@ export function computePayroll(input, scenario, grossAnnual = grossAnnualOf(inpu
     ),
   );
   const annualEmploymentBase = Math.max(0, incomeTax.netEarnings - incomeTax.otherExpenses - incomeTax.reduction);
+  // Housing deductions test the general taxable base, before pension reductions.
+  const housing = foral
+    ? assessHousing(input)
+    : assessHousing(input, {
+        baseImponible: Math.max(
+          0,
+          annualEarnings.netEarnings + additional.general - annualEarnings.otherExpenses - annualEarnings.reduction,
+        ),
+        taxableGross,
+      });
+  const housingClaim = { state: housing.state, regional: housing.regional };
   const annualBase = Math.max(
     0,
     annualEarnings.netEarnings +
@@ -149,6 +160,7 @@ export function computePayroll(input, scenario, grossAnnual = grossAnnualOf(inpu
         : annualEarnings.netEarnings) + additional.incomeForCredits,
     baseBeforePension: annualEarnings.netEarnings + additional.general + additional.savings - annualEarnings.reduction,
     savingsBase: additional.savings,
+    housing: housingClaim,
   });
   const pensionTaxSaved =
     calculateAnnual(input, scenario.incomeTax, annualEmploymentBase + additional.general, taxableGross, {
@@ -158,6 +170,7 @@ export function computePayroll(input, scenario, grossAnnual = grossAnnualOf(inpu
         additional.incomeForCredits,
       baseBeforePension: annualEmploymentBase + additional.general + additional.savings,
       savingsBase: additional.savings,
+      housing: housingClaim,
     }).tax - annual.tax;
 
   // Positive: refund. Negative: to pay, unless the employee doesn't have to file.
@@ -167,7 +180,14 @@ export function computePayroll(input, scenario, grossAnnual = grossAnnualOf(inpu
       ? taxableGross < 17000
       : taxableGross <= 20000
     : taxableGross <= scenario.incomeTax.filingThreshold;
-  if (refund < 0 && exemptFromFiling && (!foral || ((input.foralRentalGross ?? 0) === 0 && additional.total === 0)))
+  // DT 18ª.3 LIRPF: claiming the transitional purchase deduction makes filing compulsory.
+  const mustFile = housing.applied.some((rule) => rule.id === 'S3');
+  if (
+    refund < 0 &&
+    exemptFromFiling &&
+    !mustFile &&
+    (!foral || ((input.foralRentalGross ?? 0) === 0 && additional.total === 0))
+  )
     refund = 0;
 
   const mixedIncome =
@@ -195,8 +215,8 @@ export function computePayroll(input, scenario, grossAnnual = grossAnnualOf(inpu
     employerCost: gross + employer.total + pension.employer,
     flexible: { ...flexible, taxSaved: taxWithoutFlexible - incomeTax.withheld },
     pension: { ...pension, taxSaved: pensionTaxSaved },
-    // Housing rules considered for this profile; no amount above includes them yet.
-    housing: assessHousing(input),
+    // Housing rules considered for this profile and the deduction actually applied.
+    housing: { ...housing, deduction: foral ? 0 : annual.housingDeduction },
     incomeTax: {
       ...incomeTax,
       foral,
@@ -208,6 +228,7 @@ export function computePayroll(input, scenario, grossAnnual = grossAnnualOf(inpu
       savingsBase: additional.savings,
       savingsTax: annual.savingsTax ?? 0,
       housingCredit: annual.housingCredit ?? 0,
+      housingDeduction: foral ? 0 : annual.housingDeduction,
       minWageCredit: foral ? 0 : annual.credit,
       foralCredit: foral ? annual.credit : 0,
       annualTax: annual.tax,

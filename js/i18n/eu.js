@@ -379,4 +379,25 @@ export default {
   compareChartDesc: 'Urteko diferentzia garbia indarreko araudiarekiko, soldata gordinaren arabera.',
   newSimulation: '+ Simulazio berria',
   removeSimulation: 'Simulazioa ezabatu',
+  housingTitle: 'Ohiko etxebizitza · urteko aitorpena',
+  housingHelp:
+    'Oraingoz, estatuko araubide iragankorrak soilik kalkulatzen dira: 2015 aurreko kontratua duen alokairua eta 2013 aurreko erosketa. Etxebizitzagatiko kenkari autonomikoak eta alokairuagatiko estatuko kenkari berria ez dira oraindik sartzen.',
+  housingTenure: 'Zure ohiko etxebizitza',
+  housingTenureNotProvided: 'Nahiago dut ez adierazi',
+  housingTenureTenant: 'Alokairuan bizi naiz',
+  housingTenureOwner: 'Nirea da',
+  housingTenureOther: 'Beste egoera bat',
+  housingRentPaid: 'Urtean ordaindutako alokairua (€ / urte)',
+  housingLeaseBefore2015:
+    'Nire kontratua 2015eko urtarrilaren 1a baino lehenagokoa da, data horren aurretik alokairua ordaindu nuen eta 2015 aurreko urteren batean alokairuagatiko estatuko kenkarirako eskubidea nuen.',
+  housingInvestment: 'Aurten etxebizitzagatik ordaindua: amortizazioa, interesak eta gastuak (€ / urte)',
+  housingPurchaseBefore2013:
+    '2013ko urtarrilaren 1a baino lehen erosi nuen, edo eraikuntza ordaindu nuen, 2013 aurretik etxebizitzagatiko kenkaria aplikatzen nuen eta nire ondarea gutxienez aurten inbertitutakoa handitzen da, interesak kontatu gabe.',
+  housingLoanWithholding:
+    'Nire enpresari jakinarazi diot (145 eredua) kenkari honetarako eskubidea ematen duen mailegu batekin finantzatzen dudala.',
+  housingScope:
+    'Bi araubideek urteko aitorpeneko zerga murrizten dute, kuotak negatiboan utzi gabe. 2013 aurreko erosketak, jakinarazitako maileguarekin, atxikipena ere 2 puntu jaisten du urtean 33.007,20 € baino gutxiago kobratzen baduzu. Katalunian, Valentziako Erkidegoan eta Balear Uharteetan erosketa ez da oraindik kalkulatzen, ehuneko autonomikoa berretsi gabe dagoelako.',
+  rowHousingDeduction: 'Etxebizitzagatiko kenkaria (araubide iragankorra)',
+  helpHousingDeduction:
+    '2015 aurreko kontratua duen alokairua: alokairuaren % 10,05, 9.040 €-ko oinarri maximoarekin, 17.707,20 €-ko zerga oinarritik aurrera murrizten dena eta 24.107,20 €-an desagertzen dena; erdia estatuko kuotan eta erdia autonomikoan. 2013 aurreko erosketa: % 7,5 estatukoa eta % 7,5 autonomikoa, gehienez 9.040 €-ren gainean.',
 };

@@ -532,6 +532,13 @@ function update() {
   $('#foral-benefits-help').hidden = !foral;
   $('#foral-benefits-help').textContent = t(basque ? 'foralBenefitsBasqueHelp' : 'foralBenefitsNavarraHelp');
   $('#foral-annual-fields').hidden = !foral;
+  const tenure = state.input.housingTenure;
+  $('#housing-fields').hidden = foral;
+  $('#housingRentPaid-field').hidden = tenure !== 'tenant';
+  $('#housingLeaseBefore2015-field').hidden = tenure !== 'tenant';
+  $('#housingInvestment-field').hidden = tenure !== 'owner';
+  $('#housingPurchaseBefore2013-field').hidden = tenure !== 'owner';
+  $('#housingLoanWithholding-field').hidden = tenure !== 'owner' || !state.input.housingPurchaseBefore2013;
   $('#foralExemptIncome-field').hidden = state.input.region !== 'navarra';
   $('#foralRentalInsurance-field').hidden = !basque;
   $('label[for="foralRentalExpenses"]').textContent = t(basque ? 'foralRentalExpensesBasque' : 'foralRentalExpenses');

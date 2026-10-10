@@ -374,4 +374,25 @@ export default {
   compareChartDesc: 'Net annual difference vs current rules, by gross salary.',
   newSimulation: '+ New simulation',
   removeSimulation: 'Remove simulation',
+  housingTitle: 'Main home · annual assessment',
+  housingHelp:
+    'Only the state transitional regimes are calculated for now: renting under a lease signed before 2015 and buying before 2013. Regional housing deductions and the new state rent deduction are not included yet.',
+  housingTenure: 'Your main home',
+  housingTenureNotProvided: 'I prefer not to say',
+  housingTenureTenant: 'I rent it',
+  housingTenureOwner: 'I own it',
+  housingTenureOther: 'Other situation',
+  housingRentPaid: 'Rent paid in the year (€ / year)',
+  housingLeaseBefore2015:
+    'My lease was signed before 1 January 2015, I paid rent before that date and I was entitled to the state rent deduction in a year before 2015.',
+  housingInvestment: 'Paid this year for the home: principal, interest and costs (€ / year)',
+  housingPurchaseBefore2013:
+    'I bought it, or paid for its construction, before 1 January 2013, I already claimed the housing deduction before 2013, and my net worth grows at least by this year’s investment excluding interest.',
+  housingLoanWithholding:
+    'I told my employer (form 145) that I finance it with a loan that qualifies for this deduction.',
+  housingScope:
+    'Both regimes reduce the annual tax without making either quota negative. Only the pre-2013 purchase with a reported loan also lowers withholding by 2 points if you earn less than €33,007.20 a year. In Catalonia, the Valencian Community and the Balearic Islands the purchase is not calculated yet because its regional rate still has to be confirmed.',
+  rowHousingDeduction: 'Housing deduction (transitional regime)',
+  helpHousingDeduction:
+    'Lease signed before 2015: 10.05% of rent on a base of up to €9,040, reduced from a taxable base of €17,707.20 and gone at €24,107.20; half against the state quota and half against the regional one. Purchase before 2013: 7.5% state and 7.5% regional on up to €9,040.',
 };

@@ -13,6 +13,15 @@
 // `payrollEffect`: true when the rule changes payroll withholding, not only the
 //   annual return.
 
+/**
+ * Communities whose own regional share of the DT 18ª purchase deduction is not
+ * yet known: Cataluña (art. 613-1 Código tributario: 7.5 %, 9 % or 15 % depending
+ * on conditions not collected), Comunitat Valenciana (DT 1ª Ley 13/1997) and
+ * Illes Balears (art. 2 Ley 3/2012 as worded on 31-12-2012). The compendium lists
+ * no own transitional share for the others, so art. 78.2 LIRPF (7.5 %) applies.
+ */
+export const DT18_REGIONAL_RATE_PENDING = ['catalonia', 'valencia', 'balearic'];
+
 export const HOUSING_RESEARCH = {
   fiscalYear: 2026,
   researchedAt: '2026-10-10',

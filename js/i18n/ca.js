@@ -377,4 +377,25 @@ export default {
   compareChartDesc: 'Diferència neta anual respecte a la normativa vigent, segons el salari brut.',
   newSimulation: '+ Nova simulació',
   removeSimulation: 'Eliminar simulació',
+  housingTitle: 'Habitatge habitual · declaració anual',
+  housingHelp:
+    'De moment només es calculen els règims transitoris estatals: lloguer amb contracte anterior al 2015 i compra anterior al 2013. Les deduccions autonòmiques per habitatge i la nova deducció estatal per lloguer encara no s’hi inclouen.',
+  housingTenure: 'El teu habitatge habitual',
+  housingTenureNotProvided: 'Prefereixo no indicar-ho',
+  housingTenureTenant: 'Visc de lloguer',
+  housingTenureOwner: 'És de la meva propietat',
+  housingTenureOther: 'Una altra situació',
+  housingRentPaid: 'Lloguer pagat durant l’any (€ / any)',
+  housingLeaseBefore2015:
+    'El meu contracte és anterior a l’1 de gener de 2015, vaig pagar lloguer abans d’aquesta data i tenia dret a la deducció estatal per lloguer en algun any anterior al 2015.',
+  housingInvestment: 'Pagat aquest any per l’habitatge: amortització, interessos i despeses (€ / any)',
+  housingPurchaseBefore2013:
+    'El vaig comprar, o en vaig pagar la construcció, abans de l’1 de gener de 2013, ja m’aplicava la deducció per habitatge abans del 2013 i el meu patrimoni augmenta almenys en allò invertit aquest any sense comptar interessos.',
+  housingLoanWithholding:
+    'He comunicat a la meva empresa (model 145) que el finanço amb un préstec que dona dret a aquesta deducció.',
+  housingScope:
+    'Tots dos règims redueixen l’impost de la declaració anual sense deixar les quotes en negatiu. Només la compra anterior al 2013 amb préstec comunicat rebaixa a més la retenció en 2 punts si cobres menys de 33.007,20 € l’any. A Catalunya, la Comunitat Valenciana i les Illes Balears la compra encara no es calcula perquè falta confirmar-ne el percentatge autonòmic.',
+  rowHousingDeduction: 'Deducció per habitatge (règim transitori)',
+  helpHousingDeduction:
+    'Lloguer amb contracte anterior al 2015: 10,05 % del lloguer, amb base màxima de 9.040 € que es redueix a partir de 17.707,20 € de base imposable i desapareix a 24.107,20 €; meitat a la quota estatal i meitat a l’autonòmica. Compra anterior al 2013: 7,5 % estatal i 7,5 % autonòmic sobre un màxim de 9.040 €.',
 };

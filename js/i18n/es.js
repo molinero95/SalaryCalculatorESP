@@ -376,4 +376,25 @@ export default {
   compareChartDesc: 'Diferencia neta anual frente a la normativa vigente, según el salario bruto.',
   newSimulation: '+ Nueva simulación',
   removeSimulation: 'Eliminar simulación',
+  housingTitle: 'Vivienda habitual · declaración anual',
+  housingHelp:
+    'De momento solo se calculan los regímenes transitorios estatales: alquiler con contrato anterior a 2015 y compra anterior a 2013. Las deducciones autonómicas por vivienda y la nueva deducción estatal por alquiler aún no se incluyen.',
+  housingTenure: 'Tu vivienda habitual',
+  housingTenureNotProvided: 'Prefiero no indicarlo',
+  housingTenureTenant: 'Vivo de alquiler',
+  housingTenureOwner: 'Es de mi propiedad',
+  housingTenureOther: 'Otra situación',
+  housingRentPaid: 'Alquiler pagado en el año (€ / año)',
+  housingLeaseBefore2015:
+    'Mi contrato es anterior al 1 de enero de 2015, pagué alquiler antes de esa fecha y tenía derecho a la deducción estatal por alquiler en algún año anterior a 2015.',
+  housingInvestment: 'Pagado este año por la vivienda: amortización, intereses y gastos (€ / año)',
+  housingPurchaseBefore2013:
+    'La compré, o pagué su construcción, antes del 1 de enero de 2013, ya me aplicaba la deducción por vivienda antes de 2013 y mi patrimonio aumenta al menos en lo invertido este año sin contar intereses.',
+  housingLoanWithholding:
+    'He comunicado a mi empresa (modelo 145) que la financio con un préstamo que da derecho a esta deducción.',
+  housingScope:
+    'Ambos regímenes reducen el impuesto de la declaración anual sin dejar las cuotas en negativo. Solo la compra anterior a 2013 con préstamo comunicado rebaja además la retención en 2 puntos si cobras menos de 33.007,20 € al año. En Cataluña, Comunitat Valenciana e Illes Balears la compra aún no se calcula porque falta confirmar su porcentaje autonómico.',
+  rowHousingDeduction: 'Deducción por vivienda (régimen transitorio)',
+  helpHousingDeduction:
+    'Alquiler con contrato anterior a 2015: 10,05 % del alquiler, con base máxima de 9.040 € que se reduce desde 17.707,20 € de base imponible y desaparece en 24.107,20 €; mitad en cuota estatal y mitad autonómica. Compra anterior a 2013: 7,5 % estatal y 7,5 % autonómico sobre un máximo de 9.040 €.',
 };

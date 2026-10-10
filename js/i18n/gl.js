@@ -370,4 +370,25 @@ export default {
   compareChartDesc: 'Diferenza neta anual fronte á normativa vixente, segundo o salario bruto.',
   newSimulation: '+ Nova simulación',
   removeSimulation: 'Eliminar simulación',
+  housingTitle: 'Vivenda habitual · declaración anual',
+  housingHelp:
+    'Polo momento só se calculan os réximes transitorios estatais: alugueiro con contrato anterior a 2015 e compra anterior a 2013. As deducións autonómicas por vivenda e a nova dedución estatal por alugueiro aínda non se inclúen.',
+  housingTenure: 'A túa vivenda habitual',
+  housingTenureNotProvided: 'Prefiro non indicalo',
+  housingTenureTenant: 'Vivo de alugueiro',
+  housingTenureOwner: 'É da miña propiedade',
+  housingTenureOther: 'Outra situación',
+  housingRentPaid: 'Alugueiro pagado no ano (€ / ano)',
+  housingLeaseBefore2015:
+    'O meu contrato é anterior ao 1 de xaneiro de 2015, paguei alugueiro antes desa data e tiña dereito á dedución estatal por alugueiro nalgún ano anterior a 2015.',
+  housingInvestment: 'Pagado este ano pola vivenda: amortización, xuros e gastos (€ / ano)',
+  housingPurchaseBefore2013:
+    'Mercheina, ou paguei a súa construción, antes do 1 de xaneiro de 2013, xa me aplicaba a dedución por vivenda antes de 2013 e o meu patrimonio aumenta polo menos no investido este ano sen contar xuros.',
+  housingLoanWithholding:
+    'Comuniqueille á miña empresa (modelo 145) que a financio cun préstamo que dá dereito a esta dedución.',
+  housingScope:
+    'Ambos os réximes reducen o imposto da declaración anual sen deixar as cotas en negativo. Só a compra anterior a 2013 con préstamo comunicado rebaixa ademais a retención en 2 puntos se cobras menos de 33.007,20 € ao ano. En Cataluña, Comunitat Valenciana e Illes Balears a compra aínda non se calcula porque falta confirmar a súa porcentaxe autonómica.',
+  rowHousingDeduction: 'Dedución por vivenda (réxime transitorio)',
+  helpHousingDeduction:
+    'Alugueiro con contrato anterior a 2015: 10,05 % do alugueiro, cunha base máxima de 9.040 € que se reduce desde 17.707,20 € de base impoñible e desaparece en 24.107,20 €; metade na cota estatal e metade na autonómica. Compra anterior a 2013: 7,5 % estatal e 7,5 % autonómico sobre un máximo de 9.040 €.',
 };
