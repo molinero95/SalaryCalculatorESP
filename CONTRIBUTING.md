@@ -38,7 +38,7 @@ Playwright starts its own Python server on port 4173 and runs desktop Chrome and
 2. Specify applicable period and profile; identify whether it affects withholding, annual assessment, contributions or a hypothetical scenario.
 3. Implement in the responsible module. Keep national and regional rules distinct.
 4. Add an independent fixture/worked expected result, including relevant thresholds and one-sided boundary cases.
-5. Update source documentation and explain unsupported conditions. For proposal updates, update catalogue history and human `verifiedAt` only after content review.
+5. Update source documentation and explain unsupported conditions. For enacted-law parameters, update the matching entry in `data/fiscal-sources.json` (`url`, `fiscalYear`, `verifiedAt`). For proposal updates, update catalogue history and human `verifiedAt` only after content review.
 6. Run relevant checks and review the diff for unrelated changes.
 
 The source monitor is separate: `npm run templates:sources` accesses live websites and creates ignored `.source-monitor/` reports. A nonzero exit can mean a changed or inaccessible document rather than a calculator regression. See `docs/template-maintenance.md` before accepting a baseline.
