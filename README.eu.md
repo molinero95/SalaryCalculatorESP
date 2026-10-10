@@ -36,7 +36,7 @@ Euskal lurraldeek eta Nafarroak beren arauak erabiltzen dituzte onartutako profi
 
 PP, PSOE, Podemos 2025 eta Ciudadanos informazio gisa agertzen dira egiaztatutako datuak falta direnean. Ez dira eredu osoak edo katalogo exhaustiboa. Gordetako simulazioak ez dira berridazten: aplikatu berriro txantiloia berrikusitako arauak hartzeko. [Iturriak eta irismena](docs/proposal-scope.md) · [Katalogoa](data/proposals.json).
 
-**Etxebizitza:** hasierako datuak eta aplikatu gabeko arauen azalpenak daude; planeko kenkari berriak oraindik ez dira kalkulatzen. [Plana](https://github.com/molinero95/SalaryCalculatorESP/pull/22) · [Backlog](docs/BACKLOG.md).
+**Etxebizitza:** estatuko araubide iragankorrak (2015 aurreko alokairua eta 2013 aurreko erosketa) eta profil orokorren alokairuagatiko kenkari autonomikoa 11 erkidegotan kalkulatzen dira; gainerako arauak aplikatu gabe gisa azaltzen dira. [Plana](https://github.com/molinero95/SalaryCalculatorESP/pull/22) · [Backlog](docs/BACKLOG.md).
 
 ## Eguneratzea eta alertak
 

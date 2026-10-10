@@ -378,7 +378,7 @@ export default {
   removeSimulation: 'Eliminar simulación',
   housingTitle: 'Vivienda habitual · declaración anual',
   housingHelp:
-    'De momento solo se calculan los regímenes transitorios estatales: alquiler con contrato anterior a 2015 y compra anterior a 2013. Las deducciones autonómicas por vivienda y la nueva deducción estatal por alquiler aún no se incluyen.',
+    'Se calculan los regímenes transitorios estatales (alquiler con contrato anterior a 2015 y compra anterior a 2013) y la deducción autonómica por alquiler de los perfiles generales en Andalucía, Asturias, Illes Balears, Castilla-La Mancha, Cataluña, Comunitat Valenciana, Extremadura, Galicia, Madrid, Murcia y La Rioja. Aún no se incluyen Canarias, Cantabria, Castilla y León, las variantes por municipio, las deducciones autonómicas por compra o para arrendadores ni la nueva deducción estatal por alquiler.',
   housingTenure: 'Tu vivienda habitual',
   housingTenureNotProvided: 'Sin indicar',
   housingTenureTenant: 'Alquiler',
@@ -392,9 +392,19 @@ export default {
     'La compré, o pagué su construcción, antes del 1 de enero de 2013, ya me aplicaba la deducción por vivienda antes de 2013 y mi patrimonio aumenta al menos en lo invertido este año sin contar intereses.',
   housingLoanWithholding:
     'He comunicado a mi empresa (modelo 145) que la financio con un préstamo que da derecho a esta deducción.',
+  housingRentAid: 'Ayudas públicas al alquiler cobradas (€ / año)',
+  housingSavingsBase: 'Base imponible del ahorro: intereses, dividendos y ganancias (€ / año)',
+  housingLargeFamily: 'Tengo título de familia numerosa.',
+  housingSingleParent: 'Formo una familia monoparental según la normativa de mi comunidad.',
+  housingTwoMinorChildren: 'Tengo dos o más hijos menores de edad.',
+  housingFamilyUnitConfirmed:
+    'Voy a indicar la suma de las bases imponibles del resto de mi unidad familiar (0 si no hay más miembros).',
+  housingFamilyUnitOtherBase: 'Bases imponibles del resto de la unidad familiar (€ / año)',
+  housingRegionalConfirmed:
+    'Cumplo los requisitos formales de la deducción autonómica: contrato a mi nombre, vivienda habitual en la comunidad, fianza depositada o impuesto del contrato liquidado cuando se exige, NIF del arrendador, pago sin efectivo y ninguna otra vivienda mía cerca.',
   housingScope:
-    'Ambos regímenes reducen el impuesto de la declaración anual sin dejar las cuotas en negativo. Solo la compra anterior a 2013 con préstamo comunicado rebaja además la retención en 2 puntos si cobras menos de 33.007,20 € al año. En Cataluña, Comunitat Valenciana e Illes Balears la compra aún no se calcula porque falta confirmar su porcentaje autonómico.',
-  rowHousingDeduction: 'Deducción por vivienda (régimen transitorio)',
+    'Las deducciones reducen el impuesto de la declaración anual sin dejar las cuotas en negativo. Solo la compra anterior a 2013 con préstamo comunicado rebaja además la retención en 2 puntos si cobras menos de 33.007,20 € al año; la deducción autonómica por alquiler no cambia la nómina. Se calcula en tributación individual. La base del ahorro solo se usa en los límites de renta; su impuesto no se calcula. No se recogen los colectivos de víctimas, desempleo o viudedad. En Cataluña, Comunitat Valenciana e Illes Balears la compra aún no se calcula porque falta confirmar su porcentaje autonómico.',
+  rowHousingDeduction: 'Deducciones por vivienda',
   helpHousingDeduction:
-    'Alquiler con contrato anterior a 2015: 10,05 % del alquiler, con base máxima de 9.040 € que se reduce desde 17.707,20 € de base imponible y desaparece en 24.107,20 €; mitad en cuota estatal y mitad autonómica. Compra anterior a 2013: 7,5 % estatal y 7,5 % autonómico sobre un máximo de 9.040 €.',
+    'Alquiler con contrato anterior a 2015: 10,05 % del alquiler, con base máxima de 9.040 € que se reduce desde 17.707,20 € de base imponible y desaparece en 24.107,20 €; mitad en cuota estatal y mitad autonómica. Compra anterior a 2013: 7,5 % estatal y 7,5 % autonómico sobre un máximo de 9.040 €. Deducción autonómica por alquiler: porcentaje y límite de tu comunidad tras comprobar edad, colectivo y renta; solo reduce la cuota autonómica.',
 };

@@ -381,7 +381,7 @@ export default {
   removeSimulation: 'Simulazioa ezabatu',
   housingTitle: 'Ohiko etxebizitza · urteko aitorpena',
   housingHelp:
-    'Oraingoz, estatuko araubide iragankorrak soilik kalkulatzen dira: 2015 aurreko kontratua duen alokairua eta 2013 aurreko erosketa. Etxebizitzagatiko kenkari autonomikoak eta alokairuagatiko estatuko kenkari berria ez dira oraindik sartzen.',
+    'Estatuko araubide iragankorrak (2015 aurreko kontratua duen alokairua eta 2013 aurreko erosketa) eta profil orokorren alokairuagatiko kenkari autonomikoa kalkulatzen dira Andaluzian, Asturiasen, Balear Uharteetan, Gaztela-Mantxan, Katalunian, Valentziako Erkidegoan, Extremaduran, Galizian, Madrilen, Murtzian eta Errioxan. Oraindik ez dira sartzen Kanariak, Kantabria, Gaztela eta Leon, udalerriaren araberako aldaerak, erosketagatiko edo errentatzaileentzako kenkari autonomikoak, ezta alokairuagatiko estatuko kenkari berria ere.',
   housingTenure: 'Zure ohiko etxebizitza',
   housingTenureNotProvided: 'Adierazi gabe',
   housingTenureTenant: 'Alokairua',
@@ -395,9 +395,19 @@ export default {
     '2013ko urtarrilaren 1a baino lehen erosi nuen, edo eraikuntza ordaindu nuen, 2013 aurretik etxebizitzagatiko kenkaria aplikatzen nuen eta nire ondarea gutxienez aurten inbertitutakoa handitzen da, interesak kontatu gabe.',
   housingLoanWithholding:
     'Nire enpresari jakinarazi diot (145 eredua) kenkari honetarako eskubidea ematen duen mailegu batekin finantzatzen dudala.',
+  housingRentAid: 'Jasotako alokairurako laguntza publikoak (€ / urte)',
+  housingSavingsBase: 'Aurrezkiaren zerga oinarria: interesak, dibidenduak eta irabaziak (€ / urte)',
+  housingLargeFamily: 'Familia ugariaren titulua daukat.',
+  housingSingleParent: 'Familia gurasobakarra osatzen dut nire erkidegoko araudiaren arabera.',
+  housingTwoMinorChildren: 'Adingabeko bi seme-alaba edo gehiago ditut.',
+  housingFamilyUnitConfirmed:
+    'Nire familia unitateko gainerako kideen zerga oinarrien batura adieraziko dut (0, beste kiderik ez badago).',
+  housingFamilyUnitOtherBase: 'Familia unitateko gainerako kideen zerga oinarriak (€ / urte)',
+  housingRegionalConfirmed:
+    'Kenkari autonomikoaren baldintza formalak betetzen ditut: kontratua nire izenean, ohiko etxebizitza erkidegoan, fidantza gordailututa edo kontratuaren zerga likidatuta eskatzen denean, errentatzailearen IFZ, eskudirurik gabeko ordainketa eta inguruan nire beste etxebizitzarik ez.',
   housingScope:
-    'Bi araubideek urteko aitorpeneko zerga murrizten dute, kuotak negatiboan utzi gabe. 2013 aurreko erosketak, jakinarazitako maileguarekin, atxikipena ere 2 puntu jaisten du urtean 33.007,20 € baino gutxiago kobratzen baduzu. Katalunian, Valentziako Erkidegoan eta Balear Uharteetan erosketa ez da oraindik kalkulatzen, ehuneko autonomikoa berretsi gabe dagoelako.',
-  rowHousingDeduction: 'Etxebizitzagatiko kenkaria (araubide iragankorra)',
+    'Kenkariek urteko aitorpeneko zerga murrizten dute, kuotak negatiboan utzi gabe. 2013 aurreko erosketak, jakinarazitako maileguarekin, atxikipena ere 2 puntu jaisten du urtean 33.007,20 € baino gutxiago kobratzen baduzu; alokairuagatiko kenkari autonomikoak ez du nomina aldatzen. Banakako tributazioan kalkulatzen da. Aurrezkiaren oinarria errenta mugetan soilik erabiltzen da; haren zerga ez da kalkulatzen. Ez dira jasotzen biktimen, langabeziaren edo alarguntasunaren taldeak. Katalunian, Valentziako Erkidegoan eta Balear Uharteetan erosketa ez da oraindik kalkulatzen, ehuneko autonomikoa berretsi gabe dagoelako.',
+  rowHousingDeduction: 'Etxebizitzagatiko kenkariak',
   helpHousingDeduction:
-    '2015 aurreko kontratua duen alokairua: alokairuaren % 10,05, 9.040 €-ko oinarri maximoarekin, 17.707,20 €-ko zerga oinarritik aurrera murrizten dena eta 24.107,20 €-an desagertzen dena; erdia estatuko kuotan eta erdia autonomikoan. 2013 aurreko erosketa: % 7,5 estatukoa eta % 7,5 autonomikoa, gehienez 9.040 €-ren gainean.',
+    '2015 aurreko kontratua duen alokairua: alokairuaren % 10,05, 9.040 €-ko oinarri maximoarekin, 17.707,20 €-ko zerga oinarritik aurrera murrizten dena eta 24.107,20 €-an desagertzen dena; erdia estatuko kuotan eta erdia autonomikoan. 2013 aurreko erosketa: % 7,5 estatukoa eta % 7,5 autonomikoa, gehienez 9.040 €-ren gainean. Alokairuagatiko kenkari autonomikoa: zure erkidegoko ehunekoa eta muga, adina, taldea eta errenta egiaztatu ondoren; kuota autonomikoa soilik murrizten du.',
 };

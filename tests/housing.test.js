@@ -66,7 +66,27 @@ test('research facts are kept: four state rules, only DT 18ª touches payroll, t
     HOUSING_RULES.filter((rule) => rule.legalStatus === 'provisional').map((rule) => rule.id),
     ['S1'],
   );
-  assert.ok(HOUSING_RULES.filter((rule) => rule.region !== null).every((rule) => rule.level === 'L2'));
+  // Regional rules stay at the compendium level unless their regional text was checked.
+  assert.deepEqual(
+    HOUSING_RULES.filter((rule) => rule.region !== null && rule.level === 'L1').map((rule) => rule.id),
+    [
+      'AND-1',
+      'AST-1',
+      'BAL-1',
+      'CLM-1',
+      'CLM-2',
+      'CLM-3',
+      'CLM-4',
+      'CAT-1',
+      'VAL-1',
+      'EXT-1',
+      'GAL-1',
+      'RIO-1',
+      'MAD-1',
+      'MUR-1',
+    ],
+  );
+  assert.ok(HOUSING_RULES.filter((rule) => rule.region !== null).every((rule) => ['L1', 'L2'].includes(rule.level)));
 });
 
 test('housing input defaults to "not provided" and rejects invalid values', () => {
@@ -114,7 +134,7 @@ test('without eligibility confirmed nothing is applied, and every skipped rule s
   assert.equal(reasons({ region: 'madrid' })['MAD-1'], 'housingNotProvided');
 
   const tenant = reasons({ region: 'madrid', housingTenure: 'tenant', housingRentPaid: 9600 });
-  assert.equal(tenant['MAD-1'], 'notImplemented');
+  assert.equal(tenant['MAD-1'], 'requirementsNotConfirmed');
   assert.equal(tenant.S1, 'provisionalLaw');
   assert.equal(tenant.S2, 'notEligible');
   assert.equal(tenant['MAD-6'], 'notImplemented');

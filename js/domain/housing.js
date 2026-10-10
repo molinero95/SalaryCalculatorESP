@@ -1,9 +1,11 @@
 // Housing deductions: input model, the state transitional rules and the record of
 // which researched rules apply (docs/housing-deductions-2026.md).
-// Phase 1 calculates only the frozen state transitional regimes (DT 15ª rent,
-// DT 18ª purchase and its withholding reduction). Every other candidate rule is
-// reported as skipped with the reason it was not applied.
+// Calculated: the frozen state transitional regimes (DT 15ª rent, DT 18ª purchase
+// and its withholding reduction) and the regional tenant deductions for general
+// profiles (housing-tenant.js). Every other candidate rule is reported as skipped
+// with the reason it was not applied.
 import { HOUSING_RULES, DT18_REGIONAL_RATE_PENDING } from '../data/housing-rules.js';
+import { REGIONAL_TENANT_RULES, PENDING_TENANT_RULES } from './housing-tenant.js';
 import { REGIONAL_SCALES } from '../data/regions.js';
 import { isForal } from './fiscal-profile.js';
 
@@ -34,6 +36,23 @@ export const TRANSITIONAL_PURCHASE = { stateRate: 7.5, defaultRegionalRate: 7.5,
 export const TRANSITIONAL_WITHHOLDING = { payLimit: 33007.2, points: 2 };
 
 const MAX_AMOUNT = 1e9;
+const HOUSING_AMOUNTS = [
+  'housingRentPaid',
+  'housingInvestment',
+  'housingRentAid',
+  'housingSavingsBase',
+  'housingFamilyUnitOtherBase',
+];
+const HOUSING_FLAGS = [
+  'housingLeaseBefore2015',
+  'housingPurchaseBefore2013',
+  'housingLoanWithholding',
+  'housingRegionalConfirmed',
+  'housingLargeFamily',
+  'housingSingleParent',
+  'housingTwoMinorChildren',
+  'housingFamilyUnitConfirmed',
+];
 const amount = (value) => {
   const number = Number(value);
   return Number.isFinite(number) ? Math.min(MAX_AMOUNT, Math.max(0, number)) : 0;
@@ -42,10 +61,8 @@ const amount = (value) => {
 /** Normalizes the housing fields in place; unknown or invalid values fall back to "not provided". */
 export function normalizeHousing(input) {
   input.housingTenure = HOUSING_TENURES.includes(input.housingTenure) ? input.housingTenure : 'notProvided';
-  input.housingRentPaid = amount(input.housingRentPaid);
-  input.housingInvestment = amount(input.housingInvestment);
-  for (const flag of ['housingLeaseBefore2015', 'housingPurchaseBefore2013', 'housingLoanWithholding'])
-    input[flag] = input[flag] === true;
+  for (const field of HOUSING_AMOUNTS) input[field] = amount(input[field]);
+  for (const flag of HOUSING_FLAGS) input[flag] = input[flag] === true;
   return input;
 }
 
@@ -54,6 +71,11 @@ export function housingRulesFor(region) {
   if (isForal(region)) return [];
   const community = Object.hasOwn(REGIONAL_SCALES, region) ? region : null;
   return HOUSING_RULES.filter((rule) => rule.region === null || rule.region === community);
+}
+
+/** True when the community has a calculated regional tenant deduction. */
+export function hasRegionalTenantRule(region) {
+  return housingRulesFor(region).some((rule) => Object.hasOwn(REGIONAL_TENANT_RULES, rule.id));
 }
 
 const SIDES_BY_TENURE = { tenant: ['tenant', 'any'], owner: ['buyer', 'any'], other: [] };
@@ -94,23 +116,53 @@ function transitionalPurchase(input) {
   };
 }
 
-function evaluate(rule, input, tenure, baseImponible) {
+/** Regional tenant rule: common guards, then the community's own test. */
+function regionalTenant(rule, input, income) {
+  if (!(input.housingRentPaid > 0)) return { reason: 'noAmount' };
+  if (!input.housingRegionalConfirmed) return { reason: 'requirementsNotConfirmed' };
+  if (!Object.values(income).every(Number.isFinite)) return { reason: 'incomeNotProvided' };
+  const result = REGIONAL_TENANT_RULES[rule.id](input, income);
+  if (result.reason) return result;
+  return result.regional > 0 ? { state: 0, regional: result.regional } : { reason: 'noAmount' };
+}
+
+function evaluate(rule, input, tenure, income) {
   if (rule.side === 'landlord') return { reason: 'requiresRentalIncome' };
   if (tenure === 'notProvided') return { reason: 'housingNotProvided' };
   if (!SIDES_BY_TENURE[tenure].includes(rule.side)) return { reason: 'notApplicableToTenure' };
   if (rule.id === 'S1') return { reason: 'provisionalLaw' };
-  if (rule.id === 'S2') return transitionalRent(input, baseImponible);
+  if (rule.id === 'S2') return transitionalRent(input, income.generalBase + income.savingsBase);
   if (rule.id === 'S3') return transitionalPurchase(input);
+  if (Object.hasOwn(PENDING_TENANT_RULES, rule.id)) return { reason: PENDING_TENANT_RULES[rule.id] };
+  if (Object.hasOwn(REGIONAL_TENANT_RULES, rule.id)) return regionalTenant(rule, input, income);
   return { reason: 'notImplemented' };
 }
 
 /**
  * Housing deductions claimed by this profile and every rule skipped, with its reason.
- * `baseImponible` is the general taxable base (before pension reductions); rules that
- * depend on it are skipped when it is not provided. Amounts are claims before the
+ * `baseImponible` is the general taxable base (before pension reductions),
+ * `baseLiquidable` the general base after them, `minimum` the personal and family
+ * minimum of the annual return and `descendantMinimum` its descendant part. Rules
+ * that depend on a missing magnitude are skipped. Amounts are claims before the
  * quota limits: the annual assessment caps them so no quota becomes negative.
  */
-export function assessHousing(input, { baseImponible = Number.NaN, taxableGross = Number.NaN } = {}) {
+export function assessHousing(
+  input,
+  {
+    baseImponible = Number.NaN,
+    baseLiquidable = Number.NaN,
+    minimum = Number.NaN,
+    descendantMinimum = Number.NaN,
+    taxableGross = Number.NaN,
+  } = {},
+) {
+  const income = {
+    generalBase: baseImponible,
+    savingsBase: amount(input.housingSavingsBase),
+    generalLiquidBase: baseLiquidable,
+    minimum,
+    descendantMinimum,
+  };
   const tenure = tenureOf(input);
   const scope = isForal(input.region)
     ? 'foralTerritory'
@@ -120,7 +172,7 @@ export function assessHousing(input, { baseImponible = Number.NaN, taxableGross 
   const applied = [];
   const skipped = [];
   for (const rule of housingRulesFor(input.region)) {
-    const result = evaluate(rule, input, tenure, baseImponible);
+    const result = evaluate(rule, input, tenure, income);
     if (result.reason) skipped.push({ id: rule.id, reason: result.reason });
     else applied.push({ id: rule.id, state: result.state, regional: result.regional });
   }

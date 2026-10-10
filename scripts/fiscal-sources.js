@@ -17,6 +17,8 @@ export const REQUIRED_GROUPS = [
   'pension',
   'socialSecurity',
   'regionalAllowances',
+  'housing.state',
+  'housing.regionalTenant',
   ...Object.keys(REGIONAL_SCALES).map((region) => `regional.${region}`),
   ...Object.keys(FORAL_TERRITORIES).map((territory) => `foral.${territory}`),
 ];

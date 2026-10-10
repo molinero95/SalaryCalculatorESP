@@ -36,6 +36,9 @@ export const NUMERIC_INPUTS = new Set([
   'flexHealthPeople',
   'housingRentPaid',
   'housingInvestment',
+  'housingRentAid',
+  'housingSavingsBase',
+  'housingFamilyUnitOtherBase',
   ...Object.keys(PERIOD_OF_AMOUNT),
 ]);
 
@@ -57,6 +60,9 @@ export const INPUT_LIMITS = {
   flexHealthPeople: { min: 1, max: 15, integer: true },
   housingRentPaid: {},
   housingInvestment: {},
+  housingRentAid: {},
+  housingSavingsBase: {},
+  housingFamilyUnitOtherBase: {},
   ...Object.fromEntries(Object.keys(PERIOD_OF_AMOUNT).map((field) => [field, {}])),
 };
 

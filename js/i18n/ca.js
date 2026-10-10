@@ -379,7 +379,7 @@ export default {
   removeSimulation: 'Eliminar simulació',
   housingTitle: 'Habitatge habitual · declaració anual',
   housingHelp:
-    'De moment només es calculen els règims transitoris estatals: lloguer amb contracte anterior al 2015 i compra anterior al 2013. Les deduccions autonòmiques per habitatge i la nova deducció estatal per lloguer encara no s’hi inclouen.',
+    'Es calculen els règims transitoris estatals (lloguer amb contracte anterior al 2015 i compra anterior al 2013) i la deducció autonòmica per lloguer dels perfils generals a Andalusia, Astúries, les Illes Balears, Castella-la Manxa, Catalunya, la Comunitat Valenciana, Extremadura, Galícia, Madrid, Múrcia i la Rioja. Encara no s’hi inclouen Canàries, Cantàbria, Castella i Lleó, les variants per municipi, les deduccions autonòmiques per compra o per a arrendadors ni la nova deducció estatal per lloguer.',
   housingTenure: 'El teu habitatge habitual',
   housingTenureNotProvided: 'Sense indicar',
   housingTenureTenant: 'Lloguer',
@@ -393,9 +393,19 @@ export default {
     'El vaig comprar, o en vaig pagar la construcció, abans de l’1 de gener de 2013, ja m’aplicava la deducció per habitatge abans del 2013 i el meu patrimoni augmenta almenys en allò invertit aquest any sense comptar interessos.',
   housingLoanWithholding:
     'He comunicat a la meva empresa (model 145) que el finanço amb un préstec que dona dret a aquesta deducció.',
+  housingRentAid: 'Ajudes públiques al lloguer cobrades (€ / any)',
+  housingSavingsBase: 'Base imposable de l’estalvi: interessos, dividends i guanys (€ / any)',
+  housingLargeFamily: 'Tinc títol de família nombrosa.',
+  housingSingleParent: 'Formo una família monoparental segons la normativa de la meva comunitat.',
+  housingTwoMinorChildren: 'Tinc dos o més fills menors d’edat.',
+  housingFamilyUnitConfirmed:
+    'Indicaré la suma de les bases imposables de la resta de la meva unitat familiar (0 si no hi ha més membres).',
+  housingFamilyUnitOtherBase: 'Bases imposables de la resta de la unitat familiar (€ / any)',
+  housingRegionalConfirmed:
+    'Compleixo els requisits formals de la deducció autonòmica: contracte al meu nom, habitatge habitual a la comunitat, fiança dipositada o impost del contracte liquidat quan s’exigeix, NIF de l’arrendador, pagament sense efectiu i cap altre habitatge meu a prop.',
   housingScope:
-    'Tots dos règims redueixen l’impost de la declaració anual sense deixar les quotes en negatiu. Només la compra anterior al 2013 amb préstec comunicat rebaixa a més la retenció en 2 punts si cobres menys de 33.007,20 € l’any. A Catalunya, la Comunitat Valenciana i les Illes Balears la compra encara no es calcula perquè falta confirmar-ne el percentatge autonòmic.',
-  rowHousingDeduction: 'Deducció per habitatge (règim transitori)',
+    'Les deduccions redueixen l’impost de la declaració anual sense deixar les quotes en negatiu. Només la compra anterior al 2013 amb préstec comunicat rebaixa a més la retenció en 2 punts si cobres menys de 33.007,20 € l’any; la deducció autonòmica per lloguer no canvia la nòmina. Es calcula en tributació individual. La base de l’estalvi només s’usa en els límits de renda; el seu impost no es calcula. No es recullen els col·lectius de víctimes, atur o viduïtat. A Catalunya, la Comunitat Valenciana i les Illes Balears la compra encara no es calcula perquè falta confirmar-ne el percentatge autonòmic.',
+  rowHousingDeduction: 'Deduccions per habitatge',
   helpHousingDeduction:
-    'Lloguer amb contracte anterior al 2015: 10,05 % del lloguer, amb base màxima de 9.040 € que es redueix a partir de 17.707,20 € de base imposable i desapareix a 24.107,20 €; meitat a la quota estatal i meitat a l’autonòmica. Compra anterior al 2013: 7,5 % estatal i 7,5 % autonòmic sobre un màxim de 9.040 €.',
+    'Lloguer amb contracte anterior al 2015: 10,05 % del lloguer, amb base màxima de 9.040 € que es redueix a partir de 17.707,20 € de base imposable i desapareix a 24.107,20 €; meitat a la quota estatal i meitat a l’autonòmica. Compra anterior al 2013: 7,5 % estatal i 7,5 % autonòmic sobre un màxim de 9.040 €. Deducció autonòmica per lloguer: percentatge i límit de la teva comunitat després de comprovar edat, col·lectiu i renda; només redueix la quota autonòmica.',
 };

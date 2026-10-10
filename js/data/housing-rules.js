@@ -1,12 +1,13 @@
 // Catalogue of IRPF housing rules researched for fiscal year 2026.
 // Research and per-rule detail: docs/housing-deductions-2026.md (rule ids match).
-// Metadata only: no rule is calculated yet, so every rule is reported as skipped.
+// Metadata only; the calculation lives in js/domain/housing.js and housing-tenant.js.
 //
 // `region`: null for state rules, otherwise a common-regime key of REGIONAL_SCALES.
 // `side`: who claims it. 'tenant' pays rent for their habitual dwelling, 'buyer'
 //   acquires, builds, rehabilitates or finances it, 'landlord' lets a dwelling,
 //   'any' is a housing-related amount open to tenants and buyers alike.
-// `level`: verification level of the research. 'L1' primary legal text (BOE),
+// `level`: verification level. 'L1' primary legal text (BOE or the regional
+//   gazette; regional rules promoted in housing phase 2 cite it in `url`),
 //   'L2' Ministry of Finance compendium "Tributación Autonómica. Medidas 2026"
 //   chapter IV (updated 23-09-2026), 'L3' AEAT Renta 2025 manual only.
 // `legalStatus`: 'provisional' while the enacting norm can still lapse.
@@ -56,6 +57,29 @@ const regional = (region, rules) =>
     legalStatus: 'inForce',
     payrollEffect: false,
   }));
+
+/**
+ * Regional tenant rules checked against the regional consolidated text on
+ * 2026-10-10 (docs/housing-deductions-2026.md, "Phase 2 implementation").
+ */
+const REGIONAL_TEXT_CHECKED = {
+  'MAD-1': 'https://www.boe.es/buscar/doc.php?id=BOE-A-2025-3303',
+  'CAT-1': 'https://www.boe.es/eli/es-ct/dlg/2024/03/12/1/con',
+  'VAL-1': 'https://www.boe.es/eli/es-vc/l/1997/12/23/13/con',
+  'EXT-1': 'https://www.boe.es/eli/es-ex/dlg/2018/04/10/1/con',
+  'CLM-1': 'https://www.boe.es/eli/es-cm/l/2013/11/21/8/con',
+  'CLM-2': 'https://www.boe.es/eli/es-cm/l/2013/11/21/8/con',
+  'CLM-3': 'https://www.boe.es/eli/es-cm/l/2013/11/21/8/con',
+  'CLM-4': 'https://www.boe.es/eli/es-cm/l/2013/11/21/8/con',
+  'GAL-1': 'https://www.boe.es/eli/es-ga/dlg/2011/07/28/1/con',
+  'BAL-1': 'https://www.boe.es/eli/es-ib/dlg/2014/06/06/1/con',
+  'AND-1': 'https://www.boe.es/eli/es-an/l/2021/10/20/5/con',
+  'AST-1': 'https://www.boe.es/eli/es-as/dlg/2014/10/22/2/con',
+  'MUR-1': 'https://www.boe.es/eli/es-mc/dlg/2010/11/05/1/con',
+  'RIO-1': 'https://www.boe.es/eli/es-ri/l/2017/10/27/10/con',
+};
+const promote = (rule) =>
+  Object.hasOwn(REGIONAL_TEXT_CHECKED, rule.id) ? { ...rule, level: 'L1', url: REGIONAL_TEXT_CHECKED[rule.id] } : rule;
 
 export const HOUSING_RULES = [
   state('S1', 'tenant', 'LIRPF art. 68.6 (RDL 29/2026)', BOE_RDL_29_2026, { legalStatus: 'provisional' }),
@@ -109,7 +133,7 @@ export const HOUSING_RULES = [
     ['L-CANT', 'landlord', 'TR D.Leg. 62/2008 art. 2.17'],
   ]),
   ...regional('castillaLaMancha', [
-    ['CLM-1', 'tenant', 'Ley 8/2013 art. 9'],
+    ['CLM-1', 'tenant', 'Ley 8/2013 arts. 9, 13.3 (Ley 1/2026)'],
     ['CLM-2', 'tenant', 'Ley 8/2013 art. 9 ter'],
     ['CLM-3', 'tenant', 'Ley 8/2013 art. 9 quáter'],
     ['CLM-4', 'tenant', 'Ley 8/2013 art. 9 quinquies'],
@@ -180,4 +204,4 @@ export const HOUSING_RULES = [
     ['MUR-3', 'buyer', 'TR D.Leg. 1/2010 art. 1.Quince'],
     ['MUR-T', 'buyer', 'TR D.Leg. 1/2010 DT 1ª, DT única.4'],
   ]),
-];
+].map(promote);

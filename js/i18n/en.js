@@ -376,7 +376,7 @@ export default {
   removeSimulation: 'Remove simulation',
   housingTitle: 'Main home · annual assessment',
   housingHelp:
-    'Only the state transitional regimes are calculated for now: renting under a lease signed before 2015 and buying before 2013. Regional housing deductions and the new state rent deduction are not included yet.',
+    'The state transitional regimes (renting under a lease signed before 2015 and buying before 2013) and the regional rent deduction for general profiles in Andalusia, Asturias, the Balearic Islands, Castilla-La Mancha, Catalonia, the Valencian Community, Extremadura, Galicia, Madrid, Murcia and La Rioja are calculated. The Canary Islands, Cantabria, Castilla y León, municipality-dependent variants, regional purchase and landlord deductions and the new state rent deduction are not included yet.',
   housingTenure: 'Your main home',
   housingTenureNotProvided: 'Not stated',
   housingTenureTenant: 'Renting',
@@ -390,9 +390,19 @@ export default {
     'I bought it, or paid for its construction, before 1 January 2013, I already claimed the housing deduction before 2013, and my net worth grows at least by this year’s investment excluding interest.',
   housingLoanWithholding:
     'I told my employer (form 145) that I finance it with a loan that qualifies for this deduction.',
+  housingRentAid: 'Public rent aid received (€ / year)',
+  housingSavingsBase: 'Savings taxable base: interest, dividends and gains (€ / year)',
+  housingLargeFamily: 'I hold a large-family title.',
+  housingSingleParent: 'I head a single-parent family as defined by my community.',
+  housingTwoMinorChildren: 'I have two or more minor children.',
+  housingFamilyUnitConfirmed:
+    'I will enter the sum of the taxable bases of the rest of my family unit (0 if there are no other members).',
+  housingFamilyUnitOtherBase: 'Taxable bases of the rest of the family unit (€ / year)',
+  housingRegionalConfirmed:
+    'I meet the formal requirements of the regional deduction: lease in my name, habitual dwelling in the community, deposit lodged or lease tax paid where required, landlord’s tax ID, no cash payments and no other dwelling of mine nearby.',
   housingScope:
-    'Both regimes reduce the annual tax without making either quota negative. Only the pre-2013 purchase with a reported loan also lowers withholding by 2 points if you earn less than €33,007.20 a year. In Catalonia, the Valencian Community and the Balearic Islands the purchase is not calculated yet because its regional rate still has to be confirmed.',
-  rowHousingDeduction: 'Housing deduction (transitional regime)',
+    'Deductions reduce the annual tax without making either quota negative. Only the pre-2013 purchase with a reported loan also lowers withholding by 2 points if you earn less than €33,007.20 a year; the regional rent deduction does not change payroll. Individual filing is assumed. The savings base is used only in the income limits; its tax is not calculated. Groups such as victims, the unemployed or widowed people are not collected. In Catalonia, the Valencian Community and the Balearic Islands the purchase is not calculated yet because its regional rate still has to be confirmed.',
+  rowHousingDeduction: 'Housing deductions',
   helpHousingDeduction:
-    'Lease signed before 2015: 10.05% of rent on a base of up to €9,040, reduced from a taxable base of €17,707.20 and gone at €24,107.20; half against the state quota and half against the regional one. Purchase before 2013: 7.5% state and 7.5% regional on up to €9,040.',
+    'Lease signed before 2015: 10.05% of rent on a base of up to €9,040, reduced from a taxable base of €17,707.20 and gone at €24,107.20; half against the state quota and half against the regional one. Purchase before 2013: 7.5% state and 7.5% regional on up to €9,040. Regional rent deduction: your community’s rate and cap after checking age, group and income; it only reduces the regional quota.',
 };

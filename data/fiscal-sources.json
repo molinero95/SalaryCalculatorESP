@@ -14,7 +14,8 @@
         "state.minWageCredit",
         "state.filingThreshold",
         "flexible",
-        "pension"
+        "pension",
+        "housing.state"
       ],
       "fiscalYear": 2026,
       "verifiedAt": "2026-10-09"
@@ -24,7 +25,7 @@
       "title": "Real Decreto 439/2007, Reglamento del IRPF (texto consolidado)",
       "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2007-6820",
       "monitorUrl": "https://www.boe.es/datosabiertos/api/legislacion-consolidada/id/BOE-A-2007-6820/metadatos",
-      "covers": ["withholding", "flexible"],
+      "covers": ["withholding", "flexible", "housing.state"],
       "fiscalYear": 2026,
       "verifiedAt": "2026-10-09"
     },
@@ -153,6 +154,102 @@
       "covers": ["foral.navarra"],
       "fiscalYear": 2026,
       "verifiedAt": "2026-10-09"
+    },
+    {
+      "id": "housingmadrid",
+      "title": "Comunidad de Madrid, Ley 5/2024 (arts. 8 and 18 TR D.Leg. 1/2010)",
+      "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2025-3303",
+      "covers": ["housing.regionalTenant"],
+      "fiscalYear": 2026,
+      "verifiedAt": "2026-10-10"
+    },
+    {
+      "id": "housingcatalonia",
+      "title": "Cataluña, Código tributario libro sexto (D.Leg. 1/2024), art. 612-3",
+      "url": "https://www.boe.es/eli/es-ct/dlg/2024/03/12/1/con",
+      "covers": ["housing.regionalTenant"],
+      "fiscalYear": 2026,
+      "verifiedAt": "2026-10-10"
+    },
+    {
+      "id": "housingvalencia",
+      "title": "Comunitat Valenciana, Ley 13/1997, art. 4.Uno.n) and 4.Cuatro",
+      "url": "https://www.boe.es/eli/es-vc/l/1997/12/23/13/con",
+      "covers": ["housing.regionalTenant"],
+      "fiscalYear": 2026,
+      "verifiedAt": "2026-10-10"
+    },
+    {
+      "id": "housingextremadura",
+      "title": "Extremadura, TR D.Leg. 1/2018, arts. 9 and 12 bis",
+      "url": "https://www.boe.es/eli/es-ex/dlg/2018/04/10/1/con",
+      "covers": ["housing.regionalTenant"],
+      "fiscalYear": 2026,
+      "verifiedAt": "2026-10-10"
+    },
+    {
+      "id": "housingclm",
+      "title": "Castilla-La Mancha, Ley 8/2013, arts. 9 to 9 quinquies and 13.3",
+      "url": "https://www.boe.es/eli/es-cm/l/2013/11/21/8/con",
+      "covers": ["housing.regionalTenant"],
+      "fiscalYear": 2026,
+      "verifiedAt": "2026-10-10"
+    },
+    {
+      "id": "housingclm2026",
+      "title": "Castilla-La Mancha, Ley 1/2026, art. 18 (DOCM núm. 61)",
+      "url": "https://www.boe.es/ccaa/docm/2026/061/q10660-10683.pdf",
+      "covers": ["housing.regionalTenant"],
+      "fiscalYear": 2026,
+      "verifiedAt": "2026-10-10"
+    },
+    {
+      "id": "housinggalicia",
+      "title": "Galicia, TR D.Leg. 1/2011, art. 5.Siete",
+      "url": "https://www.boe.es/eli/es-ga/dlg/2011/07/28/1/con",
+      "covers": ["housing.regionalTenant"],
+      "fiscalYear": 2026,
+      "verifiedAt": "2026-10-10"
+    },
+    {
+      "id": "housingbalearic",
+      "title": "Illes Balears, TR D.Leg. 1/2014, art. 3 bis",
+      "url": "https://www.boe.es/eli/es-ib/dlg/2014/06/06/1/con",
+      "covers": ["housing.regionalTenant"],
+      "fiscalYear": 2026,
+      "verifiedAt": "2026-10-10"
+    },
+    {
+      "id": "housingandalusia",
+      "title": "Andalucía, Ley 5/2021, art. 10",
+      "url": "https://www.boe.es/eli/es-an/l/2021/10/20/5/con",
+      "covers": ["housing.regionalTenant"],
+      "fiscalYear": 2026,
+      "verifiedAt": "2026-10-10"
+    },
+    {
+      "id": "housingasturias",
+      "title": "Principado de Asturias, TR D.Leg. 2/2014, art. 7",
+      "url": "https://www.boe.es/eli/es-as/dlg/2014/10/22/2/con",
+      "covers": ["housing.regionalTenant"],
+      "fiscalYear": 2026,
+      "verifiedAt": "2026-10-10"
+    },
+    {
+      "id": "housingmurcia",
+      "title": "Región de Murcia, TR D.Leg. 1/2010, art. 1.Trece",
+      "url": "https://www.boe.es/eli/es-mc/dlg/2010/11/05/1/con",
+      "covers": ["housing.regionalTenant"],
+      "fiscalYear": 2026,
+      "verifiedAt": "2026-10-10"
+    },
+    {
+      "id": "housingrioja",
+      "title": "La Rioja, Ley 10/2017, art. 32.12",
+      "url": "https://www.boe.es/eli/es-ri/l/2017/10/27/10/con",
+      "covers": ["housing.regionalTenant"],
+      "fiscalYear": 2026,
+      "verifiedAt": "2026-10-10"
     }
   ]
 }

@@ -372,7 +372,7 @@ export default {
   removeSimulation: 'Eliminar simulación',
   housingTitle: 'Vivenda habitual · declaración anual',
   housingHelp:
-    'Polo momento só se calculan os réximes transitorios estatais: alugueiro con contrato anterior a 2015 e compra anterior a 2013. As deducións autonómicas por vivenda e a nova dedución estatal por alugueiro aínda non se inclúen.',
+    'Calcúlanse os réximes transitorios estatais (alugueiro con contrato anterior a 2015 e compra anterior a 2013) e a dedución autonómica por alugueiro dos perfís xerais en Andalucía, Asturias, Illes Balears, Castela-A Mancha, Cataluña, Comunitat Valenciana, Estremadura, Galicia, Madrid, Murcia e A Rioxa. Aínda non se inclúen Canarias, Cantabria, Castela e León, as variantes por municipio, as deducións autonómicas por compra ou para arrendadores nin a nova dedución estatal por alugueiro.',
   housingTenure: 'A túa vivenda habitual',
   housingTenureNotProvided: 'Sen indicar',
   housingTenureTenant: 'Alugueiro',
@@ -386,9 +386,19 @@ export default {
     'Mercheina, ou paguei a súa construción, antes do 1 de xaneiro de 2013, xa me aplicaba a dedución por vivenda antes de 2013 e o meu patrimonio aumenta polo menos no investido este ano sen contar xuros.',
   housingLoanWithholding:
     'Comuniqueille á miña empresa (modelo 145) que a financio cun préstamo que dá dereito a esta dedución.',
+  housingRentAid: 'Axudas públicas ao alugueiro cobradas (€ / ano)',
+  housingSavingsBase: 'Base impoñible do aforro: xuros, dividendos e ganancias (€ / ano)',
+  housingLargeFamily: 'Teño título de familia numerosa.',
+  housingSingleParent: 'Formo unha familia monoparental segundo a normativa da miña comunidade.',
+  housingTwoMinorChildren: 'Teño dous ou máis fillos menores de idade.',
+  housingFamilyUnitConfirmed:
+    'Vou indicar a suma das bases impoñibles do resto da miña unidade familiar (0 se non hai máis membros).',
+  housingFamilyUnitOtherBase: 'Bases impoñibles do resto da unidade familiar (€ / ano)',
+  housingRegionalConfirmed:
+    'Cumpro os requisitos formais da dedución autonómica: contrato ao meu nome, vivenda habitual na comunidade, fianza depositada ou imposto do contrato liquidado cando se esixe, NIF do arrendador, pagamento sen efectivo e ningunha outra vivenda miña preto.',
   housingScope:
-    'Ambos os réximes reducen o imposto da declaración anual sen deixar as cotas en negativo. Só a compra anterior a 2013 con préstamo comunicado rebaixa ademais a retención en 2 puntos se cobras menos de 33.007,20 € ao ano. En Cataluña, Comunitat Valenciana e Illes Balears a compra aínda non se calcula porque falta confirmar a súa porcentaxe autonómica.',
-  rowHousingDeduction: 'Dedución por vivenda (réxime transitorio)',
+    'As deducións reducen o imposto da declaración anual sen deixar as cotas en negativo. Só a compra anterior a 2013 con préstamo comunicado rebaixa ademais a retención en 2 puntos se cobras menos de 33.007,20 € ao ano; a dedución autonómica por alugueiro non cambia a nómina. Calcúlase en tributación individual. A base do aforro só se usa nos límites de renda; o seu imposto non se calcula. Non se recollen os colectivos de vítimas, desemprego ou viuvez. En Cataluña, Comunitat Valenciana e Illes Balears a compra aínda non se calcula porque falta confirmar a súa porcentaxe autonómica.',
+  rowHousingDeduction: 'Deducións por vivenda',
   helpHousingDeduction:
-    'Alugueiro con contrato anterior a 2015: 10,05 % do alugueiro, cunha base máxima de 9.040 € que se reduce desde 17.707,20 € de base impoñible e desaparece en 24.107,20 €; metade na cota estatal e metade na autonómica. Compra anterior a 2013: 7,5 % estatal e 7,5 % autonómico sobre un máximo de 9.040 €.',
+    'Alugueiro con contrato anterior a 2015: 10,05 % do alugueiro, cunha base máxima de 9.040 € que se reduce desde 17.707,20 € de base impoñible e desaparece en 24.107,20 €; metade na cota estatal e metade na autonómica. Compra anterior a 2013: 7,5 % estatal e 7,5 % autonómico sobre un máximo de 9.040 €. Dedución autonómica por alugueiro: porcentaxe e límite da túa comunidade tras comprobar idade, colectivo e renda; só reduce a cota autonómica.',
 };

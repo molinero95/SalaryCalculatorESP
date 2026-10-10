@@ -20,6 +20,7 @@ import { renderResults, renderBreakdown } from './results.js';
 import * as storage from './storage.js';
 import { renderResidenceOptions, renderResidenceBrackets } from './presentation/residence.js';
 import { isForal, unsupportedFiscalProfile, unsupportedFiscalScenario } from './domain/fiscal-profile.js';
+import { hasRegionalTenantRule } from './domain/housing.js';
 import { PROPOSALS, UNMODELLED_PROPOSALS } from './data/proposals.js';
 import { salaryPercentile } from './data/salaries.js';
 import { cumulativeInflation, BRACKETS_LAST_UPDATED } from './data/cpi.js';
@@ -539,6 +540,15 @@ function update() {
   $('#housingInvestment-field').hidden = tenure !== 'owner';
   $('#housingPurchaseBefore2013-field').hidden = tenure !== 'owner';
   $('#housingLoanWithholding-field').hidden = tenure !== 'owner' || !state.input.housingPurchaseBefore2013;
+  // Regional tenant deductions: only the communities with a calculated rule ask for their facts.
+  const regionalTenant = tenure === 'tenant' && hasRegionalTenantRule(state.input.region);
+  $('#housingSavingsBase-field').hidden = tenure !== 'tenant';
+  for (const field of ['housingRentAid', 'housingLargeFamily', 'housingSingleParent', 'housingRegionalConfirmed'])
+    $(`#${field}-field`).hidden = !regionalTenant;
+  $('#housingTwoMinorChildren-field').hidden = !regionalTenant || state.input.region !== 'galicia';
+  $('#housingFamilyUnitConfirmed-field').hidden = !regionalTenant || state.input.region !== 'madrid';
+  $('#housingFamilyUnitOtherBase-field').hidden =
+    !regionalTenant || state.input.region !== 'madrid' || !state.input.housingFamilyUnitConfirmed;
   $('#foralExemptIncome-field').hidden = state.input.region !== 'navarra';
   $('#foralRentalInsurance-field').hidden = !basque;
   $('label[for="foralRentalExpenses"]').textContent = t(basque ? 'foralRentalExpensesBasque' : 'foralRentalExpenses');

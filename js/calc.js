@@ -3,7 +3,7 @@
 import { foralAdditionalIncome } from './domain/foral-assessment.js';
 import { pensionPlan } from './domain/pension.js';
 import { GENERAL_REGIONAL_SCALE, combineScales } from './defaults.js';
-import { applyScale, withholding, annualTax, employmentIncome } from './tax.js';
+import { applyScale, withholding, annualTax, employmentIncome, personalAllowance } from './tax.js';
 import { isForal, unsupportedFiscalProfile, unsupportedFiscalScenario } from './domain/fiscal-profile.js';
 import { foralEmploymentIncome, foralWithholding, foralAnnualTax } from './foral-tax.js';
 import { assessHousing } from './domain/housing.js';
@@ -130,17 +130,6 @@ export function computePayroll(input, scenario, grossAnnual = grossAnnualOf(inpu
     ),
   );
   const annualEmploymentBase = Math.max(0, incomeTax.netEarnings - incomeTax.otherExpenses - incomeTax.reduction);
-  // Housing deductions test the general taxable base, before pension reductions.
-  const housing = foral
-    ? assessHousing(input)
-    : assessHousing(input, {
-        baseImponible: Math.max(
-          0,
-          annualEarnings.netEarnings + additional.general - annualEarnings.otherExpenses - annualEarnings.reduction,
-        ),
-        taxableGross,
-      });
-  const housingClaim = { state: housing.state, regional: housing.regional };
   const annualBase = Math.max(
     0,
     annualEarnings.netEarnings +
@@ -149,6 +138,22 @@ export function computePayroll(input, scenario, grossAnnual = grossAnnualOf(inpu
       annualEarnings.reduction -
       pension.deductible,
   );
+  // Housing income tests use the general taxable base (before pension reductions),
+  // the general liquid base (after them) and the minimum of the annual return.
+  const annualMinimum = personalAllowance(input, scenario.incomeTax, true);
+  const housing = foral
+    ? assessHousing(input)
+    : assessHousing(input, {
+        baseImponible: Math.max(
+          0,
+          annualEarnings.netEarnings + additional.general - annualEarnings.otherExpenses - annualEarnings.reduction,
+        ),
+        baseLiquidable: annualBase,
+        minimum: annualMinimum.total,
+        descendantMinimum: annualMinimum.children,
+        taxableGross,
+      });
+  const housingClaim = { state: housing.state, regional: housing.regional };
   const annual = calculateAnnual(input, scenario.incomeTax, annualBase, annualGross, {
     netEmploymentIncome:
       input.region === 'navarra'
