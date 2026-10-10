@@ -9,8 +9,24 @@ on:
         description: Accept source fingerprints after reviewing the report (does not approve fiscal parameters)
         type: boolean
         default: false
+      alert_id:
+        description: Optional persistent alert ID to review (from report)
+        type: string
+        default: ''
+      alert_status:
+        description: Review outcome (ignored without alert_id)
+        type: choice
+        options:
+          - reviewed
+          - implementation-needed
+          - implemented
+        default: reviewed
+      alert_evidence:
+        description: Review reasoning, or repository PR URL for implemented
+        type: string
+        default: ''
 
-# Write access only to push the fingerprint baseline to the monitor-state branch.
+# Write access only to persist fingerprints and review cases on monitor-state.
 permissions:
   contents: write
 
@@ -33,16 +49,30 @@ jobs:
       - name: Restore baseline from monitor-state branch
         run: |
           mkdir -p .source-monitor
-          if git fetch --depth=1 origin +refs/heads/monitor-state:refs/remotes/origin/monitor-state; then
-            git show origin/monitor-state:baseline.json > .source-monitor/baseline.json
+          # A network/authentication failure must not be treated as absent state.
+          git ls-remote --heads origin refs/heads/monitor-state > "$RUNNER_TEMP/monitor-ref"
+          if [ -s "$RUNNER_TEMP/monitor-ref" ]; then
+            git fetch --depth=1 origin +refs/heads/monitor-state:refs/remotes/origin/monitor-state
+            if git cat-file -e origin/monitor-state:baseline.json 2>/dev/null; then
+              git show origin/monitor-state:baseline.json > .source-monitor/baseline.json
+            else
+              echo "::warning::No stored fingerprint baseline; existing review cases are preserved."
+            fi
+            if git cat-file -e origin/monitor-state:alerts.json 2>/dev/null; then
+              git show origin/monitor-state:alerts.json > .source-monitor/alerts.json
+            fi
           else
             echo "::warning::No monitor-state branch yet; this run creates the first baseline."
           fi
+          echo "MONITOR_STATE_RESTORED=true" >> "$GITHUB_ENV"
       - run: node scripts/check-template-sources.js
         env:
           ACCEPT_SOURCE_BASELINE: ${{ inputs.accept_baseline == true && 'true' || 'false' }}
+          SOURCE_ALERT_ID: ${{ inputs.alert_id }}
+          SOURCE_ALERT_STATUS: ${{ inputs.alert_status }}
+          SOURCE_ALERT_EVIDENCE: ${{ inputs.alert_evidence }}
       - name: Save baseline to monitor-state branch
-        if: always() && hashFiles('.source-monitor/baseline.json') != ''
+        if: always() && env.MONITOR_STATE_RESTORED == 'true' && (hashFiles('.source-monitor/baseline.json') != '' || hashFiles('.source-monitor/alerts.json') != '')
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
@@ -51,19 +81,27 @@ jobs:
           else
             git worktree add --orphan -b monitor-state "$RUNNER_TEMP/state"
           fi
-          cp .source-monitor/baseline.json "$RUNNER_TEMP/state/baseline.json"
+          for file in baseline.json alerts.json; do
+            if [ -f ".source-monitor/$file" ]; then
+              cp ".source-monitor/$file" "$RUNNER_TEMP/state/$file"
+            fi
+          done
           cd "$RUNNER_TEMP/state"
-          git add baseline.json
+          for file in baseline.json alerts.json; do
+            if [ -f "$file" ]; then git add "$file"; fi
+          done
           if git diff --cached --quiet; then
             echo "Baseline unchanged."
           else
-            git commit -m "Update source monitor baseline (run ${{ github.run_id }})"
+            git commit -m "Update source monitor state (run ${{ github.run_id }})"
             git push origin HEAD:refs/heads/monitor-state
           fi
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: template-source-report
-          path: .source-monitor/report.*
+          path: |
+            .source-monitor/report.*
+            .source-monitor/alerts.json
           retention-days: 90
           include-hidden-files: true
