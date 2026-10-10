@@ -1,6 +1,18 @@
 // Basque translations. `f_*` keys label the settings fields.
 
 export default {
+  navigationLabel: 'Kalkulagailuaren atalak',
+  navSalary: 'Zure soldata',
+  navSimulation: 'Aldaketak simulatu',
+  navProposals: 'Proposamen politikoak',
+  viewSalaryDescription:
+    'Kalkulatu nomina eta urteko estimazioa zure datuekin. Zerga xehetasunak eta kenkari erabilgarriak bizilekuaren araberakoak dira.',
+  viewSimulationDescription:
+    'Editatu arauak eta alderatu simulazioak erreferentziarekin. Datu pertsonalak mantentzen dira atalez aldatzean.',
+  viewProposalsDescription:
+    'Kontsultatu dokumentatutako proposamenak. Bat hautatzean, simulazioa irekiko da uneko datuekin.',
+  proposalsIntro:
+    'Proposamenak ez dira indarreko araudia. Iturriak, datak eta kalkuluaren mugak erakusten ditugu; datu nahikorik gabeko neurriak informazioa baino ez dira.',
   foralBenefitsBasqueHelp:
     'Euskadi: osasun aseguru arruntak zergak ordaintzen ditu. Pentsio/BGAE arruntak: 5.000 € banakakoak, 8.000 € enplegukoak eta 10.000 € guztira; langile aktiboa, erreskaterik edo lehentasunezko BGAE kenkaririk gabe. Otordu, garraio, haur eskola eta prestakuntzak lege baldintzak bete behar dituzte.',
   foralBenefitsNavarraHelp:
@@ -221,8 +233,8 @@ export default {
   f_solidarity3: 'Elkartasuna: 3. tartea',
   howTitle: 'Nola dabil',
   how1: 'Sartu zure soldata gordina eta zure egoera pertsonala.',
-  how2: '«Proposamena simulatu» atalean, aldatu tarteak, gutxienekoak edo kotizazioak ebaluatu nahi duzun neurria islatzeko.',
-  how3: 'Alderatu berehala zure egungo nomina simulatuarekin, eta gorde edo partekatu proposamena esteka batekin.',
+  how2: '«Aldaketak simulatu» atalean, aldatu tarteak, gutxienekoak edo kotizazioak neurri bat ebaluatzeko.',
+  how3: 'Alderatu nomina simulazioarekin eta partekatu proposamena esteka batekin.',
   simTitle: 'Proposamena simulatu',
   simDesc:
     'Zehaztu hemen ebaluatu nahi duzun aldaketa. Indarreko araudia du abiapuntu; aldatzen dituzun balioak nabarmendu egiten dira.',

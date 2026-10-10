@@ -1,6 +1,17 @@
 // Galician translations. `f_*` keys label the settings fields.
 
 export default {
+  navigationLabel: 'Seccións da calculadora',
+  navSalary: 'O teu salario',
+  navSimulation: 'Simular cambios',
+  navProposals: 'Propostas políticas',
+  viewSalaryDescription:
+    'Calcula a nómina e a estimación anual cos teus datos. Os detalles fiscais e as deducións dispoñibles dependen da residencia.',
+  viewSimulationDescription:
+    'Edita as regras e compara simulacións coa referencia. Os datos persoais consérvanse ao cambiar de sección.',
+  viewProposalsDescription: 'Consulta propostas documentadas. Ao elixir unha, abrirase a simulación cos datos actuais.',
+  proposalsIntro:
+    'As propostas non son normativa vixente. Amosamos fontes, datas e límites do cálculo; as medidas sen datos suficientes preséntanse só como información.',
   foralBenefitsBasqueHelp:
     'País Vasco: o seguro médico ordinario tributa. Pensións/EPSV ordinarias: 5.000 € individuais, 8.000 € de emprego e 10.000 € conxuntos; traballador en activo, sen rescates nin créditos de EPSV preferentes. Comidas, transporte, gardería e formación deben cumprir os requisitos legais.',
   foralBenefitsNavarraHelp:
@@ -220,8 +231,8 @@ export default {
   f_solidarity3: 'Solidariedade: tramo 3',
   howTitle: 'Como funciona',
   how1: 'Introduce o teu salario bruto e a túa situación persoal.',
-  how2: 'En «Proposta que simular», cambia tramos, mínimos ou cotizacións para reflectir a medida que queiras avaliar.',
-  how3: 'Compara ao instante a túa nómina actual coa simulada, e garda ou comparte a proposta cunha ligazón.',
+  how2: 'En «Simular cambios», modifica tramos, mínimos ou cotizacións para avaliar unha medida.',
+  how3: 'Compara a nómina coa simulación e comparte a proposta cunha ligazón.',
   simTitle: 'Proposta que simular',
   simDesc: 'Define aquí o cambio que queres avaliar. Parte da normativa vixente; os valores que modifiques resáltanse.',
   currentTitle: 'Normativa vixente',

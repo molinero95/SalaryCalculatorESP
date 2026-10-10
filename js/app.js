@@ -1,3 +1,4 @@
+import { bindProductNavigation } from './presentation/product-navigation.js';
 import { createEventTracker } from './infrastructure/analytics.js';
 import {
   createSession,
@@ -47,6 +48,28 @@ document.querySelector('script[data-goatcounter]')?.addEventListener('load', () 
 const persistence = createSessionPersistence(storage, state);
 const persist = () => persistence.schedule();
 window.addEventListener('pagehide', () => persistence.flush());
+
+const navigation = bindProductNavigation(
+  $('#product-navigation'),
+  () => {
+    applyViewVisibility();
+    update();
+  },
+  shared ? 'simulation' : 'salary',
+);
+
+function applyViewVisibility() {
+  const view = navigation.view;
+  $('#results-section').setAttribute('role', view === 'salary' ? 'tabpanel' : 'region');
+  $('#results-section').setAttribute('aria-labelledby', view === 'salary' ? 'tab-salary' : 'simulation-title');
+  $('#simulation-panel').hidden = view !== 'simulation';
+  $('.card-current').hidden = view !== 'simulation';
+  $('#proposals-panel').hidden = view !== 'proposals';
+  $('#view-description').textContent = t(`view${view[0].toUpperCase()}${view.slice(1)}Description`);
+  $('#chart-title').closest('section').hidden ||= view !== 'simulation';
+  $('#compare-title').closest('section').hidden ||= view !== 'simulation';
+  $('#sticky-summary').hidden ||= view !== 'simulation';
+}
 
 // ---------------------------------------------------------------------------
 // Personal details form
@@ -324,12 +347,16 @@ function renderProposalInfo() {
   info.hidden = !proposal;
   if (proposal)
     info.innerHTML = `<p>${t(proposal.note)}</p><p class="muted">${t('proposalSource')}: ${sourceLink(proposal)}</p><p class="muted">${t('proposalVerified')}: ${escapeHtml(proposal.verifiedAt)}${proposal.status === 'partial' ? ` · ${t('proposalPartial')}` : ''}</p>`;
+  const simulationInfo = $('#simulation-proposal-info');
+  simulationInfo.hidden = !proposal;
+  simulationInfo.innerHTML = proposal ? info.innerHTML : '';
 }
 
 $('#proposal-select').addEventListener('change', ({ target }) => {
   state.simulation = target.value
     ? proposalScenario(target.value, proposalName(target.value))
     : { ...clone(state.current), name: '', proposal: '' };
+  navigation.select('simulation', { focus: true });
   trackEvent(`proposal-${target.value || 'custom'}`);
   refreshScenarios();
 });
@@ -357,6 +384,7 @@ $('#creep-simulate').addEventListener('click', () => {
   state.simulation = indexedScenario(state.current, INFLATION_SINCE_BRACKETS, indexedName());
   trackEvent('simulate-indexed-brackets');
   refreshScenarios();
+  navigation.select('simulation');
   $('.card-simulation').scrollIntoView({ behavior: 'smooth' });
 });
 
@@ -522,6 +550,7 @@ function update() {
         'foralOtherWithholding',
       ].some((key) => state.input[key] > 0));
   $('#sticky-summary').hidden = unsupported;
+  applyViewVisibility();
   for (const id of ['share-whatsapp', 'share-x', 'share-native']) $(`#${id}`).disabled = unsupported;
   renderInputWarnings();
   if (unsupported) {
@@ -561,6 +590,7 @@ function update() {
 document.querySelector(`input[name="chartMode"][value="${state.chartMode}"]`).checked = true;
 renderInput();
 applyLanguage();
+navigation.select(navigation.view);
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));

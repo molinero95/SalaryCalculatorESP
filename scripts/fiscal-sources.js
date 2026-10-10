@@ -21,7 +21,11 @@ export const REQUIRED_GROUPS = [
   ...Object.keys(FORAL_TERRITORIES).map((territory) => `foral.${territory}`),
 ];
 
-const isDate = (value) => typeof value === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(value) && !isNaN(Date.parse(value));
+const isDate = (value) => {
+  if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+  const date = new Date(`${value}T00:00:00Z`);
+  return !isNaN(date.getTime()) && date.toISOString().slice(0, 10) === value;
+};
 
 function assertPublicHttps(value) {
   const url = new URL(value);
@@ -59,12 +63,15 @@ export function validateFiscalSources(catalogue) {
  * new-year rules are often published in late December or early January.
  */
 export function staleGroups(catalogue, today, { maxAgeDays = 365, graceDays = 31 } = {}) {
+  if (!isDate(today)) throw new Error('Invalid monitoring date');
   const now = new Date(`${today}T00:00:00Z`);
   const year = now.getUTCFullYear();
   const dayOfYear = (now - Date.UTC(year, 0, 1)) / 86400000;
   const minimumYear = dayOfYear < graceDays ? year - 1 : year;
-  const isCurrent = (s) =>
-    s.fiscalYear >= minimumYear && (now - new Date(`${s.verifiedAt}T00:00:00Z`)) / 86400000 <= maxAgeDays;
+  const isCurrent = (s) => {
+    const age = (now - new Date(`${s.verifiedAt}T00:00:00Z`)) / 86400000;
+    return s.fiscalYear >= minimumYear && s.fiscalYear <= year && isDate(s.verifiedAt) && age >= 0 && age <= maxAgeDays;
+  };
 
   return REQUIRED_GROUPS.filter((group) => !catalogue.sources.some((s) => s.covers.includes(group) && isCurrent(s)));
 }

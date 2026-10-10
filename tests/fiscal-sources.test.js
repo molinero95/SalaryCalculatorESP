@@ -110,3 +110,33 @@ test('enacted-law sources with a monitor URL are fingerprinted alongside proposa
   assert.ok(enacted.every((r) => r.sourceType === 'enacted' && r.status === 'baseline-needed' && !r.error));
   assert.equal(results.length - enacted.length, proposals.proposals.length);
 });
+
+for (const date of ['2026-02-30', '2026-02-29', '2026-04-31']) {
+  test(`rejects nonexistent calendar date ${date}`, () => {
+    const copy = structuredClone(fiscal);
+    copy.sources[0].verifiedAt = date;
+    assert.throws(() => validateFiscalSources(copy));
+  });
+}
+
+test('accepts a genuine leap day', () => {
+  const copy = structuredClone(fiscal);
+  copy.sources[0].verifiedAt = '2024-02-29';
+  assert.equal(validateFiscalSources(copy), copy);
+});
+
+for (const source of [
+  { fiscalYear: 2027, verifiedAt: '2026-10-09' },
+  { fiscalYear: 2026, verifiedAt: '2026-10-11' },
+  { fiscalYear: 2027, verifiedAt: '2026-01-01' },
+]) {
+  test(`future metadata is stale: ${JSON.stringify(source)}`, () => {
+    const catalogue = { sources: [{ ...tiny.sources[1], ...source }] };
+    assert.ok(staleGroups(catalogue, '2026-10-10').includes('state.scale'));
+    assert.ok(staleGroups(catalogue, '2026-01-15').includes('state.scale'));
+  });
+}
+
+test('rejects an impossible monitoring date', () => {
+  assert.throws(() => staleGroups(tiny, '2026-02-30'));
+});

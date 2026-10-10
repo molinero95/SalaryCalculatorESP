@@ -1697,3 +1697,44 @@ main > *,
     transform: none;
   }
 }
+
+/* Product modes share one payroll session; only the relevant tools are visible. */
+.product-navigation {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+.product-navigation button {
+  flex: 1 1 9rem;
+  min-width: 0;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.65rem;
+  font: inherit;
+  cursor: pointer;
+  color: inherit;
+  background: var(--surface-1);
+}
+.product-navigation button[aria-selected='true'] {
+  background: var(--accent);
+  color: white;
+}
+.product-navigation button:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+body[data-view='salary'] .result-simulation,
+body[data-view='salary'] .summary-strip,
+body[data-view='salary'] #difference,
+body[data-view='proposals'] #results-section,
+body[data-view='proposals'] section[aria-labelledby='breakdown-title'],
+body[data-view='proposals'] section[aria-labelledby='context-title'] {
+  display: none;
+}
+body[data-view='salary'] .results {
+  grid-template-columns: 1fr;
+}
+body[data-view='salary'] .breakdown-table tr > :nth-child(n + 3) {
+  display: none;
+}

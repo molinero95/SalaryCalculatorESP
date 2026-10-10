@@ -5,6 +5,7 @@ test.beforeEach(async ({ page }) => {
   await page.goto('/');
   await page.evaluate(() => localStorage.clear());
   await page.reload();
+  await page.locator('#product-navigation [data-view="simulation"]').click();
 });
 
 test('shows the current payslip by default', async ({ page }) => {
@@ -140,6 +141,7 @@ test('several simulations can be kept and compared at once', async ({ page }) =>
 
   // Tabs survive a reload
   await page.reload();
+  await page.locator('#product-navigation [data-view="simulation"]').click();
   await expect(page.locator('.sim-tab')).toHaveCount(2);
 });
 
@@ -164,6 +166,7 @@ test('app reloads and calculates offline after caching the app shell', async ({ 
   });
   await context.setOffline(true);
   await page.reload();
+  await page.locator('#product-navigation [data-view="simulation"]').click();
   await expect(page.locator('#add-simulation')).toBeVisible();
   await page.locator('#add-simulation').click();
   await expect(page.locator('#chart .line')).toHaveCount(2);

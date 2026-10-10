@@ -23,6 +23,7 @@ async function openApp(page, { language = 'es', expand = true } = {}) {
     localStorage.setItem('net-salary:state', JSON.stringify({ language: lang }));
   }, language);
   await page.reload();
+  await page.locator('#product-navigation [data-view="simulation"]').click();
   await page.locator('.result-current .headline strong').waitFor();
   if (expand) await page.evaluate(() => document.querySelectorAll('details').forEach((d) => (d.open = true)));
   // Let the chart render in the next animation frame and hide the floating badge
@@ -43,6 +44,19 @@ test.describe('@visual layout', () => {
     await openApp(page, { expand: false });
     await expect(page).toHaveScreenshot('dark-mode.png', { fullPage: true, animations: 'disabled' });
   });
+});
+
+test.describe('@visual product navigation', () => {
+  for (const view of ['salary', 'proposals']) {
+    test(`navigation ${view}`, async ({ page }) => {
+      await openApp(page, { expand: false });
+      await page.locator(`#product-navigation [data-view="${view}"]`).click();
+      await expect(page).toHaveScreenshot(`navigation-${view}.png`, {
+        fullPage: true,
+        animations: 'disabled',
+      });
+    });
+  }
 });
 
 test.describe('@visual hover states', () => {
