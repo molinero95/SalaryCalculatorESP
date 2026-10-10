@@ -353,8 +353,10 @@ export default {
     'Anunci històric de 2023 de deduccions per a famílies a partir del segon fill. No concreta la base, els límits ni com aplicar la deducció; es mostra com a informació i no calcula estalvi.',
   proposalPpDeflationNote:
     'Proposició parlamentària del PP publicada el 20 de febrer de 2025: demana deflactar almenys els tres primers trams, mínims i deduccions personals de l’IRPF. No fixa el percentatge ni els imports finals, de manera que no es calcula un estalvi. És una proposta històrica, no normativa vigent.',
+  withholdingShortfall:
+    'La retenció d’aquesta simulació no cobreix tot l’impost: a la renda sortirien {amount} a pagar. Part del net mensual és una bestreta que es retorna.',
   proposalVoxNote:
-    'Proposta de 2024: escala estatal anual del 15 % fins a 70.000 € i 25 % sobre l’excés; manté l’escala autonòmica. L’article 101 proposa una retenció independent del 15 %/25 %. Mínim personal de 22.000 € i rebaixa de 4 punts per fill només a la quota estatal anual. Es mantenen els mínims autonòmics expressos; altres comunitats hereten el mínim proposat. Simulació parcial: conserva les regles reglamentàries i exclou els xecs per naixement.',
+    'Proposta de 2024: escala estatal anual del 15 % fins a 70.000 € i 25 % sobre l’excés; manté l’escala autonòmica. Mínim personal de 22.000 € i rebaixa de 4 punts per fill només a la quota estatal, com indica la proposta; la quota autonòmica conserva els mínims actuals. L’article 101 proposa una retenció del 15 %/25 % sense part autonòmica: la nòmina reté menys, però la quota autonòmica es paga a la renda. Simulació parcial: conserva les regles reglamentàries i exclou els xecs per naixement.',
   proposalSumarNote:
     'Apuja el tipus marginal màxim al 52 % per sobre de 300.000 €. El programa no detalla els tipus entre 120.000 i 300.000 €, que es mantenen. La retenció de nòmina es manté: el programa no en defineix una escala nova.',
   proposalPsoeNote: 'Proposa augmentar el mínim per descendents i persones dependents, sense xifres concretes.',

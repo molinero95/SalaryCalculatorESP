@@ -209,6 +209,8 @@ export function computePayroll(input, scenario, grossAnnual = grossAnnualOf(inpu
       foralCredit: foral ? annual.credit : 0,
       annualTax: annual.tax,
       refund,
+      // A separate withholding scale can leave part of the annual tax to pay in the return.
+      withholdingShortfall: !foral && scenario.incomeTax.useSeparateWithholding && refund < 0 ? -refund : 0,
     },
     netAnnual,
     netAnnualAfterReturn,

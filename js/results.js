@@ -40,6 +40,7 @@ function resultCard(kind, name, r, reference, { showRefund, showInKind, showPens
         ${r.effectiveRate === null ? '' : metric(t('effectiveRate'), formatPercent(r.effectiveRate), rateDelta(r.effectiveRate, reference?.effectiveRate))}
         ${metric(t('employerCost'), formatEuros(r.employerCost))}
       </dl>
+      ${r.incomeTax.withholdingShortfall > 0 ? `<p class="warning">${t('withholdingShortfall', { amount: escapeHtml(formatEuros(r.incomeTax.withholdingShortfall)) })}</p>` : ''}
       <p class="muted result-tax-scope">${t('payrollAnnualScope')}</p>
     </article>`;
 }

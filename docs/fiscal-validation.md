@@ -48,7 +48,7 @@ npm run test:e2e
 
 ## Reviewed proposal scope
 
-See [proposal-scope.md](proposal-scope.md) for the Vox article 63/article 101 distinction, regional minimum assumptions and the limited Sumar annual top-rate scenario. Templates with separate withholding scales do not derive payroll withholding from their combined annual scale.
+See [proposal-scope.md](proposal-scope.md) for the Vox article 63/article 101 distinction, the state-only minimum and the limited Sumar annual top-rate scenario. Templates with separate withholding scales do not derive payroll withholding from their combined annual scale.
 
 ## Residence coverage
 

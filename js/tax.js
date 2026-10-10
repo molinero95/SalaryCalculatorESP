@@ -1,5 +1,5 @@
 // Pure income-tax rules. Withholding and annual assessment use distinct allowances.
-import { GENERAL_REGIONAL_SCALE, combineScales } from './defaults.js';
+import { CURRENT_SCENARIO, GENERAL_REGIONAL_SCALE, combineScales } from './defaults.js';
 import { REGIONAL_SCALES, REGIONAL_ALLOWANCES } from './data/regions.js';
 const round2 = (x) => Math.round(x * 100) / 100;
 
@@ -58,6 +58,11 @@ export function personalAllowance(input, p, annual = false) {
   return { personal, children, dependents, disability, total: personal + children + dependents + disability };
 }
 
+/** Minimum amounts of the law in force (personal, age, descendants, ascendants, disability). */
+function currentAllowances() {
+  return Object.fromEntries(Object.entries(CURRENT_SCENARIO.incomeTax).filter(([key]) => /Allowance$/.test(key)));
+}
+
 /**
  * Estimated tax due in the annual return. The scenario's brackets are the
  * combined state + general regional scale. Each annual quota uses its own
@@ -65,7 +70,10 @@ export function personalAllowance(input, p, annual = false) {
  */
 export function annualTax(input, p, base, grossEarnings) {
   const allowance = personalAllowance(input, p, true);
-  const regionalParameters = { ...p, ...REGIONAL_ALLOWANCES[input.region] };
+  // Art. 56.3 LIRPF: without its own minima a community uses the state amounts. A
+  // reform marked state-only keeps today's amounts for the regional quota instead.
+  const regionalBase = p.stateOnlyAllowances ? { ...p, ...currentAllowances() } : p;
+  const regionalParameters = { ...regionalBase, ...REGIONAL_ALLOWANCES[input.region] };
   if (input.region === 'balearic' && input.age > 65) regionalParameters.personalAllowance = 6105;
   const regionalAllowance = personalAllowance(input, regionalParameters, true);
   const regionalScale = REGIONAL_SCALES[input.region]?.brackets ?? GENERAL_REGIONAL_SCALE;

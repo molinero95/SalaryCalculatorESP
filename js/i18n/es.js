@@ -352,8 +352,10 @@ export default {
     'Anuncio histórico de 2023 de deducciones para familias a partir del segundo hijo. No concreta la base, los límites ni cómo aplicar la deducción; se muestra como información y no calcula ahorro.',
   proposalPpDeflationNote:
     'Proposición parlamentaria del PP publicada el 20 de febrero de 2025: pide deflactar al menos los tres primeros tramos, mínimos y deducciones personales del IRPF. No fija el porcentaje ni los importes finales, por lo que no se calcula un ahorro. Es una propuesta histórica, no normativa vigente.',
+  withholdingShortfall:
+    'La retención de esta simulación no cubre todo el impuesto: en la renta saldrían {amount} a pagar. Parte del neto mensual es un adelanto que se devuelve.',
   proposalVoxNote:
-    'Propuesta de 2024: escala estatal anual del 15 % hasta 70.000 € y 25 % sobre el exceso; mantiene la escala autonómica. El artículo 101 propone una retención independiente del 15 %/25 %. Mínimo personal de 22.000 € y rebaja de 4 puntos por hijo solo en la cuota estatal anual. Se conservan los mínimos autonómicos fijados expresamente; en otras comunidades se hereda el mínimo propuesto. Simulación parcial: conserva reglas reglamentarias de retención y no incluye cheques por nacimiento.',
+    'Propuesta de 2024: escala estatal anual del 15 % hasta 70.000 € y 25 % sobre el exceso; mantiene la escala autonómica. Mínimo personal de 22.000 € y rebaja de 4 puntos por hijo solo en la cuota estatal, como indica la propuesta; la cuota autonómica conserva los mínimos actuales. El artículo 101 propone una retención del 15 %/25 % sin parte autonómica: la nómina retiene menos, pero la cuota autonómica se paga en la renta. Simulación parcial: conserva reglas reglamentarias de retención y no incluye cheques por nacimiento.',
   proposalSumarNote:
     'Sube el tipo marginal máximo al 52 % por encima de 300.000 €. El programa no detalla los tipos entre 120.000 y 300.000 €, que se mantienen. La retención de nómina se mantiene: el programa no define una escala nueva para ella.',
   proposalPsoeNote: 'Propone aumentar el mínimo por descendientes y personas dependientes, sin cifras concretas.',

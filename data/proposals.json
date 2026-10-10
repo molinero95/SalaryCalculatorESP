@@ -48,15 +48,16 @@
               "upTo": null,
               "rate": 25
             }
-          ]
+          ],
+          "stateOnlyAllowances": true
         }
       },
       "status": "partial",
       "verifiedAt": "2026-10-09",
       "sourceType": "official",
       "limitations": [
-        "Article 101 specifies separate 15/25 withholding rates; regulatory calculation details are retained as an estimate. Child rate relief is applied to annual state tax, not inferred for withholding.",
-        "Regional scales remain unchanged. Existing explicitly fixed regional minima are retained; regions without overrides inherit the proposed article 57 minimum. No regional-law adaptation is assumed.",
+        "Article 101 replaces the employment withholding scale with 15/25 rates and no regional component, while regional quotas remain due; the estimate therefore shows an amount to pay in the annual return. Regulatory calculation details are an estimate. Child rate relief is applied to annual state tax, not inferred for withholding.",
+        "Regional scales remain unchanged. The 22,000 € minimum is applied to the state quota only, as the bill states it modifies only the state tranche; the regional quota keeps today's minima (or the community's own). Read literally, art. 56.3 LIRPF would also extend it to the regional quota of communities without their own minima.",
         "Birth cheques and other measures outside income tax are not simulated."
       ],
       "history": [
@@ -67,6 +68,10 @@
         {
           "date": "2026-10-09",
           "description": "Reviewed bill pages 5–7: separate article 101 withholding scale from article 63 annual state scale; mark regulatory and regional-minimum assumptions."
+        },
+        {
+          "date": "2026-10-11",
+          "description": "Apply the 22,000 € minimum to the state quota only and flag the withholding shortfall against regional quotas."
         }
       ]
     },
