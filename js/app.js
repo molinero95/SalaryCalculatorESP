@@ -19,7 +19,12 @@ import { renderChart, renderDataTable } from './chart.js';
 import { renderResults, renderBreakdown } from './results.js';
 import * as storage from './storage.js';
 import { renderResidenceOptions, renderResidenceBrackets } from './presentation/residence.js';
-import { isForal, unsupportedFiscalProfile, unsupportedFiscalScenario } from './domain/fiscal-profile.js';
+import {
+  isForal,
+  foralProfileIssues,
+  unsupportedFiscalProfile,
+  unsupportedFiscalScenario,
+} from './domain/fiscal-profile.js';
 import { PROPOSALS, UNMODELLED_PROPOSALS } from './data/proposals.js';
 import { salaryPercentile } from './data/salaries.js';
 import { cumulativeInflation, BRACKETS_LAST_UPDATED } from './data/cpi.js';
@@ -564,7 +569,7 @@ function update() {
   scope.textContent = t(
     unsupportedReference ? 'foralScenarioUnsupported' : unsupported ? 'foralUnsupported' : 'foralScope',
   );
-  const outputSections = ['#results', '#context-title', '#chart-title', '#compare-title', '#breakdown-title'];
+  const outputSections = ['#context-title', '#chart-title', '#compare-title', '#breakdown-title'];
   for (const selector of outputSections) $(selector).closest('section').hidden = unsupported;
   $('#chart-title').closest('section').hidden =
     unsupported ||
@@ -583,6 +588,12 @@ function update() {
     $(`#${id}`).disabled = unsupported || unsupportedSimulation;
   renderInputWarnings();
   if (unsupported) {
+    // Say exactly what is missing where the results would be, instead of an empty area.
+    const issues = unsupportedReference ? ['foralIssueScenario'] : foralProfileIssues(state.input);
+    $('#results').innerHTML =
+      `<div class="warning" role="status"><p>${escapeHtml(t('foralResultsHidden'))}</p><ul>${issues
+        .map((key) => `<li>${escapeHtml(t(key))}</li>`)
+        .join('')}</ul></div>`;
     lastResults = null;
     renderResultTabs();
     renderProposalInfo();

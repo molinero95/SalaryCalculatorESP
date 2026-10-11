@@ -55,6 +55,18 @@ export default {
     'Children without disability, adoption or family changes during the year: living with you, nonexempt income no higher than SMI, not part of another family unit exceeding SMI, and neither filing nor required to file income tax. Enter year-end ages. Full counting means one eligible parent; otherwise the credit is shared by two.',
   foralChildrenNavarraHelp:
     'Unmarried children without disability, adoption or family changes during the year: living with you and nonexempt income no higher than IPREM. Enter year-end ages. Full counting means one eligible parent; otherwise the credit is shared by two.',
+  foralResultsHidden: 'We do not show results for this foral profile until this is resolved:',
+  foralIssueChildren:
+    'Tick the box confirming that the children entered meet the foral requirements, or set children to 0.',
+  foralIssueAgeGroups:
+    'The children’s age groups do not add up to the total (for example, more under-3s or under-6s than children). Fix them or set them to 0.',
+  foralIssueAscendants: 'Tick the box confirming the requirements of the ascendants entered, or set them to 0.',
+  foralIssueAnnual:
+    'Confirm the additional annual amounts (rent received, savings, business or other withholding) or leave them at 0.',
+  foralIssueAlavaRural: 'Vitoria-Gasteiz cannot be marked as a rural area of Álava.',
+  foralIssueInvalid: 'A family or annual value is out of range; check the numbers entered.',
+  foralIssueScenario:
+    'The “Current” parameters have been edited. Foral territories are only calculated with the law in force: press “Reset to official values” in Current.',
   foralUnsupported:
     'This foral profile is not validated or family requirements are missing. Results are hidden. Check age groups and confirm child and ascendant eligibility.',
   foralScenarioUnsupported:

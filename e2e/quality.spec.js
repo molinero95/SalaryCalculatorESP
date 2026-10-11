@@ -389,17 +389,19 @@ test('unreviewed foral profiles hide every fiscal output and recover when correc
   await chooseResidence(page, 'city:bilbao');
   await page.fill('#children', '1');
   await expect(page.locator('#fiscal-scope')).toContainText('Se ocultan los resultados');
-  for (const selector of ['#results', '#chart', '#compare-table', '#breakdown', '#sticky-summary'])
+  await expect(page.locator('#results .warning')).toContainText('confirma que los hijos');
+  await expect(page.locator('#results .result-current')).toHaveCount(0);
+  for (const selector of ['#chart', '#compare-table', '#breakdown', '#sticky-summary'])
     await expect(page.locator(selector)).toBeHidden();
   await page.setViewportSize({ width: 640, height: 900 });
   await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))));
   expect(errors).toEqual([]);
   await page.fill('#children', '0');
-  await expect(page.locator('#results')).toBeVisible();
+  await expect(page.locator('#results .result-current')).toBeVisible();
   await expect(page.locator('#fiscal-scope')).toContainText('Modelo foral de nómina');
   await page.fill('#children', '1');
   await chooseResidence(page, 'city:madrid');
-  await expect(page.locator('#results')).toBeVisible();
+  await expect(page.locator('#results .result-current')).toBeVisible();
   await expect(page.locator('#fiscal-scope')).toBeHidden();
 });
 
@@ -427,45 +429,45 @@ test('reviewed foral children require confirmation, preserve shared withholding 
   await chooseResidence(page, 'city:bilbao');
   await page.fill('#children', '1');
   await page.fill('#childrenUnder6', '1');
-  await expect(page.locator('#results')).toBeHidden();
+  await expect(page.locator('#results .result-current')).toHaveCount(0);
   await page.check('#foralChildrenConfirmed');
-  await expect(page.locator('#results')).toBeVisible();
+  await expect(page.locator('#results .result-current')).toBeVisible();
   await expect(page.locator('label[for="children"]')).toContainText('30 años inclusive');
   await page.check('input[name="childrenFullyCounted"]');
-  await expect(page.locator('#results')).toBeVisible();
+  await expect(page.locator('#results .result-current')).toBeVisible();
   await page.fill('#childrenUnder3', '1');
   await page.fill('#childrenUnder6', '0');
-  await expect(page.locator('#results')).toBeHidden();
+  await expect(page.locator('#results .result-current')).toHaveCount(0);
   await page.fill('#childrenUnder6', '1');
-  await expect(page.locator('#results')).toBeVisible();
+  await expect(page.locator('#results .result-current')).toBeVisible();
   await page.reload();
   await page.locator('#product-navigation [data-view="simulation"]').click();
   await expect(page.locator('#foralChildrenConfirmed')).toBeChecked();
   await expect(page.locator('#childrenUnder6')).toHaveValue('1');
-  await expect(page.locator('#results')).toBeVisible();
+  await expect(page.locator('#results .result-current')).toBeVisible();
   await chooseResidence(page, 'city:pamplona-iruna');
   await expect(page.locator('#foralChildrenConfirmed')).not.toBeChecked();
-  await expect(page.locator('#results')).toBeHidden();
+  await expect(page.locator('#results .result-current')).toHaveCount(0);
   await page.check('#foralChildrenConfirmed');
   await expect(page.locator('#foral-under6-field')).toBeHidden();
   await expect(page.locator('label[for="children"]')).toContainText('menores de 30');
-  await expect(page.locator('#results')).toBeVisible();
+  await expect(page.locator('#results .result-current')).toBeVisible();
   await chooseResidence(page, 'region:alava');
   await page.check('#foralChildrenConfirmed');
   await expect(page.locator('#foral-age6to15-field')).toBeVisible();
   await page.fill('#children6to15', '1');
-  await expect(page.locator('#results')).toBeHidden();
+  await expect(page.locator('#results .result-current')).toHaveCount(0);
   await page.fill('#children6to15', '0');
-  await expect(page.locator('#results')).toBeVisible();
+  await expect(page.locator('#results .result-current')).toBeVisible();
 });
 
 test('reviewed foral disability and mobility recover output without leaking into common regime', async ({ page }) => {
   await chooseResidence(page, 'city:bilbao');
   await page.selectOption('#disability', '33');
-  await expect(page.locator('#results')).toBeVisible();
+  await expect(page.locator('#results .result-current')).toBeVisible();
   await expect(page.locator('#foral-mobility-field')).toBeVisible();
   await page.check('#foralReducedMobility');
-  await expect(page.locator('#results')).toBeVisible();
+  await expect(page.locator('#results .result-current')).toBeVisible();
   await page.selectOption('#disability', '65');
   await expect(page.locator('#foral-mobility-field')).toBeHidden();
   await chooseResidence(page, 'city:madrid');
@@ -473,7 +475,7 @@ test('reviewed foral disability and mobility recover output without leaking into
   await expect(page.locator('#foral-under6-field')).toBeHidden();
   await expect(page.locator('#foral-mobility-field')).toBeHidden();
   await expect(page.locator('label[for="children"]')).toContainText('25');
-  await expect(page.locator('#results')).toBeVisible();
+  await expect(page.locator('#results .result-current')).toBeVisible();
 });
 
 test('community and territory filter cities and restore saved selections', async ({ page }) => {
@@ -530,19 +532,19 @@ for (const residence of ['region:bizkaia', 'region:gipuzkoa', 'region:alava', 'r
     await page.fill('#age', '66');
     await page.locator('label:has(input[name="contract"][value="temporary"])').click();
     await page.selectOption('#familySituation', '2');
-    await expect(page.locator('#results')).toBeVisible();
+    await expect(page.locator('#results .result-current')).toBeVisible();
     await page.fill('#dependents65', '1');
-    await expect(page.locator('#results')).toBeHidden();
+    await expect(page.locator('#results .result-current')).toHaveCount(0);
     await page.check('#foralAscendantsConfirmed');
-    await expect(page.locator('#results')).toBeVisible();
+    await expect(page.locator('#results .result-current')).toBeVisible();
     await page.locator('#pensionIndividual').locator('xpath=ancestor::details').locator('summary').click();
     await page.fill('#pensionIndividual', '1500');
-    await expect(page.locator('#results')).toBeVisible();
+    await expect(page.locator('#results .result-current')).toBeVisible();
     await page.locator('#foral-annual-fields summary').click();
     await page.fill('#foralSavingsIncome', '1000');
-    await expect(page.locator('#results')).toBeHidden();
+    await expect(page.locator('#results .result-current')).toHaveCount(0);
     await page.check('#foralAnnualConfirmed');
-    await expect(page.locator('#results')).toBeVisible();
+    await expect(page.locator('#results .result-current')).toBeVisible();
     await testInfo.attach('expanded-foral-form', {
       body: await page.locator('#details-form').screenshot(),
       contentType: 'image/png',
@@ -590,5 +592,5 @@ test('annual and ascendant confirmations reset when jurisdiction or eligible amo
   await expect(page.locator('label[for="dependents75"]')).toHaveText('Ascendientes a cargo 75 o más');
   await chooseResidence(page, 'city:madrid');
   await expect(page.locator('#foral-annual-fields')).toBeHidden();
-  await expect(page.locator('#results')).toBeVisible();
+  await expect(page.locator('#results .result-current')).toBeVisible();
 });

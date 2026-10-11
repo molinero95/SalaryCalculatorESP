@@ -75,3 +75,18 @@ test('foral applicability notice fits 320px in all languages', async ({ page }) 
     await expect(page.locator('.result-simulation .headline')).toHaveCount(0);
   }
 });
+
+test('a blocked foral profile explains what is missing where the results would be', async ({ page }) => {
+  await page.goto('/');
+  await page.evaluate(() => localStorage.clear());
+  await page.reload();
+  await page.fill('#childrenUnder3', '1');
+  await page.fill('#children', '0');
+  await page.selectOption('#residence', 'region:basque');
+  const notice = page.locator('#results .warning');
+  await expect(notice).toBeVisible();
+  await expect(notice).toContainText('grupos de edad');
+  await expect(page.locator('.result-current')).toHaveCount(0);
+  await page.fill('#childrenUnder3', '0');
+  await expect(page.locator('.result-current .headline strong')).toHaveText('1.658,93 €');
+});
