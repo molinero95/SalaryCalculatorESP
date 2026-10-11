@@ -48,7 +48,7 @@ function contributions(grossAnnual, socialSecurity, rates, { contract, partTime 
  * Flexible compensation: part of the gross salary paid in kind. Exempt amounts
  * don't pay income tax, but everything still pays social security.
  */
-function flexibleCompensation(input, limits, gross) {
+function flexibleCompensation(input, limits, gross, inKind = 0) {
   if (['bizkaia', 'gipuzkoa', 'alava', 'navarra'].includes(input.region))
     limits = { mealDailyLimit: 11, transportLimit: 1500, healthLimit: 500, healthDisabilityLimit: 1500, inKindCap: 30 };
   const healthCap =
@@ -64,7 +64,8 @@ function flexibleCompensation(input, limits, gross) {
     input.flexTraining,
   ]);
 
-  return { total, exempt, overCap: total > (gross * limits.inKindCap) / 100 };
+  // Art. 26.1 ET: pay in kind, flexible or not, cannot exceed 30 % of total salary.
+  return { total, exempt, overCap: total + inKind > ((gross + inKind) * limits.inKindCap) / 100 };
 }
 
 export const grossAnnualOf = (input) => (input.period === 'perPayment' ? input.salary * input.payments : input.salary);
@@ -95,17 +96,26 @@ export function computePayroll(input, scenario, grossAnnual = grossAnnualOf(inpu
   }
   const gross = round2(Math.max(0, grossAnnual));
 
-  // Employer pension contributions are part of the contribution base
-  const contributionBase = gross + input.pensionEmployer;
+  // Taxable pay in kind on top of the cash salary (company car, school fees...),
+  // as valued on the payslip. Common regime only; foral profiles reject it.
+  const inKind = foral ? 0 : Math.max(0, input.inKindTaxable ?? 0);
+  // Employer pension contributions and pay in kind are part of the contribution base
+  // (art. 147.1 LGSS: "tanto en metálico como en especie").
+  const contributionBase = gross + input.pensionEmployer + inKind;
   const employee = contributions(contributionBase, scenario.socialSecurity, scenario.employee, input);
   const employer = contributions(contributionBase, scenario.socialSecurity, scenario.employer, input);
 
-  const flexible = flexibleCompensation(input, scenario.flexible, gross);
-  const taxableGross = gross - flexible.exempt;
+  const flexible = flexibleCompensation(input, scenario.flexible, gross, inKind);
+  // The withholding rate is computed on cash and in-kind pay together (AEAT algorithm,
+  // RETRIB) and applied to both: on pay in kind it is the ingreso a cuenta (art. 102 RIRPF).
+  const taxableGross = gross - flexible.exempt + inKind;
   const incomeTax = calculateWithholding(input, scenario.incomeTax, taxableGross, employee.total);
+  const inKindAdvance = round2((inKind * incomeTax.rate) / 100);
+  // Art. 43.2 LIRPF: an ingreso a cuenta the employer bears is income too.
+  const advanceBorne = inKind > 0 && input.inKindAdvanceBorne === true ? inKindAdvance : 0;
   const taxWithoutFlexible =
     flexible.exempt > 0
-      ? calculateWithholding(input, scenario.incomeTax, gross, employee.total).withheld
+      ? calculateWithholding(input, scenario.incomeTax, gross + inKind, employee.total).withheld
       : incomeTax.withheld;
 
   // --- Annual return ---
@@ -114,7 +124,7 @@ export function computePayroll(input, scenario, grossAnnual = grossAnnualOf(inpu
   const additional = foral
     ? foralAdditionalIncome(input)
     : { general: 0, savings: 0, total: 0, activity: 0, incomeForCredits: 0 };
-  const annualGross = taxableGross + input.pensionEmployer;
+  const annualGross = taxableGross + advanceBorne + input.pensionEmployer;
   const annualEarnings = calculateEarnings(input, scenario.incomeTax, annualGross, employee.total);
   const pension = pensionPlan(
     input,
@@ -150,7 +160,7 @@ export function computePayroll(input, scenario, grossAnnual = grossAnnualOf(inpu
     savingsBase: additional.savings,
   });
   const pensionTaxSaved =
-    calculateAnnual(input, scenario.incomeTax, annualEmploymentBase + additional.general, taxableGross, {
+    calculateAnnual(input, scenario.incomeTax, annualEmploymentBase + additional.general, taxableGross + advanceBorne, {
       netEmploymentIncome: input.region === 'navarra' ? Math.max(0, gross - employee.total) : incomeTax.netEarnings,
       taxableIncome:
         (input.region === 'navarra' ? Math.max(0, gross - employee.total) : incomeTax.netEarnings) +
@@ -165,7 +175,7 @@ export function computePayroll(input, scenario, grossAnnual = grossAnnualOf(inpu
     ? input.region === 'navarra'
       ? taxableGross < 17000
       : taxableGross <= 20000
-    : taxableGross <= scenario.incomeTax.filingThreshold;
+    : taxableGross + advanceBorne <= scenario.incomeTax.filingThreshold;
   if (refund < 0 && exemptFromFiling && (!foral || ((input.foralRentalGross ?? 0) === 0 && additional.total === 0)))
     refund = 0;
 
@@ -175,7 +185,9 @@ export function computePayroll(input, scenario, grossAnnual = grossAnnualOf(inpu
       additional.total > 0 ||
       (input.foralExemptIncome ?? 0) > 0 ||
       (input.foralOtherWithholding ?? 0) > 0);
-  const netAnnual = gross - flexible.total - employee.total - incomeTax.withheld - pension.employee;
+  // What leaves the payslip: the ingreso a cuenta only when it is deducted from pay.
+  const withheldFromPay = incomeTax.withheld - advanceBorne;
+  const netAnnual = gross - flexible.total - employee.total - withheldFromPay - pension.employee;
   const netAnnualAfterReturn = netAnnual + refund - pension.individual;
 
   // With 14 payments, social security, flexible compensation and pension
@@ -184,14 +196,15 @@ export function computePayroll(input, scenario, grossAnnual = grossAnnualOf(inpu
   const grossPerPayment = gross / input.payments;
   const hasExtraPayments = input.payments === 14;
   const taxPerExtraPayment = hasExtraPayments ? (grossPerPayment * incomeTax.rate) / 100 : 0;
-  const taxPerRegularPayment = (incomeTax.withheld - 2 * taxPerExtraPayment) / 12;
+  const taxPerRegularPayment = (withheldFromPay - 2 * taxPerExtraPayment) / 12;
+  const totalPay = gross + inKind;
 
   return {
     grossAnnual: gross,
     taxableGross,
     employee,
     employer,
-    employerCost: gross + employer.total + pension.employer,
+    employerCost: gross + advanceBorne + employer.total + pension.employer,
     flexible: { ...flexible, taxSaved: taxWithoutFlexible - incomeTax.withheld },
     pension: { ...pension, taxSaved: pensionTaxSaved },
     incomeTax: {
@@ -209,6 +222,10 @@ export function computePayroll(input, scenario, grossAnnual = grossAnnualOf(inpu
       foralCredit: foral ? annual.credit : 0,
       annualTax: annual.tax,
       refund,
+      inKind,
+      inKindAdvance,
+      inKindAdvanceBorne: advanceBorne > 0,
+      withheldFromPay,
       // A separate withholding scale can leave part of the annual tax to pay in the return.
       withholdingShortfall: !foral && scenario.incomeTax.useSeparateWithholding && refund < 0 ? -refund : 0,
     },
@@ -219,11 +236,15 @@ export function computePayroll(input, scenario, grossAnnual = grossAnnualOf(inpu
     netRegularPayment:
       grossPerPayment - (employee.total + flexible.total + pension.employee) / 12 - taxPerRegularPayment,
     netExtraPayment: hasExtraPayments ? grossPerPayment - taxPerExtraPayment : 0,
-    effectiveRate: mixedIncome ? null : gross > 0 ? ((employee.total + incomeTax.withheld - refund) / gross) * 100 : 0,
+    effectiveRate: mixedIncome
+      ? null
+      : totalPay > 0
+        ? ((employee.total + incomeTax.withheld - refund) / totalPay) * 100
+        : 0,
     taxWedge: mixedIncome
       ? null
-      : gross > 0
-        ? ((employer.total + employee.total + incomeTax.withheld - refund) / (gross + employer.total)) * 100
+      : totalPay > 0
+        ? ((employer.total + employee.total + incomeTax.withheld - refund) / (totalPay + employer.total)) * 100
         : 0,
   };
 }

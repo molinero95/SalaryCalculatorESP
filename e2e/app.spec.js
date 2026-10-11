@@ -172,3 +172,11 @@ test('app reloads and calculates offline after caching the app shell', async ({ 
   await expect(page.locator('#chart .line')).toHaveCount(2);
   await context.setOffline(false);
 });
+
+test('taxable pay in kind lowers the cash net and shows its ingreso a cuenta', async ({ page }) => {
+  await page.locator('#inkind-fields > summary').click();
+  await page.fill('#inKindTaxable', '3000');
+  await expect(page.locator('.result-current .metrics')).toContainText('Retribución en especie que tributa');
+  await expect(page.locator('.result-current .metrics')).toContainText('3.000,00 €');
+  await expect(page.locator('#breakdown')).toContainText('ingreso a cuenta por la especie');
+});
