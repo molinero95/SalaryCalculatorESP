@@ -1,0 +1,416 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-12T16:52:46.032Z",
+  "alerts": [
+    {
+      "kind": "unavailable",
+      "target": "podemos2019",
+      "url": "https://podemos.info/wp-content/uploads/2019/10/Podemos_programa_generales_10N.pdf",
+      "groups": [],
+      "signature": "https://podemos.info/wp-content/uploads/2019/10/Podemos_programa_generales_10N.pdf",
+      "evidence": {
+        "error": "HTTP 403",
+        "url": "https://podemos.info/wp-content/uploads/2019/10/Podemos_programa_generales_10N.pdf"
+      },
+      "scope": "sources",
+      "id": "unavailable:podemos2019",
+      "firstSeen": "2026-10-12T16:52:42.127Z",
+      "occurrences": 1,
+      "status": "pending",
+      "history": [
+        {
+          "at": "2026-10-12T16:52:42.127Z",
+          "action": "detected",
+          "evidence": {
+            "error": "HTTP 403",
+            "url": "https://podemos.info/wp-content/uploads/2019/10/Podemos_programa_generales_10N.pdf"
+          }
+        }
+      ],
+      "active": true,
+      "lastSeen": "2026-10-12T16:52:42.127Z"
+    },
+    {
+      "kind": "unavailable",
+      "target": "fiscal:navarra",
+      "url": "https://www.navarra.es/es/web/normativa-hacienda/-/texto-refundido-de-la-ley-foral-del-impuesto-sobre-la-renta-de-las-personas-f%C3%ADsicas-dfl-4/2008-de-2-de-junio-",
+      "groups": [
+        "foral.navarra"
+      ],
+      "signature": "https://www.navarra.es/es/web/normativa-hacienda/-/texto-refundido-de-la-ley-foral-del-impuesto-sobre-la-renta-de-las-personas-f%C3%ADsicas-dfl-4/2008-de-2-de-junio-",
+      "evidence": {
+        "error": "fetch failed",
+        "url": "https://www.navarra.es/es/web/normativa-hacienda/-/texto-refundido-de-la-ley-foral-del-impuesto-sobre-la-renta-de-las-personas-f%C3%ADsicas-dfl-4/2008-de-2-de-junio-"
+      },
+      "scope": "sources",
+      "id": "unavailable:fiscal:navarra",
+      "firstSeen": "2026-10-12T16:52:42.127Z",
+      "occurrences": 1,
+      "status": "pending",
+      "history": [
+        {
+          "at": "2026-10-12T16:52:42.127Z",
+          "action": "detected",
+          "evidence": {
+            "error": "fetch failed",
+            "url": "https://www.navarra.es/es/web/normativa-hacienda/-/texto-refundido-de-la-ley-foral-del-impuesto-sobre-la-renta-de-las-personas-f%C3%ADsicas-dfl-4/2008-de-2-de-junio-"
+          }
+        }
+      ],
+      "active": true,
+      "lastSeen": "2026-10-12T16:52:42.127Z"
+    },
+    {
+      "kind": "publication",
+      "target": "BOE-A-2026-20004",
+      "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20004",
+      "groups": [],
+      "signature": "463f70a68b191c670aa00c1eb359b5e506313f14a076dde9d6966e2575a358bc",
+      "evidence": {
+        "id": "BOE-A-2026-20004",
+        "title": "Orden PJC/1004/2026, de 17 de septiembre, por la que se publica el Acuerdo del Consejo de Ministros de 1 de septiembre de 2026, por el que se fija el módulo para la distribución del crédito que figura en los Presupuestos Generales del Estado para 2023, prorrogados para 2026, destinado a subvencionar los gastos de funcionamiento de las Oficinas de Justicia en los municipios.",
+        "publishedAt": "2026-09-28",
+        "publisher": "Agencia Estatal Boletín Oficial del Estado",
+        "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20004",
+        "reasons": [
+          "broad-fiscal-review"
+        ],
+        "groups": [],
+        "signature": "463f70a68b191c670aa00c1eb359b5e506313f14a076dde9d6966e2575a358bc"
+      },
+      "scope": "boe-discovery",
+      "id": "publication:BOE-A-2026-20004",
+      "firstSeen": "2026-10-12T16:52:46.032Z",
+      "occurrences": 1,
+      "status": "pending",
+      "history": [
+        {
+          "at": "2026-10-12T16:52:46.032Z",
+          "action": "detected",
+          "evidence": {
+            "id": "BOE-A-2026-20004",
+            "title": "Orden PJC/1004/2026, de 17 de septiembre, por la que se publica el Acuerdo del Consejo de Ministros de 1 de septiembre de 2026, por el que se fija el módulo para la distribución del crédito que figura en los Presupuestos Generales del Estado para 2023, prorrogados para 2026, destinado a subvencionar los gastos de funcionamiento de las Oficinas de Justicia en los municipios.",
+            "publishedAt": "2026-09-28",
+            "publisher": "Agencia Estatal Boletín Oficial del Estado",
+            "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20004",
+            "reasons": [
+              "broad-fiscal-review"
+            ],
+            "groups": [],
+            "signature": "463f70a68b191c670aa00c1eb359b5e506313f14a076dde9d6966e2575a358bc"
+          }
+        }
+      ],
+      "active": true,
+      "lastSeen": "2026-10-12T16:52:46.032Z"
+    },
+    {
+      "kind": "publication",
+      "target": "BOE-A-2026-20266",
+      "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20266",
+      "groups": [],
+      "signature": "5958c2188da4ff3f7acc8633f0db8dca36c90d54fe510fa0637d2d115758bfd7",
+      "evidence": {
+        "id": "BOE-A-2026-20266",
+        "title": "Real Decreto-ley 26/2026, de 29 de septiembre, por el que se adoptan medidas urgentes para la protección de la función social de la vivienda y la ampliación de la oferta de vivienda asequible.",
+        "publishedAt": "2026-09-30",
+        "publisher": "Agencia Estatal Boletín Oficial del Estado",
+        "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20266",
+        "reasons": [
+          "housing-review"
+        ],
+        "groups": [],
+        "signature": "5958c2188da4ff3f7acc8633f0db8dca36c90d54fe510fa0637d2d115758bfd7"
+      },
+      "scope": "boe-discovery",
+      "id": "publication:BOE-A-2026-20266",
+      "firstSeen": "2026-10-12T16:52:46.032Z",
+      "occurrences": 1,
+      "status": "pending",
+      "history": [
+        {
+          "at": "2026-10-12T16:52:46.032Z",
+          "action": "detected",
+          "evidence": {
+            "id": "BOE-A-2026-20266",
+            "title": "Real Decreto-ley 26/2026, de 29 de septiembre, por el que se adoptan medidas urgentes para la protección de la función social de la vivienda y la ampliación de la oferta de vivienda asequible.",
+            "publishedAt": "2026-09-30",
+            "publisher": "Agencia Estatal Boletín Oficial del Estado",
+            "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20266",
+            "reasons": [
+              "housing-review"
+            ],
+            "groups": [],
+            "signature": "5958c2188da4ff3f7acc8633f0db8dca36c90d54fe510fa0637d2d115758bfd7"
+          }
+        }
+      ],
+      "active": true,
+      "lastSeen": "2026-10-12T16:52:46.032Z"
+    },
+    {
+      "kind": "publication",
+      "target": "BOE-A-2026-20385",
+      "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20385",
+      "groups": [],
+      "signature": "83b74351023cc2e56868c296d2a1e2f72fefce13b2c40785545ec0c68f75b0bb",
+      "evidence": {
+        "id": "BOE-A-2026-20385",
+        "title": "Real Decreto-ley 27/2026, de 29 de septiembre, por el que se adoptan medidas urgentes para reforzar la estabilidad de los contratos de arrendamiento de vivienda habitual.",
+        "publishedAt": "2026-10-01",
+        "publisher": "Agencia Estatal Boletín Oficial del Estado",
+        "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20385",
+        "reasons": [
+          "housing-review"
+        ],
+        "groups": [],
+        "signature": "83b74351023cc2e56868c296d2a1e2f72fefce13b2c40785545ec0c68f75b0bb"
+      },
+      "scope": "boe-discovery",
+      "id": "publication:BOE-A-2026-20385",
+      "firstSeen": "2026-10-12T16:52:46.032Z",
+      "occurrences": 1,
+      "status": "pending",
+      "history": [
+        {
+          "at": "2026-10-12T16:52:46.032Z",
+          "action": "detected",
+          "evidence": {
+            "id": "BOE-A-2026-20385",
+            "title": "Real Decreto-ley 27/2026, de 29 de septiembre, por el que se adoptan medidas urgentes para reforzar la estabilidad de los contratos de arrendamiento de vivienda habitual.",
+            "publishedAt": "2026-10-01",
+            "publisher": "Agencia Estatal Boletín Oficial del Estado",
+            "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20385",
+            "reasons": [
+              "housing-review"
+            ],
+            "groups": [],
+            "signature": "83b74351023cc2e56868c296d2a1e2f72fefce13b2c40785545ec0c68f75b0bb"
+          }
+        }
+      ],
+      "active": true,
+      "lastSeen": "2026-10-12T16:52:46.032Z"
+    },
+    {
+      "kind": "publication",
+      "target": "BOE-A-2026-20526",
+      "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20526",
+      "groups": [],
+      "signature": "fb5d9c4f091825f353e548584e27c81593825fa48ede12993e4d44438bbb6fe3",
+      "evidence": {
+        "id": "BOE-A-2026-20526",
+        "title": "Resolución de 2 de octubre de 2026, del Congreso de los Diputados, por la que se ordena la publicación del Acuerdo de derogación del Real Decreto-ley 26/2026, de 29 de septiembre, por el que se adoptan medidas urgentes para la protección de la función social de la vivienda y la ampliación de la oferta de vivienda asequible.",
+        "publishedAt": "2026-10-02",
+        "publisher": "Agencia Estatal Boletín Oficial del Estado",
+        "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20526",
+        "reasons": [
+          "housing-review"
+        ],
+        "groups": [],
+        "signature": "fb5d9c4f091825f353e548584e27c81593825fa48ede12993e4d44438bbb6fe3"
+      },
+      "scope": "boe-discovery",
+      "id": "publication:BOE-A-2026-20526",
+      "firstSeen": "2026-10-12T16:52:46.032Z",
+      "occurrences": 1,
+      "status": "pending",
+      "history": [
+        {
+          "at": "2026-10-12T16:52:46.032Z",
+          "action": "detected",
+          "evidence": {
+            "id": "BOE-A-2026-20526",
+            "title": "Resolución de 2 de octubre de 2026, del Congreso de los Diputados, por la que se ordena la publicación del Acuerdo de derogación del Real Decreto-ley 26/2026, de 29 de septiembre, por el que se adoptan medidas urgentes para la protección de la función social de la vivienda y la ampliación de la oferta de vivienda asequible.",
+            "publishedAt": "2026-10-02",
+            "publisher": "Agencia Estatal Boletín Oficial del Estado",
+            "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20526",
+            "reasons": [
+              "housing-review"
+            ],
+            "groups": [],
+            "signature": "fb5d9c4f091825f353e548584e27c81593825fa48ede12993e4d44438bbb6fe3"
+          }
+        }
+      ],
+      "active": true,
+      "lastSeen": "2026-10-12T16:52:46.032Z"
+    },
+    {
+      "kind": "publication",
+      "target": "BOE-A-2026-20527",
+      "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20527",
+      "groups": [],
+      "signature": "6b8b8e1b34b010fb2a9004bcf141dbc71fe3ca210ccaeb544478b82f3c5e5c83",
+      "evidence": {
+        "id": "BOE-A-2026-20527",
+        "title": "Resolución de 2 de octubre de 2026, del Congreso de los Diputados, por la que se ordena la publicación del Acuerdo de derogación del Real Decreto-ley 27/2026, de 29 de septiembre, por el que se adoptan medidas urgentes para reforzar la estabilidad de los contratos de arrendamiento de vivienda habitual.",
+        "publishedAt": "2026-10-02",
+        "publisher": "Agencia Estatal Boletín Oficial del Estado",
+        "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20527",
+        "reasons": [
+          "housing-review"
+        ],
+        "groups": [],
+        "signature": "6b8b8e1b34b010fb2a9004bcf141dbc71fe3ca210ccaeb544478b82f3c5e5c83"
+      },
+      "scope": "boe-discovery",
+      "id": "publication:BOE-A-2026-20527",
+      "firstSeen": "2026-10-12T16:52:46.032Z",
+      "occurrences": 1,
+      "status": "pending",
+      "history": [
+        {
+          "at": "2026-10-12T16:52:46.032Z",
+          "action": "detected",
+          "evidence": {
+            "id": "BOE-A-2026-20527",
+            "title": "Resolución de 2 de octubre de 2026, del Congreso de los Diputados, por la que se ordena la publicación del Acuerdo de derogación del Real Decreto-ley 27/2026, de 29 de septiembre, por el que se adoptan medidas urgentes para reforzar la estabilidad de los contratos de arrendamiento de vivienda habitual.",
+            "publishedAt": "2026-10-02",
+            "publisher": "Agencia Estatal Boletín Oficial del Estado",
+            "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20527",
+            "reasons": [
+              "housing-review"
+            ],
+            "groups": [],
+            "signature": "6b8b8e1b34b010fb2a9004bcf141dbc71fe3ca210ccaeb544478b82f3c5e5c83"
+          }
+        }
+      ],
+      "active": true,
+      "lastSeen": "2026-10-12T16:52:46.032Z"
+    },
+    {
+      "kind": "publication",
+      "target": "BOE-A-2026-20471",
+      "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20471",
+      "groups": [],
+      "signature": "a1f6a55af48ad8753d8fe8a0930493d9dec135b6feedaf736362cbb7b9533d2d",
+      "evidence": {
+        "id": "BOE-A-2026-20471",
+        "title": "Real Decreto 765/2026, de 30 de septiembre, por el que se regula la concesión directa de subvenciones en materia de vivienda para la financiación de iniciativas locales que contribuyan a la consecución de los objetivos de la línea 13.4 del Marco de actuaciones para el desarrollo territorial sostenible del área de influencia del Espacio Natural de Doñana en 2026.",
+        "publishedAt": "2026-10-02",
+        "publisher": "Agencia Estatal Boletín Oficial del Estado",
+        "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20471",
+        "reasons": [
+          "housing-review"
+        ],
+        "groups": [],
+        "signature": "a1f6a55af48ad8753d8fe8a0930493d9dec135b6feedaf736362cbb7b9533d2d"
+      },
+      "scope": "boe-discovery",
+      "id": "publication:BOE-A-2026-20471",
+      "firstSeen": "2026-10-12T16:52:46.032Z",
+      "occurrences": 1,
+      "status": "pending",
+      "history": [
+        {
+          "at": "2026-10-12T16:52:46.032Z",
+          "action": "detected",
+          "evidence": {
+            "id": "BOE-A-2026-20471",
+            "title": "Real Decreto 765/2026, de 30 de septiembre, por el que se regula la concesión directa de subvenciones en materia de vivienda para la financiación de iniciativas locales que contribuyan a la consecución de los objetivos de la línea 13.4 del Marco de actuaciones para el desarrollo territorial sostenible del área de influencia del Espacio Natural de Doñana en 2026.",
+            "publishedAt": "2026-10-02",
+            "publisher": "Agencia Estatal Boletín Oficial del Estado",
+            "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20471",
+            "reasons": [
+              "housing-review"
+            ],
+            "groups": [],
+            "signature": "a1f6a55af48ad8753d8fe8a0930493d9dec135b6feedaf736362cbb7b9533d2d"
+          }
+        }
+      ],
+      "active": true,
+      "lastSeen": "2026-10-12T16:52:46.032Z"
+    },
+    {
+      "kind": "publication",
+      "target": "BOE-A-2026-20822",
+      "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20822",
+      "groups": [],
+      "signature": "3623b5c146bf1adcd8512da4ed4e288df62d0ca3abf2d6927f9b9522f71cbd1b",
+      "evidence": {
+        "id": "BOE-A-2026-20822",
+        "title": "Real Decreto-ley 28/2026, de 6 de octubre, por el que se adoptan medidas urgentes para reforzar la estabilidad de los contratos de arrendamiento de vivienda habitual.",
+        "publishedAt": "2026-10-07",
+        "publisher": "Agencia Estatal Boletín Oficial del Estado",
+        "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20822",
+        "reasons": [
+          "housing-review"
+        ],
+        "groups": [],
+        "signature": "3623b5c146bf1adcd8512da4ed4e288df62d0ca3abf2d6927f9b9522f71cbd1b"
+      },
+      "scope": "boe-discovery",
+      "id": "publication:BOE-A-2026-20822",
+      "firstSeen": "2026-10-12T16:52:46.032Z",
+      "occurrences": 1,
+      "status": "pending",
+      "history": [
+        {
+          "at": "2026-10-12T16:52:46.032Z",
+          "action": "detected",
+          "evidence": {
+            "id": "BOE-A-2026-20822",
+            "title": "Real Decreto-ley 28/2026, de 6 de octubre, por el que se adoptan medidas urgentes para reforzar la estabilidad de los contratos de arrendamiento de vivienda habitual.",
+            "publishedAt": "2026-10-07",
+            "publisher": "Agencia Estatal Boletín Oficial del Estado",
+            "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20822",
+            "reasons": [
+              "housing-review"
+            ],
+            "groups": [],
+            "signature": "3623b5c146bf1adcd8512da4ed4e288df62d0ca3abf2d6927f9b9522f71cbd1b"
+          }
+        }
+      ],
+      "active": true,
+      "lastSeen": "2026-10-12T16:52:46.032Z"
+    },
+    {
+      "kind": "publication",
+      "target": "BOE-A-2026-20823",
+      "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20823",
+      "groups": [],
+      "signature": "76396fdd78d8191ac6aa0a932c0689787c04b69e32f9c9dc32c4782158818107",
+      "evidence": {
+        "id": "BOE-A-2026-20823",
+        "title": "Real Decreto-ley 29/2026, de 6 de octubre, por el que se adoptan medidas urgentes para la protección de la función social de la vivienda y la ampliación de la oferta de vivienda asequible.",
+        "publishedAt": "2026-10-07",
+        "publisher": "Agencia Estatal Boletín Oficial del Estado",
+        "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20823",
+        "reasons": [
+          "housing-review"
+        ],
+        "groups": [],
+        "signature": "76396fdd78d8191ac6aa0a932c0689787c04b69e32f9c9dc32c4782158818107"
+      },
+      "scope": "boe-discovery",
+      "id": "publication:BOE-A-2026-20823",
+      "firstSeen": "2026-10-12T16:52:46.032Z",
+      "occurrences": 1,
+      "status": "pending",
+      "history": [
+        {
+          "at": "2026-10-12T16:52:46.032Z",
+          "action": "detected",
+          "evidence": {
+            "id": "BOE-A-2026-20823",
+            "title": "Real Decreto-ley 29/2026, de 6 de octubre, por el que se adoptan medidas urgentes para la protección de la función social de la vivienda y la ampliación de la oferta de vivienda asequible.",
+            "publishedAt": "2026-10-07",
+            "publisher": "Agencia Estatal Boletín Oficial del Estado",
+            "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-20823",
+            "reasons": [
+              "housing-review"
+            ],
+            "groups": [],
+            "signature": "76396fdd78d8191ac6aa0a932c0689787c04b69e32f9c9dc32c4782158818107"
+          }
+        }
+      ],
+      "active": true,
+      "lastSeen": "2026-10-12T16:52:46.032Z"
+    }
+  ]
+}

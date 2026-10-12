@@ -1,0 +1,70 @@
+{
+  "vox2024": {
+    "url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-98-1.PDF",
+    "sha256": "6a980cd976c66fe4af161baadc25f0c848f6c1b97d4732333a2962521d3e00bf"
+  },
+  "sumar2023": {
+    "url": "https://movimientosumar.es/wp-content/uploads/2023/07/Un-Programa-para-ti.pdf",
+    "sha256": "d5ccdac0d20f1b93a5f703f180d086041bd988835072dd5cb5d1378bf0195820"
+  },
+  "psoe2023": {
+    "url": "https://www.psoe.es/media-content/2023/07/PROGRAMA_ELECTORAL-GENERALES-2023.pdf",
+    "sha256": "02d4972a848250fec9b8b2cffc5aaa78733acb0ac010e79ce1787161f91a42f2"
+  },
+  "pp2024": {
+    "url": "https://www.pp.es/actualidad/articulos/pp-proponebonificaciones-fiscales-jovenes-primeros-cuatro-anos-su-vida-laboral/",
+    "sha256": "b4492879e1c9a4000c068f7a292ad4676079d481fe3813368fa431f9cfd2a989"
+  },
+  "podemos2025": {
+    "url": "https://www.newtral.es/wp-content/uploads/2025/02/PL_MODIFICACION_LEY_IRPF_Podemos.pdf",
+    "sha256": "de5f92adc596686b582de7397544eecf605e10d408441baf68ab8c60e9d00c44"
+  },
+  "pp2025deflation": {
+    "url": "https://www.congreso.es/public_oficiales/L15/SEN/BOCG/2025/BOCG_D_15_219_2014.PDF",
+    "sha256": "3b70329f2c577c9a6d2b00ad2087e757cfd20209636a4ad4edfdc8365d75bab9"
+  },
+  "ciudadanos2023families": {
+    "url": "https://www.ciudadanos-cs.org/prensa/ciudadanos-propone-el-plan-mas-ambicioso-de-fomento-de-la-natalidad-con-ayudas-directas-y-deducciones-fiscales-por-el-segundo-hijo/13363",
+    "sha256": "592fdf3a87d720b88479d6485187eae8fc1e0e1e3bb55abcf9b190ec8f5dc15c"
+  },
+  "fiscal:lirpf": {
+    "url": "https://www.boe.es/datosabiertos/api/legislacion-consolidada/id/BOE-A-2006-20764/metadatos",
+    "sha256": "08098c9d7b744b43009f2a8618a02278e39ccf073ec2f3b07d51d2c7020556e5"
+  },
+  "fiscal:rirpf": {
+    "url": "https://www.boe.es/datosabiertos/api/legislacion-consolidada/id/BOE-A-2007-6820/metadatos",
+    "sha256": "8a52ca8ee8e3b36744619b3eff05463377608e262fbe5d74c38d2a5c0240cb5c"
+  },
+  "fiscal:aeatwithholding2026": {
+    "url": "https://sede.agenciatributaria.gob.es/static_files/Sede/Programas_ayuda/Retenciones/2026/Algoritmo%20Retenciones-2026_10sept.pdf",
+    "sha256": "b1a120d93bf541deb35ccbfd55f08f771eecc01a762148491e5c9e2cf0be27d3"
+  },
+  "fiscal:contributions2026": {
+    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-7296",
+    "sha256": "b929bc7e92be30c91abf74ee2d8670bb1ed24d5a38506e36c21b5cba5d9dc732"
+  },
+  "fiscal:regionalmeasures2026": {
+    "url": "https://www.hacienda.gob.es/sgfal/financiacionterritorial/autonomica/capitulo-i-tributacion-autonomica-2026.pdf",
+    "sha256": "493670ec50c55e0bc3053d643240cda4a18a951dce3f3adddaba2ea9fd37aad5"
+  },
+  "fiscal:valencia2026": {
+    "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2026-19331",
+    "sha256": "1ce8439fe728c08dcf0986e371a29c68523b3a27f4717bef214d70ef75d7e5c4"
+  },
+  "fiscal:extremadura2026": {
+    "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2026-17839",
+    "sha256": "3ad92f111e0566eb8f03f6e9957fd79b33977a78f828da9e4ac334efd5a2435a"
+  },
+  "fiscal:bizkaia": {
+    "url": "https://www.bizkaia.eus/documents/880307/15187815/ca_13_2013.pdf",
+    "sha256": "ada81743ffa79d9903d19722e32c4ea20a5262d70584971df1c08bc9e753c87a"
+  },
+  "fiscal:gipuzkoa": {
+    "url": "https://www.gipuzkoa.eus/documents/2456431/80760262/NF+3-2014+%282025-3%29.pdf/8ab5c95c-3f89-8fdf-5cb8-01950e3983cc",
+    "sha256": "fa3824b4f0d7cc2a70ce48f45fd718475cf212fb83e89fc277698da824af7704"
+  },
+  "fiscal:alava": {
+    "url": "https://web.araba.eus/documents/d/araba/indice_norma-foral_irpf_cas-7-pdf",
+    "sha256": "d52dcf4e23f782f4d3f46c24db52ee0563ef5f9541caba794f671c1a37e34ac1"
+  }
+}
