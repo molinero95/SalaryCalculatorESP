@@ -8,6 +8,10 @@ This software was generated and developed with AI assistance. Fiscal data, trans
 
 The supported fiscal model includes the common regime and a limited foral model for employee profiles including confirmed eligible children/ascendants, taxpayer age/disability, short temporary employment, flexible compensation, ordinary pensions and selected positive annual rental/savings/business inputs in Bizkaia, Gipuzkoa, Álava and Navarra. Read [foral-payroll.md](foral-payroll.md) and [locations.md](locations.md) and [foral-family.md](foral-family.md) before changing jurisdiction logic; unsupported foral profiles hide results rather than use common-regime rules. This is not a full Renta WEB declaration: losses, joint filing, all regional deductions, special employment profiles and every benefit/eligibility case are outside the implemented scope. The authoritative detail is in [fiscal-validation.md](fiscal-validation.md).
 
+## Maintenance mode
+
+The current operating mode is maintenance: preserve the supported calculator, fix regressions and verify fiscal/source updates. Taxable pay in kind ([PR #34](https://github.com/molinero95/SalaryCalculatorESP/pull/34)) remains explicitly requested. Other feature expansion is deferred, including housing deductions. Read [maintenance.md](maintenance.md) before choosing backlog work; a historical Ready status does not authorize product expansion.
+
 ## Architecture
 
 | Area                   | Files                                                                         | Responsibility                                                                                                                                           |
