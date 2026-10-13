@@ -66,6 +66,17 @@ export default {
   foralIssueInvalid: 'Hai un dato familiar ou anual fóra de rango; revisa os números introducidos.',
   foralIssueScenario:
     'Os parámetros de «Actual» modificáronse. Nos territorios forais só se calcula coa normativa vixente: preme «Restablecer valores oficiais» en Actual.',
+  inKindTitle: 'Retribución en especie que tributa',
+  inKindHelp:
+    'Para o que a empresa che dá ademais do soldo e que tributa: coche de empresa, colexio dos fillos, seguros non exentos… Indica o valor anual que figura na túa nómina como especie (no coche, o valor imputado). Cotiza á Seguridade Social e tributa no IRPF, e a empresa fai un ingreso a conta sobre el. Non inclúas a retribución flexible exenta do apartado anterior. Non dispoñible no País Vasco nin en Navarra.',
+  inKindTaxable: 'Valor anual en especie (€ / ano)',
+  inKindAdvanceBorne:
+    'A empresa asume o ingreso a conta (non mo desconta na nómina). Entón ese importe tamén tributa como especie.',
+  foralIssueInKind: 'A retribución en especie que tributa non está modelada para territorios forais; ponla a 0.',
+  rowInKind: 'Retribución en especie que tributa',
+  rowInKindAdvance: 'Dela, ingreso a conta pola especie',
+  helpInKindAdvance:
+    'A empresa aplica o teu tipo de retención ao valor da especie (art. 102 do Regulamento do IRPF). Se cho desconta, reduce o teu neto; se o asume ela, súmase á túa renda como especie (art. 43.2 da Lei do IRPF). Na declaración conta como pagado a conta.',
   foralUnsupported:
     'Perfil foral non validado ou requisitos familiares pendentes. Ocúltanse os resultados. Revisa as idades e confirma os requisitos de fillos e ascendentes.',
   foralScenarioUnsupported:

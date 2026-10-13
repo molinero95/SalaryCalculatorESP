@@ -537,6 +537,7 @@ function update() {
   $('#foral-benefits-help').hidden = !foral;
   $('#foral-benefits-help').textContent = t(basque ? 'foralBenefitsBasqueHelp' : 'foralBenefitsNavarraHelp');
   $('#foral-annual-fields').hidden = !foral;
+  $('#inkind-fields').hidden = foral && !(state.input.inKindTaxable > 0);
   $('#foralExemptIncome-field').hidden = state.input.region !== 'navarra';
   $('#foralRentalInsurance-field').hidden = !basque;
   $('label[for="foralRentalExpenses"]').textContent = t(basque ? 'foralRentalExpensesBasque' : 'foralRentalExpenses');

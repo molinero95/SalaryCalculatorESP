@@ -67,6 +67,17 @@ export default {
   foralIssueInvalid: 'A family or annual value is out of range; check the numbers entered.',
   foralIssueScenario:
     'The “Current” parameters have been edited. Foral territories are only calculated with the law in force: press “Reset to official values” in Current.',
+  inKindTitle: 'Taxable pay in kind',
+  inKindHelp:
+    'For what your employer gives you on top of your salary that is taxed: company car, children’s school fees, non-exempt insurance… Enter the annual value your payslip shows as pay in kind (for a car, the imputed value). It pays social security and income tax, and the employer makes an ingreso a cuenta (advance payment) on it. Do not include the exempt flexible pay from the previous section. Not available in the Basque Country or Navarre.',
+  inKindTaxable: 'Annual value in kind (€ / year)',
+  inKindAdvanceBorne:
+    'My employer bears the ingreso a cuenta (it is not deducted from my pay). That amount is then taxed as pay in kind too.',
+  foralIssueInKind: 'Taxable pay in kind is not modelled for the foral territories; set it to 0.',
+  rowInKind: 'Taxable pay in kind',
+  rowInKindAdvance: 'Of which, ingreso a cuenta on pay in kind',
+  helpInKindAdvance:
+    'The employer applies your withholding rate to the value in kind (art. 102 of the IRPF Regulation). If it is deducted, it lowers your net pay; if the employer bears it, it is added to your income as pay in kind (art. 43.2 of the IRPF Act). In the annual return it counts as paid on account.',
   foralUnsupported:
     'This foral profile is not validated or family requirements are missing. Results are hidden. Check age groups and confirm child and ascendant eligibility.',
   foralScenarioUnsupported:
