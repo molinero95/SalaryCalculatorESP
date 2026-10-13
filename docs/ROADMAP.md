@@ -1,5 +1,9 @@
 # Decisions and next work
 
+## Current operating mode
+
+On 13 October 2026 the owner requested maintenance mode, with taxable pay in kind as an explicit exception ([PR #34](https://github.com/molinero95/SalaryCalculatorESP/pull/34)). Preserve the existing product and focus on defects, verified fiscal updates and regression coverage. Other feature expansion and broad refactoring are deferred. The [maintenance policy](maintenance.md) takes precedence over the historical execution order in the backlog.
+
 ## Established decisions
 
 | Decision                                       | Reason / consequence                                                                             |
