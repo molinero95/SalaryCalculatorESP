@@ -54,3 +54,13 @@ See [proposal-scope.md](proposal-scope.md) for the Vox article 63/article 101 di
 ## Residence coverage
 
 All 17 autonomous communities are selectable. Basque territories and Navarra use separate fixed fiscal rules for the reviewed basic employee profile. See [foral-payroll.md](foral-payroll.md) and [locations.md](locations.md) for official sources, eligibility, withheld/annual distinctions, examples and the explicitly guarded unsupported profiles.
+
+## Taxable pay-in-kind review · 13 October 2026
+
+Common-regime withholding counts the entered taxable valuation without its ingreso a cuenta (RIRPF art.83.2.1), then applies the rate to that valuation (art.102). An employer-borne advance is added for annual income under LIRPF art.43.2; it is not cash deducted from payroll. Foral taxable pay in kind remains unsupported.
+
+The pension comparison uses the same employer-borne advance on both sides. At 30,000 cash plus 3,000 in kind, an advance of 524.10 gives annual tax 5,924.73 without pensions and 5,474.73 with an eligible 1,500 individual contribution: 450 saved. Without a pension the saving is zero. Employer cost includes the entered in-kind valuation as a **proxy** for benefit cost, plus contributions and any borne advance; actual purchase/lease costs can differ and are not collected. Both effective-rate denominators include the borne advance as remuneration.
+
+Remaining assumptions: the same entered in-kind value is used for tax and contributions, although statutory contribution valuations can differ; the employer-borne advance is not added to the contribution base. This review verifies the withholding/annual-income distinction and fixes the existing review findings, but does not establish those contribution assumptions as universal rules.
+
+The intended extra form section was inspected in the macOS CI artifact from run 38120505745 at commit aac8833, including desktop/mobile and dark mode. Its ten affected references now use the inspected macOS captures; Linux references were not regenerated. The default zero-in-kind calculation is unchanged.

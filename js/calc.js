@@ -138,7 +138,18 @@ export function computePayroll(input, scenario, grossAnnual = grossAnnualOf(inpu
         (foral && input.region !== 'navarra' ? annualEarnings.reduction : 0),
     ),
   );
-  const annualEmploymentBase = Math.max(0, incomeTax.netEarnings - incomeTax.otherExpenses - incomeTax.reduction);
+  // Compare pensions against the same in-kind income, including an employer-borne
+  // advance, while excluding the employer pension contribution as before.
+  const baselineAnnualEarnings = calculateEarnings(
+    input,
+    scenario.incomeTax,
+    taxableGross + advanceBorne,
+    employee.total,
+  );
+  const annualEmploymentBase = Math.max(
+    0,
+    baselineAnnualEarnings.netEarnings - baselineAnnualEarnings.otherExpenses - baselineAnnualEarnings.reduction,
+  );
   const annualBase = Math.max(
     0,
     annualEarnings.netEarnings +
@@ -161,9 +172,10 @@ export function computePayroll(input, scenario, grossAnnual = grossAnnualOf(inpu
   });
   const pensionTaxSaved =
     calculateAnnual(input, scenario.incomeTax, annualEmploymentBase + additional.general, taxableGross + advanceBorne, {
-      netEmploymentIncome: input.region === 'navarra' ? Math.max(0, gross - employee.total) : incomeTax.netEarnings,
+      netEmploymentIncome:
+        input.region === 'navarra' ? Math.max(0, gross - employee.total) : baselineAnnualEarnings.netEarnings,
       taxableIncome:
-        (input.region === 'navarra' ? Math.max(0, gross - employee.total) : incomeTax.netEarnings) +
+        (input.region === 'navarra' ? Math.max(0, gross - employee.total) : baselineAnnualEarnings.netEarnings) +
         additional.incomeForCredits,
       baseBeforePension: annualEmploymentBase + additional.general + additional.savings,
       savingsBase: additional.savings,
@@ -197,14 +209,16 @@ export function computePayroll(input, scenario, grossAnnual = grossAnnualOf(inpu
   const hasExtraPayments = input.payments === 14;
   const taxPerExtraPayment = hasExtraPayments ? (grossPerPayment * incomeTax.rate) / 100 : 0;
   const taxPerRegularPayment = (withheldFromPay - 2 * taxPerExtraPayment) / 12;
-  const totalPay = gross + inKind;
+  const totalPay = gross + inKind + advanceBorne;
 
   return {
     grossAnnual: gross,
     taxableGross,
     employee,
     employer,
-    employerCost: gross + advanceBorne + employer.total + pension.employer,
+    // Use the entered payslip valuation as a proxy for the employer's in-kind
+    // cost; the real purchase/lease cost is not an input to this estimator.
+    employerCost: totalPay + employer.total + pension.employer,
     flexible: { ...flexible, taxSaved: taxWithoutFlexible - incomeTax.withheld },
     pension: { ...pension, taxSaved: pensionTaxSaved },
     incomeTax: {

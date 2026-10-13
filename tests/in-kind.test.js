@@ -52,3 +52,26 @@ test('foral profiles explain that pay in kind is not modelled', () => {
   ]);
   assert.throws(() => run({ region: 'bizkaia', inKindTaxable: 1000 }));
 });
+
+test('employer-borne advance does not create pension savings without a pension', () => {
+  const r = run({ inKindTaxable: 3000, inKindAdvanceBorne: true });
+  assert.equal(r.pension.taxSaved, 0);
+});
+
+test('pension savings use the same employer-borne income on both sides', () => {
+  const r = run({ inKindTaxable: 3000, inKindAdvanceBorne: true, pensionIndividual: 1500 });
+  // No-pension tax 5,924.73; a 1,500 deduction at the 30 % marginal rate saves 450.
+  assert.equal(cents(r.incomeTax.annualTax), 5474.73);
+  assert.equal(cents(r.pension.taxSaved), 450);
+});
+
+test('employer cost includes the entered in-kind value and any borne advance', () => {
+  // Employer contributions on 33,000 at 32.15 % = 10,609.50.
+  assert.equal(cents(run({ inKindTaxable: 3000 }).employerCost), 43609.5);
+  const r = run({ inKindTaxable: 3000, inKindAdvanceBorne: true });
+  assert.equal(cents(r.employerCost), 44133.6);
+  // Tax + employee SS = 5,924.73 + 2,145 = 8,069.73; compensation includes 524.10.
+  assert.equal(cents(r.effectiveRate), 24.07);
+  // Total tax/contributions 18,679.23 over 44,133.60 of estimated employer cost.
+  assert.equal(cents(r.taxWedge), 42.32);
+});
