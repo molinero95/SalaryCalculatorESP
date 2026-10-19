@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-10-12T16:52:46.032Z",
+  "checkedAt": "2026-10-19T14:49:59.830Z",
   "alerts": [
     {
       "kind": "unavailable",
@@ -15,7 +15,7 @@
       "scope": "sources",
       "id": "unavailable:podemos2019",
       "firstSeen": "2026-10-12T16:52:42.127Z",
-      "occurrences": 1,
+      "occurrences": 2,
       "status": "pending",
       "history": [
         {
@@ -28,7 +28,7 @@
         }
       ],
       "active": true,
-      "lastSeen": "2026-10-12T16:52:42.127Z"
+      "lastSeen": "2026-10-19T14:49:55.539Z"
     },
     {
       "kind": "unavailable",
@@ -45,7 +45,7 @@
       "scope": "sources",
       "id": "unavailable:fiscal:navarra",
       "firstSeen": "2026-10-12T16:52:42.127Z",
-      "occurrences": 1,
+      "occurrences": 2,
       "status": "pending",
       "history": [
         {
@@ -58,7 +58,7 @@
         }
       ],
       "active": true,
-      "lastSeen": "2026-10-12T16:52:42.127Z"
+      "lastSeen": "2026-10-19T14:49:55.539Z"
     },
     {
       "kind": "publication",
@@ -101,7 +101,7 @@
           }
         }
       ],
-      "active": true,
+      "active": false,
       "lastSeen": "2026-10-12T16:52:46.032Z"
     },
     {
@@ -145,7 +145,7 @@
           }
         }
       ],
-      "active": true,
+      "active": false,
       "lastSeen": "2026-10-12T16:52:46.032Z"
     },
     {
@@ -189,7 +189,7 @@
           }
         }
       ],
-      "active": true,
+      "active": false,
       "lastSeen": "2026-10-12T16:52:46.032Z"
     },
     {
@@ -233,7 +233,7 @@
           }
         }
       ],
-      "active": true,
+      "active": false,
       "lastSeen": "2026-10-12T16:52:46.032Z"
     },
     {
@@ -277,7 +277,7 @@
           }
         }
       ],
-      "active": true,
+      "active": false,
       "lastSeen": "2026-10-12T16:52:46.032Z"
     },
     {
@@ -321,7 +321,7 @@
           }
         }
       ],
-      "active": true,
+      "active": false,
       "lastSeen": "2026-10-12T16:52:46.032Z"
     },
     {
@@ -345,7 +345,7 @@
       "scope": "boe-discovery",
       "id": "publication:BOE-A-2026-20822",
       "firstSeen": "2026-10-12T16:52:46.032Z",
-      "occurrences": 1,
+      "occurrences": 2,
       "status": "pending",
       "history": [
         {
@@ -366,7 +366,7 @@
         }
       ],
       "active": true,
-      "lastSeen": "2026-10-12T16:52:46.032Z"
+      "lastSeen": "2026-10-19T14:49:59.830Z"
     },
     {
       "kind": "publication",
@@ -389,7 +389,7 @@
       "scope": "boe-discovery",
       "id": "publication:BOE-A-2026-20823",
       "firstSeen": "2026-10-12T16:52:46.032Z",
-      "occurrences": 1,
+      "occurrences": 2,
       "status": "pending",
       "history": [
         {
@@ -410,7 +410,67 @@
         }
       ],
       "active": true,
-      "lastSeen": "2026-10-12T16:52:46.032Z"
+      "lastSeen": "2026-10-19T14:49:59.830Z"
+    },
+    {
+      "kind": "changed",
+      "target": "pp2024",
+      "url": "https://www.pp.es/actualidad/articulos/pp-proponebonificaciones-fiscales-jovenes-primeros-cuatro-anos-su-vida-laboral/",
+      "groups": [],
+      "signature": "[\"https://www.pp.es/actualidad/articulos/pp-proponebonificaciones-fiscales-jovenes-primeros-cuatro-anos-su-vida-laboral/\",\"dd7b30d61539aa28d5bf192db3306ce08eeec3987e4b3a5874ad35ccd9ca3587\"]",
+      "evidence": {
+        "sha256": "dd7b30d61539aa28d5bf192db3306ce08eeec3987e4b3a5874ad35ccd9ca3587",
+        "previousSha256": "b4492879e1c9a4000c068f7a292ad4676079d481fe3813368fa431f9cfd2a989",
+        "url": "https://www.pp.es/actualidad/articulos/pp-proponebonificaciones-fiscales-jovenes-primeros-cuatro-anos-su-vida-laboral/"
+      },
+      "scope": "sources",
+      "id": "changed:pp2024",
+      "firstSeen": "2026-10-19T14:49:55.539Z",
+      "occurrences": 1,
+      "status": "pending",
+      "history": [
+        {
+          "at": "2026-10-19T14:49:55.539Z",
+          "action": "detected",
+          "evidence": {
+            "sha256": "dd7b30d61539aa28d5bf192db3306ce08eeec3987e4b3a5874ad35ccd9ca3587",
+            "previousSha256": "b4492879e1c9a4000c068f7a292ad4676079d481fe3813368fa431f9cfd2a989",
+            "url": "https://www.pp.es/actualidad/articulos/pp-proponebonificaciones-fiscales-jovenes-primeros-cuatro-anos-su-vida-laboral/"
+          }
+        }
+      ],
+      "active": true,
+      "lastSeen": "2026-10-19T14:49:55.539Z"
+    },
+    {
+      "kind": "unavailable",
+      "target": "fiscal:bizkaia",
+      "url": "https://www.bizkaia.eus/documents/880307/15187815/ca_13_2013.pdf",
+      "groups": [
+        "foral.bizkaia"
+      ],
+      "signature": "https://www.bizkaia.eus/documents/880307/15187815/ca_13_2013.pdf",
+      "evidence": {
+        "error": "fetch failed",
+        "url": "https://www.bizkaia.eus/documents/880307/15187815/ca_13_2013.pdf"
+      },
+      "scope": "sources",
+      "id": "unavailable:fiscal:bizkaia",
+      "firstSeen": "2026-10-19T14:49:55.539Z",
+      "occurrences": 1,
+      "status": "pending",
+      "history": [
+        {
+          "at": "2026-10-19T14:49:55.539Z",
+          "action": "detected",
+          "evidence": {
+            "error": "fetch failed",
+            "url": "https://www.bizkaia.eus/documents/880307/15187815/ca_13_2013.pdf"
+          }
+        }
+      ],
+      "active": true,
+      "lastSeen": "2026-10-19T14:49:55.539Z"
     }
   ]
 }
