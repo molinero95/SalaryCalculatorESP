@@ -1,6 +1,20 @@
 name: Template source review
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/template-sources.yml'
+      - 'scripts/check-template-sources.js'
+      - 'scripts/discover-boe.js'
+      - 'scripts/source-alerts.js'
+      - 'scripts/fiscal-sources.js'
+      - 'scripts/source-archives.js'
+      - 'data/fiscal-sources.json'
+      - 'data/proposals.json'
+      - 'data/source-archives.json'
+      - 'data/source-archives/**'
+      - 'data/source-reviews.json'
   schedule:
     - cron: '23 7 * * 1'
   workflow_dispatch:
