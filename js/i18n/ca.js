@@ -67,6 +67,17 @@ export default {
   foralIssueInvalid: 'Hi ha una dada familiar o anual fora de rang; revisa els números introduïts.',
   foralIssueScenario:
     'Els paràmetres d’«Actual» s’han modificat. Als territoris forals només es calcula amb la normativa vigent: prem «Restablir valors oficials» a Actual.',
+  inKindTitle: 'Retribució en espècie que tributa',
+  inKindHelp:
+    'Per al que l’empresa et dona a més del sou i que tributa: cotxe d’empresa, escola dels fills, assegurances no exemptes… Indica el valor anual que consta a la nòmina com a espècie (en el cotxe, el valor imputat). Cotitza a la Seguretat Social i tributa a l’IRPF, i l’empresa fa un ingrés a compte sobre aquest valor. No hi incloguis la retribució flexible exempta de l’apartat anterior. No disponible al País Basc ni a Navarra.',
+  inKindTaxable: 'Valor anual en espècie (€ / any)',
+  inKindAdvanceBorne:
+    'L’empresa assumeix l’ingrés a compte (no me’l descompta a la nòmina). Aleshores aquest import també tributa com a espècie.',
+  foralIssueInKind: 'La retribució en espècie que tributa no està modelada per als territoris forals; posa-la a 0.',
+  rowInKind: 'Retribució en espècie que tributa',
+  rowInKindAdvance: 'D’aquesta, ingrés a compte per l’espècie',
+  helpInKindAdvance:
+    'L’empresa aplica el teu tipus de retenció al valor de l’espècie (art. 102 del Reglament de l’IRPF). Si te’l descompta, redueix el teu net; si l’assumeix ella, se suma a la teva renda com a espècie (art. 43.2 de la Llei de l’IRPF). A la declaració compta com a pagat a compte.',
   foralUnsupported:
     'Perfil foral no validat o requisits familiars pendents. S’oculten els resultats. Revisa les edats i confirma els requisits de fills i ascendents.',
   foralScenarioUnsupported:
