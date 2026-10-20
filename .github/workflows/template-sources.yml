@@ -6,6 +6,7 @@ on:
     paths:
       - '.github/workflows/template-sources.yml'
       - 'scripts/check-template-sources.js'
+      - 'scripts/template-catalogue.js'
       - 'scripts/discover-boe.js'
       - 'scripts/source-alerts.js'
       - 'scripts/fiscal-sources.js'
