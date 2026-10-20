@@ -2,7 +2,14 @@
 import { createHash } from 'node:crypto';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
-import { emptyAlerts, reconcileAlerts, openAlerts, alertSummary } from './source-alerts.js';
+import {
+  emptyAlerts,
+  reconcileAlerts,
+  openAlerts,
+  alertSummary,
+  applyReviewDecisions,
+  readReviewDecisions,
+} from './source-alerts.js';
 
 export const BOE_API = 'https://www.boe.es/datosabiertos/api/boe/sumario/';
 export const DISCOVERY_DAYS = 14;
@@ -168,6 +175,15 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   }
   const report = await discoverBoe(endDate);
   ledger = reconcileAlerts(ledger, report);
+  const decisions = applyReviewDecisions(
+    ledger,
+    await readReviewDecisions(),
+    'boe-discovery',
+    process.env.GITHUB_ACTOR ?? process.env.SOURCE_ALERT_ACTOR ?? 'committed-review',
+    report.checkedAt,
+  );
+  ledger = decisions.ledger;
+  report.deferredReviews = decisions.deferred;
   report.openAlerts = openAlerts(ledger);
   await mkdir('.source-monitor', { recursive: true });
   await writeFile('.source-monitor/alerts.json', JSON.stringify(ledger, null, 2));
@@ -189,6 +205,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     'A successful scan does not prove exhaustive detection. Interrupted schedules longer than 14 days require manual backfill.',
     '',
     alertSummary(ledger),
+    ...report.deferredReviews.map((reason) => `Committed review deferred: ${reason}`),
   ].join('\n');
   await writeFile('.source-monitor/report-boe.md', summary);
   if (process.env.GITHUB_STEP_SUMMARY) await writeFile(process.env.GITHUB_STEP_SUMMARY, summary, { flag: 'a' });

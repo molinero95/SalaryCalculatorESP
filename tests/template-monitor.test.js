@@ -2,7 +2,13 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { validateCatalogue, renderCatalogue, cataloguePath } from '../scripts/template-catalogue.js';
-import { inspectSource, classifySource, checkSources, nextBaseline } from '../scripts/check-template-sources.js';
+import {
+  inspectSource,
+  classifySource,
+  checkSources,
+  nextBaseline,
+  normalizeProtectedEmails,
+} from '../scripts/check-template-sources.js';
 const catalogue = JSON.parse(await readFile(cataloguePath, 'utf8'));
 test('catalogue validates and generates both modelled proposals and notes', () => {
   assert.equal(validateCatalogue(catalogue), catalogue);
@@ -31,6 +37,35 @@ for (const [label, mutate] of [
   });
 }
 const fakeFetch = async () => new Response('%PDF-source text', { headers: { 'content-type': 'application/pdf' } });
+test('random Cloudflare email keys do not change PP fingerprints but changed content and email bytes do', async () => {
+  const page = (token, text = 'Proposal text') =>
+    `<article>${text}</article><a href="/cdn-cgi/l/email-protection#${token}">Email</a>`;
+  const inspect = (body, url = 'https://www.pp.es/article') =>
+    inspectSource(url, async () => new Response(body, { headers: { 'content-type': 'text/html' } }));
+  // Both tokens decode to the same ASCII 'a' using different XOR keys.
+  const first = await inspect(page('0061'));
+  const second = await inspect(page('0160'));
+  assert.notEqual(first.rawSha256, second.rawSha256);
+  assert.equal(classifySource(first, second), 'unchanged');
+  assert.equal(classifySource(first, await inspect(page('0163'))), 'changed');
+  assert.equal(classifySource(first, await inspect(page('0160', 'Changed proposal'))), 'changed');
+  assert.equal(classifySource({ ...first, fingerprintMethod: undefined }, first), 'changed');
+  assert.equal(
+    normalizeProtectedEmails('<span data-cfemail="0061">'),
+    normalizeProtectedEmails('<span data-cfemail="0160">'),
+  );
+  const other = await inspect(page('0061'), 'https://example.org/article');
+  assert.equal(other.fingerprintMethod, undefined);
+  assert.equal(
+    nextBaseline({}, [{ ...first, id: 'pp2024', status: 'baseline-needed' }]).pp2024.fingerprintMethod,
+    'sha256:cf-email-v1',
+  );
+  assert.equal(
+    nextBaseline({ pp2024: { sha256: 'old' } }, [{ ...first, id: 'pp2024', status: 'changed' }], new Set(['other']))
+      .pp2024.sha256,
+    'old',
+  );
+});
 test('hashes source bytes and distinguishes changed, unchanged, new URLs and errors', async () => {
   const current = await inspectSource('https://example.org', fakeFetch);
   assert.match(current.sha256, /^[a-f0-9]{64}$/);
@@ -96,4 +131,73 @@ test('one failing source does not block healthy baselines or approve changed one
   assert.deepEqual(nextBaseline(baseline, results), { ...baseline, new: { url: 'new', sha256: 'new' } });
   assert.equal(nextBaseline(baseline, results, true).changed.sha256, 'new');
   assert.equal(nextBaseline(baseline, results, true).failed.sha256, 'old');
+});
+
+test('a transient transport failure retries once and retains the document fingerprint', async () => {
+  let calls = 0;
+  const result = await inspectSource(
+    'https://example.org/source.pdf',
+    async () => {
+      calls++;
+      if (calls === 1) throw new TypeError('fetch failed', { cause: { code: 'ECONNRESET' } });
+      return fakeFetch();
+    },
+    { retryDelayMs: 0 },
+  );
+  assert.equal(calls, 2);
+  assert.equal(result.attempts, 2);
+  assert.equal(result.sha256, (await inspectSource('https://example.org/source.pdf', fakeFetch)).sha256);
+});
+
+test('temporary HTTP failures retry once, but 403 blocks and invalid PDFs do not', async () => {
+  for (const [status, expectedCalls] of [
+    [503, 2],
+    [429, 2],
+    [403, 1],
+    [404, 1],
+  ]) {
+    let calls = 0;
+    const result = await inspectSource(
+      'https://example.org/source.pdf',
+      async () => {
+        calls++;
+        return new Response('failure', { status });
+      },
+      { retryDelayMs: 0 },
+    );
+    assert.equal(calls, expectedCalls);
+    assert.equal(result.error, `HTTP ${status}`);
+  }
+  let calls = 0;
+  const invalid = await inspectSource(
+    'https://example.org/source.pdf',
+    async () => {
+      calls++;
+      return new Response('challenge', { headers: { 'content-type': 'application/pdf' } });
+    },
+    { retryDelayMs: 0 },
+  );
+  assert.equal(calls, 1);
+  assert.equal(invalid.error, 'Invalid PDF signature');
+});
+
+test('exhausted transport retries retain the cause code without accepting a baseline', async () => {
+  const failed = await inspectSource(
+    'https://example.org/source.pdf',
+    async () => {
+      throw new TypeError('fetch failed', { cause: { code: 'UND_ERR_CONNECT_TIMEOUT' } });
+    },
+    { retryDelayMs: 0 },
+  );
+  assert.equal(failed.attempts, 2);
+  assert.equal(failed.error, 'fetch failed (UND_ERR_CONNECT_TIMEOUT)');
+  assert.equal(classifySource({ sha256: 'old' }, failed), 'unavailable');
+  assert.deepEqual(
+    nextBaseline(
+      { source: { url: failed.url, sha256: 'old' } },
+      [{ ...failed, id: 'source', status: 'unavailable' }],
+      true,
+    ),
+    { source: { url: failed.url, sha256: 'old' } },
+  );
 });
