@@ -13,7 +13,8 @@
   },
   "pp2024": {
     "url": "https://www.pp.es/actualidad/articulos/pp-proponebonificaciones-fiscales-jovenes-primeros-cuatro-anos-su-vida-laboral/",
-    "sha256": "b4492879e1c9a4000c068f7a292ad4676079d481fe3813368fa431f9cfd2a989"
+    "sha256": "7d3fb51f313741aa2dbaa5aa65bdc8c52b2cc8325d76c963ee5816a95b6694ef",
+    "fingerprintMethod": "sha256:cf-email-v1"
   },
   "podemos2025": {
     "url": "https://www.newtral.es/wp-content/uploads/2025/02/PL_MODIFICACION_LEY_IRPF_Podemos.pdf",
@@ -66,5 +67,13 @@
   "fiscal:alava": {
     "url": "https://web.araba.eus/documents/d/araba/indice_norma-foral_irpf_cas-7-pdf",
     "sha256": "d52dcf4e23f782f4d3f46c24db52ee0563ef5f9541caba794f671c1a37e34ac1"
+  },
+  "podemos2019": {
+    "url": "https://podemos.info/wp-content/uploads/2019/10/Podemos_programa_generales_10N.pdf",
+    "sha256": "c58695bf26d5e2c38b82b5269e3e854ab8ac908286ba8dc6ddc5ccfa6abf77fa"
+  },
+  "fiscal:navarra": {
+    "url": "https://www.lexnavarra.navarra.es/detalle.asp?r=29657",
+    "sha256": "4907ce757225b443ea8ee18e5f0add5788dc9cb943e059f10889a1bd639e430e"
   }
 }
