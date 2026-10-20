@@ -2,6 +2,8 @@
 
 Reviewed 9 October 2026. The selector covers all 17 autonomous communities. The Basque Country is split into Bizkaia, Gipuzkoa and Araba/Álava because they have separate tax administrations. Bilbao selects Bizkaia, Donostia/San Sebastián selects Gipuzkoa, Vitoria-Gasteiz selects Álava and Pamplona/Iruña selects Navarra. Existing common-regime community keys and saved scenarios remain compatible.
 
+See the [complete provincial coverage audit](territorial-coverage.md): the basic employee profile covers all 50 provinces, while Ceuta/Melilla and La Palma-specific relief remain unmodelled. Province coverage does not mean complete fiscal-profile coverage.
+
 ## Cities and residence selection
 
 `js/data/cities.js` contains provincial capitals and a curated selection of major cities. It is not a complete municipal database or an automatically refreshed population ranking. The geographical reference is the [INE municipality/province catalogue, 1 January 2026](https://www.ine.es/dyngs/INEbase/operacion.htm?c=Estadistica_C&cid=1254736177031&idp=1254734710990). Display names include familiar bilingual forms; ids are stable application identifiers rather than INE codes.

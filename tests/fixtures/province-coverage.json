@@ -1,0 +1,318 @@
+{
+  "source": "https://www.ine.es/daco/daco42/codmun/cod_provincia_estandar.htm",
+  "reviewedAt": "2026-10-13",
+  "territories": [
+    {
+      "code": "01",
+      "province": "Araba/Álava",
+      "capital": "vitoria-gasteiz",
+      "region": "alava"
+    },
+    {
+      "code": "02",
+      "province": "Albacete",
+      "capital": "albacete",
+      "region": "castillaLaMancha"
+    },
+    {
+      "code": "03",
+      "province": "Alicante/Alacant",
+      "capital": "alicante-alacant",
+      "region": "valencia"
+    },
+    {
+      "code": "04",
+      "province": "Almería",
+      "capital": "almeria",
+      "region": "andalusia"
+    },
+    {
+      "code": "05",
+      "province": "Ávila",
+      "capital": "avila",
+      "region": "castillaLeon"
+    },
+    {
+      "code": "06",
+      "province": "Badajoz",
+      "capital": "badajoz",
+      "region": "extremadura"
+    },
+    {
+      "code": "07",
+      "province": "Illes Balears",
+      "capital": "palma",
+      "region": "balearic"
+    },
+    {
+      "code": "08",
+      "province": "Barcelona",
+      "capital": "barcelona",
+      "region": "catalonia"
+    },
+    {
+      "code": "09",
+      "province": "Burgos",
+      "capital": "burgos",
+      "region": "castillaLeon"
+    },
+    {
+      "code": "10",
+      "province": "Cáceres",
+      "capital": "caceres",
+      "region": "extremadura"
+    },
+    {
+      "code": "11",
+      "province": "Cádiz",
+      "capital": "cadiz",
+      "region": "andalusia"
+    },
+    {
+      "code": "12",
+      "province": "Castellón/Castelló",
+      "capital": "castello-de-la-plana",
+      "region": "valencia"
+    },
+    {
+      "code": "13",
+      "province": "Ciudad Real",
+      "capital": "ciudad-real",
+      "region": "castillaLaMancha"
+    },
+    {
+      "code": "14",
+      "province": "Córdoba",
+      "capital": "cordoba",
+      "region": "andalusia"
+    },
+    {
+      "code": "15",
+      "province": "A Coruña",
+      "capital": "a-coruna",
+      "region": "galicia"
+    },
+    {
+      "code": "16",
+      "province": "Cuenca",
+      "capital": "cuenca",
+      "region": "castillaLaMancha"
+    },
+    {
+      "code": "17",
+      "province": "Girona",
+      "capital": "girona",
+      "region": "catalonia"
+    },
+    {
+      "code": "18",
+      "province": "Granada",
+      "capital": "granada",
+      "region": "andalusia"
+    },
+    {
+      "code": "19",
+      "province": "Guadalajara",
+      "capital": "guadalajara",
+      "region": "castillaLaMancha"
+    },
+    {
+      "code": "20",
+      "province": "Gipuzkoa",
+      "capital": "donostia-san-sebastian",
+      "region": "gipuzkoa"
+    },
+    {
+      "code": "21",
+      "province": "Huelva",
+      "capital": "huelva",
+      "region": "andalusia"
+    },
+    {
+      "code": "22",
+      "province": "Huesca",
+      "capital": "huesca",
+      "region": "aragon"
+    },
+    {
+      "code": "23",
+      "province": "Jaén",
+      "capital": "jaen",
+      "region": "andalusia"
+    },
+    {
+      "code": "24",
+      "province": "León",
+      "capital": "leon",
+      "region": "castillaLeon"
+    },
+    {
+      "code": "25",
+      "province": "Lleida",
+      "capital": "lleida",
+      "region": "catalonia"
+    },
+    {
+      "code": "26",
+      "province": "La Rioja",
+      "capital": "logrono",
+      "region": "rioja"
+    },
+    {
+      "code": "27",
+      "province": "Lugo",
+      "capital": "lugo",
+      "region": "galicia"
+    },
+    {
+      "code": "28",
+      "province": "Madrid",
+      "capital": "madrid",
+      "region": "madrid"
+    },
+    {
+      "code": "29",
+      "province": "Málaga",
+      "capital": "malaga",
+      "region": "andalusia"
+    },
+    {
+      "code": "30",
+      "province": "Murcia",
+      "capital": "murcia",
+      "region": "murcia"
+    },
+    {
+      "code": "31",
+      "province": "Navarra",
+      "capital": "pamplona-iruna",
+      "region": "navarra"
+    },
+    {
+      "code": "32",
+      "province": "Ourense",
+      "capital": "ourense",
+      "region": "galicia"
+    },
+    {
+      "code": "33",
+      "province": "Asturias",
+      "capital": "oviedo",
+      "region": "asturias"
+    },
+    {
+      "code": "34",
+      "province": "Palencia",
+      "capital": "palencia",
+      "region": "castillaLeon"
+    },
+    {
+      "code": "35",
+      "province": "Las Palmas",
+      "capital": "las-palmas-de-gran-canaria",
+      "region": "canary"
+    },
+    {
+      "code": "36",
+      "province": "Pontevedra",
+      "capital": "pontevedra",
+      "region": "galicia"
+    },
+    {
+      "code": "37",
+      "province": "Salamanca",
+      "capital": "salamanca",
+      "region": "castillaLeon"
+    },
+    {
+      "code": "38",
+      "province": "Santa Cruz de Tenerife",
+      "capital": "santa-cruz-de-tenerife",
+      "region": "canary"
+    },
+    {
+      "code": "39",
+      "province": "Cantabria",
+      "capital": "santander",
+      "region": "cantabria"
+    },
+    {
+      "code": "40",
+      "province": "Segovia",
+      "capital": "segovia",
+      "region": "castillaLeon"
+    },
+    {
+      "code": "41",
+      "province": "Sevilla",
+      "capital": "sevilla",
+      "region": "andalusia"
+    },
+    {
+      "code": "42",
+      "province": "Soria",
+      "capital": "soria",
+      "region": "castillaLeon"
+    },
+    {
+      "code": "43",
+      "province": "Tarragona",
+      "capital": "tarragona",
+      "region": "catalonia"
+    },
+    {
+      "code": "44",
+      "province": "Teruel",
+      "capital": "teruel",
+      "region": "aragon"
+    },
+    {
+      "code": "45",
+      "province": "Toledo",
+      "capital": "toledo",
+      "region": "castillaLaMancha"
+    },
+    {
+      "code": "46",
+      "province": "Valencia/València",
+      "capital": "valencia",
+      "region": "valencia"
+    },
+    {
+      "code": "47",
+      "province": "Valladolid",
+      "capital": "valladolid",
+      "region": "castillaLeon"
+    },
+    {
+      "code": "48",
+      "province": "Bizkaia",
+      "capital": "bilbao",
+      "region": "bizkaia"
+    },
+    {
+      "code": "49",
+      "province": "Zamora",
+      "capital": "zamora",
+      "region": "castillaLeon"
+    },
+    {
+      "code": "50",
+      "province": "Zaragoza",
+      "capital": "zaragoza",
+      "region": "aragon"
+    },
+    {
+      "code": "51",
+      "province": "Ceuta",
+      "capital": "",
+      "region": ""
+    },
+    {
+      "code": "52",
+      "province": "Melilla",
+      "capital": "",
+      "region": ""
+    }
+  ]
+}
