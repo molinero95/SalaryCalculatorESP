@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-10-20T09:53:44.947Z",
+  "checkedAt": "2026-10-26T14:26:46.893Z",
   "alerts": [
     {
       "kind": "unavailable",
@@ -428,7 +428,7 @@
           "reviewId": "2026-10-19:publication:BOE-A-2026-20822"
         }
       ],
-      "active": true,
+      "active": false,
       "lastSeen": "2026-10-20T09:53:44.947Z"
     },
     {
@@ -479,7 +479,7 @@
           "reviewId": "2026-10-19:publication:BOE-A-2026-20823"
         }
       ],
-      "active": true,
+      "active": false,
       "lastSeen": "2026-10-20T09:53:44.947Z"
     },
     {
@@ -487,19 +487,19 @@
       "target": "pp2024",
       "url": "https://www.pp.es/actualidad/articulos/pp-proponebonificaciones-fiscales-jovenes-primeros-cuatro-anos-su-vida-laboral/",
       "groups": [],
-      "signature": "[\"https://www.pp.es/actualidad/articulos/pp-proponebonificaciones-fiscales-jovenes-primeros-cuatro-anos-su-vida-laboral/\",\"7d3fb51f313741aa2dbaa5aa65bdc8c52b2cc8325d76c963ee5816a95b6694ef\",\"sha256:cf-email-v1\"]",
+      "signature": "[\"https://www.pp.es/actualidad/articulos/pp-proponebonificaciones-fiscales-jovenes-primeros-cuatro-anos-su-vida-laboral/\",\"2d3e0e7e425257d3f47a133f4ad3e1d2723a36c390aba5b5f18fa0dfa0858ea0\",\"sha256:cf-email-v1\"]",
       "evidence": {
-        "sha256": "7d3fb51f313741aa2dbaa5aa65bdc8c52b2cc8325d76c963ee5816a95b6694ef",
-        "previousSha256": "b4492879e1c9a4000c068f7a292ad4676079d481fe3813368fa431f9cfd2a989",
+        "sha256": "2d3e0e7e425257d3f47a133f4ad3e1d2723a36c390aba5b5f18fa0dfa0858ea0",
+        "previousSha256": "7d3fb51f313741aa2dbaa5aa65bdc8c52b2cc8325d76c963ee5816a95b6694ef",
         "url": "https://www.pp.es/actualidad/articulos/pp-proponebonificaciones-fiscales-jovenes-primeros-cuatro-anos-su-vida-laboral/",
         "fingerprintMethod": "sha256:cf-email-v1",
-        "rawSha256": "c02d16dba46c722e767ea5032ca66d3b4842330a6f3529864abf1366124fc748"
+        "rawSha256": "f8a052f4574dc32586f127db067cc5222589c06cf91419457b39a4d1a6a08cbd"
       },
       "scope": "sources",
       "id": "changed:pp2024",
       "firstSeen": "2026-10-19T14:49:55.539Z",
-      "occurrences": 2,
-      "status": "reviewed",
+      "occurrences": 3,
+      "status": "pending",
       "history": [
         {
           "at": "2026-10-19T14:49:55.539Z",
@@ -527,10 +527,21 @@
           "actor": "molinero95",
           "evidence": "Reviewed the 28 May 2024 party announcement: youth relief 100%, 75%, 50%, 25% over years one through four. Both downloaded HTML copies differ only in the randomized Cloudflare email/share-link XOR key; decoding just that token gives the same fingerprint 7d3fb51f313741aa2dbaa5aa65bdc8c52b2cc8325d76c963ee5816a95b6694ef. Keep the catalogue informational/unmodelled. See docs/source-reviews/2026-10-19.md; accept only these normalized bytes, never arbitrary new page content.",
           "reviewId": "2026-10-19:changed:pp2024"
+        },
+        {
+          "at": "2026-10-26T14:26:42.941Z",
+          "action": "reopened",
+          "evidence": {
+            "sha256": "2d3e0e7e425257d3f47a133f4ad3e1d2723a36c390aba5b5f18fa0dfa0858ea0",
+            "previousSha256": "7d3fb51f313741aa2dbaa5aa65bdc8c52b2cc8325d76c963ee5816a95b6694ef",
+            "url": "https://www.pp.es/actualidad/articulos/pp-proponebonificaciones-fiscales-jovenes-primeros-cuatro-anos-su-vida-laboral/",
+            "fingerprintMethod": "sha256:cf-email-v1",
+            "rawSha256": "f8a052f4574dc32586f127db067cc5222589c06cf91419457b39a4d1a6a08cbd"
+          }
         }
       ],
       "active": true,
-      "lastSeen": "2026-10-20T09:53:42.441Z"
+      "lastSeen": "2026-10-26T14:26:42.941Z"
     },
     {
       "kind": "unavailable",
@@ -568,6 +579,100 @@
       ],
       "active": false,
       "lastSeen": "2026-10-19T14:49:55.539Z"
+    },
+    {
+      "kind": "changed",
+      "target": "ciudadanos2023families",
+      "url": "https://www.ciudadanos-cs.org/prensa/ciudadanos-propone-el-plan-mas-ambicioso-de-fomento-de-la-natalidad-con-ayudas-directas-y-deducciones-fiscales-por-el-segundo-hijo/13363",
+      "groups": [],
+      "signature": "[\"https://www.ciudadanos-cs.org/prensa/ciudadanos-propone-el-plan-mas-ambicioso-de-fomento-de-la-natalidad-con-ayudas-directas-y-deducciones-fiscales-por-el-segundo-hijo/13363\",\"ffbdf388c840bbda80370067f44939e8c4500507506258676b7d38f16233a50b\"]",
+      "evidence": {
+        "sha256": "ffbdf388c840bbda80370067f44939e8c4500507506258676b7d38f16233a50b",
+        "previousSha256": "592fdf3a87d720b88479d6485187eae8fc1e0e1e3bb55abcf9b190ec8f5dc15c",
+        "url": "https://www.ciudadanos-cs.org/prensa/ciudadanos-propone-el-plan-mas-ambicioso-de-fomento-de-la-natalidad-con-ayudas-directas-y-deducciones-fiscales-por-el-segundo-hijo/13363"
+      },
+      "scope": "sources",
+      "id": "changed:ciudadanos2023families",
+      "firstSeen": "2026-10-26T14:26:42.941Z",
+      "occurrences": 1,
+      "status": "pending",
+      "history": [
+        {
+          "at": "2026-10-26T14:26:42.941Z",
+          "action": "detected",
+          "evidence": {
+            "sha256": "ffbdf388c840bbda80370067f44939e8c4500507506258676b7d38f16233a50b",
+            "previousSha256": "592fdf3a87d720b88479d6485187eae8fc1e0e1e3bb55abcf9b190ec8f5dc15c",
+            "url": "https://www.ciudadanos-cs.org/prensa/ciudadanos-propone-el-plan-mas-ambicioso-de-fomento-de-la-natalidad-con-ayudas-directas-y-deducciones-fiscales-por-el-segundo-hijo/13363"
+          }
+        }
+      ],
+      "active": true,
+      "lastSeen": "2026-10-26T14:26:42.941Z"
+    },
+    {
+      "kind": "changed",
+      "target": "fiscal:valencia2026",
+      "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2026-19331",
+      "groups": [
+        "regional.valencia"
+      ],
+      "signature": "[\"https://www.boe.es/buscar/doc.php?id=BOE-A-2026-19331\",\"ca356663503dbe48f980fbff4b05ad69961b13fef60ce6b15fa43b6433eb0b1b\"]",
+      "evidence": {
+        "sha256": "ca356663503dbe48f980fbff4b05ad69961b13fef60ce6b15fa43b6433eb0b1b",
+        "previousSha256": "1ce8439fe728c08dcf0986e371a29c68523b3a27f4717bef214d70ef75d7e5c4",
+        "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2026-19331"
+      },
+      "scope": "sources",
+      "id": "changed:fiscal:valencia2026",
+      "firstSeen": "2026-10-26T14:26:42.941Z",
+      "occurrences": 1,
+      "status": "pending",
+      "history": [
+        {
+          "at": "2026-10-26T14:26:42.941Z",
+          "action": "detected",
+          "evidence": {
+            "sha256": "ca356663503dbe48f980fbff4b05ad69961b13fef60ce6b15fa43b6433eb0b1b",
+            "previousSha256": "1ce8439fe728c08dcf0986e371a29c68523b3a27f4717bef214d70ef75d7e5c4",
+            "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2026-19331"
+          }
+        }
+      ],
+      "active": true,
+      "lastSeen": "2026-10-26T14:26:42.941Z"
+    },
+    {
+      "kind": "changed",
+      "target": "fiscal:navarra",
+      "url": "https://www.lexnavarra.navarra.es/detalle.asp?r=29657",
+      "groups": [
+        "foral.navarra"
+      ],
+      "signature": "[\"https://www.lexnavarra.navarra.es/detalle.asp?r=29657\",\"fee02e69591cf43f024477ac4c0a37f8530ff308bdf17980841ff0a1b5121547\"]",
+      "evidence": {
+        "sha256": "fee02e69591cf43f024477ac4c0a37f8530ff308bdf17980841ff0a1b5121547",
+        "previousSha256": "4907ce757225b443ea8ee18e5f0add5788dc9cb943e059f10889a1bd639e430e",
+        "url": "https://www.lexnavarra.navarra.es/detalle.asp?r=29657"
+      },
+      "scope": "sources",
+      "id": "changed:fiscal:navarra",
+      "firstSeen": "2026-10-26T14:26:42.941Z",
+      "occurrences": 1,
+      "status": "pending",
+      "history": [
+        {
+          "at": "2026-10-26T14:26:42.941Z",
+          "action": "detected",
+          "evidence": {
+            "sha256": "fee02e69591cf43f024477ac4c0a37f8530ff308bdf17980841ff0a1b5121547",
+            "previousSha256": "4907ce757225b443ea8ee18e5f0add5788dc9cb943e059f10889a1bd639e430e",
+            "url": "https://www.lexnavarra.navarra.es/detalle.asp?r=29657"
+          }
+        }
+      ],
+      "active": true,
+      "lastSeen": "2026-10-26T14:26:42.941Z"
     }
   ]
 }
