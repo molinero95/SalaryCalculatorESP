@@ -13,7 +13,7 @@
   },
   "pp2024": {
     "url": "https://www.pp.es/actualidad/articulos/pp-proponebonificaciones-fiscales-jovenes-primeros-cuatro-anos-su-vida-laboral/",
-    "sha256": "7d3fb51f313741aa2dbaa5aa65bdc8c52b2cc8325d76c963ee5816a95b6694ef",
+    "sha256": "70e0d5b5a405296184f1c650396a4e6d3903093edb6d59fc4ef6d90c65636a61",
     "fingerprintMethod": "sha256:cf-email-v1"
   },
   "podemos2025": {
@@ -74,6 +74,6 @@
   },
   "fiscal:navarra": {
     "url": "https://www.lexnavarra.navarra.es/detalle.asp?r=29657",
-    "sha256": "4907ce757225b443ea8ee18e5f0add5788dc9cb943e059f10889a1bd639e430e"
+    "sha256": "94bc33ca83eb448d548a43fe51730690c519a3ec6ac8531ec94852a42ed07d77"
   }
 }
