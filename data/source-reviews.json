@@ -73,6 +73,27 @@
       "id": "unavailable:fiscal:bizkaia",
       "signature": "https://www.bizkaia.eus/documents/880307/15187815/ca_13_2013.pdf",
       "evidence": "The same official NF 13/2013 PDF is available again. Retain its existing fingerprint; bounded transient retries improve recovery. Close only after a healthy check, and preserve any independently detected changed-document case."
+    },
+    {
+      "reviewId": "2026-10-27:changed:pp2024",
+      "id": "changed:pp2024",
+      "signature": "[\"https://www.pp.es/actualidad/articulos/pp-proponebonificaciones-fiscales-jovenes-primeros-cuatro-anos-su-vida-laboral/\",\"2d3e0e7e425257d3f47a133f4ad3e1d2723a36c390aba5b5f18fa0dfa0858ea0\",\"sha256:cf-email-v1\"]",
+      "evidence": "Read the official 28 May 2024 announcement on 27 October 2026: relief for first labour-market entry ages 18–34 over four years remains informational, with no complete executable mechanism. Two fresh HTML downloads produce normalized fingerprint 2d3e0e7e425257d3f47a133f4ad3e1d2723a36c390aba5b5f18fa0dfa0858ea0, matching the 26 October finding. Accept only that exact sha256:cf-email-v1 content; do not infer which historical page bytes changed. See docs/source-reviews/2026-10-27.md.",
+      "acceptFingerprint": true
+    },
+    {
+      "reviewId": "2026-10-27:changed:ciudadanos2023families",
+      "id": "changed:ciudadanos2023families",
+      "signature": "[\"https://www.ciudadanos-cs.org/prensa/ciudadanos-propone-el-plan-mas-ambicioso-de-fomento-de-la-natalidad-con-ayudas-directas-y-deducciones-fiscales-por-el-segundo-hijo/13363\",\"ffbdf388c840bbda80370067f44939e8c4500507506258676b7d38f16233a50b\"]",
+      "evidence": "Read the official 4 May 2023 press release on 27 October 2026. Its ten-point family proposal still lacks a defined base/quota mechanism, limits and full eligibility rules; it remains historical and unmodelled. Fresh response SHA-256 ffbdf388c840bbda80370067f44939e8c4500507506258676b7d38f16233a50b matches the exact monitor finding. No executable parameters or legal status change. See docs/source-reviews/2026-10-27.md.",
+      "acceptFingerprint": true
+    },
+    {
+      "reviewId": "2026-10-27:changed:fiscal:valencia2026",
+      "id": "changed:fiscal:valencia2026",
+      "signature": "[\"https://www.boe.es/buscar/doc.php?id=BOE-A-2026-19331\",\"ca356663503dbe48f980fbff4b05ad69961b13fef60ce6b15fa43b6433eb0b1b\"]",
+      "evidence": "Read BOE-A-2026-19331, Ley 5/2026 art.18 and transitional provision 3 on 27 October 2026. All eleven 2026 band limits/rates and published accumulated quotas in art.18 match js/data/regions.js and the independent tests/fixtures/regional-scales.js rows. Transitional provision 3 applies from 1 January 2027 and must not replace the 2026 scale. Fresh SHA-256 ca356663503dbe48f980fbff4b05ad69961b13fef60ce6b15fa43b6433eb0b1b matches the exact alert. No 2026 scale correction required; no assertion about the cause of the raw HTML change. See docs/source-reviews/2026-10-27.md.",
+      "acceptFingerprint": true
     }
   ]
 }
