@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-10-26T14:26:46.893Z",
+  "checkedAt": "2026-10-31T09:09:04.169Z",
   "alerts": [
     {
       "kind": "unavailable",
@@ -487,18 +487,18 @@
       "target": "pp2024",
       "url": "https://www.pp.es/actualidad/articulos/pp-proponebonificaciones-fiscales-jovenes-primeros-cuatro-anos-su-vida-laboral/",
       "groups": [],
-      "signature": "[\"https://www.pp.es/actualidad/articulos/pp-proponebonificaciones-fiscales-jovenes-primeros-cuatro-anos-su-vida-laboral/\",\"2d3e0e7e425257d3f47a133f4ad3e1d2723a36c390aba5b5f18fa0dfa0858ea0\",\"sha256:cf-email-v1\"]",
+      "signature": "[\"https://www.pp.es/actualidad/articulos/pp-proponebonificaciones-fiscales-jovenes-primeros-cuatro-anos-su-vida-laboral/\",\"70e0d5b5a405296184f1c650396a4e6d3903093edb6d59fc4ef6d90c65636a61\",\"sha256:cf-email-v1\"]",
       "evidence": {
-        "sha256": "2d3e0e7e425257d3f47a133f4ad3e1d2723a36c390aba5b5f18fa0dfa0858ea0",
+        "sha256": "70e0d5b5a405296184f1c650396a4e6d3903093edb6d59fc4ef6d90c65636a61",
         "previousSha256": "7d3fb51f313741aa2dbaa5aa65bdc8c52b2cc8325d76c963ee5816a95b6694ef",
         "url": "https://www.pp.es/actualidad/articulos/pp-proponebonificaciones-fiscales-jovenes-primeros-cuatro-anos-su-vida-laboral/",
         "fingerprintMethod": "sha256:cf-email-v1",
-        "rawSha256": "f8a052f4574dc32586f127db067cc5222589c06cf91419457b39a4d1a6a08cbd"
+        "rawSha256": "e708c549decf769eb6e63e6ddeb92a5dfc2039a577635928b73b9596b9326157"
       },
       "scope": "sources",
       "id": "changed:pp2024",
       "firstSeen": "2026-10-19T14:49:55.539Z",
-      "occurrences": 3,
+      "occurrences": 4,
       "status": "pending",
       "history": [
         {
@@ -538,10 +538,21 @@
             "fingerprintMethod": "sha256:cf-email-v1",
             "rawSha256": "f8a052f4574dc32586f127db067cc5222589c06cf91419457b39a4d1a6a08cbd"
           }
+        },
+        {
+          "at": "2026-10-31T09:09:00.323Z",
+          "action": "reopened",
+          "evidence": {
+            "sha256": "70e0d5b5a405296184f1c650396a4e6d3903093edb6d59fc4ef6d90c65636a61",
+            "previousSha256": "7d3fb51f313741aa2dbaa5aa65bdc8c52b2cc8325d76c963ee5816a95b6694ef",
+            "url": "https://www.pp.es/actualidad/articulos/pp-proponebonificaciones-fiscales-jovenes-primeros-cuatro-anos-su-vida-laboral/",
+            "fingerprintMethod": "sha256:cf-email-v1",
+            "rawSha256": "e708c549decf769eb6e63e6ddeb92a5dfc2039a577635928b73b9596b9326157"
+          }
         }
       ],
       "active": true,
-      "lastSeen": "2026-10-26T14:26:42.941Z"
+      "lastSeen": "2026-10-31T09:09:00.323Z"
     },
     {
       "kind": "unavailable",
@@ -594,8 +605,8 @@
       "scope": "sources",
       "id": "changed:ciudadanos2023families",
       "firstSeen": "2026-10-26T14:26:42.941Z",
-      "occurrences": 1,
-      "status": "pending",
+      "occurrences": 2,
+      "status": "reviewed",
       "history": [
         {
           "at": "2026-10-26T14:26:42.941Z",
@@ -605,10 +616,17 @@
             "previousSha256": "592fdf3a87d720b88479d6485187eae8fc1e0e1e3bb55abcf9b190ec8f5dc15c",
             "url": "https://www.ciudadanos-cs.org/prensa/ciudadanos-propone-el-plan-mas-ambicioso-de-fomento-de-la-natalidad-con-ayudas-directas-y-deducciones-fiscales-por-el-segundo-hijo/13363"
           }
+        },
+        {
+          "at": "2026-10-31T09:09:00.323Z",
+          "action": "reviewed",
+          "actor": "molinero95",
+          "evidence": "Read the official 4 May 2023 press release on 27 October 2026. Its ten-point family proposal still lacks a defined base/quota mechanism, limits and full eligibility rules; it remains historical and unmodelled. Fresh response SHA-256 ffbdf388c840bbda80370067f44939e8c4500507506258676b7d38f16233a50b matches the exact monitor finding. No executable parameters or legal status change. See docs/source-reviews/2026-10-27.md.",
+          "reviewId": "2026-10-27:changed:ciudadanos2023families"
         }
       ],
       "active": true,
-      "lastSeen": "2026-10-26T14:26:42.941Z"
+      "lastSeen": "2026-10-31T09:09:00.323Z"
     },
     {
       "kind": "changed",
@@ -626,8 +644,8 @@
       "scope": "sources",
       "id": "changed:fiscal:valencia2026",
       "firstSeen": "2026-10-26T14:26:42.941Z",
-      "occurrences": 1,
-      "status": "pending",
+      "occurrences": 2,
+      "status": "reviewed",
       "history": [
         {
           "at": "2026-10-26T14:26:42.941Z",
@@ -637,10 +655,17 @@
             "previousSha256": "1ce8439fe728c08dcf0986e371a29c68523b3a27f4717bef214d70ef75d7e5c4",
             "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2026-19331"
           }
+        },
+        {
+          "at": "2026-10-31T09:09:00.323Z",
+          "action": "reviewed",
+          "actor": "molinero95",
+          "evidence": "Read BOE-A-2026-19331, Ley 5/2026 art.18 and transitional provision 3 on 27 October 2026. All eleven 2026 band limits/rates and published accumulated quotas in art.18 match js/data/regions.js and the independent tests/fixtures/regional-scales.js rows. Transitional provision 3 applies from 1 January 2027 and must not replace the 2026 scale. Fresh SHA-256 ca356663503dbe48f980fbff4b05ad69961b13fef60ce6b15fa43b6433eb0b1b matches the exact alert. No 2026 scale correction required; no assertion about the cause of the raw HTML change. See docs/source-reviews/2026-10-27.md.",
+          "reviewId": "2026-10-27:changed:fiscal:valencia2026"
         }
       ],
       "active": true,
-      "lastSeen": "2026-10-26T14:26:42.941Z"
+      "lastSeen": "2026-10-31T09:09:00.323Z"
     },
     {
       "kind": "changed",
@@ -649,16 +674,16 @@
       "groups": [
         "foral.navarra"
       ],
-      "signature": "[\"https://www.lexnavarra.navarra.es/detalle.asp?r=29657\",\"fee02e69591cf43f024477ac4c0a37f8530ff308bdf17980841ff0a1b5121547\"]",
+      "signature": "[\"https://www.lexnavarra.navarra.es/detalle.asp?r=29657\",\"94bc33ca83eb448d548a43fe51730690c519a3ec6ac8531ec94852a42ed07d77\"]",
       "evidence": {
-        "sha256": "fee02e69591cf43f024477ac4c0a37f8530ff308bdf17980841ff0a1b5121547",
+        "sha256": "94bc33ca83eb448d548a43fe51730690c519a3ec6ac8531ec94852a42ed07d77",
         "previousSha256": "4907ce757225b443ea8ee18e5f0add5788dc9cb943e059f10889a1bd639e430e",
         "url": "https://www.lexnavarra.navarra.es/detalle.asp?r=29657"
       },
       "scope": "sources",
       "id": "changed:fiscal:navarra",
       "firstSeen": "2026-10-26T14:26:42.941Z",
-      "occurrences": 1,
+      "occurrences": 2,
       "status": "pending",
       "history": [
         {
@@ -669,10 +694,107 @@
             "previousSha256": "4907ce757225b443ea8ee18e5f0add5788dc9cb943e059f10889a1bd639e430e",
             "url": "https://www.lexnavarra.navarra.es/detalle.asp?r=29657"
           }
+        },
+        {
+          "at": "2026-10-31T09:09:00.323Z",
+          "action": "reopened",
+          "evidence": {
+            "sha256": "94bc33ca83eb448d548a43fe51730690c519a3ec6ac8531ec94852a42ed07d77",
+            "previousSha256": "4907ce757225b443ea8ee18e5f0add5788dc9cb943e059f10889a1bd639e430e",
+            "url": "https://www.lexnavarra.navarra.es/detalle.asp?r=29657"
+          }
         }
       ],
       "active": true,
-      "lastSeen": "2026-10-26T14:26:42.941Z"
+      "lastSeen": "2026-10-31T09:09:00.323Z"
+    },
+    {
+      "kind": "publication",
+      "target": "BOE-A-2026-22528",
+      "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-22528",
+      "groups": [],
+      "signature": "d4a36bc4845d3e5170f86720b4d42a0946ba1fc28928e355f3b9589d35c132c1",
+      "evidence": {
+        "id": "BOE-A-2026-22528",
+        "title": "Recurso de inconstitucionalidad n.º 6911-2026, contra la disposición transitoria única, apartados 1 y 2, de la Ley Foral 14/2026, de 2 de julio, de modificación de la Ley Foral 10/2010, de 10 de mayo, del derecho a la vivienda en Navarra.",
+        "publishedAt": "2026-10-28",
+        "publisher": "Agencia Estatal Boletín Oficial del Estado",
+        "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-22528",
+        "reasons": [
+          "housing-review"
+        ],
+        "groups": [],
+        "signature": "d4a36bc4845d3e5170f86720b4d42a0946ba1fc28928e355f3b9589d35c132c1"
+      },
+      "scope": "boe-discovery",
+      "id": "publication:BOE-A-2026-22528",
+      "firstSeen": "2026-10-31T09:09:04.169Z",
+      "occurrences": 1,
+      "status": "pending",
+      "history": [
+        {
+          "at": "2026-10-31T09:09:04.169Z",
+          "action": "detected",
+          "evidence": {
+            "id": "BOE-A-2026-22528",
+            "title": "Recurso de inconstitucionalidad n.º 6911-2026, contra la disposición transitoria única, apartados 1 y 2, de la Ley Foral 14/2026, de 2 de julio, de modificación de la Ley Foral 10/2010, de 10 de mayo, del derecho a la vivienda en Navarra.",
+            "publishedAt": "2026-10-28",
+            "publisher": "Agencia Estatal Boletín Oficial del Estado",
+            "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-22528",
+            "reasons": [
+              "housing-review"
+            ],
+            "groups": [],
+            "signature": "d4a36bc4845d3e5170f86720b4d42a0946ba1fc28928e355f3b9589d35c132c1"
+          }
+        }
+      ],
+      "active": true,
+      "lastSeen": "2026-10-31T09:09:04.169Z"
+    },
+    {
+      "kind": "publication",
+      "target": "BOE-A-2026-22617",
+      "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-22617",
+      "groups": [],
+      "signature": "4a478a9bf7042139ba94100a1c09c28c067d39b3dd1bc23183bd8b1dbd0c5916",
+      "evidence": {
+        "id": "BOE-A-2026-22617",
+        "title": "Real Decreto 928/2026, de 28 de octubre, por el que se regula la concesión directa de subvenciones destinadas a la financiación de los contratos de concesión de obra para la promoción de vivienda destinada al alquiler asequible licitados por CASA 47 Entidad Pública Empresarial en el marco del Plan de Vivienda para el Alquiler Asequible del Ministerio de Vivienda y Agenda Urbana.",
+        "publishedAt": "2026-10-29",
+        "publisher": "Agencia Estatal Boletín Oficial del Estado",
+        "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-22617",
+        "reasons": [
+          "housing-review"
+        ],
+        "groups": [],
+        "signature": "4a478a9bf7042139ba94100a1c09c28c067d39b3dd1bc23183bd8b1dbd0c5916"
+      },
+      "scope": "boe-discovery",
+      "id": "publication:BOE-A-2026-22617",
+      "firstSeen": "2026-10-31T09:09:04.169Z",
+      "occurrences": 1,
+      "status": "pending",
+      "history": [
+        {
+          "at": "2026-10-31T09:09:04.169Z",
+          "action": "detected",
+          "evidence": {
+            "id": "BOE-A-2026-22617",
+            "title": "Real Decreto 928/2026, de 28 de octubre, por el que se regula la concesión directa de subvenciones destinadas a la financiación de los contratos de concesión de obra para la promoción de vivienda destinada al alquiler asequible licitados por CASA 47 Entidad Pública Empresarial en el marco del Plan de Vivienda para el Alquiler Asequible del Ministerio de Vivienda y Agenda Urbana.",
+            "publishedAt": "2026-10-29",
+            "publisher": "Agencia Estatal Boletín Oficial del Estado",
+            "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-22617",
+            "reasons": [
+              "housing-review"
+            ],
+            "groups": [],
+            "signature": "4a478a9bf7042139ba94100a1c09c28c067d39b3dd1bc23183bd8b1dbd0c5916"
+          }
+        }
+      ],
+      "active": true,
+      "lastSeen": "2026-10-31T09:09:04.169Z"
     }
   ]
 }

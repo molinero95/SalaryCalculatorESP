@@ -26,7 +26,7 @@
   },
   "ciudadanos2023families": {
     "url": "https://www.ciudadanos-cs.org/prensa/ciudadanos-propone-el-plan-mas-ambicioso-de-fomento-de-la-natalidad-con-ayudas-directas-y-deducciones-fiscales-por-el-segundo-hijo/13363",
-    "sha256": "592fdf3a87d720b88479d6485187eae8fc1e0e1e3bb55abcf9b190ec8f5dc15c"
+    "sha256": "ffbdf388c840bbda80370067f44939e8c4500507506258676b7d38f16233a50b"
   },
   "fiscal:lirpf": {
     "url": "https://www.boe.es/datosabiertos/api/legislacion-consolidada/id/BOE-A-2006-20764/metadatos",
@@ -50,7 +50,7 @@
   },
   "fiscal:valencia2026": {
     "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2026-19331",
-    "sha256": "1ce8439fe728c08dcf0986e371a29c68523b3a27f4717bef214d70ef75d7e5c4"
+    "sha256": "ca356663503dbe48f980fbff4b05ad69961b13fef60ce6b15fa43b6433eb0b1b"
   },
   "fiscal:extremadura2026": {
     "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2026-17839",
