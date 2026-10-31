@@ -94,6 +94,32 @@
       "signature": "[\"https://www.boe.es/buscar/doc.php?id=BOE-A-2026-19331\",\"ca356663503dbe48f980fbff4b05ad69961b13fef60ce6b15fa43b6433eb0b1b\"]",
       "evidence": "Read BOE-A-2026-19331, Ley 5/2026 art.18 and transitional provision 3 on 27 October 2026. All eleven 2026 band limits/rates and published accumulated quotas in art.18 match js/data/regions.js and the independent tests/fixtures/regional-scales.js rows. Transitional provision 3 applies from 1 January 2027 and must not replace the 2026 scale. Fresh SHA-256 ca356663503dbe48f980fbff4b05ad69961b13fef60ce6b15fa43b6433eb0b1b matches the exact alert. No 2026 scale correction required; no assertion about the cause of the raw HTML change. See docs/source-reviews/2026-10-27.md.",
       "acceptFingerprint": true
+    },
+    {
+      "reviewId": "2026-10-31:changed:pp2024",
+      "id": "changed:pp2024",
+      "signature": "[\"https://www.pp.es/actualidad/articulos/pp-proponebonificaciones-fiscales-jovenes-primeros-cuatro-anos-su-vida-laboral/\",\"70e0d5b5a405296184f1c650396a4e6d3903093edb6d59fc4ef6d90c65636a61\",\"sha256:cf-email-v1\"]",
+      "evidence": "Read the official 28 May 2024 PP announcement again on 31 October 2026. Youth first-employment relief remains a historical informational proposal, with the same four-year 100/75/50/25 percentages and no complete executable mechanism. Fresh downloaded HTML normalizes to the exact current monitor fingerprint 70e0d5b5a405296184f1c650396a4e6d3903093edb6d59fc4ef6d90c65636a61 using the unchanged sha256:cf-email-v1 method. Accept only this reviewed current content; no claim about unseen historical bytes. See docs/source-reviews/2026-10-31.md.",
+      "acceptFingerprint": true
+    },
+    {
+      "reviewId": "2026-10-31:changed:fiscal:navarra",
+      "id": "changed:fiscal:navarra",
+      "signature": "[\"https://www.lexnavarra.navarra.es/detalle.asp?r=29657\",\"94bc33ca83eb448d548a43fe51730690c519a3ec6ac8531ec94852a42ed07d77\"]",
+      "evidence": "Reviewed the current LexNavarra DFL 4/2008 and cross-checked BOE consolidated BON-n-2008-90013, its amendment trail (latest 20 April 2026), LF 17/2025 and DLF 1/2026. Two fresh original downloads match current raw SHA-256 94bc33ca83eb448d548a43fe51730690c519a3ec6ac8531ec94852a42ed07d77. Supported arts.15,25,55,59,60,62.2/5/9,64.5,66 match current ordinary active-employee/individual-assessment parameters and scope. Checked the eleven general bands (including the embedded table image), savings bands, pension limits, employment/personal/family credits and ordinary eligible rental rules. The April amendment extends energy-efficiency works relief, outside this model. No supported parameter update; this does not approve unretained October 26/27 bytes or certify unsupported profiles. See docs/source-reviews/2026-10-31.md.",
+      "acceptFingerprint": true
+    },
+    {
+      "reviewId": "2026-10-31:publication:BOE-A-2026-22528",
+      "id": "publication:BOE-A-2026-22528",
+      "signature": "d4a36bc4845d3e5170f86720b4d42a0946ba1fc28928e355f3b9589d35c132c1",
+      "evidence": "Read the 28 October 2026 BOE publication in full: the Constitutional Court admits appeal 6911-2026 against the transitional provision of Navarra housing LF 14/2026. The notice contains no amendment to employee IRPF scales, withholding, allowances, contributions or the supported ordinary tax inputs. No calculator implementation is required; housing litigation is outside the model. See docs/source-reviews/2026-10-31.md."
+    },
+    {
+      "reviewId": "2026-10-31:publication:BOE-A-2026-22617",
+      "id": "publication:BOE-A-2026-22617",
+      "signature": "4a478a9bf7042139ba94100a1c09c28c067d39b3dd1bc23183bd8b1dbd0c5916",
+      "evidence": "Read RD 928/2026, published 29 October 2026: arts.1-15 and final provisions regulate direct subsidies to CASA 47 housing-concession awardees, eligible construction costs, SIEG obligations, funding, controls and recovery. This is affordable-housing project financing, not a change to employee IRPF or social-security parameters. No supported calculation update. See docs/source-reviews/2026-10-31.md."
     }
   ]
 }
