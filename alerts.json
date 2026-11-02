@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-10-31T09:17:08.948Z",
+  "checkedAt": "2026-11-02T17:16:33.794Z",
   "alerts": [
     {
       "kind": "unavailable",
@@ -558,7 +558,7 @@
           "reviewId": "2026-10-31:changed:pp2024"
         }
       ],
-      "active": true,
+      "active": false,
       "lastSeen": "2026-10-31T09:17:05.966Z"
     },
     {
@@ -681,17 +681,17 @@
       "groups": [
         "foral.navarra"
       ],
-      "signature": "[\"https://www.lexnavarra.navarra.es/detalle.asp?r=29657\",\"94bc33ca83eb448d548a43fe51730690c519a3ec6ac8531ec94852a42ed07d77\"]",
+      "signature": "[\"https://www.lexnavarra.navarra.es/detalle.asp?r=29657\",\"094b46f993099e49cd83d9238951bf589be5d3271a81e5b9fc8c605afad524fe\"]",
       "evidence": {
-        "sha256": "94bc33ca83eb448d548a43fe51730690c519a3ec6ac8531ec94852a42ed07d77",
-        "previousSha256": "4907ce757225b443ea8ee18e5f0add5788dc9cb943e059f10889a1bd639e430e",
+        "sha256": "094b46f993099e49cd83d9238951bf589be5d3271a81e5b9fc8c605afad524fe",
+        "previousSha256": "94bc33ca83eb448d548a43fe51730690c519a3ec6ac8531ec94852a42ed07d77",
         "url": "https://www.lexnavarra.navarra.es/detalle.asp?r=29657"
       },
       "scope": "sources",
       "id": "changed:fiscal:navarra",
       "firstSeen": "2026-10-26T14:26:42.941Z",
-      "occurrences": 3,
-      "status": "reviewed",
+      "occurrences": 4,
+      "status": "pending",
       "history": [
         {
           "at": "2026-10-26T14:26:42.941Z",
@@ -717,10 +717,19 @@
           "actor": "molinero95",
           "evidence": "Reviewed the current LexNavarra DFL 4/2008 and cross-checked BOE consolidated BON-n-2008-90013, its amendment trail (latest 20 April 2026), LF 17/2025 and DLF 1/2026. Two fresh original downloads match current raw SHA-256 94bc33ca83eb448d548a43fe51730690c519a3ec6ac8531ec94852a42ed07d77. Supported arts.15,25,55,59,60,62.2/5/9,64.5,66 match current ordinary active-employee/individual-assessment parameters and scope. Checked the eleven general bands (including the embedded table image), savings bands, pension limits, employment/personal/family credits and ordinary eligible rental rules. The April amendment extends energy-efficiency works relief, outside this model. No supported parameter update; this does not approve unretained October 26/27 bytes or certify unsupported profiles. See docs/source-reviews/2026-10-31.md.",
           "reviewId": "2026-10-31:changed:fiscal:navarra"
+        },
+        {
+          "at": "2026-11-02T17:16:31.380Z",
+          "action": "reopened",
+          "evidence": {
+            "sha256": "094b46f993099e49cd83d9238951bf589be5d3271a81e5b9fc8c605afad524fe",
+            "previousSha256": "94bc33ca83eb448d548a43fe51730690c519a3ec6ac8531ec94852a42ed07d77",
+            "url": "https://www.lexnavarra.navarra.es/detalle.asp?r=29657"
+          }
         }
       ],
       "active": true,
-      "lastSeen": "2026-10-31T09:17:05.966Z"
+      "lastSeen": "2026-11-02T17:16:31.380Z"
     },
     {
       "kind": "publication",
@@ -743,7 +752,7 @@
       "scope": "boe-discovery",
       "id": "publication:BOE-A-2026-22528",
       "firstSeen": "2026-10-31T09:09:04.169Z",
-      "occurrences": 2,
+      "occurrences": 3,
       "status": "reviewed",
       "history": [
         {
@@ -771,7 +780,7 @@
         }
       ],
       "active": true,
-      "lastSeen": "2026-10-31T09:17:08.948Z"
+      "lastSeen": "2026-11-02T17:16:33.794Z"
     },
     {
       "kind": "publication",
@@ -794,7 +803,7 @@
       "scope": "boe-discovery",
       "id": "publication:BOE-A-2026-22617",
       "firstSeen": "2026-10-31T09:09:04.169Z",
-      "occurrences": 2,
+      "occurrences": 3,
       "status": "reviewed",
       "history": [
         {
@@ -822,7 +831,7 @@
         }
       ],
       "active": true,
-      "lastSeen": "2026-10-31T09:17:08.948Z"
+      "lastSeen": "2026-11-02T17:16:33.794Z"
     }
   ]
 }
