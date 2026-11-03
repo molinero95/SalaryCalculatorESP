@@ -120,6 +120,13 @@
       "id": "publication:BOE-A-2026-22617",
       "signature": "4a478a9bf7042139ba94100a1c09c28c067d39b3dd1bc23183bd8b1dbd0c5916",
       "evidence": "Read RD 928/2026, published 29 October 2026: arts.1-15 and final provisions regulate direct subsidies to CASA 47 housing-concession awardees, eligible construction costs, SIEG obligations, funding, controls and recovery. This is affordable-housing project financing, not a change to employee IRPF or social-security parameters. No supported calculation update. See docs/source-reviews/2026-10-31.md."
+    },
+    {
+      "reviewId": "2026-11-03:changed:fiscal:navarra:response-date-v1",
+      "id": "changed:fiscal:navarra",
+      "signature": "[\"https://www.lexnavarra.navarra.es/detalle.asp?r=29657\",\"aa0d6ef1df713b98a81237fc4e1da38cbbc836ba10b629db7a5b2ff79d49fd44\",\"sha256:lexnavarra-response-date-v1\"]",
+      "evidence": "Two fresh LexNavarra downloads on 3 November 2026 have raw SHA-256 6a8a00981fba59303cfd200d4c01a56454cfc82a95c8ae5fd95215d282d8c4e0. Replacing only the head FECHA response-day value with 2026-11-2 exactly reproduces the 2 November alert hash 094b46f993099e49cd83d9238951bf589be5d3271a81e5b9fc8c605afad524fe; replacing it with 2026-10-31 exactly reproduces the reviewed baseline 94bc33ca83eb448d548a43fe51730690c519a3ec6ac8531ec94852a42ed07d77. All other bytes, including legal text, match the reviewed 31 October source. Accept only normalized fingerprint aa0d6ef1df713b98a81237fc4e1da38cbbc836ba10b629db7a5b2ff79d49fd44 under sha256:lexnavarra-response-date-v1. No fiscal parameter or verification-date change. See docs/source-reviews/2026-11-03.md.",
+      "acceptFingerprint": true
     }
   ]
 }
