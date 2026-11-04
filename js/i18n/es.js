@@ -67,6 +67,25 @@ export default {
   foralIssueInvalid: 'Hay un dato familiar o anual fuera de rango; revisa los números introducidos.',
   foralIssueScenario:
     'Los parámetros de «Actual» se han modificado. En territorios forales solo se calcula con la normativa vigente: pulsa «Restablecer valores oficiales» en Actual.',
+  inKindContribution: 'Importe anual cotizable de la especie (€ / año)',
+  inKindContributionHelp:
+    'El valor anterior es para IRPF, sin ingreso a cuenta. Indica por separado el importe de esta especie incluido en las bases de cotización de tu nómina, con cualquier ajuste por el ingreso a cuenta asumido que corresponda. No sumes el sueldo en dinero, la retribución flexible ni las pensiones. No se deduce del valor fiscal: las reglas de valoración pueden diferir. Este importe se mantiene fijo al simular; revísalo si cambian las condiciones. El coste empresarial usa el valor fiscal como aproximación al coste del beneficio.',
+  inKindContributionConfirmed:
+    'Confirmo el importe cotizable según mi nómina o asesoría, incluidos los ajustes que procedan por el ingreso a cuenta asumido.',
+  inKindContributionMissing:
+    'Indica y confirma el importe anual cotizable de la especie antes de calcular. Al cambiar su valor fiscal, cotizable o quién asume el ingreso a cuenta debes confirmarlo de nuevo.',
+  inKindResultsHidden: 'Falta confirmar un dato para calcular el salario.',
+  inKindTitle: 'Retribución en especie que tributa',
+  inKindHelp:
+    'Para lo que la empresa te da además del sueldo y que tributa: coche de empresa, colegio de los hijos, seguros no exentos… Indica el valor anual que figura en tu nómina como especie (en el coche, el valor imputado). Cotiza a la Seguridad Social y tributa en IRPF, y la empresa hace un ingreso a cuenta sobre él. No incluyas la retribución flexible exenta del apartado anterior. No disponible en País Vasco y Navarra.',
+  inKindTaxable: 'Valor anual en especie (€ / año)',
+  inKindAdvanceBorne:
+    'La empresa asume el ingreso a cuenta (no me lo descuenta en nómina). Entonces ese importe también tributa como especie.',
+  foralIssueInKind: 'La retribución en especie que tributa no está modelada para territorios forales; ponla a 0.',
+  rowInKind: 'Retribución en especie que tributa',
+  rowInKindAdvance: 'De ella, ingreso a cuenta por la especie',
+  helpInKindAdvance:
+    'La empresa aplica tu tipo de retención al valor de la especie (art. 102 del Reglamento del IRPF). Si te lo descuenta, reduce tu neto; si lo asume ella, se suma a tu renta como especie (art. 43.2 de la Ley del IRPF). En la declaración cuenta como pagado a cuenta.',
   foralUnsupported:
     'Este perfil foral aún no está validado o faltan requisitos familiares. Se ocultan los resultados. Revisa los grupos de edad y confirma los requisitos de hijos y ascendientes.',
   foralScenarioUnsupported:

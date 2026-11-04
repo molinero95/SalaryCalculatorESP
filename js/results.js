@@ -35,6 +35,7 @@ function resultCard(kind, name, r, reference, { showRefund, showInKind, showPens
         ${r.payments === 14 ? metric(t('extraPayment'), formatEuros(r.netExtraPayment), deltaBadge(r.netExtraPayment, reference?.netExtraPayment)) : ''}
         ${showRefund ? metric(t('refund'), formatSignedEuros(r.incomeTax.refund), deltaBadge(r.incomeTax.refund, reference?.incomeTax.refund)) : ''}
         ${showInKind ? metric(t('inKind'), formatEuros(r.flexible.total)) : ''}
+        ${r.incomeTax.inKind > 0 ? metric(t('rowInKind'), formatEuros(r.incomeTax.inKind)) : ''}
         ${showPension ? metric(t('pensions'), formatEuros(r.pension.total)) : ''}
         ${metric(t('withholding'), formatPercent(r.incomeTax.rate), rateDelta(r.incomeTax.rate, reference?.incomeTax.rate))}
         ${r.effectiveRate === null ? '' : metric(t('effectiveRate'), formatPercent(r.effectiveRate), rateDelta(r.effectiveRate, reference?.effectiveRate))}
@@ -140,6 +141,7 @@ const BREAKDOWN = [
     title: 'sectionIncomeTax',
     rows: [
       { label: 'rowTaxableGross', value: (r) => r.taxableGross },
+      { label: 'rowInKind', value: (r) => r.incomeTax.inKind ?? 0, optional: true },
       { label: 'rowNetEarnings', value: (r) => r.incomeTax.netEarnings, showIf: (r) => !r.incomeTax.foral },
       { label: 'rowOtherExpenses', value: (r) => -r.incomeTax.otherExpenses, showIf: (r) => !r.incomeTax.foral },
       {
@@ -166,6 +168,12 @@ const BREAKDOWN = [
         formatDiff: formatPoints,
       },
       { label: 'rowIncomeTax', value: (r) => r.incomeTax.withheld, total: true },
+      {
+        label: 'rowInKindAdvance',
+        help: 'helpInKindAdvance',
+        value: (r) => r.incomeTax.inKindAdvance ?? 0,
+        optional: true,
+      },
       {
         label: 'rowMinWageCredit',
         value: (r) => r.incomeTax.minWageCredit,
@@ -200,7 +208,7 @@ const BREAKDOWN = [
     rows: [
       { label: 'rowGross', value: (r) => r.grossAnnual },
       { label: 'rowSocialSecurityTotal', value: (r) => -r.employee.total },
-      { label: 'rowIncomeTax', value: (r) => -r.incomeTax.withheld },
+      { label: 'rowIncomeTax', value: (r) => -(r.incomeTax.withheldFromPay ?? r.incomeTax.withheld) },
       { label: 'rowFlexTotal', value: (r) => -r.flexible.total, optional: true },
       { label: 'rowPensionEmployee', value: (r) => -r.pension.employee, optional: true },
       { label: 'rowNetCash', value: (r) => r.netAnnual, total: true, highlight: true },

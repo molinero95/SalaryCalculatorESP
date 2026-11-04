@@ -363,6 +363,46 @@
             <p class="warning" id="flex-warning" role="alert" hidden></p>
           </details>
 
+          <details class="extras field-wide" id="inkind-fields">
+            <summary data-i18n="inKindTitle"></summary>
+            <p class="help" data-i18n="inKindHelp"></p>
+            <div class="fields">
+              <div class="field">
+                <label for="inKindTaxable" data-i18n="inKindTaxable"></label>
+                <div class="input-unit">
+                  <input id="inKindTaxable" name="inKindTaxable" type="number" min="0" step="100" inputmode="decimal" />
+                  <span class="unit">€</span>
+                </div>
+              </div>
+              <label class="checkbox field-wide"
+                ><input id="inKindAdvanceBorne" name="inKindAdvanceBorne" type="checkbox" /><span
+                  data-i18n="inKindAdvanceBorne"
+                ></span
+              ></label>
+            </div>
+            <div id="inkind-contribution-fields" hidden>
+              <p class="help" data-i18n="inKindContributionHelp"></p>
+              <div class="field">
+                <label for="inKindContribution" data-i18n="inKindContribution"></label>
+                <div class="input-unit">
+                  <input
+                    id="inKindContribution"
+                    name="inKindContribution"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    inputmode="decimal"
+                  />
+                  <span class="unit">€</span>
+                </div>
+              </div>
+              <label class="checkbox field-wide">
+                <input id="inKindContributionConfirmed" name="inKindContributionConfirmed" type="checkbox" />
+                <span data-i18n="inKindContributionConfirmed"></span>
+              </label>
+            </div>
+          </details>
+
           <details class="extras field-wide">
             <summary data-i18n="pensionTitle"></summary>
             <p class="help" data-i18n="pensionHelp"></p>

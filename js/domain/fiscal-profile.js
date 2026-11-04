@@ -24,13 +24,29 @@ export function foralProfileIssues(input) {
   )
     issues.push('foralIssueInvalid');
   if (annual.some((value) => value > 0) && input.foralAnnualConfirmed !== true) issues.push('foralIssueAnnual');
+  // Foral rules for pay in kind are not modelled.
+  if ((input.inKindTaxable ?? 0) > 0) issues.push('foralIssueInKind');
   issues.push(...foralFamilyIssues(input));
   const ascendants = counts[0] + counts[1] + (input.region === 'navarra' ? 0 : counts[2]);
   if (ascendants > 0 && input.foralAscendantsConfirmed !== true) issues.push('foralIssueAscendants');
   return [...new Set(issues)];
 }
 
-export const unsupportedFiscalProfile = (input) => foralProfileIssues(input).length > 0;
+export function fiscalProfileIssues(input) {
+  const issues = foralProfileIssues(input);
+  if (
+    !isForal(input.region) &&
+    (input.inKindTaxable ?? 0) > 0 &&
+    (input.inKindContributionConfirmed !== true ||
+      !Number.isFinite(input.inKindContribution) ||
+      input.inKindContribution < 0 ||
+      input.inKindContribution > 1e9)
+  )
+    issues.push('inKindContributionMissing');
+  return issues;
+}
+
+export const unsupportedFiscalProfile = (input) => fiscalProfileIssues(input).length > 0;
 
 /** These scenario groups are replaced by territorial rules in the foral engine. */
 export function unsupportedFiscalScenario(input, scenario) {

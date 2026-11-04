@@ -38,6 +38,10 @@ export function bindPayrollForm(form, state, onChange) {
     if (!(name in state.input)) return;
 
     const previousGross = grossAnnualOf(state.input);
+    if (['inKindTaxable', 'inKindContribution', 'inKindAdvanceBorne'].includes(name)) {
+      state.input.inKindContributionConfirmed = false;
+      form.elements.inKindContributionConfirmed.checked = false;
+    }
     if (['dependents65', 'dependents75', 'foralAscendantsUnder65', 'foralAscendantClaimants'].includes(name)) {
       state.input.foralAscendantsConfirmed = false;
       form.elements.foralAscendantsConfirmed.checked = false;

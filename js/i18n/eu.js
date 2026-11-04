@@ -67,6 +67,25 @@ export default {
   foralIssueInvalid: 'Familiako edo urteko datu bat tartetik kanpo dago; berrikusi sartutako zenbakiak.',
   foralIssueScenario:
     '«Egungoa»ren parametroak aldatu dira. Foru-lurraldeetan indarreko araudiarekin soilik kalkulatzen da: sakatu «Berrezarri balio ofizialak» Egungoan.',
+  inKindContribution: 'Gauzazko ordainsariaren urteko kotizazio-balioa (€ / urte)',
+  inKindContributionHelp:
+    'Goiko balioa PFEZrako da, konturako sarrerarik gabe. Sartu bereizita nominan kotizazio-oinarrietan dagoen gauzazko ordainsari honen zenbatekoa, enpresak bere gain hartutako konturako sarrerari dagozkion doikuntzak barne. Ez sartu diruzko soldata, ordainsari malgua edo pentsioak. Ez da zerga-baliotik ondorioztatzen: balorazio-arauak desberdinak izan daitezke. Zenbateko hau finko mantentzen da simulazioetan; berrikusi baldintzak aldatzen badira. Enpresaren kostuak zerga-balioa erabiltzen du onuraren kostuaren hurbilketa gisa.',
+  inKindContributionConfirmed:
+    'Kotizazio-balioa nominaren edo aholkularitzaren arabera baieztatzen dut, enpresak bere gain hartutako konturako sarreraren doikuntzak barne, hala badagokio.',
+  inKindContributionMissing:
+    'Sartu eta baieztatu gauzazko ordainsariaren urteko kotizazio-balioa kalkulatu aurretik. Zerga-balioa, kotizazio-balioa edo konturako sarrera nork hartzen duen aldatuz gero, baieztatu berriro.',
+  inKindResultsHidden: 'Soldata kalkulatzeko datu bat baieztatu behar da.',
+  inKindTitle: 'Zergapean dagoen gauzazko ordainsaria',
+  inKindHelp:
+    'Enpresak soldataz gain ematen dizuna eta zergapean dagoena: enpresako autoa, seme-alaben ikastetxea, salbuetsi gabeko aseguruak… Adierazi nominan gauzazko gisa agertzen den urteko balioa (autoan, egotzitako balioa). Gizarte Segurantzan kotizatzen du eta PFEZn tributatzen du, eta enpresak konturako sarrera egiten du horren gainean. Ez sartu aurreko ataleko ordainsari malgu salbuetsia. Ez dago erabilgarri Euskadin eta Nafarroan.',
+  inKindTaxable: 'Gauzazko urteko balioa (€ / urte)',
+  inKindAdvanceBorne:
+    'Enpresak hartzen du konturako sarrera (ez dit nominan kentzen). Orduan zenbateko horrek ere gauzazko gisa tributatzen du.',
+  foralIssueInKind: 'Zergapean dagoen gauzazko ordainsaria ez dago foru-lurraldeetarako modelatuta; jarri 0.',
+  rowInKind: 'Zergapean dagoen gauzazko ordainsaria',
+  rowInKindAdvance: 'Horretatik, gauzazkoagatiko konturako sarrera',
+  helpInKindAdvance:
+    'Enpresak zure atxikipen-tasa aplikatzen dio gauzazkoaren balioari (PFEZ Erregelamenduaren 102. art.). Kentzen badizu, zure garbia murrizten du; berak hartzen badu, zure errentari gehitzen zaio gauzazko gisa (PFEZ Legearen 43.2 art.). Aitorpenean konturako ordaindutzat hartzen da.',
   foralUnsupported:
     'Foru profila ez dago balioztatuta edo familia baldintzak falta dira. Emaitzak ezkutatzen dira. Egiaztatu adinak eta baieztatu seme-alaben eta arbasoen baldintzak.',
   foralScenarioUnsupported:

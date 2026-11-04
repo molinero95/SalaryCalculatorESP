@@ -33,6 +33,8 @@ export const NUMERIC_INPUTS = new Set([
   'disability',
   'workingDays',
   'flexHealthPeople',
+  'inKindTaxable',
+  'inKindContribution',
   ...Object.keys(PERIOD_OF_AMOUNT),
 ]);
 
@@ -52,6 +54,8 @@ export const INPUT_LIMITS = {
   dependents75: { max: 10, integer: true },
   workingDays: { max: 366, integer: true },
   flexHealthPeople: { min: 1, max: 15, integer: true },
+  inKindTaxable: {},
+  inKindContribution: {},
   ...Object.fromEntries(Object.keys(PERIOD_OF_AMOUNT).map((field) => [field, {}])),
 };
 

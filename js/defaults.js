@@ -166,6 +166,11 @@ export const DEFAULT_INPUT = {
   disability: 0, // 0 | 33 | 65
   // Flexible compensation and pension plans, stored as annual amounts in euros.
   // `*Period` only controls whether the form shows them per year or per month.
+  // Taxable pay in kind on top of the cash salary, as valued on the payslip (common regime).
+  inKindTaxable: 0, // annual value in euros: company car, school fees, non-exempt insurance...
+  inKindAdvanceBorne: false, // the employer bears the ingreso a cuenta instead of deducting it
+  inKindContribution: 0, // independently valued annual amount included in contribution bases
+  inKindContributionConfirmed: false, // includes any applicable adjustment for the borne advance
   flexPeriod: 'annual', // 'annual' | 'monthly'
   flexMeal: 0,
   workingDays: 220,
