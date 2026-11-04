@@ -1,4 +1,7 @@
 // Persistent maintenance cases. No fiscal parameters or verification dates are changed here.
+import { readFile } from 'node:fs/promises';
+
+export const reviewDecisionsPath = new URL('../data/source-reviews.json', import.meta.url);
 const OPEN = new Set(['pending', 'implementation-needed']);
 const STATUSES = new Set([...OPEN, 'reviewed', 'implemented']);
 const KINDS = new Set(['changed', 'unavailable', 'stale', 'publication']);
@@ -57,10 +60,18 @@ export function reconcileAlerts(previous, report) {
         target: r.id,
         url: r.url,
         groups: r.covers ?? [],
-        signature: r.status === 'changed' ? JSON.stringify([r.url, r.sha256]) : r.url,
+        signature:
+          r.status === 'changed'
+            ? JSON.stringify([r.url, r.sha256, ...(r.fingerprintMethod ? [r.fingerprintMethod] : [])])
+            : r.url,
         evidence:
           r.status === 'changed'
-            ? { sha256: r.sha256, previousSha256: r.previousSha256, url: r.url }
+            ? {
+                sha256: r.sha256,
+                previousSha256: r.previousSha256,
+                url: r.url,
+                ...(r.fingerprintMethod ? { fingerprintMethod: r.fingerprintMethod, rawSha256: r.rawSha256 } : {}),
+              }
             : { error: r.error, url: r.url },
       })),
     ...(report.staleGroups ?? []).map((group) => ({
@@ -120,6 +131,50 @@ export function reviewAlert(previous, { id, status, evidence, actor, signature }
 }
 
 export const openAlerts = (ledger) => ledger.alerts.filter((alert) => OPEN.has(alert.status));
+
+/** Apply explicit repository-reviewed decisions once, only to matching evidence.
+ * Unavailable/stale findings must recover first; recurring failures reopen normally.
+ */
+export function applyReviewDecisions(previous, decisions, scope, actor, at) {
+  validateAlerts(previous);
+  if (decisions.schemaVersion !== 1 || !Array.isArray(decisions.reviews)) throw new Error('Invalid review decisions');
+  let ledger = previous;
+  const acceptedFingerprints = new Set();
+  const deferred = [];
+  const ids = new Set();
+  for (const decision of decisions.reviews) {
+    if (typeof decision.reviewId !== 'string' || !decision.reviewId || ids.has(decision.reviewId))
+      throw new Error('Invalid or duplicate review decision ID');
+    ids.add(decision.reviewId);
+    const alert = ledger.alerts.find((a) => a.id === decision.id && (a.scope ?? 'sources') === scope);
+    if (!alert) continue;
+    const applied = alert.history.some((h) => h.reviewId === decision.reviewId);
+    if (alert.signature !== decision.signature) {
+      if (OPEN.has(alert.status)) deferred.push(`${decision.id}: evidence changed`);
+      continue;
+    }
+    if (!applied && OPEN.has(alert.status)) {
+      try {
+        ledger = reviewAlert(ledger, { ...decision, status: 'reviewed', actor }, at);
+        ledger.alerts.find((a) => a.id === decision.id).history.at(-1).reviewId = decision.reviewId;
+      } catch (error) {
+        deferred.push(`${decision.id}: ${error.message}`);
+        continue;
+      }
+    }
+    const current = ledger.alerts.find((a) => a.id === decision.id);
+    if (
+      decision.acceptFingerprint === true &&
+      current.kind === 'changed' &&
+      current.status === 'reviewed' &&
+      current.history.some((h) => h.reviewId === decision.reviewId)
+    )
+      acceptedFingerprints.add(current.target);
+  }
+  return { ledger, acceptedFingerprints, deferred };
+}
+
+export const readReviewDecisions = async () => JSON.parse(await readFile(reviewDecisionsPath, 'utf8'));
 
 export function alertSummary(ledger) {
   return [

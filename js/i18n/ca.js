@@ -67,6 +67,14 @@ export default {
   foralIssueInvalid: 'Hi ha una dada familiar o anual fora de rang; revisa els números introduïts.',
   foralIssueScenario:
     'Els paràmetres d’«Actual» s’han modificat. Als territoris forals només es calcula amb la normativa vigent: prem «Restablir valors oficials» a Actual.',
+  inKindContribution: 'Import anual cotitzable de la retribució en espècie (€ / any)',
+  inKindContributionHelp:
+    'El valor anterior és per a l’IRPF, sense ingrés a compte. Indica per separat l’import d’aquesta espècie inclòs en les bases de cotització de la nòmina, amb els ajustos que pertoquin per l’ingrés a compte assumit. Exclou el sou en diners, la retribució flexible i les pensions. No es dedueix del valor fiscal: les regles de valoració poden diferir. Aquest import es manté fix en les simulacions; revisa’l si canvien les condicions. El cost empresarial fa servir el valor fiscal com a aproximació al cost del benefici.',
+  inKindContributionConfirmed:
+    'Confirmo l’import cotitzable segons la nòmina o l’assessoria, inclosos els ajustos que pertoquin per l’ingrés a compte assumit.',
+  inKindContributionMissing:
+    'Indica i confirma l’import anual cotitzable de l’espècie abans de calcular. Si canvies el valor fiscal, el cotitzable o qui assumeix l’ingrés a compte, cal tornar-lo a confirmar.',
+  inKindResultsHidden: 'Falta confirmar una dada per calcular el salari.',
   inKindTitle: 'Retribució en espècie que tributa',
   inKindHelp:
     'Per al que l’empresa et dona a més del sou i que tributa: cotxe d’empresa, escola dels fills, assegurances no exemptes… Indica el valor anual que consta a la nòmina com a espècie (en el cotxe, el valor imputat). Cotitza a la Seguretat Social i tributa a l’IRPF, i l’empresa fa un ingrés a compte sobre aquest valor. No hi incloguis la retribució flexible exempta de l’apartat anterior. No disponible al País Basc ni a Navarra.',

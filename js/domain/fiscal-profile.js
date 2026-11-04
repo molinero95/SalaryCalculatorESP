@@ -32,7 +32,21 @@ export function foralProfileIssues(input) {
   return [...new Set(issues)];
 }
 
-export const unsupportedFiscalProfile = (input) => foralProfileIssues(input).length > 0;
+export function fiscalProfileIssues(input) {
+  const issues = foralProfileIssues(input);
+  if (
+    !isForal(input.region) &&
+    (input.inKindTaxable ?? 0) > 0 &&
+    (input.inKindContributionConfirmed !== true ||
+      !Number.isFinite(input.inKindContribution) ||
+      input.inKindContribution < 0 ||
+      input.inKindContribution > 1e9)
+  )
+    issues.push('inKindContributionMissing');
+  return issues;
+}
+
+export const unsupportedFiscalProfile = (input) => fiscalProfileIssues(input).length > 0;
 
 /** These scenario groups are replaced by territorial rules in the foral engine. */
 export function unsupportedFiscalScenario(input, scenario) {

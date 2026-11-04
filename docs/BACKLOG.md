@@ -2,6 +2,10 @@
 
 Priorities agreed on 10 October 2026. This is the canonical list of pending work; [ROADMAP.md](ROADMAP.md) records architecture decisions and implemented capabilities. Items below are plans, not claims of implemented or legally verified behaviour.
 
+## Maintenance policy
+
+The owner switched to maintenance on 13 October 2026; see [maintenance.md](maintenance.md). The priorities and statuses below retain earlier plans, but they do not authorize starting feature expansion. Taxable pay in kind in [PR #34](https://github.com/molinero95/SalaryCalculatorESP/pull/34) is explicitly requested. Focus on existing defects, source reviews, fiscal currency and regression gaps. Resume other product work only after a new owner request.
+
 ## Working rules
 
 - Priority: P0 = protect fiscal currency and make gaps visible; P1 = strengthen validation and supported scope; P2 = maintenance or later product work.
@@ -19,7 +23,7 @@ Priorities agreed on 10 October 2026. This is the canonical list of pending work
 | FRESH-03    | P0       | Show fiscal year, verification and pending scope in results             | Ready       | Codex      | FRESH-02 for live alert status                     |
 | FRESH-04    | P0       | Apply source-specific review deadlines and monitor health checks        | Research    | Codex      | —                                                  |
 | TEST-01     | P1       | Cover fiscal-year rollover and stale data behaviour                     | Ready       | Codex      | FRESH-03, FRESH-04 for new behaviour               |
-| TEST-02     | P1       | Verify an installed app upgrades from an older offline cache            | Ready       | Codex      | —                                                  |
+| TEST-02     | P1       | Verify an installed app upgrades from an older offline cache            | In progress | Codex      | —                                                  |
 | DATA-01     | P1       | Trace each parameter group to legal articles and fixtures               | Ready       | Codex      | —                                                  |
 | POLICY-01   | P1       | Discover additional proposals and verify missing eligibility            | Research    | Unassigned | Primary sources and supported inputs               |
 | PAYERS-01   | P1       | Model several employment payers and mid-year job changes                | Research    | Unassigned | Verified annual aggregation and withholding inputs |

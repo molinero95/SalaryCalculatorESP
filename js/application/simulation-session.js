@@ -15,6 +15,22 @@ function changesFrom(base, value) {
   return JSON.stringify(base) === JSON.stringify(value) ? undefined : value;
 }
 
+function normalizePayrollInput(base, source = {}) {
+  const input = normalizeInput(merge(base, source));
+  if (!isPlainObject(source)) return input;
+  const changed = ['inKindTaxable', 'inKindContribution', 'inKindAdvanceBorne'].some(
+    (key) => Object.hasOwn(source, key) && source[key] !== base[key],
+  );
+  const explicitValuation =
+    Number.isFinite(source.inKindContribution) && source.inKindContribution >= 0 && source.inKindContribution <= 1e9;
+  if (
+    (changed || source.inKindContributionConfirmed === true) &&
+    !(source.inKindContributionConfirmed === true && explicitValuation)
+  )
+    input.inKindContributionConfirmed = false;
+  return input;
+}
+
 /** Simulations from saved or imported data (also accepts the old single `simulation`). */
 function simulationList(source) {
   const list = Array.isArray(source?.simulations)
@@ -54,7 +70,14 @@ export function createSession(saved = {}, shared = null, { defaultLanguage = 'es
   }
   defineActiveSimulation(state);
   state.chartMode = ['diff', 'rate'].includes(state.chartMode) ? state.chartMode : 'diff';
-  normalizeInput(state.input);
+  state.input = normalizePayrollInput(clone(DEFAULT_INPUT), state.input);
+  for (const source of [saved?.input, shared?.input]) {
+    if (
+      source?.inKindContributionConfirmed === true &&
+      (!Number.isFinite(source.inKindContribution) || source.inKindContribution < 0 || source.inKindContribution > 1e9)
+    )
+      state.input.inKindContributionConfirmed = false;
+  }
   return state;
 }
 
@@ -63,7 +86,7 @@ export function importSession(state, imported) {
   if (!isPlainObject(imported?.simulation) && !Array.isArray(imported?.simulations)) {
     throw new Error('Invalid scenario file');
   }
-  state.input = normalizeInput(merge(state.input, imported.input ?? {}));
+  state.input = normalizePayrollInput(state.input, imported.input ?? {});
   state.current = toScenario(imported.current ?? {});
   state.simulations = simulationList(imported);
   state.active = 0;

@@ -1,0 +1,132 @@
+{
+  "schemaVersion": 1,
+  "reviews": [
+    {
+      "reviewId": "2026-10-19:unavailable:podemos2019",
+      "id": "unavailable:podemos2019",
+      "signature": "https://podemos.info/wp-content/uploads/2019/10/Podemos_programa_generales_10N.pdf",
+      "evidence": "Owner supplied the linked historical 2019 programme on 2026-10-19. Verified measure 263 on PDF/printed pp.109–110; the existing partial first-band model remains unchanged. A pinned PDF copy is now checked when the original returns HTTP 403; the report preserves the remote block. See data/source-archives.json and docs/source-reviews/2026-10-19.md."
+    },
+    {
+      "reviewId": "2026-10-19:unavailable:fiscal:navarra",
+      "id": "unavailable:fiscal:navarra",
+      "signature": "https://www.navarra.es/es/web/normativa-hacienda/-/texto-refundido-de-la-ley-foral-del-impuesto-sobre-la-renta-de-las-personas-f%C3%ADsicas-dfl-4/2008-de-2-de-junio-",
+      "evidence": "Replaced the failing monitor endpoint with the official LexNavarra consolidated DFL 4/2008, https://www.lexnavarra.navarra.es/detalle.asp?r=29657. Same enacted-law identity; this is source availability maintenance, not a new parameter verification date. Close only after a healthy check of the replacement."
+    },
+    {
+      "reviewId": "2026-10-19:publication:BOE-A-2026-20004",
+      "id": "publication:BOE-A-2026-20004",
+      "signature": "463f70a68b191c670aa00c1eb359b5e506313f14a076dde9d6966e2575a358bc",
+      "evidence": "Read official text: Order PJC/1004/2026 allocates municipal Justice Office operating subsidies by population. It does not change employee IRPF scales, withholding, allowances or contributions. Broad budget-title match; no supported calculation changes."
+    },
+    {
+      "reviewId": "2026-10-19:publication:BOE-A-2026-20266",
+      "id": "publication:BOE-A-2026-20266",
+      "signature": "5958c2188da4ff3f7acc8633f0db8dca36c90d54fe510fa0637d2d115758bfd7",
+      "evidence": "Read RDL 26/2026, especially art.6 and final provision 3, together with BOE-A-2026-20526: Congress repealed it on 2 October. Housing imputation/rental relief and specific investment-account treatment do not replace the supported employee scales/withholding. Its successor BOE-A-2026-20823 is reviewed separately; no supported parameter update."
+    },
+    {
+      "reviewId": "2026-10-19:publication:BOE-A-2026-20385",
+      "id": "publication:BOE-A-2026-20385",
+      "signature": "83b74351023cc2e56868c296d2a1e2f72fefce13b2c40785545ec0c68f75b0bb",
+      "evidence": "Read RDL 27/2026: regulates residential lease duration/stability rather than payroll tax parameters. Repealed on 2 October by BOE-A-2026-20527; successor BOE-A-2026-20822 reviewed separately. Housing contract mechanics are outside the calculator."
+    },
+    {
+      "reviewId": "2026-10-19:publication:BOE-A-2026-20526",
+      "id": "publication:BOE-A-2026-20526",
+      "signature": "fb5d9c4f091825f353e548584e27c81593825fa48ede12993e4d44438bbb6fe3",
+      "evidence": "Read the Congressional resolution: repeals RDL 26/2026. Reviewed jointly with BOE-A-2026-20266 and successor BOE-A-2026-20823. No employee tax/contribution parameters from the repealed measure were implemented, so no rollback is needed."
+    },
+    {
+      "reviewId": "2026-10-19:publication:BOE-A-2026-20527",
+      "id": "publication:BOE-A-2026-20527",
+      "signature": "6b8b8e1b34b010fb2a9004bcf141dbc71fe3ca210ccaeb544478b82f3c5e5c83",
+      "evidence": "Read the Congressional resolution: repeals RDL 27/2026 on residential lease duration. No such contract measures were implemented in the calculator; no employee calculation rollback is needed."
+    },
+    {
+      "reviewId": "2026-10-19:publication:BOE-A-2026-20471",
+      "id": "publication:BOE-A-2026-20471",
+      "signature": "a1f6a55af48ad8753d8fe8a0930493d9dec135b6feedaf736362cbb7b9533d2d",
+      "evidence": "Read RD 765/2026: direct grants to local housing initiatives in the Donana area, including grant funding and beneficiary obligations. No change to general employee IRPF scales, withholding, minima or social-security contribution parameters."
+    },
+    {
+      "reviewId": "2026-10-19:publication:BOE-A-2026-20822",
+      "id": "publication:BOE-A-2026-20822",
+      "signature": "3623b5c146bf1adcd8512da4ed4e288df62d0ca3abf2d6927f9b9522f71cbd1b",
+      "evidence": "Read RDL 28/2026: changes residential lease duration, extensions and associated contract stability. These are housing contract rules outside the payroll/annual tax model; no supported tax or contribution parameter update."
+    },
+    {
+      "reviewId": "2026-10-19:publication:BOE-A-2026-20823",
+      "id": "publication:BOE-A-2026-20823",
+      "signature": "76396fdd78d8191ac6aa0a932c0689787c04b69e32f9c9dc32c4782158818107",
+      "evidence": "Read RDL 29/2026, art.6 and final provision 3: housing income imputation/rental reductions, future housing relief and special Financia Europa investment-account rules are outside the supported ordinary payroll and annual savings model. No replacement employee tax scales/minima, employment reduction or withholding algorithm. Housing deductions and these special investment products remain unsupported; no current calculation parameter update."
+    },
+    {
+      "reviewId": "2026-10-19:changed:pp2024",
+      "id": "changed:pp2024",
+      "signature": "[\"https://www.pp.es/actualidad/articulos/pp-proponebonificaciones-fiscales-jovenes-primeros-cuatro-anos-su-vida-laboral/\",\"7d3fb51f313741aa2dbaa5aa65bdc8c52b2cc8325d76c963ee5816a95b6694ef\",\"sha256:cf-email-v1\"]",
+      "evidence": "Reviewed the 28 May 2024 party announcement: youth relief 100%, 75%, 50%, 25% over years one through four. Both downloaded HTML copies differ only in the randomized Cloudflare email/share-link XOR key; decoding just that token gives the same fingerprint 7d3fb51f313741aa2dbaa5aa65bdc8c52b2cc8325d76c963ee5816a95b6694ef. Keep the catalogue informational/unmodelled. See docs/source-reviews/2026-10-19.md; accept only these normalized bytes, never arbitrary new page content.",
+      "acceptFingerprint": true
+    },
+    {
+      "reviewId": "2026-10-19:unavailable:fiscal:bizkaia",
+      "id": "unavailable:fiscal:bizkaia",
+      "signature": "https://www.bizkaia.eus/documents/880307/15187815/ca_13_2013.pdf",
+      "evidence": "The same official NF 13/2013 PDF is available again. Retain its existing fingerprint; bounded transient retries improve recovery. Close only after a healthy check, and preserve any independently detected changed-document case."
+    },
+    {
+      "reviewId": "2026-10-27:changed:pp2024",
+      "id": "changed:pp2024",
+      "signature": "[\"https://www.pp.es/actualidad/articulos/pp-proponebonificaciones-fiscales-jovenes-primeros-cuatro-anos-su-vida-laboral/\",\"2d3e0e7e425257d3f47a133f4ad3e1d2723a36c390aba5b5f18fa0dfa0858ea0\",\"sha256:cf-email-v1\"]",
+      "evidence": "Read the official 28 May 2024 announcement on 27 October 2026: relief for first labour-market entry ages 18–34 over four years remains informational, with no complete executable mechanism. Two fresh HTML downloads produce normalized fingerprint 2d3e0e7e425257d3f47a133f4ad3e1d2723a36c390aba5b5f18fa0dfa0858ea0, matching the 26 October finding. Accept only that exact sha256:cf-email-v1 content; do not infer which historical page bytes changed. See docs/source-reviews/2026-10-27.md.",
+      "acceptFingerprint": true
+    },
+    {
+      "reviewId": "2026-10-27:changed:ciudadanos2023families",
+      "id": "changed:ciudadanos2023families",
+      "signature": "[\"https://www.ciudadanos-cs.org/prensa/ciudadanos-propone-el-plan-mas-ambicioso-de-fomento-de-la-natalidad-con-ayudas-directas-y-deducciones-fiscales-por-el-segundo-hijo/13363\",\"ffbdf388c840bbda80370067f44939e8c4500507506258676b7d38f16233a50b\"]",
+      "evidence": "Read the official 4 May 2023 press release on 27 October 2026. Its ten-point family proposal still lacks a defined base/quota mechanism, limits and full eligibility rules; it remains historical and unmodelled. Fresh response SHA-256 ffbdf388c840bbda80370067f44939e8c4500507506258676b7d38f16233a50b matches the exact monitor finding. No executable parameters or legal status change. See docs/source-reviews/2026-10-27.md.",
+      "acceptFingerprint": true
+    },
+    {
+      "reviewId": "2026-10-27:changed:fiscal:valencia2026",
+      "id": "changed:fiscal:valencia2026",
+      "signature": "[\"https://www.boe.es/buscar/doc.php?id=BOE-A-2026-19331\",\"ca356663503dbe48f980fbff4b05ad69961b13fef60ce6b15fa43b6433eb0b1b\"]",
+      "evidence": "Read BOE-A-2026-19331, Ley 5/2026 art.18 and transitional provision 3 on 27 October 2026. All eleven 2026 band limits/rates and published accumulated quotas in art.18 match js/data/regions.js and the independent tests/fixtures/regional-scales.js rows. Transitional provision 3 applies from 1 January 2027 and must not replace the 2026 scale. Fresh SHA-256 ca356663503dbe48f980fbff4b05ad69961b13fef60ce6b15fa43b6433eb0b1b matches the exact alert. No 2026 scale correction required; no assertion about the cause of the raw HTML change. See docs/source-reviews/2026-10-27.md.",
+      "acceptFingerprint": true
+    },
+    {
+      "reviewId": "2026-10-31:changed:pp2024",
+      "id": "changed:pp2024",
+      "signature": "[\"https://www.pp.es/actualidad/articulos/pp-proponebonificaciones-fiscales-jovenes-primeros-cuatro-anos-su-vida-laboral/\",\"70e0d5b5a405296184f1c650396a4e6d3903093edb6d59fc4ef6d90c65636a61\",\"sha256:cf-email-v1\"]",
+      "evidence": "Read the official 28 May 2024 PP announcement again on 31 October 2026. Youth first-employment relief remains a historical informational proposal, with the same four-year 100/75/50/25 percentages and no complete executable mechanism. Fresh downloaded HTML normalizes to the exact current monitor fingerprint 70e0d5b5a405296184f1c650396a4e6d3903093edb6d59fc4ef6d90c65636a61 using the unchanged sha256:cf-email-v1 method. Accept only this reviewed current content; no claim about unseen historical bytes. See docs/source-reviews/2026-10-31.md.",
+      "acceptFingerprint": true
+    },
+    {
+      "reviewId": "2026-10-31:changed:fiscal:navarra",
+      "id": "changed:fiscal:navarra",
+      "signature": "[\"https://www.lexnavarra.navarra.es/detalle.asp?r=29657\",\"94bc33ca83eb448d548a43fe51730690c519a3ec6ac8531ec94852a42ed07d77\"]",
+      "evidence": "Reviewed the current LexNavarra DFL 4/2008 and cross-checked BOE consolidated BON-n-2008-90013, its amendment trail (latest 20 April 2026), LF 17/2025 and DLF 1/2026. Two fresh original downloads match current raw SHA-256 94bc33ca83eb448d548a43fe51730690c519a3ec6ac8531ec94852a42ed07d77. Supported arts.15,25,55,59,60,62.2/5/9,64.5,66 match current ordinary active-employee/individual-assessment parameters and scope. Checked the eleven general bands (including the embedded table image), savings bands, pension limits, employment/personal/family credits and ordinary eligible rental rules. The April amendment extends energy-efficiency works relief, outside this model. No supported parameter update; this does not approve unretained October 26/27 bytes or certify unsupported profiles. See docs/source-reviews/2026-10-31.md.",
+      "acceptFingerprint": true
+    },
+    {
+      "reviewId": "2026-10-31:publication:BOE-A-2026-22528",
+      "id": "publication:BOE-A-2026-22528",
+      "signature": "d4a36bc4845d3e5170f86720b4d42a0946ba1fc28928e355f3b9589d35c132c1",
+      "evidence": "Read the 28 October 2026 BOE publication in full: the Constitutional Court admits appeal 6911-2026 against the transitional provision of Navarra housing LF 14/2026. The notice contains no amendment to employee IRPF scales, withholding, allowances, contributions or the supported ordinary tax inputs. No calculator implementation is required; housing litigation is outside the model. See docs/source-reviews/2026-10-31.md."
+    },
+    {
+      "reviewId": "2026-10-31:publication:BOE-A-2026-22617",
+      "id": "publication:BOE-A-2026-22617",
+      "signature": "4a478a9bf7042139ba94100a1c09c28c067d39b3dd1bc23183bd8b1dbd0c5916",
+      "evidence": "Read RD 928/2026, published 29 October 2026: arts.1-15 and final provisions regulate direct subsidies to CASA 47 housing-concession awardees, eligible construction costs, SIEG obligations, funding, controls and recovery. This is affordable-housing project financing, not a change to employee IRPF or social-security parameters. No supported calculation update. See docs/source-reviews/2026-10-31.md."
+    },
+    {
+      "reviewId": "2026-11-03:changed:fiscal:navarra:response-date-v1",
+      "id": "changed:fiscal:navarra",
+      "signature": "[\"https://www.lexnavarra.navarra.es/detalle.asp?r=29657\",\"aa0d6ef1df713b98a81237fc4e1da38cbbc836ba10b629db7a5b2ff79d49fd44\",\"sha256:lexnavarra-response-date-v1\"]",
+      "evidence": "Two fresh LexNavarra downloads on 3 November 2026 have raw SHA-256 6a8a00981fba59303cfd200d4c01a56454cfc82a95c8ae5fd95215d282d8c4e0. Replacing only the head FECHA response-day value with 2026-11-2 exactly reproduces the 2 November alert hash 094b46f993099e49cd83d9238951bf589be5d3271a81e5b9fc8c605afad524fe; replacing it with 2026-10-31 exactly reproduces the reviewed baseline 94bc33ca83eb448d548a43fe51730690c519a3ec6ac8531ec94852a42ed07d77. All other bytes, including legal text, match the reviewed 31 October source. Accept only normalized fingerprint aa0d6ef1df713b98a81237fc4e1da38cbbc836ba10b629db7a5b2ff79d49fd44 under sha256:lexnavarra-response-date-v1. No fiscal parameter or verification-date change. See docs/source-reviews/2026-11-03.md.",
+      "acceptFingerprint": true
+    }
+  ]
+}

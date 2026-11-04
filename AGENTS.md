@@ -10,6 +10,10 @@ Read this file first. It applies to the whole repository. User instructions take
 4. For proposals or monitoring: [template maintenance](docs/template-maintenance.md).
 5. [Decisions and next work](docs/ROADMAP.md).
 
+## Operating mode
+
+The owner switched the project to maintenance on 13 October 2026. Prioritize defects, verified updates to existing fiscal rules, source-monitor triage, accessibility/offline regressions and necessary tooling fixes. The explicitly requested taxable pay-in-kind feature in PR #34 is the current exception. Defer other product expansion and broad refactoring until the owner requests them. Housing deductions remain out of scope. See [maintenance policy](docs/maintenance.md).
+
 ## Ground rules
 
 - The product is a static Spanish payroll estimator and fiscal proposal simulator. Preserve its offline operation, editable scenarios and five languages.

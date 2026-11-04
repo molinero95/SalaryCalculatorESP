@@ -5,7 +5,14 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { emptyAlerts, reconcileAlerts, reviewAlert, openAlerts, validateAlerts } from '../scripts/source-alerts.js';
+import {
+  emptyAlerts,
+  reconcileAlerts,
+  reviewAlert,
+  openAlerts,
+  validateAlerts,
+  applyReviewDecisions,
+} from '../scripts/source-alerts.js';
 
 const first = '2026-10-10T08:00:00Z';
 const later = '2026-10-11T08:00:00Z';
@@ -23,6 +30,66 @@ const review = (ledger, status = 'reviewed', evidence = 'Read the original text;
     { id: 'changed:fiscal:lirpf', status, evidence, actor: 'reviewer', signature: ledger.alerts[0].signature },
     ledger.checkedAt,
   );
+
+test('committed reviews require matching evidence, preserve history and accept only a named fingerprint', () => {
+  const initial = reconcileAlerts(emptyAlerts(), report());
+  const decisions = {
+    schemaVersion: 1,
+    reviews: [
+      {
+        reviewId: 'review-1',
+        id: initial.alerts[0].id,
+        signature: initial.alerts[0].signature,
+        evidence: 'Read the current official text; formatting only.',
+        acceptFingerprint: true,
+      },
+    ],
+  };
+  const applied = applyReviewDecisions(initial, decisions, 'sources', 'maintainer', first);
+  assert.equal(openAlerts(applied.ledger).length, 0);
+  assert.deepEqual([...applied.acceptedFingerprints], ['fiscal:lirpf']);
+  assert.equal(applied.ledger.alerts[0].history.at(-1).actor, 'maintainer');
+  const repeated = applyReviewDecisions(applied.ledger, decisions, 'sources', 'maintainer', first);
+  assert.deepEqual(repeated.ledger, applied.ledger);
+  const newer = reconcileAlerts(applied.ledger, report([{ ...changed, sha256: 'newer' }], later));
+  const refused = applyReviewDecisions(newer, decisions, 'sources', 'maintainer', later);
+  assert.equal(openAlerts(refused.ledger).length, 1);
+  assert.equal(refused.acceptedFingerprints.size, 0);
+  assert.match(refused.deferred[0], /evidence changed/);
+  const newMethod = reconcileAlerts(applied.ledger, report([{ ...changed, fingerprintMethod: 'new-method' }], later));
+  const methodReview = applyReviewDecisions(newMethod, decisions, 'sources', 'maintainer', later);
+  assert.equal(openAlerts(methodReview.ledger).length, 1);
+  assert.equal(methodReview.acceptedFingerprints.size, 0);
+});
+
+test('committed reviews wait for recovery and cannot close the same outage a second time', () => {
+  const failed = { ...changed, status: 'unavailable', error: 'HTTP 403' };
+  const initial = reconcileAlerts(emptyAlerts(), report([failed]));
+  const decisions = {
+    schemaVersion: 1,
+    reviews: [
+      {
+        reviewId: 'outage-review-1',
+        id: initial.alerts[0].id,
+        signature: initial.alerts[0].signature,
+        evidence: 'Verified the recovered official source.',
+      },
+    ],
+  };
+  assert.equal(openAlerts(applyReviewDecisions(initial, decisions, 'sources', 'maintainer', first).ledger).length, 1);
+  const healthy = reconcileAlerts(initial, report([], later));
+  // BOE discovery must not review sources that have not been checked in its scope.
+  assert.equal(
+    openAlerts(applyReviewDecisions(healthy, decisions, 'boe-discovery', 'maintainer', later).ledger).length,
+    1,
+  );
+  const reviewed = applyReviewDecisions(healthy, decisions, 'sources', 'maintainer', later).ledger;
+  assert.equal(openAlerts(reviewed).length, 0);
+  const reopened = reconcileAlerts(reviewed, report([failed], '2026-10-12T08:00:00Z'));
+  const recoveredAgain = reconcileAlerts(reopened, report([], '2026-10-13T08:00:00Z'));
+  const unchanged = applyReviewDecisions(recoveredAgain, decisions, 'sources', 'maintainer', recoveredAgain.checkedAt);
+  assert.equal(openAlerts(unchanged.ledger).length, 1);
+});
 
 test('repeated findings share an id and preserve first detection, affected groups and input', () => {
   const original = emptyAlerts();
@@ -216,6 +283,35 @@ test('CLI persists open cases across accepted baselines and explicit reviews wit
     const done = JSON.parse(await readFile(join(directory, '.source-monitor/alerts.json'), 'utf8'));
     assert.equal(done.alerts[0].status, 'reviewed');
     assert.match(await readFile(join(directory, '.source-monitor/report.md'), 'utf8'), /No open review cases/);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('source CLI leaves BOE cases for the subsequent discovery gate', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'salary-source-scope-'));
+  try {
+    await mkdir(join(directory, '.source-monitor'));
+    const publication = { id: 'BOE-A-2026-99999', signature: 'unreviewed-publication', groups: [] };
+    const ledger = reconcileAlerts(emptyAlerts(), {
+      scope: 'boe-discovery',
+      checkedAt: first,
+      results: [],
+      publications: [publication],
+    });
+    await writeFile(join(directory, '.source-monitor/alerts.json'), JSON.stringify(ledger));
+    const runner = fileURLToPath(new URL('../scripts/check-template-sources.js', import.meta.url));
+    const script = `globalThis.fetch = async () => new Response('%PDF-fake', { headers: { 'content-type': 'application/pdf' } }); process.argv[1] = ${JSON.stringify(runner)}; await import(${JSON.stringify(new URL('../scripts/check-template-sources.js', import.meta.url).href)});`;
+    const result = spawnSync(process.execPath, ['--input-type=module', '-e', script], {
+      cwd: directory,
+      encoding: 'utf8',
+      env: { ...process.env, GITHUB_STEP_SUMMARY: '', SOURCE_ALERT_ID: '', ACCEPT_SOURCE_BASELINE: 'false' },
+    });
+    assert.equal(result.status, 0, result.stderr);
+    const after = JSON.parse(await readFile(join(directory, '.source-monitor/alerts.json')));
+    assert.equal(openAlerts(after).length, 1);
+    assert.equal(after.alerts[0].signature, 'unreviewed-publication');
+    assert.equal(after.alerts[0].status, 'pending');
   } finally {
     await rm(directory, { recursive: true, force: true });
   }

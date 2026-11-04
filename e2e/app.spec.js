@@ -176,7 +176,35 @@ test('app reloads and calculates offline after caching the app shell', async ({ 
 test('taxable pay in kind lowers the cash net and shows its ingreso a cuenta', async ({ page }) => {
   await page.locator('#inkind-fields > summary').click();
   await page.fill('#inKindTaxable', '3000');
+  await expect(page.locator('#results')).toContainText('Indica y confirma el importe anual cotizable');
+  await page.fill('#inKindContribution', '2000');
+  await page.check('#inKindContributionConfirmed');
   await expect(page.locator('.result-current .metrics')).toContainText('Retribución en especie que tributa');
   await expect(page.locator('.result-current .metrics')).toContainText('3.000,00 €');
   await expect(page.locator('#breakdown')).toContainText('ingreso a cuenta por la especie');
+  const net = await page.locator('.result-current .headline strong').textContent();
+  await page.evaluate(async () => {
+    await navigator.serviceWorker.ready;
+    if (!navigator.serviceWorker.controller)
+      await new Promise((resolve) =>
+        navigator.serviceWorker.addEventListener('controllerchange', resolve, { once: true }),
+      );
+  });
+  await page.context().setOffline(true);
+  await page.reload();
+  await expect(page.locator('.result-current .headline strong')).toHaveText(net);
+  await page.context().setOffline(false);
+  await page.locator('#inkind-fields > summary').click();
+  await expect(page.locator('#inKindContribution')).toHaveValue('2000');
+  await expect(page.locator('#inKindContributionConfirmed')).toBeChecked();
+  await page.check('#inKindAdvanceBorne');
+  await expect(page.locator('#inKindContributionConfirmed')).not.toBeChecked();
+  await expect(page.locator('#results')).toContainText('Indica y confirma el importe anual cotizable');
+  await page.check('#inKindContributionConfirmed');
+  await page.fill('#inKindContribution', '2100');
+  await expect(page.locator('#inKindContributionConfirmed')).not.toBeChecked();
+  await expect(page.locator('#results')).toContainText('Indica y confirma el importe anual cotizable');
+  await page.check('#inKindContributionConfirmed');
+  await page.fill('#inKindTaxable', '3100');
+  await expect(page.locator('#inKindContributionConfirmed')).not.toBeChecked();
 });

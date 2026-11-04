@@ -67,6 +67,14 @@ export default {
   foralIssueInvalid: 'A family or annual value is out of range; check the numbers entered.',
   foralIssueScenario:
     'The “Current” parameters have been edited. Foral territories are only calculated with the law in force: press “Reset to official values” in Current.',
+  inKindContribution: 'Annual contribution valuation of pay in kind (€ / year)',
+  inKindContributionHelp:
+    'The value above is for income tax, excluding the advance payment. Separately enter the amount of this benefit included in your payslip contribution bases, including any applicable adjustment for an employer-borne advance. Exclude cash salary, flexible pay and pensions. It is not derived from the tax value: valuation rules can differ. This amount stays fixed in simulations; review it if circumstances change. Employer cost uses the tax value as a proxy for the benefit cost.',
+  inKindContributionConfirmed:
+    'I confirm the contribution valuation from my payslip or adviser, including any applicable employer-borne advance adjustments.',
+  inKindContributionMissing:
+    'Enter and confirm the annual contribution valuation of pay in kind before calculating. Changing its tax value, contribution value or who bears the advance requires confirmation again.',
+  inKindResultsHidden: 'A value must be confirmed before calculating your salary.',
   inKindTitle: 'Taxable pay in kind',
   inKindHelp:
     'For what your employer gives you on top of your salary that is taxed: company car, children’s school fees, non-exempt insurance… Enter the annual value your payslip shows as pay in kind (for a car, the imputed value). It pays social security and income tax, and the employer makes an ingreso a cuenta (advance payment) on it. Do not include the exempt flexible pay from the previous section. Not available in the Basque Country or Navarre.',

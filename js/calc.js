@@ -75,7 +75,8 @@ export const grossAnnualOf = (input) => (input.period === 'perPayment' ? input.s
  * `grossAnnual` can be overridden to evaluate other salary levels with the same profile.
  */
 export function computePayroll(input, scenario, grossAnnual = grossAnnualOf(input)) {
-  if (unsupportedFiscalProfile(input)) throw new RangeError('Unsupported foral fiscal profile');
+  if (unsupportedFiscalProfile(input))
+    throw new RangeError(isForal(input.region) ? 'Unsupported foral fiscal profile' : 'Unsupported fiscal profile');
   if (unsupportedFiscalScenario(input, scenario)) throw new RangeError('Unsupported foral fiscal scenario');
   const foral = isForal(input.region);
   const calculateWithholding = foral ? (i, p, gross, ss) => foralWithholding(i, gross, ss) : withholding;
@@ -99,9 +100,11 @@ export function computePayroll(input, scenario, grossAnnual = grossAnnualOf(inpu
   // Taxable pay in kind on top of the cash salary (company car, school fees...),
   // as valued on the payslip. Common regime only; foral profiles reject it.
   const inKind = foral ? 0 : Math.max(0, input.inKindTaxable ?? 0);
-  // Employer pension contributions and pay in kind are part of the contribution base
-  // (art. 147.1 LGSS: "tanto en metálico como en especie").
-  const contributionBase = gross + input.pensionEmployer + inKind;
+  // Art. 23 RD 2064/1995 has its own valuation rules. Require the confirmed
+  // annual cotizable amount, including any applicable advance adjustment, rather
+  // than deriving it from the IRPF value or assuming an advance is excluded.
+  const inKindContribution = inKind > 0 ? input.inKindContribution : 0;
+  const contributionBase = gross + input.pensionEmployer + inKindContribution;
   const employee = contributions(contributionBase, scenario.socialSecurity, scenario.employee, input);
   const employer = contributions(contributionBase, scenario.socialSecurity, scenario.employer, input);
 

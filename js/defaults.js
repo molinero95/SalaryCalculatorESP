@@ -169,6 +169,8 @@ export const DEFAULT_INPUT = {
   // Taxable pay in kind on top of the cash salary, as valued on the payslip (common regime).
   inKindTaxable: 0, // annual value in euros: company car, school fees, non-exempt insurance...
   inKindAdvanceBorne: false, // the employer bears the ingreso a cuenta instead of deducting it
+  inKindContribution: 0, // independently valued annual amount included in contribution bases
+  inKindContributionConfirmed: false, // includes any applicable adjustment for the borne advance
   flexPeriod: 'annual', // 'annual' | 'monthly'
   flexMeal: 0,
   workingDays: 220,

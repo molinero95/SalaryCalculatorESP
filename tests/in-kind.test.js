@@ -5,10 +5,68 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { computePayroll } from '../js/calc.js';
 import { DEFAULT_INPUT, CURRENT_SCENARIO, clone } from '../js/defaults.js';
-import { foralProfileIssues } from '../js/domain/fiscal-profile.js';
+import { foralProfileIssues, fiscalProfileIssues } from '../js/domain/fiscal-profile.js';
+import { createSession, importSession } from '../js/application/simulation-session.js';
 
 const cents = (x) => Math.round(x * 100) / 100;
-const run = (input) => computePayroll({ ...clone(DEFAULT_INPUT), salary: 30000, ...input }, clone(CURRENT_SCENARIO));
+const run = (input) =>
+  computePayroll(
+    { ...clone(DEFAULT_INPUT), salary: 30000, inKindContribution: 3000, inKindContributionConfirmed: true, ...input },
+    clone(CURRENT_SCENARIO),
+  );
+
+test('contribution valuation is required and confirmed independently of the tax value', () => {
+  for (const extra of [
+    {},
+    { inKindContribution: 3000 },
+    { inKindContribution: NaN, inKindContributionConfirmed: true },
+    { inKindContribution: -1, inKindContributionConfirmed: true },
+  ]) {
+    const input = { ...clone(DEFAULT_INPUT), salary: 30000, inKindTaxable: 3000, ...extra };
+    assert.deepEqual(fiscalProfileIssues(input), ['inKindContributionMissing']);
+    assert.throws(() => computePayroll(input, clone(CURRENT_SCENARIO)), /Unsupported fiscal profile/);
+  }
+  const restored = createSession({ input: { inKindTaxable: 3000 } });
+  assert.deepEqual(fiscalProfileIssues(restored.input), ['inKindContributionMissing']);
+  for (const value of [undefined, null, '2000', -1, 1e10, NaN]) {
+    const invalid = createSession({
+      input: { inKindTaxable: 3000, inKindContribution: value, inKindContributionConfirmed: true },
+    });
+    assert.deepEqual(fiscalProfileIssues(invalid.input), ['inKindContributionMissing']);
+  }
+  const valid = createSession({
+    input: { inKindTaxable: 3000, inKindContribution: 2000, inKindContributionConfirmed: true },
+  });
+  assert.deepEqual(fiscalProfileIssues(valid.input), []);
+  importSession(valid, { input: { inKindTaxable: 3100 }, simulation: {} });
+  assert.deepEqual(fiscalProfileIssues(valid.input), ['inKindContributionMissing']);
+});
+
+test('independent contribution valuation controls SS and the deductible expense, not tax valuation', () => {
+  const r = run({ inKindTaxable: 3000, inKindContribution: 2000 });
+  // Confirmed cotizable remuneration: 30,000 + 2,000; employee 6.5%, employer 32.15%.
+  assert.equal(cents(r.employee.total), 2080);
+  assert.equal(cents(r.employer.total), 10288);
+  // IRPF remains based on 33,000: 33,000 - 2,080 - 2,000 = 28,920;
+  // quota 6,841.50 - 1,054.50 = 5,787; truncated rate 17.53%.
+  assert.equal(r.incomeTax.rate, 17.53);
+  assert.equal(cents(r.incomeTax.annualTax), 5787);
+  assert.equal(r.incomeTax.inKindAdvance, 525.9);
+  assert.equal(cents(r.netAnnual), 22135.1);
+  const borne = run({ inKindTaxable: 3000, inKindContribution: 2000, inKindAdvanceBorne: true });
+  assert.equal(cents(borne.employee.total), 2080);
+  assert.equal(cents(borne.incomeTax.annualTax), 5944.77);
+  assert.equal(cents(borne.netAnnual), 22661);
+});
+
+test('confirmed contribution amount may include an applicable advance adjustment or a zero valuation', () => {
+  // The engine uses the independently confirmed figure; it does not infer the legal adjustment.
+  assert.equal(
+    cents(run({ inKindTaxable: 3000, inKindContribution: 3500, inKindAdvanceBorne: true }).employee.total),
+    2177.5,
+  );
+  assert.equal(cents(run({ inKindTaxable: 3000, inKindContribution: 0 }).employee.total), 1950);
+});
 
 test('3,000 € in kind deducted from pay: contributions, withholding and annual return', () => {
   const r = run({ inKindTaxable: 3000 });

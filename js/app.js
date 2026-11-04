@@ -21,7 +21,7 @@ import * as storage from './storage.js';
 import { renderResidenceOptions, renderResidenceBrackets } from './presentation/residence.js';
 import {
   isForal,
-  foralProfileIssues,
+  fiscalProfileIssues,
   unsupportedFiscalProfile,
   unsupportedFiscalScenario,
 } from './domain/fiscal-profile.js';
@@ -538,6 +538,7 @@ function update() {
   $('#foral-benefits-help').textContent = t(basque ? 'foralBenefitsBasqueHelp' : 'foralBenefitsNavarraHelp');
   $('#foral-annual-fields').hidden = !foral;
   $('#inkind-fields').hidden = foral && !(state.input.inKindTaxable > 0);
+  $('#inkind-contribution-fields').hidden = !(state.input.inKindTaxable > 0);
   $('#foralExemptIncome-field').hidden = state.input.region !== 'navarra';
   $('#foralRentalInsurance-field').hidden = !basque;
   $('label[for="foralRentalExpenses"]').textContent = t(basque ? 'foralRentalExpensesBasque' : 'foralRentalExpenses');
@@ -590,9 +591,9 @@ function update() {
   renderInputWarnings();
   if (unsupported) {
     // Say exactly what is missing where the results would be, instead of an empty area.
-    const issues = unsupportedReference ? ['foralIssueScenario'] : foralProfileIssues(state.input);
+    const issues = unsupportedReference ? ['foralIssueScenario'] : fiscalProfileIssues(state.input);
     $('#results').innerHTML =
-      `<div class="warning" role="status"><p>${escapeHtml(t('foralResultsHidden'))}</p><ul>${issues
+      `<div class="warning" role="status"><p>${escapeHtml(t(foral ? 'foralResultsHidden' : 'inKindResultsHidden'))}</p><ul>${issues
         .map((key) => `<li>${escapeHtml(t(key))}</li>`)
         .join('')}</ul></div>`;
     lastResults = null;

@@ -66,6 +66,14 @@ export default {
   foralIssueInvalid: 'Hai un dato familiar ou anual fóra de rango; revisa os números introducidos.',
   foralIssueScenario:
     'Os parámetros de «Actual» modificáronse. Nos territorios forais só se calcula coa normativa vixente: preme «Restablecer valores oficiais» en Actual.',
+  inKindContribution: 'Importe anual cotizable da retribución en especie (€ / ano)',
+  inKindContributionHelp:
+    'O valor anterior é para o IRPF, sen ingreso á conta. Indica por separado o importe desta especie incluído nas bases de cotización da nómina, cos axustes que correspondan polo ingreso á conta asumido. Exclúe o salario en diñeiro, a retribución flexible e as pensións. Non se deduce do valor fiscal: as regras de valoración poden diferir. Este importe mantense fixo nas simulacións; revísao se cambian as condicións. O custo empresarial usa o valor fiscal como aproximación ao custo do beneficio.',
+  inKindContributionConfirmed:
+    'Confirmo o importe cotizable segundo a nómina ou asesoría, incluídos os axustes que correspondan polo ingreso á conta asumido.',
+  inKindContributionMissing:
+    'Indica e confirma o importe anual cotizable da especie antes de calcular. Se cambias o valor fiscal, o cotizable ou quen asume o ingreso á conta, debes confirmalo de novo.',
+  inKindResultsHidden: 'Falta confirmar un dato para calcular o salario.',
   inKindTitle: 'Retribución en especie que tributa',
   inKindHelp:
     'Para o que a empresa che dá ademais do soldo e que tributa: coche de empresa, colexio dos fillos, seguros non exentos… Indica o valor anual que figura na túa nómina como especie (no coche, o valor imputado). Cotiza á Seguridade Social e tributa no IRPF, e a empresa fai un ingreso a conta sobre el. Non inclúas a retribución flexible exenta do apartado anterior. Non dispoñible no País Vasco nin en Navarra.',
