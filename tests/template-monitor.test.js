@@ -8,6 +8,7 @@ import {
   checkSources,
   nextBaseline,
   normalizeProtectedEmails,
+  normalizeLexNavarraDate,
 } from '../scripts/check-template-sources.js';
 const catalogue = JSON.parse(await readFile(cataloguePath, 'utf8'));
 test('catalogue validates and generates both modelled proposals and notes', () => {
@@ -37,6 +38,45 @@ for (const [label, mutate] of [
   });
 }
 const fakeFetch = async () => new Response('%PDF-source text', { headers: { 'content-type': 'application/pdf' } });
+test('LexNavarra response-day metadata is isolated from legal dates, bytes and other sources', async () => {
+  const url = 'https://www.lexnavarra.navarra.es/detalle.asp?r=29657';
+  const page = (day, text = 'Art. 59: escala 2026-10-31; cuota 100; ñ') =>
+    Buffer.from(`<head><meta name="FECHA" content="${day}"/></head><body>${text}</body>`, 'latin1');
+  const inspect = (bytes, target = url, finalUrl = target, contentType = 'text/html') =>
+    inspectSource(target, async () => {
+      const response = new Response(bytes, { headers: { 'content-type': contentType } });
+      Object.defineProperty(response, 'url', { value: finalUrl });
+      return response;
+    });
+  const first = await inspect(page('2026-10-31'));
+  const second = await inspect(page('2026-11-2'));
+  assert.notEqual(first.rawSha256, second.rawSha256);
+  assert.equal(classifySource(first, second), 'unchanged');
+  assert.equal(first.fingerprintMethod, 'sha256:lexnavarra-response-date-v1');
+  assert.equal(classifySource({ ...first, fingerprintMethod: undefined }, first), 'changed');
+  for (const text of ['Art. 59: cuota 101', 'Art. 59: fecha 2026-11-2', 'Art. 59: n'])
+    assert.equal(classifySource(first, await inspect(page('2026-11-2', text))), 'changed');
+  const expected = Buffer.from(
+    '<head><meta name="FECHA" content="response-day"/></head><body>Art. 59: escala 2026-10-31; cuota 100; ñ</body>',
+    'latin1',
+  );
+  assert.deepEqual(normalizeLexNavarraDate(page('2026-11-2')), expected);
+  for (const target of ['https://example.org/detalle.asp?r=29657', url + '&other=1', url.replace('29657', '1')])
+    assert.equal((await inspect(page('2026-11-2'), target)).fingerprintMethod, undefined);
+  assert.equal((await inspect(page('2026-11-2'), url, 'https://example.org')).fingerprintMethod, undefined);
+  assert.equal((await inspect(page('2026-11-2'), url, url, 'text/plain')).fingerprintMethod, undefined);
+  for (const html of [
+    '<head></head><meta name="FECHA" content="2026-11-2"/>',
+    '<head><meta name="FECHA" content="2026-11-2"/>',
+    '<head><meta name="FECHA" content="2026-2-30"/></head>',
+    '<head><meta name="FECHA" content="2026-13-1"/></head>',
+    '<head><meta name="FECHA" content="unknown"/></head>',
+    '<head><meta name="FECHA" content="2026-11-2"/><meta name="FECHA" content="2026-11-3"/></head>',
+  ]) {
+    const bytes = Buffer.from(html);
+    assert.deepEqual(normalizeLexNavarraDate(bytes), bytes);
+  }
+});
 test('random Cloudflare email keys do not change PP fingerprints but changed content and email bytes do', async () => {
   const page = (token, text = 'Proposal text') =>
     `<article>${text}</article><a href="/cdn-cgi/l/email-protection#${token}">Email</a>`;

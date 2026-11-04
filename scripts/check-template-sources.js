@@ -46,6 +46,27 @@ export function classifySource(previous, current) {
   return previous.sha256 === current.sha256 ? 'unchanged' : 'changed';
 }
 
+// This exact LexNavarra page emits the response day in head metadata. Preserve
+// every other byte, including legal dates and the ISO-8859-1 source encoding.
+export function normalizeLexNavarraDate(bytes) {
+  const html = bytes.toString('latin1');
+  const end = html.indexOf('</head>');
+  if (end < 0) return bytes;
+  const head = html.slice(0, end);
+  const pattern = /<meta name="FECHA" content="(\d{4})-(\d{1,2})-(\d{1,2})"\/>/g;
+  const matches = [...head.matchAll(pattern)];
+  if (matches.length !== 1) return bytes;
+  const [tag, year, month, day] = matches[0];
+  const date = new Date(Date.UTC(Number(year), Number(month) - 1, Number(day)));
+  if (
+    date.getUTCFullYear() !== Number(year) ||
+    date.getUTCMonth() + 1 !== Number(month) ||
+    date.getUTCDate() !== Number(day)
+  )
+    return bytes;
+  return Buffer.from(head.replace(tag, '<meta name="FECHA" content="response-day"/>') + html.slice(end), 'latin1');
+}
+
 export async function inspectSource(url, fetcher = fetch, { retryDelayMs = 500 } = {}) {
   // At most two 15-second attempts: retry transient transport/server failures,
   // while preserving blocked, invalid or changed documents as review findings.
@@ -71,6 +92,10 @@ export async function inspectSource(url, fetcher = fetch, { retryDelayMs = 500 }
       const reader = response.body.getReader();
       const hash = createHash('sha256');
       const normalize = new URL(url).hostname === 'www.pp.es' && /text\/html/i.test(contentType);
+      const normalizeNavarra =
+        url === 'https://www.lexnavarra.navarra.es/detalle.asp?r=29657' &&
+        response.url === url &&
+        /text\/html/i.test(contentType);
       const chunks = [];
       let bytes = 0;
       let prefix = Buffer.alloc(0);
@@ -84,7 +109,7 @@ export async function inspectSource(url, fetcher = fetch, { retryDelayMs = 500 }
           throw new Error('Source exceeds 20 MiB');
         }
         hash.update(value);
-        if (normalize) chunks.push(Buffer.from(value));
+        if (normalize || normalizeNavarra) chunks.push(Buffer.from(value));
       }
       if (!bytes) throw new Error('Empty source');
       if (/application\/pdf/i.test(contentType) && prefix.toString() !== '%PDF-')
@@ -98,7 +123,15 @@ export async function inspectSource(url, fetcher = fetch, { retryDelayMs = 500 }
               .update(normalizeProtectedEmails(Buffer.concat(chunks).toString('utf8')))
               .digest('hex'),
           }
-        : { sha256: rawSha256 };
+        : normalizeNavarra
+          ? {
+              fingerprintMethod: 'sha256:lexnavarra-response-date-v1',
+              rawSha256,
+              sha256: createHash('sha256')
+                .update(normalizeLexNavarraDate(Buffer.concat(chunks)))
+                .digest('hex'),
+            }
+          : { sha256: rawSha256 };
       return { url, finalUrl: response.url, contentType, bytes, ...fingerprint, attempts: attempt };
     } catch (error) {
       const code = error.cause?.code;
