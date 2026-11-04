@@ -74,6 +74,7 @@
   },
   "fiscal:navarra": {
     "url": "https://www.lexnavarra.navarra.es/detalle.asp?r=29657",
-    "sha256": "94bc33ca83eb448d548a43fe51730690c519a3ec6ac8531ec94852a42ed07d77"
+    "sha256": "aa0d6ef1df713b98a81237fc4e1da38cbbc836ba10b629db7a5b2ff79d49fd44",
+    "fingerprintMethod": "sha256:lexnavarra-response-date-v1"
   }
 }
