@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-11-04T08:29:15.986Z",
+  "checkedAt": "2026-11-09T17:42:20.204Z",
   "alerts": [
     {
       "kind": "unavailable",
@@ -603,17 +603,17 @@
       "target": "ciudadanos2023families",
       "url": "https://www.ciudadanos-cs.org/prensa/ciudadanos-propone-el-plan-mas-ambicioso-de-fomento-de-la-natalidad-con-ayudas-directas-y-deducciones-fiscales-por-el-segundo-hijo/13363",
       "groups": [],
-      "signature": "[\"https://www.ciudadanos-cs.org/prensa/ciudadanos-propone-el-plan-mas-ambicioso-de-fomento-de-la-natalidad-con-ayudas-directas-y-deducciones-fiscales-por-el-segundo-hijo/13363\",\"ffbdf388c840bbda80370067f44939e8c4500507506258676b7d38f16233a50b\"]",
+      "signature": "[\"https://www.ciudadanos-cs.org/prensa/ciudadanos-propone-el-plan-mas-ambicioso-de-fomento-de-la-natalidad-con-ayudas-directas-y-deducciones-fiscales-por-el-segundo-hijo/13363\",\"d707499c2a8c7b74a846ad8036aa58ba8f27323c83681bbd7843ee609f4546ef\"]",
       "evidence": {
-        "sha256": "ffbdf388c840bbda80370067f44939e8c4500507506258676b7d38f16233a50b",
-        "previousSha256": "592fdf3a87d720b88479d6485187eae8fc1e0e1e3bb55abcf9b190ec8f5dc15c",
+        "sha256": "d707499c2a8c7b74a846ad8036aa58ba8f27323c83681bbd7843ee609f4546ef",
+        "previousSha256": "ffbdf388c840bbda80370067f44939e8c4500507506258676b7d38f16233a50b",
         "url": "https://www.ciudadanos-cs.org/prensa/ciudadanos-propone-el-plan-mas-ambicioso-de-fomento-de-la-natalidad-con-ayudas-directas-y-deducciones-fiscales-por-el-segundo-hijo/13363"
       },
       "scope": "sources",
       "id": "changed:ciudadanos2023families",
       "firstSeen": "2026-10-26T14:26:42.941Z",
-      "occurrences": 2,
-      "status": "reviewed",
+      "occurrences": 3,
+      "status": "pending",
       "history": [
         {
           "at": "2026-10-26T14:26:42.941Z",
@@ -630,10 +630,19 @@
           "actor": "molinero95",
           "evidence": "Read the official 4 May 2023 press release on 27 October 2026. Its ten-point family proposal still lacks a defined base/quota mechanism, limits and full eligibility rules; it remains historical and unmodelled. Fresh response SHA-256 ffbdf388c840bbda80370067f44939e8c4500507506258676b7d38f16233a50b matches the exact monitor finding. No executable parameters or legal status change. See docs/source-reviews/2026-10-27.md.",
           "reviewId": "2026-10-27:changed:ciudadanos2023families"
+        },
+        {
+          "at": "2026-11-09T17:42:17.721Z",
+          "action": "reopened",
+          "evidence": {
+            "sha256": "d707499c2a8c7b74a846ad8036aa58ba8f27323c83681bbd7843ee609f4546ef",
+            "previousSha256": "ffbdf388c840bbda80370067f44939e8c4500507506258676b7d38f16233a50b",
+            "url": "https://www.ciudadanos-cs.org/prensa/ciudadanos-propone-el-plan-mas-ambicioso-de-fomento-de-la-natalidad-con-ayudas-directas-y-deducciones-fiscales-por-el-segundo-hijo/13363"
+          }
         }
       ],
-      "active": false,
-      "lastSeen": "2026-10-31T09:09:00.323Z"
+      "active": true,
+      "lastSeen": "2026-11-09T17:42:17.721Z"
     },
     {
       "kind": "changed",
@@ -748,7 +757,7 @@
           "reviewId": "2026-11-03:changed:fiscal:navarra:response-date-v1"
         }
       ],
-      "active": true,
+      "active": false,
       "lastSeen": "2026-11-04T08:29:13.324Z"
     },
     {
@@ -772,7 +781,7 @@
       "scope": "boe-discovery",
       "id": "publication:BOE-A-2026-22528",
       "firstSeen": "2026-10-31T09:09:04.169Z",
-      "occurrences": 4,
+      "occurrences": 5,
       "status": "reviewed",
       "history": [
         {
@@ -800,7 +809,7 @@
         }
       ],
       "active": true,
-      "lastSeen": "2026-11-04T08:29:15.986Z"
+      "lastSeen": "2026-11-09T17:42:20.204Z"
     },
     {
       "kind": "publication",
@@ -823,7 +832,7 @@
       "scope": "boe-discovery",
       "id": "publication:BOE-A-2026-22617",
       "firstSeen": "2026-10-31T09:09:04.169Z",
-      "occurrences": 4,
+      "occurrences": 5,
       "status": "reviewed",
       "history": [
         {
@@ -851,7 +860,171 @@
         }
       ],
       "active": true,
-      "lastSeen": "2026-11-04T08:29:15.986Z"
+      "lastSeen": "2026-11-09T17:42:20.204Z"
+    },
+    {
+      "kind": "changed",
+      "target": "fiscal:rirpf",
+      "url": "https://www.boe.es/datosabiertos/api/legislacion-consolidada/id/BOE-A-2007-6820/metadatos",
+      "groups": [
+        "withholding",
+        "flexible"
+      ],
+      "signature": "[\"https://www.boe.es/datosabiertos/api/legislacion-consolidada/id/BOE-A-2007-6820/metadatos\",\"2dcb2463f743686e041ea77f2bf39783d8a8d9ab28a12638e7f728abc2334fb8\"]",
+      "evidence": {
+        "sha256": "2dcb2463f743686e041ea77f2bf39783d8a8d9ab28a12638e7f728abc2334fb8",
+        "previousSha256": "8a52ca8ee8e3b36744619b3eff05463377608e262fbe5d74c38d2a5c0240cb5c",
+        "url": "https://www.boe.es/datosabiertos/api/legislacion-consolidada/id/BOE-A-2007-6820/metadatos"
+      },
+      "scope": "sources",
+      "id": "changed:fiscal:rirpf",
+      "firstSeen": "2026-11-09T17:42:17.721Z",
+      "occurrences": 1,
+      "status": "pending",
+      "history": [
+        {
+          "at": "2026-11-09T17:42:17.721Z",
+          "action": "detected",
+          "evidence": {
+            "sha256": "2dcb2463f743686e041ea77f2bf39783d8a8d9ab28a12638e7f728abc2334fb8",
+            "previousSha256": "8a52ca8ee8e3b36744619b3eff05463377608e262fbe5d74c38d2a5c0240cb5c",
+            "url": "https://www.boe.es/datosabiertos/api/legislacion-consolidada/id/BOE-A-2007-6820/metadatos"
+          }
+        }
+      ],
+      "active": true,
+      "lastSeen": "2026-11-09T17:42:17.721Z"
+    },
+    {
+      "kind": "unavailable",
+      "target": "fiscal:regionalmeasures2026",
+      "url": "https://www.hacienda.gob.es/sgfal/financiacionterritorial/autonomica/capitulo-i-tributacion-autonomica-2026.pdf",
+      "groups": [
+        "regional.andalusia",
+        "regional.aragon",
+        "regional.asturias",
+        "regional.balearic",
+        "regional.canary",
+        "regional.cantabria",
+        "regional.castillaLaMancha",
+        "regional.castillaLeon",
+        "regional.catalonia",
+        "regional.galicia",
+        "regional.madrid",
+        "regional.murcia",
+        "regional.rioja",
+        "regionalAllowances"
+      ],
+      "signature": "https://www.hacienda.gob.es/sgfal/financiacionterritorial/autonomica/capitulo-i-tributacion-autonomica-2026.pdf",
+      "evidence": {
+        "error": "fetch failed (UND_ERR_CONNECT_TIMEOUT)",
+        "url": "https://www.hacienda.gob.es/sgfal/financiacionterritorial/autonomica/capitulo-i-tributacion-autonomica-2026.pdf"
+      },
+      "scope": "sources",
+      "id": "unavailable:fiscal:regionalmeasures2026",
+      "firstSeen": "2026-11-09T17:42:17.721Z",
+      "occurrences": 1,
+      "status": "pending",
+      "history": [
+        {
+          "at": "2026-11-09T17:42:17.721Z",
+          "action": "detected",
+          "evidence": {
+            "error": "fetch failed (UND_ERR_CONNECT_TIMEOUT)",
+            "url": "https://www.hacienda.gob.es/sgfal/financiacionterritorial/autonomica/capitulo-i-tributacion-autonomica-2026.pdf"
+          }
+        }
+      ],
+      "active": true,
+      "lastSeen": "2026-11-09T17:42:17.721Z"
+    },
+    {
+      "kind": "publication",
+      "target": "BOE-A-2026-23174",
+      "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-23174",
+      "groups": [],
+      "signature": "8a84bc2d1bfb82d63b61d2b18bb65b5a47cdad00be3121c9606bace8d11b7b7e",
+      "evidence": {
+        "id": "BOE-A-2026-23174",
+        "title": "Orden HAC/1161/2026, de 4 de noviembre, por la que se desarrollan para el año 2027 el método de estimación objetiva del Impuesto sobre la Renta de las Personas Físicas y el régimen especial simplificado del Impuesto sobre el Valor Añadido.",
+        "publishedAt": "2026-11-05",
+        "publisher": "Agencia Estatal Boletín Oficial del Estado",
+        "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-23174",
+        "reasons": [
+          "income-tax"
+        ],
+        "groups": [],
+        "signature": "8a84bc2d1bfb82d63b61d2b18bb65b5a47cdad00be3121c9606bace8d11b7b7e"
+      },
+      "scope": "boe-discovery",
+      "id": "publication:BOE-A-2026-23174",
+      "firstSeen": "2026-11-09T17:42:20.204Z",
+      "occurrences": 1,
+      "status": "pending",
+      "history": [
+        {
+          "at": "2026-11-09T17:42:20.204Z",
+          "action": "detected",
+          "evidence": {
+            "id": "BOE-A-2026-23174",
+            "title": "Orden HAC/1161/2026, de 4 de noviembre, por la que se desarrollan para el año 2027 el método de estimación objetiva del Impuesto sobre la Renta de las Personas Físicas y el régimen especial simplificado del Impuesto sobre el Valor Añadido.",
+            "publishedAt": "2026-11-05",
+            "publisher": "Agencia Estatal Boletín Oficial del Estado",
+            "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-23174",
+            "reasons": [
+              "income-tax"
+            ],
+            "groups": [],
+            "signature": "8a84bc2d1bfb82d63b61d2b18bb65b5a47cdad00be3121c9606bace8d11b7b7e"
+          }
+        }
+      ],
+      "active": true,
+      "lastSeen": "2026-11-09T17:42:20.204Z"
+    },
+    {
+      "kind": "publication",
+      "target": "BOE-A-2026-23270",
+      "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-23270",
+      "groups": [],
+      "signature": "5c6f22efbd7d83a2dc6b436ed9f3ad5f8fa792d3644ef3185441c1bbe42901bc",
+      "evidence": {
+        "id": "BOE-A-2026-23270",
+        "title": "Orden VAU/1167/2026, de 4 de noviembre, por la que se regulan los mecanismos de seguimiento, control y evaluación de las actuaciones y suministro de información del Plan Estatal de Vivienda 2026-2030, de acuerdo con el Real Decreto 326/2026, de 22 de abril, por el que se regula el Plan Estatal de Vivienda 2026-2030.",
+        "publishedAt": "2026-11-06",
+        "publisher": "Agencia Estatal Boletín Oficial del Estado",
+        "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-23270",
+        "reasons": [
+          "housing-review"
+        ],
+        "groups": [],
+        "signature": "5c6f22efbd7d83a2dc6b436ed9f3ad5f8fa792d3644ef3185441c1bbe42901bc"
+      },
+      "scope": "boe-discovery",
+      "id": "publication:BOE-A-2026-23270",
+      "firstSeen": "2026-11-09T17:42:20.204Z",
+      "occurrences": 1,
+      "status": "pending",
+      "history": [
+        {
+          "at": "2026-11-09T17:42:20.204Z",
+          "action": "detected",
+          "evidence": {
+            "id": "BOE-A-2026-23270",
+            "title": "Orden VAU/1167/2026, de 4 de noviembre, por la que se regulan los mecanismos de seguimiento, control y evaluación de las actuaciones y suministro de información del Plan Estatal de Vivienda 2026-2030, de acuerdo con el Real Decreto 326/2026, de 22 de abril, por el que se regula el Plan Estatal de Vivienda 2026-2030.",
+            "publishedAt": "2026-11-06",
+            "publisher": "Agencia Estatal Boletín Oficial del Estado",
+            "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-23270",
+            "reasons": [
+              "housing-review"
+            ],
+            "groups": [],
+            "signature": "5c6f22efbd7d83a2dc6b436ed9f3ad5f8fa792d3644ef3185441c1bbe42901bc"
+          }
+        }
+      ],
+      "active": true,
+      "lastSeen": "2026-11-09T17:42:20.204Z"
     }
   ]
 }
