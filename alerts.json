@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-11-09T17:42:20.204Z",
+  "checkedAt": "2026-11-10T10:19:15.902Z",
   "alerts": [
     {
       "kind": "unavailable",
@@ -612,7 +612,7 @@
       "scope": "sources",
       "id": "changed:ciudadanos2023families",
       "firstSeen": "2026-10-26T14:26:42.941Z",
-      "occurrences": 3,
+      "occurrences": 4,
       "status": "pending",
       "history": [
         {
@@ -642,7 +642,7 @@
         }
       ],
       "active": true,
-      "lastSeen": "2026-11-09T17:42:17.721Z"
+      "lastSeen": "2026-11-10T10:19:13.529Z"
     },
     {
       "kind": "changed",
@@ -781,7 +781,7 @@
       "scope": "boe-discovery",
       "id": "publication:BOE-A-2026-22528",
       "firstSeen": "2026-10-31T09:09:04.169Z",
-      "occurrences": 5,
+      "occurrences": 6,
       "status": "reviewed",
       "history": [
         {
@@ -809,7 +809,7 @@
         }
       ],
       "active": true,
-      "lastSeen": "2026-11-09T17:42:20.204Z"
+      "lastSeen": "2026-11-10T10:19:15.902Z"
     },
     {
       "kind": "publication",
@@ -832,7 +832,7 @@
       "scope": "boe-discovery",
       "id": "publication:BOE-A-2026-22617",
       "firstSeen": "2026-10-31T09:09:04.169Z",
-      "occurrences": 5,
+      "occurrences": 6,
       "status": "reviewed",
       "history": [
         {
@@ -860,7 +860,7 @@
         }
       ],
       "active": true,
-      "lastSeen": "2026-11-09T17:42:20.204Z"
+      "lastSeen": "2026-11-10T10:19:15.902Z"
     },
     {
       "kind": "changed",
@@ -879,7 +879,7 @@
       "scope": "sources",
       "id": "changed:fiscal:rirpf",
       "firstSeen": "2026-11-09T17:42:17.721Z",
-      "occurrences": 1,
+      "occurrences": 2,
       "status": "pending",
       "history": [
         {
@@ -893,7 +893,7 @@
         }
       ],
       "active": true,
-      "lastSeen": "2026-11-09T17:42:17.721Z"
+      "lastSeen": "2026-11-10T10:19:13.529Z"
     },
     {
       "kind": "unavailable",
@@ -923,7 +923,7 @@
       "scope": "sources",
       "id": "unavailable:fiscal:regionalmeasures2026",
       "firstSeen": "2026-11-09T17:42:17.721Z",
-      "occurrences": 1,
+      "occurrences": 2,
       "status": "pending",
       "history": [
         {
@@ -936,7 +936,7 @@
         }
       ],
       "active": true,
-      "lastSeen": "2026-11-09T17:42:17.721Z"
+      "lastSeen": "2026-11-10T10:19:13.529Z"
     },
     {
       "kind": "publication",
@@ -959,7 +959,7 @@
       "scope": "boe-discovery",
       "id": "publication:BOE-A-2026-23174",
       "firstSeen": "2026-11-09T17:42:20.204Z",
-      "occurrences": 1,
+      "occurrences": 2,
       "status": "pending",
       "history": [
         {
@@ -980,7 +980,7 @@
         }
       ],
       "active": true,
-      "lastSeen": "2026-11-09T17:42:20.204Z"
+      "lastSeen": "2026-11-10T10:19:15.902Z"
     },
     {
       "kind": "publication",
@@ -1003,7 +1003,7 @@
       "scope": "boe-discovery",
       "id": "publication:BOE-A-2026-23270",
       "firstSeen": "2026-11-09T17:42:20.204Z",
-      "occurrences": 1,
+      "occurrences": 2,
       "status": "pending",
       "history": [
         {
@@ -1024,7 +1024,95 @@
         }
       ],
       "active": true,
-      "lastSeen": "2026-11-09T17:42:20.204Z"
+      "lastSeen": "2026-11-10T10:19:15.902Z"
+    },
+    {
+      "kind": "publication",
+      "target": "BOE-A-2026-23387",
+      "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-23387",
+      "groups": [],
+      "signature": "91a05abf13197161bccd58471d5202f50edfa862bc54e95782042f69e1fd6599",
+      "evidence": {
+        "id": "BOE-A-2026-23387",
+        "title": "Ley 1/2026, de 26 de marzo, de Medidas Administrativas y Tributarias de Castilla-La Mancha.",
+        "publishedAt": "2026-11-09",
+        "publisher": "Agencia Estatal Boletín Oficial del Estado",
+        "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-23387",
+        "reasons": [
+          "broad-fiscal-review"
+        ],
+        "groups": [],
+        "signature": "91a05abf13197161bccd58471d5202f50edfa862bc54e95782042f69e1fd6599"
+      },
+      "scope": "boe-discovery",
+      "id": "publication:BOE-A-2026-23387",
+      "firstSeen": "2026-11-10T10:19:15.902Z",
+      "occurrences": 1,
+      "status": "pending",
+      "history": [
+        {
+          "at": "2026-11-10T10:19:15.902Z",
+          "action": "detected",
+          "evidence": {
+            "id": "BOE-A-2026-23387",
+            "title": "Ley 1/2026, de 26 de marzo, de Medidas Administrativas y Tributarias de Castilla-La Mancha.",
+            "publishedAt": "2026-11-09",
+            "publisher": "Agencia Estatal Boletín Oficial del Estado",
+            "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-23387",
+            "reasons": [
+              "broad-fiscal-review"
+            ],
+            "groups": [],
+            "signature": "91a05abf13197161bccd58471d5202f50edfa862bc54e95782042f69e1fd6599"
+          }
+        }
+      ],
+      "active": true,
+      "lastSeen": "2026-11-10T10:19:15.902Z"
+    },
+    {
+      "kind": "publication",
+      "target": "BOE-A-2026-23390",
+      "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-23390",
+      "groups": [],
+      "signature": "999149383a9a904c0999327d269f50d39a4715f51aabe8f9fabfd1eee1ec1f3e",
+      "evidence": {
+        "id": "BOE-A-2026-23390",
+        "title": "Ley 4/2026, de 7 de mayo, de medidas urgentes en materia de acceso a la vivienda y suelo de Castilla-La Mancha.",
+        "publishedAt": "2026-11-09",
+        "publisher": "Agencia Estatal Boletín Oficial del Estado",
+        "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-23390",
+        "reasons": [
+          "housing-review"
+        ],
+        "groups": [],
+        "signature": "999149383a9a904c0999327d269f50d39a4715f51aabe8f9fabfd1eee1ec1f3e"
+      },
+      "scope": "boe-discovery",
+      "id": "publication:BOE-A-2026-23390",
+      "firstSeen": "2026-11-10T10:19:15.902Z",
+      "occurrences": 1,
+      "status": "pending",
+      "history": [
+        {
+          "at": "2026-11-10T10:19:15.902Z",
+          "action": "detected",
+          "evidence": {
+            "id": "BOE-A-2026-23390",
+            "title": "Ley 4/2026, de 7 de mayo, de medidas urgentes en materia de acceso a la vivienda y suelo de Castilla-La Mancha.",
+            "publishedAt": "2026-11-09",
+            "publisher": "Agencia Estatal Boletín Oficial del Estado",
+            "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-23390",
+            "reasons": [
+              "housing-review"
+            ],
+            "groups": [],
+            "signature": "999149383a9a904c0999327d269f50d39a4715f51aabe8f9fabfd1eee1ec1f3e"
+          }
+        }
+      ],
+      "active": true,
+      "lastSeen": "2026-11-10T10:19:15.902Z"
     }
   ]
 }
