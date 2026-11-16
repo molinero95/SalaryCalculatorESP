@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-11-10T10:19:15.902Z",
+  "checkedAt": "2026-11-16T17:13:26.755Z",
   "alerts": [
     {
       "kind": "unavailable",
@@ -487,19 +487,19 @@
       "target": "pp2024",
       "url": "https://www.pp.es/actualidad/articulos/pp-proponebonificaciones-fiscales-jovenes-primeros-cuatro-anos-su-vida-laboral/",
       "groups": [],
-      "signature": "[\"https://www.pp.es/actualidad/articulos/pp-proponebonificaciones-fiscales-jovenes-primeros-cuatro-anos-su-vida-laboral/\",\"70e0d5b5a405296184f1c650396a4e6d3903093edb6d59fc4ef6d90c65636a61\",\"sha256:cf-email-v1\"]",
+      "signature": "[\"https://www.pp.es/actualidad/articulos/pp-proponebonificaciones-fiscales-jovenes-primeros-cuatro-anos-su-vida-laboral/\",\"33d52bbc040e35fb8f1a230a83c67e7d33ef0cb7e7beae1585a36553c733c7c9\",\"sha256:cf-email-v1\"]",
       "evidence": {
-        "sha256": "70e0d5b5a405296184f1c650396a4e6d3903093edb6d59fc4ef6d90c65636a61",
-        "previousSha256": "7d3fb51f313741aa2dbaa5aa65bdc8c52b2cc8325d76c963ee5816a95b6694ef",
+        "sha256": "33d52bbc040e35fb8f1a230a83c67e7d33ef0cb7e7beae1585a36553c733c7c9",
+        "previousSha256": "70e0d5b5a405296184f1c650396a4e6d3903093edb6d59fc4ef6d90c65636a61",
         "url": "https://www.pp.es/actualidad/articulos/pp-proponebonificaciones-fiscales-jovenes-primeros-cuatro-anos-su-vida-laboral/",
         "fingerprintMethod": "sha256:cf-email-v1",
-        "rawSha256": "83a3d5e3d8bd38e7318c4b5551113800a3125a22291c573433c1df9c5d0452fb"
+        "rawSha256": "99411a80b7fc1f8c902c8a7197b61562f15fbf6497b2a2418a0e40e0ee1ba37f"
       },
       "scope": "sources",
       "id": "changed:pp2024",
       "firstSeen": "2026-10-19T14:49:55.539Z",
-      "occurrences": 5,
-      "status": "reviewed",
+      "occurrences": 6,
+      "status": "pending",
       "history": [
         {
           "at": "2026-10-19T14:49:55.539Z",
@@ -556,10 +556,21 @@
           "actor": "molinero95",
           "evidence": "Read the official 28 May 2024 PP announcement again on 31 October 2026. Youth first-employment relief remains a historical informational proposal, with the same four-year 100/75/50/25 percentages and no complete executable mechanism. Fresh downloaded HTML normalizes to the exact current monitor fingerprint 70e0d5b5a405296184f1c650396a4e6d3903093edb6d59fc4ef6d90c65636a61 using the unchanged sha256:cf-email-v1 method. Accept only this reviewed current content; no claim about unseen historical bytes. See docs/source-reviews/2026-10-31.md.",
           "reviewId": "2026-10-31:changed:pp2024"
+        },
+        {
+          "at": "2026-11-16T17:13:23.344Z",
+          "action": "reopened",
+          "evidence": {
+            "sha256": "33d52bbc040e35fb8f1a230a83c67e7d33ef0cb7e7beae1585a36553c733c7c9",
+            "previousSha256": "70e0d5b5a405296184f1c650396a4e6d3903093edb6d59fc4ef6d90c65636a61",
+            "url": "https://www.pp.es/actualidad/articulos/pp-proponebonificaciones-fiscales-jovenes-primeros-cuatro-anos-su-vida-laboral/",
+            "fingerprintMethod": "sha256:cf-email-v1",
+            "rawSha256": "99411a80b7fc1f8c902c8a7197b61562f15fbf6497b2a2418a0e40e0ee1ba37f"
+          }
         }
       ],
-      "active": false,
-      "lastSeen": "2026-10-31T09:17:05.966Z"
+      "active": true,
+      "lastSeen": "2026-11-16T17:13:23.344Z"
     },
     {
       "kind": "unavailable",
@@ -612,7 +623,7 @@
       "scope": "sources",
       "id": "changed:ciudadanos2023families",
       "firstSeen": "2026-10-26T14:26:42.941Z",
-      "occurrences": 4,
+      "occurrences": 5,
       "status": "pending",
       "history": [
         {
@@ -642,7 +653,7 @@
         }
       ],
       "active": true,
-      "lastSeen": "2026-11-10T10:19:13.529Z"
+      "lastSeen": "2026-11-16T17:13:23.344Z"
     },
     {
       "kind": "changed",
@@ -651,17 +662,17 @@
       "groups": [
         "regional.valencia"
       ],
-      "signature": "[\"https://www.boe.es/buscar/doc.php?id=BOE-A-2026-19331\",\"ca356663503dbe48f980fbff4b05ad69961b13fef60ce6b15fa43b6433eb0b1b\"]",
+      "signature": "[\"https://www.boe.es/buscar/doc.php?id=BOE-A-2026-19331\",\"1798863b979b6bcfdc0e2849741b09d22a0ca1eb402c0c51054cade1d3f60863\"]",
       "evidence": {
-        "sha256": "ca356663503dbe48f980fbff4b05ad69961b13fef60ce6b15fa43b6433eb0b1b",
-        "previousSha256": "1ce8439fe728c08dcf0986e371a29c68523b3a27f4717bef214d70ef75d7e5c4",
+        "sha256": "1798863b979b6bcfdc0e2849741b09d22a0ca1eb402c0c51054cade1d3f60863",
+        "previousSha256": "ca356663503dbe48f980fbff4b05ad69961b13fef60ce6b15fa43b6433eb0b1b",
         "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2026-19331"
       },
       "scope": "sources",
       "id": "changed:fiscal:valencia2026",
       "firstSeen": "2026-10-26T14:26:42.941Z",
-      "occurrences": 2,
-      "status": "reviewed",
+      "occurrences": 3,
+      "status": "pending",
       "history": [
         {
           "at": "2026-10-26T14:26:42.941Z",
@@ -678,10 +689,19 @@
           "actor": "molinero95",
           "evidence": "Read BOE-A-2026-19331, Ley 5/2026 art.18 and transitional provision 3 on 27 October 2026. All eleven 2026 band limits/rates and published accumulated quotas in art.18 match js/data/regions.js and the independent tests/fixtures/regional-scales.js rows. Transitional provision 3 applies from 1 January 2027 and must not replace the 2026 scale. Fresh SHA-256 ca356663503dbe48f980fbff4b05ad69961b13fef60ce6b15fa43b6433eb0b1b matches the exact alert. No 2026 scale correction required; no assertion about the cause of the raw HTML change. See docs/source-reviews/2026-10-27.md.",
           "reviewId": "2026-10-27:changed:fiscal:valencia2026"
+        },
+        {
+          "at": "2026-11-16T17:13:23.344Z",
+          "action": "reopened",
+          "evidence": {
+            "sha256": "1798863b979b6bcfdc0e2849741b09d22a0ca1eb402c0c51054cade1d3f60863",
+            "previousSha256": "ca356663503dbe48f980fbff4b05ad69961b13fef60ce6b15fa43b6433eb0b1b",
+            "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2026-19331"
+          }
         }
       ],
-      "active": false,
-      "lastSeen": "2026-10-31T09:09:00.323Z"
+      "active": true,
+      "lastSeen": "2026-11-16T17:13:23.344Z"
     },
     {
       "kind": "changed",
@@ -808,7 +828,7 @@
           "reviewId": "2026-10-31:publication:BOE-A-2026-22528"
         }
       ],
-      "active": true,
+      "active": false,
       "lastSeen": "2026-11-10T10:19:15.902Z"
     },
     {
@@ -859,7 +879,7 @@
           "reviewId": "2026-10-31:publication:BOE-A-2026-22617"
         }
       ],
-      "active": true,
+      "active": false,
       "lastSeen": "2026-11-10T10:19:15.902Z"
     },
     {
@@ -879,7 +899,7 @@
       "scope": "sources",
       "id": "changed:fiscal:rirpf",
       "firstSeen": "2026-11-09T17:42:17.721Z",
-      "occurrences": 2,
+      "occurrences": 3,
       "status": "pending",
       "history": [
         {
@@ -893,7 +913,7 @@
         }
       ],
       "active": true,
-      "lastSeen": "2026-11-10T10:19:13.529Z"
+      "lastSeen": "2026-11-16T17:13:23.344Z"
     },
     {
       "kind": "unavailable",
@@ -923,7 +943,7 @@
       "scope": "sources",
       "id": "unavailable:fiscal:regionalmeasures2026",
       "firstSeen": "2026-11-09T17:42:17.721Z",
-      "occurrences": 2,
+      "occurrences": 3,
       "status": "pending",
       "history": [
         {
@@ -936,7 +956,7 @@
         }
       ],
       "active": true,
-      "lastSeen": "2026-11-10T10:19:13.529Z"
+      "lastSeen": "2026-11-16T17:13:23.344Z"
     },
     {
       "kind": "publication",
@@ -959,7 +979,7 @@
       "scope": "boe-discovery",
       "id": "publication:BOE-A-2026-23174",
       "firstSeen": "2026-11-09T17:42:20.204Z",
-      "occurrences": 2,
+      "occurrences": 3,
       "status": "pending",
       "history": [
         {
@@ -980,7 +1000,7 @@
         }
       ],
       "active": true,
-      "lastSeen": "2026-11-10T10:19:15.902Z"
+      "lastSeen": "2026-11-16T17:13:26.755Z"
     },
     {
       "kind": "publication",
@@ -1003,7 +1023,7 @@
       "scope": "boe-discovery",
       "id": "publication:BOE-A-2026-23270",
       "firstSeen": "2026-11-09T17:42:20.204Z",
-      "occurrences": 2,
+      "occurrences": 3,
       "status": "pending",
       "history": [
         {
@@ -1024,7 +1044,7 @@
         }
       ],
       "active": true,
-      "lastSeen": "2026-11-10T10:19:15.902Z"
+      "lastSeen": "2026-11-16T17:13:26.755Z"
     },
     {
       "kind": "publication",
@@ -1047,7 +1067,7 @@
       "scope": "boe-discovery",
       "id": "publication:BOE-A-2026-23387",
       "firstSeen": "2026-11-10T10:19:15.902Z",
-      "occurrences": 1,
+      "occurrences": 2,
       "status": "pending",
       "history": [
         {
@@ -1068,7 +1088,7 @@
         }
       ],
       "active": true,
-      "lastSeen": "2026-11-10T10:19:15.902Z"
+      "lastSeen": "2026-11-16T17:13:26.755Z"
     },
     {
       "kind": "publication",
@@ -1091,7 +1111,7 @@
       "scope": "boe-discovery",
       "id": "publication:BOE-A-2026-23390",
       "firstSeen": "2026-11-10T10:19:15.902Z",
-      "occurrences": 1,
+      "occurrences": 2,
       "status": "pending",
       "history": [
         {
@@ -1112,7 +1132,209 @@
         }
       ],
       "active": true,
-      "lastSeen": "2026-11-10T10:19:15.902Z"
+      "lastSeen": "2026-11-16T17:13:26.755Z"
+    },
+    {
+      "kind": "changed",
+      "target": "fiscal:lirpf",
+      "url": "https://www.boe.es/datosabiertos/api/legislacion-consolidada/id/BOE-A-2006-20764/metadatos",
+      "groups": [
+        "state.scale",
+        "state.allowances",
+        "state.employmentIncome",
+        "state.minWageCredit",
+        "state.filingThreshold",
+        "flexible",
+        "pension"
+      ],
+      "signature": "[\"https://www.boe.es/datosabiertos/api/legislacion-consolidada/id/BOE-A-2006-20764/metadatos\",\"03e53a88233071f4a428135b161b2404ce77f9a836ea075bbe4207991d3a05af\"]",
+      "evidence": {
+        "sha256": "03e53a88233071f4a428135b161b2404ce77f9a836ea075bbe4207991d3a05af",
+        "previousSha256": "08098c9d7b744b43009f2a8618a02278e39ccf073ec2f3b07d51d2c7020556e5",
+        "url": "https://www.boe.es/datosabiertos/api/legislacion-consolidada/id/BOE-A-2006-20764/metadatos"
+      },
+      "scope": "sources",
+      "id": "changed:fiscal:lirpf",
+      "firstSeen": "2026-11-16T17:13:23.344Z",
+      "occurrences": 1,
+      "status": "pending",
+      "history": [
+        {
+          "at": "2026-11-16T17:13:23.344Z",
+          "action": "detected",
+          "evidence": {
+            "sha256": "03e53a88233071f4a428135b161b2404ce77f9a836ea075bbe4207991d3a05af",
+            "previousSha256": "08098c9d7b744b43009f2a8618a02278e39ccf073ec2f3b07d51d2c7020556e5",
+            "url": "https://www.boe.es/datosabiertos/api/legislacion-consolidada/id/BOE-A-2006-20764/metadatos"
+          }
+        }
+      ],
+      "active": true,
+      "lastSeen": "2026-11-16T17:13:23.344Z"
+    },
+    {
+      "kind": "changed",
+      "target": "fiscal:bizkaia",
+      "url": "https://www.bizkaia.eus/documents/880307/15187815/ca_13_2013.pdf",
+      "groups": [
+        "foral.bizkaia"
+      ],
+      "signature": "[\"https://www.bizkaia.eus/documents/880307/15187815/ca_13_2013.pdf\",\"2b7cc6bf54731ccd133664d83471622c8722aaaea50227505632dbfe4585c930\"]",
+      "evidence": {
+        "sha256": "2b7cc6bf54731ccd133664d83471622c8722aaaea50227505632dbfe4585c930",
+        "previousSha256": "ada81743ffa79d9903d19722e32c4ea20a5262d70584971df1c08bc9e753c87a",
+        "url": "https://www.bizkaia.eus/documents/880307/15187815/ca_13_2013.pdf"
+      },
+      "scope": "sources",
+      "id": "changed:fiscal:bizkaia",
+      "firstSeen": "2026-11-16T17:13:23.344Z",
+      "occurrences": 1,
+      "status": "pending",
+      "history": [
+        {
+          "at": "2026-11-16T17:13:23.344Z",
+          "action": "detected",
+          "evidence": {
+            "sha256": "2b7cc6bf54731ccd133664d83471622c8722aaaea50227505632dbfe4585c930",
+            "previousSha256": "ada81743ffa79d9903d19722e32c4ea20a5262d70584971df1c08bc9e753c87a",
+            "url": "https://www.bizkaia.eus/documents/880307/15187815/ca_13_2013.pdf"
+          }
+        }
+      ],
+      "active": true,
+      "lastSeen": "2026-11-16T17:13:23.344Z"
+    },
+    {
+      "kind": "publication",
+      "target": "BOE-A-2026-23662",
+      "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-23662",
+      "groups": [],
+      "signature": "895223659df9be5d3bdeb2652c8b045a1f55e3d66059a2f3b0c42f18b32807ce",
+      "evidence": {
+        "id": "BOE-A-2026-23662",
+        "title": "Conflicto positivo de competencia n.º 6108-2026, contra determinados preceptos del Real Decreto 326/2026, de 22 de abril, por el que se regula el Plan Estatal de Vivienda 2026-2030.",
+        "publishedAt": "2026-11-12",
+        "publisher": "Agencia Estatal Boletín Oficial del Estado",
+        "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-23662",
+        "reasons": [
+          "housing-review"
+        ],
+        "groups": [],
+        "signature": "895223659df9be5d3bdeb2652c8b045a1f55e3d66059a2f3b0c42f18b32807ce"
+      },
+      "scope": "boe-discovery",
+      "id": "publication:BOE-A-2026-23662",
+      "firstSeen": "2026-11-16T17:13:26.755Z",
+      "occurrences": 1,
+      "status": "pending",
+      "history": [
+        {
+          "at": "2026-11-16T17:13:26.755Z",
+          "action": "detected",
+          "evidence": {
+            "id": "BOE-A-2026-23662",
+            "title": "Conflicto positivo de competencia n.º 6108-2026, contra determinados preceptos del Real Decreto 326/2026, de 22 de abril, por el que se regula el Plan Estatal de Vivienda 2026-2030.",
+            "publishedAt": "2026-11-12",
+            "publisher": "Agencia Estatal Boletín Oficial del Estado",
+            "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-23662",
+            "reasons": [
+              "housing-review"
+            ],
+            "groups": [],
+            "signature": "895223659df9be5d3bdeb2652c8b045a1f55e3d66059a2f3b0c42f18b32807ce"
+          }
+        }
+      ],
+      "active": true,
+      "lastSeen": "2026-11-16T17:13:26.755Z"
+    },
+    {
+      "kind": "publication",
+      "target": "BOE-A-2026-23754",
+      "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-23754",
+      "groups": [],
+      "signature": "6d2790b21b549cbaa526c3da5123f49b5d3dc693afb07f54e6b0ebddcafa45ae",
+      "evidence": {
+        "id": "BOE-A-2026-23754",
+        "title": "Resolución de 12 de noviembre de 2026, del Congreso de los Diputados, por la que se ordena la publicación del Acuerdo de derogación del Real Decreto-ley 28/2026, de 6 de octubre, por el que se adoptan medidas urgentes para reforzar la estabilidad de los contratos de arrendamiento de vivienda habitual.",
+        "publishedAt": "2026-11-13",
+        "publisher": "Agencia Estatal Boletín Oficial del Estado",
+        "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-23754",
+        "reasons": [
+          "housing-review"
+        ],
+        "groups": [],
+        "signature": "6d2790b21b549cbaa526c3da5123f49b5d3dc693afb07f54e6b0ebddcafa45ae"
+      },
+      "scope": "boe-discovery",
+      "id": "publication:BOE-A-2026-23754",
+      "firstSeen": "2026-11-16T17:13:26.755Z",
+      "occurrences": 1,
+      "status": "pending",
+      "history": [
+        {
+          "at": "2026-11-16T17:13:26.755Z",
+          "action": "detected",
+          "evidence": {
+            "id": "BOE-A-2026-23754",
+            "title": "Resolución de 12 de noviembre de 2026, del Congreso de los Diputados, por la que se ordena la publicación del Acuerdo de derogación del Real Decreto-ley 28/2026, de 6 de octubre, por el que se adoptan medidas urgentes para reforzar la estabilidad de los contratos de arrendamiento de vivienda habitual.",
+            "publishedAt": "2026-11-13",
+            "publisher": "Agencia Estatal Boletín Oficial del Estado",
+            "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-23754",
+            "reasons": [
+              "housing-review"
+            ],
+            "groups": [],
+            "signature": "6d2790b21b549cbaa526c3da5123f49b5d3dc693afb07f54e6b0ebddcafa45ae"
+          }
+        }
+      ],
+      "active": true,
+      "lastSeen": "2026-11-16T17:13:26.755Z"
+    },
+    {
+      "kind": "publication",
+      "target": "BOE-A-2026-23755",
+      "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-23755",
+      "groups": [],
+      "signature": "c9cee50f41fb1af1c9f205fb8b0071e892b00d135f547189142dabf497cff6ed",
+      "evidence": {
+        "id": "BOE-A-2026-23755",
+        "title": "Resolución de 12 de noviembre de 2026, del Congreso de los Diputados, por la que se ordena la publicación del Acuerdo de convalidación del Real Decreto-ley 29/2026, de 6 de octubre, por el que se adoptan medidas urgentes para la protección de la función social de la vivienda y la ampliación de la oferta de vivienda asequible.",
+        "publishedAt": "2026-11-13",
+        "publisher": "Agencia Estatal Boletín Oficial del Estado",
+        "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-23755",
+        "reasons": [
+          "housing-review"
+        ],
+        "groups": [],
+        "signature": "c9cee50f41fb1af1c9f205fb8b0071e892b00d135f547189142dabf497cff6ed"
+      },
+      "scope": "boe-discovery",
+      "id": "publication:BOE-A-2026-23755",
+      "firstSeen": "2026-11-16T17:13:26.755Z",
+      "occurrences": 1,
+      "status": "pending",
+      "history": [
+        {
+          "at": "2026-11-16T17:13:26.755Z",
+          "action": "detected",
+          "evidence": {
+            "id": "BOE-A-2026-23755",
+            "title": "Resolución de 12 de noviembre de 2026, del Congreso de los Diputados, por la que se ordena la publicación del Acuerdo de convalidación del Real Decreto-ley 29/2026, de 6 de octubre, por el que se adoptan medidas urgentes para la protección de la función social de la vivienda y la ampliación de la oferta de vivienda asequible.",
+            "publishedAt": "2026-11-13",
+            "publisher": "Agencia Estatal Boletín Oficial del Estado",
+            "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-23755",
+            "reasons": [
+              "housing-review"
+            ],
+            "groups": [],
+            "signature": "c9cee50f41fb1af1c9f205fb8b0071e892b00d135f547189142dabf497cff6ed"
+          }
+        }
+      ],
+      "active": true,
+      "lastSeen": "2026-11-16T17:13:26.755Z"
     }
   ]
 }
