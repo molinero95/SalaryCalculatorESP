@@ -127,6 +127,90 @@
       "signature": "[\"https://www.lexnavarra.navarra.es/detalle.asp?r=29657\",\"aa0d6ef1df713b98a81237fc4e1da38cbbc836ba10b629db7a5b2ff79d49fd44\",\"sha256:lexnavarra-response-date-v1\"]",
       "evidence": "Two fresh LexNavarra downloads on 3 November 2026 have raw SHA-256 6a8a00981fba59303cfd200d4c01a56454cfc82a95c8ae5fd95215d282d8c4e0. Replacing only the head FECHA response-day value with 2026-11-2 exactly reproduces the 2 November alert hash 094b46f993099e49cd83d9238951bf589be5d3271a81e5b9fc8c605afad524fe; replacing it with 2026-10-31 exactly reproduces the reviewed baseline 94bc33ca83eb448d548a43fe51730690c519a3ec6ac8531ec94852a42ed07d77. All other bytes, including legal text, match the reviewed 31 October source. Accept only normalized fingerprint aa0d6ef1df713b98a81237fc4e1da38cbbc836ba10b629db7a5b2ff79d49fd44 under sha256:lexnavarra-response-date-v1. No fiscal parameter or verification-date change. See docs/source-reviews/2026-11-03.md.",
       "acceptFingerprint": true
+    },
+    {
+      "reviewId": "2026-11-10:changed:ciudadanos2023families",
+      "id": "changed:ciudadanos2023families",
+      "signature": "[\"https://www.ciudadanos-cs.org/prensa/ciudadanos-propone-el-plan-mas-ambicioso-de-fomento-de-la-natalidad-con-ayudas-directas-y-deducciones-fiscales-por-el-segundo-hijo/13363\",\"d707499c2a8c7b74a846ad8036aa58ba8f27323c83681bbd7843ee609f4546ef\"]",
+      "evidence": "Read the official 4 May 2023 family press release again on 10 November 2026. Fresh original HTML matches current SHA-256 d707499c2a8c7b74a846ad8036aa58ba8f27323c83681bbd7843ee609f4546ef. It remains a historical proposal, with no defined base/quota mechanism, limits or complete eligibility rules for an executable model. Keep it unmodelled; no new programme or enacted-law inference. Accept only this exact reviewed response, without claiming which unretained earlier bytes changed. See docs/source-reviews/2026-11-10.md.",
+      "acceptFingerprint": true
+    },
+    {
+      "reviewId": "2026-11-10:changed:fiscal:rirpf",
+      "id": "changed:fiscal:rirpf",
+      "signature": "[\"https://www.boe.es/datosabiertos/api/legislacion-consolidada/id/BOE-A-2007-6820/metadatos\",\"2dcb2463f743686e041ea77f2bf39783d8a8d9ab28a12638e7f728abc2334fb8\"]",
+      "evidence": "Read the current BOE RIRPF metadata and consolidated amendment trail on 10 November 2026. Exact XML SHA-256 2dcb2463f743686e041ea77f2bf39783d8a8d9ab28a12638e7f728abc2334fb8 has fecha_actualizacion 20261105T101238Z; the legal consolidation still ends on 7 October 2026. Rechecked supported arts.45,46,46bis,81-86,102 against the documented withholding/flexible-pay model and existing official fixtures. No new amendment to those supported rules; the October housing/special-investment changes were reviewed separately. Accept only this metadata fingerprint, without asserting the cause of unseen old bytes. No parameter or verifiedAt update. See docs/source-reviews/2026-11-10.md.",
+      "acceptFingerprint": true
+    },
+    {
+      "reviewId": "2026-11-10:publication:BOE-A-2026-23174",
+      "id": "publication:BOE-A-2026-23174",
+      "signature": "8a84bc2d1bfb82d63b61d2b18bb65b5a47cdad00be3121c9606bace8d11b7b7e",
+      "evidence": "Read HAC/1161/2026, published 5 November 2026: arts.1-6, additional provisions and final provision concern objective-estimation business modules and simplified VAT for 2027, with an explicit agricultural/livestock 2026 exception in DA4. Neither business modules nor VAT is calculated here, including the limited foral input of already-computed net business income. No employee withholding/scale/contribution update. See docs/source-reviews/2026-11-10.md."
+    },
+    {
+      "reviewId": "2026-11-10:publication:BOE-A-2026-23270",
+      "id": "publication:BOE-A-2026-23270",
+      "signature": "5c6f22efbd7d83a2dc6b436ed9f3ad5f8fa792d3644ef3185441c1bbe42901bc",
+      "evidence": "Read VAU/1167/2026, published 6 November 2026: reporting, monitoring, certification, technical transmission and indicators for the State Housing Plan 2026-2030. No supported payroll/IRPF/contribution parameter change. Housing administration is outside scope. See docs/source-reviews/2026-11-10.md."
+    },
+    {
+      "reviewId": "2026-11-10:publication:BOE-A-2026-23387",
+      "id": "publication:BOE-A-2026-23387",
+      "signature": "91a05abf13197161bccd58471d5202f50edfa862bc54e95782042f69e1fd6599",
+      "evidence": "Read CLM Law 1/2026, published in BOE on 9 November and originally DOCM 30 March 2026. Art.18 changes rental/housing-savings and assistance-dog annual credits and property-transfer/stamp taxes, not the supported regional scale/minima or payroll withholding. DF6 applies its IRPF credits from tax year 2025; do not treat BOE republication as a new November commencement. These credits are outside the current model; housing expansion remains unauthorized. No supported parameter update. See docs/source-reviews/2026-11-10.md."
+    },
+    {
+      "reviewId": "2026-11-10:publication:BOE-A-2026-23390",
+      "id": "publication:BOE-A-2026-23390",
+      "signature": "999149383a9a904c0999327d269f50d39a4715f51aabe8f9fabfd1eee1ec1f3e",
+      "evidence": "Read CLM Law 4/2026, published in BOE on 9 November and originally DOCM 18 May 2026. Arts.1-2 regulate rental-deposit management and public residential land/housing definitions. Effective 19 May 2026 under its final provision, not newly effective in November. No supported tax or contribution parameter change. See docs/source-reviews/2026-11-10.md."
+    },
+    {
+      "reviewId": "2026-11-17:changed:pp2024",
+      "id": "changed:pp2024",
+      "signature": "[\"https://www.pp.es/actualidad/articulos/pp-proponebonificaciones-fiscales-jovenes-primeros-cuatro-anos-su-vida-laboral/\",\"33d52bbc040e35fb8f1a230a83c67e7d33ef0cb7e7beae1585a36553c733c7c9\",\"sha256:cf-email-v1\"]",
+      "evidence": "Read the original 28 May 2024 PP announcement on 17 November 2026. Two ordinary requests with the existing monitor headers return HTML normalized by unchanged sha256:cf-email-v1 to 33d52bbc040e35fb8f1a230a83c67e7d33ef0cb7e7beae1585a36553c733c7c9, matching the alert despite randomized raw protected-email bytes. Youth first labour-market entry ages 18-34 and historical four-year 100/75/50/25 relief remain informational; no complete executable mechanism or new programme. Accept only this exact normalized content. See docs/source-reviews/2026-11-17.md.",
+      "acceptFingerprint": true
+    },
+    {
+      "reviewId": "2026-11-17:changed:fiscal:valencia2026",
+      "id": "changed:fiscal:valencia2026",
+      "signature": "[\"https://www.boe.es/buscar/doc.php?id=BOE-A-2026-19331\",\"1798863b979b6bcfdc0e2849741b09d22a0ca1eb402c0c51054cade1d3f60863\"]",
+      "evidence": "Read original BOE-A-2026-19331 art.18 and transitional provision 3 again on 17 November 2026. Fresh HTML SHA-256 1798863b979b6bcfdc0e2849741b09d22a0ca1eb402c0c51054cade1d3f60863 matches the alert. All eleven 2026 base/quota/rate rows match the independent regional-scales fixture and production data; transitional provision 3 starts 1 January 2027. No 2026 parameter correction. Accept only the reviewed bytes without asserting the cause of unseen historical HTML changes. See docs/source-reviews/2026-11-17.md.",
+      "acceptFingerprint": true
+    },
+    {
+      "reviewId": "2026-11-17:changed:fiscal:lirpf",
+      "id": "changed:fiscal:lirpf",
+      "signature": "[\"https://www.boe.es/datosabiertos/api/legislacion-consolidada/id/BOE-A-2006-20764/metadatos\",\"03e53a88233071f4a428135b161b2404ce77f9a836ea075bbe4207991d3a05af\"]",
+      "evidence": "Read current BOE metadata (XML SHA-256 03e53a88233071f4a428135b161b2404ce77f9a836ea075bbe4207991d3a05af, update 20261111T094003Z), consolidated LIRPF and RDL 33/2026 DF2, published 11 November 2026. The actual amendment adds DA5 paragraphs 5/6, effective 1 January 2025: exemptions for personal-damage natural-disaster public aid in declared civil-protection emergency areas and qualifying analogous regional/local aid, with statutory conditions and timing. Those aid categories are outside the supported payroll/annual inputs; no supported scale, allowance, pension or flexible-pay parameter changes. Accept this exact metadata only; no verifiedAt change. See docs/source-reviews/2026-11-17.md.",
+      "acceptFingerprint": true
+    },
+    {
+      "reviewId": "2026-11-17:changed:fiscal:bizkaia",
+      "id": "changed:fiscal:bizkaia",
+      "signature": "[\"https://www.bizkaia.eus/documents/880307/15187815/ca_13_2013.pdf\",\"2b7cc6bf54731ccd133664d83471622c8722aaaea50227505632dbfe4585c930\"]",
+      "evidence": "Downloaded and read original NF 13/2013 PDF on 17 November 2026: valid PDF, 1548697 bytes, SHA-256 2b7cc6bf54731ccd133664d83471622c8722aaaea50227505632dbfe4585c930, matching the alert; heading remains updated 1 January 2026. Rechecked supported arts.17,23,32,63,70-71,75-77,79,81-83,86 against the documented active-employee individual-assessment scope, production data and independent existing tests; visually checked the original page 84 general/savings tables. No supported rule/amount discrepancy found. This is not a claim that the unseen old PDF differs only in metadata or that unsupported profiles are certified. Accept only these reviewed bytes. See docs/source-reviews/2026-11-17.md.",
+      "acceptFingerprint": true
+    },
+    {
+      "reviewId": "2026-11-17:publication:BOE-A-2026-23662",
+      "id": "publication:BOE-A-2026-23662",
+      "signature": "895223659df9be5d3bdeb2652c8b045a1f55e3d66059a2f3b0c42f18b32807ce",
+      "evidence": "Read original BOE publication of 12 November 2026: Constitutional Court plenary of 3 November admits conflict 6108-2026 brought by Extremadura against specified State Housing Plan provisions of RD 326/2026. No amendment to supported employee IRPF scales, withholding, benefits or contributions. Housing litigation needs no calculator implementation. See docs/source-reviews/2026-11-17.md."
+    },
+    {
+      "reviewId": "2026-11-17:publication:BOE-A-2026-23754",
+      "id": "publication:BOE-A-2026-23754",
+      "signature": "6d2790b21b549cbaa526c3da5123f49b5d3dc693afb07f54e6b0ebddcafa45ae",
+      "evidence": "Read original BOE publication of 13 November 2026: Congress Permanent Deputation resolution of 12 November repeals RDL 28/2026 of 6 October on housing-contract stability. That decree was outside the supported model and not implemented; there is no calculator parameter to roll back. No supported employee fiscal change. See docs/source-reviews/2026-11-17.md."
+    },
+    {
+      "reviewId": "2026-11-17:publication:BOE-A-2026-23755",
+      "id": "publication:BOE-A-2026-23755",
+      "signature": "c9cee50f41fb1af1c9f205fb8b0071e892b00d135f547189142dabf497cff6ed",
+      "evidence": "Read original BOE publication of 13 November 2026: Congress Permanent Deputation resolution of 12 November validates RDL 29/2026 of 6 October on housing social function and affordable supply. Its out-of-scope content was reviewed on 19 October; this convalidation introduces no separate supported employee tax/contribution parameter change. No housing expansion. See docs/source-reviews/2026-11-17.md."
     }
   ]
 }
