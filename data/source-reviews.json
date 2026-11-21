@@ -211,6 +211,46 @@
       "id": "publication:BOE-A-2026-23755",
       "signature": "c9cee50f41fb1af1c9f205fb8b0071e892b00d135f547189142dabf497cff6ed",
       "evidence": "Read original BOE publication of 13 November 2026: Congress Permanent Deputation resolution of 12 November validates RDL 29/2026 of 6 October on housing social function and affordable supply. Its out-of-scope content was reviewed on 19 October; this convalidation introduces no separate supported employee tax/contribution parameter change. No housing expansion. See docs/source-reviews/2026-11-17.md."
+    },
+    {
+      "reviewId": "2026-11-21:changed:pp2024",
+      "id": "changed:pp2024",
+      "signature": "[\"https://www.pp.es/actualidad/articulos/pp-proponebonificaciones-fiscales-jovenes-primeros-cuatro-anos-su-vida-laboral/\",\"44d58e127c0dea1a01ef551d4285682c85f1e8fd3e5d9a5f6eaa56754b178e93\",\"sha256:cf-email-v1\"]",
+      "evidence": "Read the original 28 May 2024 PP announcement on 21 November 2026. Fresh 93634-byte HTML normalizes under unchanged sha256:cf-email-v1 to the exact alert fingerprint 44d58e127c0dea1a01ef551d4285682c85f1e8fd3e5d9a5f6eaa56754b178e93 (raw 2e98ebd2778480634477b3b83fdf7d34e941e97b056a6638d3183b024a7c4445). It remains the historical age 18-34 first-employment announcement with four-year 100/75/50/25 relief and no complete executable mechanism. Do not substitute the distinct 2026 election programme or infer current law. No claim about unseen old HTML differences. See docs/source-reviews/2026-11-21.md.",
+      "acceptFingerprint": true
+    },
+    {
+      "reviewId": "2026-11-21:changed:ciudadanos2023families",
+      "id": "changed:ciudadanos2023families",
+      "signature": "[\"https://www.ciudadanos-cs.org/prensa/ciudadanos-propone-el-plan-mas-ambicioso-de-fomento-de-la-natalidad-con-ayudas-directas-y-deducciones-fiscales-por-el-segundo-hijo/13363\",\"4fe878af8d75853e4673ce0a6f5e23d4231733fa9bda3209546324e4341db3bd\"]",
+      "evidence": "Read the original 4 May 2023 family announcement again on 21 November 2026. Fresh 51379-byte HTML SHA-256 4fe878af8d75853e4673ce0a6f5e23d4231733fa9bda3209546324e4341db3bd matches this exact alert. The ten-point second-child proposal still lacks a defined base/quota mechanism, limits and complete eligibility; it stays historical and unmodelled. Do not infer a new programme or enacted law. Accept only these reviewed bytes without asserting the cause of unretained earlier changes. See docs/source-reviews/2026-11-21.md.",
+      "acceptFingerprint": true
+    },
+    {
+      "reviewId": "2026-11-21:changed:fiscal:lirpf",
+      "id": "changed:fiscal:lirpf",
+      "signature": "[\"https://www.boe.es/datosabiertos/api/legislacion-consolidada/id/BOE-A-2006-20764/metadatos\",\"0c3b56cc8b3bf74d55f8b126844a451cb00accd1a75ae68f609e889619071060\"]",
+      "evidence": "Read original RDL 38/2026 art.5 and the consolidated LIRPF DA61 on 21 November 2026. Fresh XML SHA-256 0c3b56cc8b3bf74d55f8b126844a451cb00accd1a75ae68f609e889619071060 matches the alert, update 20261118T123311Z. The new work-income credit has effects from 1 January 2027; BOE explicitly labels that wording not yet in force. Preserve the supported 2026 parameters and verification dates. Accept only this reviewed metadata, not the future rule as current. Publication BOE-A-2026-24120 remains pending for year-transition implementation and independent tests. See docs/source-reviews/2026-11-21.md.",
+      "acceptFingerprint": true
+    },
+    {
+      "reviewId": "2026-11-21:changed:fiscal:rirpf",
+      "id": "changed:fiscal:rirpf",
+      "signature": "[\"https://www.boe.es/datosabiertos/api/legislacion-consolidada/id/BOE-A-2007-6820/metadatos\",\"8fa74d9d39de08b893efb384ca36a9c6c0ac5bd3fcc0a00ae18b9d7853f6b8b0\"]",
+      "evidence": "Read original RDL 38/2026 art.6 and consolidated RIRPF art.85 on 21 November 2026. Fresh XML SHA-256 8fa74d9d39de08b893efb384ca36a9c6c0ac5bd3fcc0a00ae18b9d7853f6b8b0 matches the alert, update 20261118T111337Z. New art.85.3 work-income withholding reduction and renumbering of old paragraph 3 to 4 have effects from 1 January 2027, explicitly not yet in force in BOE. They must not change 2026 withholding. Accept only the exact metadata; keep publication BOE-A-2026-24120 pending for year transition and independent tests. See docs/source-reviews/2026-11-21.md.",
+      "acceptFingerprint": true
+    },
+    {
+      "reviewId": "2026-11-21:publication:BOE-A-2026-24007",
+      "id": "publication:BOE-A-2026-24007",
+      "signature": "df2269069f25221abc15a60f7d6a6774302d17387126424fc5d66ab6189f1991",
+      "evidence": "Read Catalonia Law 11/2026, BOE publication 17 November, originally DOGC 13 July with October errata. Art.37 adds annual credits for thalidomide aid, forest investments/fire prevention and coeliac disease (the latter conditional under DF8.2), plus inheritance/property-transfer/stamp-tax provisions. It does not replace the supported Catalan scale/minima or employee withholding. Those annual credits are outside the model; no housing expansion. Original-law commencement is 14 July subject to specific provisions, not the November BOE republication. See docs/source-reviews/2026-11-21.md."
+    },
+    {
+      "reviewId": "2026-11-21:publication:BOE-A-2026-24010",
+      "id": "publication:BOE-A-2026-24010",
+      "signature": "dae58d0ca69db8a98e7be97cba885872c05c76cc2e7263ca83472c4249d02a3b",
+      "evidence": "Read the complete original correction, BOE 17 November 2026, originally DOE 9 November. In Extremadura DL 4/2026 art.10.2, the cross-reference for the housing building-permit period changes from paragraph 4 to paragraph 5. No supported employee IRPF, contribution or annual scale/minimum parameter changes. This is an urban-planning correction, not calculator housing functionality. See docs/source-reviews/2026-11-21.md."
     }
   ]
 }
