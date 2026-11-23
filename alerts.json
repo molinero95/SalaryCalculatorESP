@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-11-20T19:45:35.968Z",
+  "checkedAt": "2026-11-23T19:23:12.917Z",
   "alerts": [
     {
       "kind": "unavailable",
@@ -493,12 +493,12 @@
         "previousSha256": "70e0d5b5a405296184f1c650396a4e6d3903093edb6d59fc4ef6d90c65636a61",
         "url": "https://www.pp.es/actualidad/articulos/pp-proponebonificaciones-fiscales-jovenes-primeros-cuatro-anos-su-vida-laboral/",
         "fingerprintMethod": "sha256:cf-email-v1",
-        "rawSha256": "9233aa730cda9075802be3ed6bfd6feeb83c4db3850b0716bbd9f48dc2a38f93"
+        "rawSha256": "5f7c82709beb17059a6805ffbc35ec0d42930adbc41401a4b4f3d91cf16708df"
       },
       "scope": "sources",
       "id": "changed:pp2024",
       "firstSeen": "2026-10-19T14:49:55.539Z",
-      "occurrences": 7,
+      "occurrences": 8,
       "status": "pending",
       "history": [
         {
@@ -581,7 +581,7 @@
         }
       ],
       "active": true,
-      "lastSeen": "2026-11-20T19:45:33.837Z"
+      "lastSeen": "2026-11-23T19:23:09.675Z"
     },
     {
       "kind": "unavailable",
@@ -598,7 +598,7 @@
       "scope": "sources",
       "id": "unavailable:fiscal:bizkaia",
       "firstSeen": "2026-10-19T14:49:55.539Z",
-      "occurrences": 2,
+      "occurrences": 3,
       "status": "pending",
       "history": [
         {
@@ -626,7 +626,7 @@
         }
       ],
       "active": true,
-      "lastSeen": "2026-11-20T19:45:33.837Z"
+      "lastSeen": "2026-11-23T19:23:09.675Z"
     },
     {
       "kind": "changed",
@@ -642,7 +642,7 @@
       "scope": "sources",
       "id": "changed:ciudadanos2023families",
       "firstSeen": "2026-10-26T14:26:42.941Z",
-      "occurrences": 6,
+      "occurrences": 7,
       "status": "pending",
       "history": [
         {
@@ -681,7 +681,7 @@
         }
       ],
       "active": true,
-      "lastSeen": "2026-11-20T19:45:33.837Z"
+      "lastSeen": "2026-11-23T19:23:09.675Z"
     },
     {
       "kind": "changed",
@@ -735,7 +735,7 @@
           "reviewId": "2026-11-17:changed:fiscal:valencia2026"
         }
       ],
-      "active": true,
+      "active": false,
       "lastSeen": "2026-11-20T19:45:33.837Z"
     },
     {
@@ -934,7 +934,7 @@
       "scope": "sources",
       "id": "changed:fiscal:rirpf",
       "firstSeen": "2026-11-09T17:42:17.721Z",
-      "occurrences": 4,
+      "occurrences": 5,
       "status": "pending",
       "history": [
         {
@@ -957,7 +957,7 @@
         }
       ],
       "active": true,
-      "lastSeen": "2026-11-20T19:45:33.837Z"
+      "lastSeen": "2026-11-23T19:23:09.675Z"
     },
     {
       "kind": "unavailable",
@@ -987,7 +987,7 @@
       "scope": "sources",
       "id": "unavailable:fiscal:regionalmeasures2026",
       "firstSeen": "2026-11-09T17:42:17.721Z",
-      "occurrences": 4,
+      "occurrences": 5,
       "status": "pending",
       "history": [
         {
@@ -1000,7 +1000,7 @@
         }
       ],
       "active": true,
-      "lastSeen": "2026-11-20T19:45:33.837Z"
+      "lastSeen": "2026-11-23T19:23:09.675Z"
     },
     {
       "kind": "publication",
@@ -1101,7 +1101,7 @@
           "reviewId": "2026-11-10:publication:BOE-A-2026-23270"
         }
       ],
-      "active": true,
+      "active": false,
       "lastSeen": "2026-11-20T19:45:35.968Z"
     },
     {
@@ -1125,7 +1125,7 @@
       "scope": "boe-discovery",
       "id": "publication:BOE-A-2026-23387",
       "firstSeen": "2026-11-10T10:19:15.902Z",
-      "occurrences": 3,
+      "occurrences": 4,
       "status": "reviewed",
       "history": [
         {
@@ -1153,7 +1153,7 @@
         }
       ],
       "active": true,
-      "lastSeen": "2026-11-20T19:45:35.968Z"
+      "lastSeen": "2026-11-23T19:23:12.917Z"
     },
     {
       "kind": "publication",
@@ -1176,7 +1176,7 @@
       "scope": "boe-discovery",
       "id": "publication:BOE-A-2026-23390",
       "firstSeen": "2026-11-10T10:19:15.902Z",
-      "occurrences": 3,
+      "occurrences": 4,
       "status": "reviewed",
       "history": [
         {
@@ -1204,7 +1204,7 @@
         }
       ],
       "active": true,
-      "lastSeen": "2026-11-20T19:45:35.968Z"
+      "lastSeen": "2026-11-23T19:23:12.917Z"
     },
     {
       "kind": "changed",
@@ -1228,7 +1228,7 @@
       "scope": "sources",
       "id": "changed:fiscal:lirpf",
       "firstSeen": "2026-11-16T17:13:23.344Z",
-      "occurrences": 2,
+      "occurrences": 3,
       "status": "pending",
       "history": [
         {
@@ -1251,7 +1251,7 @@
         }
       ],
       "active": true,
-      "lastSeen": "2026-11-20T19:45:33.837Z"
+      "lastSeen": "2026-11-23T19:23:09.675Z"
     },
     {
       "kind": "changed",
@@ -1313,7 +1313,7 @@
       "scope": "boe-discovery",
       "id": "publication:BOE-A-2026-23662",
       "firstSeen": "2026-11-16T17:13:26.755Z",
-      "occurrences": 2,
+      "occurrences": 3,
       "status": "reviewed",
       "history": [
         {
@@ -1341,7 +1341,7 @@
         }
       ],
       "active": true,
-      "lastSeen": "2026-11-20T19:45:35.968Z"
+      "lastSeen": "2026-11-23T19:23:12.917Z"
     },
     {
       "kind": "publication",
@@ -1364,7 +1364,7 @@
       "scope": "boe-discovery",
       "id": "publication:BOE-A-2026-23754",
       "firstSeen": "2026-11-16T17:13:26.755Z",
-      "occurrences": 2,
+      "occurrences": 3,
       "status": "reviewed",
       "history": [
         {
@@ -1392,7 +1392,7 @@
         }
       ],
       "active": true,
-      "lastSeen": "2026-11-20T19:45:35.968Z"
+      "lastSeen": "2026-11-23T19:23:12.917Z"
     },
     {
       "kind": "publication",
@@ -1415,7 +1415,7 @@
       "scope": "boe-discovery",
       "id": "publication:BOE-A-2026-23755",
       "firstSeen": "2026-11-16T17:13:26.755Z",
-      "occurrences": 2,
+      "occurrences": 3,
       "status": "reviewed",
       "history": [
         {
@@ -1443,7 +1443,7 @@
         }
       ],
       "active": true,
-      "lastSeen": "2026-11-20T19:45:35.968Z"
+      "lastSeen": "2026-11-23T19:23:12.917Z"
     },
     {
       "kind": "publication",
@@ -1466,7 +1466,7 @@
       "scope": "boe-discovery",
       "id": "publication:BOE-A-2026-24007",
       "firstSeen": "2026-11-20T19:45:35.968Z",
-      "occurrences": 1,
+      "occurrences": 2,
       "status": "pending",
       "history": [
         {
@@ -1487,7 +1487,7 @@
         }
       ],
       "active": true,
-      "lastSeen": "2026-11-20T19:45:35.968Z"
+      "lastSeen": "2026-11-23T19:23:12.917Z"
     },
     {
       "kind": "publication",
@@ -1510,7 +1510,7 @@
       "scope": "boe-discovery",
       "id": "publication:BOE-A-2026-24010",
       "firstSeen": "2026-11-20T19:45:35.968Z",
-      "occurrences": 1,
+      "occurrences": 2,
       "status": "pending",
       "history": [
         {
@@ -1531,7 +1531,7 @@
         }
       ],
       "active": true,
-      "lastSeen": "2026-11-20T19:45:35.968Z"
+      "lastSeen": "2026-11-23T19:23:12.917Z"
     },
     {
       "kind": "publication",
@@ -1555,7 +1555,7 @@
       "scope": "boe-discovery",
       "id": "publication:BOE-A-2026-24120",
       "firstSeen": "2026-11-20T19:45:35.968Z",
-      "occurrences": 1,
+      "occurrences": 2,
       "status": "pending",
       "history": [
         {
@@ -1577,7 +1577,7 @@
         }
       ],
       "active": true,
-      "lastSeen": "2026-11-20T19:45:35.968Z"
+      "lastSeen": "2026-11-23T19:23:12.917Z"
     }
   ]
 }
